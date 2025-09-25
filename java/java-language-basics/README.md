@@ -169,6 +169,28 @@ sequenceDiagram
 - Array index out of bounds.
 - Forgetting `public static void main(String[] args)` exactly.
 
+## Common Interview Questions
+
+1. What is the difference between == and .equals()?
+
+   == checks reference equality for objects, .equals() checks value equality.
+
+2. What is the main method in Java?
+
+   public static void main(String[] args) - entry point.
+
+3. Explain pass-by-value in Java.
+
+   Java is pass-by-value; for primitives, value is copied; for objects, reference is copied.
+
+4. What are the primitive data types?
+
+   byte, short, int, long, float, double, char, boolean.
+
+5. How do you declare an array in Java?
+
+   int[] arr = new int[5]; or int[] arr = {1,2,3}.
+
 ## Tools & Libraries
 
 - JDK: For compilation and runtime.

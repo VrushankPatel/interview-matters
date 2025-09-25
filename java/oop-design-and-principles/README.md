@@ -123,6 +123,28 @@ classDiagram
 - Overusing inheritance instead of composition.
 - Tight coupling in inheritance.
 
+## Common Interview Questions
+
+1. What are the four pillars of OOP?
+
+   Encapsulation, Inheritance, Polymorphism, Abstraction.
+
+2. Explain SOLID principles.
+
+   S: Single Responsibility, O: Open-Closed, L: Liskov Substitution, I: Interface Segregation, D: Dependency Inversion.
+
+3. Difference between abstract class and interface?
+
+   Abstract class can have concrete methods, interface can't (before Java 8).
+
+4. What is polymorphism?
+
+   Ability to take many forms, method overriding/overloading.
+
+5. How does composition differ from inheritance?
+
+   Composition is has-a relationship, inheritance is is-a.
+
 ## Tools & Libraries
 
 - UML tools for class diagrams.

@@ -5,11 +5,11 @@ Last update
 2025-09-25
 
 Summary of recent additions
- - sorting-algorithms
- - graph-algorithms
- - string-algorithms
- - number-theory
- - bit-manipulation
+ - java-language-basics
+ - oop-design-and-principles
+ - jvm-internals-and-classloading
+ - garbage-collection-algorithms
+ - java-memory-model-and-concurrency
 
 Conventions
  - Dir naming: kebab-case.

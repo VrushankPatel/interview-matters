@@ -91,6 +91,28 @@ sequenceDiagram
 - Visibility issues without volatile.
 - False sharing in arrays.
 
+## Common Interview Questions
+
+1. What is the Java Memory Model?
+
+   Defines how threads interact with memory.
+
+2. Explain volatile in Java.
+
+   Ensures visibility of changes to all threads.
+
+3. Difference between synchronized and volatile?
+
+   Synchronized provides mutual exclusion, volatile visibility.
+
+4. What is a race condition?
+
+   When multiple threads access shared data concurrently.
+
+5. How to avoid deadlocks?
+
+   Avoid circular waits, use timeouts.
+
 ## Tools & Libraries
 
 - java.util.concurrent package.

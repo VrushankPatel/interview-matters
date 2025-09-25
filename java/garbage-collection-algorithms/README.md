@@ -79,6 +79,28 @@ flowchart TD
 - Memory leaks: Objects not garbage collected.
 - Tuning without metrics.
 
+## Common Interview Questions
+
+1. What is garbage collection in Java?
+
+   Automatic memory management.
+
+2. Explain generational GC.
+
+   Young and old generations.
+
+3. What is the difference between minor and major GC?
+
+   Minor: Young gen, Major: Old gen.
+
+4. What GC to use for low latency?
+
+   G1, ZGC.
+
+5. How to monitor GC?
+
+   jstat, GC logs.
+
 ## Tools & Libraries
 
 - GCViewer for log analysis.

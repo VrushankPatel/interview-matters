@@ -97,6 +97,28 @@ sequenceDiagram
 - PermGen/Metaspace exhaustion.
 - Class loader leaks in application servers.
 
+## Common Interview Questions
+
+1. What is the JVM?
+
+   Java Virtual Machine, executes bytecode.
+
+2. Explain class loading.
+
+   Loading, linking, initialization.
+
+3. What are the types of class loaders?
+
+   Bootstrap, Extension, System.
+
+4. What is the difference between JDK and JRE?
+
+   JDK includes development tools, JRE for running.
+
+5. What is bytecode?
+
+   Intermediate code compiled from Java source.
+
 ## Tools & Libraries
 
 - VisualVM for monitoring.
