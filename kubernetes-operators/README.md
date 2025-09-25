@@ -1,7 +1,7 @@
 ---
 title: Kubernetes Operators
-aliases: []
-tags: [#devops,#kubernetes]
+aliases: [k8s operators, operator pattern]
+tags: [#kubernetes,#devops,#automation]
 created: 2025-09-25
 updated: 2025-09-25
 ---
@@ -11,6 +11,14 @@ updated: 2025-09-25
 ## Overview
 
 Kubernetes Operators are software extensions that automate the management of complex applications on Kubernetes. They extend the Kubernetes API to provide custom resources and controllers that manage application lifecycle, configuration, and operational tasks.
+
+```mermaid
+graph TD
+    A[Custom Resource] --> B[Operator Controller]
+    B --> C[Kubernetes API Server]
+    C --> D[Actual Resources: Deployments, Services, etc.]
+    B --> E[Observe and Reconcile]
+```
 
 ## Detailed Explanation
 
@@ -34,6 +42,23 @@ Kubernetes Operators are software extensions that automate the management of com
 - **Application Operators**: Manage specific applications (e.g., PostgreSQL, Redis)
 - **Infrastructure Operators**: Manage infrastructure components
 - **Platform Operators**: Manage entire platforms or stacks
+
+## Journey / Sequence
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant API Server
+    participant Operator
+    participant Resources
+
+    User->>API Server: Create Custom Resource
+    API Server->>Operator: Notify change
+    Operator->>API Server: Query current state
+    Operator->>Resources: Create/Update resources
+    Resources->>Operator: Report status
+    Operator->>API Server: Update Custom Resource status
+```
 
 ## Real-world Examples & Use Cases
 
@@ -241,12 +266,13 @@ public class MyAppController {
 
 ## Common Pitfalls & Edge Cases
 
-- Complex reconciliation logic leading to bugs
-- Race conditions in concurrent operations
-- Handling resource deletion and cleanup
-- Managing operator upgrades
-- Dealing with cluster failures
-- Testing operator behavior
+- **RBAC Issues**: Ensure proper permissions for the operator service account.
+- **Version Conflicts**: Handle CRD version upgrades carefully.
+- **Resource Limits**: Operators can consume significant resources; monitor and limit.
+- **Idempotency**: Ensure reconcile logic is idempotent to handle retries.
+- **Finalizers**: Use for cleanup on deletion to avoid orphaned resources.
+- **Race Conditions**: Handle concurrent operations carefully.
+- **Testing**: Comprehensive testing of operator behavior under various conditions.
 
 ## Tools & Libraries
 
@@ -258,9 +284,11 @@ public class MyAppController {
 
 ## References
 
-- [Kubernetes Operators - CoreOS](https://coreos.com/operators/)
-- [Operator Pattern - Kubernetes](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/)
+- [Kubernetes Operator Pattern](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/)
+- [CNCF Operator White Paper](https://github.com/cncf/tag-app-delivery/blob/main/operator-wg/whitepaper/Operator-WhitePaper_v1-0.md)
+- [OperatorHub.io](https://operatorhub.io/)
 - [Operator SDK Documentation](https://sdk.operatorframework.io/)
+- [Kubebuilder Book](https://book.kubebuilder.io/)
 
 ## Github-README Links & Related Topics
 

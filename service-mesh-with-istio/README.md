@@ -1,7 +1,7 @@
 ---
 title: Service Mesh with Istio
-aliases: [Istio Service Mesh]
-tags: [#microservices,#service-mesh]
+aliases: [istio service mesh]
+tags: [#istio,#service-mesh,#kubernetes,#microservices]
 created: 2025-09-25
 updated: 2025-09-25
 ---
@@ -9,6 +9,14 @@ updated: 2025-09-25
 # Overview
 
 Istio is an open-source service mesh that provides a uniform way to connect, secure, and observe microservices. It manages traffic, enforces policies, and collects telemetry without code changes.
+
+```mermaid
+graph TD
+    A[Service A] --> B[Envoy Proxy]
+    B --> C[Istiod Control Plane]
+    C --> D[Service B]
+    B --> E[Metrics, Logs, Traces]
+```
 
 # Detailed Explanation
 
@@ -61,15 +69,17 @@ public class ServiceController {
 
 # References
 
+- [What is Istio?](https://istio.io/latest/docs/concepts/what-is-istio/)
 - [Istio Documentation](https://istio.io/latest/docs/)
-- "Service Mesh Patterns" by Lee Calcote.
-- CNCF Istio Project.
+- [Service Mesh Patterns](https://www.oreilly.com/library/view/service-mesh-patterns/9781492086440/)
+- [CNCF Istio Project](https://www.cncf.io/projects/istio/)
 
 # Github-README Links & Related Topics
 
-- [microservices-architecture/](microservices-architecture/)
-- [kubernetes-basics/](kubernetes-basics/)
-- [api-gateway-design/](api-gateway-design/)
+- [Microservices Architecture](../microservices-architecture/README.md)
+- [Kubernetes Basics](../kubernetes-basics/README.md)
+- [API Gateway Design](../api-gateway-design/README.md)
+- [Kubernetes Networking](../kubernetes-networking/README.md)
 
 # STAR Summary
 
@@ -80,11 +90,20 @@ public class ServiceController {
 
 # Journey / Sequence
 
-1. Install Istio on Kubernetes cluster.
-2. Inject sidecars into pods.
-3. Configure VirtualServices and DestinationRules.
-4. Enable mTLS and monitoring.
-5. Scale and optimize policies.
+```mermaid
+sequenceDiagram
+    participant Dev
+    participant Cluster
+    participant Istio
+    participant Services
+
+    Dev->>Cluster: Install Istio
+    Cluster->>Istio: Deploy control plane
+    Dev->>Services: Inject sidecars
+    Services->>Istio: Register with mesh
+    Dev->>Istio: Configure policies
+    Istio->>Services: Enforce traffic rules
+```
 
 # Data Models / Message Formats
 
@@ -92,9 +111,11 @@ public class ServiceController {
 
 # Common Pitfalls & Edge Cases
 
-- Resource overhead from sidecars.
-- Configuration complexity.
-- Compatibility with legacy apps.
+- **Resource Overhead**: Sidecar proxies consume CPU and memory.
+- **Configuration Complexity**: Managing YAML configs for large meshes.
+- **Legacy Compatibility**: Apps not designed for service mesh.
+- **Network Latency**: Additional hop through proxies.
+- **Debugging**: Tracing issues across mesh boundaries.
 
 # Tools & Libraries
 

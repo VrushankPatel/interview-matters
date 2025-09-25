@@ -1,7 +1,7 @@
 ---
 title: API Gateway Patterns
-aliases: []
-tags: [#system-design,#microservices]
+aliases: [api gateway patterns]
+tags: [#api-gateway,#microservices,#system-design]
 created: 2025-09-25
 updated: 2025-09-25
 ---
@@ -11,6 +11,17 @@ updated: 2025-09-25
 ## Overview
 
 API Gateway patterns provide architectural solutions for managing, securing, and optimizing API interactions in distributed systems, particularly microservices architectures. They act as a single entry point for client requests, abstracting the complexity of backend services.
+
+```mermaid
+graph TD
+    A[Client] --> B[API Gateway]
+    B --> C[Auth Service]
+    B --> D[Rate Limiter]
+    B --> E[Service A]
+    B --> F[Service B]
+    D --> E
+    D --> F
+```
 
 ## Detailed Explanation
 
@@ -37,6 +48,22 @@ API Gateway patterns provide architectural solutions for managing, securing, and
 - **Edge Gateway**: Deployed at the network edge
 - **Service Mesh Integration**: Working with service meshes like Istio
 - **Sidecar Pattern**: Gateway as a sidecar container
+
+## Journey / Sequence
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Gateway
+    participant Service
+
+    Client->>Gateway: API Request
+    Gateway->>Gateway: Authenticate
+    Gateway->>Gateway: Rate Limit
+    Gateway->>Service: Route Request
+    Service->>Gateway: Response
+    Gateway->>Client: Formatted Response
+```
 
 ## Real-world Examples & Use Cases
 
@@ -133,11 +160,11 @@ public class AuthFilter implements GlobalFilter, Ordered {
 
 ## Common Pitfalls & Edge Cases
 
-- Single point of failure if not properly designed
-- Performance bottlenecks under high load
-- Complex routing logic maintenance
-- Handling different authentication schemes
-- Managing API versioning across services
+- **Single Point of Failure**: Ensure HA and scalability.
+- **Performance Bottlenecks**: Optimize routing and caching.
+- **Configuration Complexity**: Manage routing rules.
+- **Auth Scheme Handling**: Support multiple protocols.
+- **API Versioning**: Backward compatibility.
 
 ## Tools & Libraries
 
@@ -149,9 +176,10 @@ public class AuthFilter implements GlobalFilter, Ordered {
 
 ## References
 
-- [API Gateway Pattern - Microsoft](https://docs.microsoft.com/en-us/azure/architecture/patterns/api-gateway)
-- [Spring Cloud Gateway Documentation](https://spring.io/projects/spring-cloud-gateway)
-- [Kong Gateway](https://konghq.com/kong/)
+- [API Gateway Pattern](https://microservices.io/patterns/apigateway.html)
+- [Spring Cloud Gateway](https://spring.io/projects/spring-cloud-gateway)
+- [Kong Documentation](https://docs.konghq.com/)
+- [AWS API Gateway](https://aws.amazon.com/api-gateway/)
 
 ## Github-README Links & Related Topics
 
