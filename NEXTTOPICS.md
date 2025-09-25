@@ -1,5 +1,10 @@
-URL Shortener System Design
-Netflix Video Streaming Architecture
-Twitter System Design
-WhatsApp Messaging System
-Uber Ride Sharing System
+YouTube System Design
+Instagram System Design
+TikTok System Design
+Discord System Design
+Slack Messaging System
+Zoom Video Conferencing
+Dropbox File Storage
+Google Maps System Design
+Amazon E-commerce Platform
+LinkedIn Social Network
