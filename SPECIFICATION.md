@@ -5,7 +5,7 @@ Last update
 2025-09-25
 
 Summary of recent additions
- - Added microservices-communication-patterns, database-sharding-strategies, api-rate-limiting, distributed-transactions, service-discovery with detailed explanations, code examples, and diagrams
+ - Processed and verified initial seed topics: java-language-basics, oop-design-and-principles, jvm-internals-and-classloading, garbage-collection-algorithms, java-memory-model-and-concurrency
 
 Conventions
  - Dir naming: kebab-case.
@@ -36,6 +36,16 @@ Next Topics Candidates
     - logging-and-monitoring: ELK, Prometheus
     - security-in-microservices: OAuth, JWT
     - containerization-docker: Images, volumes, basics
+    - order-book-modeling: Canonical models for in-memory book and persistence
+    - matching-algorithms: Batch vs streaming matching, complexity
+    - time-in-force-variations: Exchange semantics across major venues
+    - latency-measurement: Instrumentation and microbenchmarks
+    - raft-and-leader-election: Implementations and failure modes
+    - memory-models: JMM deep-dive
+    - gc-tuning: Practical GC tuning for low-latency services
+    - kafka-internals: Partitioning, replication, and consumer groups
+    - caching-patterns: Cache invalidation strategies
+    - consistency-models: Eventual vs strong consistency tradeoffs
 
 TODO
  - High-level open design decisions and split criteria for oversized topics.
