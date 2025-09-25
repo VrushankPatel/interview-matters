@@ -6,6 +6,8 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
+# JVM Internals & Class Loading
+
 ## Overview
 
 The Java Virtual Machine (JVM) is responsible for executing Java bytecode. A key aspect of JVM internals is the class loading mechanism, which dynamically loads, links, and initializes classes and interfaces at runtime. This process ensures type safety, security, and modularity. Class loading involves finding binary representations (typically .class files), verifying their integrity, preparing runtime structures, resolving symbolic references, and executing initialization code. Understanding class loading is crucial for developers dealing with custom class loaders, modular applications, and performance optimization.
