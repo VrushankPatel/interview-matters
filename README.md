@@ -53,6 +53,7 @@ This repository contains a comprehensive collection of technical interview prepa
 - [Java Scoped Values](java-scoped-values/README.md)
 - [Java Sealed Classes](java-sealed-classes/README.md)
 - [Java Security Basics](java-security-basics/README.md)
+- [Security Best Practices in Java](security-best-practices-in-java/README.md)
 - [Java Semaphore](java-semaphore/README.md)
 - [Java Stream API and Functional Programming](java-stream-api-and-functional-programming/README.md)
 - [Java Streams Advanced](java-streams-advanced/README.md)
