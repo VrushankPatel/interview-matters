@@ -1,7 +1,7 @@
 ---
 title: WhatsApp System Design
-aliases: [Messaging App Architecture, Real-time Chat System]
-tags: [#system-design,#messaging,#real-time]
+aliases: ["Messaging App Architecture", "Real-time Chat System"]
+tags: [#system-design, #messaging, #real-time]
 created: 2025-09-25
 updated: 2025-09-25
 ---

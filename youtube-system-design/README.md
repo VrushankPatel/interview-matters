@@ -1,7 +1,7 @@
 ---
 title: YouTube System Design
-aliases: [Video Streaming Platform, YouTube Architecture]
-tags: [#system-design,#video-streaming,#scalability]
+aliases: ["Video Streaming Platform", "YouTube Architecture"]
+tags: [#system-design, #video-streaming, #scalability]
 created: 2025-09-25
 updated: 2025-09-25
 ---

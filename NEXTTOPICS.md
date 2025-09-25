@@ -1,5 +1,0 @@
-- WhatsApp System Design
-- Discord System Design
-- Slack System Design
-- Spotify System Design
-- YouTube System Design
