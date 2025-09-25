@@ -1,9 +1,4 @@
 # One topic per line. Top is oldest.
-partitioning-and-sharding
-consistency-and-availability
-message-queues-and-kafka
-event-sourcing-and-cqrs
-raft-consensus-and-leader-election
 distributed-tracing-and-observability
 networking-tcp-ip-http2-tls
 operating-systems-concepts

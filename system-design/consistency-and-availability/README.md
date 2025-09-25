@@ -20,6 +20,33 @@ Consistency and availability are core tradeoffs in distributed systems, formaliz
 - **PACELC:** If Partition (P), choose Availability or Consistency; Else (E), choose Latency or Consistency.
 - **Consistency Models:** Strong (linearizability), Eventual, Causal, Weak.
 - **Availability Patterns:** Replication, load balancing, circuit breakers.
+- **Tradeoffs:** Strong consistency reduces availability during partitions; eventual consistency allows stale reads.
+
+### High-Level Design (HLD)
+```mermaid
+graph TD
+    A[Client] --> B[Load Balancer]
+    B --> C[Consistency Layer]
+    C --> D{Consistency Model}
+    D --> E[Strong Consistency Node]
+    D --> F[Eventual Consistency Node]
+    E --> G[Quorum Replication]
+    F --> H[Asynchronous Replication]
+    G --> I[Database]
+    H --> J[Database]
+```
+
+### Capacity and Throughput Targets
+- **Throughput:** 50,000 reads/sec, 10,000 writes/sec with eventual consistency; lower for strong.
+- **Dimensioning:** 3 replicas for quorum (2/3 for reads/writes).
+- **Latency:** <5ms for local, <100ms for global consistency.
+
+### API Design Examples
+- `GET /data?consistency=strong` - Wait for quorum
+- `POST /data` - Asynchronous write with eventual consistency
+
+### Deployment and Scaling Strategies
+- Deploy across regions with geo-replication; use Kubernetes for auto-healing.
 
 ## Real-world Examples & Use Cases
 - **Banking:** Strong consistency for account balances (CP).
@@ -70,6 +97,12 @@ sequenceDiagram
 - Assuming CA in partitioned environments.
 - Ignoring latency in PACELC.
 - Edge case: Network partition during leader election causing split-brain.
+
+## Common Interview Questions
+- Explain CAP theorem with examples.
+- When to choose AP over CP?
+- How does PACELC affect design?
+- Design a system for high availability with eventual consistency.
 
 ## Tools & Libraries
 - **Databases:** Cassandra (tunable consistency), ZooKeeper (CP).

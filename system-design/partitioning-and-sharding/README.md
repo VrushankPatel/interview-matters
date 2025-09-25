@@ -19,7 +19,39 @@ Partitioning and sharding are techniques to distribute data across multiple stor
 - **Partitioning Types:** Range (e.g., by date), Hash (modulo on key), List (explicit lists).
 - **Sharding Strategies:** Directory-based (lookup table), Consistent Hashing (ring-based for even distribution).
 - **Key Concepts:** Shard key selection, rebalancing, cross-shard queries, replication for fault tolerance.
-- **Tradeoffs:** Increased complexity vs. linear scalability; potential for uneven load (hot shards).
+- **Tradeoffs:** Increased complexity vs. linear scalability; potential for uneven load (hot shards); consistency challenges in distributed writes.
+
+### High-Level Design (HLD)
+```mermaid
+graph TD
+    A[Client Request] --> B[Load Balancer]
+    B --> C[Shard Router]
+    C --> D{Shard Key Hash}
+    D --> E[Shard 1]
+    D --> F[Shard 2]
+    D --> G[Shard N]
+    E --> H[Database Instance]
+    F --> I[Database Instance]
+    G --> J[Database Instance]
+    H --> K[Replication]
+    I --> L[Replication]
+    J --> M[Replication]
+```
+
+### Capacity and Throughput Targets
+- **Read/Write Throughput:** Target 10,000 ops/sec per shard; total system 100,000 ops/sec with 10 shards.
+- **Dimensioning:** For 1TB data, 100GB per shard; scale horizontally by adding shards.
+- **Latency:** <10ms for local shard queries; <50ms for cross-shard.
+
+### API Design Examples
+Sample endpoints for a sharded user service:
+- `GET /users/{id}` - Route to shard based on hash(id)
+- `POST /users` - Assign shard, insert data
+- `PUT /users/{id}` - Update on specific shard
+
+### Deployment and Scaling Strategies
+- Deploy shards on Kubernetes with auto-scaling pods.
+- Use rolling updates for rebalancing; monitor shard load and trigger splits.
 
 ## Real-world Examples & Use Cases
 - **Social Networks:** Sharding user data by user ID in Facebook's TAO system.
@@ -81,16 +113,22 @@ sequenceDiagram
 - Cross-shard joins requiring application-level logic.
 - Edge case: Single shard failure affecting availability if not replicated.
 
+## Common Interview Questions
+- How do you choose a shard key to avoid hotspots?
+- Explain consistent hashing and its benefits.
+- What are the tradeoffs between partitioning and sharding?
+- Design a sharding strategy for a global e-commerce platform.
+
 ## Tools & Libraries
 - **Databases:** Cassandra (automatic partitioning), MongoDB (sharding).
 - **Libraries:** Apache Commons ConsistentHash, Netflix's Dynomite for sharding.
 - **Frameworks:** Spring Data with sharding support.
 
 ## Github-README Links & Related Topics
-- [Database Design and Indexing](database-design-and-indexing/)
-- [Load Balancing and Routing](load-balancing-and-routing/)
-- [Caching Strategies](caching-strategies/)
-- [Distributed Tracing and Observability](../distributed-tracing-and-observability/)  # assuming it exists, but since not, perhaps remove or keep
+- [[database-design-and-indexing]]
+- [[load-balancing-and-routing]]
+- [[caching-strategies]]
+- [[distributed-tracing-and-observability]]
 
 ## References
 - MongoDB Sharding Documentation: https://docs.mongodb.com/manual/sharding/

@@ -5,11 +5,11 @@ Last update
 2025-09-25
 
 Summary of recent additions
- - design-patterns
- - system-design-basics
- - load-balancing-and-routing
- - caching-strategies
- - database-design-and-indexing
+ - partitioning-and-sharding
+ - consistency-and-availability
+ - message-queues-and-kafka
+ - event-sourcing-and-cqrs
+ - raft-consensus-and-leader-election
 
 Conventions
  - Dir naming: kebab-case.
@@ -45,6 +45,18 @@ Next Topics Candidates
     - build-automation: CI/CD with Maven and Gradle
     - profiling-tools: Performance analysis tools
     - advanced-java-concepts: Generics, type erasure, and more
+
+Next Topics Candidates (added this run)
+- backtracking: N-Queens, Sudoku, combinatorial problem solving
+- divide-and-conquer: Merge sort, quicksort, closest pair algorithms
+- probabilistic-algorithms: Bloom filters, skip lists for space efficiency
+- computational-geometry: Convex hull, line intersection, geometric algorithms
+- jvm-performance-tuning: Heap sizing, GC tuning for low latency
+- order-book-modeling: Canonical models for in-memory book and persistence
+- matching-algorithms: Batch vs streaming matching, complexity
+- time-in-force-variations: Exchange semantics across major venues
+- latency-measurement: Instrumentation and microbenchmarks
+- raft-and-leader-election: Implementations and failure modes
 
 TODO
  - High-level open design decisions and split criteria for oversized topics.

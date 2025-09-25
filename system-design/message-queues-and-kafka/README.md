@@ -19,7 +19,32 @@ Message queues enable asynchronous communication between services, decoupling pr
 - **Components:** Producers, Brokers, Consumers, Topics, Partitions, Offsets.
 - **Guarantees:** At-least-once, exactly-once delivery.
 - **Scaling:** Partitioning for parallelism, replication for fault tolerance.
-- **Tradeoffs:** Throughput vs. latency, durability vs. performance.
+- **Tradeoffs:** Throughput vs. latency, durability vs. performance; complexity in exactly-once semantics.
+
+### High-Level Design (HLD)
+```mermaid
+graph TD
+    A[Producers] --> B[Kafka Cluster]
+    B --> C[ZooKeeper]
+    C --> D[Metadata Management]
+    B --> E[Topics]
+    E --> F[Partitions]
+    F --> G[Replicas]
+    H[Consumers] --> B
+    H --> I[Consumer Groups]
+```
+
+### Capacity and Throughput Targets
+- **Throughput:** 1M messages/sec per cluster; 100K/sec per partition.
+- **Dimensioning:** 10 brokers, 100 partitions per topic for high throughput.
+- **Latency:** <10ms for local, <100ms for cross-region.
+
+### API Design Examples
+- `POST /topics/{topic}/messages` - Produce message
+- `GET /topics/{topic}/messages?group=consumer-group` - Consume messages
+
+### Deployment and Scaling Strategies
+- Deploy on Kubernetes with Helm charts; scale brokers horizontally; use KRaft for metadata.
 
 ## Real-world Examples & Use Cases
 - **Logging:** Centralized log aggregation in ELK stack.
@@ -73,6 +98,12 @@ sequenceDiagram
 - Message ordering in partitions.
 - Consumer lag causing backlogs.
 - Edge case: Broker failure during rebalancing.
+
+## Common Interview Questions
+- How does Kafka ensure fault tolerance?
+- Explain consumer groups and partitions.
+- When to use Kafka vs. RabbitMQ?
+- Design a notification system using Kafka.
 
 ## Tools & Libraries
 - **Kafka Clients:** Java, Python libraries.

@@ -19,7 +19,32 @@ Raft is a consensus algorithm for managing replicated logs in distributed system
 - **Phases:** Leader Election, Log Replication, Safety.
 - **Roles:** Leader, Follower, Candidate.
 - **Guarantees:** Leader Completeness, State Machine Safety.
-- **Tradeoffs:** Latency for consensus vs. throughput.
+- **Tradeoffs:** Latency for consensus vs. throughput; complexity in failure handling.
+
+### High-Level Design (HLD)
+```mermaid
+graph TD
+    A[Nodes] --> B{Roles}
+    B --> C[Leader]
+    B --> D[Follower]
+    B --> E[Candidate]
+    C --> F[Log Replication]
+    F --> G[Commit]
+    D --> H[Vote]
+    E --> I[Election]
+```
+
+### Capacity and Throughput Targets
+- **Throughput:** 10K ops/sec per cluster; scales with nodes.
+- **Dimensioning:** 3-5 nodes for fault tolerance; log size based on retention.
+- **Latency:** Election timeout 150-300ms; log append <10ms.
+
+### API Design Examples
+- `POST /raft/append` - Append log entry
+- `GET /raft/leader` - Get current leader
+
+### Deployment and Scaling Strategies
+- Deploy nodes across zones; use Kubernetes for orchestration; monitor heartbeats.
 
 ## Real-world Examples & Use Cases
 - **Databases:** etcd, Consul for configuration.
@@ -75,6 +100,12 @@ sequenceDiagram
 - Network partitions causing multiple leaders.
 - Log inconsistencies during elections.
 - Edge case: Leader failure during log append.
+
+## Common Interview Questions
+- Explain Raft leader election process.
+- How does Raft ensure safety?
+- Compare Raft to Paxos.
+- Design a distributed lock service using Raft.
 
 ## Tools & Libraries
 - **Implementations:** etcd (Raft), HashiCorp Raft.

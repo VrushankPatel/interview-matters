@@ -19,7 +19,31 @@ Event Sourcing persists state as a sequence of immutable events, enabling audita
 - **Event Sourcing:** Append-only event log, state rebuilt by replaying events.
 - **CQRS:** Commands mutate state, queries read from optimized views.
 - **Components:** Event Store, Aggregates, Projectors, Sagas.
-- **Tradeoffs:** Increased storage vs. flexibility; eventual consistency in reads.
+- **Tradeoffs:** Increased storage vs. flexibility; eventual consistency in reads; complexity in event versioning.
+
+### High-Level Design (HLD)
+```mermaid
+graph TD
+    A[Commands] --> B[Command Handler]
+    B --> C[Aggregate]
+    C --> D[Event Store]
+    D --> E[Event Bus]
+    E --> F[Projectors]
+    F --> G[Read Models]
+    H[Queries] --> G
+```
+
+### Capacity and Throughput Targets
+- **Throughput:** 10K commands/sec, 100K queries/sec.
+- **Dimensioning:** Event store with 1TB storage for events; read models in separate DBs.
+- **Latency:** <50ms for commands, <10ms for queries.
+
+### API Design Examples
+- `POST /commands/deposit` - Execute deposit command
+- `GET /queries/balance/{accountId}` - Query read model
+
+### Deployment and Scaling Strategies
+- Deploy event store on durable storage; scale projectors with Kubernetes; use event sourcing for microservices.
 
 ## Real-world Examples & Use Cases
 - **Banking:** Account transactions as events.
@@ -80,6 +104,12 @@ sequenceDiagram
 - Event schema evolution.
 - Snapshotting for performance.
 - Edge case: Concurrent commands on same aggregate.
+
+## Common Interview Questions
+- How does Event Sourcing differ from CRUD?
+- Explain CQRS benefits and drawbacks.
+- How to handle event versioning?
+- Design an order management system with CQRS.
 
 ## Tools & Libraries
 - **Event Stores:** EventStoreDB, Kafka.
