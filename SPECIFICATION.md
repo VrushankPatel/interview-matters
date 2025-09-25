@@ -26,6 +26,16 @@ Next Topics Candidates
     - service-mesh-istio: Traffic management and observability
     - container-orchestration-k8s: Pods, services, deployments
     - event-driven-architecture: Pub-sub patterns and event sourcing
+    - api-gateway-patterns: Routing, authentication, and rate limiting in APIs
+    - observability-patterns: Logs, metrics, and traces for system monitoring
+    - security-in-distributed-systems: Encryption, authentication, and authorization
+    - data-partitioning-strategies: Sharding and replication techniques
+    - fault-tolerance-patterns: Retry, circuit breaker, and bulkhead patterns
+    - cloud-native-architectures: Microservices, serverless, and containerization
+    - real-time-data-processing: Stream processing with Kafka and Flink
+    - machine-learning-infrastructure: Model serving and inference pipelines
+    - blockchain-basics: Distributed ledgers and consensus mechanisms
+    - quantum-computing-fundamentals: Qubits, superposition, and quantum algorithms
 
 TODO
  - High-level open design decisions and split criteria for oversized topics.
