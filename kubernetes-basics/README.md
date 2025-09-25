@@ -75,6 +75,14 @@ spec:
         image: nginx
 ```
 
+## Common Pitfalls & Edge Cases
+
+- **Resource Limits**: Not setting CPU/memory limits can lead to resource starvation.
+- **Networking Issues**: Pod-to-pod communication failures due to misconfigured services or network policies.
+- **Rolling Updates**: Slow updates or failures if not configured properly, causing downtime.
+- **Persistent Volumes**: Data loss if PVs are not properly backed up or configured.
+- **Security**: Running containers as root or without RBAC can expose vulnerabilities.
+
 ## References
 
 - [Kubernetes Documentation](https://kubernetes.io/docs/)

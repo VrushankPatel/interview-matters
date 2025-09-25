@@ -62,6 +62,14 @@ services:
       MYSQL_ROOT_PASSWORD: password
 ```
 
+## Common Pitfalls & Edge Cases
+
+- **Layer Caching**: Large images due to inefficient Dockerfile ordering.
+- **Security Vulnerabilities**: Using outdated base images or not scanning for vulnerabilities.
+- **Orchestration Gaps**: Docker alone lacks scaling; needs Kubernetes for production.
+- **Volume Management**: Data persistence issues if volumes are not handled correctly.
+- **Networking**: Container isolation can complicate inter-container communication.
+
 ## References
 
 - [Docker Documentation](https://docs.docker.com/)
