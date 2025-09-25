@@ -5,11 +5,11 @@ Last update
 2025-09-25
 
 Summary of recent additions
-   - dynamic-programming-and-greedy
-   - system-design-interview-cases
-   - behavioral-star-prep
-   - low-latency-systems
-   - security-authz-authn-tokens
+ - api-design-rest-grpc-openapi
+ - observability-logs-metrics-traces
+ - order-book-modeling
+ - matching-algorithms
+ - time-in-force-variations
 
 Conventions
  - Dir naming: kebab-case.
@@ -30,36 +30,6 @@ Next Topics Candidates
     - service-mesh-istio: Traffic management and observability
     - container-orchestration-k8s: Pods, services, deployments
     - event-driven-architecture: Pub-sub patterns and event sourcing
-    - order-book-modeling: Canonical models for in-memory book and persistence
-    - matching-algorithms: Batch vs streaming matching, complexity
-    - time-in-force-variations: Exchange semantics across major venues
-    - latency-measurement: Instrumentation and microbenchmarks
-    - raft-and-leader-election: Implementations and failure modes
-    - memory-models: JMM deep-dive
-    - gc-tuning: Practical GC tuning for low-latency services
-    - kafka-internals: Partitioning, replication, and consumer groups
-    - caching-patterns: Cache invalidation strategies
-    - consistency-models: Eventual vs strong consistency tradeoffs
-    - data-structures-advanced: Segment trees, fenwick trees for range queries
-    - sorting-algorithms: Comparison and non-comparison sorts with complexities
-    - graph-algorithms: Traversal, shortest path, minimum spanning trees
-    - string-algorithms: KMP, Rabin-Karp, suffix arrays for pattern matching
-    - number-theory: GCD, modular arithmetic, primality testing
-    - bit-manipulation: Bit tricks, masks, and operations for optimization
-    - backtracking: N-Queens, Sudoku, combinatorial problem solving
-    - divide-and-conquer: Merge sort, quicksort, closest pair algorithms
-    - probabilistic-algorithms: Bloom filters, skip lists for space efficiency
-    - computational-geometry: Convex hull, line intersection, geometric algorithms
-   - data-structures-advanced: Segment trees, fenwick trees for range queries
-   - sorting-algorithms: Comparison and non-comparison sorts with complexities
-   - graph-algorithms: Traversal, shortest path, minimum spanning trees
-   - string-algorithms: KMP, Rabin-Karp, suffix arrays for pattern matching
-   - number-theory: GCD, modular arithmetic, primality testing
-   - bit-manipulation: Bit tricks, masks, and operations for optimization
-   - backtracking: N-Queens, Sudoku, combinatorial problem solving
-   - divide-and-conquer: Merge sort, quicksort, closest pair algorithms
-   - probabilistic-algorithms: Bloom filters, skip lists for space efficiency
-   - computational-geometry: Convex hull, line intersection, geometric algorithms
 
 TODO
  - High-level open design decisions and split criteria for oversized topics.
