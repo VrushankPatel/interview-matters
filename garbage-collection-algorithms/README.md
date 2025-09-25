@@ -237,7 +237,7 @@ public class FinalizerExample {
 
 ## Github-README Links & Related Topics
 
-- [GC Tuning](../gc-tuning/)
-- [Java Memory Management](../java-memory-management/)
-- [JVM Internals & Class Loading](../jvm-internals-class-loading/)
-- [Memory Models](../memory-models/)
+- [GC Tuning](../gc-tuning/README.md)
+- [Java Memory Management](../java-memory-management/README.md)
+- [JVM Internals & Class Loading](../jvm-internals-class-loading/README.md)
+- [Memory Models](../memory-models/README.md)

@@ -272,7 +272,7 @@ public class ProducerConsumer {
 
 ## Github-README Links & Related Topics
 
-- [Java Fundamentals](./java-fundamentals)
-- [JVM Internals & Class Loading](./jvm-internals-and-class-loading)
-- [Collections & Data Structures](./collections-and-data-structures)
-- [Java Memory Management](./java-memory-management)
+- [Java Fundamentals](../java-fundamentals/README.md)
+- [JVM Internals & Class Loading](../jvm-internals-class-loading/README.md)
+- [Collections & Data Structures](../collections-and-data-structures/README.md)
+- [Java Memory Management](../java-memory-management/README.md)

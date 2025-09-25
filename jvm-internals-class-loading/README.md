@@ -104,6 +104,6 @@ public class CustomClassLoader extends ClassLoader {
 
 ## Github-README Links & Related Topics
 
-- [Java Fundamentals](./java-fundamentals)
-- [OOP Principles in Java](./oop-principles-in-java)
-- [Garbage Collection Algorithms](./garbage-collection-algorithms)
+- [Java Fundamentals](../java-fundamentals/README.md)
+- [OOP Principles in Java](../oop-principles-in-java/README.md)
+- [Garbage Collection Algorithms](../garbage-collection-algorithms/README.md)

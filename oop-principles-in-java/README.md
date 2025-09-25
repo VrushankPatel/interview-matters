@@ -173,6 +173,6 @@ public class Main {
 
 ## Github-README Links & Related Topics
 
-- [Java Fundamentals](./java-fundamentals)
-- [Design Patterns in Java](./design-patterns-in-java)
-- [JVM Internals & Class Loading](./jvm-internals-class-loading)
+- [Java Fundamentals](../java-fundamentals/README.md)
+- [Design Patterns in Java](../design-patterns-in-java/README.md)
+- [JVM Internals & Class Loading](../jvm-internals-class-loading/README.md)
