@@ -6,13 +6,11 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# OOP Principles in Java
-
-## Overview
+# Overview
 
 Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects", which can contain data and code. Java implements four fundamental OOP principles: Encapsulation, Inheritance, Polymorphism, and Abstraction. These principles help create modular, maintainable, and reusable code.
 
-## Detailed Explanation
+# Detailed Explanation
 
 ### Encapsulation
 
@@ -96,7 +94,7 @@ classDiagram
     }
 ```
 
-## Real-world Examples & Use Cases
+# Real-world Examples & Use Cases
 
 1. **Banking System**: Account classes with encapsulation for security
 2. **Vehicle Management**: Inheritance hierarchy for different vehicle types
@@ -105,7 +103,7 @@ classDiagram
 5. **Game Development**: Character classes with inheritance and polymorphism
 6. **E-commerce**: Product catalog with abstraction for different product types
 
-## Code Examples
+# Code Examples
 
 ### Encapsulation Example
 
@@ -393,13 +391,13 @@ public class Motorcycle extends Vehicle {
 }
 ```
 
-## References
+# References
 
 - [Oracle OOP Concepts](https://docs.oracle.com/javase/tutorial/java/concepts/)
 - [Baeldung OOP in Java](https://www.baeldung.com/java-oop)
 - [GeeksforGeeks OOP Principles](https://www.geeksforgeeks.org/object-oriented-programming-oops-concept-in-java/)
 
-## Github-README Links & Related Topics
+# Github-README Links & Related Topics
 
 - [java-fundamentals/README.md](../java-fundamentals/README.md)
 - [design-patterns/README.md](../java/design-patterns/README.md)

@@ -6,13 +6,11 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# JVM Internals & Class Loading
-
-## Overview
+# Overview
 
 The Java Virtual Machine (JVM) is the runtime environment that executes Java bytecode. Understanding JVM internals and the class loading mechanism is crucial for Java developers to optimize performance, troubleshoot issues, and implement advanced features like custom class loaders.
 
-## Detailed Explanation
+# Detailed Explanation
 
 ### JVM Architecture
 
@@ -101,7 +99,7 @@ When a class loader is asked to load a class:
 2. If parent can't load, it attempts to load itself
 3. This ensures core classes are loaded by bootstrap loader
 
-## Real-world Examples & Use Cases
+# Real-world Examples & Use Cases
 
 1. **Application Servers**: Custom class loaders for hot deployment
 2. **OSGi Frameworks**: Modular class loading
@@ -110,7 +108,7 @@ When a class loader is asked to load a class:
 5. **Testing Frameworks**: Custom class loaders for mocking
 6. **Bytecode Manipulation**: Loading modified classes at runtime
 
-## Code Examples
+# Code Examples
 
 ### Understanding Class Loading
 
@@ -262,7 +260,7 @@ public class MemoryDemo {
 }
 ```
 
-## Common Pitfalls & Edge Cases
+# Common Pitfalls & Edge Cases
 
 1. **ClassNotFoundException**: Class not found in classpath
 2. **NoClassDefFoundError**: Class found at compile time but not runtime
@@ -271,7 +269,7 @@ public class MemoryDemo {
 5. **StackOverflowError**: Deep recursion exceeding stack size
 6. **OutOfMemoryError**: Heap space exhausted
 
-## Tools & Libraries
+# Tools & Libraries
 
 - **jvisualvm**: Visual tool for JVM monitoring
 - **jconsole**: JMX-based monitoring
@@ -279,14 +277,14 @@ public class MemoryDemo {
 - **ASM**: Bytecode manipulation library
 - **Byte Buddy**: Code generation library
 
-## References
+# References
 
 - [Oracle JVM Specification](https://docs.oracle.com/javase/specs/jvms/se21/html/)
 - [Oracle Class Loading](https://docs.oracle.com/javase/tutorial/ext/basics/load.html)
 - [Baeldung JVM Internals](https://www.baeldung.com/jvm)
 - [JVM Anatomy](https://shipilev.net/jvm/anatomy/)
 
-## Github-README Links & Related Topics
+# Github-README Links & Related Topics
 
 - [java-fundamentals/README.md](../java-fundamentals/README.md)
 - [garbage-collection-algorithms/README.md](../garbage-collection-algorithms/README.md)

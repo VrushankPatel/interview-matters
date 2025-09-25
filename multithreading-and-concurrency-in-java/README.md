@@ -6,13 +6,11 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Multithreading & Concurrency in Java
-
-## Overview
+# Overview
 
 Multithreading and concurrency in Java allow programs to execute multiple threads simultaneously, improving performance and responsiveness. Java provides comprehensive support for concurrent programming through its threading API, synchronization mechanisms, and concurrent utilities.
 
-## Detailed Explanation
+# Detailed Explanation
 
 ### Thread Fundamentals
 
@@ -331,7 +329,7 @@ public class ConcurrentCollectionsExample {
 }
 ```
 
-## Real-world Examples & Use Cases
+# Real-world Examples & Use Cases
 
 1. **Web Servers**: Handling multiple client requests concurrently
 2. **Database Connections**: Connection pooling with multiple threads
@@ -341,7 +339,7 @@ public class ConcurrentCollectionsExample {
 6. **Data Processing**: Parallel computation on large datasets
 7. **Network Applications**: Concurrent client handling in servers
 
-## Code Examples
+# Code Examples
 
 ### Producer-Consumer Pattern
 
@@ -473,7 +471,7 @@ public class DeadlockExample {
 }
 ```
 
-## Common Pitfalls & Edge Cases
+# Common Pitfalls & Edge Cases
 
 1. **Race Conditions**: Multiple threads accessing shared data without synchronization
 2. **Deadlocks**: Threads waiting for each other indefinitely
@@ -482,7 +480,7 @@ public class DeadlockExample {
 5. **Memory Visibility**: Changes not visible across threads without proper synchronization
 6. **Thread Leaks**: Threads not properly terminated
 
-## Tools & Libraries
+# Tools & Libraries
 
 - **VisualVM**: Thread monitoring and profiling
 - **jconsole**: JMX monitoring including threads
@@ -490,14 +488,14 @@ public class DeadlockExample {
 - **Java Flight Recorder**: Detailed thread analysis
 - **Concurrent Utilities**: java.util.concurrent package
 
-## References
+# References
 
 - [Oracle Concurrency Tutorial](https://docs.oracle.com/javase/tutorial/essential/concurrency/)
 - [Java Concurrency in Practice](https://www.amazon.com/Java-Concurrency-Practice-Brian-Goetz/dp/0321349601)
 - [Baeldung Java Concurrency](https://www.baeldung.com/java-concurrency)
 - [JSR 166: Concurrency Utilities](https://jcp.org/en/jsr/detail?id=166)
 
-## Github-README Links & Related Topics
+# Github-README Links & Related Topics
 
 - [java-fundamentals/README.md](../java-fundamentals/README.md)
 - [java-concurrenthashmap/README.md](../java-concurrenthashmap/README.md)

@@ -6,13 +6,11 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Garbage Collection Algorithms
-
-## Overview
+# Overview
 
 Garbage Collection (GC) is the process of automatically reclaiming memory occupied by objects that are no longer in use. Java provides several GC algorithms with different trade-offs in terms of throughput, latency, and memory usage.
 
-## Detailed Explanation
+# Detailed Explanation
 
 ### Basic GC Concepts
 
@@ -103,7 +101,7 @@ graph TD
 - Broker GC pauses
 - Similar to ZGC but different implementation
 
-## Real-world Examples & Use Cases
+# Real-world Examples & Use Cases
 
 1. **High-Throughput Applications**: Use Parallel GC for maximum throughput
 2. **Low-Latency Systems**: Use G1 or ZGC for predictable pauses
@@ -111,7 +109,7 @@ graph TD
 4. **Microservices**: Tune GC for quick startup and low memory footprint
 5. **Gaming Applications**: Use low-pause GC to avoid frame drops
 
-## Code Examples
+# Code Examples
 
 ### GC Monitoring Example
 
@@ -158,14 +156,14 @@ public class MemoryLeakDemo {
 }
 ```
 
-## Tools & Libraries
+# Tools & Libraries
 
 - **VisualVM**: GUI tool for monitoring JVM and GC
 - **JConsole**: Built-in monitoring tool
 - **GCViewer**: Analyze GC logs
 - **Async Profiler**: Low-overhead profiling including GC
 
-## Common Pitfalls & Edge Cases
+# Common Pitfalls & Edge Cases
 
 1. **Memory Leaks**: Objects held by static references
 2. **GC Pauses**: Long pauses in latency-sensitive applications
@@ -173,13 +171,13 @@ public class MemoryLeakDemo {
 4. **Reference Types**: Soft/weak references affecting GC behavior
 5. **Finalizers**: Blocking GC, use Cleaner API instead
 
-## References
+# References
 
 - [Oracle GC Tuning Guide](https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/)
 - [JVM GC Algorithms](https://www.baeldung.com/jvm-garbage-collectors)
 - [G1 GC Deep Dive](https://www.oracle.com/technetwork/tutorials/tutorials-1876574.html)
 
-## Github-README Links & Related Topics
+# Github-README Links & Related Topics
 
 - [jvm-internals-and-class-loading/README.md](../jvm-internals-and-class-loading/README.md)
 - [gc-tuning/README.md](../gc-tuning/README.md)

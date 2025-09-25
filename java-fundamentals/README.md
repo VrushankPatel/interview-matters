@@ -115,7 +115,7 @@ public class Person {
 
 # Github-README Links & Related Topics
 
-- [OOP Principles in Java](oop-principles-in-java/README.md)
-- [JVM Internals & Class Loading](jvm-internals-and-class-loading/README.md)
-- [Collections & Data Structures](collections-and-data-structures/README.md)
-- [Java Stream API & Functional Programming](java-stream-api-and-functional-programming/README.md)
+- [OOP Principles in Java](../oop-principles-in-java/README.md)
+- [JVM Internals & Class Loading](../jvm-internals-and-class-loading/README.md)
+- [Collections & Data Structures](../collections-and-data-structures/README.md)
+- [Java Stream API & Functional Programming](../java-stream-api-and-functional-programming/README.md)
