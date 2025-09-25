@@ -132,7 +132,7 @@ sequenceDiagram
 - Libraries: Jedis (Redis client), Hibernate (ORM).
 
 ## Github-README Links & Related Topics
-Related: [[system-design-basics]], [[caching-strategies]], [[database-design-and-indexing]], [[load-balancing-and-routing]]
+Related: [system-design-basics](../system-design-basics/README.md), [caching-strategies](../caching-strategies/README.md), [database-design-and-indexing](../database-design-and-indexing/README.md), [load-balancing-and-routing](../load-balancing-and-routing/README.md)
 
 ## References
 - "Designing Data-Intensive Applications" by Martin Kleppmann.

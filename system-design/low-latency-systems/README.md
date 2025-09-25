@@ -93,7 +93,7 @@ flowchart TD
 - Monitoring: Prometheus, Grafana.
 
 ## Github-README Links & Related Topics
-Related: [[caching-strategies]], [[distributed-tracing-and-observability]], [[performance-tuning-and-profiling]]
+Related: [caching-strategies](../caching-strategies/README.md), [distributed-tracing-and-observability](../distributed-tracing-and-observability/README.md), [performance-tuning-and-profiling](../performance-tuning-and-profiling/README.md)
 
 ## References
 - "Building Low Latency Applications with C++" (adapt to Java).

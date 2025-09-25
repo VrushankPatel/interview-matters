@@ -56,7 +56,7 @@ flowchart TD
 - Practice: Pramp, LeetCode behavioral prep.
 
 ## Github-README Links & Related Topics
-Related: [[system-design-interview-cases]]
+Related: [system-design-interview-cases](../../system-design/system-design-interview-cases/README.md)
 
 ## References
 - https://www.thebalancecareers.com/star-interview-method-2061629

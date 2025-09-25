@@ -140,7 +140,7 @@ sequenceDiagram
 - Libraries: None specific; use JMH for benchmarking.
 
 ## Github-README Links & Related Topics
-Related: [[graphs-trees-heaps-and-tries]], [[algorithms-and-data-structures]], [[sorting-algorithms]]
+Related: [graphs-trees-heaps-and-tries](../graphs-trees-heaps-and-tries/README.md), [algorithms-and-data-structures](../algorithms-and-data-structures/README.md), [sorting-algorithms](../sorting-algorithms/README.md)
 
 ## References
 - Cormen, T. H., et al. "Introduction to Algorithms." MIT Press, 2009.

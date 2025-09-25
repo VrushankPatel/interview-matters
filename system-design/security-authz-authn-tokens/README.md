@@ -98,7 +98,7 @@ sequenceDiagram
 - OAuth: Keycloak.
 
 ## Github-README Links & Related Topics
-Related: [[api-design-rest-grpc-openapi]], [[system-design-basics]]
+Related: [api-design-rest-grpc-openapi](../api-design-rest-grpc-openapi/README.md), [system-design-basics](../system-design-basics/README.md)
 
 ## References
 - https://tools.ietf.org/html/rfc7519 (JWT)
