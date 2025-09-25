@@ -200,6 +200,6 @@ public class Truck implements Drivable {
 
 ## Github-README Links & Related Topics
 
-- [Java Fundamentals](../java-fundamentals/README.md)
-- [Design Patterns](../design-patterns/README.md)
-- [Java Reflection](../java-reflection/README.md)
+- [Java Fundamentals](java-fundamentals/README.md)
+- [Design Patterns](java/design-patterns/README.md)
+- [Java Reflection](java-reflection/README.md)

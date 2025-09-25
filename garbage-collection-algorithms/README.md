@@ -69,8 +69,8 @@ public class GCExample {
 ## References
 - [Oracle GC Tuning Guide](https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/)
 - [OpenJDK GC Documentation](https://openjdk.java.net/groups/hotspot/docs/)
-
 ## Github-README Links & Related Topics
-- [JVM Internals & Class Loading](../jvm-internals-and-class-loading/README.md)
-- [Performance Tuning and Profiling](../java/jvm-performance-tuning/README.md)
-- [Memory Models](../memory-models/README.md)
+
+- [JVM Internals & Class Loading](jvm-internals-and-class-loading/README.md)
+- [JVM Performance Tuning](java/advanced-java-concepts/jvm-performance-tuning/README.md)
+- [Memory Models](java/memory-models/README.md)

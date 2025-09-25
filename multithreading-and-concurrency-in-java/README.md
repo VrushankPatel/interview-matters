@@ -77,8 +77,8 @@ public class ConcurrencyExample {
 ## References
 - [Java Concurrency in Practice](https://jcip.net/)
 - [Oracle Concurrency Tutorial](https://docs.oracle.com/javase/tutorial/essential/concurrency/)
-
 ## Github-README Links & Related Topics
-- [Threads Executors Futures](../java/threads-executors-futures/README.md)
-- [Concurrent Programming Patterns](../concurrent-programming-patterns/README.md)
-- [Java Memory Model and Concurrency](../java/java-memory-model-and-concurrency/README.md)
+
+- [Threads, Executors, and Futures](java/threads-executors-futures/README.md)
+- [Concurrent Programming Patterns](java/concurrent-programming-patterns/README.md)
+- [Java Memory Model and Concurrency](java/java-memory-model-and-concurrency/README.md)

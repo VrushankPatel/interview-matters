@@ -149,6 +149,6 @@ public class Person {
 
 ## Github-README Links & Related Topics
 
-- [OOP Principles in Java](../oop-principles-in-java/README.md)
-- [JVM Internals and Class Loading](../jvm-internals-and-class-loading/README.md)
-- [Collections Framework](../collections-framework/README.md)
+- [OOP Principles in Java](oop-principles-in-java/README.md)
+- [JVM Internals and Class Loading](jvm-internals-and-class-loading/README.md)
+- [Collections & Data Structures](collections-and-data-structures/README.md)

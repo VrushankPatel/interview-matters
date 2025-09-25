@@ -122,6 +122,6 @@ graph TD
 
 ## Github-README Links & Related Topics
 
-- [Java Fundamentals](../java-fundamentals/README.md)
-- [Garbage Collection Algorithms](../garbage-collection-algorithms/README.md)
-- [JVM Performance Tuning](../jvm-performance-tuning/README.md)
+- [Java Fundamentals](java-fundamentals/README.md)
+- [Garbage Collection Algorithms](garbage-collection-algorithms/README.md)
+- [JVM Performance Tuning](java/advanced-java-concepts/jvm-performance-tuning/README.md)
