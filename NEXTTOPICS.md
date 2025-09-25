@@ -1,8 +1,3 @@
-CAP Theorem & Distributed Systems
-Popular System Designs (LLD and HLD)
-LLD HLD Basics
-Replication vs Sharding vs Partitioning
-Caching
 Latency and Throughput
 Monitoring and Logging
 Async Logging
