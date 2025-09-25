@@ -6,8 +6,6 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Java Sealed Classes
-
 ## Overview
 
 Sealed classes in Java, introduced in Java 17, allow developers to restrict which classes can extend or implement a particular class or interface. This feature enhances encapsulation, enables exhaustive pattern matching, and provides better control over class hierarchies in domain modeling.
@@ -111,6 +109,19 @@ public record BinaryOp(Expr left, Expr right, char op) implements Expr {
 - Sealed classes cannot be used with anonymous classes or lambda expressions.
 - Ensure all permitted classes are compiled together to avoid linkage errors.
 
+## Common Pitfalls & Edge Cases
+
+- Permitted classes must be accessible; private classes in the same file are allowed.
+- Sealed classes cannot be used with anonymous classes or lambda expressions.
+- Ensure all permitted classes are compiled together to avoid linkage errors.
+- Inheritance restrictions can make refactoring challenging if the hierarchy needs to expand.
+
+## Tools & Libraries
+
+- **Jackson**: JSON serialization support for sealed classes.
+- **Spring Boot**: Configuration and dependency injection with sealed classes.
+- **MapStruct**: Mapping frameworks that can work with sealed hierarchies.
+
 ## References
 
 - [Oracle Java Documentation: Sealed Classes](https://docs.oracle.com/en/java/javase/17/language/sealed-classes-and-interfaces.html)
@@ -118,5 +129,5 @@ public record BinaryOp(Expr left, Expr right, char op) implements Expr {
 
 ## Github-README Links & Related Topics
 
-- [OOP Principles in Java](../oop-design-and-principles/README.md)
-- [Java Language Basics](../java-language-basics/README.md)
+- [OOP Principles in Java](java/oop-design-and-principles/README.md)
+- [Java Language Basics](java/java-language-basics/README.md)

@@ -6,8 +6,6 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Java Text Blocks
-
 ## Overview
 
 Java Text Blocks, introduced in Java 13 as a preview feature and finalized in Java 15, provide a way to define multi-line string literals without the need for escape sequences. They improve readability for strings containing newlines, quotes, or complex formatting.
@@ -95,6 +93,13 @@ And this is another line.
 - Empty lines at the start or end are handled carefully.
 - Mixing text blocks with regular strings requires attention to concatenation.
 
+## Common Pitfalls & Edge Cases
+
+- Trailing whitespace on lines may be preserved if not part of common indentation.
+- Empty lines at the start or end are handled carefully; leading/trailing empty lines are stripped.
+- Mixing text blocks with regular strings requires attention to concatenation and formatting.
+- Indentation is based on the closing `"""`; ensure proper alignment to avoid unexpected whitespace.
+
 ## References
 
 - [Oracle Java Documentation: Text Blocks](https://docs.oracle.com/en/java/javase/15/text-blocks/index.html)
@@ -102,5 +107,5 @@ And this is another line.
 
 ## Github-README Links & Related Topics
 
-- [Java Language Basics](../java-language-basics/README.md)
-- [Java Strings and Text Processing](../java-language-basics/README.md)
+- [Java Language Basics](java/java-language-basics/README.md)
+- [Java Strings and Text Processing](java/java-language-basics/README.md)

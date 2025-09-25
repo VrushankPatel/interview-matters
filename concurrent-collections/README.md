@@ -103,5 +103,5 @@ String message = queue.take(); // Blocks if empty
 
 ## Github-README Links & Related Topics
 
-- [Multithreading & Concurrency in Java](../java-memory-model-and-concurrency/README.md)
-- [Concurrent Programming Patterns](../concurrent-programming-patterns/README.md)
+- [Multithreading & Concurrency in Java](java/java-memory-model-and-concurrency/README.md)
+- [Concurrent Programming Patterns](concurrent-programming-patterns/README.md)

@@ -6,8 +6,6 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Java Switch Expressions
-
 ## Overview
 
 Switch expressions, introduced in Java 12 as a preview and finalized in Java 14, extend the traditional switch statement to be used as expressions that yield values. They support pattern matching, multiple case labels, and arrow syntax, making code more concise and expressive.
@@ -98,6 +96,13 @@ String description = switch (shape) {
 - Arrow cases cannot have multiple statements without braces.
 - Mixing statements and expressions can lead to confusion.
 
+## Common Pitfalls & Edge Cases
+
+- Exhaustive cases required for enums and sealed types; use `default` otherwise to avoid compilation errors.
+- Arrow cases cannot have multiple statements without braces and `yield`.
+- Mixing statements and expressions can lead to confusion; prefer expressions for consistency.
+- Pattern matching with guards requires careful ordering to avoid unreachable code.
+
 ## References
 
 - [Oracle Java Documentation: Switch Expressions](https://docs.oracle.com/en/java/javase/14/language/switch-expressions.html)
@@ -105,5 +110,5 @@ String description = switch (shape) {
 
 ## Github-README Links & Related Topics
 
-- [Java Language Basics](../java-language-basics/README.md)
-- [Java Sealed Classes](../java-sealed-classes/README.md)
+- [Java Language Basics](java/java-language-basics/README.md)
+- [Java Sealed Classes](java-sealed-classes/README.md)
