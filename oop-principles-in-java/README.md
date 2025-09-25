@@ -1,18 +1,23 @@
 ---
 title: OOP Principles in Java
-aliases: [Object-Oriented Programming in Java]
-tags: [#java, #oop]
+aliases: ["Object-Oriented Programming in Java"]
+tags: ["#java", "#oop"]
 created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# OOP Principles in Java
-
-## Overview
+# Overview
 
 Object-Oriented Programming (OOP) principles in Java form the cornerstone of designing modular, maintainable, and scalable software. The four main principles are Encapsulation, Inheritance, Polymorphism, and Abstraction, which help in modeling real-world entities and relationships in code.
 
 ## Detailed Explanation
+
+| Principle | Description | Java Keywords/Features |
+|-----------|-------------|-------------------------|
+| Encapsulation | Bundling data and methods, restricting access | `private`, `public`, `protected`, getters/setters |
+| Inheritance | Acquiring properties from parent class | `extends`, `super` |
+| Polymorphism | Many forms - method overriding/overloading | `@Override`, method signatures |
+| Abstraction | Hiding complexity, showing essentials | `abstract`, `interface`, `implements` |
 
 ### Encapsulation
 
@@ -50,6 +55,17 @@ class Dog extends Animal {
         System.out.println("Barking");
     }
 }
+```
+
+## Inheritance Hierarchy
+
+```mermaid
+classDiagram
+    Animal <|-- Dog
+    Animal <|-- Cat
+    Animal : +eat()
+    Dog : +bark()
+    Cat : +meow()
 ```
 
 ### Polymorphism
@@ -183,13 +199,36 @@ public class LibraryDemo {
 }
 ```
 
-## References
+# Journey / Sequence
+
+1. **Analysis**: Identify real-world entities and relationships.
+2. **Design**: Create class diagrams, define hierarchies.
+3. **Implementation**: Write classes with encapsulation, inheritance, polymorphism, abstraction.
+4. **Testing**: Verify behavior through unit tests.
+5. **Refactoring**: Improve design using OOP principles.
+
+# Common Pitfalls & Edge Cases
+
+- **Tight Coupling**: Excessive inheritance leading to fragile code.
+- **God Object**: Classes doing too much, violating single responsibility.
+- **Inheritance vs Composition**: Choosing wrong relationship type.
+- **Over-Abstraction**: Making interfaces too generic or abstract.
+- **Method Overloading Confusion**: Similar methods with different behaviors.
+
+# Tools & Libraries
+
+- **IDE Support**: IntelliJ IDEA, Eclipse for OOP refactoring.
+- **UML Tools**: PlantUML, draw.io for class diagrams.
+- **Design Patterns Libraries**: Commons Lang for utility classes.
+- **Testing**: JUnit for testing OOP implementations.
+
+# References
 
 - [Oracle Java Tutorials - Object-Oriented Programming Concepts](https://docs.oracle.com/javase/tutorial/java/concepts/index.html)
 - [GeeksforGeeks OOP Concepts](https://www.geeksforgeeks.org/object-oriented-programming-oops-concept-in-java/)
 - [Baeldung OOP in Java](https://www.baeldung.com/java-oop)
 
-## Github-README Links & Related Topics
+# Github-README Links & Related Topics
 
 - [Java Fundamentals](../java-fundamentals/README.md)
 - [Design Patterns in Java](../design-patterns-in-java/README.md)

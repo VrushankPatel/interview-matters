@@ -1,18 +1,16 @@
 ---
 title: Java Fundamentals
-aliases: [Java Basics, Core Java]
-tags: [#java]
+aliases: ["Java Basics", "Core Java"]
+tags: ["#java"]
 created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Java Fundamentals
-
-## Overview
+# Overview
 
 Java Fundamentals encompass the essential building blocks of the Java programming language, including syntax, data types, control structures, and basic object-oriented concepts. These fundamentals provide the foundation for writing, compiling, and running Java applications across various platforms.
 
-## Detailed Explanation
+# Detailed Explanation
 
 ### Java Program Structure
 
@@ -26,12 +24,34 @@ public class MyClass {
 }
 ```
 
+## Compilation Process
+
+```mermaid
+graph LR
+    A[Java Source .java] --> B[javac Compiler]
+    B --> C[Bytecode .class]
+    C --> D[JVM]
+    D --> E[Machine Code]
+    D --> F[Operating System]
+```
+
 ### Data Types
 
 Java supports primitive data types and reference types:
 
 - **Primitive types**: `int`, `double`, `boolean`, `char`, `byte`, `short`, `long`, `float`
 - **Reference types**: Objects, arrays, strings
+
+| Type | Size | Default Value | Range |
+|------|------|---------------|-------|
+| byte | 8 bits | 0 | -128 to 127 |
+| short | 16 bits | 0 | -32,768 to 32,767 |
+| int | 32 bits | 0 | -2^31 to 2^31-1 |
+| long | 64 bits | 0L | -2^63 to 2^63-1 |
+| float | 32 bits | 0.0f | IEEE 754 |
+| double | 64 bits | 0.0d | IEEE 754 |
+| char | 16 bits | '\u0000' | 0 to 65,535 |
+| boolean | 1 bit | false | true/false |
 
 ```java
 int age = 25;
@@ -100,7 +120,31 @@ try {
 }
 ```
 
-## Real-world Examples & Use Cases
+# Journey / Sequence
+
+1. **Source Code Creation**: Write .java files with classes and main method.
+2. **Compilation**: Use javac to compile source to bytecode (.class).
+3. **Execution**: Run bytecode on JVM using java command.
+4. **Runtime**: JVM loads classes, executes instructions, manages memory.
+5. **Termination**: Program ends when main method completes or System.exit() called.
+
+# Common Pitfalls & Edge Cases
+
+- **NullPointerException**: Dereferencing null objects.
+- **ArrayIndexOutOfBoundsException**: Accessing invalid array indices.
+- **ClassCastException**: Invalid type casting.
+- **Integer Overflow**: Silent wrap-around for int/long.
+- **Floating Point Precision**: Inexact representation of decimal numbers.
+
+# Tools & Libraries
+
+- **JDK (Java Development Kit)**: Compiler, runtime, tools.
+- **JRE (Java Runtime Environment)**: Runtime only.
+- **IDEs**: Eclipse, IntelliJ IDEA, NetBeans.
+- **Build Tools**: Maven, Gradle.
+- **Testing**: JUnit, TestNG.
+
+# Real-world Examples & Use Cases
 
 - **Console Applications**: Command-line tools and utilities
 - **Web Applications**: Backend services using frameworks like Spring
@@ -108,7 +152,7 @@ try {
 - **Android Development**: Mobile apps (though with some differences)
 - **Enterprise Software**: Large-scale business applications
 
-## Code Examples
+# Code Examples
 
 ### Basic Calculator
 
@@ -199,13 +243,13 @@ public class GradeManager {
 }
 ```
 
-## References
+# References
 
 - [Oracle Java Tutorials - Getting Started](https://docs.oracle.com/javase/tutorial/getStarted/index.html)
 - [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se21/html/index.html)
 - [GeeksforGeeks Java Fundamentals](https://www.geeksforgeeks.org/java/)
 
-## Github-README Links & Related Topics
+# Github-README Links & Related Topics
 
 - [OOP Principles in Java](../oop-principles-in-java/README.md)
 - [JVM Internals & Class Loading](../jvm-internals-class-loading/README.md)

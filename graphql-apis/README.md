@@ -1,6 +1,6 @@
 ---
-title: GraphQL API Design
-aliases: []
+title: GraphQL APIs
+aliases: ["GraphQL", "GraphQL API"]
 tags: ["#system-design","#api","#graphql"]
 created: 2025-09-25
 updated: 2025-09-25
@@ -32,6 +32,19 @@ type User {
   email: String
   friends: [User]
 }
+```
+
+## Architecture Diagram
+
+```mermaid
+graph TD
+    A[Client] -->|GraphQL Query| B[GraphQL Server]
+    B --> C[Schema Validation]
+    C --> D[Resolvers]
+    D --> E[Data Sources]
+    E --> F[Database/API]
+    D --> G[Response JSON]
+    G --> A
 ```
 
 # Real-world Examples & Use Cases
@@ -99,6 +112,28 @@ query GetUser($id: ID!) {
 - [GraphQL Learn](https://graphql.org/learn/)
 - [GraphQL Specification](https://spec.graphql.org/)
 - [GraphQL Best Practices](https://graphql.org/learn/best-practices/)
+
+# Journey / Sequence
+
+1. Client constructs a GraphQL query specifying needed data.
+2. Query sent to GraphQL server endpoint via HTTP POST.
+3. Server parses query and validates against schema.
+4. Resolvers execute to fetch data from sources.
+5. Response assembled and sent back as JSON.
+
+# Common Pitfalls & Edge Cases
+
+- **N+1 Query Problem**: Inefficient resolvers causing multiple database calls. Mitigate with DataLoader.
+- **Schema Complexity**: Overly nested schemas leading to performance issues.
+- **Security Risks**: Lack of rate limiting or authorization.
+- **Caching Challenges**: Harder to cache than REST due to dynamic queries.
+- **Error Handling**: Partial failures in responses.
+
+# Tools & Libraries
+
+- **Servers**: Apollo Server, GraphQL Yoga, Graphene
+- **Clients**: Apollo Client, Relay, URQL
+- **Tools**: GraphQL Playground, GraphiQL, Prisma
 
 # Github-README Links & Related Topics
 
