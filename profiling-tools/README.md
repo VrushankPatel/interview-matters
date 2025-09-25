@@ -1,5 +1,5 @@
 ---
-title: Performance analysis tools
+title: Profiling Tools
 aliases: [JMH, VisualVM, Profiling]
 tags: [#java,#performance]
 created: 2025-09-25

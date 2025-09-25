@@ -1,5 +1,5 @@
 ---
-title: Divide and Conquer Algorithms
+title: Divide and Conquer
 aliases: [Divide and Conquer, D&C Algorithms]
 tags: [#algorithms, #sorting]
 created: 2025-09-25

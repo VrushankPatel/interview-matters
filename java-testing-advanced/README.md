@@ -1,5 +1,5 @@
 ---
-title: Mocks, spies, and test frameworks
+title: Java Testing Advanced
 aliases: [JUnit, Mockito, Unit Testing]
 tags: [#java,#testing]
 created: 2025-09-25
