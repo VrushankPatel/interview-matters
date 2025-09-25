@@ -1,5 +1,5 @@
 ---
-title: Efficient file and channel operations
+title: File I/O and NIO
 aliases: [Java IO, NIO, File Operations]
 tags: [#java,#io]
 created: 2025-09-25
@@ -10,7 +10,22 @@ updated: 2025-09-25
 
 Java's IO and NIO APIs provide mechanisms for efficient file and channel operations. Traditional IO uses blocking streams, while NIO introduces non-blocking channels and buffers for better performance in concurrent and large-scale applications.
 
+Canonical Interview Prompt: Compare traditional IO and NIO for file copying, explaining performance differences.
+
 # Detailed Explanation
+
+## High-Level Design
+
+Traditional IO is stream-based and blocking, while NIO is channel and buffer-based with non-blocking capabilities.
+
+```mermaid
+graph TD
+    A[Traditional IO] --> B[Streams: Input/Output]
+    B --> C[Blocking Operations]
+    D[NIO] --> E[Channels + Buffers]
+    E --> F[Non-blocking/Selectors]
+    F --> G[Better Concurrency]
+```
 
 ## Traditional IO (java.io)
 
@@ -107,6 +122,18 @@ public class ChannelCopyExample {
 }
 ```
 
+# Common Pitfalls & Edge Cases
+
+- **Resource Leaks**: Always use try-with-resources to close streams/channels.
+- **Encoding Issues**: Specify charset (e.g., StandardCharsets.UTF_8) for text operations.
+- **Large Files**: Traditional IO may cause OutOfMemoryError; use NIO channels.
+- **File Locking**: Handle file locks in concurrent environments.
+
+# Tools & Libraries
+
+- Java IO/NIO APIs
+- Apache Commons IO for utilities
+
 # References
 
 - [Oracle Java IO Tutorial](https://docs.oracle.com/javase/tutorial/essential/io/)
@@ -115,6 +142,4 @@ public class ChannelCopyExample {
 
 # Github-README Links & Related Topics
 
-- [IO and NIO](java/io-and-nio/README.md)
-- [Java Streams](java/streams-functional-java/README.md)
-- [Serialization and Deserialization](java/serialization-and-deserialization/README.md)
+[IO and NIO](../java/io-and-nio/README.md), [Java Streams](../java/streams-functional-java/README.md), [Serialization and Deserialization](../java/serialization-and-deserialization/README.md)
