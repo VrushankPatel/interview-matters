@@ -1,9 +1,4 @@
-
-- LLD HLD Basics
-- Replication vs Sharding vs Partitioning
-- Caching
-- Latency and Throughput zero to hero
-- Monitoring and Logging
+ 
 - Async Logging
 - DevOps & Infrastructure as Code
 - Proxy Forward and Reverse
@@ -14,3 +9,13 @@
 - Netflix Video Streaming
 - Instagram System Design
 - Facebook News Feed
+- Java Fundamentals
+- OOP Principles in Java
+- JVM Internals & Class Loading
+- Garbage Collection Algorithms
+- Multithreading & Concurrency in Java
+- Collections & Data Structures
+- Java Stream API & Functional Programming
+- System Design Basics
+- High Scalability Patterns
+- CAP Theorem & Distributed Systems
