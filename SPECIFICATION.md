@@ -10,6 +10,11 @@ Summary of recent additions
  - load-balancing-and-routing
  - caching-strategies
  - database-design-and-indexing
+ - partitioning-and-sharding
+ - consistency-and-availability
+ - message-queues-and-kafka
+ - event-sourcing-and-cqrs
+ - raft-consensus-and-leader-election
 
 Conventions
  - Dir naming: kebab-case.
@@ -124,4 +129,13 @@ New Next Topics Candidates
   - java-switch-expressions — 'Enhanced switch statements'
 
 TODO
- - High-level open design decisions and split criteria for oversized topics.
+ - High-level open design decisions and split criteria for oversized topics.   - backtracking — 'N-Queens, Sudoku, combinatorial problem solving'
+   - divide-and-conquer — 'Merge sort, quicksort, closest pair algorithms'
+   - probabilistic-algorithms — 'Bloom filters, skip lists for space efficiency'
+   - computational-geometry — 'Convex hull, line intersection, geometric algorithms'
+   - jvm-performance-tuning — 'Heap sizing, GC tuning for low latency'
+   - concurrent-collections — 'Thread-safe collections in Java'
+   - java-streams-advanced — 'Advanced stream operations and collectors'
+   - reflection-and-annotations — 'Runtime inspection and custom annotations'
+   - java-security-basics — 'Secure coding and cryptography'
+   - networking-sockets — 'Low-level network programming'

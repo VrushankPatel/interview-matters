@@ -1,11 +1,17 @@
 # One topic per line. Top is oldest.
 
-partitioning-and-sharding
-consistency-and-availability
-message-queues-and-kafka
-event-sourcing-and-cqrs
-raft-consensus-and-leader-election
 distributed-tracing-and-observability
+networking-tcp-ip-http2-tls
+operating-systems-concepts
+algorithms-and-data-structures
+graphs-trees-heaps-and-tries
+dynamic-programming-and-greedy
+system-design-interview-cases
+behavioral-star-prep
+low-latency-systems
+security-authz-authn-tokens
+api-design-rest-grpc-openapi
+observability-logs-metrics-traces
 networking-tcp-ip-http2-tls
 operating-systems-concepts
 algorithms-and-data-structures
