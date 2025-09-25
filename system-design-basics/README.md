@@ -136,8 +136,8 @@ graph TD
 
 ## Github-README Links & Related Topics
 - [lld-hld-basics](../lld-hld-basics/)
-- [high-scalability-patterns](../system-design/high-scalability-patterns/)
-- [load-balancing-and-strategies](../system-design/load-balancing-and-strategies/)
+- [high-scalability-patterns](../high-scalability-patterns/)
+- [load-balancing-and-strategies](../load-balancing-and-strategies/)
 
 ## References
 - "Designing Data-Intensive Applications" by Martin Kleppmann
