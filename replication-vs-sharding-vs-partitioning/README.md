@@ -1,182 +1,131 @@
 ---
 title: Replication vs Sharding vs Partitioning
 aliases: [Data Distribution Strategies, Database Scaling Techniques]
-tags: [#system-design,#database,#scalability]
+tags: [#database,#scalability,#distributed-systems]
 created: 2025-09-25
 updated: 2025-09-25
 ---
 
+# Replication vs Sharding vs Partitioning
+
 ## Overview
 
-Replication, sharding, and partitioning are key strategies for scaling databases and distributing data across multiple servers. This topic explores the differences between these approaches, their use cases, advantages, and trade-offs in building scalable systems.
+In database systems, replication, sharding, and partitioning are strategies to handle large-scale data and high traffic. Replication creates copies of data for redundancy and read performance. Sharding distributes data across multiple servers to scale writes. Partitioning divides data within a single database for better query performance. Choosing the right strategy depends on read/write patterns, data size, and consistency requirements.
 
 ## Detailed Explanation
 
-## Replication
+### Replication
 
-Replication involves creating and maintaining multiple copies of the same data across different servers or databases.
+Replication involves copying data to multiple nodes:
 
-### Types of Replication
+- **Types**: Master-slave (writes to master, reads from slaves), master-master (writes to any node).
+- **Benefits**: High availability, read scalability, fault tolerance.
+- **Drawbacks**: Write bottlenecks on master, consistency issues in master-master.
+- **Use Case**: Read-heavy applications like social media feeds.
 
-- **Master-Slave Replication**: One master handles writes, slaves handle reads.
-- **Master-Master Replication**: Multiple masters can handle both reads and writes.
-- **Multi-Master Replication**: Similar to master-master but with conflict resolution.
+### Sharding
 
-### Benefits
+Sharding splits data across independent databases:
 
-- Improved read performance through load distribution
-- High availability and fault tolerance
-- Data redundancy for backup and disaster recovery
+- **Sharding Key**: Attribute like user_id to determine shard.
+- **Horizontal Sharding**: Rows distributed across shards.
+- **Benefits**: Scales writes, reduces single-point failures.
+- **Drawbacks**: Complex queries across shards, rebalancing challenges.
+- **Use Case**: Massive datasets like user profiles in global apps.
 
-### Drawbacks
+### Partitioning
 
-- Increased storage costs
-- Potential for data inconsistency (eventual consistency)
-- Write performance may not improve (bottleneck at master)
+Partitioning divides data within a single database:
 
-## Sharding
+- **Horizontal Partitioning**: Split tables by rows (e.g., by date).
+- **Vertical Partitioning**: Split tables by columns.
+- **Benefits**: Faster queries, easier maintenance.
+- **Drawbacks**: Limited to single server, no write scaling.
+- **Use Case**: Time-series data or large tables.
 
-Sharding (also called horizontal partitioning) splits data across multiple databases or servers based on a shard key.
+### Comparison
 
-### Sharding Strategies
+| Strategy | Scope | Scaling | Complexity | Consistency |
+|----------|-------|---------|------------|-------------|
+| Replication | Copies data | Read scaling | Medium | Eventual |
+| Sharding | Distributes data | Read/Write scaling | High | Partitioned |
+| Partitioning | Divides data | Query performance | Low | Strong |
 
-- **Hash-based Sharding**: Uses a hash function on the shard key.
-- **Range-based Sharding**: Divides data based on ranges of the shard key.
-- **Directory-based Sharding**: Uses a lookup table to determine shard location.
-
-### Benefits
-
-- Improved write performance
-- Better scalability for large datasets
-- Reduced index size per shard
-
-### Drawbacks
-
-- Complex query routing
-- Potential for uneven data distribution (hot spots)
-- Cross-shard queries can be expensive
-- Rebalancing shards is challenging
-
-## Partitioning
-
-Partitioning divides a large table into smaller, more manageable pieces within the same database.
-
-### Types of Partitioning
-
-- **Horizontal Partitioning**: Rows are divided across partitions.
-- **Vertical Partitioning**: Columns are divided across partitions.
-- **Functional Partitioning**: Data is partitioned based on usage patterns.
-
-### Benefits
-
-- Improved query performance
-- Easier maintenance and backup
-- Better data locality
-
-### Drawbacks
-
-- Limited to single database instance
-- May not solve all scalability issues
-- Partitioning key selection is critical
-
-## Key Differences
-
-| Aspect | Replication | Sharding | Partitioning |
-|--------|-------------|----------|--------------|
-| Data Copies | Multiple identical copies | Unique data subsets | Data subsets within same DB |
-| Scalability | Read scalability | Read and write scalability | Query performance |
-| Consistency | Eventual consistency possible | Strong consistency within shard | Strong consistency |
-| Complexity | Moderate | High | Low to moderate |
-| Use Case | High read loads, HA | Massive datasets, high throughput | Large tables, query optimization |
+```mermaid
+graph TD
+    A[Data Scaling Strategies] --> B[Replication: Copies for Redundancy]
+    A --> C[Sharding: Distributes Across Nodes]
+    A --> D[Partitioning: Divides Within Node]
+    B --> E[Read Scalability]
+    C --> F[Write Scalability]
+    D --> G[Query Optimization]
+```
 
 ## Real-world Examples & Use Cases
 
-- **Replication**: Social media feeds (read-heavy), content delivery networks.
-- **Sharding**: Large e-commerce platforms (user data), search engines (index data).
-- **Partitioning**: Time-series data (logs by date), geographical data.
+- **Replication**: Facebook uses replication for news feed reads; master handles writes, slaves serve reads.
+- **Sharding**: Instagram shards user data by user_id across global regions for fast access.
+- **Partitioning**: E-commerce sites partition order tables by date for efficient historical queries.
 
 ## Code Examples
 
-## Simple Replication Concept (Pseudocode)
-
-```python
-class ReplicatedDatabase:
-    def __init__(self, masters, slaves):
-        self.masters = masters
-        self.slaves = slaves
-    
-    def write(self, key, value):
-        # Write to all masters
-        for master in self.masters:
-            master.put(key, value)
-        # Asynchronous replication to slaves
-    
-    def read(self, key):
-        # Read from a random slave for load balancing
-        slave = random.choice(self.slaves)
-        return slave.get(key)
-```
-
-## Sharding Implementation
-
-```java
-public class ShardedDatabase {
-    private List<Database> shards;
-    private int numShards;
-    
-    public ShardedDatabase(int numShards) {
-        this.numShards = numShards;
-        this.shards = new ArrayList<>();
-        for (int i = 0; i < numShards; i++) {
-            shards.add(new Database());
-        }
-    }
-    
-    private int getShardIndex(String key) {
-        return Math.abs(key.hashCode()) % numShards;
-    }
-    
-    public void put(String key, String value) {
-        int shardIndex = getShardIndex(key);
-        shards.get(shardIndex).put(key, value);
-    }
-    
-    public String get(String key) {
-        int shardIndex = getShardIndex(key);
-        return shards.get(shardIndex).get(key);
-    }
-}
-```
-
-## Table Partitioning Example (SQL)
+### Replication Setup (MySQL Master-Slave)
 
 ```sql
--- Range partitioning by date
-CREATE TABLE sales (
-    id INT,
-    sale_date DATE,
-    amount DECIMAL(10,2)
-)
-PARTITION BY RANGE (YEAR(sale_date)) (
-    PARTITION p2020 VALUES LESS THAN (2021),
-    PARTITION p2021 VALUES LESS THAN (2022),
-    PARTITION p2022 VALUES LESS THAN (2023)
-);
+-- On Master
+CHANGE MASTER TO MASTER_HOST='slave_host', MASTER_USER='repl', MASTER_PASSWORD='password';
+START SLAVE;
 
--- Query specific partition
-SELECT * FROM sales PARTITION (p2021) WHERE amount > 1000;
+-- On Slave
+SHOW SLAVE STATUS;
 ```
+
+### Sharding Example (Python with Sharding Logic)
+
+```python
+def get_shard(user_id, num_shards):
+    return user_id % num_shards
+
+def insert_user(user_id, data):
+    shard = get_shard(user_id, 4)
+    # Connect to shard_db[shard] and insert
+    shard_db[shard].insert(data)
+```
+
+### Partitioning (PostgreSQL)
+
+```sql
+CREATE TABLE orders (
+    id SERIAL,
+    user_id INT,
+    order_date DATE,
+    amount DECIMAL
+) PARTITION BY RANGE (order_date);
+
+CREATE TABLE orders_2023 PARTITION OF orders FOR VALUES FROM ('2023-01-01') TO ('2024-01-01');
+```
+
+## Common Pitfalls & Edge Cases
+
+- **Hot Shards**: Uneven data distribution causing overload.
+- **Cross-Shard Queries**: Expensive joins in sharded systems.
+- **Replication Lag**: Stale reads in eventual consistency.
+- **Rebalancing**: Data migration during shard changes.
+
+## Tools & Libraries
+
+- **Replication**: MySQL Replication, PostgreSQL Streaming Replication.
+- **Sharding**: MongoDB Sharding, Cassandra.
+- **Partitioning**: PostgreSQL Table Partitioning, MySQL Partitioning.
 
 ## References
 
-- [Database Sharding: Concepts and Examples](https://www.mongodb.com/blog/post/database-sharding-concepts-and-examples)
-- [Replication vs Sharding](https://www.cockroachlabs.com/blog/replication-vs-sharding/)
+- [Database Sharding Explained](https://www.mongodb.com/basics/database-sharding-explained)
+- [Replication Strategies](https://dev.mysql.com/doc/refman/8.0/en/replication.html)
 - [Partitioning in PostgreSQL](https://www.postgresql.org/docs/current/ddl-partitioning.html)
-- [Designing Data-Intensive Applications by Martin Kleppmann](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321)
 
 ## Github-README Links & Related Topics
 
-- [Database Sharding Strategies](database-sharding-strategies/README.md)
-- [Database Replication Strategies](database-replication-strategies/README.md)
-- [High Scalability Patterns](high-scalability-patterns/README.md)
-- [CAP Theorem & Distributed Systems](cap-theorem-and-distributed-systems/README.md)
+- [Database Sharding Strategies](../database-sharding-strategies/)
+- [Database Replication Strategies](../database-replication-strategies/)
+- [Distributed Systems](../cap-theorem-and-distributed-systems/)
