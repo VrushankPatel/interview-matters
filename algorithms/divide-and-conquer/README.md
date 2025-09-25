@@ -7,49 +7,63 @@ updated: 2025-09-25
 ---
 
 ## Overview
-Divide and Conquer is a algorithmic paradigm that solves a problem by breaking it into smaller subproblems of the same type, solving them recursively, and combining their solutions. It is efficient for problems with optimal substructure and is foundational for sorting, searching, and geometric algorithms.
+Divide and Conquer (D&C) is an algorithmic paradigm that breaks a problem into smaller subproblems of the same type, solves them recursively, and combines their solutions to solve the original problem. It is efficient for problems with optimal substructure and overlapping subproblems, often achieving better time complexities than brute force.
+
+Key applications include sorting, searching, and geometric problems. Master Theorem: T(n) = a T(n/b) + f(n), where a is subproblem count, b is size reduction.
 
 ## STAR Summary
-**Situation:** Implementing a fast sorting algorithm for large datasets in a data processing pipeline.  
-**Task:** Sort arrays of up to 1M elements efficiently.  
-**Action:** Used merge sort (divide and conquer) instead of bubble sort.  
-**Result:** Reduced time complexity from O(N^2) to O(N log N), handling datasets in seconds.
+**Situation:** Optimizing a data pipeline sorting 100M records daily.  
+**Task:** Reduce sort time from hours to minutes.  
+**Action:** Replaced insertion sort with merge sort (D&C).  
+**Result:** Time dropped from O(N^2) to O(N log N), processing in 10 minutes.
 
 ## Detailed Explanation
-Steps: Divide the problem into subproblems, conquer (solve recursively), combine solutions. Examples: Merge sort, quicksort, binary search. Time complexity often T(N) = a T(N/b) + f(N), solvable by master theorem.
+Steps:
+1. **Divide:** Split problem into subproblems.
+2. **Conquer:** Solve recursively.
+3. **Combine:** Merge solutions.
+
+Examples:
+- Merge Sort: Divide array, sort halves, merge.
+- Quick Sort: Partition around pivot.
+- Binary Search: Divide search space.
+
+Complexity: Often O(N log N) for sorting.
 
 ## Real-world Examples & Use Cases
-- Sorting algorithms (merge sort, quicksort).
-- Closest pair of points in computational geometry.
-- Matrix multiplication (Strassen's algorithm).
+- Sorting large datasets (merge sort in external sorting).
+- Closest pair of points in maps.
+- Matrix multiplication (Strassen's).
+- FFT for signal processing.
 
 ## Code Examples
 ### Merge Sort in Java
 ```java
+import java.util.Arrays;
+
 public class MergeSort {
-    public void sort(int[] arr, int l, int r) {
-        if (l < r) {
-            int m = l + (r - l) / 2;
-            sort(arr, l, m);
-            sort(arr, m + 1, r);
-            merge(arr, l, m, r);
-        }
+    public void mergeSort(int[] arr) {
+        if (arr.length < 2) return;
+        int mid = arr.length / 2;
+        int[] left = Arrays.copyOfRange(arr, 0, mid);
+        int[] right = Arrays.copyOfRange(arr, mid, arr.length);
+        mergeSort(left);
+        mergeSort(right);
+        merge(arr, left, right);
     }
 
-    private void merge(int[] arr, int l, int m, int r) {
-        int n1 = m - l + 1, n2 = r - m;
-        int[] L = new int[n1], R = new int[n2];
-        System.arraycopy(arr, l, L, 0, n1);
-        System.arraycopy(arr, m + 1, R, 0, n2);
-        int i = 0, j = 0, k = l;
-        while (i < n1 && j < n2) arr[k++] = L[i] <= R[j] ? L[i++] : R[j++];
-        while (i < n1) arr[k++] = L[i++];
-        while (j < n2) arr[k++] = R[j++];
+    private void merge(int[] arr, int[] left, int[] right) {
+        int i = 0, j = 0, k = 0;
+        while (i < left.length && j < right.length) {
+            arr[k++] = left[i] <= right[j] ? left[i++] : right[j++];
+        }
+        while (i < left.length) arr[k++] = left[i++];
+        while (j < right.length) arr[k++] = right[j++];
     }
 
     public static void main(String[] args) {
-        int[] arr = {12, 11, 13, 5, 6, 7};
-        new MergeSort().sort(arr, 0, arr.length - 1);
+        int[] arr = {38, 27, 43, 3, 9, 82, 10};
+        new MergeSort().mergeSort(arr);
         System.out.println(Arrays.toString(arr));
     }
 }
@@ -57,34 +71,77 @@ public class MergeSort {
 
 Compile and run: `javac MergeSort.java && java MergeSort`
 
+### Closest Pair of Points
+```java
+import java.util.Arrays;
+
+public class ClosestPair {
+    static class Point {
+        double x, y;
+        Point(double x, double y) { this.x = x; this.y = y; }
+    }
+
+    public double closest(Point[] points) {
+        Arrays.sort(points, (a, b) -> Double.compare(a.x, b.x));
+        return closestUtil(points, 0, points.length - 1);
+    }
+
+    private double closestUtil(Point[] points, int l, int r) {
+        if (r - l <= 3) return bruteForce(points, l, r);
+        int mid = (l + r) / 2;
+        Point midPoint = points[mid];
+        double dl = closestUtil(points, l, mid);
+        double dr = closestUtil(points, mid + 1, r);
+        double d = Math.min(dl, dr);
+        return Math.min(d, stripClosest(points, mid, d));
+    }
+
+    // Implement bruteForce and stripClosest
+    private double bruteForce(Point[] points, int l, int r) {
+        double min = Double.MAX_VALUE;
+        for (int i = l; i <= r; i++)
+            for (int j = i + 1; j <= r; j++)
+                min = Math.min(min, dist(points[i], points[j]));
+        return min;
+    }
+
+    private double dist(Point a, Point b) {
+        return Math.sqrt((a.x - b.x)*(a.x - b.x) + (a.y - b.y)*(a.y - b.y));
+    }
+
+    // stripClosest omitted for brevity
+}
+```
+
 ## Data Models / Message Formats
 | Field | Type | Description |
 |-------|------|-------------|
 | arr | int[] | Array to sort |
-| l, r | int | Left and right indices |
+| points | Point[] | Array of 2D points |
+| d | double | Minimum distance |
 
 ## Journey / Sequence
 ```mermaid
 sequenceDiagram
-    participant Sort
+    participant DAC
     participant Sub
-    Sort->>Sub: Divide into halves
-    Sub->>Sub: Recurse sort left
-    Sub->>Sub: Recurse sort right
-    Sub->>Sort: Merge results
+    DAC->>Sub: Divide problem
+    Sub->>Sub: Conquer subproblems
+    Sub->>DAC: Combine solutions
+    DAC->>DAC: Return result
 ```
 
 ## Common Pitfalls & Edge Cases
-- Recursion depth limits for large N.
-- Choosing bad pivot in quicksort leading to O(N^2).
+- Recursion depth for large N.
 - Extra space in merge sort.
+- Bad pivot in quicksort.
 
 ## Tools & Libraries
-- Java Arrays.sort() uses dual-pivot quicksort.
+- Java Arrays.sort() uses D&C variants.
 - No external tools.
 
 ## Github-README Links & Related Topics
-Related: [[sorting-algorithms]], [[dynamic-programming-and-greedy]], [[graphs-trees-heaps-and-tries]]
+Related: [[sorting-algorithms]], [[dynamic-programming-and-greedy]], [[computational-geometry]]
 
 ## References
 - https://en.wikipedia.org/wiki/Divide-and-conquer_algorithm
@@ -92,6 +149,11 @@ Related: [[sorting-algorithms]], [[dynamic-programming-and-greedy]], [[graphs-tr
 - GeeksforGeeks: Divide and Conquer
 
 ### Practice Problems
-1. **Merge Two Sorted Arrays**: Merge without extra space. (LeetCode 88) - Time: O(M+N), Space: O(1)
-2. **Kth Largest Element**: Find kth in unsorted array. (LeetCode 215) - Time: O(N log N) avg
-3. **Closest Pair of Points**: Find min distance in 2D. (LeetCode 973 variant) - Time: O(N log N)
+1. **Merge Intervals** (LeetCode 56): Merge overlapping intervals. Time: O(N log N)
+2. **Kth Largest Element** (LeetCode 215): Quickselect variant. Time: O(N) avg
+3. **Closest Pair** (Geeks): Min distance in points. Time: O(N log N)
+
+### Common Interview Questions
+- Explain merge sort.
+- Master Theorem examples.
+- D&C vs DP?

@@ -7,96 +7,152 @@ updated: 2025-09-25
 ---
 
 ## Overview
-Probabilistic algorithms use randomness to achieve efficiency or simplicity, often with high probability of correctness. They include Monte Carlo (may be wrong) and Las Vegas (always correct, variable time). Common in data structures like Bloom filters for space-efficient membership testing.
+Probabilistic algorithms use randomness to solve problems efficiently, often with high probability of correctness. Types: Monte Carlo (fast but may err), Las Vegas (correct but variable time). Key structures: Bloom filters for membership, skip lists for ordered data.
+
+Used when deterministic algorithms are too slow or space-intensive.
 
 ## STAR Summary
-**Situation:** Checking membership in a large set (1B items) with limited memory.  
-**Task:** Implement fast lookups with low false positives.  
-**Action:** Used Bloom filter, a probabilistic data structure.  
-**Result:** 99% accuracy with 10x less memory than a hash set.
+**Situation:** Database with 1B URLs, need fast duplicate checks.  
+**Task:** Check membership with <1GB memory.  
+**Action:** Implemented Bloom filter.  
+**Result:** 1% false positives, 10x space savings.
 
 ## Detailed Explanation
-- **Bloom Filter:** Space-efficient set with false positives; uses hash functions and bit array.
-- **Skip List:** Probabilistic balanced BST with expected O(log N) operations.
-- **Randomized Quickselect:** Expected linear time for selection.
+- **Bloom Filter:** Bit array + hash functions. Add: set bits; Check: if all set (may false positive).
+- **Skip List:** Linked list with levels, random promotions. Expected O(log N) ops.
+- **Randomized Select:** Quickselect with random pivot.
+
+Probability: Tune for desired error rates.
 
 ## Real-world Examples & Use Cases
-- Bloom filters in databases for cache checks.
-- Skip lists in Redis sorted sets.
-- Randomized algorithms in cryptography.
+- Bloom filters in Chrome for malware checks.
+- Skip lists in ConcurrentSkipListMap.
+- Randomized in cryptography.
 
 ## Code Examples
-### Simple Bloom Filter in Java
+### Bloom Filter
 ```java
 import java.util.BitSet;
+import java.util.Random;
 
 public class BloomFilter {
     private BitSet bits;
     private int size;
-    private int[] hashes;
+    private int hashCount;
+    private Random rand = new Random();
 
-    public BloomFilter(int size, int hashCount) {
-        this.size = size;
+    public BloomFilter(int expectedItems, double falsePositiveRate) {
+        size = (int) (-expectedItems * Math.log(falsePositiveRate) / (Math.log(2) * Math.log(2)));
+        hashCount = (int) (size * Math.log(2) / expectedItems);
         bits = new BitSet(size);
-        hashes = new int[hashCount];
-        // Initialize hashes
     }
 
     public void add(String item) {
-        for (int i = 0; i < hashes.length; i++) {
-            int hash = (item.hashCode() + i * 31) % size;
+        for (int i = 0; i < hashCount; i++) {
+            int hash = hash(item, i);
             bits.set(hash);
         }
     }
 
     public boolean mightContain(String item) {
-        for (int i = 0; i < hashes.length; i++) {
-            int hash = (item.hashCode() + i * 31) % size;
+        for (int i = 0; i < hashCount; i++) {
+            int hash = hash(item, i);
             if (!bits.get(hash)) return false;
         }
         return true;
     }
+
+    private int hash(String item, int seed) {
+        return Math.abs((item.hashCode() + seed * 31) % size);
+    }
 }
 ```
 
-Compile and run: `javac BloomFilter.java`
+Compile: `javac BloomFilter.java`
+
+### Skip List
+```java
+import java.util.Random;
+
+public class SkipList {
+    private Node head;
+    private int maxLevel;
+    private Random rand = new Random();
+
+    static class Node {
+        int val;
+        Node[] next;
+        Node(int val, int level) { this.val = val; next = new Node[level]; }
+    }
+
+    public SkipList() {
+        head = new Node(Integer.MIN_VALUE, 16);
+        maxLevel = 16;
+    }
+
+    public void insert(int val) {
+        Node[] update = new Node[maxLevel];
+        Node curr = head;
+        for (int i = maxLevel - 1; i >= 0; i--) {
+            while (curr.next[i] != null && curr.next[i].val < val) curr = curr.next[i];
+            update[i] = curr;
+        }
+        int level = randomLevel();
+        Node newNode = new Node(val, level);
+        for (int i = 0; i < level; i++) {
+            newNode.next[i] = update[i].next[i];
+            update[i].next[i] = newNode;
+        }
+    }
+
+    private int randomLevel() {
+        int level = 1;
+        while (rand.nextDouble() < 0.5 && level < maxLevel) level++;
+        return level;
+    }
+}
+```
 
 ## Data Models / Message Formats
 | Field | Type | Description |
 |-------|------|-------------|
-| bits | BitSet | Bit array for storage |
-| size | int | Filter size |
-| hashes | int[] | Number of hash functions |
+| bits | BitSet | Bit array |
+| head | Node | Skip list head |
+| level | int | Node level |
 
 ## Journey / Sequence
 ```mermaid
 sequenceDiagram
-    participant Filter
-    participant Item
-    Filter->>Item: Hash item multiple times
-    Item-->>Filter: Set bits
-    Filter->>Item: Check bits for query
-    Item-->>Filter: True if all set (possible false positive)
+    participant Algo
+    participant Data
+    Algo->>Data: Add with hashes
+    Data-->>Algo: Set bits
+    Algo->>Data: Query hashes
+    Data-->>Algo: Check bits
 ```
 
 ## Common Pitfalls & Edge Cases
-- False positives; tune hash count and size.
-- No deletions in basic Bloom filter.
-- Memory vs accuracy trade-off.
+- False positives in Bloom.
+- No deletions.
+- Tune parameters.
 
 ## Tools & Libraries
-- Guava BloomFilter in Java.
-- Redis for skip lists.
+- Guava BloomFilter.
+- Java ConcurrentSkipListMap.
 
 ## Github-README Links & Related Topics
-Related: [[data-structures-advanced]], [[bit-manipulation]], [[caching-strategies]]
+Related: [[data-structures-advanced]], [[bit-manipulation]], [[caching-patterns]]
 
 ## References
 - https://en.wikipedia.org/wiki/Bloom_filter
-- "Probabilistic Data Structures" articles
-- MIT OCW: Randomized Algorithms
+- "Probabilistic Data Structures" by Durand and Flajolet
+- MIT OCW
 
 ### Practice Problems
-1. **Implement Bloom Filter**: Add and check membership. - Space: O(M), Time: O(K)
-2. **Skip List Insertion**: Insert into skip list. (LeetCode variant) - Expected O(log N)
-3. **Randomized Select**: Find kth element. (LeetCode 215) - Expected O(N)
+1. **Bloom Filter Implementation**: Add/check. Space: O(M)
+2. **Skip List Search**: Find element. Expected O(log N)
+3. **Randomized Quickselect**: Kth element. Expected O(N)
+
+### Common Interview Questions
+- How does Bloom filter work?
+- Trade-offs in probabilistic structures?

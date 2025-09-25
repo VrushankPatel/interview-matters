@@ -20,16 +20,16 @@ Conventions
  - STAR: apply for behavioral/system-case explanations.
 
 Next Topics Candidates
-    - backtracking: N-Queens, Sudoku, combinatorial problem solving
-    - divide-and-conquer: Merge sort, quicksort, closest pair algorithms
-    - probabilistic-algorithms: Bloom filters, skip lists for space efficiency
-    - computational-geometry: Convex hull, line intersection, geometric algorithms
-    - jvm-performance-tuning: Heap sizing, GC tuning for low latency
     - concurrent-collections: ConcurrentHashMap, CopyOnWriteArrayList usage
     - java-streams-advanced: Parallel streams, custom collectors
     - reflection-and-annotations: Runtime inspection and custom annotations
     - java-security-basics: Cryptography, secure coding practices
     - networking-sockets: TCP/UDP sockets in Java
+    - file-io-nio: Channels, buffers for efficient I/O
+    - java-testing-advanced: Mockito spies, parameterized tests
+    - build-automation: Gradle vs Maven, multi-module projects
+    - profiling-tools: JProfiler, VisualVM for performance analysis
+    - advanced-java-concepts: Generics, wildcards, type erasure
 
 TODO
  - High-level open design decisions and split criteria for oversized topics.
