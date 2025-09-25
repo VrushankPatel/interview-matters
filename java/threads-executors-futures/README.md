@@ -22,6 +22,14 @@ Threads, Executors, and Futures form the foundation of concurrent programming in
 
 Key concepts: thread lifecycle, pool sizing, exception handling in async tasks.
 
+Concurrency primitives: Threads are JVM-managed native threads. Executors use synchronization primitives like locks for pool management. Futures rely on volatile fields for state visibility.
+
+Memory visibility: Volatile ensures that state changes in Future are visible to waiting threads, adhering to JMM.
+
+GC: Long-running executors can accumulate objects; tune GC with flags like -XX:+UseG1GC for better pause times in low-latency apps.
+
+Common libraries: Java's built-in, or Reactor for reactive programming.
+
 ## Common Interview Questions
 - What is the difference between Runnable and Callable?
 - How do you properly shut down an ExecutorService?

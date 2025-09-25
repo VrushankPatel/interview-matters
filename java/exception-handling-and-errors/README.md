@@ -20,6 +20,14 @@ Hierarchy: Throwable > Exception (checked/unchecked) > RuntimeException. Errors 
 
 Best practices: Catch specific exceptions, avoid catching Exception, log appropriately.
 
+JVM internals: Exceptions unwind the stack using exception tables in bytecode, checked at compile time for checked exceptions.
+
+GC: Proper handling prevents resource leaks, reducing GC pressure from unreleased objects.
+
+Memory visibility: Exception state is thread-local, no cross-thread visibility issues.
+
+Common libraries: SLF4J for logging exceptions.
+
 ## Common Interview Questions
 - What is the difference between checked and unchecked exceptions?
 - When should you use try-with-resources?

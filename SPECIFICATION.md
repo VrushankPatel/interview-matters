@@ -10,6 +10,11 @@ Summary of recent additions
  - jvm-internals-and-classloading
  - garbage-collection-algorithms
  - java-memory-model-and-concurrency
+ - concurrent-data-structures
+ - threads-executors-futures
+ - collections-framework
+ - streams-functional-java
+ - exception-handling-and-errors
 
 Conventions
  - Dir naming: kebab-case.
@@ -20,26 +25,21 @@ Conventions
  - STAR: apply for behavioral/system-case explanations.
 
 Next Topics Candidates
-    - concurrent-collections: ConcurrentHashMap, CopyOnWriteArrayList usage
-    - java-streams-advanced: Parallel streams, custom collectors
-    - reflection-and-annotations: Runtime inspection and custom annotations
-    - java-security-basics: Cryptography, secure coding practices
-    - networking-sockets: TCP/UDP sockets in Java
-    - file-io-nio: Channels, buffers for efficient I/O
-    - java-testing-advanced: Mockito spies, parameterized tests
-    - build-automation: Gradle vs Maven, multi-module projects
-    - profiling-tools: JProfiler, VisualVM for performance analysis
-    - advanced-java-concepts: Generics, wildcards, type erasure
-    - java-reflection-api: Runtime class inspection and dynamic invocation
-    - java-annotations-deep-dive: Custom annotations and processing
-    - java-io-streams: Input/output streams and serialization basics
-    - java-nio-channels: Non-blocking I/O with channels and selectors
-    - java-concurrency-utilities: Advanced locks, semaphores, and barriers
-    - java-fork-join-framework: Parallel computation patterns
-    - java-reactive-programming: Reactive Streams and RxJava integration
-    - java-microbenchmarking: JMH for accurate performance measurement
-    - java-classloaders: Custom classloaders and delegation hierarchy
-    - event-sourcing-cqrs: Architectural patterns for event-driven systems
+    - backtracking: N-Queens, Sudoku, combinatorial problem solving
+    - divide-and-conquer: Merge sort, quicksort, closest pair algorithms
+    - probabilistic-algorithms: Bloom filters, skip lists for space efficiency
+    - computational-geometry: Convex hull, line intersection, geometric algorithms
+    - jvm-performance-tuning: Heap sizing, GC tuning for low latency
+    - order-book-modeling: Canonical models for in-memory book and persistence
+    - matching-algorithms: Batch vs streaming matching, complexity
+    - time-in-force-variations: Exchange semantics across major venues
+    - latency-measurement: Instrumentation and microbenchmarks
+    - raft-and-leader-election: Implementations and failure modes
+    - memory-models: JMM deep-dive
+    - gc-tuning: Practical GC tuning for low-latency services
+    - kafka-internals: Partitioning, replication, and consumer groups
+    - caching-patterns: Cache invalidation strategies
+    - consistency-models: Eventual vs strong consistency tradeoffs
 
 TODO
  - High-level open design decisions and split criteria for oversized topics.

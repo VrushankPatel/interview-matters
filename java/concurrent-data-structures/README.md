@@ -23,6 +23,16 @@ Key features:
 - **Weakly consistent iterators:** Iterators reflect state at creation time, avoiding ConcurrentModificationException.
 - **Performance:** Designed for high concurrency with minimal contention.
 
+Concurrency primitives: ConcurrentHashMap uses CAS (Compare-And-Swap) operations provided by the JVM for atomic updates, ensuring thread-safety without full locks. The Java Memory Model ensures visibility through volatile fields and happens-before relationships.
+
+GC algorithms: Concurrent collections minimize GC pauses; CopyOnWriteArrayList creates copies on write, which can increase memory usage and GC load for frequent updates.
+
+Memory visibility: Operations establish memory barriers to ensure changes are visible across threads, preventing stale reads.
+
+Common libraries: In addition to java.util.concurrent, libraries like Guava offer extended concurrent utilities.
+
+Sample code: Use Maven for dependencies if needed.
+
 ## Common Interview Questions
 - What is the difference between ConcurrentHashMap and synchronized HashMap?
 - How does ConcurrentHashMap achieve thread-safety without locking the entire map?

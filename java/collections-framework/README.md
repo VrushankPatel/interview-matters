@@ -20,6 +20,14 @@ Core interfaces: Collection (List, Set, Queue), Map. Implementations vary in per
 
 Complexity: HashMap O(1) average for get/put, TreeMap O(log n) for ordered operations.
 
+JVM internals: Collections are heap-allocated; ArrayList uses contiguous arrays, LinkedList uses node objects, affecting memory layout and cache performance.
+
+GC: Resizing ArrayList triggers minor GC; pre-sizing avoids this. WeakHashMap allows GC of keys.
+
+Memory visibility: Non-thread-safe by default; for concurrent access, use synchronized wrappers or concurrent versions to ensure visibility.
+
+Common libraries: Apache Commons Collections for extended utilities.
+
 ## Common Interview Questions
 - What is the difference between ArrayList and LinkedList?
 - How does HashMap handle collisions?

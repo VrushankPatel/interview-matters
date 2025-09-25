@@ -20,6 +20,14 @@ Streams represent sequences of elements supporting aggregate operations like fil
 
 Functional interfaces: Predicate, Function, Consumer, Supplier.
 
+JVM internals: Lambdas implemented using invokedynamic for efficiency. Streams use spliterators for parallel processing via ForkJoinPool.
+
+GC: Lazy evaluation minimizes object creation, but collect() can create large collections triggering GC.
+
+Memory visibility: Streams are not thread-safe; parallel streams require stateless operations to avoid visibility issues.
+
+Common libraries: Vavr for more functional constructs.
+
 ## Common Interview Questions
 - What is the difference between intermediate and terminal operations in streams?
 - When should you use parallel streams?
