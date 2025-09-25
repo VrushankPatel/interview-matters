@@ -84,6 +84,13 @@ sequenceDiagram
 - Over-mocking leading to brittle tests.
 - Not handling exceptions in tests.
 
+## Common Interview Questions
+- **What is the difference between @Mock and @Spy in Mockito?** @Mock creates a completely mocked object with no real behavior. @Spy wraps a real object and allows calling real methods unless stubbed.
+- **How do you verify method calls in Mockito?** Use verify(mock).methodCall() to check if a method was called with specific arguments.
+- **Explain JUnit lifecycle annotations.** @BeforeEach runs before each test, @AfterEach after each, @BeforeAll once before all tests, @AfterAll once after all.
+- **What is a parameterized test in JUnit?** @ParameterizedTest allows running the same test with different inputs, using @ValueSource or custom providers.
+- **How to handle exceptions in JUnit tests?** Use assertThrows() to verify exceptions are thrown.
+
 ## Tools & Libraries
 - JUnit: junit-jupiter
 - Mockito: mockito-core
