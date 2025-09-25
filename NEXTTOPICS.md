@@ -1,5 +1,5 @@
-Zoom Video Conferencing
-Dropbox File Storage
-Google Maps System Design
-Amazon E-commerce Platform
-LinkedIn Social Network
+Payment Systems
+Recommendation Systems
+Geospatial Databases
+Real-time Feeds
+User Authentication
