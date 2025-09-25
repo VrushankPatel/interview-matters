@@ -1,7 +1,7 @@
 ---
 title: JVM Internals & Class Loading
-aliases: [Java Virtual Machine Internals, Class Loading Mechanism]
-tags: [#java,#jvm]
+aliases: [Java Virtual Machine, JVM Architecture, Class Loaders]
+tags: [#java,#jvm,#internals]
 created: 2025-09-25
 updated: 2025-09-25
 ---
@@ -10,7 +10,7 @@ updated: 2025-09-25
 
 ## Overview
 
-The Java Virtual Machine (JVM) is the runtime environment that executes Java bytecode. Understanding JVM internals and the class loading mechanism is crucial for optimizing performance, debugging issues, and writing efficient Java applications.
+The Java Virtual Machine (JVM) is the runtime environment that executes Java bytecode. Understanding JVM internals and the class loading mechanism is crucial for Java developers to optimize performance, troubleshoot issues, and implement advanced features like custom class loaders.
 
 ## Detailed Explanation
 
@@ -23,22 +23,47 @@ graph TD
     A[JVM] --> B[Class Loader Subsystem]
     A --> C[Runtime Data Areas]
     A --> D[Execution Engine]
-    A --> E[Native Method Interface]
+    A --> E[Native Interface]
     
     C --> F[Method Area]
     C --> G[Heap]
     C --> H[Java Stack]
     C --> I[PC Register]
     C --> J[Native Method Stack]
+    
+    D --> K[Interpreter]
+    D --> L[JIT Compiler]
+    D --> M[Garbage Collector]
 ```
+
+#### Class Loader Subsystem
+
+Responsible for loading class files into the JVM.
+
+#### Runtime Data Areas
+
+- **Method Area**: Stores class-level information, constants, static variables
+- **Heap**: Runtime data area where objects are allocated
+- **Java Stack**: Stores method call frames, local variables, partial results
+- **PC Register**: Holds address of currently executing JVM instruction
+- **Native Method Stack**: Supports native methods
+
+#### Execution Engine
+
+- **Interpreter**: Executes bytecode line by line
+- **JIT Compiler**: Compiles bytecode to native code for better performance
+- **Garbage Collector**: Automatically manages memory
 
 ### Class Loading Process
 
-Class loading is the process of loading class files into the JVM memory. It involves three main phases:
+Class loading occurs in three phases:
 
-1. **Loading**: Finding and importing the binary data of a class
-2. **Linking**: Verifying, preparing, and resolving symbolic references
-3. **Initialization**: Executing static initializers and assigning initial values
+1. **Loading**: Finding and importing the binary data for a class
+2. **Linking**: 
+   - Verification: Ensuring the correctness of the bytecode
+   - Preparation: Allocating memory for class variables and initializing to default values
+   - Resolution: Replacing symbolic references with direct references
+3. **Initialization**: Executing static initializers and assigning initial values to static variables
 
 ### Class Loader Hierarchy
 
@@ -51,54 +76,64 @@ graph TD
     C --> D[Custom Class Loaders]
 ```
 
-- **Bootstrap Class Loader**: Loads core Java classes from rt.jar
-- **Extension Class Loader**: Loads classes from jre/lib/ext
-- **System Class Loader**: Loads classes from classpath
-- **Custom Class Loaders**: User-defined class loaders
+#### Bootstrap Class Loader
 
-### Runtime Data Areas
+- Written in native code (C/C++)
+- Loads core Java classes from `rt.jar`
+- No parent class loader
 
-#### Method Area
-- Stores class-level information (class name, modifiers, method info)
-- Stores static variables and constants
-- Shared among all threads
+#### Extension Class Loader
 
-#### Heap
-- Stores object instances and arrays
-- Divided into Young Generation (Eden, Survivor spaces) and Old Generation
-- Garbage collected
+- Loads classes from `jre/lib/ext` directory
+- Parent is Bootstrap Class Loader
 
-#### Java Stack
-- Stores method call frames
-- Each frame contains local variables, operand stack, and frame data
-- Thread-specific
+#### System/Application Class Loader
 
-#### PC Register
-- Stores the address of the currently executing JVM instruction
-- Thread-specific
+- Loads classes from classpath
+- Parent is Extension Class Loader
+- Default class loader for applications
 
-#### Native Method Stack
-- Supports native method execution
-- Thread-specific
+### Class Loading Delegation Model
 
-### Class Loading Example
+When a class loader is asked to load a class:
+
+1. It delegates the request to its parent
+2. If parent can't load, it attempts to load itself
+3. This ensures core classes are loaded by bootstrap loader
+
+## Real-world Examples & Use Cases
+
+1. **Application Servers**: Custom class loaders for hot deployment
+2. **OSGi Frameworks**: Modular class loading
+3. **Plugin Systems**: Isolated class loading for plugins
+4. **Web Applications**: WAR file class loading
+5. **Testing Frameworks**: Custom class loaders for mocking
+6. **Bytecode Manipulation**: Loading modified classes at runtime
+
+## Code Examples
+
+### Understanding Class Loading
 
 ```java
-public class ClassLoadingExample {
+public class ClassLoadingDemo {
     public static void main(String[] args) {
-        // Class loading happens here when MyClass is first referenced
-        MyClass obj = new MyClass();
-        obj.display();
-    }
-}
-
-class MyClass {
-    static {
-        System.out.println("MyClass is being initialized");
-    }
-    
-    public void display() {
-        System.out.println("Hello from MyClass");
+        // Get class loader for this class
+        ClassLoader classLoader = ClassLoadingDemo.class.getClassLoader();
+        System.out.println("Class Loader: " + classLoader);
+        
+        // Get parent class loaders
+        while (classLoader != null) {
+            System.out.println("Parent: " + classLoader.getParent());
+            classLoader = classLoader.getParent();
+        }
+        
+        // Load a class dynamically
+        try {
+            Class<?> stringClass = Class.forName("java.lang.String");
+            System.out.println("String class loaded: " + stringClass.getName());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
 ```
@@ -107,98 +142,153 @@ class MyClass {
 
 ```java
 public class CustomClassLoader extends ClassLoader {
-    @Override
-    public Class<?> findClass(String name) throws ClassNotFoundException {
-        byte[] classData = loadClassData(name);
-        if (classData == null) {
-            throw new ClassNotFoundException();
-        }
-        return defineClass(name, classData, 0, classData.length);
+    private String classPath;
+    
+    public CustomClassLoader(String classPath) {
+        this.classPath = classPath;
     }
     
-    private byte[] loadClassData(String name) {
-        // Implementation to load class data from custom source
-        // e.g., network, encrypted files, etc.
-        return null;
-    }
-}
-```
-
-## Real-world Examples & Use Cases
-
-1. **Application Servers**: Custom class loaders for hot deployment and isolation
-2. **Plugin Systems**: Dynamic loading of plugins without restarting the application
-3. **OSGi Frameworks**: Modular class loading for component-based systems
-4. **Web Applications**: Class loading in servlet containers
-5. **Testing Frameworks**: Isolated class loading for test environments
-
-## Code Examples
-
-### Class Loading Demonstration
-
-```java
-public class ClassLoaderDemo {
-    public static void main(String[] args) {
-        // Get class loader hierarchy
-        ClassLoader systemLoader = ClassLoader.getSystemClassLoader();
-        ClassLoader extensionLoader = systemLoader.getParent();
-        ClassLoader bootstrapLoader = extensionLoader.getParent();
-        
-        System.out.println("System Class Loader: " + systemLoader);
-        System.out.println("Extension Class Loader: " + extensionLoader);
-        System.out.println("Bootstrap Class Loader: " + bootstrapLoader);
-        
-        // Load a class dynamically
+    @Override
+    protected Class<?> findClass(String name) throws ClassNotFoundException {
         try {
-            Class<?> clazz = Class.forName("java.lang.String");
-            System.out.println("Loaded class: " + clazz.getName());
-            System.out.println("Class loader: " + clazz.getClassLoader());
-        } catch (ClassNotFoundException e) {
+            // Convert class name to file path
+            String fileName = name.replace('.', '/') + ".class";
+            File classFile = new File(classPath, fileName);
+            
+            if (!classFile.exists()) {
+                throw new ClassNotFoundException("Class file not found: " + fileName);
+            }
+            
+            // Read class file
+            byte[] classBytes = Files.readAllBytes(classFile.toPath());
+            
+            // Define class
+            return defineClass(name, classBytes, 0, classBytes.length);
+        } catch (IOException e) {
+            throw new ClassNotFoundException("Error loading class: " + name, e);
+        }
+    }
+    
+    public static void main(String[] args) {
+        // Create custom class loader
+        CustomClassLoader loader = new CustomClassLoader("path/to/classes");
+        
+        try {
+            // Load class using custom loader
+            Class<?> customClass = loader.loadClass("com.example.CustomClass");
+            System.out.println("Loaded class: " + customClass.getName());
+            
+            // Create instance
+            Object instance = customClass.getDeclaredConstructor().newInstance();
+            System.out.println("Created instance: " + instance);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 }
 ```
 
-### Memory Area Demonstration
+### Class Loading with Reflection
+
+```java
+public class ReflectionDemo {
+    public static void main(String[] args) {
+        try {
+            // Load class
+            Class<?> clazz = Class.forName("java.util.ArrayList");
+            
+            // Get class information
+            System.out.println("Class Name: " + clazz.getName());
+            System.out.println("Package: " + clazz.getPackage().getName());
+            System.out.println("Superclass: " + clazz.getSuperclass().getName());
+            
+            // Get constructors
+            Constructor<?>[] constructors = clazz.getConstructors();
+            System.out.println("Constructors:");
+            for (Constructor<?> constructor : constructors) {
+                System.out.println("  " + constructor);
+            }
+            
+            // Get methods
+            Method[] methods = clazz.getMethods();
+            System.out.println("Public Methods:");
+            for (Method method : methods) {
+                System.out.println("  " + method.getName());
+            }
+            
+            // Create instance and invoke method
+            Object list = clazz.getDeclaredConstructor().newInstance();
+            Method addMethod = clazz.getMethod("add", Object.class);
+            addMethod.invoke(list, "Hello World");
+            
+            Method sizeMethod = clazz.getMethod("size");
+            int size = (Integer) sizeMethod.invoke(list);
+            System.out.println("List size: " + size);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### JVM Memory Areas Demo
 
 ```java
 public class MemoryDemo {
+    // Static variable - stored in Method Area
+    private static String staticVar = "Static Variable";
+    
     public static void main(String[] args) {
-        // Method area: static variables
-        // Heap: object instances
-        StringBuilder sb = new StringBuilder("Hello");
-        sb.append(" World");
-        
-        // Java stack: method frames and local variables
+        // Local variable - stored in Java Stack
         int localVar = 42;
         
-        System.out.println(sb.toString());
-        System.out.println("Local variable: " + localVar);
+        // Object - reference in stack, object in heap
+        String heapObject = new String("Heap Object");
         
-        // Demonstrate garbage collection
-        sb = null;
-        System.gc(); // Suggest garbage collection
+        System.out.println("Static: " + staticVar);
+        System.out.println("Local: " + localVar);
+        System.out.println("Heap: " + heapObject);
+        
+        // Call method - creates new frame in stack
+        methodCall();
+    }
+    
+    private static void methodCall() {
+        // Another local variable
+        double methodLocal = 3.14;
+        System.out.println("Method local: " + methodLocal);
     }
 }
 ```
 
 ## Common Pitfalls & Edge Cases
 
-1. **ClassNotFoundException**: When class loader cannot find the class
-2. **NoClassDefFoundError**: When class was available at compile time but not at runtime
-3. **Class loading deadlocks**: Multiple threads loading classes simultaneously
-4. **Memory leaks**: Improper class loader management in long-running applications
-5. **PermGen/Metaspace exhaustion**: Too many loaded classes
+1. **ClassNotFoundException**: Class not found in classpath
+2. **NoClassDefFoundError**: Class found at compile time but not runtime
+3. **ClassCastException**: Invalid casting between classes
+4. **LinkageError**: Incompatible class change
+5. **StackOverflowError**: Deep recursion exceeding stack size
+6. **OutOfMemoryError**: Heap space exhausted
+
+## Tools & Libraries
+
+- **jvisualvm**: Visual tool for JVM monitoring
+- **jconsole**: JMX-based monitoring
+- **javap**: Disassembler for class files
+- **ASM**: Bytecode manipulation library
+- **Byte Buddy**: Code generation library
 
 ## References
 
-- [Oracle JVM Documentation](https://docs.oracle.com/javase/specs/jvms/se17/html/index.html)
-- [Java Class Loading](https://www.baeldung.com/java-classloaders)
-- [JVM Internals](https://www.geeksforgeeks.org/jvm-works-jvm-architecture/)
+- [Oracle JVM Specification](https://docs.oracle.com/javase/specs/jvms/se21/html/)
+- [Oracle Class Loading](https://docs.oracle.com/javase/tutorial/ext/basics/load.html)
+- [Baeldung JVM Internals](https://www.baeldung.com/jvm)
+- [JVM Anatomy](https://shipilev.net/jvm/anatomy/)
 
 ## Github-README Links & Related Topics
 
+- [java-fundamentals/README.md](../java-fundamentals/README.md)
 - [garbage-collection-algorithms/README.md](../garbage-collection-algorithms/README.md)
-- [jvm-internals-and-class-loading/README.md](../java/jvm-internals-and-classloading/README.md)
-- [java-memory-model-and-concurrency/README.md](../java/java-memory-model-and-concurrency/README.md)
+- [jvm-performance-tuning/README.md](../java/jvm-performance-tuning/README.md)
+- [java-reflection/README.md](../java-reflection/README.md)
