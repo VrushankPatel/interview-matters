@@ -1,20 +1,20 @@
 ---
 title: Monitoring and Logging
 aliases: []
-tags: [#system-design, #devops]
+tags: [##system-design, ##devops]
 created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Overview
+#### Overview
 
 Monitoring and logging are essential practices in system design and DevOps for ensuring the reliability, performance, and security of applications and infrastructure. Monitoring involves collecting, analyzing, and visualizing metrics, events, and traces to provide real-time insights into system health. Logging captures detailed records of events, errors, and activities for debugging, auditing, and compliance. Together, they enable proactive issue detection, root cause analysis, and informed decision-making.
 
 Effective monitoring and logging reduce downtime, improve user experience, and support scalability. They integrate with observability tools to correlate data across metrics, logs, and traces, forming a comprehensive view of system behavior.
 
-# Detailed Explanation
+## Detailed Explanation
 
-## Monitoring
+#### Monitoring
 
 Monitoring tracks system performance through metrics, which are numerical measurements of system state over time. Key components include:
 
@@ -25,7 +25,7 @@ Monitoring tracks system performance through metrics, which are numerical measur
 
 Monitoring focuses on "what" is happening, providing quantitative data for trends and thresholds.
 
-## Logging
+#### Logging
 
 Logging records discrete events as structured or unstructured text. It supports debugging and auditing by capturing context like timestamps, severity levels, and metadata.
 
@@ -35,11 +35,11 @@ Logging records discrete events as structured or unstructured text. It supports 
 
 Logging answers "why" something happened, offering qualitative insights.
 
-## Integration
+#### Integration
 
 Monitoring and logging complement each other: metrics show trends, logs provide details. Tools like OpenTelemetry unify them into signals (metrics, logs, traces) for end-to-end observability.
 
-### Architecture Diagram
+###### Architecture Diagram
 
 ```mermaid
 graph TD
@@ -53,12 +53,12 @@ graph TD
     G --> H[Alerts & Dashboards]
 ```
 
-## Data Models / Message Formats
+#### Data Models / Message Formats
 
 - **Metrics**: Time-series data with labels (e.g., Prometheus format: `metric_name{label="value"} value timestamp`).
 - **Logs**: JSON or plain text with fields like timestamp, level, message, and attributes (e.g., OpenTelemetry log record: timestamp, severity, body, resource).
 
-## Journey / Sequence
+#### Journey / Sequence
 
 1. **Instrumentation**: Add monitoring/logging to code/infrastructure.
 2. **Collection**: Gather metrics/logs via agents or SDKs.
@@ -68,7 +68,7 @@ graph TD
 6. **Alerting**: Trigger notifications on anomalies.
 7. **Feedback Loop**: Use insights to optimize systems.
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 - **E-commerce Platform**: Monitor API response times and log user transactions to detect bottlenecks during peak traffic.
 - **Microservices Architecture**: Use distributed tracing with logs to correlate requests across services, identifying failures in a payment flow.
@@ -82,9 +82,9 @@ graph TD
 | Database Health | Query latency, connection pool | Slow queries, deadlocks |
 | Network Issues | Packet loss, bandwidth | Connection failures, IPs |
 
-# Code Examples
+## Code Examples
 
-## Monitoring with Prometheus (Python)
+#### Monitoring with Prometheus (Python)
 
 ```python
 from prometheus_client import Counter, generate_latest
@@ -93,15 +93,15 @@ REQUEST_COUNT = Counter('http_requests_total', 'Total HTTP requests', ['method',
 
 def handle_request(method, endpoint):
     REQUEST_COUNT.labels(method=method, endpoint=endpoint).inc()
-    # Your app logic here
+    ## Your app logic here
 
-# Expose metrics at /metrics
+## Expose metrics at /metrics
 @app.route('/metrics')
 def metrics():
     return generate_latest()
 ```
 
-## Logging with ELK Stack (Java)
+#### Logging with ELK Stack (Java)
 
 ```java
 import org.slf4j.Logger;
@@ -121,7 +121,7 @@ public class MyService {
 }
 ```
 
-## Structured Logging with OpenTelemetry (Go)
+#### Structured Logging with OpenTelemetry (Go)
 
 ```go
 import (
@@ -142,14 +142,14 @@ func logEvent(ctx context.Context, logger log.Logger) {
 }
 ```
 
-# Tools & Libraries
+## Tools & Libraries
 
 - **Monitoring**: Prometheus, Grafana, Datadog, New Relic.
 - **Logging**: ELK Stack (Elasticsearch, Logstash, Kibana), Loki, Fluentd.
 - **Unified Observability**: OpenTelemetry, Jaeger.
 - **Libraries**: Prometheus client libraries, SLF4J (Java), Logrus (Go), Winston (Node.js).
 
-# Common Pitfalls & Edge Cases
+## Common Pitfalls & Edge Cases
 
 - **Over-logging**: Excessive logs increase costs and noise; use sampling.
 - **Metric Cardinality Explosion**: High label combinations in metrics; limit labels.
@@ -158,14 +158,14 @@ func logEvent(ctx context.Context, logger log.Logger) {
 - **Security**: Avoid logging sensitive data; use redaction.
 - **Distributed Systems**: Handle clock skew in timestamps and partial failures.
 
-# STAR Summary
+## STAR Summary
 
 **Situation**: A microservices app experienced intermittent outages during traffic spikes.  
 **Task**: Implement monitoring and logging to identify root causes.  
 **Action**: Added Prometheus for metrics, ELK for logs, and OpenTelemetry for correlation. Set up Grafana dashboards and alerts.  
 **Result**: Reduced downtime by 40% through proactive alerts and faster debugging.
 
-# References
+## References
 
 - [Prometheus Overview](https://prometheus.io/docs/introduction/overview/)
 - [Elastic Stack Getting Started](https://www.elastic.co/guide/en/elastic-stack-get-started/current/get-started-elastic-stack.html)
@@ -173,7 +173,7 @@ func logEvent(ctx context.Context, logger log.Logger) {
 - [Grafana Documentation](https://grafana.com/docs/grafana/latest/)
 - [Datadog Getting Started](https://docs.datadoghq.com/getting_started/)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 - [Monitoring Tools](../monitoring-tools/README.md)
 - [Logging Frameworks](../logging-frameworks/README.md)

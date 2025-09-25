@@ -6,8 +6,6 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Distributed Tracing
-
 ## Overview
 
 Distributed tracing is a method for monitoring and troubleshooting applications, particularly in microservices architectures. It tracks requests as they propagate through multiple services, providing visibility into performance bottlenecks, latency issues, and error paths. By correlating spans across services, distributed tracing enables end-to-end observability of complex, distributed systems.
