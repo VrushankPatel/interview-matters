@@ -1,7 +1,7 @@
 ---
 title: Kubernetes Basics
-aliases: [K8s Fundamentals]
-tags: [#devops, #container-orchestration]
+aliases: ["k8s fundamentals"]
+tags: ["#kubernetes", "#container-orchestration", "#devops"]
 created: 2025-09-25
 updated: 2025-09-25
 ---
@@ -29,6 +29,13 @@ graph TD
     E[Worker Nodes] --> F[Pods]
     F --> G[Containers]
 ```
+
+### Journey / Sequence
+
+1. Containerize your application with Docker.
+2. Create Kubernetes manifests (YAML files) for deployments, services, etc.
+3. Deploy to a Kubernetes cluster using kubectl.
+4. Monitor, scale, and update applications via Kubernetes API.
 
 ## Real-world Examples & Use Cases
 
