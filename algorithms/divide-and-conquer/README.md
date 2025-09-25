@@ -29,14 +29,14 @@ Quicksort selects a pivot, partitions the array into elements less than and grea
 ### Closest Pair of Points
 This geometric problem finds the minimum distance between any two points in a set. Using divide and conquer, it sorts points by x-coordinate, divides into halves, recursively finds closest pairs in each half, and checks points near the dividing line.
 
-## Real-world Examples & Use Cases
+# Real-world Examples & Use Cases
 
 - **Sorting Large Datasets**: Merge sort and quicksort are used in databases and file systems for efficient sorting of millions of records.
 - **Computational Geometry**: Closest pair algorithms apply to collision detection in graphics, clustering in data mining, and nearest neighbor searches in GIS.
 - **Parallel Computing**: Divide-and-conquer algorithms parallelize well, used in multi-core processors for tasks like image processing and scientific simulations.
 - **External Sorting**: Merge sort variants handle data larger than memory in big data frameworks like Hadoop.
 
-## Code Examples
+# Code Examples
 
 ### Merge Sort in Java
 ```java
@@ -158,7 +158,7 @@ public class ClosestPair {
 }
 ```
 
-## Data Models / Message Formats
+# Data Models / Message Formats
 
 | Algorithm          | Time Complexity | Space Complexity | Stability | Notes |
 |--------------------|-----------------|------------------|-----------|-------|
@@ -166,7 +166,7 @@ public class ClosestPair {
 | Quicksort         | O(n log n) avg, O(n²) worst | O(log n) | No       | Fast in practice, in-place |
 | Closest Pair      | O(n log n)      | O(n)            | N/A      | Geometric, divide-and-conquer |
 
-## Journey / Sequence
+# Journey / Sequence
 
 ```mermaid
 graph TD
@@ -177,7 +177,7 @@ graph TD
     E --> F[Final Solution]
 ```
 
-## Common Pitfalls & Edge Cases
+# Common Pitfalls & Edge Cases
 
 - **Quicksort Worst Case**: Occurs with sorted input; use randomized pivot or median-of-three.
 - **Merge Sort Space**: Requires O(n) extra space; in-place variants exist but are complex.
@@ -196,9 +196,9 @@ graph TD
 
 - [[sorting-algorithms]]
 - [[dynamic-programming-and-greedy]]
-- [[graphs-trees-heaps-and-tries]]
+- [Graphs Trees Heaps and Tries](algorithms/graphs-trees-heaps-and-tries/README.md)
 
-## References
+# References
 
 - Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2009). Introduction to Algorithms. MIT Press.
 - https://en.wikipedia.org/wiki/Divide-and-conquer_algorithm

@@ -6,18 +6,18 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-## Overview
+# Overview
 Probabilistic algorithms use randomness to solve problems efficiently, often with high probability of correctness. Types: Monte Carlo (fast but may err), Las Vegas (correct but variable time). Key structures: Bloom filters for membership, skip lists for ordered data.
 
 Used when deterministic algorithms are too slow or space-intensive.
 
-## STAR Summary
+# STAR Summary
 **Situation:** Database with 1B URLs, need fast duplicate checks.  
 **Task:** Check membership with <1GB memory.  
 **Action:** Implemented Bloom filter.  
 **Result:** 1% false positives, 10x space savings.
 
-## Detailed Explanation
+# Detailed Explanation
 - **Bloom Filter:** Bit array + hash functions. Add: set bits; Check: if all set (may false positive).
 - **Skip List:** Linked list with levels, random promotions. Expected O(log N) ops.
 - **Randomized Select:** Quickselect with random pivot.
@@ -113,7 +113,7 @@ public class SkipList {
 }
 ```
 
-## Data Models / Message Formats
+# Data Models / Message Formats
 | Field | Type | Description |
 |-------|------|-------------|
 | bits | BitSet | Bit array |
@@ -136,7 +136,7 @@ sequenceDiagram
 - No deletions.
 - Tune parameters.
 
-## Tools & Libraries
+# Tools & Libraries
 - Guava BloomFilter.
 - Java ConcurrentSkipListMap.
 
