@@ -1,6 +1,6 @@
 ---
 title: Java Stream API & Functional Programming
-aliases: [java streams, functional programming, lambdas]
+aliases: [Java Streams, Functional Programming in Java]
 tags: [#java, #functional-programming]
 created: 2025-09-25
 updated: 2025-09-25
@@ -18,8 +18,11 @@ Streams represent a sequence of elements from a source (collections, arrays, I/O
 - **Functional Interfaces:** Core interfaces like `Predicate<T>` (boolean test), `Function<T,R>` (transformation), `Consumer<T>` (side-effect), `Supplier<T>` (value generation).
 - **Method References:** Shorthand for lambdas, e.g., `String::toUpperCase` instead of `s -> s.toUpperCase()`.
 - **Operations Types:**
-  - **Intermediate:** Lazy operations returning a new stream (filter, map, flatMap, sorted, distinct).
-  - **Terminal:** Eager operations producing a result or side-effect (collect, forEach, reduce, count, anyMatch).
+
+| Operation Type | Examples | Description |
+|---------------|----------|-------------|
+| Intermediate | filter, map, flatMap, sorted, distinct | Lazy operations that return a new stream, allowing chaining without immediate execution. |
+| Terminal | collect, forEach, reduce, count, anyMatch | Eager operations that trigger pipeline execution and produce a result or side-effect. |
 - **Parallel Streams:** Leverage multi-core processors for performance, but may not preserve order; use `.parallelStream()`.
 - **Collectors:** Utilities for accumulating stream elements into collections, maps, or other structures (e.g., `Collectors.toList()`, `groupingBy()`).
 
@@ -182,4 +185,6 @@ graph TD
 - "Functional Programming in Java" by Venkat Subramaniam: https://www.manning.com/books/functional-programming-in-java
 - Baeldung Streams Guide: https://www.baeldung.com/java-8-streams
 - GitHub: https://github.com/eugenp/tutorials/tree/master/core-java-modules/core-java-streams
-- GeeksforGeeks Streams: https://www.geeksforgeeks.org/stream-in-java/
+- GeeksforGeeks Streams: https://www.geeksforgeeks.org/stream-in-java/</content>
+</xai:function_call ><xai:function_call name="write">
+<parameter name="filePath">system-design-basics/README.md

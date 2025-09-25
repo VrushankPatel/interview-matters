@@ -48,65 +48,32 @@ The Collections Framework is built around interfaces (List, Set, Map, Queue) wit
 - Use TreeMap for sorted key iteration.
 
 ## Real-world Examples & Use Cases
-- **ArrayList:** Managing a list of products in an e-commerce cart.
-- **LinkedList:** Implementing a browser's back/forward navigation history.
-- **HashMap:** Storing user profiles by username in a web application.
-- **TreeSet:** Maintaining a sorted set of unique IP addresses for access logs.
-- **PriorityQueue:** Task scheduler prioritizing urgent jobs.
-- **LinkedHashMap:** LRU cache implementation preserving access order.
+- **Caching:** HashMap for in-memory key-value stores.
+- **Unique Collections:** HashSet for deduplication in data processing.
+- **Priority Queues:** PriorityQueue for task scheduling in OS kernels.
+- **Sorted Data:** TreeSet for maintaining ordered unique elements in search algorithms.
 
 ## Code Examples
-### ArrayList Operations
+### ArrayList Usage
 ```java
 import java.util.ArrayList;
 import java.util.List;
 
-List<String> fruits = new ArrayList<>();
-fruits.add("Apple");
-fruits.add("Banana");
-fruits.add(1, "Orange");  // Insert at index
-System.out.println(fruits.get(0));  // Apple
-fruits.remove("Banana");
-System.out.println(fruits);  // [Apple, Orange]
+List<String> list = new ArrayList<>();
+list.add("Apple");
+list.add("Banana");
+System.out.println(list.get(0)); // Apple
 ```
 
-### HashMap with Custom Objects
+### HashMap for Key-Value Pairs
 ```java
 import java.util.HashMap;
 import java.util.Map;
 
-class User {
-    String name;
-    int age;
-    User(String name, int age) { this.name = name; this.age = age; }
-}
-
-Map<String, User> userMap = new HashMap<>();
-userMap.put("alice", new User("Alice", 25));
-userMap.put("bob", new User("Bob", 30));
-User user = userMap.get("alice");
-System.out.println(user.name + " is " + user.age);  // Alice is 25
-```
-
-### PriorityQueue for Task Scheduling
-```java
-import java.util.PriorityQueue;
-import java.util.Queue;
-
-Queue<Task> tasks = new PriorityQueue<>((a, b) -> Integer.compare(a.priority, b.priority));
-
-class Task {
-    String name;
-    int priority;
-    Task(String name, int priority) { this.name = name; this.priority = priority; }
-}
-
-tasks.add(new Task("Low", 3));
-tasks.add(new Task("High", 1));
-tasks.add(new Task("Medium", 2));
-
-System.out.println(tasks.poll().name);  // High
-System.out.println(tasks.poll().name);  // Medium
+Map<String, Integer> map = new HashMap<>();
+map.put("Alice", 30);
+map.put("Bob", 25);
+System.out.println(map.get("Alice")); // 30
 ```
 
 ### TreeSet for Sorted Unique Elements
@@ -114,81 +81,43 @@ System.out.println(tasks.poll().name);  // Medium
 import java.util.TreeSet;
 import java.util.Set;
 
-Set<String> sortedSet = new TreeSet<>();
-sortedSet.add("Zebra");
-sortedSet.add("Apple");
-sortedSet.add("Banana");
-System.out.println(sortedSet);  // [Apple, Banana, Zebra]
-System.out.println(sortedSet.first());  // Apple
-System.out.println(sortedSet.last());  // Zebra
+Set<Integer> set = new TreeSet<>();
+set.add(3);
+set.add(1);
+set.add(2);
+System.out.println(set); // [1, 2, 3]
 ```
 
-## Journey / Sequence
-```mermaid
-sequenceDiagram
-    participant App
-    participant ArrayList
-    participant HashMap
+### PriorityQueue for Priority Ordering
+```java
+import java.util.PriorityQueue;
+import java.util.Queue;
 
-    App->>ArrayList: add(element)
-    ArrayList-->>App: void
-    App->>ArrayList: get(index)
-    ArrayList-->>App: element
-    App->>HashMap: put(key, value)
-    HashMap-->>App: previous_value
-    App->>HashMap: get(key)
-    HashMap-->>App: value
-```
-
-## Data Models / Message Formats
-### Collections Hierarchy
-```mermaid
-graph TD
-    A[Collection] --> B[List]
-    A --> C[Set]
-    A --> D[Queue]
-    B --> E[ArrayList]
-    B --> F[LinkedList]
-    C --> G[HashSet]
-    C --> H[TreeSet]
-    C --> I[LinkedHashSet]
-    D --> J[PriorityQueue]
-    D --> K[ArrayDeque]
-    L[Map] --> M[HashMap]
-    L --> N[TreeMap]
-    L --> O[LinkedHashMap]
-```
-
-### JSON Representation of a Map
-```json
-{
-  "users": {
-    "alice": {"name": "Alice", "age": 25},
-    "bob": {"name": "Bob", "age": 30}
-  }
-}
+Queue<Integer> pq = new PriorityQueue<>();
+pq.add(3);
+pq.add(1);
+pq.add(2);
+System.out.println(pq.poll()); // 1
 ```
 
 ## Common Pitfalls & Edge Cases
-- **ConcurrentModificationException:** Modifying collection during iteration without Iterator.
-- **Hash Collisions:** Poor hash functions leading to degraded performance in HashMap/HashSet.
-- **Null Keys/Values:** HashMap allows one null key, TreeMap does not.
-- **Capacity and Load Factor:** ArrayList resizing, HashMap rehashing.
-- **Edge Case:** Empty collections, single-element operations.
+- **Concurrent Modification:** Avoid modifying collections during iteration; use iterators or concurrent collections.
+- **Null Values:** HashMap allows null keys/values, but TreeMap doesn't.
+- **Capacity Issues:** ArrayList resizes inefficiently; pre-size if known.
+- **Synchronization:** Use Collections.synchronizedList() for thread-safety, but prefer concurrent collections.
 
 ## Tools & Libraries
-- Java Collections Framework (java.util)
-- Apache Commons Collections for utilities
-- Google Guava for enhanced collections
-- Eclipse Collections for high-performance alternatives
+- Java Collections Framework (java.util).
+- Google Guava: Enhanced collections.
+- Apache Commons Collections: Utilities for collections.
+
+## References
+- Oracle Collections Tutorial: https://docs.oracle.com/javase/tutorial/collections/
+- Effective Java by Joshua Bloch: Chapter on Generics and Collections.
+- GeeksforGeeks Data Structures: https://www.geeksforgeeks.org/data-structures/
 
 ## Github-README Links & Related Topics
 - [java-collections-deep-dive](../java-collections-deep-dive/)
-- [algorithms-and-data-structures](../algorithms-and-data-structures/)
-- [concurrent-collections](../concurrent-collections/)
-
-## References
-- Oracle Java Collections Tutorial: https://docs.oracle.com/javase/tutorial/collections/
-- "Effective Java" by Joshua Bloch
-- https://github.com/eugenp/tutorials/tree/master/core-java-modules/core-java-collections
-- GeeksforGeeks Data Structures: https://www.geeksforgeeks.org/data-structures/
+- [multithreading-and-concurrency-in-java](../multithreading-and-concurrency-in-java/)</content>
+</xai:function_call ><xai:function_call name="write">
+<parameter name="filePath">java-stream-api-and-functional-programming/README.md

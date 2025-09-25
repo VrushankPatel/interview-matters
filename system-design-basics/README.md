@@ -29,6 +29,16 @@ Common components:
 - **Message Queues:** Decouple components for asynchronous processing.
 - **CDNs:** Deliver content closer to users.
 
+### System Architecture Diagram
+```mermaid
+graph TD
+    A[Client] --> B[Load Balancer]
+    B --> C[Web Server 1]
+    B --> D[Web Server 2]
+    C --> E[Database]
+    D --> E
+```
+
 ## Real-world Examples & Use Cases
 - **URL Shortener:** Simple service to shorten URLs, handle redirects.
 - **Rate Limiter:** Control the rate of requests to prevent abuse.
@@ -73,6 +83,12 @@ class LoadBalancer {
 }
 ```
 
+## STAR Summary
+- **Situation:** Designing a system for a growing application with increasing user load.
+- **Task:** Ensure the system can scale, remain reliable, and perform efficiently.
+- **Action:** Incorporate load balancers for traffic distribution, caching for performance, and databases for data persistence.
+- **Result:** Achieved high availability, reduced latency, and improved user experience.
+
 ## Journey / Sequence
 ```mermaid
 sequenceDiagram
@@ -86,35 +102,20 @@ sequenceDiagram
     LoadBalancer-->>User: Response
 ```
 
-## Data Models / Message Formats
-### System Architecture Diagram
-```mermaid
-graph TD
-    A[Client] --> B[Load Balancer]
-    B --> C[Web Server 1]
-    B --> D[Web Server 2]
-    C --> E[Database]
-    D --> E
-```
-
 ## Common Pitfalls & Edge Cases
 - **Single Point of Failure:** Ensure no single component can bring down the system.
 - **Over-engineering:** Start simple, scale as needed.
 - **Ignoring Bottlenecks:** Identify and address performance bottlenecks early.
 - **Edge Case:** Sudden traffic spikes, data corruption, network failures.
 
-## Tools & Libraries
-- **Web Frameworks:** Spring Boot, Express.js
-- **Databases:** PostgreSQL, MongoDB
-- **Caching:** Redis, Memcached
-- **Message Queues:** RabbitMQ, Kafka
-
-## Github-README Links & Related Topics
-- [lld-hld-basics](../lld-hld-basics/)
-- [high-scalability-patterns](../high-scalability-patterns/)
-- [cap-theorem-and-distributed-systems](../cap-theorem-and-distributed-systems/)
-
 ## References
 - "System Design Interview" by Alex Xu
 - https://github.com/donnemartin/system-design-primer
 - "Designing Data-Intensive Applications" by Martin Kleppmann
+
+## Github-README Links & Related Topics
+- [lld-hld-basics](../lld-hld-basics/)
+- [high-scalability-patterns](../high-scalability-patterns/)
+- [cap-theorem-and-distributed-systems](../cap-theorem-and-distributed-systems/)</content>
+</xai:function_call ><xai:function_call name="write">
+<parameter name="filePath">high-scalability-patterns/README.md
