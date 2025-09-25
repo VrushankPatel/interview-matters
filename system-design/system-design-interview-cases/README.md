@@ -6,10 +6,8 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# System Design Interview Cases
-
 ## Overview
-System design interviews at MAANG focus on designing scalable, reliable systems. This topic covers canonical cases like URL shortener, rate limiter, news feed, and chat system. Emphasizes HLD, capacity planning, tradeoffs, and API design.
+System design interviews at MAANG evaluate the ability to design scalable, reliable systems. This topic covers canonical cases like URL shortener, rate limiter, news feed, and chat system, emphasizing high-level design, capacity planning, tradeoffs, and API design.
 
 ## STAR Summary
 **Situation:** Designed a URL shortener for a startup handling millions of requests.  
@@ -134,7 +132,7 @@ sequenceDiagram
 - Libraries: Jedis (Redis client), Hibernate (ORM).
 
 ## Github-README Links & Related Topics
-[[system-design-basics]], [[caching-strategies]], [[database-design-and-indexing]], [[load-balancing-and-routing]]
+Related: [[system-design-basics]], [[caching-strategies]], [[database-design-and-indexing]], [[load-balancing-and-routing]]
 
 ## References
 - "Designing Data-Intensive Applications" by Martin Kleppmann.

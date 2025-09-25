@@ -6,8 +6,6 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Low Latency Systems
-
 ## Overview
 Low latency systems minimize response times (<10ms for HFT, <100ms for web). Techniques include caching, async processing, proximity, and optimization at all layers. Critical for trading, gaming, real-time analytics.
 
@@ -35,6 +33,10 @@ graph TD
 ### Capacity Planning
 - 10M req/s, P99 <10ms.
 - Servers: 1000 instances, 10k req/s each.
+
+### Tradeoffs
+- Consistency vs Latency: Eventual consistency for reads.
+- Cost vs Performance: Sharding increases complexity but scales.
 
 ### API Design
 GET /data/{id}
@@ -91,7 +93,7 @@ flowchart TD
 - Monitoring: Prometheus, Grafana.
 
 ## Github-README Links & Related Topics
-[[caching-strategies]], [[distributed-tracing-and-observability]], [[performance-tuning-and-profiling]]
+Related: [[caching-strategies]], [[distributed-tracing-and-observability]], [[performance-tuning-and-profiling]]
 
 ## References
 - "Building Low Latency Applications with C++" (adapt to Java).

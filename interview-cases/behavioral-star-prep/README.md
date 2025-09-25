@@ -6,8 +6,6 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Behavioral STAR Prep
-
 ## Overview
 Behavioral interviews assess past experiences using the STAR method: Situation, Task, Action, Result. Prepare stories from projects, challenges, leadership, and failures. Focus on MAANG values: impact, collaboration, innovation.
 
@@ -58,12 +56,7 @@ flowchart TD
 - Practice: Pramp, LeetCode behavioral prep.
 
 ## Github-README Links & Related Topics
-[[system-design-interview-cases]]
-
-## Common Interview Questions
-1. Tell me about a time you failed.
-2. Describe a challenging project.
-3. How do you handle conflict?
+Related: [[system-design-interview-cases]]
 
 ## References
 - https://www.thebalancecareers.com/star-interview-method-2061629

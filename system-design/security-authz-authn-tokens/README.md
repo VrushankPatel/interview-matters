@@ -6,8 +6,6 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Security Authz Authn Tokens
-
 ## Overview
 Authentication verifies identity, authorization checks permissions. Tokens (JWT, OAuth) enable stateless auth. Secure systems use HTTPS, encryption, and least privilege.
 
@@ -100,7 +98,7 @@ sequenceDiagram
 - OAuth: Keycloak.
 
 ## Github-README Links & Related Topics
-[[api-design-rest-grpc-openapi]], [[system-design-basics]]
+Related: [[api-design-rest-grpc-openapi]], [[system-design-basics]]
 
 ## References
 - https://tools.ietf.org/html/rfc7519 (JWT)

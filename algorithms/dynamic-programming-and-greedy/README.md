@@ -6,39 +6,42 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Dynamic Programming and Greedy
-
 ## Overview
-Dynamic Programming (DP) and Greedy algorithms are essential optimization techniques in computer science. DP solves problems by breaking them into overlapping subproblems and using memoization or tabulation to store results, avoiding redundant computations. Greedy algorithms make the locally optimal choice at each step, hoping it leads to a global optimum. These are crucial for MAANG interviews, appearing in problems like knapsack, coin change, and pathfinding.
+Dynamic Programming (DP) and Greedy algorithms are fundamental optimization techniques in computer science. DP solves problems by breaking them into subproblems and storing solutions to avoid recomputation, while Greedy makes locally optimal choices at each step. Both are crucial for MAANG interviews, appearing in problems like knapsack, shortest paths, and scheduling.
 
 ## STAR Summary
-**Situation:** Optimizing a resource allocation system for a cloud provider where brute-force approaches failed on large datasets.  
-**Task:** Implement an efficient algorithm to maximize profit under constraints.  
-**Action:** Identified the problem as a variant of the 0/1 Knapsack and applied DP with space optimization, reducing time from exponential to O(nW).  
-**Result:** Achieved 95% performance improvement, enabling real-time decisions for thousands of users.
+**Situation:** During a system design interview for a resource allocation service, I needed to optimize server assignment to minimize latency.  
+**Task:** Implement an algorithm to assign tasks to servers with varying capacities and costs.  
+**Action:** Used DP for the 0/1 knapsack variant to maximize resource utilization, then applied greedy for quick approximations in real-time scenarios.  
+**Result:** Achieved 30% better resource efficiency, demonstrating tradeoffs between optimal and heuristic solutions.
 
 ## Detailed Explanation
-DP relies on two key properties: optimal substructure (optimal solution to the problem contains optimal solutions to subproblems) and overlapping subproblems (subproblems are reused). Techniques include memoization (top-down) and tabulation (bottom-up). Greedy works when the greedy choice property holds and problems have optimal substructure. Complexity varies: DP often O(n^2) or O(n log n), Greedy typically O(n log n) due to sorting.
+### Dynamic Programming
+DP is used for optimization problems with overlapping subproblems and optimal substructure. Key approaches:
+- **Memoization (Top-down):** Recursive with caching.
+- **Tabulation (Bottom-up):** Iterative filling of a table.
+- Time/Space: Often O(n) or O(n^2), depending on states.
 
-Typical interview variants: unbounded knapsack, longest common subsequence, edit distance, fractional knapsack (greedy).
+### Greedy Algorithms
+Greedy chooses the best immediate option, hoping for a global optimum. Works when local choices lead to global solutions (e.g., activity selection). Fails when choices conflict (e.g., coin change with non-canonical coins).
 
 ## Real-world Examples & Use Cases
-- Resource allocation in cloud computing (e.g., AWS EC2 instance selection).
-- Route optimization in logistics (e.g., TSP approximations).
-- Sequence alignment in genomics.
-- Caching policies in OS (e.g., LRU with greedy eviction).
+- **Knapsack:** Resource allocation in cloud computing.
+- **Coin Change:** Currency systems, vending machines.
+- **Activity Selection:** Scheduling meetings or CPU tasks.
+- **Shortest Paths:** Dijkstra's (greedy) vs Bellman-Ford (DP).
 
 ## Code Examples
 ### 0/1 Knapsack (DP)
 ```java
 public class KnapsackDP {
-    public static int maxValue(int[] weights, int[] values, int capacity) {
+    public static int knapsack(int[] weights, int[] values, int capacity) {
         int n = weights.length;
         int[][] dp = new int[n + 1][capacity + 1];
         for (int i = 1; i <= n; i++) {
-            for (int w = 1; w <= capacity; w++) {
+            for (int w = 0; w <= capacity; w++) {
                 if (weights[i-1] <= w) {
-                    dp[i][w] = Math.max(dp[i-1][w], values[i-1] + dp[i-1][w - weights[i-1]]);
+                    dp[i][w] = Math.max(dp[i-1][w], dp[i-1][w - weights[i-1]] + values[i-1]);
                 } else {
                     dp[i][w] = dp[i-1][w];
                 }
@@ -46,68 +49,108 @@ public class KnapsackDP {
         }
         return dp[n][capacity];
     }
-    // Usage: int result = maxValue(new int[]{1,2,3}, new int[]{10,15,40}, 6);
+    // Usage: int maxValue = knapsack(new int[]{1,2,3}, new int[]{10,15,40}, 6);
 }
 ```
-Compile and run: `javac KnapsackDP.java && java KnapsackDP`
 
-### Coin Change (Greedy, assumes canonical coins)
+### Coin Change (DP)
 ```java
-import java.util.Arrays;
-public class CoinChangeGreedy {
+public class CoinChange {
     public static int minCoins(int[] coins, int amount) {
-        Arrays.sort(coins);
-        int count = 0;
-        for (int i = coins.length - 1; i >= 0; i--) {
-            while (amount >= coins[i]) {
-                amount -= coins[i];
-                count++;
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, amount + 1);
+        dp[0] = 0;
+        for (int i = 1; i <= amount; i++) {
+            for (int coin : coins) {
+                if (coin <= i) {
+                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                }
             }
         }
-        return amount == 0 ? count : -1;
+        return dp[amount] > amount ? -1 : dp[amount];
     }
-    // Usage: int result = minCoins(new int[]{1,2,5}, 11);
+    // Usage: int min = minCoins(new int[]{1,2,5}, 11);
+}
+```
+
+### Activity Selection (Greedy)
+```java
+public class ActivitySelection {
+    public static int maxActivities(int[] start, int[] end) {
+        int n = start.length;
+        List<int[]> activities = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            activities.add(new int[]{start[i], end[i]});
+        }
+        activities.sort(Comparator.comparingInt(a -> a[1]));
+        int count = 1;
+        int lastEnd = activities.get(0)[1];
+        for (int i = 1; i < n; i++) {
+            if (activities.get(i)[0] >= lastEnd) {
+                count++;
+                lastEnd = activities.get(i)[1];
+            }
+        }
+        return count;
+    }
+    // Usage: int max = maxActivities(new int[]{1,3,0,5,8,5}, new int[]{2,4,6,7,9,9});
 }
 ```
 
 ## Data Models / Message Formats
 | Item | Weight | Value |
 |------|--------|-------|
-| A    | 1      | 10    |
-| B    | 2      | 15    |
-| C    | 3      | 40    |
+| 1    | 1      | 10    |
+| 2    | 2      | 15    |
+| 3    | 3      | 40    |
+
+DP Table for Knapsack (capacity 6):
+```
+   0 1 2 3 4 5 6
+0  0 0 0 0 0 0 0
+1  0 10 10 10 10 10 10
+2  0 10 15 25 25 25 25
+3  0 10 15 40 50 55 65
+```
 
 ## Journey / Sequence
 ```mermaid
-flowchart TD
-    A[Problem Statement] --> B{Overlapping Subproblems?}
-    B -->|Yes| C{Optimal Substructure?}
-    C -->|Yes| D[Use DP: Memoization/Tabulation]
-    B -->|No| E{Greedy Choice Property?}
-    E -->|Yes| F[Use Greedy Algorithm]
-    F --> G[Verify Optimality]
-    D --> G
+sequenceDiagram
+    participant User
+    participant DP as DP Solver
+    participant Cache
+    User->>DP: Solve subproblem
+    DP->>Cache: Check if solved
+    alt Not solved
+        DP->>DP: Recurse
+        DP->>Cache: Store result
+    end
+    Cache-->>DP: Return result
+    DP-->>User: Final answer
 ```
 
 ## Common Pitfalls & Edge Cases
-- Greedy fails for non-canonical coin systems (e.g., coins [1,3,4], amount 6: greedy gives 4+1+1=3, optimal 3+3=2).
-- DP space optimization: use two arrays instead of 2D for O(n) space.
-- Negative weights/values: may require adjustments.
-- Large n/W: consider approximation algorithms.
+- Greedy fails for fractional knapsack (use DP).
+- DP space optimization: Use 2 arrays instead of 2D.
+- Negative weights/values: May require adjustments.
+- Large inputs: Optimize space (e.g., rolling array).
 
 ## Tools & Libraries
-- Java: Standard arrays; for large data, use `ArrayList` or external libraries like Apache Commons Math.
-- Profiling: JMH for benchmarking DP vs Greedy.
+- Java: Standard arrays/lists for DP tables.
+- Libraries: None specific; use JMH for benchmarking.
 
 ## Github-README Links & Related Topics
-[[algorithms-and-data-structures]], [[graphs-trees-heaps-and-tries]], [[divide-and-conquer]]
-
-## Common Interview Questions
-1. **0/1 Knapsack Problem**: Maximize value with weight constraint. Time: O(n*W), Space: O(n*W). Variants: Bounded, Unbounded.
-2. **Coin Change Problem**: Minimum coins for amount. DP: O(amount*coins), Greedy for canonical.
-3. **Longest Common Subsequence**: LCS between two strings. Time: O(m*n), Space: O(m*n).
+Related: [[graphs-trees-heaps-and-tries]], [[algorithms-and-data-structures]], [[sorting-algorithms]]
 
 ## References
-- Cormen, Leiserson, Rivest, Stein. *Introduction to Algorithms* (CLRS), Chapter 15.
+- Cormen, T. H., et al. "Introduction to Algorithms." MIT Press, 2009.
 - https://en.wikipedia.org/wiki/Dynamic_programming
 - https://www.geeksforgeeks.org/dynamic-programming/
+
+### Practice Problems
+1. **Longest Common Subsequence:** Given two strings, find LCS length. (DP, O(m*n))
+   - Solution: Use 2D DP table.
+2. **Edit Distance:** Minimum operations to transform one string to another. (DP, O(m*n))
+   - Solution: DP with insert/delete/replace.
+3. **Fractional Knapsack:** Maximize value with fractional items. (Greedy, O(n log n))
+   - Solution: Sort by value/weight ratio, greedy select.
