@@ -1,6 +1,6 @@
 # One topic per line. Top is oldest.
-time-in-force-variations — 'Exchange semantics across major venues'
-latency-measurement — 'Instrumentation and microbenchmarks'
-raft-and-leader-election — 'Implementations and failure modes'
-concurrent-programming-patterns — 'Common patterns for concurrent programming'
-java-reflection — 'Runtime inspection and dynamic code'
+java-annotations — 'Custom annotations and metadata'
+java-annotations — 'Custom annotations and metadata'
+java-generics — 'Type safety and erasure in Java'
+java-lambda-expressions — 'Functional programming with lambdas'
+java-modules — 'Modular system with JPMS'
