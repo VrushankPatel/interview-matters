@@ -1,10 +1,5 @@
 
 
-System Design Basics — 'Scalability, reliability, trade-offs'
-Collections & Data Structures — 'Lists, sets, maps, trees in Java'
-Java Stream API & Functional Programming — 'Streams, lambdas, functional interfaces'
-CAP Theorem & Distributed Systems — 'Consistency, availability, partition tolerance'
-LLD HLD Basics — 'Low level design, high level design principles'
 Replication vs Sharding vs Partitioning — 'Data distribution strategies'
 Caching — 'Cache strategies, eviction policies'
 Latency and Throughput — 'Measuring and optimizing performance'
