@@ -5,11 +5,11 @@ Last update
 2025-09-25
 
 Summary of recent additions
- - java-language-basics
- - oop-design-and-principles
- - jvm-internals-and-classloading
- - garbage-collection-algorithms
- - java-memory-model-and-concurrency
+ - concurrent-data-structures
+ - threads-executors-futures
+ - collections-framework
+ - streams-functional-java
+ - exception-handling-and-errors
 
 Conventions
  - Dir naming: kebab-case.
@@ -18,6 +18,18 @@ Conventions
  - Diagrams: Mermaid only.
  - Code: prefer working Java examples and minimal runnable snippets.
  - STAR: apply for behavioral/system-case explanations.
+
+Next Topics Candidates
+ - microservices-architecture: Decomposition, communication patterns, and challenges
+ - circuit-breaker-pattern: Fault tolerance in distributed systems
+ - idempotency-in-apis: Ensuring safe retries for operations
+ - rate-limiting-algorithms: Token bucket, leaky bucket implementations
+ - database-acid-properties: Atomicity, consistency, isolation, durability
+ - nosql-vs-sql-tradeoffs: When to choose relational vs non-relational
+ - distributed-locks: Redlock algorithm and implementations
+ - service-mesh-istio: Traffic management and observability
+ - container-orchestration-k8s: Pods, services, deployments
+ - event-driven-architecture: Pub-sub patterns and event sourcing
 
 TODO
  - High-level open design decisions and split criteria for oversized topics.
