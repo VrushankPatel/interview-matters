@@ -5,7 +5,7 @@ Last update
 2025-09-25
 
 Summary of recent additions
- - Updated caching-patterns, consistency-models, microservices-architecture, circuit-breaker-pattern, idempotency-in-apis with enhanced content and interlinks
+ - Added data-partitioning-strategies, fault-tolerance-patterns, cloud-native-architectures, real-time-data-processing, machine-learning-infrastructure with comprehensive content and interlinks
 
 Conventions
  - Dir naming: kebab-case.
