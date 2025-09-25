@@ -1,9 +1,4 @@
-LLD HLD Basics
-Replication vs Sharding vs Partitioning
-Caching
-Latency and Throughput Zero to Hero
-Monitoring and Logging
-Proxy Forward and Reverse
-Load Balancing and Strategies
-Rate Limiting
-Concurrency & Parallelism
+00001| Proxy Forward and Reverse
+00002| Load Balancing and Strategies
+00003| Rate Limiting
+00004| Concurrency & Parallelism
