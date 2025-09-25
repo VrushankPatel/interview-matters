@@ -1,8 +1,3 @@
-LLD HLD basics
-Replication vs Sharding vs Partitioning
-Caching
-Latency and Throughput zero to hero
-Monitoring and Logging
 Collections & Data Structures
 Java Stream API & Functional Programming
 System Design Basics
@@ -11,3 +6,13 @@ Async logging
 DevOps & Infrastructure as Code
 Proxy forward and reverse
 Concurrency & Parallelism
+Database Indexing Best Practices
+API Gateway Design
+Microservices Security
+Event-Driven Architecture
+Distributed Tracing
+Container Orchestration
+Serverless Computing
+GraphQL APIs
+OAuth and JWT
+Machine Learning Model Serving
