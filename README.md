@@ -100,6 +100,7 @@ This repository contains a comprehensive collection of technical interview prepa
 - [Low Latency Systems](system-design/low-latency-systems/README.md)
 - [Microservices Architecture](system-design/microservices-architecture/README.md)
 - [Netflix Video Streaming Architecture](system-design/netflix-video-streaming-architecture/README.md)
+- [Netflix System Design](netflix-system-design/README.md)
 - [Observability Patterns](system-design/observability-patterns/README.md)
 - [Raft and Leader Election](system-design/raft-and-leader-election/README.md)
 - [Rate Limiting](system-design/rate-limiting/README.md)
