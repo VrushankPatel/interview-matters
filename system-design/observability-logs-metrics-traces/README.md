@@ -10,6 +10,8 @@ updated: 2025-09-25
 
 Observability enables understanding system behavior through logs, metrics, and traces. Critical for debugging distributed systems.
 
+Canonical Interview Prompt: Implement observability for a distributed e-commerce system to monitor order processing latency and error rates.
+
 # STAR Summary
 
 **Situation:** Production outages in a distributed system with poor visibility.  
@@ -144,6 +146,12 @@ sequenceDiagram
 - Metric cardinality: High cardinality causes performance issues.  
 - Trace sampling: Balance detail vs overhead.
 
+# Common Interview Questions
+
+- How do you set up distributed tracing in a microservices architecture?
+- What are the differences between logs, metrics, and traces?
+- How to handle high-volume logging without impacting performance?
+
 # Tools & Libraries
 
 - ELK Stack (Elasticsearch, Logstash, Kibana)  
@@ -152,7 +160,7 @@ sequenceDiagram
 
 # Github-README Links & Related Topics
 
-[[distributed-tracing-and-observability]], [[low-latency-systems]]
+[[distributed-tracing-and-observability]], [[low-latency-systems]], [[microservices-architecture]]
 
 # References
 

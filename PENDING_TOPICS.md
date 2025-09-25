@@ -1,3 +1,6 @@
 # One topic per line. Top is oldest.
-api-design-rest-grpc-openapi
-observability-logs-metrics-traces
+backtracking
+divide-and-conquer
+probabilistic-algorithms
+computational-geometry
+jvm-performance-tuning

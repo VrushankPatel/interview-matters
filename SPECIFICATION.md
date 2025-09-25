@@ -10,6 +10,8 @@ Summary of recent additions
  - behavioral-star-prep
  - low-latency-systems
  - security-authz-authn-tokens
+ - api-design-rest-grpc-openapi
+ - observability-logs-metrics-traces
 
 Conventions
  - Dir naming: kebab-case.
@@ -34,17 +36,27 @@ Next Topics Candidates
     - gc-tuning: Practical GC tuning for low-latency services
     - kafka-internals: Partitioning, replication, and consumer groups
     - caching-patterns: Cache invalidation strategies
-    - consistency-models: Eventual vs strong consistency tradeoffs
-    - concurrent-collections: Thread-safe collections in Java
-    - java-streams-advanced: Functional programming with streams
-    - reflection-and-annotations: Runtime inspection and metadata
-    - java-security-basics: Secure coding and cryptography
-    - networking-sockets: Low-level network programming
-    - file-io-nio: Efficient file and channel operations
-    - java-testing-advanced: Mocks, spies, and test frameworks
-    - build-automation: CI/CD with Maven and Gradle
-    - profiling-tools: Performance analysis tools
-    - advanced-java-concepts: Generics, type erasure, and more
+ - consistency-models: Eventual vs strong consistency tradeoffs
+ - concurrent-collections: Thread-safe collections in Java
+ - java-streams-advanced: Functional programming with streams
+ - reflection-and-annotations: Runtime inspection and metadata
+ - java-security-basics: Secure coding and cryptography
+ - networking-sockets: Low-level network programming
+ - file-io-nio: Efficient file and channel operations
+ - java-testing-advanced: Mocks, spies, and test frameworks
+ - build-automation: CI/CD with Maven and Gradle
+ - profiling-tools: Performance analysis tools
+ - advanced-java-concepts: Generics, type erasure, and more
+ - backtracking: N-Queens, Sudoku, combinatorial problem solving
+ - divide-and-conquer: Merge sort, quicksort, closest pair algorithms
+ - probabilistic-algorithms: Bloom filters, skip lists for space efficiency
+ - computational-geometry: Convex hull, line intersection, geometric algorithms
+ - jvm-performance-tuning: Heap sizing, GC tuning for low latency
+ - concurrent-collections: ConcurrentHashMap, CopyOnWriteArrayList usage
+ - java-streams-advanced: Parallel streams, custom collectors
+ - reflection-and-annotations: Runtime inspection and custom annotations
+ - java-security-basics: Cryptography, secure coding practices
+ - networking-sockets: TCP/UDP sockets in Java
 
 Next Topics Candidates (added this run)
  - backtracking: N-Queens, Sudoku, combinatorial problem solving

@@ -10,6 +10,8 @@ updated: 2025-09-25
 
 API design principles for building scalable, maintainable services. Covers REST for simplicity, gRPC for performance, and OpenAPI for documentation. Essential for system design interviews.
 
+Canonical Interview Prompt: Design the API for a social media platform's post service, including endpoints for creating, retrieving, and liking posts.
+
 # STAR Summary
 
 **Situation:** Led API redesign for a high-traffic e-commerce platform experiencing integration issues.  
@@ -180,6 +182,12 @@ sequenceDiagram
 - Rate limiting: Implement token bucket.  
 - Error handling: Consistent error codes.  
 - Security: OAuth2, input validation.
+
+# Common Interview Questions
+
+- How do you choose between REST, GraphQL, and gRPC for API design?
+- How to handle API versioning and backward compatibility?
+- What are the best practices for securing APIs?
 
 # Tools & Libraries
 
