@@ -5,7 +5,7 @@ Last update
 2025-09-25
 
 Summary of recent additions
- - Added data-partitioning-strategies, fault-tolerance-patterns, cloud-native-architectures, real-time-data-processing, machine-learning-infrastructure with comprehensive content and interlinks
+ - Added microservices-communication-patterns, database-sharding-strategies, api-rate-limiting, distributed-transactions, service-discovery with detailed explanations, code examples, and diagrams
 
 Conventions
  - Dir naming: kebab-case.
