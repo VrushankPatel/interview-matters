@@ -6,8 +6,6 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Netflix System Design
-
 ## Overview
 Netflix is a global video-on-demand platform that streams movies and TV shows to over 200 million subscribers worldwide. The system must handle massive scale, deliver high-quality video with minimal latency, support personalized recommendations, and ensure 99.99% uptime. Key challenges include content delivery at scale, adaptive bitrate streaming, global distribution, and real-time analytics.
 

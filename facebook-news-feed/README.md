@@ -6,8 +6,6 @@ created: '2025-09-25'
 updated: '2025-09-25'
 ---
 
-# Facebook News Feed — Personalized Content Ranking and Delivery
-
 ## Overview
 
 The Facebook News Feed is a personalized content delivery system that ranks and presents posts, stories, and updates to users based on relevance, engagement, and long-term value. Leveraging machine learning (ML) models, it processes billions of potential content items daily for over 2 billion users, ensuring a tailored experience that prioritizes meaningful interactions over promotional or irrelevant content. The system evolved from early graph-based algorithms like EdgeRank to advanced neural networks, focusing on multitask learning for predictions like likes, comments, and shares. Key challenges include scalability, real-time processing, and balancing personalization with diversity and integrity.

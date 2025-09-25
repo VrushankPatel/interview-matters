@@ -6,8 +6,6 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# URL Shortener System Design
-
 ## Overview
 
 A URL shortener service, like bit.ly or TinyURL, converts long URLs into short, shareable links. It involves generating unique short codes, storing URL mappings, and handling redirections at scale.
