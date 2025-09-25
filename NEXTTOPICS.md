@@ -165,6 +165,16 @@ probabilistic-algorithms — 'Bloom filters, skip lists for space efficiency'
 computational-geometry — 'Convex hull, line intersection, geometric algorithms'
 
 jvm-performance-tuning — 'Heap sizing, GC tuning for low latency'
+order-book-modeling — 'Canonical models for in-memory book and persistence'
+matching-algorithms — 'Batch vs streaming matching, complexity'
+time-in-force-variations — 'Exchange semantics across major venues'
+latency-measurement — 'Instrumentation and microbenchmarks'
+raft-and-leader-election — 'Implementations and failure modes'
+memory-models — 'JMM deep-dive'
+gc-tuning — 'Practical GC tuning for low-latency services'
+kafka-internals — 'Partitioning, replication, and consumer groups'
+caching-patterns — 'Cache invalidation strategies'
+consistency-models — 'Eventual vs strong consistency tradeoffs'
 
 order-book-modeling — 'Canonical models for in-memory book and persistence'
 

@@ -5,13 +5,11 @@ Last update
 2025-09-25
 
 Summary of recent additions
- - dynamic-programming-and-greedy
- - system-design-interview-cases
- - behavioral-star-prep
- - low-latency-systems
- - security-authz-authn-tokens
- - api-design-rest-grpc-openapi
- - observability-logs-metrics-traces
+  - backtracking
+  - divide-and-conquer
+  - probabilistic-algorithms
+  - computational-geometry
+  - jvm-performance-tuning
 
 Conventions
  - Dir naming: kebab-case.
@@ -75,5 +73,17 @@ Next Topics Candidates (added this run)
  - caching-patterns: Cache invalidation strategies
  - consistency-models: Eventual vs strong consistency tradeoffs
 
+New Next Topics Candidates
+  - order-book-modeling — 'Canonical models for in-memory book and persistence'
+  - matching-algorithms — 'Batch vs streaming matching, complexity'
+  - time-in-force-variations — 'Exchange semantics across major venues'
+  - latency-measurement — 'Instrumentation and microbenchmarks'
+  - raft-and-leader-election — 'Implementations and failure modes'
+  - memory-models — 'JMM deep-dive'
+  - gc-tuning — 'Practical GC tuning for low-latency services'
+  - kafka-internals — 'Partitioning, replication, and consumer groups'
+  - caching-patterns — 'Cache invalidation strategies'
+  - consistency-models — 'Eventual vs strong consistency tradeoffs'
+
 TODO
- - High-level open design decisions and split criteria for oversized topics.
+  - High-level open design decisions and split criteria for oversized topics.
