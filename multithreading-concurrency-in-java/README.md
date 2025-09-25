@@ -1,7 +1,7 @@
 ---
-title: Multithreading & Concurrency in Java
-aliases: [Java Multithreading, Concurrent Programming in Java]
-tags: [#java,#concurrency]
+title: 'Multithreading & Concurrency in Java'
+aliases: []
+tags: [#java, #concurrency]
 created: 2025-09-25
 updated: 2025-09-25
 ---
@@ -157,14 +157,14 @@ public class AtomicExample {
 
 ## Github-README Links & Related Topics
 
-- [Java Atomic Variables](java-atomic-variables/)
-- [Java BlockingQueue](java-blockingqueue/)
-- [Java ConcurrentHashMap](java-concurrenthashmap/)
-- [Java ExecutorService](java-executorservice/)
-- [Java ForkJoinPool](java-forkjoinpool/)
-- [Java ReadWriteLock](java-readwritelock/)
-- [Java ReentrantLock](java-reentrantlock/)
-- [Java Semaphore](java-semaphore/)
-- [Java Synchronized Blocks](java-synchronized-blocks/)
-- [Java Volatile Keyword](java-volatile-keyword/)
-- [Java Wait Notify](java-wait-notify/)
+- [Java Atomic Variables](../java-atomic-variables/)
+- [Java BlockingQueue](../java-blockingqueue/)
+- [Java ConcurrentHashMap](../java-concurrenthashmap/)
+- [Java ExecutorService](../java-executorservice/)
+- [Java ForkJoinPool](../java-forkjoinpool/)
+- [Java ReadWriteLock](../java-readwritelock/)
+- [Java ReentrantLock](../java-reentrantlock/)
+- [Java Semaphore](../java-semaphore/)
+- [Java Synchronized Blocks](../java-synchronized-blocks/)
+- [Java Volatile Keyword](../java-volatile-keyword/)
+- [Java Wait Notify](../java-wait-notify/)

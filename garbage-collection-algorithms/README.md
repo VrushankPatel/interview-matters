@@ -1,7 +1,7 @@
 ---
-title: Garbage Collection Algorithms
-aliases: [GC Algorithms, Java Garbage Collection]
-tags: [#java,#jvm,#gc]
+title: 'Garbage Collection Algorithms'
+aliases: []
+tags: [#java, #jvm, #gc]
 created: 2025-09-25
 updated: 2025-09-25
 ---
@@ -49,21 +49,37 @@ Garbage collection (GC) is the automatic process of managing memory in the Java 
 - **Advantages**: Efficient for typical Java applications.
 - **Disadvantages**: Complex tuning required.
 
+```mermaid
+graph TD
+    A[Java Heap] --> B[Young Generation]
+    A --> C[Old Generation]
+    B --> D[Eden]
+    B --> E[Survivor Space 0]
+    B --> F[Survivor Space 1]
+```
+
 ### Modern GC Implementations in JVM
 
 | GC Algorithm | Introduced In | Key Features | Best For |
 |--------------|---------------|--------------|----------|
-| Serial GC | JDK 1.3 | Single-threaded, simple | Small applications, client-side |
-| Parallel GC | JDK 1.4 | Multi-threaded mark-sweep-compact | Batch processing, high throughput |
-| CMS (Concurrent Mark Sweep) | JDK 1.4.1 | Concurrent marking, low pauses | Web servers, interactive applications |
-| G1 (Garbage First) | JDK 7 | Region-based, predictable pauses | Large heaps, low latency |
-| ZGC | JDK 11 | Concurrent, low latency | Large heaps (up to 16TB), sub-millisecond pauses |
-| Shenandoah | JDK 12 | Concurrent evacuation | Low pause times, large heaps |
+| Serial GC | JDK 1.3 | Single-threaded, generational mark-sweep-compact | Small heaps, single processor machines |
+| Parallel GC | JDK 1.4 | Multi-threaded, generational mark-sweep-compact | High throughput, multiprocessor hardware |
+| G1 (Garbage First) | JDK 7 | Region-based, mostly concurrent, predictable pauses | Large heaps, low latency requirements |
+| ZGC | JDK 11 | Concurrent, low latency, handles large heaps | Very large heaps (up to 16TB), sub-millisecond pauses |
 
 #### G1 Garbage Collector
 - Divides heap into ~2048 regions (1-32MB each).
 - Prioritizes regions with most garbage for collection.
 - Aims for predictable pause times via incremental collection.
+
+```mermaid
+graph TD
+    A[Heap] --> B[Young Regions]
+    A --> C[Old Regions]
+    A --> D[Humongous Regions]
+    B --> E[Eden Regions]
+    B --> F[Survivor Regions]
+```
 
 #### Z Garbage Collector
 - Designed for low-latency applications.
@@ -212,6 +228,8 @@ public class FinalizerExample {
 ## References
 
 - [Oracle Garbage Collection Tuning Guide](https://docs.oracle.com/en/java/javase/21/gctuning/) - Official documentation on GC algorithms and tuning.
+- [Garbage Collector Implementation](https://docs.oracle.com/en/java/javase/21/gctuning/garbage-collector-implementation.html) - Detailed explanation of generational GC and performance considerations.
+- [Available Collectors](https://docs.oracle.com/en/java/javase/21/gctuning/available-collectors.html) - Overview of Serial, Parallel, G1, and Z Garbage Collectors.
 - [OpenJDK GC Wiki](https://wiki.openjdk.org/display/HotSpot/Garbage+Collection) - Detailed information on JVM GC implementations.
 - [Baeldung: Java Garbage Collection](https://www.baeldung.com/java-garbage-collection) - Comprehensive articles on GC concepts.
 - [JVM Anatomy Series by Aleksey Shipilev](https://shipilev.net/jvm/anatomy-quarks/) - Deep dives into GC internals.
