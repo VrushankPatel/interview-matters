@@ -1,10 +1,5 @@
 
 
-Instagram System Design — 'Photo sharing with high availability and scalability'
-Uber Ride Sharing System — 'Location-based matching and real-time updates'
-Airbnb Booking System — 'Distributed booking with consistency'
-Facebook News Feed — 'Personalized content ranking and delivery'
-Google Search Engine — 'Distributed indexing and ranking algorithms'
 WhatsApp Messaging System — 'End-to-end encrypted messaging at scale'
 Dropbox File Storage — 'Cloud storage with synchronization and versioning'
 Java Fundamentals — 'Core Java syntax, data types, control structures'
