@@ -6,7 +6,7 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-## Overview
+# Overview
 
 Divide and conquer is a fundamental algorithmic paradigm that breaks down complex problems into smaller, more manageable subproblems, solves them recursively, and combines their solutions to address the original problem. This approach is particularly effective for problems that can be decomposed naturally, such as sorting and searching. Key algorithms include merge sort, quicksort, and the closest pair of points problem, which exemplify efficient recursive decomposition in computational geometry and data processing.
 
@@ -192,10 +192,10 @@ graph TD
 - **Python**: sorted() uses Timsort.
 - **Libraries**: Apache Commons for Java utilities; Boost for C++.
 
-## Github-README Links & Related Topics
+# Github-README Links & Related Topics
 
-- [[sorting-algorithms]]
-- [[dynamic-programming-and-greedy]]
+- [Sorting Algorithms](algorithms/sorting-algorithms/README.md)
+- [Dynamic Programming and Greedy](algorithms/dynamic-programming-and-greedy/README.md)
 - [Graphs Trees Heaps and Tries](algorithms/graphs-trees-heaps-and-tries/README.md)
 
 # References

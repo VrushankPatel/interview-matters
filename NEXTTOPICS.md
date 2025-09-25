@@ -1,9 +1,3 @@
-networking-sockets — 'Low-level network programming'java-testing-advanced — 'Mocks, spies, and test frameworks'
-
-profiling-tools — 'Performance analysis tools'
--e 
-backtracking — 'N-Queens, Sudoku, combinatorial problem solving'
-divide-and-conquer — 'Merge sort, quicksort, closest pair algorithms'
 probabilistic-algorithms — 'Bloom filters, skip lists for space efficiency'
 computational-geometry — 'Convex hull, line intersection, geometric algorithms'
 jvm-performance-tuning — 'Heap sizing, GC tuning for low latency'
@@ -50,7 +44,6 @@ java-security-basics — 'Secure coding and cryptography'
 networking-sockets — 'Low-level network programming'
 file-io-nio — 'Efficient file and channel operations'
 java-testing-advanced — 'Mocks, spies, and test frameworks'
-
 profiling-tools — 'Performance analysis tools'
 backtracking — 'N-Queens, Sudoku, combinatorial problem solving'
 divide-and-conquer — 'Merge sort, quicksort, closest pair algorithms'
