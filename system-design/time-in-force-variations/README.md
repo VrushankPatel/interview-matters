@@ -19,9 +19,40 @@ Time-in-force semantics across exchanges: GTC, IOC, FOK, etc.
 
 # Detailed Explanation
 
-GTC: Good till canceled.  
-IOC: Immediate or cancel.  
-FOK: Fill or kill.
+## High-Level Design
+
+```mermaid
+flowchart TD
+    A[Trader] --> B[Order Gateway]
+    B --> C[Validation Layer]
+    C --> D{Time in Force}
+    D -->|GTC| E[Persistent Storage]
+    D -->|IOC| F[Immediate Match Attempt]
+    D -->|FOK| G[Full Fill Check]
+    E --> H[Order Book]
+    F --> H
+    G --> H
+    H --> I[Matching Engine]
+```
+
+## Capacity and Throughput Targets
+
+- Handle 10k orders/second with TIF logic.
+- Latency: <10ms for IOC/FOK validation.
+
+## Tradeoffs
+
+- GTC: Persistent but storage intensive.
+- IOC/FOK: Immediate but may reject orders.
+- Flexibility vs Simplicity: More TIF options increase complexity.
+
+## API Design Examples
+
+Order submission: `POST /orders` with `tif: "IOC"`
+
+## Deployment Notes
+
+Integrate TIF in order engine, use databases for GTC persistence.
 
 # Real-world Examples & Use Cases
 

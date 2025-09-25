@@ -19,7 +19,36 @@ Order book models for financial trading systems. In-memory data structures for b
 
 # Detailed Explanation
 
-Order book: Sorted bids (buy) and asks (sell). Use heaps or trees for efficient insertion/deletion.
+## Complexity Analysis
+
+- Insertion/Deletion: O(log n) with priority queues or balanced trees.
+- Matching: O(n) in worst case for full traversal, but optimized with heaps.
+- Persistence: O(log n) for updates in LSM trees or B-trees.
+
+## Typical Interview Variants
+
+- Limit orders: Price-specific.
+- Market orders: Immediate execution.
+- Stop orders: Triggered at price levels.
+
+## High-Level Design
+
+```mermaid
+classDiagram
+    class OrderBook {
+        +PriorityQueue bids
+        +PriorityQueue asks
+        +addOrder(Order)
+        +matchOrders()
+    }
+    class Order {
+        +long id
+        +double price
+        +int quantity
+        +OrderType type
+    }
+    OrderBook --> Order
+```
 
 # Real-world Examples & Use Cases
 
@@ -79,7 +108,14 @@ sequenceDiagram
 
 - Price-time priority  
 - Partial fills  
-- Market orders
+- Market orders  
+- High-frequency updates causing contention
+
+# Common Interview Questions
+
+1. **Implement Order Book**: Use two heaps for bids/asks, handle add/match. Test with sample orders.
+2. **Matching Engine**: Process orders, handle partial fills, update quantities.
+3. **Persistence Strategy**: Design for crash recovery, use WAL and snapshots.
 
 # Tools & Libraries
 

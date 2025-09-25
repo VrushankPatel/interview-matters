@@ -19,9 +19,54 @@ API design principles for building scalable, maintainable services. Covers REST 
 
 # Detailed Explanation
 
-REST APIs use HTTP methods (GET, POST, PUT, DELETE) on resources. Stateless, cacheable.  
-gRPC uses HTTP/2, protocol buffers for efficient serialization. Supports streaming.  
-OpenAPI (Swagger) provides machine-readable API specs for documentation and code generation.
+## High-Level Design
+
+```mermaid
+flowchart TD
+    A[Client] --> B[API Gateway]
+    B --> C{Protocol Choice}
+    C -->|REST| D[REST Service Layer]
+    C -->|gRPC| E[gRPC Service Layer]
+    D --> F[Database / Cache]
+    E --> F
+    B --> G[OpenAPI Spec Generator]
+    G --> H[Client SDKs]
+```
+
+## Capacity and Throughput Targets
+
+- REST APIs: 1000-5000 requests/second per instance, limited by JSON parsing and network overhead.
+- gRPC: 10000-50000 requests/second, benefiting from binary protobuf and HTTP/2 multiplexing.
+- OpenAPI: Negligible overhead, used for tooling.
+
+Dimensioning: For 1M daily users, scale to 10 instances with load balancer.
+
+## Tradeoffs
+
+- **REST vs gRPC**: REST is simpler for external clients and debugging, but gRPC offers better performance and type safety for internal services.
+- **Consistency vs Availability**: REST's statelessness improves availability but requires client-side state management.
+- **OpenAPI**: Improves developer experience but adds maintenance for spec updates.
+
+## API Design Examples
+
+Sample REST endpoints:
+- `GET /api/v1/products?page=1&limit=10` - Paginated product list
+- `POST /api/v1/orders` - Create order with JSON body
+- `PUT /api/v1/products/{id}` - Update product
+
+gRPC service definition:
+```
+service OrderService {
+  rpc CreateOrder(CreateOrderRequest) returns (OrderResponse);
+  rpc GetOrder(GetOrderRequest) returns (OrderResponse);
+}
+```
+
+## Deployment Notes
+
+- REST: Deploy on Kubernetes with Ingress for routing, use Spring Boot or Express.
+- gRPC: Internal microservices with service mesh like Istio for load balancing.
+- OpenAPI: Generate specs from code annotations, host on API portal.
 
 # Real-world Examples & Use Cases
 

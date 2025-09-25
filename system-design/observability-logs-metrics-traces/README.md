@@ -19,9 +19,46 @@ Observability enables understanding system behavior through logs, metrics, and t
 
 # Detailed Explanation
 
-Logs: Structured events for debugging.  
-Metrics: Time-series data (counters, gauges, histograms).  
-Traces: Request paths across services.
+## High-Level Design
+
+```mermaid
+flowchart TD
+    A[Application] --> B[Instrumentation Layer]
+    B --> C[Logs Collector]
+    B --> D[Metrics Exporter]
+    B --> E[Trace Spans]
+    C --> F[ELK Stack]
+    D --> G[Prometheus]
+    E --> H[Jaeger]
+    F --> I[Dashboards]
+    G --> I
+    H --> I
+```
+
+## Capacity and Throughput Targets
+
+- Logs: 100k events/second, with log aggregation to avoid storage bloat.
+- Metrics: 10k time-series per service, scrape every 15s.
+- Traces: 1k spans/second, with 10% sampling for high-throughput systems.
+
+Dimensioning: For distributed system with 100 services, deploy centralized collectors with horizontal scaling.
+
+## Tradeoffs
+
+- **Logs vs Metrics**: Logs provide detail but are expensive to query; metrics are efficient for alerting but lack context.
+- **Traces**: High fidelity for debugging but add latency overhead.
+- **Consistency vs Performance**: Synchronous logging ensures consistency but impacts throughput.
+
+## API Design Examples
+
+Metrics endpoint: `GET /metrics` (Prometheus format)
+Trace injection: Headers like `x-trace-id` for correlation.
+
+## Deployment Notes
+
+- Use sidecars for collection in Kubernetes.
+- Centralize storage with Elasticsearch for logs, TSDB for metrics.
+- Integrate with CI/CD for automated instrumentation.
 
 # Real-world Examples & Use Cases
 
