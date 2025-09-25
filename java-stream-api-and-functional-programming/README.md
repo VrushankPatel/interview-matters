@@ -6,6 +6,8 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
+# Java Stream API & Functional Programming
+
 ## Overview
 The Java Stream API, introduced in Java 8, enables functional-style operations on collections and arrays, allowing for declarative, composable, and parallel data processing. It integrates seamlessly with lambda expressions and functional interfaces to promote immutable operations, reducing side effects and improving code readability and maintainability.
 

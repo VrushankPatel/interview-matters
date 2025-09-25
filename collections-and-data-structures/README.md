@@ -6,6 +6,8 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
+# Collections & Data Structures
+
 ## Overview
 Collections and data structures in Java are essential for organizing and manipulating data efficiently. The Java Collections Framework provides interfaces and implementations for common data structures like lists, sets, maps, and queues, each optimized for specific use cases with varying time and space complexities.
 
