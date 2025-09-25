@@ -6,13 +6,13 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Overview
+## Overview
 
 Socket programming enables low-level network communication in Java, forming the basis for higher-level protocols. Critical for understanding network internals.
 
 Canonical Interview Prompt: Build a simple TCP echo server and client using Java sockets.
 
-# Detailed Explanation
+## Detailed Explanation
 
 ## High-Level Design
 
@@ -43,13 +43,13 @@ graph TD
 - **Blocking vs Non-blocking**: Blocking simpler but may hang.
 - **Resource Management**: Close sockets to avoid leaks.
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 - **Web Servers**: Underlying HTTP connections.
 - **Chat Applications**: Real-time messaging.
 - **File Transfer**: FTP-like protocols.
 
-# Code Examples
+## Code Examples
 
 **TCP Echo Server:**
 
@@ -115,13 +115,13 @@ Continuous byte stream.
 
 Datagram with address and data.
 
-# Common Pitfalls & Edge Cases
+## Common Pitfalls & Edge Cases
 
 - **Port Conflicts**: Choose unused ports.
 - **Firewall Issues**: Ensure ports are open.
 - **Timeouts**: Set read timeouts to avoid hanging.
 
-# Tools & Libraries
+## Tools & Libraries
 
 - Java Net package
 - NIO for non-blocking I/O
@@ -130,7 +130,7 @@ Datagram with address and data.
 
 [networking-tcp-ip-http2-tls](../networking-tcp-ip-http2-tls/README.md), [io-and-nio](../io-and-nio/README.md)
 
-# References
+## References
 
 - https://docs.oracle.com/javase/tutorial/networking/sockets/
 - https://docs.oracle.com/javase/8/docs/api/java/net/package-summary.html

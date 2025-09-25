@@ -43,13 +43,13 @@ graph TD
 - **Type Safety vs Compatibility**: Erasure maintains JVM compatibility but loses type info.
 - **Complexity**: Wildcards can be confusing.
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 - **Collections**: List<String> prevents ClassCastException.
 - **Frameworks**: Spring uses generics extensively.
 - **APIs**: Type-safe method signatures.
 
-# Code Examples
+## Code Examples
 
 **Generic Class:**
 
@@ -76,22 +76,22 @@ Box<String> box = new Box<>();
 // At runtime, it's Box (raw type)
 ```
 
-# Common Pitfalls & Edge Cases
+## Common Pitfalls & Edge Cases
 
 - **Erasure Limitations**: Cannot instantiate generic arrays.
 - **Overloading**: Erasure can cause conflicts.
 - **Raw Types**: Avoid using raw types.
 
-# Tools & Libraries
+## Tools & Libraries
 
 - Java Language Specification
 
-# Github-README Links & Related Topics
-
-[java-language-basics](../java-language-basics/README.md), [reflection-and-annotations](../reflection-and-annotations/README.md)
-
-# References
+## References
 
 - https://docs.oracle.com/javase/tutorial/java/generics/
 - https://www.baeldung.com/java-generics
 - https://docs.oracle.com/javase/specs/jls/se8/html/jls-4.html
+
+## Github-README Links & Related Topics
+
+[java-language-basics](../java-language-basics/README.md), [reflection-and-annotations](../reflection-and-annotations/README.md)
