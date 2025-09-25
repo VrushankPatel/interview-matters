@@ -21,9 +21,33 @@ Caching stores frequently accessed data to reduce latency and load on backend sy
 - **Write-Behind:** Update cache first, DB later.
 - **Invalidation:** TTL, LRU eviction.
 
-## Real-world Examples
-- Browser caching for static assets.
-- Redis in e-commerce for product data.
+### Canonical Interview Prompt
+**Design a Caching Layer for a Social Media Feed System**
+
+- **Functional Requirements:** Cache user feeds, invalidate on new posts, support millions of users.
+- **Non-Functional Requirements:** Low latency (<50ms), high throughput (100k RPS), eventual consistency.
+- **High-Level Design (HLD):**
+
+```mermaid
+graph TD
+    A[Client] --> B[API Gateway]
+    B --> C[Cache (Redis Cluster)]
+    C --> D[DB (NoSQL)]
+    B --> E[Feed Service]
+    E --> C
+```
+
+- **Capacity Estimation:** 1B users, 10M active, feed size 100 posts, cache hit rate 80%, memory ~10TB for Redis.
+- **Tradeoffs:** Consistency vs Performance - use write-behind for high write throughput, accepting eventual consistency. Scalability vs Cost - distributed cache increases complexity but allows global scaling.
+- **API Design (OpenAPI-style minimal):**
+  - `GET /feed/{user_id}` -> cached feed
+  - `POST /post` -> invalidate related caches
+- **Deployment Notes:** Use Redis Cluster for sharding, TTL 1 hour, monitor cache hit rates with Prometheus.
+
+## Real-world Examples & Use Cases
+- Browser caching for static assets to reduce server load.
+- Redis in e-commerce for product data caching.
+- Use case: News feed caching to handle viral content spikes.
 
 ## Code Examples
 ### Cache-Aside with Map
@@ -45,7 +69,7 @@ class CacheAside {
 }
 ```
 
-## Data Models
+## Data Models / Message Formats
 ```mermaid
 sequenceDiagram
     Client->>Cache: Request data
@@ -55,25 +79,37 @@ sequenceDiagram
     Cache-->>Client: Data
 ```
 
-## Journey Sequence
-1. Identify cacheable data.
-2. Choose strategy (e.g., cache-aside).
-3. Implement with a cache store (Redis).
-4. Set eviction policies.
-5. Monitor hit rates.
+| Field | Type | Description |
+|-------|------|-------------|
+| key | string | Cache key (e.g., user_feed:123) |
+| value | json | Cached data |
+| ttl | int | Time to live in seconds |
 
-## Common Pitfalls
-- Cache inconsistency.
-- Thundering herd on cache miss.
-- Over-caching leading to memory issues.
+## Journey / Sequence
+```mermaid
+sequenceDiagram
+    participant App
+    participant Cache
+    participant DB
+    App->>Cache: Get data
+    Cache-->>App: Miss
+    Cache->>DB: Fetch
+    DB-->>Cache: Data
+    Cache->>Cache: Store with TTL
+    Cache-->>App: Data
+```
+
+## Common Pitfalls & Edge Cases
+- Cache inconsistency; edge case: stale data after DB update.
+- Thundering herd on cache miss; use probabilistic early expiration.
+- Over-caching leading to memory issues; edge case: cache eviction storms.
 
 ## Tools & Libraries
 - Redis: In-memory cache.
 - Caffeine: Java caching library.
 
-## Related Topics
-- [database-design-and-indexing](../database-design-and-indexing/)
-- [performance-tuning-and-profiling](../performance-tuning-and-profiling/)
+## Github-README Links & Related Topics
+Related: [[database-design-and-indexing]], [[performance-tuning-and-profiling]]
 
 ## Common Interview Questions
 - What are the main caching strategies and their use cases?
@@ -81,6 +117,13 @@ sequenceDiagram
 - How does Redis implement LRU eviction?
 - Describe write-through vs write-behind caching.
 - How to handle cache consistency in distributed systems?
+
+## Common Interview Questions
+- What are the differences between cache-aside and write-through?
+- How to handle cache invalidation in distributed systems?
+- Explain cache stampede and solutions.
+- What is TTL and LRU in caching?
+- How does Redis clustering work for caching?
 
 ## References
 - Redis documentation.

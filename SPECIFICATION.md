@@ -5,11 +5,11 @@ Last update
 2025-09-25
 
 Summary of recent additions
- - io-and-nio
- - serialization-and-deserialization
- - build-tools-maven-gradle
- - testing-and-mocking-junit-mockito
- - performance-tuning-and-profiling
+ - design-patterns
+ - system-design-basics
+ - load-balancing-and-routing
+ - caching-strategies
+ - database-design-and-indexing
 
 Conventions
  - Dir naming: kebab-case.
@@ -35,6 +35,16 @@ Next Topics Candidates
     - kafka-internals: Partitioning, replication, and consumer groups
     - caching-patterns: Cache invalidation strategies
     - consistency-models: Eventual vs strong consistency tradeoffs
+    - concurrent-collections: Thread-safe collections in Java
+    - java-streams-advanced: Functional programming with streams
+    - reflection-and-annotations: Runtime inspection and metadata
+    - java-security-basics: Secure coding and cryptography
+    - networking-sockets: Low-level network programming
+    - file-io-nio: Efficient file and channel operations
+    - java-testing-advanced: Mocks, spies, and test frameworks
+    - build-automation: CI/CD with Maven and Gradle
+    - profiling-tools: Performance analysis tools
+    - advanced-java-concepts: Generics, type erasure, and more
 
 TODO
  - High-level open design decisions and split criteria for oversized topics.

@@ -21,9 +21,33 @@ Database design involves structuring data for efficiency. Indexing speeds up que
 - **Indexing:** B-tree, Hash, Full-text.
 - **Partitioning:** Horizontal, vertical.
 
-## Real-world Examples
-- E-commerce: Product tables with indexes on category.
-- Social media: User tables with composite indexes.
+### Canonical Interview Prompt
+**Design the Database Schema for a Blogging Platform**
+
+- **Functional Requirements:** Store users, posts, comments, support search and analytics.
+- **Non-Functional Requirements:** High read throughput (10k RPS), data durability, scalable to 100M posts.
+- **High-Level Design (HLD):**
+
+```mermaid
+graph TD
+    A[App] --> B[DB Cluster]
+    B --> C[Users Table]
+    B --> D[Posts Table]
+    B --> E[Comments Table]
+    D --> F[Index on author_id]
+    E --> G[Index on post_id]
+```
+
+- **Capacity Estimation:** 100M posts, each 1KB, total 100GB. Indexes add 50% overhead. Read/write ratio 100:1.
+- **Tradeoffs:** Normalization vs Performance - denormalize for reads to avoid joins. Scalability vs Consistency - use sharding for horizontal scaling, accepting eventual consistency.
+- **API Design (OpenAPI-style minimal):**
+  - `GET /posts?author_id=123` -> indexed query
+- **Deployment Notes:** Use PostgreSQL with partitioning by date, indexes on frequently queried columns, backup to S3.
+
+## Real-world Examples & Use Cases
+- E-commerce: Product tables with indexes on category for fast searches.
+- Social media: User tables with composite indexes on name and location.
+- Use case: Blog platform with full-text search on posts.
 
 ## Code Examples
 ### SQL Index Creation
@@ -32,41 +56,59 @@ CREATE INDEX idx_user_email ON users(email);
 SELECT * FROM users WHERE email = 'test@example.com';
 ```
 
-## Data Models
+## Data Models / Message Formats
 ```mermaid
 erDiagram
-    USERS ||--o{ ORDERS : places
+    USERS ||--o{ POSTS : writes
+    POSTS ||--o{ COMMENTS : has
     USERS {
         int id PK
         string email
         string name
     }
-    ORDERS {
+    POSTS {
         int id PK
         int user_id FK
-        date order_date
+        string title
+        text content
+    }
+    COMMENTS {
+        int id PK
+        int post_id FK
+        int user_id FK
+        text comment
     }
 ```
 
-## Journey Sequence
-1. Analyze query patterns.
-2. Design schema with normalization.
-3. Add indexes on WHERE clauses.
-4. Test performance.
-5. Monitor and adjust.
+| Table | Field | Type | Index |
+|-------|-------|------|-------|
+| users | email | varchar | UNIQUE |
+| posts | user_id | int | INDEX |
+| comments | post_id | int | INDEX |
 
-## Common Pitfalls
-- Over-indexing slowing writes.
-- Ignoring cardinality.
-- Poor key choices.
+## Journey / Sequence
+```mermaid
+sequenceDiagram
+    participant Dev
+    participant Schema
+    participant DB
+    Dev->>Schema: Design tables
+    Schema->>DB: Create with indexes
+    DB-->>Dev: Test queries
+    Dev->>DB: Optimize with EXPLAIN
+```
+
+## Common Pitfalls & Edge Cases
+- Over-indexing slowing writes; edge case: index maintenance overhead.
+- Ignoring cardinality; edge case: low-selectivity indexes.
+- Poor key choices; edge case: hot keys in sharded DB.
 
 ## Tools & Libraries
 - MySQL Workbench: For design.
 - EXPLAIN: Query analysis.
 
-## Related Topics
-- [partitioning-and-sharding](../partitioning-and-sharding/)
-- [nosql-vs-sql-tradeoffs](../nosql-vs-sql-tradeoffs/)
+## Github-README Links & Related Topics
+Related: [[partitioning-and-sharding]], [[nosql-vs-sql-tradeoffs]]
 
 ## Common Interview Questions
 - Explain normalization and its forms (1NF, 2NF, 3NF).
@@ -74,6 +116,13 @@ erDiagram
 - How does indexing affect insert/update performance?
 - Describe composite indexes and their usage.
 - When to use denormalization in database design?
+
+## Common Interview Questions
+- Explain the differences between 1NF, 2NF, and 3NF.
+- What are clustered vs non-clustered indexes?
+- How does indexing affect query performance?
+- When to use denormalization?
+- Describe database partitioning strategies.
 
 ## References
 - "Database System Concepts" by Silberschatz.

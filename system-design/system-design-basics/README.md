@@ -47,9 +47,10 @@ graph TD
   - `GET /{alias}` -> 302 redirect to original URL
 - **Deployment Notes:** Deploy on Kubernetes for auto-scaling, use CDN (Cloudflare) for global redirect caching, database sharding by hash for scalability.
 
-## Real-world Examples
-- Netflix: Uses microservices with API gateways.
-- Twitter: Employs sharding for tweets database.
+## Real-world Examples & Use Cases
+- Netflix: Uses microservices with API gateways for scalability.
+- Twitter: Employs sharding for tweets database to handle billions of posts.
+- Use case: URL shortener for social sharing, requiring high availability and low latency.
 
 ## Code Examples
 ### Simple Load Balancer Simulation
@@ -67,7 +68,7 @@ class LoadBalancer {
 }
 ```
 
-## Data Models
+## Data Models / Message Formats
 ```mermaid
 graph TD
     A[Client] --> B[Load Balancer]
@@ -77,25 +78,46 @@ graph TD
     D --> E
 ```
 
-## Journey Sequence
-1. Clarify requirements and constraints.
-2. Estimate scale (users, data, requests).
-3. Design high-level architecture.
-4. Identify bottlenecks and optimize.
-5. Discuss trade-offs.
+| Field | Type | Description |
+|-------|------|-------------|
+| url_id | string | Unique short ID |
+| original_url | string | Full URL |
+| created_at | timestamp | Creation time |
 
-## Common Pitfalls
-- Ignoring bottlenecks early.
+## Journey / Sequence
+```mermaid
+sequenceDiagram
+    participant User
+    participant API
+    participant DB
+    User->>API: POST /shorten {url}
+    API->>DB: Store URL
+    DB-->>API: short_id
+    API-->>User: short_url
+    User->>API: GET /short_id
+    API->>DB: Lookup
+    DB-->>API: original_url
+    API-->>User: 302 redirect
+```
+
+## Common Pitfalls & Edge Cases
+- Ignoring bottlenecks early; edge case: hot keys in cache.
 - Over-designing for non-existent scale.
-- Neglecting monitoring and logging.
+- Neglecting monitoring and logging; edge case: silent failures in async queues.
 
 ## Tools & Libraries
 - Diagrams: Draw.io or Mermaid.
 - Simulation: Apache JMeter for load testing.
 
-## Related Topics
-- [load-balancing-and-routing](../load-balancing-and-routing/)
-- [caching-strategies](../caching-strategies/)
+## Github-README Links & Related Topics
+Related: [[load-balancing-and-routing]], [[caching-strategies]]
+
+## Common Interview Questions
+- What are the key components of a scalable web service?
+- How do you estimate capacity for a system?
+- Explain CAP theorem and its implications.
+- Describe the difference between horizontal and vertical scaling.
+- How to handle database sharding in a distributed system?
 
 ## References
 - "Designing Data-Intensive Applications" by Martin Kleppmann.
