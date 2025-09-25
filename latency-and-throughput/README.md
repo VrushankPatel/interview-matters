@@ -1,5 +1,5 @@
 ---
-title: Latency and Throughput
+title: Latency and Throughput: Zero to Hero
 aliases: [performance metrics, system performance]
 tags: [#system-design,#performance]
 created: 2025-09-25
@@ -43,6 +43,15 @@ graph TD
     F --> B
 ```
 
+## Journey / Sequence
+
+1. **Basics**: Define latency (response time) and throughput (requests per second). Understand units and measurement.
+2. **Measurement**: Use percentiles (P50, P95, P99) for latency. Track throughput over time.
+3. **Analysis**: Identify bottlenecks (CPU, I/O, network). Monitor in production with APM tools.
+4. **Optimization**: Implement caching, async processing, load balancing to balance latency and throughput.
+5. **Advanced**: In distributed systems, consider CAP trade-offs, eventual consistency for higher throughput.
+6. **Hero Level**: Design systems with adaptive scaling, predictive analytics for traffic, and zero-downtime deployments.
+
 ## Real-world Examples & Use Cases
 
 - **Web Services**: Low latency for real-time apps (e.g., gaming); high throughput for analytics.
@@ -76,6 +85,28 @@ CompletableFuture.supplyAsync(() -> slowOperation())
     .thenAccept(System.out::println);
 ```
 
+## Tools & Libraries
+
+- **Monitoring**: Prometheus, Grafana, New Relic, Datadog.
+- **Benchmarking**: JMeter, Gatling, Apache Bench, wrk.
+- **Libraries**: RxJava (reactive), Akka (actors), Netty (async I/O).
+- **Cloud**: AWS CloudWatch, GCP Monitoring, Azure Monitor.
+
+## Common Pitfalls & Edge Cases
+
+- **Misleading Averages**: High latency outliers skew averages; always use percentiles.
+- **Throughput Over Latency**: Optimizing for throughput may increase latency (e.g., batching); balance based on use case.
+- **Measurement Overhead**: Monitoring tools add latency; use sampling.
+- **Edge Case**: Flash sales cause throughput spikes, leading to latency degradation; implement rate limiting and auto-scaling.
+- **Distributed Latency**: Network hops add latency; use CDNs and edge computing.
+
+## Tools & Libraries
+
+- **Monitoring**: Prometheus, Grafana, New Relic, Datadog.
+- **Benchmarking**: JMeter, Gatling, Apache Bench, wrk.
+- **Libraries**: RxJava (reactive), Akka (actors), Netty (async I/O).
+- **Cloud**: AWS CloudWatch, GCP Monitoring, Azure Monitor.
+
 ## Common Pitfalls & Edge Cases
 
 - **Latency Spikes**: GC pauses, network jitter; monitor with APM tools.
@@ -89,13 +120,13 @@ CompletableFuture.supplyAsync(() -> slowOperation())
 - **Benchmarking**: JMeter, Gatling, wrk.
 - **Libraries**: Reactor (reactive), Akka (actors).
 
-# References
+## References
 
 - [Google SRE: Latency vs Throughput](https://sre.google/sre-book/handling-overload/)
 - [AWS Performance Best Practices](https://aws.amazon.com/architecture/well-architected/)
 - [Martin Kleppmann: Designing Data-Intensive Applications](https://dataintensive.net/)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 - [Latency Measurement](latency-measurement/)
 - [Monitoring and Logging](monitoring-and-logging/)

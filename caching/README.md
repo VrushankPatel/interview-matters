@@ -107,14 +107,14 @@ public String getData(String key) {
 - **CDN**: Cloudflare, Fastly, AWS CloudFront.
 - **Database**: MySQL InnoDB Buffer Pool, PostgreSQL shared buffers.
 
-# References
+## References
 
 - [Redis Documentation](https://redis.io/docs/)
 - [Caffeine GitHub](https://github.com/ben-manes/caffeine)
 - [AWS Caching Best Practices](https://aws.amazon.com/caching/)
 - [Martin Fowler: Caching](https://martinfowler.com/bliki/Caching.html)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 - [Caching Patterns](caching-patterns/)
 - [Caching Strategies](caching-strategies/)
