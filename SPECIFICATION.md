@@ -5,11 +5,11 @@ Last update
 2025-09-25
 
 Summary of recent additions
- - io-and-nio
- - serialization-and-deserialization
- - build-tools-maven-gradle
- - testing-and-mocking-junit-mockito
- - performance-tuning-and-profiling
+ - backtracking
+ - divide-and-conquer
+ - probabilistic-algorithms
+ - computational-geometry
+ - jvm-performance-tuning
 
 Conventions
  - Dir naming: kebab-case.
@@ -30,16 +30,6 @@ Next Topics Candidates
     - reflection-and-annotations: Runtime inspection and custom annotations
     - java-security-basics: Cryptography, secure coding practices
     - networking-sockets: TCP/UDP sockets in Java
-    - file-io-nio: Channels, buffers for efficient I/O
-    - java-testing-advanced: Mockito spies, parameterized tests
-    - build-automation: Gradle vs Maven, multi-module projects
-    - profiling-tools: JProfiler, VisualVM for performance analysis
-    - advanced-java-concepts: Generics, wildcards, type erasure
-    - java-reflection-api: Class loading, method invocation at runtime
-    - java-annotations-deep-dive: Custom annotations, annotation processing
-    - java-io-streams: Input/Output streams, readers, writers
-    - java-nio-channels: Selectors, non-blocking I/O
-    - java-concurrency-utilities: Locks, semaphores, barriers
 
 TODO
  - High-level open design decisions and split criteria for oversized topics.
