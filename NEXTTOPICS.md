@@ -1,10 +1,5 @@
 
 
-Garbage Collection Algorithms — 'Mark-sweep, generational GC, G1, ZGC'
-Multithreading & Concurrency in Java — 'Threads, synchronization, locks, atomic operations'
-Java Fundamentals — 'Core Java syntax, data types, control structures'
-OOP Principles in Java — 'Encapsulation, inheritance, polymorphism, abstraction'
-JVM Internals & Class Loading — 'Class loaders, bytecode, JIT compilation'
 System Design Basics — 'Scalability, reliability, trade-offs'
 Collections & Data Structures — 'Lists, sets, maps, trees in Java'
 Java Stream API & Functional Programming — 'Streams, lambdas, functional interfaces'
