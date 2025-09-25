@@ -26,3 +26,13 @@ Profiling Tools
 Java Text Blocks
 Java Switch Expressions
 Java Records
+Java Fundamentals
+OOP Principles in Java
+JVM Internals & Class Loading
+Garbage Collection Algorithms
+Multithreading & Concurrency in Java
+Collections & Data Structures
+Popular System Designs (LLD and HLD)
+Raft and Leader Election
+Consensus Algorithms
+Event-Driven Systems

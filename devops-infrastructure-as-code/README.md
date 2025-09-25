@@ -1,61 +1,78 @@
 ---
 title: DevOps & Infrastructure as Code
-aliases: [DevOps, IaC, Infrastructure as Code]
-tags: [#devops, #infrastructure-as-code, #ci-cd]
+aliases: []
+tags: [#devops, #system-design]
 created: 2025-09-25
 updated: 2025-09-25
 ---
 
 ## Overview
-DevOps is a cultural and technical movement that emphasizes collaboration between software development and IT operations teams to automate and streamline the software delivery process. Infrastructure as Code (IaC) treats infrastructure provisioning and management as software, enabling version control, testing, and automated deployment of resources.
+
+DevOps combines cultural philosophies, practices, and tools to accelerate software delivery by fostering collaboration between development and operations teams. Infrastructure as Code (IaC) enables the management of IT infrastructure through machine-readable code, promoting automation, version control, and reproducibility. Together, they form the backbone of modern software engineering, enabling rapid, reliable, and scalable deployments.
 
 ## Detailed Explanation
-DevOps aims to reduce the time between committing code and deploying it to production, fostering a culture of continuous improvement.
 
-### Core Principles of DevOps
-- **Collaboration:** Breaking down silos between dev and ops.
-- **Automation:** Automating repetitive tasks like builds, tests, deployments.
-- **Continuous Feedback:** Monitoring and logging for rapid issue resolution.
-- **Incremental Changes:** Small, frequent releases to reduce risk.
+DevOps emerged as a response to the inefficiencies of traditional software development silos, where development and operations teams worked in isolation. By integrating these disciplines, DevOps emphasizes automation, continuous feedback, and iterative improvements to deliver high-quality software faster.
 
-### CI/CD Pipeline
-- **Continuous Integration (CI):** Merge code changes frequently, run automated tests.
-- **Continuous Delivery (CD):** Automate deployment to staging/production.
-- **Continuous Deployment:** Fully automated release to production.
+### Key DevOps Practices
 
-### Infrastructure as Code (IaC)
-IaC defines infrastructure in code files, allowing for:
-- **Version Control:** Track changes like software code.
-- **Testing:** Validate configurations before deployment.
-- **Reproducibility:** Consistent environments across dev, test, prod.
-- **Scalability:** Easily provision/destroy resources.
+- **Continuous Integration (CI):** Frequent code merges with automated testing to detect issues early.
+- **Continuous Delivery (CD):** Automated pipelines for deploying code to production environments.
+- **Infrastructure as Code (IaC):** Defining infrastructure in code for automated provisioning and management.
+- **Monitoring and Logging:** Real-time observability to ensure system health and quick issue resolution.
+- **Collaboration and Culture:** Breaking down silos through shared responsibilities and tools.
 
-#### Declarative vs. Imperative IaC
-- **Declarative:** Specify desired state (e.g., Terraform).
-- **Imperative:** Define step-by-step actions (e.g., Ansible scripts).
+### Infrastructure as Code Fundamentals
 
-### Benefits
-- Faster deployment cycles.
-- Reduced manual errors.
-- Improved scalability and reliability.
-- Easier rollback and disaster recovery.
+IaC treats infrastructure as software, allowing developers to define, version, and deploy resources programmatically. It supports both declarative (specifying desired state) and imperative (step-by-step instructions) approaches.
+
+| Aspect | Declarative (e.g., Terraform) | Imperative (e.g., Ansible) |
+|--------|-------------------------------|----------------------------|
+| Focus | What the end state should be | How to achieve the state |
+| Advantages | Idempotent, easier to maintain | Flexible for complex logic |
+| Use Cases | Cloud resource provisioning | Configuration management |
+
+### DevOps Lifecycle
+
+The DevOps lifecycle is often visualized as an infinite loop, integrating planning, development, testing, deployment, and monitoring.
+
+```mermaid
+graph LR
+    A[Plan] --> B[Code]
+    B --> C[Build]
+    C --> D[Test]
+    D --> E[Release]
+    E --> F[Deploy]
+    F --> G[Operate]
+    G --> H[Monitor]
+    H --> A
+```
+
+This loop ensures continuous improvement, with IaC enabling automated infrastructure changes within the cycle.
 
 ## Real-world Examples & Use Cases
-- **E-commerce Platform:** CI/CD for rapid feature deployment, IaC for auto-scaling during peak sales.
-- **Financial Services:** Automated testing and deployment with strict compliance checks.
-- **Media Streaming:** IaC for global CDN provisioning, CI/CD for app updates.
-- **Healthcare:** Secure, auditable deployments with IaC for HIPAA compliance.
-- **Startups:** Quick iteration with CI/CD pipelines reducing time-to-market.
+
+DevOps and IaC are widely adopted across industries for their ability to scale operations and reduce downtime.
+
+- **E-commerce Platforms:** Netflix uses IaC with Terraform and Ansible for auto-scaling during traffic spikes, combined with CI/CD pipelines for feature rollouts, ensuring 99.99% uptime.
+- **Financial Services:** Banks like Capital One employ DevOps practices with IaC to automate compliance checks and deployments, reducing audit times by 50% while maintaining security standards like PCI-DSS.
+- **Media Streaming:** Spotify leverages Kubernetes and IaC for global infrastructure management, enabling rapid A/B testing and content delivery via CI/CD pipelines.
+- **Healthcare:** Organizations use IaC for HIPAA-compliant environments, with DevOps pipelines automating secure deployments and monitoring for patient data systems.
+- **Startups:** Companies like Airbnb started with manual deployments but scaled using DevOps and IaC, reducing deployment times from days to minutes.
 
 ## Code Examples
-### Terraform for AWS EC2 Instance
+
+Below are copy-pastable examples demonstrating DevOps and IaC in action.
+
+### Terraform (Declarative IaC) for AWS VPC Setup
+
 ```hcl
 # main.tf
 terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.0"
+      version = "~> 5.0"
     }
   }
 }
@@ -64,189 +81,122 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_instance" "web_server" {
-  ami           = "ami-0c55b159cbfafe1d0"
-  instance_type = "t2.micro"
+resource "aws_vpc" "main" {
+  cidr_block = "10.0.0.0/16"
 
   tags = {
-    Name        = "WebServer"
-    Environment = "dev"
-  }
-
-  security_groups = [aws_security_group.web_sg.name]
-}
-
-resource "aws_security_group" "web_sg" {
-  name_prefix = "web-sg-"
-
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    Name = "main-vpc"
   }
 }
+
+resource "aws_subnet" "public" {
+  vpc_id     = aws_vpc.main.id
+  cidr_block = "10.0.1.0/24"
+
+  tags = {
+    Name = "public-subnet"
+  }
+}
+
+# Apply with: terraform init && terraform plan && terraform apply
 ```
 
-### Ansible Playbook for Nginx Setup
+### Ansible (Imperative IaC) Playbook for Web Server Deployment
+
 ```yaml
 ---
-- name: Deploy Nginx Web Server
+- name: Deploy Web Application
   hosts: webservers
   become: yes
   vars:
-    nginx_port: 80
+    app_port: 8080
 
   tasks:
-  - name: Update package cache
-    apt:
-      update_cache: yes
+    - name: Install Java
+      apt:
+        name: openjdk-11-jdk
+        state: present
+        update_cache: yes
 
-  - name: Install Nginx
-    apt:
-      name: nginx
-      state: present
+    - name: Download JAR file
+      get_url:
+        url: https://example.com/app.jar
+        dest: /opt/app.jar
 
-  - name: Configure Nginx
-    template:
-      src: nginx.conf.j2
-      dest: /etc/nginx/nginx.conf
-    notify: Restart Nginx
+    - name: Create systemd service
+      template:
+        src: app.service.j2
+        dest: /etc/systemd/system/app.service
 
-  - name: Ensure Nginx is running
-    service:
-      name: nginx
-      state: started
-      enabled: yes
+    - name: Start and enable service
+      systemd:
+        name: app
+        state: started
+        enabled: yes
 
   handlers:
-  - name: Restart Nginx
-    service:
-      name: nginx
-      state: restarted
+    - name: Restart app
+      systemd:
+        name: app
+        state: restarted
 ```
 
-### GitHub Actions CI/CD Pipeline
+### GitHub Actions CI/CD Pipeline with IaC Integration
+
 ```yaml
-# .github/workflows/ci-cd.yml
-name: CI/CD Pipeline
+name: Deploy Infrastructure and App
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-    - name: Run tests
-      run: mvn test
+      - uses: actions/checkout@v4
+      - name: Run unit tests
+        run: npm test
 
-  build-and-deploy:
+  deploy-infra:
     needs: test
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
     steps:
-    - uses: actions/checkout@v3
-    - name: Build JAR
-      run: mvn clean package -DskipTests
-    - name: Deploy to staging
-      run: echo "Deploy to staging environment"
-      # Add actual deployment steps
+      - uses: actions/checkout@v4
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+      - name: Terraform Init
+        run: terraform init
+      - name: Terraform Plan
+        run: terraform plan
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+
+  deploy-app:
+    needs: deploy-infra
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy to production
+        run: |
+          # Example deployment script
+          echo "Deploying app to production"
 ```
-
-## Journey / Sequence
-```mermaid
-sequenceDiagram
-    participant Developer
-    participant Git
-    participant CI
-    participant CD
-    participant IaC
-
-    Developer->>Git: Commit code
-    Git->>CI: Trigger build
-    CI->>CI: Run tests
-    CI->>CD: Push artifact
-    CD->>IaC: Provision infra
-    IaC->>CD: Infra ready
-    CD->>CD: Deploy to prod
-```
-
-## Data Models / Message Formats
-### CI/CD Pipeline Flow
-```mermaid
-graph TD
-    A[Code Commit] --> B[CI: Lint & Unit Tests]
-    B --> C[CI: Integration Tests]
-    C --> D[Artifact Registry]
-    D --> E[CD: Deploy Staging]
-    E --> F[CD: Smoke Tests]
-    F --> G[CD: Deploy Production]
-    H[IaC: Terraform Plan] --> I[IaC: Apply Changes]
-    I --> G
-```
-
-### Infrastructure Configuration JSON
-```json
-{
-  "infrastructure": {
-    "servers": [
-      {
-        "name": "web-01",
-        "type": "t2.micro",
-        "ami": "ami-12345678",
-        "security_groups": ["web-sg"]
-      }
-    ],
-    "databases": [
-      {
-        "name": "app-db",
-        "engine": "postgres",
-        "version": "13"
-      }
-    ]
-  }
-}
-```
-
-## Common Pitfalls & Edge Cases
-- **Configuration Drift:** Manual changes not reflected in IaC.
-- **State Management:** Terraform state file corruption.
-- **Secret Handling:** Exposing credentials in code.
-- **Rollback Issues:** Incomplete rollback strategies.
-- **Edge Case:** Network partitions during deployment.
-
-## Tools & Libraries
-- **CI/CD:** Jenkins, GitHub Actions, GitLab CI, CircleCI, ArgoCD
-- **IaC:** Terraform, Ansible, Puppet, Chef, CloudFormation
-- **Containers:** Docker, Kubernetes
-- **Monitoring:** Prometheus, Grafana, ELK Stack
-- **Version Control:** Git, GitHub, GitLab
-
-## Github-README Links & Related Topics
-- [load-balancing-and-routing](../system-design/load-balancing-and-routing/)
-- [monitoring-and-logging](../monitoring-and-logging/)
-- [container-orchestration-k8s](../system-design/container-orchestration-k8s/)
 
 ## References
-- "The DevOps Handbook" by Gene Kim et al.
-- Terraform Documentation: https://www.terraform.io/docs
-- Ansible Documentation: https://docs.ansible.com/
-- Jenkins Handbook: https://www.jenkins.io/doc/book/
-- GitHub Actions: https://docs.github.com/en/actions
+
+- AWS DevOps Overview: https://aws.amazon.com/devops/what-is-devops/
+- Terraform Introduction: https://www.terraform.io/intro
+- Ansible Getting Started: https://docs.ansible.com/ansible/latest/getting_started/index.html
+- Pulumi IaC: https://www.pulumi.com/what-is/infrastructure-as-code/
+- Wikipedia IaC: https://en.wikipedia.org/wiki/Infrastructure_as_code
+- Atlassian DevOps: https://www.atlassian.com/devops
+- Martin Fowler IaC: https://martinfowler.com/bliki/InfrastructureAsCode.html
+
+## Github-README Links & Related Topics
+
+- [Docker Containerization](../docker-containerization/README.md)
+- [Kubernetes Basics](../kubernetes-basics/README.md)
+- [Monitoring and Logging](../monitoring-and-logging/README.md)
+- [CI/CD Pipelines](../system-design/ci-cd-pipelines/README.md)
+- [Cloud Computing](../system-design/cloud-computing/README.md)
