@@ -112,6 +112,21 @@ public class Car extends Vehicle {
 }
 ```
 
+```mermaid
+classDiagram
+    class Animal {
+        +eat()
+    }
+    class Dog {
+        +bark()
+    }
+    class Cat {
+        +meow()
+    }
+    Animal <|-- Dog
+    Animal <|-- Cat
+```
+
 ## Real-world Examples & Use Cases
 
 1. **Banking System**: Encapsulation for account security, inheritance for different account types.

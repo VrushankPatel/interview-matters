@@ -26,19 +26,30 @@ public class HelloWorld {
 }
 ```
 
+```mermaid
+graph TD
+    A[Write Java Code] --> B[Compile with javac]
+    B --> C[Generate .class files]
+    C --> D[Run with java]
+    D --> E[Execute on JVM]
+```
+
 ### Data Types
 
 Java has two categories of data types: primitive and reference.
 
 **Primitive Types:**
-- `byte`: 8-bit signed integer (-128 to 127)
-- `short`: 16-bit signed integer (-32,768 to 32,767)
-- `int`: 32-bit signed integer (-2^31 to 2^31-1)
-- `long`: 64-bit signed integer (-2^63 to 2^63-1)
-- `float`: 32-bit IEEE 754 floating-point
-- `double`: 64-bit IEEE 754 floating-point
-- `char`: 16-bit Unicode character
-- `boolean`: true or false
+
+| Type | Size | Range | Description |
+|------|------|-------|-------------|
+| `byte` | 8-bit | -128 to 127 | Signed integer |
+| `short` | 16-bit | -32,768 to 32,767 | Signed integer |
+| `int` | 32-bit | -2^31 to 2^31-1 | Signed integer |
+| `long` | 64-bit | -2^63 to 2^63-1 | Signed integer |
+| `float` | 32-bit | IEEE 754 | Floating-point |
+| `double` | 64-bit | IEEE 754 | Floating-point |
+| `char` | 16-bit | Unicode | Character |
+| `boolean` | 1-bit | true/false | Boolean |
 
 **Reference Types:**
 - Objects, arrays, and strings
@@ -83,6 +94,15 @@ switch (variable) {
     default:
         // code
 }
+```
+
+```mermaid
+graph TD
+    A[Start] --> B{Condition}
+    B -->|true| C[Execute if block]
+    B -->|false| D[Execute else block]
+    C --> E[End]
+    D --> E
 ```
 
 **Loops:**
