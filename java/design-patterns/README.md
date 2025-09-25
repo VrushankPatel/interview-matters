@@ -1,7 +1,7 @@
 ---
 title: Design Patterns
 aliases: [design-patterns, java-design-patterns]
-tags: ['#java', '#system-design', '#interviews']
+tags: [#java,#system-design,#interviews]
 created: 2025-09-25
 updated: 2025-09-25
 ---

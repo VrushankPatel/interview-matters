@@ -1,5 +1,5 @@
-Design Patterns
-Memory Models
-Reflection and Annotations
-Java Security Basics
-File I/O and NIO
+Java Fundamentals
+OOP Principles in Java
+JVM Internals & Class Loading
+Garbage Collection Algorithms
+Multithreading & Concurrency in Java

@@ -1,7 +1,7 @@
 ---
-title: IO and NIO
+title: File I/O and NIO
 aliases: [Java IO, Non-blocking IO]
-tags: [#java, #interviews]
+tags: [#java,#interviews]
 created: 2025-09-25
 updated: 2025-09-25
 ---

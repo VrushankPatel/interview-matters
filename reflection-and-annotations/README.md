@@ -1,7 +1,7 @@
 ---
-title: 'Reflection and Annotations'
-aliases: ["Runtime Inspection"]
-tags: ["#java", "#reflection", "#annotations"]
+title: Reflection and Annotations
+aliases: [Runtime Inspection]
+tags: [#java,#reflection,#annotations]
 created: 2025-09-25
 updated: 2025-09-25
 ---
