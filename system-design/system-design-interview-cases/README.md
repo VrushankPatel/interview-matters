@@ -26,6 +26,32 @@ Canonical prompts:
 3. Design a news feed system.
 4. Design a chat application.
 
+### High-Level Design (HLD)
+```mermaid
+graph TD
+    A[Client] --> B[Load Balancer]
+    B --> C[API Gateway]
+    C --> D[Application Servers]
+    D --> E[Cache (Redis)]
+    D --> F[Database (Sharded)]
+```
+
+### Capacity Planning
+- 1B URLs, 100M req/day, 1000 req/s.
+- Storage: 1KB/URL * 1B = 1TB.
+- Throughput: 1000 req/s, latency <50ms.
+
+### Tradeoffs
+- Consistency vs Availability: Eventual consistency for reads.
+- Cost vs Performance: Sharding increases complexity but scales.
+
+### API Design
+POST /shorten {url: string} -> {shortUrl: string}
+GET /expand/{shortUrl} -> {url: string}
+
+### Deployment Notes
+Use Kubernetes for scaling, CDN for global distribution.
+
 ## Real-world Examples & Use Cases
 - Twitter's tweet system (news feed).
 - Bitly (URL shortener).

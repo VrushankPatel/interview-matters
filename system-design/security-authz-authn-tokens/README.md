@@ -20,6 +20,27 @@ Authentication verifies identity, authorization checks permissions. Tokens (JWT,
 ## Detailed Explanation
 AuthN: Passwords, biometrics, MFA. AuthZ: RBAC/ABAC. Tokens: JWT (header.payload.signature), OAuth2 flows. Threats: XSS, CSRF, token theft.
 
+### High-Level Design (HLD)
+```mermaid
+graph TD
+    A[Client] --> B[Auth Server]
+    B --> C[Resource Server]
+    C --> D[DB]
+```
+
+### Capacity Planning
+- 1M auth req/s, latency <100ms.
+
+### Tradeoffs
+- Security vs Usability: MFA adds friction but improves security.
+
+### API Design
+POST /login {username, password} -> JWT
+GET /protected (with Bearer token)
+
+### Deployment Notes
+Use HTTPS, rotate secrets.
+
 ## Real-world Examples & Use Cases
 - OAuth in Google login.
 - JWT in microservices.

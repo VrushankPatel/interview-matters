@@ -22,6 +22,26 @@ Latency sources: Network, CPU, I/O, GC. Strategies: Precompute, batch, compress.
 
 Tradeoffs: Consistency vs Latency (eventual consistency), Cost vs Performance.
 
+### High-Level Design (HLD)
+```mermaid
+graph TD
+    A[Client] --> B[CDN/Edge]
+    B --> C[Load Balancer]
+    C --> D[App Servers]
+    D --> E[Cache]
+    D --> F[DB]
+```
+
+### Capacity Planning
+- 10M req/s, P99 <10ms.
+- Servers: 1000 instances, 10k req/s each.
+
+### API Design
+GET /data/{id}
+
+### Deployment Notes
+Colocate with users, use async queues.
+
 ## Real-world Examples & Use Cases
 - High-frequency trading (HFT).
 - Online gaming (e.g., Fortnite).

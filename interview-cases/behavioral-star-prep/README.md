@@ -60,6 +60,11 @@ flowchart TD
 ## Github-README Links & Related Topics
 [[system-design-interview-cases]]
 
+## Common Interview Questions
+1. Tell me about a time you failed.
+2. Describe a challenging project.
+3. How do you handle conflict?
+
 ## References
 - https://www.thebalancecareers.com/star-interview-method-2061629
 - "Cracking the Code to a Successful Interview" by Evan Pellett.

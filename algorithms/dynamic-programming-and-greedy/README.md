@@ -102,6 +102,11 @@ flowchart TD
 ## Github-README Links & Related Topics
 [[algorithms-and-data-structures]], [[graphs-trees-heaps-and-tries]], [[divide-and-conquer]]
 
+## Common Interview Questions
+1. **0/1 Knapsack Problem**: Maximize value with weight constraint. Time: O(n*W), Space: O(n*W). Variants: Bounded, Unbounded.
+2. **Coin Change Problem**: Minimum coins for amount. DP: O(amount*coins), Greedy for canonical.
+3. **Longest Common Subsequence**: LCS between two strings. Time: O(m*n), Space: O(m*n).
+
 ## References
 - Cormen, Leiserson, Rivest, Stein. *Introduction to Algorithms* (CLRS), Chapter 15.
 - https://en.wikipedia.org/wiki/Dynamic_programming
