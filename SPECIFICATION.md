@@ -5,11 +5,11 @@ Last update
 2025-09-25
 
 Summary of recent additions
- - design-patterns
- - system-design-basics
- - load-balancing-and-routing
- - caching-strategies
- - database-design-and-indexing
+ - sorting-algorithms
+ - graph-algorithms
+ - string-algorithms
+ - number-theory
+ - bit-manipulation
 
 Conventions
  - Dir naming: kebab-case.
