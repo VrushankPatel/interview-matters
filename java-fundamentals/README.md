@@ -1,7 +1,7 @@
 ---
 title: Java Fundamentals
 aliases: [Java Basics]
-tags: [#java]
+tags: [#java, #fundamentals]
 created: 2025-09-25
 updated: 2025-09-25
 ---

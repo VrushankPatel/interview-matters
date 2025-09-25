@@ -1,7 +1,7 @@
 ---
 title: Garbage Collection Algorithms
-aliases: [GC Algorithms, Java GC]
-tags: [#java, #gc]
+aliases: [GC Algorithms]
+tags: [#java, #jvm, #gc]
 created: 2025-09-25
 updated: 2025-09-25
 ---
@@ -33,11 +33,26 @@ In languages like Java, developers don't manually allocate/deallocate memory. Th
 - **Pros**: Simple, no object movement
 - **Cons**: Fragmentation, potential for long pauses
 
+```mermaid
+graph TD
+    A[Start GC] --> B[Mark Phase: Traverse from roots, mark reachable objects]
+    B --> C[Sweep Phase: Scan heap, remove unmarked objects]
+    C --> D[End GC]
+```
+
 #### 2. Mark-Sweep-Compact
 
 - Adds a compact phase to defragment memory
 - Moves surviving objects to create contiguous free space
 - Reduces fragmentation but increases pause time
+
+```mermaid
+graph TD
+    A[Start GC] --> B[Mark Phase]
+    B --> C[Sweep Phase]
+    C --> D[Compact Phase: Move objects to defragment]
+    D --> E[End GC]
+```
 
 #### 3. Copying Collectors
 
@@ -47,11 +62,28 @@ In languages like Java, developers don't manually allocate/deallocate memory. Th
 - **Pros**: Fast allocation, no fragmentation
 - **Cons**: Uses only half the heap, copying overhead
 
+```mermaid
+graph TD
+    A[From-Space] --> B[Copy live objects to To-Space]
+    B --> C[Update references]
+    C --> D[Swap From and To spaces]
+    D --> E[End GC]
+```
+
 #### 4. Generational GC
 
 - Based on "weak generational hypothesis": most objects die young
 - Divides heap into generations: Young (Eden, Survivor spaces), Old
 - Different algorithms for different generations
+
+### Comparison of GC Algorithms
+
+| Algorithm          | Pros                          | Cons                          | Best For                  |
+|--------------------|-------------------------------|-------------------------------|---------------------------|
+| Mark-Sweep         | Simple, no object movement   | Fragmentation, long pauses   | Simple applications      |
+| Mark-Sweep-Compact | Reduces fragmentation        | Higher pause times           | Memory-intensive apps    |
+| Copying            | Fast allocation, no frag     | Uses half heap, copying cost | Young generation GC      |
+| Generational       | Efficient for most apps      | Complex tuning               | General-purpose Java apps|
 
 ### Modern GC Implementations
 
@@ -147,9 +179,11 @@ public class WeakReferenceDemo {
 
 ## References
 
-- [Oracle GC Tuning Guide](https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/)
+- [Oracle GC Tuning Guide](https://docs.oracle.com/en/java/javase/21/gctuning/)
+- [OpenJDK Garbage Collection](https://openjdk.org/groups/hotspot/docs/gc/)
 - [Java GC Basics](https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/gc01/index.html)
 - [Baeldung Garbage Collection](https://www.baeldung.com/java-garbage-collection)
+- [JVM Anatomy: GC Barriers](https://shipilev.net/jvm/anatomy-quarks/23-gc-barriers/)
 
 ## Data Models / Message Formats
 
@@ -167,6 +201,7 @@ graph TD
 
 ## Github-README Links & Related Topics
 
-- [JVM Internals & Class Loading](../jvm-internals-and-class-loading/README.md)
-- [JVM Performance Tuning](../jvm-performance-tuning/README.md)
+- [GC Tuning](../gc-tuning/README.md)
+- [Java Memory Management](../java-memory-management/README.md)
+- [JVM Internals and Class Loading](../jvm-internals-and-class-loading/README.md)
 - [Memory Models](../memory-models/README.md)
