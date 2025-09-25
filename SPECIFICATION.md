@@ -5,7 +5,7 @@ Last update
 2025-09-25
 
 Summary of recent additions
- - latency-measurement, raft-and-leader-election, memory-models, gc-tuning, kafka-internals
+ - caching-patterns, consistency-models, microservices-architecture, circuit-breaker-pattern, idempotency-in-apis
 
 Conventions
  - Dir naming: kebab-case.
@@ -36,6 +36,16 @@ Next Topics Candidates
     - machine-learning-infrastructure: Model serving and inference pipelines
     - blockchain-basics: Distributed ledgers and consensus mechanisms
     - quantum-computing-fundamentals: Qubits, superposition, and quantum algorithms
+ - microservices-communication-patterns: Sync vs async patterns in microservices
+ - database-sharding-strategies: Hash, range, and consistent hashing for sharding
+ - api-rate-limiting: Token bucket and leaky bucket algorithms
+ - distributed-transactions: Saga pattern and 2PC for consistency
+ - event-sourcing-cqrs: Event stores and read models
+ - service-discovery: Eureka, Consul for dynamic registration
+ - configuration-management: Centralized config in distributed systems
+ - logging-and-monitoring: ELK stack and Prometheus for observability
+ - security-in-microservices: OAuth, JWT for auth
+ - containerization-docker: Images, volumes, and orchestration basics
 
 TODO
  - High-level open design decisions and split criteria for oversized topics.
