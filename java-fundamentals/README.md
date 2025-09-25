@@ -1,6 +1,6 @@
 ---
 title: Java Fundamentals
-aliases: [Java Basics, Java Core Concepts]
+aliases: []
 tags: [#java]
 created: 2025-09-25
 updated: 2025-09-25
@@ -8,136 +8,160 @@ updated: 2025-09-25
 
 # Overview
 
-Java Fundamentals form the core building blocks of the Java programming language, essential for developing robust, object-oriented applications. This includes basic syntax, data types, operators, control flow statements, object-oriented programming (OOP) concepts such as classes, objects, inheritance, and polymorphism, as well as fundamental exception handling. Mastering these elements enables developers to write efficient, maintainable code that runs on the Java Virtual Machine (JVM), leveraging platform independence and strong typing for enterprise and general-purpose programming.
+Java Fundamentals encompass the core concepts and building blocks of the Java programming language, providing the foundation for writing robust, object-oriented, and platform-independent applications. Key areas include basic syntax, data types, operators, control flow, object-oriented programming (OOP) principles like classes, objects, inheritance, polymorphism, encapsulation, and abstraction, as well as exception handling. These fundamentals enable developers to create efficient, maintainable code that executes on the Java Virtual Machine (JVM), supporting everything from simple scripts to complex enterprise systems.
 
 # Detailed Explanation
 
 ## Variables and Data Types
 
-Variables store data values, and Java supports primitive types (e.g., `int`, `double`, `boolean`) for basic values and reference types for objects. Primitive types are stored directly in memory, while reference types point to objects on the heap.
+Variables in Java store data values and are declared with a type. Java distinguishes between primitive types, which hold basic values directly in memory, and reference types, which point to objects on the heap.
 
 | Type      | Size (bits) | Range/Example                  | Use Case                  |
 |-----------|-------------|-------------------------------|---------------------------|
-| `byte`   | 8          | -128 to 127                  | Small integers, file I/O |
-| `short`  | 16         | -32,768 to 32,767            | Memory-constrained apps  |
-| `int`    | 32         | -2^31 to 2^31-1              | General integers         |
-| `long`   | 64         | -2^63 to 2^63-1              | Large numbers            |
-| `float`  | 32         | 1.4e-45 to 3.4e+38           | Floating-point precision |
-| `double` | 64         | 4.9e-324 to 1.8e+308         | High-precision floats    |
-| `char`   | 16         | Unicode characters           | Text manipulation        |
-| `boolean`| 1          | `true`/`false`               | Logical conditions       |
+| `byte`   | 8          | -128 to 127                  | Small integers, binary data |
+| `short`  | 16         | -32,768 to 32,767            | Memory-efficient integers |
+| `int`    | 32         | -2^31 to 2^31-1              | General-purpose integers  |
+| `long`   | 64         | -2^63 to 2^63-1              | Large numbers, timestamps |
+| `float`  | 32         | 1.4e-45 to 3.4e+38           | Single-precision floats   |
+| `double` | 64         | 4.9e-324 to 1.8e+308         | Double-precision floats   |
+| `char`   | 16         | Unicode characters           | Text characters          |
+| `boolean`| 1          | `true`/`false`               | Logical flags            |
 
-Arrays are fixed-size collections of the same type, declared as `int[] arr = new int[10];`.
+Reference types include classes, interfaces, and arrays. Arrays are fixed-size collections: `int[] arr = new int[5];`.
 
 ## Operators
 
-Operators perform operations on operands. Java includes arithmetic (`+`, `-`, `*`, `/`, `%`), relational (`==`, `!=`, `<`, `>`), logical (`&&`, `||`, `!`), and assignment (`=`, `+=`) operators. Precedence follows standard rules, with parentheses for clarity.
+Operators perform operations on variables and literals. Categories include:
+- Arithmetic: `+`, `-`, `*`, `/`, `%`
+- Relational: `==`, `!=`, `<`, `<=`, `>`, `>=`
+- Logical: `&&`, `||`, `!`
+- Assignment: `=`, `+=`, `-=`, etc.
+- Bitwise: `&`, `|`, `^`, `~`, `<<`, `>>`
+- Ternary: `condition ? trueValue : falseValue`
+
+Operator precedence follows mathematical conventions; use parentheses for clarity.
 
 ## Control Flow Statements
 
-Control flow manages execution order: conditional statements like `if-else` and `switch` for decisions, loops like `for`, `while`, and `do-while` for repetition, and branching with `break`, `continue`, and `return`.
+Control flow directs program execution:
+- Conditional: `if-else`, `switch`
+- Loops: `for`, `while`, `do-while`
+- Branching: `break`, `continue`, `return`
 
-## Object-Oriented Programming Concepts
+## Object-Oriented Programming (OOP)
 
-Java is object-oriented, emphasizing encapsulation, inheritance, polymorphism, and abstraction.
-
-- **Classes and Objects**: Classes are blueprints for objects, bundling state (fields) and behavior (methods). Objects are instances created via `new`.
-- **Inheritance**: Subclasses inherit from superclasses using `extends`, promoting code reuse.
-- **Polymorphism**: Methods can behave differently based on the object type, achieved via method overriding.
-- **Encapsulation**: Hiding internal state with access modifiers (`private`, `public`).
-- **Abstraction**: Interfaces and abstract classes define contracts without implementation.
+Java's OOP paradigm revolves around four pillars:
+- **Encapsulation**: Bundling data and methods, using access modifiers (`private`, `protected`, `public`).
+- **Inheritance**: Subclasses extend superclasses with `extends`, enabling code reuse.
+- **Polymorphism**: Method overriding and overloading allow different behaviors.
+- **Abstraction**: Abstract classes and interfaces define contracts.
 
 ```mermaid
 classDiagram
-    class Animal {
-        +String name
-        +void makeSound()
+    class Shape {
+        <<abstract>>
+        +double area()
+        +double perimeter()
     }
-    class Dog {
-        +void makeSound()
+    class Circle {
+        -double radius
+        +Circle(double r)
+        +double area()
+        +double perimeter()
     }
-    class Cat {
-        +void makeSound()
+    class Rectangle {
+        -double width
+        -double height
+        +Rectangle(double w, double h)
+        +double area()
+        +double perimeter()
     }
-    Animal <|-- Dog
-    Animal <|-- Cat
+    Shape <|-- Circle
+    Shape <|-- Rectangle
 ```
 
-This diagram illustrates inheritance, where `Dog` and `Cat` inherit from `Animal` and override `makeSound()`.
+This diagram shows abstraction and inheritance, with `Circle` and `Rectangle` implementing `Shape`.
 
 ## Methods and Constructors
 
-Methods define behaviors, with signatures including return type, name, and parameters. Constructors initialize objects and are called during instantiation.
+Methods define behaviors with return types, names, and parameters. Constructors initialize objects and match the class name. Overloading allows multiple methods with the same name but different signatures.
 
-## Packages
+## Packages and Imports
 
-Packages organize classes into namespaces, preventing naming conflicts and aiding modularity.
+Packages organize classes into namespaces, imported with `import` statements to avoid fully qualified names.
 
 ## Exception Handling
 
-Exceptions handle runtime errors. Use `try-catch-finally` blocks to catch and handle exceptions, or declare them with `throws`. Checked exceptions must be handled or declared, while unchecked (runtime) exceptions do not.
+Exceptions manage errors. Use `try-catch-finally` for handling, `throw` for raising, and `throws` in method signatures. Checked exceptions require handling; unchecked do not.
 
 # Real-world Examples & Use Cases
 
-- **E-commerce Application**: Use classes to model `Product` and `Order`, with inheritance for different product types (e.g., `Electronics` extending `Product`). Operators calculate totals, loops iterate over cart items, and exceptions handle invalid payments.
-- **Banking System**: Encapsulate account data in a `BankAccount` class with methods for deposits/withdrawals. Polymorphism allows different account types (e.g., `SavingsAccount`) to override interest calculations.
-- **Text Processing Tool**: Manipulate strings for parsing user input, using arrays for data storage and control flow for validation logic.
-- **Game Development**: OOP models game entities like `Player` and `Enemy`, with inheritance for shared behaviors and exception handling for file loading errors.
+- **Web Application**: Model user entities with classes, use inheritance for roles (e.g., `Admin` extends `User`), handle form validations with control flow, and manage database errors with exceptions.
+- **Financial Software**: Encapsulate account logic in classes, perform calculations with operators, iterate over transactions with loops, and ensure data integrity with polymorphism.
+- **Mobile App Backend**: Use OOP for service layers, handle concurrent requests with threads (fundamentals extend to concurrency), and log errors via exception handling.
+- **Data Processing Tool**: Manipulate arrays and collections for batch operations, apply control flow for conditional processing, and abstract common utilities.
 
 # Code Examples
 
-## Hello World
+## Basic Variable Declaration and Operations
 ```java
-public class HelloWorld {
+public class VariablesExample {
     public static void main(String[] args) {
-        System.out.println("Hello, World!");
+        int age = 25;
+        double salary = 50000.0;
+        boolean isEmployed = true;
+        String name = "John Doe";
+        
+        System.out.println("Name: " + name + ", Age: " + age + ", Salary: " + salary + ", Employed: " + isEmployed);
     }
 }
 ```
 
-## Class with Methods and Inheritance
+## Class Definition and Inheritance
 ```java
-class Vehicle {
-    String brand;
+class Animal {
+    String name;
     
-    Vehicle(String brand) {
-        this.brand = brand;
+    Animal(String name) {
+        this.name = name;
     }
     
-    void start() {
-        System.out.println(brand + " is starting.");
+    void speak() {
+        System.out.println("Animal speaks");
     }
 }
 
-class Car extends Vehicle {
-    Car(String brand) {
-        super(brand);
+class Dog extends Animal {
+    Dog(String name) {
+        super(name);
     }
     
     @Override
-    void start() {
-        System.out.println(brand + " car is starting with a roar.");
+    void speak() {
+        System.out.println(name + " barks");
     }
 }
 
-public class Main {
+public class InheritanceExample {
     public static void main(String[] args) {
-        Vehicle v = new Car("Toyota");
-        v.start(); // Polymorphism in action
+        Animal dog = new Dog("Buddy");
+        dog.speak(); // Outputs: Buddy barks
     }
 }
 ```
 
-## Control Flow and Operators
+## Control Flow with Loops and Conditionals
 ```java
-public class Calculator {
+public class ControlFlowExample {
     public static void main(String[] args) {
-        int a = 10, b = 5;
-        if (a > b) {
-            System.out.println("a is greater: " + (a + b)); // Arithmetic operator
-        }
-        for (int i = 0; i < 3; i++) {
-            System.out.println("Loop iteration: " + i);
+        int[] numbers = {1, 2, 3, 4, 5};
+        
+        for (int num : numbers) {
+            if (num % 2 == 0) {
+                System.out.println(num + " is even");
+            } else {
+                System.out.println(num + " is odd");
+            }
         }
     }
 }
@@ -145,36 +169,32 @@ public class Calculator {
 
 ## Exception Handling
 ```java
-public class ExceptionExample {
+public class ExceptionHandlingExample {
     public static void main(String[] args) {
         try {
-            int result = 10 / 0;
+            int result = divide(10, 0);
+            System.out.println("Result: " + result);
         } catch (ArithmeticException e) {
             System.out.println("Error: " + e.getMessage());
         } finally {
-            System.out.println("Execution complete.");
+            System.out.println("Operation completed");
         }
+    }
+    
+    static int divide(int a, int b) throws ArithmeticException {
+        return a / b;
     }
 }
 ```
 
-# Common Pitfalls & Edge Cases
-
-- **Null Pointer Exceptions**: Accessing methods on `null` references; always check with `if (obj != null)`.
-- **Integer Overflow**: Operations like `int max = Integer.MAX_VALUE + 1;` wrap around; use `long` for large values.
-- **String Immutability**: Strings cannot be modified in-place; use `StringBuilder` for concatenation in loops.
-- **Access Modifier Misuse**: Overly permissive access can break encapsulation; prefer `private` fields with getters/setters.
-- **Array Index Out of Bounds**: Accessing `arr[arr.length]` throws exception; validate indices.
-- **Unchecked Exceptions**: Runtime exceptions like `NullPointerException` aren't caught by compiler; handle defensively.
-
 # References
 
-- [Language Basics](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html)
-- [Object-Oriented Programming Concepts](https://docs.oracle.com/javase/tutorial/java/concepts/index.html)
+- [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se21/html/index.html)
+- [Java Tutorials: Language Basics](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html)
+- [OOP Concepts](https://docs.oracle.com/javase/tutorial/java/concepts/index.html)
 - [Classes and Objects](https://docs.oracle.com/javase/tutorial/java/javaOO/index.html)
-- [Numbers and Strings](https://docs.oracle.com/javase/tutorial/java/data/index.html)
 - [Operators](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/operators.html)
-- [Control Flow Statements](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/flow.html)
+- [Control Flow](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/flow.html)
 - [Exceptions](https://docs.oracle.com/javase/tutorial/essential/exceptions/index.html)
 
 # Github-README Links & Related Topics
@@ -183,5 +203,5 @@ public class ExceptionExample {
 - [Java Generics](./java-generics/README.md)
 - [Java Annotations](./java-annotations/README.md)
 - [Java Reflection](./java-reflection/README.md)
-- [Java Exception Handling](./java-exception-handling/README.md) (if exists, otherwise related)
 - [OOP Principles in Java](./oop-principles-in-java/README.md)
+- [Java Exception Handling](./java-exception-handling/README.md)
