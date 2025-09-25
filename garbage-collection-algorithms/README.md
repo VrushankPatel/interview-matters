@@ -1,76 +1,101 @@
 ---
 title: Garbage Collection Algorithms
-aliases: [GC Algorithms, JVM Garbage Collection]
-tags: [#java,#jvm,#performance-tuning]
+aliases: []
+tags: [#java, #jvm, #gc]
 created: 2025-09-25
 updated: 2025-09-25
 ---
 
-## Overview
+# Overview
 
-Garbage collection (GC) is an automatic memory management mechanism in the Java Virtual Machine (JVM) that identifies and reclaims memory occupied by objects no longer reachable from the application. It prevents memory leaks, reduces manual memory management errors, and optimizes heap usage for better application performance.
+Garbage Collection (GC) Algorithms in Java manage memory automatically, reclaiming heap space occupied by unreachable objects. Understanding these algorithms is essential for optimizing JVM performance, reducing pauses, and preventing memory leaks in high-throughput applications.
 
-## Detailed Explanation
+# Detailed Explanation
 
-## Basic Concepts
-- **Heap**: Divided into Young Generation (Eden, Survivor spaces) and Old Generation.
-- **GC Roots**: Starting points for reachability analysis (e.g., static variables, local variables).
+## Mark-Sweep-Compact
 
-## Common Algorithms
-1. **Mark-Sweep**: Marks reachable objects, sweeps unmarked ones. Simple but causes fragmentation.
-2. **Mark-Compact**: Similar to mark-sweep but compacts memory to reduce fragmentation.
-3. **Copying GC**: Copies live objects to a new space, efficient for young generation but wastes space.
-4. **Generational GC**: Exploits object lifecycle; most objects die young. Uses different algorithms for young and old generations.
+- **Mark Phase**: Identifies reachable objects from GC roots.
+- **Sweep Phase**: Reclaims memory from unmarked objects.
+- **Compact Phase**: Defragments heap for contiguous free space.
 
-## Modern Collectors
-- **G1 (Garbage-First)**: Divides heap into regions, prioritizes regions with most garbage. Low-pause, suitable for large heaps.
-- **ZGC**: Concurrent, low-latency collector for very large heaps (TB scale), pauses <1ms.
-- **Shenandoah**: Similar to ZGC, focuses on minimizing pause times.
+## Generational GC
+
+Divides heap into Young (Eden, Survivor spaces) and Old generations. Most objects die young; promotes long-lived objects to Old.
+
+## Concurrent Mark-Sweep (CMS)
+
+Runs concurrently with application threads, minimizing pauses. Uses mark-sweep without compaction.
+
+## G1 Garbage Collector
+
+Divides heap into regions, prioritizing garbage-rich regions. Balances throughput and latency.
+
+| Algorithm | Pros | Cons | Use Case |
+|-----------|------|------|----------|
+| Serial GC | Simple, low overhead | Long pauses | Single-threaded apps |
+| Parallel GC | High throughput | Pauses during full GC | Batch processing |
+| CMS | Low latency | CPU overhead, fragmentation | Web servers |
+| G1 | Balanced, predictable pauses | Tuning complexity | Large heaps |
 
 ```mermaid
 graph TD
-    A[Object Created] --> B[Young Generation - Eden]
-    B --> C[Minor GC - Copy to Survivor]
-    C --> D[Survivor to Survivor]
-    D --> E[Promoted to Old Generation]
-    E --> F[Major GC - Mark-Compact]
+    A[GC Roots] --> B[Mark Reachable Objects]
+    B --> C[Sweep Unreachable]
+    C --> D[Compact Heap]
 ```
 
-## Real-world Examples & Use Cases
-- **Web Applications**: Tomcat servers use GC to manage session data and prevent OOM errors.
-- **Big Data Processing**: Spark applications rely on efficient GC for in-memory computations.
-- **Microservices**: Low-latency services use G1 or ZGC to minimize response times.
+This diagram shows the mark-sweep-compact process.
 
-## Code Examples
+# Real-world Examples & Use Cases
 
+- **E-commerce Platforms**: Use G1 for low-latency responses during peak traffic.
+- **Low-Latency Apps**: CMS to avoid long pauses in trading apps.
+- **Batch Processing**: Parallel GC for high-throughput jobs.
+- **Embedded Systems**: Serial GC for simplicity.
+
+# Code Examples
+
+## Monitoring GC
 ```java
-public class GCExample {
+public class GCMonitor {
     public static void main(String[] args) {
-        // Create objects
-        for (int i = 0; i < 100000; i++) {
-            new Object();
-        }
-        // Force GC
-        System.gc();
-        System.out.println("GC triggered");
+        System.gc(); // Suggest GC
+        Runtime rt = Runtime.getRuntime();
+        System.out.println("Free memory: " + rt.freeMemory());
     }
 }
 ```
 
-## Common Pitfalls & Edge Cases
-- **GC Pauses**: Long pauses in CMS or Parallel GC can affect latency-sensitive apps.
-- **Memory Leaks**: Soft references or static collections can prevent GC.
-- **Tuning**: Incorrect heap sizes lead to frequent GC or OOM.
+## Weak References
+```java
+import java.lang.ref.WeakReference;
 
-## Tools & Libraries
-- **JVM Tools**: jstat, jmap, VisualVM for monitoring GC.
-- **Libraries**: Eclipse Memory Analyzer for heap dumps.
+public class WeakRefExample {
+    public static void main(String[] args) {
+        Object obj = new Object();
+        WeakReference<Object> weakRef = new WeakReference<>(obj);
+        obj = null;
+        System.gc();
+        System.out.println("Weak ref: " + weakRef.get()); // May be null
+    }
+}
+```
 
-## References
-- [Oracle GC Tuning Guide](https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/)
-- [OpenJDK GC Documentation](https://openjdk.java.net/groups/hotspot/docs/)
-## Github-README Links & Related Topics
+# Common Pitfalls & Edge Cases
 
-- [JVM Internals & Class Loading](jvm-internals-and-class-loading/README.md)
-- [JVM Performance Tuning](java/advanced-java-concepts/jvm-performance-tuning/README.md)
-- [Memory Models](java/memory-models/README.md)
+- **Memory Leaks**: Holding strong references to unused objects.
+- **GC Pauses**: In latency-sensitive apps, tune heap sizes.
+- **Fragmentation**: In CMS, leads to full GC; switch to G1.
+- **Incorrect Tuning**: Over-tuning can degrade performance.
+
+# References
+
+- [Java Garbage Collection](https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/)
+- [G1 GC](https://docs.oracle.com/javase/9/gctuning/garbage-first-garbage-collector.htm)
+- [JVM Performance Tuning](https://www.oracle.com/technetwork/java/javase/tech/vmoptions-jsp-140102.html)
+
+# Github-README Links & Related Topics
+
+- [JVM Internals & Class Loading](./jvm-internals-and-class-loading/README.md)
+- [Java Memory Management](./java-memory-management/README.md)
+- [Performance Optimization Techniques](./performance-optimization-techniques/README.md)
