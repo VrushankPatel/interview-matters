@@ -1,10 +1,10 @@
--e 00001| LLD HLD basics
-00002| Latency and Throughput zero to hero
-00003| Monitoring and Logging
-00004| Async logging
-00005| DevOps & Infrastructure as Code
--e 00006| Java Fundamentals
-00007| OOP Principles in Java
-00008| JVM Internals & Class Loading
-00009| Garbage Collection Algorithms
-00010| Multithreading & Concurrency in Java
+-e Java Fundamentals
+OOP Principles in Java
+JVM Internals & Class Loading
+Garbage Collection Algorithms
+Multithreading & Concurrency in Java
+Collections & Data Structures
+Java Stream API & Functional Programming
+System Design Basics
+High Scalability Patterns
+CAP Theorem & Distributed Systems

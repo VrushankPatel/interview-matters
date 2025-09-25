@@ -1,6 +1,6 @@
 ---
 title: Java Fundamentals
-aliases: [Java Basics, Core Java]
+aliases: [Java Basics, Java Language Basics]
 tags: [#java]
 created: 2025-09-25
 updated: 2025-09-25
@@ -10,217 +10,364 @@ updated: 2025-09-25
 
 ## Overview
 
-Java is a high-level, object-oriented programming language that emphasizes portability, robustness, and performance. Java fundamentals cover the core concepts including data types, control structures, object-oriented principles, and basic syntax that form the foundation of Java programming.
+Java Fundamentals cover the core concepts and building blocks of the Java programming language. This includes basic syntax, data types, control structures, object-oriented principles, and essential language features that form the foundation for all Java development.
 
 ## Detailed Explanation
 
+### Basic Syntax and Structure
+
+Java programs are organized into classes and methods. Every Java application must have a `main` method as the entry point.
+
+```java
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+```
+
+#### Key Elements:
+- **Package Declaration**: Organizes classes into namespaces
+- **Import Statements**: Brings classes from other packages into scope
+- **Class Declaration**: Defines a blueprint for objects
+- **Method Declaration**: Defines executable code blocks
+
 ### Data Types
 
-Java has two categories of data types:
+Java has two categories of data types: primitive and reference.
 
-#### Primitive Types
+#### Primitive Data Types
 
-| Type | Size | Range | Default |
-|------|------|-------|---------|
-| byte | 8-bit | -128 to 127 | 0 |
-| short | 16-bit | -32,768 to 32,767 | 0 |
-| int | 32-bit | -2^31 to 2^31-1 | 0 |
-| long | 64-bit | -2^63 to 2^63-1 | 0L |
-| float | 32-bit | ~3.4e-038 to 3.4e+038 | 0.0f |
-| double | 64-bit | ~1.7e-308 to 1.7e+308 | 0.0d |
-| char | 16-bit | 0 to 65,535 | '\u0000' |
-| boolean | 1-bit | true/false | false |
+```mermaid
+graph TD
+    A[Primitive Types] --> B[Integer Types]
+    A --> C[Floating-Point Types]
+    A --> D[Character Type]
+    A --> E[Boolean Type]
+    
+    B --> F[byte: 8-bit]
+    B --> G[short: 16-bit]
+    B --> H[int: 32-bit]
+    B --> I[long: 64-bit]
+    
+    C --> J[float: 32-bit]
+    C --> K[double: 64-bit]
+    
+    D --> L[char: 16-bit Unicode]
+    
+    E --> M[boolean: true/false]
+```
 
-#### Reference Types
+#### Reference Data Types
 
-- Classes
-- Interfaces
-- Arrays
-- Strings
+- **Classes**: User-defined types
+- **Interfaces**: Abstract contracts
+- **Arrays**: Fixed-size collections of same type
+- **Enums**: Special classes for constants
+
+### Variables and Constants
+
+```java
+// Variable declarations
+int age = 25;
+String name = "John Doe";
+final double PI = 3.14159; // Constant
+
+// Type inference (Java 10+)
+var message = "Hello"; // Inferred as String
+```
+
+### Operators
+
+Java supports various operators for arithmetic, comparison, logical, and assignment operations.
+
+#### Arithmetic Operators
+```java
+int a = 10, b = 3;
+int sum = a + b;        // 13
+int difference = a - b; // 7
+int product = a * b;    // 30
+int quotient = a / b;   // 3
+int remainder = a % b;  // 1
+```
+
+#### Comparison and Logical Operators
+```java
+boolean isEqual = (a == b);     // false
+boolean isGreater = (a > b);    // true
+boolean andResult = (a > 5 && b < 5); // true
+boolean orResult = (a < 5 || b < 5);  // true
+```
 
 ### Control Structures
 
 #### Conditional Statements
 
 ```java
-if (condition) {
-    // code
-} else if (anotherCondition) {
-    // code
+// If-else statement
+if (age >= 18) {
+    System.out.println("Adult");
 } else {
-    // code
+    System.out.println("Minor");
 }
 
-switch (expression) {
-    case value1:
-        // code
-        break;
-    case value2:
-        // code
-        break;
-    default:
-        // code
-}
+// Switch expression (Java 14+)
+String dayType = switch (day) {
+    case "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" -> "Weekday";
+    case "Saturday", "Sunday" -> "Weekend";
+    default -> "Invalid day";
+};
 ```
 
 #### Loops
 
 ```java
 // For loop
-for (int i = 0; i < 10; i++) {
-    // code
+for (int i = 0; i < 5; i++) {
+    System.out.println("Count: " + i);
 }
 
 // Enhanced for loop
-for (String item : collection) {
-    // code
+int[] numbers = {1, 2, 3, 4, 5};
+for (int num : numbers) {
+    System.out.println(num);
 }
 
 // While loop
-while (condition) {
-    // code
+int counter = 0;
+while (counter < 3) {
+    System.out.println("Counter: " + counter);
+    counter++;
 }
 
 // Do-while loop
 do {
-    // code
-} while (condition);
+    System.out.println("Executed at least once");
+} while (false);
 ```
 
-### Classes and Objects
+### Methods
 
-#### Class Definition
+Methods are blocks of code that perform specific tasks.
 
 ```java
-public class ClassName {
-    // Fields
-    private int field1;
-    private String field2;
-    
-    // Constructor
-    public ClassName(int field1, String field2) {
-        this.field1 = field1;
-        this.field2 = field2;
+// Method with parameters and return type
+public static int addNumbers(int a, int b) {
+    return a + b;
+}
+
+// Method overloading
+public static double addNumbers(double a, double b) {
+    return a + b;
+}
+
+// Varargs method
+public static int sum(int... numbers) {
+    int total = 0;
+    for (int num : numbers) {
+        total += num;
     }
-    
-    // Methods
-    public void method1() {
-        // code
-    }
-    
-    public int method2() {
-        return field1;
-    }
+    return total;
 }
 ```
 
-#### Object Creation
+### Arrays
+
+Arrays are fixed-size, homogeneous data structures.
 
 ```java
-ClassName obj = new ClassName(42, "Hello");
-obj.method1();
-int result = obj.method2();
+// Array declaration and initialization
+int[] numbers = new int[5];
+int[] primes = {2, 3, 5, 7, 11};
+
+// Multidimensional arrays
+int[][] matrix = new int[3][3];
+int[][] pascalTriangle = {
+    {1},
+    {1, 1},
+    {1, 2, 1}
+};
 ```
 
-### Object-Oriented Principles
+### Strings
 
-#### Encapsulation
-
-- Bundling data and methods
-- Access control with modifiers
-
-#### Inheritance
+Strings are immutable objects in Java.
 
 ```java
-public class Parent {
-    protected void parentMethod() {
-        // code
-    }
+// String creation
+String greeting = "Hello";
+String name = new String("World");
+
+// String methods
+String fullGreeting = greeting + " " + name; // "Hello World"
+int length = greeting.length(); // 5
+boolean startsWithH = greeting.startsWith("H"); // true
+String upperCase = greeting.toUpperCase(); // "HELLO"
+```
+
+### Exception Handling
+
+Java uses try-catch blocks for exception handling.
+
+```java
+try {
+    int result = divide(10, 0);
+    System.out.println("Result: " + result);
+} catch (ArithmeticException e) {
+    System.out.println("Cannot divide by zero: " + e.getMessage());
+} finally {
+    System.out.println("This always executes");
 }
 
-public class Child extends Parent {
-    @Override
-    public void parentMethod() {
-        super.parentMethod();
-        // additional code
+public static int divide(int a, int b) throws ArithmeticException {
+    if (b == 0) {
+        throw new ArithmeticException("Division by zero");
     }
+    return a / b;
 }
 ```
 
-#### Polymorphism
+### Input/Output
 
-- Method overloading (compile-time)
-- Method overriding (runtime)
-
-#### Abstraction
-
-- Abstract classes
-- Interfaces
+Basic console I/O using Scanner.
 
 ```java
-public interface Drawable {
-    void draw();
-    default void erase() {
-        // default implementation
-    }
-}
+import java.util.Scanner;
 
-public abstract class Shape implements Drawable {
-    protected String color;
-    
-    public Shape(String color) {
-        this.color = color;
-    }
-    
-    public abstract double area();
-    
-    @Override
-    public void draw() {
-        System.out.println("Drawing " + color + " shape");
+public class ConsoleIO {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter your name: ");
+        String name = scanner.nextLine();
+        
+        System.out.print("Enter your age: ");
+        int age = scanner.nextInt();
+        
+        System.out.println("Hello " + name + ", you are " + age + " years old!");
+        
+        scanner.close();
     }
 }
 ```
 
 ## Real-world Examples & Use Cases
 
-1. **Web Applications**: Building REST APIs with Spring Boot
-2. **Android Development**: Mobile app development
-3. **Enterprise Software**: Large-scale business applications
-4. **Big Data**: Processing frameworks like Hadoop
-5. **Financial Systems**: High-reliability transaction systems
-6. **IoT Devices**: Embedded systems programming
-7. **Game Development**: Cross-platform game logic
+1. **Calculator Application**: Using arithmetic operators and control structures
+2. **Student Grade Management**: Arrays and conditional statements
+3. **Bank Account System**: Classes, methods, and encapsulation
+4. **File Processing**: I/O operations and exception handling
+5. **Command-line Tools**: Console input/output and argument parsing
+6. **Data Validation**: String manipulation and regular expressions
+7. **Configuration Management**: Properties files and environment variables
 
 ## Code Examples
 
-### Complete Class Example
+### Complete Calculator Class
+
+```java
+public class Calculator {
+    public static void main(String[] args) {
+        double num1 = 10.5;
+        double num2 = 3.2;
+        char operator = '+';
+        
+        double result = calculate(num1, num2, operator);
+        System.out.println(num1 + " " + operator + " " + num2 + " = " + result);
+    }
+    
+    public static double calculate(double a, double b, char operator) {
+        return switch (operator) {
+            case '+' -> a + b;
+            case '-' -> a - b;
+            case '*' -> a * b;
+            case '/' -> {
+                if (b == 0) {
+                    throw new ArithmeticException("Division by zero");
+                }
+                yield a / b;
+            }
+            default -> throw new IllegalArgumentException("Invalid operator: " + operator);
+        };
+    }
+}
+```
+
+### Student Grade Processor
+
+```java
+import java.util.Scanner;
+
+public class GradeProcessor {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter number of students: ");
+        int numStudents = scanner.nextInt();
+        
+        double[] grades = new double[numStudents];
+        
+        // Input grades
+        for (int i = 0; i < numStudents; i++) {
+            System.out.print("Enter grade for student " + (i + 1) + ": ");
+            grades[i] = scanner.nextDouble();
+        }
+        
+        // Calculate average
+        double sum = 0;
+        for (double grade : grades) {
+            sum += grade;
+        }
+        double average = sum / numStudents;
+        
+        // Find highest and lowest
+        double highest = grades[0];
+        double lowest = grades[0];
+        for (double grade : grades) {
+            if (grade > highest) highest = grade;
+            if (grade < lowest) lowest = grade;
+        }
+        
+        // Display results
+        System.out.println("Average grade: " + average);
+        System.out.println("Highest grade: " + highest);
+        System.out.println("Lowest grade: " + lowest);
+        
+        scanner.close();
+    }
+}
+```
+
+### Simple Bank Account
 
 ```java
 public class BankAccount {
     private String accountNumber;
+    private String accountHolder;
     private double balance;
-    private String ownerName;
     
-    public BankAccount(String accountNumber, String ownerName) {
+    public BankAccount(String accountNumber, String accountHolder) {
         this.accountNumber = accountNumber;
-        this.ownerName = ownerName;
+        this.accountHolder = accountHolder;
         this.balance = 0.0;
     }
     
     public void deposit(double amount) {
         if (amount > 0) {
             balance += amount;
-            System.out.println("Deposited: $" + amount);
+            System.out.println("Deposited $" + amount + ". New balance: $" + balance);
+        } else {
+            System.out.println("Invalid deposit amount");
         }
     }
     
-    public boolean withdraw(double amount) {
-        if (amount > 0 && balance >= amount) {
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
             balance -= amount;
-            System.out.println("Withdrawn: $" + amount);
-            return true;
+            System.out.println("Withdrew $" + amount + ". New balance: $" + balance);
+        } else {
+            System.out.println("Invalid withdrawal amount or insufficient funds");
         }
-        return false;
     }
     
     public double getBalance() {
@@ -228,76 +375,28 @@ public class BankAccount {
     }
     
     public String getAccountInfo() {
-        return "Account: " + accountNumber + ", Owner: " + ownerName + ", Balance: $" + balance;
-    }
-}
-```
-
-### Inheritance and Polymorphism Example
-
-```java
-// Base class
-public class Vehicle {
-    protected String brand;
-    protected int year;
-    
-    public Vehicle(String brand, int year) {
-        this.brand = brand;
-        this.year = year;
+        return "Account: " + accountNumber + ", Holder: " + accountHolder + ", Balance: $" + balance;
     }
     
-    public void start() {
-        System.out.println("Starting " + brand + " vehicle");
-    }
-    
-    public void stop() {
-        System.out.println("Stopping " + brand + " vehicle");
-    }
-}
-
-// Derived class
-public class Car extends Vehicle {
-    private int doors;
-    
-    public Car(String brand, int year, int doors) {
-        super(brand, year);
-        this.doors = doors;
-    }
-    
-    @Override
-    public void start() {
-        System.out.println("Starting " + brand + " car with " + doors + " doors");
-    }
-    
-    public void honk() {
-        System.out.println("Honk honk!");
-    }
-}
-
-// Usage
-public class Main {
     public static void main(String[] args) {
-        Vehicle vehicle = new Car("Toyota", 2020, 4);
-        vehicle.start(); // Polymorphic call
-        vehicle.stop();
-        
-        Car car = new Car("Honda", 2021, 2);
-        car.start();
-        car.honk();
-        car.stop();
+        BankAccount account = new BankAccount("123456789", "John Doe");
+        account.deposit(1000);
+        account.withdraw(500);
+        System.out.println(account.getAccountInfo());
     }
 }
 ```
 
 ## References
 
-- [Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/)
-- [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se21/html/index.html)
+- [Oracle Java Tutorials - Language Basics](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html)
 - [Baeldung Java Fundamentals](https://www.baeldung.com/java-fundamentals)
+- [GeeksforGeeks Java Basics](https://www.geeksforgeeks.org/java/)
+- [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se21/html/index.html)
 
 ## Github-README Links & Related Topics
 
 - [oop-principles-in-java/README.md](../oop-principles-in-java/README.md)
 - [jvm-internals-and-class-loading/README.md](../jvm-internals-and-class-loading/README.md)
+- [multithreading-and-concurrency-in-java/README.md](../multithreading-and-concurrency-in-java/README.md)
 - [collections-and-data-structures/README.md](../collections-and-data-structures/README.md)
-- [java-stream-api-and-functional-programming/README.md](../java-stream-api-and-functional-programming/README.md)
