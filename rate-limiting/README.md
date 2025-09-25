@@ -1,25 +1,27 @@
 ---
-title: Rate Limiting
-aliases: [Rate Limiter, API Rate Limiting, Throttling]
-tags: [#system-design, #scalability, #security]
+title: API Rate Limiting
+aliases: [Rate Limiting, API Throttling]
+tags: [#api-design,#system-design,#security]
 created: 2025-09-25
 updated: 2025-09-25
 ---
 
 ## Overview
 
-Rate limiting controls the number of requests a client can make to an API or service within a specified time window. It prevents abuse, ensures fair resource allocation, protects against DDoS attacks, and maintains service availability and performance.
+API rate limiting controls the number of requests a client can make to an API within a specified time window. It prevents abuse, ensures fair resource allocation, protects against DDoS attacks, and maintains service availability and performance. Rate limiting is essential for scalable APIs, helping to manage traffic spikes and enforce usage policies.
 
 ## Detailed Explanation
 
-Rate limiting can be implemented at various levels: client-side, server-side, or network level. It uses algorithms to track and enforce request limits.
+Rate limiting can be implemented at various levels: client-side, server-side, or network level. It uses algorithms to track and enforce request limits, often returning HTTP 429 (Too Many Requests) when limits are exceeded.
 
 ### Common Rate Limiting Algorithms
 
-- **Fixed Window:** Counts requests in fixed time intervals (e.g., 100 requests per minute).
-- **Sliding Window:** Uses a rolling time window for smoother limiting.
-- **Token Bucket:** Tokens are added at a fixed rate; requests consume tokens.
-- **Leaky Bucket:** Requests are processed at a constant rate, queuing excess.
+| Algorithm       | Description | Pros | Cons | Use Case |
+|-----------------|-------------|------|------|----------|
+| **Fixed Window** | Counts requests in fixed time intervals (e.g., 100 requests per minute). | Simple to implement | Boundary issues (e.g., 60 requests in last second of window, 60 in first second of next) | Basic limiting for low-traffic APIs |
+| **Sliding Window** | Uses a rolling time window for smoother limiting. | More accurate than fixed window | Higher memory usage | APIs needing precise control |
+| **Token Bucket** | Tokens are added at a fixed rate; requests consume tokens. Allows bursting. | Handles bursts well | Requires storage of tokens | Variable traffic with burst allowance |
+| **Leaky Bucket** | Requests are processed at a constant rate, queuing excess. | Smooths traffic | Can cause delays | Consistent rate enforcement |
 
 ```mermaid
 graph TD;
@@ -32,24 +34,62 @@ graph TD;
 
 ### Implementation Strategies
 
-- **Distributed Rate Limiting:** Using Redis or similar for shared state.
-- **Per-User vs Global:** Limiting per user, IP, or API key.
-- **Bursting:** Allowing short bursts above the limit.
+- **Distributed Rate Limiting:** Using Redis or similar for shared state across multiple servers.
+- **Per-User vs Global:** Limiting per user, IP, API key, or endpoint.
+- **Bursting:** Allowing short bursts above the limit using algorithms like token bucket.
 
 ### Benefits
 
-- Prevents resource exhaustion.
-- Improves security against attacks.
+- Prevents resource exhaustion and ensures system stability.
+- Improves security by mitigating DDoS and abuse.
 - Ensures fair usage among clients.
-- Reduces operational costs.
+- Reduces operational costs by optimizing resource allocation.
+
+## Journey / Sequence
+
+The typical flow for handling a rate-limited request involves client-side retries with backoff.
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant API
+    Client->>API: Send Request
+    API->>API: Check Rate Limit
+    alt Within Limit
+        API->>Client: Process and Respond
+    else Exceeded
+        API->>Client: 429 Too Many Requests
+        Client->>Client: Wait (Exponential Backoff)
+        Client->>API: Retry Request
+    end
+```
+
+## Data Models / Message Formats
+
+Rate limiting often uses HTTP headers to communicate limits to clients:
+
+- `X-RateLimit-Limit`: Maximum requests allowed in the window.
+- `X-RateLimit-Remaining`: Remaining requests in the current window.
+- `X-RateLimit-Reset`: Time when the window resets (Unix timestamp).
+- `Retry-After`: Seconds to wait before retrying (for 429 responses).
+
+Example Response Headers:
+```
+HTTP/1.1 429 Too Many Requests
+X-RateLimit-Limit: 100
+X-RateLimit-Remaining: 0
+X-RateLimit-Reset: 1633072800
+Retry-After: 60
+```
 
 ## Real-world Examples & Use Cases
 
-- **API Gateways:** Limiting requests to backend services (e.g., Stripe API).
-- **Social Media Platforms:** Preventing spam and abuse.
-- **Cloud Services:** AWS API rate limits, GitHub API limits.
-- **E-commerce:** Limiting checkout requests during flash sales.
-- **IoT Devices:** Controlling data transmission rates.
+- **API Gateways:** Limiting requests to backend services (e.g., Stripe API allows 100 operations/sec in live mode).
+- **Social Media Platforms:** Preventing spam and abuse (e.g., Twitter API limits).
+- **Cloud Services:** AWS API rate limits, GitHub API (5000 requests/hour for authenticated users).
+- **E-commerce:** Limiting checkout requests during flash sales to prevent overload.
+- **IoT Devices:** Controlling data transmission rates to conserve bandwidth.
+- **Microservices:** Protecting individual services from cascading failures.
 
 ## Code Examples
 
@@ -130,30 +170,68 @@ app.get('/api/user', (req, res) => {
 });
 ```
 
+### Java with Bucket4j
+
+```java
+import io.github.bucket4j.Bandwidth;
+import io.github.bucket4j.Bucket;
+import io.github.bucket4j.Refill;
+
+import java.time.Duration;
+
+public class RateLimiterExample {
+    public static void main(String[] args) {
+        Bandwidth limit = Bandwidth.classic(100, Refill.intervally(100, Duration.ofMinutes(1)));
+        Bucket bucket = Bucket.builder().addLimit(limit).build();
+
+        if (bucket.tryConsume(1)) {
+            // Process request
+            System.out.println("Request allowed");
+        } else {
+            // Rate limit exceeded
+            System.out.println("Rate limit exceeded");
+        }
+    }
+}
+```
+
 ## Common Pitfalls & Edge Cases
 
-- **Race Conditions:** In distributed systems, concurrent requests may bypass limits.
-- **Memory Usage:** Storing counters for many clients.
-- **False Positives:** Legitimate bursts flagged as abuse.
-- **Edge Case:** Clock skew in distributed environments.
-- **Configuration Errors:** Too restrictive limits causing user frustration.
+- **Race Conditions:** In distributed systems, concurrent requests may bypass limits; use atomic operations.
+- **Memory Usage:** Storing counters for many clients; consider eviction policies.
+- **False Positives:** Legitimate bursts flagged as abuse; tune burst allowances.
+- **Clock Skew:** In distributed environments, synchronize clocks to avoid inconsistencies.
+- **Configuration Errors:** Too restrictive limits causing user frustration; monitor and adjust.
+- **Thundering Herd:** Many clients retrying simultaneously; implement jittered backoff.
 
 ## Tools & Libraries
 
 - **Web Servers:** Nginx, Apache mod_ratelimit
-- **API Gateways:** Kong, Apigee, AWS API Gateway
-- **Libraries:** express-rate-limit (Node.js), django-ratelimit (Python), Bucket4j (Java)
+- **API Gateways:** Kong, Apigee, AWS API Gateway, Tyk
+- **Libraries:** 
+  - Node.js: express-rate-limit
+  - Python: django-ratelimit, Flask-Limiter
+  - Java: Bucket4j, Resilience4j
+  - .NET: AspNetCoreRateLimit
 - **Services:** Redis, Memcached for distributed counters
+- **Cloud Providers:** AWS WAF, Google Cloud Armor, Cloudflare Rate Limiting
 
 ## Github-README Links & Related Topics
 
-- [api-gateway-patterns](../system-design/api-gateway-patterns/)
-- [security-in-distributed-systems](../system-design/security-in-distributed-systems/)
-- [high-scalability-patterns](../high-scalability-patterns/)
+- [API Design Principles](../api-design-principles/README.md)
+- [API Gateway Design](../api-gateway-design/README.md)
+- [Load Balancing and Strategies](../load-balancing-and-strategies/README.md)
+- [Security Best Practices in Java](../security-best-practices-in-java/README.md)
+- [Fault Tolerance in Distributed Systems](../fault-tolerance-in-distributed-systems/README.md)
+- [High Scalability Patterns](../high-scalability-patterns/README.md)
 
 ## References
 
-- Rate Limiting Patterns: https://stripe.com/docs/rate-limits
-- Token Bucket Algorithm: https://en.wikipedia.org/wiki/Token_bucket
-- Nginx Rate Limiting: https://docs.nginx.com/nginx/admin-guide/security-controls/controlling-access-proxied-http/
-- Express Rate Limit: https://www.npmjs.com/package/express-rate-limit
+- [Rate Limiting - Wikipedia](https://en.wikipedia.org/wiki/Rate_limiting)
+- [What is Rate Limiting? - Cloudflare](https://www.cloudflare.com/learning/bots/what-is-rate-limiting/)
+- [Rate Limiting Strategies for Reliability - AWS](https://aws.amazon.com/blogs/architecture/rate-limiting-strategies-reliability/)
+- [Rate Limits - Stripe Documentation](https://stripe.com/docs/rate-limits)
+- [Token Bucket Algorithm - Wikipedia](https://en.wikipedia.org/wiki/Token_bucket)
+- [Nginx Rate Limiting](https://docs.nginx.com/nginx/admin-guide/security-controls/controlling-access-proxied-http/)
+- [Express Rate Limit - NPM](https://www.npmjs.com/package/express-rate-limit)
+- [Bucket4j - GitHub](https://github.com/bucket4j/bucket4j)
