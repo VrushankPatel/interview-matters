@@ -5,7 +5,7 @@ Last update
 2025-09-25
 
 Summary of recent additions
- - caching-patterns, consistency-models, microservices-architecture, circuit-breaker-pattern, idempotency-in-apis
+ - Updated caching-patterns, consistency-models, microservices-architecture, circuit-breaker-pattern, idempotency-in-apis with enhanced content and interlinks
 
 Conventions
  - Dir naming: kebab-case.
