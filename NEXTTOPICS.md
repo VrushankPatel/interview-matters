@@ -1,9 +1,5 @@
 
-java-security-basics — 'Secure coding and cryptography'
-networking-sockets — 'Low-level network programming'-e 
-Java Fundamentals — 'Core Java syntax, data types, control structures'
-OOP Principles in Java — 'Encapsulation, inheritance, polymorphism, abstraction'
-JVM Internals & Class Loading — 'Class loaders, bytecode, JIT compilation'
+
 Garbage Collection Algorithms — 'Mark-sweep, generational GC, G1, ZGC'
 Multithreading & Concurrency in Java — 'Threads, synchronization, locks, atomic operations'
 URL Shortener System Design — 'Design a URL shortening service like bit.ly'
