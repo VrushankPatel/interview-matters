@@ -1,6 +1,6 @@
 ---
 title: Garbage Collection Algorithms
-aliases: []
+aliases: [GC Algorithms, Java Garbage Collection]
 tags: [#java, #jvm, #gc]
 created: 2025-09-25
 updated: 2025-09-25

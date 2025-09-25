@@ -1,6 +1,6 @@
 ---
 title: Multithreading & Concurrency in Java
-aliases: []
+aliases: [Java Multithreading, Concurrency in Java]
 tags: [#java, #concurrency]
 created: 2025-09-25
 updated: 2025-09-25

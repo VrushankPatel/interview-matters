@@ -1,6 +1,6 @@
 ---
 title: JVM Internals & Class Loading
-aliases: []
+aliases: [Java Virtual Machine Internals, JVM Class Loading]
 tags: [#java, #jvm]
 created: 2025-09-25
 updated: 2025-09-25
