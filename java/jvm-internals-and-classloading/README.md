@@ -153,7 +153,7 @@ sequenceDiagram
 
 ## Github-README Links & Related Topics
 
-Related: [[garbage-collection-algorithms]], [[java-memory-model-and-concurrency]], [[jvm-performance-tuning]]
+Related: [Garbage Collection Algorithms](garbage-collection-algorithms/README.md), [Java Memory Model and Concurrency](java/java-memory-model-and-concurrency/README.md), [JVM Performance Tuning](java/advanced-java-concepts/jvm-performance-tuning/README.md)
 
 ## References
 
