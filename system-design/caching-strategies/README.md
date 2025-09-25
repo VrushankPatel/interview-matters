@@ -109,7 +109,7 @@ sequenceDiagram
 - Caffeine: Java caching library.
 
 ## Github-README Links & Related Topics
-Related: [[database-design-and-indexing]], [[performance-tuning-and-profiling]]
+Related: [[database-design-and-indexing]], [[performance-tuning-and-profiling]], [[load-balancing-and-routing]], [[consistency-and-availability]]
 
 ## Common Interview Questions
 - What are the main caching strategies and their use cases?
@@ -117,13 +117,6 @@ Related: [[database-design-and-indexing]], [[performance-tuning-and-profiling]]
 - How does Redis implement LRU eviction?
 - Describe write-through vs write-behind caching.
 - How to handle cache consistency in distributed systems?
-
-## Common Interview Questions
-- What are the differences between cache-aside and write-through?
-- How to handle cache invalidation in distributed systems?
-- Explain cache stampede and solutions.
-- What is TTL and LRU in caching?
-- How does Redis clustering work for caching?
 
 ## References
 - Redis documentation.

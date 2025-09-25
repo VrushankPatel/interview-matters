@@ -108,7 +108,7 @@ sequenceDiagram
 - EXPLAIN: Query analysis.
 
 ## Github-README Links & Related Topics
-Related: [[partitioning-and-sharding]], [[nosql-vs-sql-tradeoffs]]
+Related: [[partitioning-and-sharding]], [[nosql-vs-sql-tradeoffs]], [[caching-strategies]], [[consistency-and-availability]]
 
 ## Common Interview Questions
 - Explain normalization and its forms (1NF, 2NF, 3NF).
@@ -116,13 +116,6 @@ Related: [[partitioning-and-sharding]], [[nosql-vs-sql-tradeoffs]]
 - How does indexing affect insert/update performance?
 - Describe composite indexes and their usage.
 - When to use denormalization in database design?
-
-## Common Interview Questions
-- Explain the differences between 1NF, 2NF, and 3NF.
-- What are clustered vs non-clustered indexes?
-- How does indexing affect query performance?
-- When to use denormalization?
-- Describe database partitioning strategies.
 
 ## References
 - "Database System Concepts" by Silberschatz.

@@ -80,7 +80,7 @@ sequenceDiagram
 - HAProxy: Advanced features.
 
 ## Github-README Links & Related Topics
-Related: [[system-design-basics]], [[networking-tcp-ip-http2-tls]]
+Related: [[system-design-basics]], [[networking-tcp-ip-http2-tls]], [[caching-strategies]], [[partitioning-and-sharding]]
 
 ## Common Interview Questions
 - Explain the difference between Layer 4 and Layer 7 load balancing.
@@ -88,13 +88,6 @@ Related: [[system-design-basics]], [[networking-tcp-ip-http2-tls]]
 - What is sticky sessions and when to use them?
 - Describe how NGINX implements load balancing.
 - How to handle health checks in a load balancer?
-
-## Common Interview Questions
-- Explain Layer 4 vs Layer 7 load balancing.
-- How does round-robin work and its limitations?
-- What are health checks and why are they important?
-- Describe geo-based routing.
-- How to handle session persistence in load balancers?
 
 ## References
 - NGINX Load Balancing documentation.
