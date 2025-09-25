@@ -32,9 +32,11 @@ Failure Modes: Network partitions, node crashes.
 
 # Real-world Examples & Use Cases
 
-- etcd: Kubernetes configuration store.
-- Consul: Service discovery.
-- CockroachDB: Distributed SQL database.
+- **etcd:** Used in Kubernetes for storing cluster state and configuration, ensuring consistency across control plane nodes.
+- **Consul:** HashiCorp's service mesh for service discovery and health checking with leader election for coordination.
+- **CockroachDB:** Distributed SQL database using Raft for multi-row transactions and geo-replication.
+- **Apache ZooKeeper:** Though using ZAB, similar to Raft for leader election in Hadoop ecosystems.
+- **TiKV:** Key-value store in TiDB, using Raft for data replication and fault tolerance.
 
 # Code Examples
 
@@ -51,6 +53,24 @@ public class RaftNode {
         state = State.CANDIDATE;
         term++;
         // Send vote requests
+    }
+}
+```
+
+**Vote Request Handling:**
+
+```java
+public class RaftNode {
+    // ... previous code
+
+    public VoteResponse handleVoteRequest(VoteRequest req) {
+        if (req.term > term) {
+            term = req.term;
+            state = State.FOLLOWER;
+            votedFor = req.candidateId;
+            return new VoteResponse(term, true);
+        }
+        return new VoteResponse(term, false);
     }
 }
 ```
@@ -89,7 +109,10 @@ sequenceDiagram
 
 # Github-README Links & Related Topics
 
-Related: [[consistency-and-availability]], [[distributed-tracing-and-observability]], [[raft-consensus-and-leader-election]], [[system-design-basics]]
+- [Consistency and Availability](system-design/consistency-and-availability/README.md)
+- [Distributed Tracing and Observability](system-design/distributed-tracing-and-observability/README.md)
+- [Raft Consensus and Leader Election](system-design/raft-consensus-and-leader-election/README.md)
+- [System Design Basics](system-design/system-design-basics/README.md)
 
 # References
 

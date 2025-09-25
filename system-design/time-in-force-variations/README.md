@@ -56,7 +56,10 @@ Integrate TIF in order engine, use databases for GTC persistence.
 
 # Real-world Examples & Use Cases
 
-Stock trading platforms.
+- **Stock Trading Platforms (e.g., Robinhood, E*TRADE):** Use IOC for day traders seeking immediate execution without slippage.
+- **Cryptocurrency Exchanges (e.g., Kraken, Gemini):** Implement FOK for large orders to ensure full fill or cancellation.
+- **Futures and Options Markets:** GTC orders for long-term positions, with expiration dates.
+- **Algorithmic Trading:** IOC for high-frequency strategies to avoid holding positions overnight.
 
 # Code Examples
 
@@ -68,6 +71,32 @@ enum TimeInForce {
 class Order {
     TimeInForce tif;
     // logic based on tif
+}
+```
+
+**Order Processing Logic:**
+
+```java
+public class OrderProcessor {
+    public void processOrder(Order order) {
+        switch (order.tif) {
+            case GTC:
+                // Persist to database
+                break;
+            case IOC:
+                if (!tryMatch(order)) {
+                    cancelOrder(order);
+                }
+                break;
+            case FOK:
+                if (!canFillFully(order)) {
+                    cancelOrder(order);
+                } else {
+                    matchOrder(order);
+                }
+                break;
+        }
+    }
 }
 ```
 
@@ -104,7 +133,8 @@ Exchange APIs.
 
 # Github-README Links & Related Topics
 
-[[order-book-modeling]], [[matching-algorithms]]
+- [Order Book Modeling](algorithms/order-book-modeling/README.md)
+- [Matching Algorithms](algorithms/matching-algorithms/README.md)
 
 # References
 

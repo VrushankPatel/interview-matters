@@ -103,6 +103,26 @@ public class Service {
 }
 ```
 
+**Distributed Tracing with OpenTelemetry:**
+
+```java
+import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.api.trace.Tracer;
+
+public class TracedService {
+    private final Tracer tracer;
+
+    public void handleRequest() {
+        Span span = tracer.spanBuilder("handleRequest").startSpan();
+        try {
+            // business logic
+        } finally {
+            span.end();
+        }
+    }
+}
+```
+
 # Data Models / Message Formats
 
 Metrics payload (Prometheus format):

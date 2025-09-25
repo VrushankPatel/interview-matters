@@ -44,7 +44,10 @@ flowchart TD
 
 # Real-world Examples & Use Cases
 
-Ride-sharing, job matching.
+- **Ride-Sharing (e.g., Uber, Lyft):** Match riders to drivers based on proximity, ETA, and pricing using streaming algorithms to minimize wait times.
+- **Job Matching Platforms (e.g., LinkedIn, Indeed):** Use bipartite matching to pair candidates with job openings based on skills and preferences.
+- **Online Advertising:** Match ads to user profiles in real-time auctions using greedy algorithms for efficiency.
+- **Medical Residency Matching:** Stable marriage problem to assign residents to hospitals without cycles of dissatisfaction.
 
 # Code Examples
 
@@ -71,6 +74,17 @@ class StreamingMatcher {
         while (!riders.isEmpty() && !drivers.isEmpty()) {
             // greedy match
         }
+    }
+}
+```
+
+**Gale-Shapley Stable Marriage (simplified):**
+
+```java
+public class GaleShapley {
+    public Map<String, String> match(Map<String, List<String>> menPrefs, Map<String, List<String>> womenPrefs) {
+        // Implementation of Gale-Shapley algorithm
+        return new HashMap<>();
     }
 }
 ```
@@ -112,7 +126,8 @@ Java graphs libraries.
 
 # Github-README Links & Related Topics
 
-[[graph-algorithms]], [[order-book-modeling]]
+- [Graph Algorithms](algorithms/graph-algorithms/README.md)
+- [Order Book Modeling](algorithms/order-book-modeling/README.md)
 
 # References
 

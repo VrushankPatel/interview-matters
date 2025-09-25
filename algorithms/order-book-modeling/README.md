@@ -52,7 +52,10 @@ classDiagram
 
 # Real-world Examples & Use Cases
 
-Stock exchanges, crypto platforms.
+- **Stock Exchanges (e.g., NYSE, NASDAQ):** Maintain centralized order books for equities, handling millions of orders daily with price-time priority to ensure fair execution.
+- **Cryptocurrency Platforms (e.g., Binance, Coinbase):** Use order books for spot and futures trading, supporting high-frequency trading with sub-millisecond matching.
+- **Options Trading:** Complex order books for derivatives, incorporating strike prices and expiration dates.
+- **Dark Pools:** Private order books for institutional trading to minimize market impact.
 
 # Code Examples
 
@@ -79,6 +82,29 @@ class OrderBook {
         }
     }
 }
+```
+
+**Python Order Book with heapq:**
+
+```python
+import heapq
+
+class OrderBook:
+    def __init__(self):
+        self.bids = []  # max-heap for bids (use negative prices)
+        self.asks = []  # min-heap for asks
+
+    def add_bid(self, price, qty):
+        heapq.heappush(self.bids, (-price, qty))
+
+    def add_ask(self, price, qty):
+        heapq.heappush(self.asks, (price, qty))
+
+    def match(self):
+        while self.bids and self.asks and -self.bids[0][0] >= self.asks[0][0]:
+            bid_price, bid_qty = heapq.heappop(self.bids)
+            ask_price, ask_qty = heapq.heappop(self.asks)
+            # match logic
 ```
 
 # Data Models / Message Formats
@@ -123,7 +149,8 @@ Java PriorityQueue, custom heaps.
 
 # Github-README Links & Related Topics
 
-[[graphs-trees-heaps-and-tries]], [[matching-algorithms]]
+- [Graphs Trees Heaps and Tries](algorithms/graphs-trees-heaps-and-tries/README.md)
+- [Matching Algorithms](algorithms/matching-algorithms/README.md)
 
 # References
 

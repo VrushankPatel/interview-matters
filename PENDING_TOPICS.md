@@ -1,9 +1,4 @@
 # One topic per line. Top is oldest.
-order-book-modeling
-matching-algorithms
-time-in-force-variations
-latency-measurement
-raft-and-leader-election
 design-patterns
 system-design-basics
 load-balancing-and-routing
