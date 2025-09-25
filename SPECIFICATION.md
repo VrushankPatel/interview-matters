@@ -5,11 +5,11 @@ Last update
 2025-09-25
 
 Summary of recent additions
- - concurrent-data-structures
- - threads-executors-futures
- - collections-framework
- - streams-functional-java
- - exception-handling-and-errors
+ - io-and-nio
+ - serialization-and-deserialization
+ - build-tools-maven-gradle
+ - testing-and-mocking-junit-mockito
+ - performance-tuning-and-profiling
 
 Conventions
  - Dir naming: kebab-case.
@@ -105,16 +105,23 @@ New Next Topics Candidates
  - profiling-tools — 'Performance analysis tools'
 
 New Next Topics Candidates
- - advanced-java-concepts — 'Generics, type erasure, and advanced language features'
- - java-security-basics — 'Secure coding practices and cryptography in Java'
- - networking-sockets — 'Low-level network programming with sockets'
- - file-io-nio — 'Efficient file operations with NIO'
- - java-testing-advanced — 'Advanced testing with mocks and frameworks'
- - build-automation — 'CI/CD pipelines with Maven and Gradle'
- - profiling-tools — 'Performance profiling and monitoring tools'
- - concurrent-programming-patterns — 'Common patterns for concurrent programming'
- - java-reflection — 'Runtime inspection and dynamic code'
- - java-annotations — 'Custom annotations and metadata'
+  - advanced-java-concepts — 'Generics, type erasure, and advanced language features'
+  - java-security-basics — 'Secure coding practices and cryptography in Java'
+  - networking-sockets — 'Low-level network programming with sockets'
+  - file-io-nio — 'Efficient file operations with NIO'
+  - java-testing-advanced — 'Advanced testing with mocks and frameworks'
+  - build-automation — 'CI/CD pipelines with Maven and Gradle'
+  - profiling-tools — 'Performance profiling and monitoring tools'
+  - concurrent-programming-patterns — 'Common patterns for concurrent programming'
+  - java-reflection — 'Runtime inspection and dynamic code'
+  - java-annotations — 'Custom annotations and metadata'
+  - java-generics — 'Type safety and erasure in Java'
+  - java-lambda-expressions — 'Functional programming with lambdas'
+  - java-modules — 'Modular system with JPMS'
+  - java-records — 'Immutable data classes'
+  - java-sealed-classes — 'Restricted class hierarchies'
+  - java-text-blocks — 'Multi-line string literals'
+  - java-switch-expressions — 'Enhanced switch statements'
 
 TODO
  - High-level open design decisions and split criteria for oversized topics.
