@@ -1,114 +1,96 @@
 ---
 title: DevOps & Infrastructure as Code
-aliases: []
-tags: [#devops,#infrastructure,#iac]
+aliases: [IaC, DevOps Practices]
+tags: [#devops,#infrastructure,#automation]
 created: 2025-09-25
 updated: 2025-09-25
 ---
 
+# DevOps & Infrastructure as Code
+
 ## Overview
 
-DevOps is a cultural and technical movement that emphasizes collaboration between development and operations teams to automate and streamline the software delivery process. Infrastructure as Code (IaC) is a key practice in DevOps that involves managing and provisioning infrastructure through machine-readable definition files, rather than physical hardware configuration or interactive configuration tools.
+DevOps bridges the gap between development and operations teams, emphasizing collaboration, automation, and rapid delivery. Infrastructure as Code (IaC) enables managing infrastructure through code, promoting consistency, scalability, and version control.
 
 ## Detailed Explanation
 
 ### DevOps Principles
 
-DevOps combines software development (Dev) and IT operations (Ops) to shorten the development lifecycle and provide continuous delivery with high software quality. Key principles include:
-
-- **Automation**: Automate repetitive tasks like testing, deployment, and monitoring.
-- **Continuous Integration/Continuous Deployment (CI/CD)**: Frequent code integration and automated deployment.
-- **Monitoring and Logging**: Real-time monitoring of applications and infrastructure.
-- **Collaboration**: Break down silos between teams.
+- **Culture**: Collaboration between dev, ops, and other stakeholders.
+- **Automation**: Automate repetitive tasks like testing, deployment.
+- **Measurement**: Monitor and measure processes for improvement.
+- **Sharing**: Share tools, knowledge, and responsibilities.
 
 ### Infrastructure as Code
 
-IaC allows infrastructure to be versioned, tested, and deployed like software code. Benefits include:
+IaC defines infrastructure in code files, allowing provisioning via tools.
 
-- **Consistency**: Ensures environments are identical across development, staging, and production.
-- **Scalability**: Easily scale infrastructure up or down.
-- **Version Control**: Track changes and roll back if needed.
+- **Declarative vs Imperative**: Terraform (declarative), Ansible (imperative).
+- **Benefits**: Reusability, testing, disaster recovery.
 
-Popular IaC tools:
+### CI/CD
 
-- **Terraform**: Declarative language for provisioning infrastructure.
-- **Ansible**: Agentless automation tool for configuration management.
-- **CloudFormation**: AWS-specific IaC service.
+Continuous Integration and Deployment pipelines automate software delivery.
+
+- **Tools**: Jenkins, GitHub Actions, CircleCI.
+
+```mermaid
+graph LR
+    A[Code Commit] --> B[Build]
+    B --> C[Test]
+    C --> D[Deploy to Staging]
+    D --> E[Deploy to Production]
+```
 
 ## Real-world Examples & Use Cases
 
-- **Cloud Deployments**: Using Terraform to provision AWS EC2 instances, VPCs, and load balancers.
-- **Configuration Management**: Ansible playbooks to configure servers for web applications.
-- **CI/CD Pipelines**: Jenkins or GitHub Actions automating build, test, and deploy processes.
+- **Cloud Migration**: Use IaC to migrate on-premises to AWS/Azure.
+- **Microservices Deployment**: Automate deployment with Kubernetes and IaC.
+- **Compliance**: Ensure infrastructure meets security standards via code.
 
 ## Code Examples
 
-### Terraform Example
+### Terraform: Provision EC2 Instance
 
 ```hcl
-resource "aws_instance" "example" {
-  ami           = "ami-0c55b159cbfafe1d0"
-  instance_type = "t2.micro"
+provider "aws" {
+  region = "us-east-1"
+}
 
+resource "aws_instance" "web" {
+  ami           = "ami-12345678"
+  instance_type = "t2.micro"
   tags = {
-    Name = "ExampleInstance"
+    Name = "WebServer"
   }
 }
 ```
 
-### Ansible Playbook
+### Ansible: Install Software
 
 ```yaml
 ---
-- name: Install and start Apache
-  hosts: webservers
+- hosts: servers
   become: yes
   tasks:
-    - name: Install Apache
+    - name: Install nginx
       apt:
-        name: apache2
+        name: nginx
         state: present
-    - name: Start Apache
+    - name: Start nginx
       service:
-        name: apache2
+        name: nginx
         state: started
 ```
-
-## Common Pitfalls & Edge Cases
-
-- **State Drift**: Infrastructure changes outside IaC leading to inconsistencies
-- **Secret Management**: Hardcoding credentials in code
-- **Version Compatibility**: Tool versions causing deployment failures
-- **Rollback Complexity**: Difficult to revert complex infrastructure changes
-- **Cost Overruns**: Unmonitored resource provisioning in cloud
-
-## Tools & Libraries
-
-- **IaC Tools**: Terraform, Ansible, Puppet, Chef
-- **CI/CD**: Jenkins, GitHub Actions, GitLab CI, CircleCI
-- **Version Control**: Git, with branching strategies
-- **Monitoring**: Prometheus, ELK Stack
-- **Cloud Providers**: AWS, Azure, GCP with their IaC services
 
 ## References
 
 - [DevOps Handbook](https://itrevolution.com/book/the-devops-handbook/)
 - [Terraform Documentation](https://www.terraform.io/docs)
-- [Ansible Documentation](https://docs.ansible.com/)
+- [Ansible Documentation](https://docs.ansible.com)
 
 ## Github-README Links & Related Topics
 
-- [CI/CD Pipelines](./ci-cd-pipelines/)
-- [Infrastructure Monitoring](./infrastructure-monitoring/)
-- [Container Orchestration](./container-orchestration/)
-
-## CI/CD Pipeline Diagram
-
-```mermaid
-graph TD;
-    A[Code Commit] --> B[Build];
-    B --> C[Test];
-    C --> D[Deploy to Staging];
-    D --> E[Integration Test];
-    E --> F[Deploy to Production];
-```
+- [CI/CD Pipelines](../ci-cd-pipelines/README.md)
+- [Infrastructure as Code with Terraform](../infrastructure-as-code-with-terraform/README.md)
+- [DevOps Infrastructure as Code](../devops-infrastructure-as-code/README.md)
