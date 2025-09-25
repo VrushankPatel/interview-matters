@@ -105,7 +105,7 @@ public class UDPClient {
 }
 ```
 
-# Data Models / Message Formats
+## Data Models / Message Formats
 
 **TCP Stream:**
 
@@ -126,7 +126,7 @@ Datagram with address and data.
 - Java Net package
 - NIO for non-blocking I/O
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 [networking-tcp-ip-http2-tls](../networking-tcp-ip-http2-tls/README.md), [io-and-nio](../io-and-nio/README.md)
 

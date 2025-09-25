@@ -1,10 +1,5 @@
 
 
-java-streams-advanced — 'Advanced stream operations and collectors'
-reflection-and-annotations — 'Runtime inspection and custom annotations'
-java-security-basics — 'Secure coding and cryptography'
-networking-sockets — 'Low-level network programming'
-file-io-nio — 'Efficient file and channel operations'
 java-testing-advanced — 'Mocks, spies, and test frameworks'
 profiling-tools — 'Performance analysis tools'
 backtracking — 'N-Queens, Sudoku, combinatorial problem solving'

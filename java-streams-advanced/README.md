@@ -20,6 +20,13 @@ Key concepts:
 - **Spliterators**: Custom stream sources
 - **Short-circuiting**: Operations like `findFirst()`, `anyMatch()`
 
+```mermaid
+graph LR
+    A[Stream Source] --> B[Intermediate Operations]
+    B --> C[Terminal Operation]
+    B --> D[Parallel Processing]
+```
+
 ## Real-world Examples & Use Cases
 
 - **Data Aggregation**: Grouping and summarizing large datasets.

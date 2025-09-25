@@ -1,12 +1,12 @@
 ---
 title: File I/O and NIO
 aliases: [Java IO, NIO, File Operations]
-tags: [#java,#io]
+tags: [#java, #io]
 created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Overview
+## Overview
 
 Java's IO and NIO APIs provide mechanisms for efficient file and channel operations. Traditional IO uses blocking streams, while NIO introduces non-blocking channels and buffers for better performance in concurrent and large-scale applications.
 
@@ -49,7 +49,7 @@ graph TD
 - **Network Servers**: Using channels for high-throughput network I/O.
 - **File Watching**: Monitoring file system changes with WatchService.
 
-# Code Examples
+## Code Examples
 
 ```java
 // Traditional IO: Reading a text file
@@ -122,24 +122,24 @@ public class ChannelCopyExample {
 }
 ```
 
-# Common Pitfalls & Edge Cases
+## Common Pitfalls & Edge Cases
 
 - **Resource Leaks**: Always use try-with-resources to close streams/channels.
 - **Encoding Issues**: Specify charset (e.g., StandardCharsets.UTF_8) for text operations.
 - **Large Files**: Traditional IO may cause OutOfMemoryError; use NIO channels.
 - **File Locking**: Handle file locks in concurrent environments.
 
-# Tools & Libraries
+## Tools & Libraries
 
 - Java IO/NIO APIs
 - Apache Commons IO for utilities
 
-# References
+## References
 
 - [Oracle Java IO Tutorial](https://docs.oracle.com/javase/tutorial/essential/io/)
 - [Oracle Java NIO Tutorial](https://docs.oracle.com/javase/tutorial/essential/io/fileio.html)
 - [Java NIO Overview](https://www.baeldung.com/java-nio)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 [IO and NIO](../java/io-and-nio/README.md), [Java Streams](../java/streams-functional-java/README.md), [Serialization and Deserialization](../java/serialization-and-deserialization/README.md)
