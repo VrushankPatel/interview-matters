@@ -6,11 +6,11 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Overview
+## Overview
 
 Garbage collection (GC) is an automatic memory management mechanism in the Java Virtual Machine (JVM) that identifies and reclaims memory occupied by objects no longer reachable from the application. It prevents memory leaks, reduces manual memory management errors, and optimizes heap usage for better application performance.
 
-# Detailed Explanation
+## Detailed Explanation
 
 ## Basic Concepts
 - **Heap**: Divided into Young Generation (Eden, Survivor spaces) and Old Generation.
@@ -36,12 +36,12 @@ graph TD
     E --> F[Major GC - Mark-Compact]
 ```
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 - **Web Applications**: Tomcat servers use GC to manage session data and prevent OOM errors.
 - **Big Data Processing**: Spark applications rely on efficient GC for in-memory computations.
 - **Microservices**: Low-latency services use G1 or ZGC to minimize response times.
 
-# Code Examples
+## Code Examples
 
 ```java
 public class GCExample {
@@ -57,20 +57,20 @@ public class GCExample {
 }
 ```
 
-# Common Pitfalls & Edge Cases
+## Common Pitfalls & Edge Cases
 - **GC Pauses**: Long pauses in CMS or Parallel GC can affect latency-sensitive apps.
 - **Memory Leaks**: Soft references or static collections can prevent GC.
 - **Tuning**: Incorrect heap sizes lead to frequent GC or OOM.
 
-# Tools & Libraries
+## Tools & Libraries
 - **JVM Tools**: jstat, jmap, VisualVM for monitoring GC.
 - **Libraries**: Eclipse Memory Analyzer for heap dumps.
 
-# References
+## References
 - [Oracle GC Tuning Guide](https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/)
 - [OpenJDK GC Documentation](https://openjdk.java.net/groups/hotspot/docs/)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 - [JVM Internals & Class Loading](../jvm-internals-and-class-loading/README.md)
 - [Performance Tuning and Profiling](../java/jvm-performance-tuning/README.md)
 - [Memory Models](../memory-models/README.md)

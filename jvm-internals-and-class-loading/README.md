@@ -6,11 +6,11 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Overview
+## Overview
 
 JVM Internals & Class Loading delves into the internal workings of the Java Virtual Machine, including class loading mechanisms, bytecode execution, and JIT compilation. Understanding these concepts is crucial for performance tuning and debugging.
 
-# Detailed Explanation
+## Detailed Explanation
 
 ## JVM Architecture
 
@@ -37,14 +37,14 @@ JVM Internals & Class Loading delves into the internal workings of the Java Virt
 - **Bytecode**: Platform-independent code executed by JVM.
 - **JIT Compiler**: Compiles hot spots to native code for performance.
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 - **Application Startup**: Understanding class loading for faster boot times.
 - **Plugin Systems**: Custom class loaders for dynamic loading.
 - **Performance Tuning**: Analyzing JIT compilation for optimization.
 - **Security**: Class loader isolation for sandboxing.
 
-# Code Examples
+## Code Examples
 
 ## Custom Class Loader
 
@@ -90,7 +90,7 @@ public class ClassLoaderExample {
 }
 ```
 
-# Journey / Sequence
+## Journey / Sequence
 
 ```mermaid
 graph TD
@@ -102,25 +102,25 @@ graph TD
     F --> G[JIT Compilation for Hot Code]
 ```
 
-# Common Pitfalls & Edge Cases
+## Common Pitfalls & Edge Cases
 
 - Class loader leaks causing memory issues.
 - ClassNotFoundException due to incorrect classpath.
 - PermGen/Metaspace exhaustion.
 - Incompatible bytecode versions.
 
-# Tools & Libraries
+## Tools & Libraries
 
 - **JVM Tools**: jps, jstat, jmap for monitoring.
 - **VisualVM**: GUI for JVM analysis.
 - **JConsole**: Monitoring and management.
 
-# References
+## References
 
 - [Oracle JVM Specification](https://docs.oracle.com/javase/specs/jvms/se8/html/)
 - [Understanding the JVM Internals](https://www.oracle.com/technetwork/java/javase/tech/index-jsp-140228.html)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 - [Java Fundamentals](../java-fundamentals/README.md)
 - [Garbage Collection Algorithms](../garbage-collection-algorithms/README.md)

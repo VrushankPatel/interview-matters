@@ -6,11 +6,11 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Overview
+## Overview
 
 OOP Principles in Java covers the four fundamental principles of Object-Oriented Programming: Encapsulation, Inheritance, Polymorphism, and Abstraction. These principles guide the design of modular, maintainable, and reusable code.
 
-# Detailed Explanation
+## Detailed Explanation
 
 ## Encapsulation
 
@@ -63,13 +63,13 @@ classDiagram
     Shape <|-- Square
 ```
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 - **Banking System**: Account classes with inheritance (SavingsAccount, CheckingAccount).
 - **Vehicle Rental**: Polymorphism for different vehicle types.
 - **Employee Management**: Encapsulation for employee data, abstraction for roles.
 
-# Code Examples
+## Code Examples
 
 ## Encapsulation
 
@@ -181,24 +181,24 @@ public class Truck implements Drivable {
 }
 ```
 
-# Common Pitfalls & Edge Cases
+## Common Pitfalls & Edge Cases
 
 - Deep inheritance hierarchies leading to complexity.
 - Incorrect use of access modifiers.
 - Forgetting to override methods properly.
 - Multiple inheritance issues with interfaces.
 
-# Tools & Libraries
+## Tools & Libraries
 
 - **Java Standard Library**: Built-in support for OOP.
 - **Design Patterns Libraries**: For advanced OOP implementations.
 
-# References
+## References
 
 - [Oracle OOP Concepts](https://docs.oracle.com/javase/tutorial/java/concepts/)
 - [Gang of Four Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 - [Java Fundamentals](../java-fundamentals/README.md)
 - [Design Patterns](../design-patterns/README.md)

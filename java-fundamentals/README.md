@@ -6,7 +6,7 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Overview
+## Overview
 
 Java Fundamentals covers the core syntax, data types, control structures, and basic concepts of the Java programming language. This forms the foundation for all Java development.
 
@@ -122,7 +122,7 @@ public class Person {
 }
 ```
 
-# Common Pitfalls & Edge Cases
+## Common Pitfalls & Edge Cases
 
 - Null pointer exceptions with reference types.
 - Integer overflow with primitive types.
@@ -139,7 +139,7 @@ public class Person {
 - [Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/)
 - [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se8/html/index.html)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 - [OOP Principles in Java](../oop-principles-in-java/README.md)
 - [JVM Internals and Class Loading](../jvm-internals-and-class-loading/README.md)
