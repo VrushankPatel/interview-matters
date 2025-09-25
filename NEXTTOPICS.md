@@ -1,8 +1,3 @@
-Twitter System Design
-Instagram System Design
-WhatsApp Messaging System
-YouTube System Design
-TikTok System Design
 Java Fundamentals
 OOP Principles in Java
 JVM Internals & Class Loading
