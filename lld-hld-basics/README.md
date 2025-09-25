@@ -1,7 +1,7 @@
 ---
 title: LLD HLD Basics
 aliases: [low level design, high level design, lld hld]
-tags: [#system-design, #design-patterns]
+tags: [#system-design,#design-patterns]
 created: 2025-09-25
 updated: 2025-09-25
 ---

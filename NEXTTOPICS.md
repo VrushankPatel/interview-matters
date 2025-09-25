@@ -1,9 +1,4 @@
 
-Collections & Data Structures
-Java Stream API & Functional Programming
-System Design Basics
-CAP Theorem & Distributed Systems
-LLD HLD basics
 High Scalability Patterns
 Replication vs Sharding vs Partitioning
 Caching
