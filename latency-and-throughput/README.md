@@ -89,7 +89,7 @@ CompletableFuture.supplyAsync(() -> slowOperation())
 
 - **Monitoring**: Prometheus, Grafana, New Relic, Datadog.
 - **Benchmarking**: JMeter, Gatling, Apache Bench, wrk.
-- **Libraries**: RxJava (reactive), Akka (actors), Netty (async I/O).
+- **Libraries**: RxJava (reactive), Akka (actors), Netty (async I/O), Reactor (reactive).
 - **Cloud**: AWS CloudWatch, GCP Monitoring, Azure Monitor.
 
 ## Common Pitfalls & Edge Cases
@@ -100,25 +100,7 @@ CompletableFuture.supplyAsync(() -> slowOperation())
 - **Edge Case**: Flash sales cause throughput spikes, leading to latency degradation; implement rate limiting and auto-scaling.
 - **Distributed Latency**: Network hops add latency; use CDNs and edge computing.
 
-## Tools & Libraries
 
-- **Monitoring**: Prometheus, Grafana, New Relic, Datadog.
-- **Benchmarking**: JMeter, Gatling, Apache Bench, wrk.
-- **Libraries**: RxJava (reactive), Akka (actors), Netty (async I/O).
-- **Cloud**: AWS CloudWatch, GCP Monitoring, Azure Monitor.
-
-## Common Pitfalls & Edge Cases
-
-- **Latency Spikes**: GC pauses, network jitter; monitor with APM tools.
-- **Throughput Limits**: Bottlenecks in single-threaded components.
-- **Edge Case**: Bursty traffic causes queueing, increasing latency.
-- **Measurement Error**: Ignoring percentiles leads to optimistic views.
-
-## Tools & Libraries
-
-- **Monitoring**: Prometheus, Grafana, New Relic.
-- **Benchmarking**: JMeter, Gatling, wrk.
-- **Libraries**: Reactor (reactive), Akka (actors).
 
 ## References
 
