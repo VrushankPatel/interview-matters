@@ -1,5 +1,0 @@
-Microservices Security
-Cloud Computing Basics
-Serverless Function Patterns
-Infrastructure Monitoring
-Container Orchestration Patterns
