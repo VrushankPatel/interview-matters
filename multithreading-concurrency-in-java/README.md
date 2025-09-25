@@ -1,33 +1,34 @@
 ---
 title: Multithreading & Concurrency in Java
-aliases: [Java Concurrency, Threading in Java]
-tags: [#java, #concurrency]
+aliases: ["Java Concurrency", "Threading in Java"]
+tags: ["#java", "#concurrency", "#multithreading"]
 created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Multithreading & Concurrency in Java
+# Overview
 
-## Overview
+Multithreading & Concurrency in Java covers the principles and practices of writing concurrent programs using Java's threading model, synchronization mechanisms, and concurrent utilities. Mastering these concepts is essential for building scalable, responsive applications that can leverage multi-core processors effectively.
 
-Multithreading and concurrency in Java enable programs to perform multiple tasks simultaneously, improving performance and responsiveness. This topic covers thread creation, synchronization, concurrent data structures, and best practices for writing thread-safe code.
+# Detailed Explanation
 
-## Detailed Explanation
-
-### Threads and Processes
-
-- **Process**: Independent program execution with its own memory space
-- **Thread**: Lightweight subprocess within a process, sharing memory
+## Thread Fundamentals
 
 ### Thread Lifecycle
 
-1. **New**: Thread created but not started
-2. **Runnable**: Ready to run, waiting for CPU
-3. **Running**: Currently executing
-4. **Blocked**: Waiting for a resource (I/O, lock)
-5. **Terminated**: Execution completed
+```mermaid
+stateDiagram-v2
+    [*] --> New
+    New --> Runnable : start()
+    Runnable --> Running : scheduled
+    Running --> Runnable : yield/preempted
+    Running --> Blocked : wait/sleep/IO
+    Blocked --> Runnable : notify/interrupt
+    Running --> Terminated : complete/exception
+    Runnable --> Terminated : stop/interrupt
+```
 
-### Thread Creation
+### Creating Threads
 
 #### Extending Thread Class
 
@@ -35,12 +36,16 @@ Multithreading and concurrency in Java enable programs to perform multiple tasks
 class MyThread extends Thread {
     @Override
     public void run() {
-        System.out.println("Thread running");
+        System.out.println("Thread running: " + Thread.currentThread().getName());
     }
 }
 
-MyThread thread = new MyThread();
-thread.start();
+public class ThreadExample {
+    public static void main(String[] args) {
+        MyThread thread = new MyThread();
+        thread.start(); // Don't call run() directly
+    }
+}
 ```
 
 #### Implementing Runnable
@@ -49,55 +54,153 @@ thread.start();
 class MyRunnable implements Runnable {
     @Override
     public void run() {
-        System.out.println("Runnable running");
+        System.out.println("Runnable running: " + Thread.currentThread().getName());
     }
 }
 
-Thread thread = new Thread(new MyRunnable());
-thread.start();
+public class RunnableExample {
+    public static void main(String[] args) {
+        Thread thread = new Thread(new MyRunnable());
+        thread.start();
+    }
+}
 ```
 
-### Synchronization
+## Synchronization
 
-Synchronization prevents race conditions by ensuring only one thread accesses shared resources at a time.
-
-#### Synchronized Methods
+### Synchronized Methods and Blocks
 
 ```java
 class Counter {
     private int count = 0;
     
+    // Synchronized method
     public synchronized void increment() {
         count++;
     }
     
-    public synchronized int getCount() {
+    // Synchronized block
+    public void incrementBlock() {
+        synchronized(this) {
+            count++;
+        }
+    }
+    
+    public int getCount() {
         return count;
     }
 }
 ```
 
-#### Synchronized Blocks
+### Volatile Keyword
 
 ```java
-public void increment() {
-    synchronized(this) {
-        count++;
+class VolatileExample {
+    private volatile boolean flag = false;
+    
+    public void setFlag(boolean value) {
+        flag = value;
+    }
+    
+    public boolean getFlag() {
+        return flag;
     }
 }
 ```
 
-### Locks
+## Concurrent Collections
 
-Java provides more flexible locking mechanisms through the `java.util.concurrent.locks` package.
+### Thread-Safe Collections
+
+| Collection | Description | Use Case |
+|------------|-------------|----------|
+| ConcurrentHashMap | Thread-safe HashMap | High-concurrency read/write operations |
+| CopyOnWriteArrayList | Thread-safe ArrayList | Read-heavy, infrequent writes |
+| BlockingQueue | Thread-safe queue with blocking operations | Producer-consumer patterns |
+| ConcurrentLinkedQueue | Non-blocking concurrent queue | High-performance concurrent access |
+
+```java
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+public class ConcurrentCollectionsExample {
+    public static void main(String[] args) {
+        // ConcurrentHashMap
+        ConcurrentHashMap<String, Integer> map = new ConcurrentHashMap<>();
+        map.put("key1", 1);
+        
+        // CopyOnWriteArrayList
+        CopyOnWriteArrayList<String> list = new CopyOnWriteArrayList<>();
+        list.add("item1");
+    }
+}
+```
+
+## Executor Framework
+
+### Thread Pools
+
+```java
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ExecutorExample {
+    public static void main(String[] args) {
+        // Fixed thread pool
+        ExecutorService executor = Executors.newFixedThreadPool(5);
+        
+        for (int i = 0; i < 10; i++) {
+            executor.submit(() -> {
+                System.out.println("Task executed by: " + Thread.currentThread().getName());
+            });
+        }
+        
+        executor.shutdown();
+    }
+}
+```
+
+### Callable and Future
+
+```java
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+public class CallableExample {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        
+        Callable<Integer> task = () -> {
+            Thread.sleep(1000);
+            return 42;
+        };
+        
+        Future<Integer> future = executor.submit(task);
+        
+        // Do other work...
+        
+        Integer result = future.get(); // Blocks until result available
+        System.out.println("Result: " + result);
+        
+        executor.shutdown();
+    }
+}
+```
+
+## Synchronization Primitives
+
+### Locks
 
 ```java
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-class Counter {
+class LockExample {
+    private final Lock lock = new ReentrantLock();
     private int count = 0;
-    private Lock lock = new ReentrantLock();
     
     public void increment() {
         lock.lock();
@@ -110,170 +213,156 @@ class Counter {
 }
 ```
 
-### Concurrent Collections
-
-Thread-safe collections from `java.util.concurrent`:
-
-- `ConcurrentHashMap`: Thread-safe HashMap
-- `CopyOnWriteArrayList`: Thread-safe ArrayList for read-heavy operations
-- `BlockingQueue`: Thread-safe queue with blocking operations
-
-### Executors and Thread Pools
-
-Managing threads manually can be complex. Executors provide a higher-level API.
+### Semaphores
 
 ```java
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 
-ExecutorService executor = Executors.newFixedThreadPool(10);
-executor.submit(() -> {
-    System.out.println("Task executed by: " + Thread.currentThread().getName());
-});
-executor.shutdown();
+class SemaphoreExample {
+    private final Semaphore semaphore = new Semaphore(3); // Allow 3 concurrent accesses
+    
+    public void accessResource() {
+        try {
+            semaphore.acquire();
+            // Access shared resource
+            System.out.println("Accessing resource: " + Thread.currentThread().getName());
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        } finally {
+            semaphore.release();
+        }
+    }
+}
 ```
 
 ## Real-world Examples & Use Cases
 
 - **Web Servers**: Handling multiple client requests concurrently
-- **Data Processing**: Parallel processing of large datasets
-- **GUI Applications**: Keeping UI responsive while performing background tasks
-- **Game Development**: Managing game loops, physics, and rendering in separate threads
+- **Database Connection Pools**: Managing limited database connections
+- **File Processing**: Parallel processing of large files
+- **GUI Applications**: Keeping UI responsive during long operations
+- **Game Development**: Managing game loops, physics, and rendering threads
 
-## Code Examples
+# Code Examples
 
-### Producer-Consumer Problem
+### Producer-Consumer Pattern
 
 ```java
-import java.util.LinkedList;
-import java.util.Queue;
-
-class ProducerConsumer {
-    private Queue<Integer> queue = new LinkedList<>();
-    private int capacity = 5;
-    
-    public synchronized void produce(int value) throws InterruptedException {
-        while (queue.size() == capacity) {
-            wait();
-        }
-        queue.add(value);
-        System.out.println("Produced: " + value);
-        notify();
-    }
-    
-    public synchronized int consume() throws InterruptedException {
-        while (queue.isEmpty()) {
-            wait();
-        }
-        int value = queue.poll();
-        System.out.println("Consumed: " + value);
-        notify();
-        return value;
-    }
-}
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 class Producer implements Runnable {
-    private ProducerConsumer pc;
+    private final BlockingQueue<Integer> queue;
     
-    Producer(ProducerConsumer pc) {
-        this.pc = pc;
+    Producer(BlockingQueue<Integer> queue) {
+        this.queue = queue;
     }
     
     @Override
     public void run() {
-        for (int i = 0; i < 10; i++) {
-            try {
-                pc.produce(i);
+        try {
+            for (int i = 0; i < 10; i++) {
+                queue.put(i);
+                System.out.println("Produced: " + i);
                 Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
     }
 }
 
 class Consumer implements Runnable {
-    private ProducerConsumer pc;
+    private final BlockingQueue<Integer> queue;
     
-    Consumer(ProducerConsumer pc) {
-        this.pc = pc;
+    Consumer(BlockingQueue<Integer> queue) {
+        this.queue = queue;
     }
     
     @Override
     public void run() {
-        for (int i = 0; i < 10; i++) {
-            try {
-                pc.consume();
+        try {
+            while (true) {
+                Integer item = queue.take();
+                System.out.println("Consumed: " + item);
                 Thread.sleep(200);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
     }
 }
 
 public class ProducerConsumerDemo {
     public static void main(String[] args) {
-        ProducerConsumer pc = new ProducerConsumer();
+        BlockingQueue<Integer> queue = new LinkedBlockingQueue<>(5);
         
-        Thread producerThread = new Thread(new Producer(pc));
-        Thread consumerThread = new Thread(new Consumer(pc));
+        Thread producer = new Thread(new Producer(queue));
+        Thread consumer = new Thread(new Consumer(queue));
         
-        producerThread.start();
-        consumerThread.start();
+        producer.start();
+        consumer.start();
     }
 }
 ```
 
-### Atomic Variables
+### Thread-Safe Singleton
 
 ```java
-import java.util.concurrent.atomic.AtomicInteger;
-
-class AtomicCounter {
-    private AtomicInteger count = new AtomicInteger(0);
+public class ThreadSafeSingleton {
+    private static volatile ThreadSafeSingleton instance;
     
-    public void increment() {
-        count.incrementAndGet();
-    }
+    private ThreadSafeSingleton() {}
     
-    public int getCount() {
-        return count.get();
-    }
-}
-
-public class AtomicDemo {
-    public static void main(String[] args) throws InterruptedException {
-        AtomicCounter counter = new AtomicCounter();
-        
-        Runnable task = () -> {
-            for (int i = 0; i < 1000; i++) {
-                counter.increment();
+    public static ThreadSafeSingleton getInstance() {
+        if (instance == null) {
+            synchronized (ThreadSafeSingleton.class) {
+                if (instance == null) {
+                    instance = new ThreadSafeSingleton();
+                }
             }
-        };
-        
-        Thread t1 = new Thread(task);
-        Thread t2 = new Thread(task);
-        
-        t1.start();
-        t2.start();
-        
-        t1.join();
-        t2.join();
-        
-        System.out.println("Final count: " + counter.getCount()); // Should be 2000
+        }
+        return instance;
     }
 }
 ```
 
-## References
+# Journey / Sequence
 
-- [Oracle Concurrency Tutorial](https://docs.oracle.com/javase/tutorial/essential/concurrency/)
+1. **Thread Creation**: Instantiate Thread or implement Runnable
+2. **Thread Start**: Call start() method to begin execution
+3. **Execution**: run() method executes in separate thread
+4. **Synchronization**: Use locks/synchronized blocks for shared resources
+5. **Communication**: Use wait/notify for thread coordination
+6. **Completion**: Thread terminates when run() completes
+7. **Cleanup**: Ensure proper resource cleanup
+
+# Common Pitfalls & Edge Cases
+
+- **Race Conditions**: Unprotected shared state modifications
+- **Deadlocks**: Circular waiting for locks
+- **Starvation**: Thread unable to acquire resources
+- **Memory Visibility**: Changes not visible across threads without proper synchronization
+- **Thread Leaks**: Threads not properly terminated
+- **InterruptedException**: Proper handling of thread interruption
+
+# Tools & Libraries
+
+- **Java Concurrency Utilities**: java.util.concurrent package
+- **Thread Dump Analysis**: jstack, VisualVM
+- **Performance Monitoring**: JConsole, JMX
+- **Testing**: ConcurrentUnit, JCStress for concurrency testing
+
+# References
+
+- [Oracle Java Concurrency Tutorial](https://docs.oracle.com/javase/tutorial/essential/concurrency/)
 - [Java Concurrency in Practice](https://www.amazon.com/Java-Concurrency-Practice-Brian-Goetz/dp/0321349601)
-- [Baeldung Java Concurrency](https://www.baeldung.com/java-concurrency)
+- [Baeldung Concurrency](https://www.baeldung.com/java-concurrency)
 
-## Github-README Links & Related Topics
+# Github-README Links & Related Topics
 
 - [Java Fundamentals](../java-fundamentals/README.md)
-- [Concurrent Collections](../concurrent-collections/README.md)
-- [Java Virtual Threads](../java-virtual-threads/README.md)
+- [Java Volatile Keyword](../java-volatile-keyword/README.md)
+- [Java Synchronized Blocks](../java-synchronized-blocks/README.md)
+- [Java ThreadLocal](../java-threadlocal/README.md)
