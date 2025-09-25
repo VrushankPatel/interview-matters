@@ -6,9 +6,7 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Latency and Throughput
-
-## Overview
+# Overview
 
 Latency and throughput are fundamental metrics in system design and performance engineering. Latency refers to the time delay between initiating a request and receiving a response, often measured in milliseconds or microseconds. Throughput, on the other hand, measures the rate at which operations are completed, typically expressed as operations per second (ops/sec) or requests per second (RPS). These metrics are interconnected; optimizing for one often impacts the other, requiring careful balancing based on system requirements.
 
@@ -175,7 +173,7 @@ result2 = expensive_operation(5)
 print(f"Second call: {time.time() - start:.3f}s")
 ```
 
-## References
+# References
 
 - [Latency (engineering) - Wikipedia](https://en.wikipedia.org/wiki/Latency_(engineering))
 - [Throughput - Wikipedia](https://en.wikipedia.org/wiki/Throughput)
