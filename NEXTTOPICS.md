@@ -1,8 +1,3 @@
-- Concurrency & Parallelism
-- URL Shortener
-- Netflix Video Streaming
-- Instagram System Design
-- Facebook News Feed
 - Java Fundamentals
 - OOP Principles in Java
 - JVM Internals & Class Loading
@@ -13,3 +8,13 @@
 - System Design Basics
 - High Scalability Patterns
 - CAP Theorem & Distributed Systems
+- Twitter System Design
+- YouTube System Design
+- WhatsApp System Design
+- Uber System Design
+- Airbnb System Design
+- Google Search Engine
+- Dropbox File Storage
+- LinkedIn Social Network
+- TikTok System Design
+- Zoom Video Conferencing

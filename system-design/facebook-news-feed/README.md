@@ -1,12 +1,10 @@
 ---
 title: Facebook News Feed
 aliases: [Social Media Feed Design]
-tags: [#system-design,#scalability,#real-time]
+tags: [#system-design, #scalability, #real-time]
 created: 2025-09-25
 updated: 2025-09-25
 ---
-
-# Facebook News Feed
 
 ## Overview
 
@@ -145,8 +143,8 @@ public class FeedCache {
 
 ## Github-README Links & Related Topics
 
-- [Microservices Architecture](../microservices-architecture/README.md)
-- [Caching Strategies](../caching-strategies/README.md)
-- [Machine Learning in Infrastructure](../machine-learning-infrastructure/README.md)
-- [Event-Driven Architecture](../event-driven-architecture/README.md)
-- [Distributed Tracing](../distributed-tracing-and-observability/README.md)
+- [microservices-architecture](../microservices-architecture/)
+- [caching](../caching/)
+- [machine-learning-in-system-design](../machine-learning-in-system-design/)
+- [event-driven-systems](../event-driven-systems/)
+- [distributed-tracing](../distributed-tracing/)
