@@ -49,6 +49,20 @@ public class MyBenchmark {
 }
 ```
 
+# Common Pitfalls & Edge Cases
+
+- **Observer Effect**: Profiling tools can alter application performance.
+- **Misinterpretation**: Confusing symptoms with causes.
+- **Environment Differences**: Profiling in dev vs production.
+- **Memory Leaks**: False positives in heap analysis.
+
+# Tools & Libraries
+
+- VisualVM: Free JVM monitoring and profiling tool.
+- JMH: Java Microbenchmark Harness for accurate benchmarks.
+- JProfiler: Commercial profiler with advanced features.
+- YourKit: Another commercial profiling tool.
+
 # References
 
 - [VisualVM](https://visualvm.github.io/)

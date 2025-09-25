@@ -90,6 +90,20 @@ public class SpyExampleTest {
 }
 ```
 
+# Common Pitfalls & Edge Cases
+
+- **Over-mocking**: Leads to brittle tests that break with implementation changes.
+- **Incomplete Verification**: Not checking all important interactions.
+- **Mock vs Spy Confusion**: Using mocks when spies are more appropriate.
+- **Test Data Management**: Hardcoded test data causing maintenance issues.
+
+# Tools & Libraries
+
+- JUnit 5: Testing framework with annotations and assertions.
+- Mockito: Mocking framework for creating test doubles.
+- AssertJ: Fluent assertions for readable tests.
+- TestContainers: For integration tests with real dependencies.
+
 # References
 
 - [JUnit 5 User Guide](https://junit.org/junit5/docs/current/user-guide/)

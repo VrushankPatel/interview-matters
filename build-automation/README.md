@@ -74,6 +74,20 @@ test {
 }
 ```
 
+# Common Pitfalls & Edge Cases
+
+- **Dependency Conflicts**: Version mismatches in transitive dependencies.
+- **Slow Builds**: Not using incremental builds or parallel execution.
+- **Plugin Misconfiguration**: Incorrect plugin versions or settings.
+- **Repository Issues**: Slow or unreliable artifact repositories.
+
+# Tools & Libraries
+
+- Maven: Declarative build management with POM.
+- Gradle: Flexible build automation with Groovy/Kotlin DSL.
+- Jenkins: CI/CD server for automated pipelines.
+- GitHub Actions: Cloud-based CI/CD for repositories.
+
 # References
 
 - [Maven Documentation](https://maven.apache.org/guides/)

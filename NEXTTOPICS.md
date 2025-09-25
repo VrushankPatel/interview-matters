@@ -1,8 +1,3 @@
-file-io-nio — 'Efficient file operations with NIO'
-java-testing-advanced — 'Advanced testing with mocks and frameworks'
-build-automation — 'CI/CD pipelines with Maven and Gradle'
-profiling-tools — 'Performance profiling and monitoring tools'
-concurrent-programming-patterns — 'Common patterns for concurrent programming'
 java-reflection — 'Runtime inspection and dynamic code'
 java-annotations — 'Custom annotations and metadata'
 backtracking — 'N-Queens, Sudoku, combinatorial problem solving'
