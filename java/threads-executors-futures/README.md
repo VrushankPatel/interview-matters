@@ -1,7 +1,7 @@
 ---
 title: Threads, Executors, and Futures
 aliases: [Java Threading, Asynchronous Programming]
-tags: [#java, #concurrency, #interviews]
+tags: [#java, #interviews]
 created: 2025-09-25
 updated: 2025-09-25
 ---
@@ -21,6 +21,13 @@ Threads, Executors, and Futures form the foundation of concurrent programming in
 - **Futures:** Represent pending results; Future for blocking, CompletableFuture for non-blocking with callbacks.
 
 Key concepts: thread lifecycle, pool sizing, exception handling in async tasks.
+
+## Common Interview Questions
+- What is the difference between Runnable and Callable?
+- How do you properly shut down an ExecutorService?
+- Explain the benefits of CompletableFuture over Future.
+- How does thread pool sizing affect performance?
+- What happens if you call future.get() on a task that throws an exception?
 
 ## Real-world Examples & Use Cases
 - **Web servers:** Handling multiple client requests.

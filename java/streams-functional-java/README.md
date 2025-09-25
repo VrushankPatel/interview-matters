@@ -1,7 +1,7 @@
 ---
 title: Streams and Functional Java
 aliases: [Java Streams API, Functional Programming in Java]
-tags: [#java, #functional-programming, #interviews]
+tags: [#java, #interviews]
 created: 2025-09-25
 updated: 2025-09-25
 ---
@@ -19,6 +19,13 @@ Java Streams API enables functional-style operations on collections, supporting 
 Streams represent sequences of elements supporting aggregate operations like filter, map, reduce. They are lazy, intermediate operations don't execute until terminal operation. Parallel streams leverage multiple cores.
 
 Functional interfaces: Predicate, Function, Consumer, Supplier.
+
+## Common Interview Questions
+- What is the difference between intermediate and terminal operations in streams?
+- When should you use parallel streams?
+- How do you handle exceptions in stream operations?
+- Explain the concept of lazy evaluation in streams.
+- What are the benefits of using streams over traditional loops?
 
 ## Real-world Examples & Use Cases
 - **Data processing:** Filtering logs, aggregating metrics.

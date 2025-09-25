@@ -1,7 +1,7 @@
 ---
 title: Concurrent Data Structures
 aliases: [Concurrent Collections, Thread-Safe Data Structures]
-tags: [#java, #concurrency, #interviews]
+tags: [#java, #interviews]
 created: 2025-09-25
 updated: 2025-09-25
 ---
@@ -22,6 +22,13 @@ Key features:
 - **Atomic operations:** Methods like putIfAbsent ensure thread-safety without external locks.
 - **Weakly consistent iterators:** Iterators reflect state at creation time, avoiding ConcurrentModificationException.
 - **Performance:** Designed for high concurrency with minimal contention.
+
+## Common Interview Questions
+- What is the difference between ConcurrentHashMap and synchronized HashMap?
+- How does ConcurrentHashMap achieve thread-safety without locking the entire map?
+- When should you use CopyOnWriteArrayList over ArrayList in multi-threaded environments?
+- Explain the concept of lock-striping in ConcurrentHashMap.
+- What are the trade-offs of using concurrent collections versus manual synchronization?
 
 ## Real-world Examples & Use Cases
 - **Caching:** ConcurrentHashMap in in-memory caches for web servers.

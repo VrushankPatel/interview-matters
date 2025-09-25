@@ -1,7 +1,7 @@
 ---
 title: Exception Handling and Errors
 aliases: [Java Exceptions, Error Management]
-tags: [#java, #error-handling, #interviews]
+tags: [#java, #interviews]
 created: 2025-09-25
 updated: 2025-09-25
 ---
@@ -19,6 +19,13 @@ Exception handling in Java manages runtime errors gracefully. Checked exceptions
 Hierarchy: Throwable > Exception (checked/unchecked) > RuntimeException. Errors are JVM issues. Use try-catch-finally, or try-with-resources for AutoCloseable.
 
 Best practices: Catch specific exceptions, avoid catching Exception, log appropriately.
+
+## Common Interview Questions
+- What is the difference between checked and unchecked exceptions?
+- When should you use try-with-resources?
+- How do you create custom exceptions in Java?
+- Explain the finally block and when it executes.
+- What are the best practices for exception handling in Java?
 
 ## Real-world Examples & Use Cases
 - **File I/O:** Handling FileNotFoundException.

@@ -15,6 +15,11 @@ Summary of recent additions
  - collections-framework
  - streams-functional-java
  - exception-handling-and-errors
+ - concurrent-data-structures
+ - threads-executors-futures
+ - collections-framework
+ - streams-functional-java
+ - exception-handling-and-errors
 
 Conventions
  - Dir naming: kebab-case.

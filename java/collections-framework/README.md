@@ -1,7 +1,7 @@
 ---
 title: Collections Framework
 aliases: [Java Collections, Data Structures in Java]
-tags: [#java, #data-structures, #interviews]
+tags: [#java, #algorithms, #interviews]
 created: 2025-09-25
 updated: 2025-09-25
 ---
@@ -19,6 +19,13 @@ Java Collections Framework provides interfaces and implementations for storing a
 Core interfaces: Collection (List, Set, Queue), Map. Implementations vary in performance: ArrayList for indexed access, LinkedList for insertions, HashMap for fast lookups. Generics ensure type safety.
 
 Complexity: HashMap O(1) average for get/put, TreeMap O(log n) for ordered operations.
+
+## Common Interview Questions
+- What is the difference between ArrayList and LinkedList?
+- How does HashMap handle collisions?
+- When would you use TreeMap over HashMap?
+- Explain the fail-fast behavior of iterators in collections.
+- How do you make a collection thread-safe?
 
 ## Real-world Examples & Use Cases
 - **Lists:** Shopping carts (ArrayList).
