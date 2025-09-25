@@ -88,7 +88,7 @@ sequenceDiagram
 - JMX, Micrometer for metrics.
 
 ## Github-README Links & Related Topics
-Related: [[garbage-collection-algorithms]], [[performance-tuning-and-profiling]], [[jvm-internals-and-classloading]]
+[garbage-collection-algorithms](../garbage-collection-algorithms/README.md), [performance-tuning-and-profiling](../performance-tuning-and-profiling/README.md), [jvm-internals-and-classloading](../jvm-internals-and-classloading/README.md)
 
 ## References
 - https://docs.oracle.com/en/java/javase/17/gctuning/
