@@ -141,7 +141,7 @@ sequenceDiagram
 - Java ConcurrentSkipListMap.
 
 ## Github-README Links & Related Topics
-Related: [[data-structures-advanced]], [[bit-manipulation]], [[caching-patterns]]
+Related: [data-structures-advanced](../data-structures-advanced/), [bit-manipulation](../bit-manipulation/), [caching-patterns](../../system-design/caching-patterns/)
 
 ## References
 - https://en.wikipedia.org/wiki/Bloom_filter

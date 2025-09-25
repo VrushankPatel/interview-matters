@@ -141,7 +141,7 @@ sequenceDiagram
 - No external tools.
 
 ## Github-README Links & Related Topics
-Related: [[sorting-algorithms]], [[dynamic-programming-and-greedy]], [[computational-geometry]]
+Related: [sorting-algorithms](../sorting-algorithms/), [dynamic-programming-and-greedy](../dynamic-programming-and-greedy/), [computational-geometry](../computational-geometry/)
 
 ## References
 - https://en.wikipedia.org/wiki/Divide-and-conquer_algorithm
