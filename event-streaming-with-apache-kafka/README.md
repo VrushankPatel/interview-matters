@@ -1,66 +1,45 @@
 ---
 title: Event Streaming with Apache Kafka
-aliases: [apache kafka, kafka event streaming]
-tags: [#kafka,#event-streaming,#distributed-systems,#messaging]
+aliases: []
+tags: [#kafka,#event-streaming,#system-design]
 created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Overview
+# Event Streaming with Apache Kafka
 
-Apache Kafka is a distributed event streaming platform that enables building real-time data pipelines and streaming applications. It provides high-throughput, fault-tolerant messaging with publish-subscribe semantics.
+## Overview
 
-# Detailed Explanation
+Apache Kafka is a distributed event streaming platform used for building real-time data pipelines and streaming applications.
 
-Kafka decouples data producers from consumers through topics, partitions, and consumer groups. Producers publish events to topics, brokers store and replicate data, and consumers subscribe to topics for processing.
+## Detailed Explanation
 
-## Key Concepts
+### Producers and Consumers
 
-- **Topics**: Categories for events.
-- **Partitions**: Parallel processing units within topics.
-- **Producers**: Publish events to topics.
-- **Consumers**: Read events from topics.
-- **Brokers**: Servers managing data storage and replication.
-- **ZooKeeper/KRaft**: Metadata management.
+Producers send messages to topics, consumers read from topics.
 
-```mermaid
-graph TD
-    A[Producer] --> B[Topic Partition 1]
-    A --> C[Topic Partition 2]
-    B --> D[Broker 1]
-    C --> E[Broker 2]
-    D --> F[Consumer Group 1]
-    E --> G[Consumer Group 2]
-```
+### Topics and Partitions
 
-## Journey / Sequence
+Topics are categories for messages, partitions allow parallelism.
 
-```mermaid
-sequenceDiagram
-    participant Producer
-    participant Broker
-    participant Consumer
+### Brokers and Clusters
 
-    Producer->>Broker: Publish event to topic
-    Broker->>Broker: Replicate to followers
-    Consumer->>Broker: Poll for messages
-    Broker->>Consumer: Deliver events
-    Consumer->>Consumer: Process and commit offset
-```
+Brokers store data, clusters provide fault tolerance.
 
-# Real-world Examples & Use Cases
+### Retention and Scaling
 
-- **Log Aggregation**: Collect logs from multiple sources.
-- **Real-time Analytics**: Process user activity for recommendations.
-- **Event Sourcing**: Store application events for replay.
-- **IoT Data Processing**: Handle sensor data streams.
-- **Microservices Communication**: Async messaging between services.
+Configure message retention and scale with more partitions/brokers.
 
-# Code Examples
+## Real-world Examples & Use Cases
 
-## Java Producer
+- Log aggregation in distributed systems.
+- Real-time analytics for user behavior.
+- Event-driven microservices communication.
+
+## Code Examples
 
 ```java
+// Kafka Producer example
 Properties props = new Properties();
 props.put("bootstrap.servers", "localhost:9092");
 props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
@@ -71,61 +50,38 @@ producer.send(new ProducerRecord<String, String>("my-topic", "key", "value"));
 producer.close();
 ```
 
-## Java Consumer
-
 ```java
+// Kafka Consumer example
 Properties props = new Properties();
 props.put("bootstrap.servers", "localhost:9092");
 props.put("group.id", "test");
 props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 
-Consumer<String, String> consumer = new KafkaConsumer<>(props);
+KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
 consumer.subscribe(Arrays.asList("my-topic"));
-
 while (true) {
     ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
-    for (ConsumerRecord<String, String> record : records) {
-        System.out.println(record.value());
-    }
+    for (ConsumerRecord<String, String> record : records)
+        System.out.printf("offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
 }
 ```
 
-## Kafka Streams Processing
-
-```java
-StreamsBuilder builder = new StreamsBuilder();
-KStream<String, String> source = builder.stream("input-topic");
-source.mapValues(value -> value.toUpperCase()).to("output-topic");
-
-KafkaStreams streams = new KafkaStreams(builder.build(), props);
-streams.start();
-```
-
-# Common Pitfalls & Edge Cases
-
-- **Data Loss**: Improper retention and replication settings.
-- **Consumer Lag**: Slow consumers causing backlog.
-- **Partition Imbalance**: Uneven data distribution.
-- **Rebalancing Issues**: Frequent group rebalances.
-- **Message Ordering**: Guarantees within partitions only.
-
-# Tools & Libraries
-
-- **Kafka CLI**: Command-line tools for management.
-- **Confluent Platform**: Enterprise features and tools.
-- **Kafka Connect**: Data integration.
-- **Schema Registry**: Avro schema management.
-- **KSQL**: SQL for stream processing.
-
-# References
+## References
 
 - [Apache Kafka Documentation](https://kafka.apache.org/documentation/)
-- [Kafka: The Definitive Guide](https://www.oreilly.com/library/view/kafka-the-definitive/9781492043078/)
-- [Confluent Documentation](https://docs.confluent.io/)
+- [Kafka Streams](https://kafka.apache.org/documentation/streams/)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
-- [Message Queues and Brokers](../message-queues-and-brokers/README.md)
-- [Distributed Systems](../cap-theorem-and-distributed-systems/README.md)
-- [Event-Driven Architecture](../event-driven-architecture/README.md)
+- [Event Driven Architecture](./event-driven-architecture/README.md)
+- [Message Queues and Brokers](./message-queues-and-brokers/README.md)
+- [Event Streaming with Apache Kafka](./event-streaming-with-apache-kafka/README.md)
+
+```mermaid
+graph TD
+A[Producer] --> B[Topic Partition 1]
+A --> C[Topic Partition 2]
+B --> D[Consumer Group 1]
+C --> E[Consumer Group 2]
+```

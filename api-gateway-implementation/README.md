@@ -1,7 +1,7 @@
 ---
 title: API Gateway Implementation
-aliases: [API Gateway, Gateway Implementation]
-tags: [#system-design,#microservices]
+aliases: []
+tags: [#api,#microservices,#system-design]
 created: 2025-09-25
 updated: 2025-09-25
 ---
@@ -10,68 +10,48 @@ updated: 2025-09-25
 
 ## Overview
 
-An API Gateway is a server that acts as an API front-end, receiving API requests, enforcing throttling and security policies, passing requests to the back-end service, and then passing the response back to the requester. It provides a single entry point for all clients, simplifying the architecture and improving security, scalability, and observability.
+API Gateway implementation involves deploying a centralized entry point for managing, securing, and routing API requests in microservices architectures.
 
 ## Detailed Explanation
 
-API Gateways handle cross-cutting concerns such as authentication, authorization, rate limiting, logging, and request/response transformation. They can route requests to different services based on URL paths, headers, or other criteria. Common implementations include Kong, Apigee, AWS API Gateway, and NGINX.
+### Routing and Load Balancing
 
-### Key Components
+Route requests to appropriate services and distribute load.
 
-- **Routing**: Directs requests to appropriate microservices.
-- **Authentication & Authorization**: Validates tokens, API keys, etc.
-- **Rate Limiting**: Prevents abuse by limiting request rates.
-- **Load Balancing**: Distributes traffic across service instances.
-- **Caching**: Stores responses to reduce backend load.
-- **Transformation**: Modifies requests/responses (e.g., protocol translation).
+### Authentication and Authorization
 
-### Architecture Diagram
+Implement OAuth, JWT for secure access.
 
-```mermaid
-graph TD
-    A[Client] --> B[API Gateway]
-    B --> C[Auth Service]
-    B --> D[Rate Limiter]
-    B --> E[Router]
-    E --> F[Service 1]
-    E --> G[Service 2]
-    E --> H[Service 3]
-```
+### Rate Limiting and Throttling
+
+Control request rates to prevent abuse.
+
+### Caching and Transformation
+
+Cache responses and transform data formats.
+
+### Monitoring and Logging
+
+Track performance and errors.
 
 ## Real-world Examples & Use Cases
 
-- **Netflix**: Uses Zuul as API Gateway for routing, load balancing, and security.
-- **Amazon**: API Gateway manages millions of API calls, handling authentication and throttling.
-- **E-commerce Platforms**: Gateways route to payment, inventory, and user services.
+- E-commerce platforms using API gateways for payment processing.
+- Social media apps routing user requests.
+- IoT systems aggregating device data.
 
 ## Code Examples
 
-### Simple NGINX Configuration
-
-```nginx
-server {
-    listen 80;
-    location /api/v1/users {
-        proxy_pass http://user-service:8080;
-    }
-    location /api/v1/orders {
-        proxy_pass http://order-service:8080;
-    }
-}
-```
-
-### Spring Cloud Gateway Example
-
 ```java
+// Spring Cloud Gateway example
 @Configuration
 public class GatewayConfig {
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
-            .route("user-service", r -> r.path("/api/users/**")
-                .uri("lb://user-service"))
-            .route("order-service", r -> r.path("/api/orders/**")
-                .uri("lb://order-service"))
+            .route("service1", r -> r.path("/service1/**")
+                .filters(f -> f.stripPrefix(1))
+                .uri("lb://service1"))
             .build();
     }
 }
@@ -79,13 +59,21 @@ public class GatewayConfig {
 
 ## References
 
-- [AWS API Gateway Documentation](https://docs.aws.amazon.com/apigateway/)
-- [Kong API Gateway](https://konghq.com/kong/)
 - [Spring Cloud Gateway](https://spring.io/projects/spring-cloud-gateway)
+- [Kong API Gateway](https://konghq.com/kong/)
 
 ## Github-README Links & Related Topics
 
-- [API Gateway Design](api-gateway-design/README.md)
-- [API Gateway Patterns](api-gateway-patterns/README.md)
-- [Microservices Architecture](microservices-architecture/README.md)
-- [Load Balancing and Strategies](load-balancing-and-strategies/README.md)
+- [API Gateway Design](./api-gateway-design/README.md)
+- [Microservices Architecture](./microservices-architecture/README.md)
+- [API Security Best Practices](./api-security-best-practices/README.md)
+
+```mermaid
+graph TD
+A[Client Request] --> B[API Gateway]
+B --> C[Authentication]
+C --> D[Rate Limiting]
+D --> E[Routing]
+E --> F[Service 1]
+E --> G[Service 2]
+```
