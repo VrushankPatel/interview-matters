@@ -1,6 +1,6 @@
 ---
 title: LLD HLD Basics
-aliases: [Low Level Design, High Level Design, System Design Fundamentals]
+aliases: [low level design, high level design, system design fundamentals]
 tags: [#system-design,#lld,#hld]
 created: 2025-09-25
 updated: 2025-09-25
@@ -8,158 +8,119 @@ updated: 2025-09-25
 
 ## Overview
 
-Low Level Design (LLD) and High Level Design (HLD) are essential phases in software system design. HLD provides a bird's-eye view of the system architecture, outlining major components and their interactions. LLD focuses on the detailed design of individual components, including data structures, algorithms, and interfaces. Together, they ensure scalable, maintainable, and efficient systems.
+Low Level Design (LLD) and High Level Design (HLD) are fundamental concepts in system design interviews. HLD provides a bird's-eye view of the system's architecture, focusing on components, data flow, and scalability. LLD dives into the implementation details, including class diagrams, data structures, algorithms, and APIs. Mastering both is essential for designing robust, scalable systems.
 
 ## Detailed Explanation
 
 ### High Level Design (HLD)
 
-HLD defines the overall system architecture without delving into implementation details.
+HLD outlines the overall system architecture without delving into code specifics. It includes:
 
-- **Components**: Identify key modules (e.g., frontend, backend, database, cache).
-- **Interactions**: Data flow, APIs, protocols.
-- **Technologies**: Tech stack choices (e.g., microservices, monolithic).
-- **Scalability**: Load balancing, replication strategies.
-- **Security**: Authentication, authorization layers.
+- **Components**: Services, databases, caches, load balancers.
+- **Data Flow**: How data moves between components.
+- **Scalability**: Horizontal/vertical scaling, partitioning.
+- **Reliability**: Fault tolerance, redundancy.
+- **Security**: Authentication, encryption.
 
-```mermaid
-graph TD
-    A[User] --> B[Load Balancer]
-    B --> C[API Gateway]
-    C --> D[Microservice 1]
-    C --> E[Microservice 2]
-    D --> F[Database]
-    E --> G[Cache]
-```
+HLD answers "what" and "why" at a high level.
 
 ### Low Level Design (LLD)
 
-LLD provides granular details for each component.
+LLD focuses on the internals of components identified in HLD. It includes:
 
-- **Class Diagrams**: Object-oriented design, relationships.
-- **Sequence Diagrams**: Interaction flows between objects.
-- **Data Models**: Schemas, entities, relationships.
-- **Algorithms**: Logic for operations (e.g., sorting, searching).
+- **Class Diagrams**: Relationships between classes, interfaces.
+- **Data Structures**: Choices for storage and retrieval (e.g., hash maps, trees).
+- **Algorithms**: Sorting, searching, optimization.
 - **APIs**: Endpoints, request/response formats.
-- **Error Handling**: Exception flows, logging.
+- **Database Schemas**: Tables, relationships, indexes.
 
-```mermaid
-classDiagram
-    class UserService {
-        +createUser(user: User): User
-        +getUser(id: String): User
-    }
-    class UserRepository {
-        +save(user: User): void
-        +findById(id: String): User
-    }
-    UserService --> UserRepository
-```
+LLD answers "how" with implementation details.
 
 ### Key Differences
 
 | Aspect          | HLD                          | LLD                          |
 |-----------------|------------------------------|------------------------------|
-| **Scope**      | System-wide                 | Component-specific          |
-| **Detail**     | High-level                  | Implementation details      |
-| **Audience**   | Architects, stakeholders    | Developers                  |
-| **Artifacts**  | Architecture diagrams       | Class/sequence diagrams     |
+| **Scope**      | System-wide architecture    | Component internals         |
+| **Detail Level**| High-level components       | Code-level design           |
+| **Audience**   | Architects, stakeholders    | Developers, engineers       |
+| **Tools**      | Diagrams, flowcharts        | UML, pseudocode             |
+| **Focus**      | Scalability, reliability    | Efficiency, correctness     |
+
+```mermaid
+graph TD
+    A[System Design] --> B[HLD: Architecture]
+    A --> C[LLD: Implementation]
+    B --> D[Components & Flow]
+    C --> E[Classes & Algorithms]
+```
 
 ## Real-world Examples & Use Cases
 
-- **E-commerce Platform**: HLD for order processing microservices; LLD for cart management class with add/remove methods.
-- **Social Media App**: HLD for user feed generation; LLD for recommendation algorithm using graph traversal.
-- **Banking System**: HLD for transaction processing; LLD for account balance updates with concurrency controls.
-- **Ride-Sharing App**: HLD for location matching; LLD for geohashing data structure.
+- **HLD Example**: Designing a URL shortener with API gateway, service layer, and database.
+- **LLD Example**: Implementing the shortening algorithm using base62 encoding and hash maps.
+- **Use Case**: In interviews, start with HLD to show big-picture thinking, then LLD to demonstrate technical depth.
 
 ## Code Examples
 
-### HLD Example: System Architecture (Conceptual)
-
-```
-Frontend (React) -> API Gateway -> Services (User, Payment) -> Database (PostgreSQL)
-```
-
-### LLD Example: User Service Class (Java)
+### LLD: URL Shortener Class Diagram (Conceptual)
 
 ```java
-public class UserService {
-    private UserRepository repository;
+public class UrlShortener {
+    private Map<String, String> urlToShort;
+    private Map<String, String> shortToUrl;
+    private static final String BASE_URL = "http://short.ly/";
 
-    public User createUser(String name, String email) {
-        User user = new User(name, email);
-        return repository.save(user);
+    public String shorten(String longUrl) {
+        if (urlToShort.containsKey(longUrl)) {
+            return urlToShort.get(longUrl);
+        }
+        String shortKey = generateKey(longUrl);
+        String shortUrl = BASE_URL + shortKey;
+        urlToShort.put(longUrl, shortUrl);
+        shortToUrl.put(shortUrl, longUrl);
+        return shortUrl;
     }
 
-    public User getUser(Long id) {
-        return repository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+    public String expand(String shortUrl) {
+        return shortToUrl.get(shortUrl);
+    }
+
+    private String generateKey(String url) {
+        return Integer.toString(url.hashCode(), 36); // Base36 encoding
     }
 }
-
-interface UserRepository {
-    User save(User user);
-    Optional<User> findById(Long id);
-}
 ```
 
-### Sequence Diagram Example (Pseudo-code)
+### HLD Diagram (Conceptual)
 
 ```
-Client -> UserService: createUser(name, email)
-UserService -> UserRepository: save(user)
-UserRepository --> UserService: user
-UserService --> Client: user
-```
-
-## Data Models / Message Formats
-
-```json
-{
-  "user": {
-    "id": "string",
-    "name": "string",
-    "email": "string"
-  }
-}
-```
-
-## Journey / Sequence
-
-```mermaid
-sequenceDiagram
-    participant Interviewer
-    participant Candidate
-    Interviewer->>Candidate: Describe HLD for X
-    Candidate->>Interviewer: High-level components
-    Interviewer->>Candidate: Dive into LLD
-    Candidate->>Interviewer: Classes and methods
+Client -> Load Balancer -> API Gateway -> Shortener Service -> Database
+                                      -> Cache
 ```
 
 ## Common Pitfalls & Edge Cases
 
-- **Over-Designing HLD**: Too many components increase complexity; start simple.
-- **Under-Designing LLD**: Missing edge cases in algorithms; thorough testing needed.
-- **Inconsistent Naming**: Use consistent conventions across diagrams.
-- **Ignoring Scalability in HLD**: Plan for growth from the start.
-- **Edge Case**: Distributed systems require HLD for consensus; LLD for lock management.
+- **Over-Designing LLD**: Focus on core functionality; avoid premature optimization.
+- **Neglecting HLD**: Poor architecture leads to unscalable systems.
+- **Edge Case**: Handling collisions in URL shortener; use longer keys or databases for uniqueness.
 
 ## Tools & Libraries
 
-- **Diagrams**: Draw.io, Lucidchart, Mermaid.
-- **Modeling**: UML tools like PlantUML, StarUML.
-- **Documentation**: Confluence, Notion.
-- **Code**: IDEs with UML plugins (e.g., IntelliJ IDEA).
+- **Diagramming**: Draw.io, Lucidchart for HLD diagrams.
+- **UML**: PlantUML, StarUML for LLD class diagrams.
+- **Prototyping**: Figma for UI/UX in design.
 
 ## References
 
 - [System Design Interview Guide](https://github.com/donnemartin/system-design-primer)
-- [Designing Data-Intensive Applications](https://dataintensive.net/)
-- [AWS Architecture Best Practices](https://aws.amazon.com/architecture/well-architected/)
-- [Martin Fowler: Microservices](https://martinfowler.com/articles/microservices.html)
+- [Grokking the System Design Interview](https://www.educative.io/courses/grokking-the-system-design-interview)
+- [Martin Kleppmann: Designing Data-Intensive Applications](https://dataintensive.net/)
 
 ## Github-README Links & Related Topics
 
+- [Popular System Designs LLD and HLD](popular-system-designs-lld-and-hld/)
 - [System Design Basics](system-design-basics/)
-- [Microservices Architecture](system-design/microservices-architecture/)
-- [API Design REST gRPC OpenAPI](system-design/api-design-rest-grpc-openapi/)
-- [Database Design and Indexing](system-design/database-design-and-indexing/)
+- [URL Shortener System Design](url-shortener-system-design/)
+- [LLD HLD Basics](lld-hld-basics/)</content>
+</xai:function_call ><xai:function_call name="edit">
+<parameter name="filePath">/home/umbrel/WORKSPACE/interview-matters/PENDING_TOPICS.md
