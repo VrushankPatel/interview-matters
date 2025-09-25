@@ -62,7 +62,8 @@ graph TD
 - Vavr for functional programming extensions.
 
 ## Github-README Links & Related Topics
-Related: [java/streams-functional-java](../java/streams-functional-java/), [java-lambda-expressions](../java-lambda-expressions/)
+- [java-lambda-expressions](../java-lambda-expressions/)
+- [java-streams-advanced](../java-streams-advanced/)
 
 ## References
 - [Oracle Stream API Guide](https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html)

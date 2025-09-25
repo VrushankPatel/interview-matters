@@ -180,8 +180,8 @@ graph TD
 
 ## Github-README Links & Related Topics
 - [system-design-basics](../system-design-basics/)
-- [caching-strategies](../system-design/caching-strategies/)
-- [load-balancing-and-strategies](../system-design/load-balancing-and-strategies/)
+- [caching](../caching/)
+- [load-balancing-and-strategies](../load-balancing-and-strategies/)
 - [replication-vs-sharding-vs-partitioning](../replication-vs-sharding-vs-partitioning/)
 
 ## References

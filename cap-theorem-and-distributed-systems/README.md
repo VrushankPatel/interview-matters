@@ -133,8 +133,8 @@ graph TD
 - **Frameworks:** Akka for distributed actors, Consul for service discovery
 
 ## Github-README Links & Related Topics
-- [consistency-models](../system-design/consistency-models/)
-- [distributed-transactions](../system-design/distributed-transactions/)
+- [data-consistency-models](../data-consistency-models/)
+- [fault-tolerance-in-distributed-systems](../fault-tolerance-in-distributed-systems/)
 - [raft-and-leader-election](../raft-and-leader-election/)
 
 ## References

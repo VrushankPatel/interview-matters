@@ -181,8 +181,8 @@ graph TD
 - Eclipse Collections for high-performance alternatives
 
 ## Github-README Links & Related Topics
-- [java/collections-framework](../java/collections-framework/)
-- [data-structures-advanced](../data-structures-advanced/)
+- [java-collections-deep-dive](../java-collections-deep-dive/)
+- [algorithms-and-data-structures](../algorithms-and-data-structures/)
 - [concurrent-collections](../concurrent-collections/)
 
 ## References

@@ -1,5 +1,10 @@
-Collections & Data Structures
-Java Stream API & Functional Programming
-System Design Basics
-High Scalability Patterns
-CAP Theorem & Distributed Systems
+Database Indexing Strategies
+API Design Principles
+Microservices Architecture
+Event-Driven Systems
+CQRS Pattern
+GraphQL API Design
+Kubernetes Basics
+Docker Containerization
+Message Queues and Brokers
+Fault Tolerance in Distributed Systems
