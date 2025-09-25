@@ -1,7 +1,7 @@
 ---
 title: YouTube System Design
-aliases: [YouTube Video Platform, YouTube Architecture]
-tags: [#system-design, #video-streaming, #scalability]
+aliases: [Video Streaming Platform, YouTube Architecture]
+tags: [#system-design,#video-streaming,#scalability]
 created: 2025-09-25
 updated: 2025-09-25
 ---
@@ -10,137 +10,164 @@ updated: 2025-09-25
 
 ## Overview
 
-YouTube is a global video-sharing platform that handles billions of videos, trillions of views, and massive user interactions daily. This document outlines the high-level system design for YouTube, focusing on scalability, reliability, and performance to support millions of concurrent users.
+YouTube is a global video-sharing platform that handles billions of video views daily, requiring robust system design for scalability, reliability, and low-latency delivery. This document outlines the architectural principles, components, and engineering decisions behind building a YouTube-like system, focusing on video upload, processing, storage, and streaming at massive scale.
+
+Key challenges include handling high-volume uploads, transcoding videos into multiple formats, distributing content via CDNs, and ensuring fault tolerance. The system leverages microservices, distributed databases, and edge computing to achieve sub-second latencies for video playback.
 
 ## Detailed Explanation
 
-### High-Level Architecture
+### Architecture Overview
+
+YouTube's architecture evolved from a monolithic setup to a distributed, sharded system. Core components include:
+
+- **Web Servers**: Handle user requests, load-balanced with NetScaler or similar.
+- **Application Servers**: Python-based for rapid development, using FastCGI.
+- **Video Processing**: Transcode videos into formats like MP4, WebM.
+- **Storage**: Distributed file systems and databases for metadata.
+- **CDN**: For global content delivery.
+- **Databases**: Sharded MySQL for metadata, BigTable for thumbnails.
 
 ```mermaid
 graph TD
-    A[User] --> B[API Gateway]
-    B --> C[Authentication Service]
-    B --> D[Video Upload Service]
-    D --> E[Video Processing Pipeline]
-    E --> F[Distributed Storage]
-    F --> G[CDN]
-    B --> H[Recommendation Engine]
-    H --> I[Metadata Database]
-    B --> J[Search Service]
-    J --> I
+    A[User Uploads Video] --> B[Web Server]
+    B --> C[Application Server]
+    C --> D[Video Processing Queue]
+    D --> E[Transcoding Service]
+    E --> F[Storage Cluster]
+    F --> G[CDN Distribution]
+    G --> H[User Playback]
+    C --> I[Metadata DB]
+    I --> J[Sharded MySQL]
 ```
 
-### Key Components
+### Core Components
 
-- **API Gateway**: Routes requests, handles load balancing, and provides security.
-- **Video Processing Service**: Transcodes videos into multiple formats (e.g., MP4, WebM) and resolutions (e.g., 720p, 1080p, 4K).
-- **Storage Layer**: Uses distributed file systems and object storage (e.g., Google Cloud Storage) for video files, with CDN integration for global distribution.
-- **Database**: NoSQL databases like Bigtable for metadata, user data, comments, and analytics.
-- **Recommendation Engine**: Machine learning models to suggest videos based on user behavior.
-- **Search and Discovery**: Inverted indexes and real-time indexing for video search.
-
-### Data Models
-
-- **Video Metadata**: ID, title, description, uploader, upload time, duration, views, likes, etc.
-- **User Data**: Profile, subscriptions, watch history.
-- **Comments**: Hierarchical structure for replies.
+| Component | Description | Technologies |
+|-----------|-------------|--------------|
+| Video Upload | Handles file uploads, validates formats | Apache, Python, FastCGI |
+| Transcoding | Converts videos to multiple resolutions/bitrate | FFmpeg, distributed workers |
+| Storage | Stores original and transcoded videos | Distributed file systems (e.g., GFS-like) |
+| Metadata DB | Stores user, video info, comments | Sharded MySQL, BigTable |
+| CDN | Delivers content globally | Akamai, Cloudflare equivalents |
+| Recommendations | ML-based suggestions | TensorFlow, distributed computing |
 
 ### Scalability Strategies
 
-- **Sharding**: Database sharding by user ID or video ID.
-- **Caching**: Redis for hot metadata and recommendations.
-- **Asynchronous Processing**: Queue-based video processing to handle uploads without blocking.
-- **Global Distribution**: Multi-region deployments with geo-replication.
+- **Sharding**: Databases sharded by user ID for even load distribution.
+- **Caching**: Row-level DB caching, in-memory caches for popular content.
+- **Replication**: Read replicas for metadata, multi-site replication for videos.
+- **CDN Integration**: Popular videos served from edge locations to reduce latency.
+
+## STAR Summary
+
+- **Situation**: Rapid user growth led to 100M+ daily views with limited infrastructure.
+- **Task**: Scale video delivery while maintaining <100ms page loads and reliable streaming.
+- **Action**: Implemented sharding, CDNs, and optimized serving with lighttpd; prioritized video watch traffic.
+- **Result**: Reduced hardware by 30%, eliminated replica lag, supported billions of views.
+
+## Journey / Sequence
+
+### Video Upload Flow
+1. User uploads video via web interface.
+2. File validated and stored temporarily.
+3. Metadata extracted (duration, thumbnails).
+4. Video queued for transcoding.
+5. Transcoded versions stored in distributed storage.
+6. Metadata updated in DB; video published.
+
+### Playback Flow
+1. User requests video.
+2. Metadata fetched from DB.
+3. Video URL resolved via CDN.
+4. Stream delivered in adaptive bitrate (e.g., HLS/DASH).
+
+## Data Models / Message Formats
+
+### Video Metadata (JSON Example)
+```json
+{
+  "videoId": "abc123",
+  "title": "Sample Video",
+  "uploaderId": "user456",
+  "duration": 300,
+  "formats": ["720p", "1080p"],
+  "thumbnails": ["thumb1.jpg", "thumb2.jpg"],
+  "uploadTime": "2023-09-25T10:00:00Z",
+  "views": 1000000
+}
+```
+
+### User Data Model
+- **Fields**: userId (PK), username, email, subscriptions (array of channelIds).
+- **Storage**: Sharded MySQL table.
 
 ## Real-world Examples & Use Cases
 
-- **Viral Content**: Handling exponential traffic growth for trending videos using auto-scaling.
-- **Live Streaming**: Real-time broadcasting with low latency for events like concerts or sports.
-- **Personalized Feeds**: AI-driven recommendations to keep users engaged.
-- **Mobile Optimization**: Adaptive bitrate streaming for varying network conditions.
+- **High-Traffic Events**: During viral videos, CDNs handle 99% of traffic, reducing origin server load.
+- **Global Reach**: Videos served from nearest edge, e.g., a user in India gets content from an Asian CDN node.
+- **Live Streaming**: Extends to real-time broadcasts using WebRTC and adaptive streaming.
+- **Mobile Optimization**: Lower bitrate formats for bandwidth-constrained users.
 
 ## Code Examples
 
-### Java Pseudo-code for Video Upload
-
+### Java: Simple Video Upload Handler (Spring Boot)
 ```java
-@Service
-public class VideoUploadService {
-
+@RestController
+public class VideoController {
     @Autowired
-    private StorageService storageService;
+    private VideoService videoService;
 
-    @Autowired
-    private QueueService queueService;
-
-    @Autowired
-    private DatabaseService dbService;
-
-    public String uploadVideo(User user, MultipartFile videoFile, VideoMetadata metadata) {
-        // Authenticate user
-        if (!authService.validateToken(user.getToken())) {
-            throw new SecurityException("Invalid user");
+    @PostMapping("/upload")
+    public ResponseEntity<String> uploadVideo(@RequestParam("file") MultipartFile file) {
+        try {
+            String videoId = videoService.processUpload(file);
+            return ResponseEntity.ok("Video uploaded: " + videoId);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Upload failed");
         }
-
-        // Generate unique video ID
-        String videoId = UUID.randomUUID().toString();
-
-        // Store video temporarily
-        String tempPath = storageService.storeTemp(videoFile, videoId);
-
-        // Save initial metadata
-        metadata.setId(videoId);
-        metadata.setStatus("PROCESSING");
-        dbService.save(metadata);
-
-        // Queue for transcoding
-        queueService.sendMessage("video-processing-queue", new ProcessingTask(videoId, tempPath));
-
-        return videoId;
     }
 }
 ```
 
-### Python Pseudo-code for Recommendation
-
-```python
-def get_recommendations(user_id, watch_history):
-    # Fetch user embeddings
-    user_embedding = embedding_service.get_user_embedding(user_id)
-    
-    # Query similar videos
-    candidates = vector_db.query_similar(user_embedding, top_k=100)
-    
-    # Rank by engagement
-    ranked = ranker.rank(candidates, watch_history)
-    
-    return ranked[:20]
+### Java: Video Transcoding with FFmpeg (via ProcessBuilder)
+```java
+public void transcodeVideo(String inputPath, String outputPath) throws IOException {
+    ProcessBuilder pb = new ProcessBuilder(
+        "ffmpeg", "-i", inputPath, "-vf", "scale=1280:720", outputPath
+    );
+    pb.start().waitFor();
+}
 ```
 
 ## Common Pitfalls & Edge Cases
 
-- **Copyright Detection**: Automated systems to flag and remove infringing content.
-- **Abuse Prevention**: Rate limiting uploads and comments to prevent spam.
-- **Cold Start Problem**: Handling new users with no watch history for recommendations.
-- **Video Quality**: Ensuring transcoding doesn't degrade quality or introduce artifacts.
+- **Long Tail Content**: Low-view videos cause random disk seeks; mitigate with RAID tuning.
+- **Thumbnail Serving**: High I/O for small files; use distributed stores like BigTable.
+- **Replica Lag**: Asynchronous replication delays; shard to reduce.
+- **CDN Costs**: Bandwidth-heavy; optimize with caching and compression.
+- **Edge Case**: Corrupted uploads; validate early with checksums.
 
 ## Tools & Libraries
 
-- **Storage**: Google Cloud Storage, AWS S3
-- **CDN**: Cloudflare, Akamai
-- **Databases**: Bigtable, Cassandra
-- **Processing**: FFmpeg for transcoding
-- **ML**: TensorFlow for recommendations
+- **Video Processing**: FFmpeg, OpenCV.
+- **Storage**: Apache Hadoop HDFS, Google BigTable.
+- **Databases**: MySQL (sharded), Cassandra.
+- **CDN**: Cloudflare, Akamai.
+- **Monitoring**: Prometheus, Grafana.
+- **Java Frameworks**: Spring Boot for microservices.
 
 ## References
 
-- [YouTube's Architecture: A Deep Dive](https://blog.youtube/engineering/architecture/)
-- [Scaling YouTube to Billions of Users](https://www.youtube.com/watch?v=2XKCG1l6LxI)
-- [Video Processing at Scale](https://netflixtechblog.com/video-processing-at-scale/)
+- [YouTube Architecture - High Scalability](https://highscalability.com/youtube-architecture)
+- [YouTube Scalability Lessons](https://highscalability.com/7-years-of-youtube-scalability-lessons-in-30-minutes/)
+- [System Design Primer: YouTube](https://github.com/donnemartin/system-design-primer/blob/master/solutions/system_design/youtube/README.md)
+- [Google Video Presentation](https://www.youtube.com/watch?v=w5WVu624fY8)
 
 ## Github-README Links & Related Topics
 
-- [System Design Basics](system-design-basics/README.md)
-- [High Scalability Patterns](high-scalability-patterns/README.md)
-- [Netflix Video Streaming Architecture](netflix-video-streaming-architecture/README.md)
-- [Distributed Tracing and Observability](system-design/distributed-tracing-and-observability/README.md)
+- [CDN Architecture](../cdn-architecture/README.md)
+- [Microservices Architecture](../microservices-architecture/README.md)
+- [Database Sharding Strategies](../database-sharding-strategies/README.md)
+- [Load Balancing and Strategies](../load-balancing-and-strategies/README.md)
+- [Video Streaming: Netflix](../netflix-video-streaming/README.md)
+- [Distributed Tracing](../distributed-tracing/README.md)

@@ -1,9 +1,3 @@
- 
-- Twitter System Design
-- YouTube System Design
-- WhatsApp System Design
-- Uber System Design
-- Airbnb System Design
 - Google Search Engine
 - Dropbox File Storage
 - LinkedIn Social Network
