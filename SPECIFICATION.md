@@ -5,11 +5,11 @@ Last update
 2025-09-25
 
 Summary of recent additions
- - backtracking
- - divide-and-conquer
- - probabilistic-algorithms
- - computational-geometry
- - jvm-performance-tuning
+ - java-language-basics
+ - oop-design-and-principles
+ - jvm-internals-and-classloading
+ - garbage-collection-algorithms
+ - java-memory-model-and-concurrency
 
 Conventions
  - Dir naming: kebab-case.
@@ -30,6 +30,16 @@ Next Topics Candidates
     - build-automation: Gradle vs Maven, multi-module projects
     - profiling-tools: JProfiler, VisualVM for performance analysis
     - advanced-java-concepts: Generics, wildcards, type erasure
+    - java-reflection-api: Runtime class inspection and dynamic invocation
+    - java-annotations-deep-dive: Custom annotations and processing
+    - java-io-streams: Input/output streams and serialization basics
+    - java-nio-channels: Non-blocking I/O with channels and selectors
+    - java-concurrency-utilities: Advanced locks, semaphores, and barriers
+    - java-fork-join-framework: Parallel computation patterns
+    - java-reactive-programming: Reactive Streams and RxJava integration
+    - java-microbenchmarking: JMH for accurate performance measurement
+    - java-classloaders: Custom classloaders and delegation hierarchy
+    - event-sourcing-cqrs: Architectural patterns for event-driven systems
 
 TODO
  - High-level open design decisions and split criteria for oversized topics.
