@@ -160,7 +160,7 @@ sequenceDiagram
 
 # Github-README Links & Related Topics
 
-[[distributed-tracing-and-observability]], [[low-latency-systems]], [[microservices-architecture]]
+[distributed-tracing-and-observability](../distributed-tracing-and-observability/README.md), [low-latency-systems](../low-latency-systems/README.md), [microservices-architecture](../microservices-architecture/README.md)
 
 # References
 

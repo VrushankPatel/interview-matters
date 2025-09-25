@@ -197,7 +197,7 @@ sequenceDiagram
 
 # Github-README Links & Related Topics
 
-[[system-design-basics]], [[load-balancing-and-routing]], [[security-authz-authn-tokens]]
+[system-design-basics](../system-design-basics/README.md), [load-balancing-and-routing](../load-balancing-and-routing/README.md), [security-authz-authn-tokens](../security-authz-authn-tokens/README.md)
 
 # References
 
