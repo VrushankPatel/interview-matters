@@ -10,60 +10,83 @@ updated: 2025-09-25
 
 ## Overview
 
-Java Fundamentals encompass the core concepts and building blocks of the Java programming language, including syntax, data types, control structures, object-oriented programming (OOP) principles, and the Java Virtual Machine (JVM). These elements form the foundation for developing robust, platform-independent applications. Java's "write once, run anywhere" philosophy relies on compiling source code to bytecode, which executes on the JVM across operating systems.
+Java Fundamentals cover the basic building blocks of the Java programming language, including syntax, data types, operators, control structures, and introductory object-oriented concepts. This topic is essential for beginners to understand how to write, compile, and run simple Java programs.
 
 ## Detailed Explanation
 
-### Key Concepts
+### Variables and Data Types
 
-- **JVM, JRE, and JDK**: The JVM executes bytecode, the JRE provides runtime environment, and the JDK includes development tools like compilers.
-- **Data Types**: Primitive types (int, double, boolean, char) and reference types (objects, arrays).
-- **Variables and Constants**: Declaration, initialization, and scope.
-- **Operators**: Arithmetic, relational, logical, bitwise, and assignment.
-- **Control Structures**: Loops (for, while, do-while), conditionals (if-else, switch), and branching.
-- **OOP Principles**: Encapsulation, inheritance, polymorphism, and abstraction.
-- **Classes and Objects**: Blueprints and instances, constructors, methods, and fields.
-- **Packages and Imports**: Organizing code and managing dependencies.
+Variables are used to store data values. Java has two main categories of data types:
 
-### Data Types Table
+- **Primitive Types**: int, double, char, boolean, byte, short, long, float.
+- **Reference Types**: Objects, arrays, strings.
 
-| Type      | Size (bits) | Range/Example                  | Use Case                  |
-|-----------|-------------|-------------------------------|---------------------------|
-| byte     | 8          | -128 to 127                  | Small integers, file I/O |
-| short    | 16         | -32,768 to 32,767            | Memory-efficient ints    |
-| int      | 32         | -2^31 to 2^31-1              | General integers         |
-| long     | 64         | -2^63 to 2^63-1              | Large numbers            |
-| float    | 32         | 1.4e-45 to 3.4e+38           | Floating-point precision |
-| double   | 64         | 4.9e-324 to 1.8e+308         | High-precision floats    |
-| boolean  | 1          | true/false                   | Logical values           |
-| char     | 16         | Unicode characters           | Text handling            |
+| Primitive Type | Size | Range |
+|----------------|------|-------|
+| int | 4 bytes | -2,147,483,648 to 2,147,483,647 |
+| double | 8 bytes | Approximately ±1.7e308 |
+| char | 2 bytes | 0 to 65,535 (Unicode) |
+| boolean | 1 bit | true or false |
 
-### OOP Diagram
+### Operators
 
-```mermaid
-classDiagram
-    class Animal {
-        +String name
-        +void eat()
-    }
-    class Dog {
-        +void bark()
-    }
-    Animal <|-- Dog : inherits
+Java supports arithmetic, relational, logical, assignment, and bitwise operators.
+
+- Arithmetic: +, -, *, /, %
+- Relational: ==, !=, <, >, <=, >=
+- Logical: &&, ||, !
+
+### Control Structures
+
+Control structures direct the flow of execution.
+
+#### If-Else Statement
+
+```java
+if (condition) {
+    // code
+} else {
+    // code
+}
 ```
 
-This diagram illustrates inheritance, where `Dog` extends `Animal`.
+#### Loops
+
+- For loop: `for (int i = 0; i < 10; i++) { }`
+- While loop: `while (condition) { }`
+- Do-While loop: `do { } while (condition);`
+
+#### Switch Statement
+
+```java
+switch (expression) {
+    case value1:
+        // code
+        break;
+    default:
+        // code
+}
+```
+
+### Methods
+
+Methods are blocks of code that perform specific tasks.
+
+```java
+public static int add(int a, int b) {
+    return a + b;
+}
+```
 
 ## Real-world Examples & Use Cases
 
-- **Web Applications**: Using classes and objects to model user entities in frameworks like Spring.
-- **Mobile Apps**: Android development relies on Java fundamentals for UI components and data handling.
-- **Enterprise Software**: Inheritance and polymorphism enable scalable architectures in banking systems.
-- **Data Processing**: Loops and conditionals process large datasets in batch jobs.
+- **Simple Calculator**: Perform basic arithmetic operations.
+- **Student Grade Calculator**: Calculate average grades from a list of scores.
+- **Temperature Converter**: Convert between Celsius and Fahrenheit.
 
 ## Code Examples
 
-### Basic Class and Object
+### Hello World Program
 
 ```java
 public class HelloWorld {
@@ -73,93 +96,39 @@ public class HelloWorld {
 }
 ```
 
-### Data Types and Operators
+### Basic Calculator
 
 ```java
-public class DataTypesExample {
+public class Calculator {
     public static void main(String[] args) {
         int a = 10;
-        double b = 3.14;
-        boolean isJavaFun = true;
-        String greeting = "Java Fundamentals";
-        
-        System.out.println(a + b); // 13.14
-        System.out.println(isJavaFun); // true
-        System.out.println(greeting.length()); // 18
+        int b = 5;
+        System.out.println("Sum: " + (a + b));
+        System.out.println("Product: " + (a * b));
     }
 }
 ```
 
-### Control Structures
+### Temperature Converter
 
 ```java
-public class ControlExample {
+public class TemperatureConverter {
     public static void main(String[] args) {
-        int[] numbers = {1, 2, 3, 4, 5};
-        
-        for (int num : numbers) {
-            if (num % 2 == 0) {
-                System.out.println(num + " is even");
-            } else {
-                System.out.println(num + " is odd");
-            }
-        }
+        double celsius = 25.0;
+        double fahrenheit = (celsius * 9/5) + 32;
+        System.out.println(celsius + "°C is " + fahrenheit + "°F");
     }
 }
 ```
-
-### OOP Example
-
-```java
-class Vehicle {
-    String brand;
-    
-    Vehicle(String brand) {
-        this.brand = brand;
-    }
-    
-    void drive() {
-        System.out.println(brand + " is driving");
-    }
-}
-
-class Car extends Vehicle {
-    Car(String brand) {
-        super(brand);
-    }
-    
-    void honk() {
-        System.out.println("Honk!");
-    }
-}
-
-public class OOPExample {
-    public static void main(String[] args) {
-        Car myCar = new Car("Toyota");
-        myCar.drive(); // Toyota is driving
-        myCar.honk();  // Honk!
-    }
-}
-```
-
-## Common Pitfalls & Edge Cases
-
-- **NullPointerException**: Accessing methods on null references; always check for null.
-- **Integer Overflow**: Large int values wrap around; use long for big numbers.
-- **Floating-Point Precision**: Avoid exact comparisons; use epsilon for equality checks.
-- **Scope Issues**: Variables declared in loops may not be accessible outside.
-- **Inheritance Pitfalls**: Overriding methods without considering super calls can break functionality.
 
 ## References
 
-- [Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/)
-- [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se21/html/index.html)
-- [JVM Architecture Overview](https://www.oracle.com/java/technologies/javase/jvm-architecture.html)
+- [Oracle Java Tutorials: Language Basics](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html)
+- [GeeksforGeeks: Java Fundamentals](https://www.geeksforgeeks.org/java/)
+- [W3Schools Java Tutorial](https://www.w3schools.com/java/)
 
 ## Github-README Links & Related Topics
 
-- [Java OOP Concepts](java/)
-- [Java Collections](java-collections-deep-dive/)
-- [Java Exception Handling](java-exception-handling/)
-- [Java Generics](java-generics/)
-- [Java Memory Management](java-memory-management/)
+- [OOP Principles in Java](oop-principles-in-java/)
+- [JVM Internals & Class Loading](jvm-internals-class-loading/)
+- [Collections & Data Structures](collections-data-structures/)

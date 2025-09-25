@@ -96,6 +96,7 @@ This repository contains comprehensive documentation on various topics for inter
 - [Java Foreign Function Memory API](./java-foreign-function-memory-api/README.md)
 - [Java ForkJoinPool](./java-forkjoinpool/README.md)
 - [Java Fundamentals](./java-fundamentals/README.md)
+- [OOP Principles in Java](./oop-principles-in-java/README.md)
 - [Java Future and Callable](./java-future-and-callable/README.md)
 - [Java Generics](./java-generics/README.md)
 - [Java HTTP Client](./java-http-client/README.md)
