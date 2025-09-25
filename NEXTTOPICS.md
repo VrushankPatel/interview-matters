@@ -1,5 +1,3 @@
-
--e 
 computational-geometry — 'Convex hull, line intersection, geometric algorithms'
 jvm-performance-tuning — 'Heap sizing, GC tuning for low latency'
 concurrent-collections — 'Thread-safe collections in Java'
