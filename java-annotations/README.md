@@ -6,8 +6,6 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Java Annotations
-
 ## Overview
 
 Java annotations are a form of metadata that provide additional information about code elements without affecting their execution. Custom annotations allow developers to define their own metadata for compile-time or runtime processing, enabling frameworks like Spring for dependency injection or Hibernate for ORM mapping. Introduced in Java 5, annotations enhance code readability and enable powerful tooling through annotation processors.
@@ -166,11 +164,11 @@ public class SecureService {
 
 ## Github-README Links & Related Topics
 
-- [Java Language Basics](../java-language-basics/README.md)
-- [Reflection and Annotations](../reflection-and-annotations/README.md)
-- [Design Patterns](../design-patterns/README.md)
-- [JVM Internals and Classloading](../jvm-internals-and-classloading/README.md)
-- [Testing and Mocking](../testing-and-mocking-junit-mockito/README.md)
+- [Java Language Basics](java/java-language-basics/README.md)
+- [Reflection and Annotations](java/reflection-and-annotations/README.md)
+- [Design Patterns](java/design-patterns/README.md)
+- [JVM Internals and Classloading](java/jvm-internals-and-classloading/README.md)
+- [Testing and Mocking](java/testing-and-mocking-junit-mockito/README.md)
 
 ## References
 

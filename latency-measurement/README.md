@@ -108,7 +108,10 @@ sequenceDiagram
 - **Prometheus:** Time-series for percentiles.
 
 ## Github-README Links & Related Topics
-[[low-latency-systems]], [[performance-tuning-and-profiling]], [[distributed-tracing-and-observability]], [[observability-logs-metrics-traces]]
+- [Low Latency Systems](low-latency-systems/README.md)
+- [Performance Tuning and Profiling](java/performance-tuning-and-profiling/README.md)
+- [Distributed Tracing and Observability](system-design/distributed-tracing-and-observability/README.md)
+- [Observability Logs Metrics Traces](system-design/observability-logs-metrics-traces/README.md)
 
 ## References
 - https://openjdk.java.net/projects/code-tools/jmh/

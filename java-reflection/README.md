@@ -6,15 +6,11 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Overview
+## Overview
 
 Java Reflection enables runtime inspection and modification of classes, interfaces, fields, methods, and constructors. It allows dynamic code execution, such as instantiating objects, invoking methods, and accessing fields without compile-time knowledge. Essential for frameworks requiring extensibility, like dependency injection or serialization.
 
-Canonical Interview Prompt: Explain how to use reflection to invoke a private method at runtime.
-
-# Detailed Explanation
-
-## High-Level Design
+## Detailed Explanation
 
 Reflection provides APIs in `java.lang.reflect` package to introspect and manipulate Java objects dynamically. The core class is `Class`, obtained via `.class`, `getClass()`, or `Class.forName()`. From `Class`, retrieve `Method`, `Field`, and `Constructor` objects for runtime operations.
 
@@ -28,25 +24,22 @@ graph TD
     D --> G[Create Instances]
 ```
 
-## Key Components
-
+Key components:
 - **Class**: Represents classes and interfaces; entry point for reflection.
 - **Method**: Allows invoking methods dynamically.
 - **Field**: Enables getting/setting field values.
 - **Constructor**: Permits creating objects via constructors.
 - **Modifier**: Checks access modifiers (public, private, etc.).
 
-## Capacity and Throughput Targets
-
+Capacity and throughput targets:
 - Performance: Reflective operations are slower due to dynamic resolution; cache `Class` objects for repeated use.
 - Security: Requires `ReflectPermission` in secured environments.
 
-## Tradeoffs
-
+Tradeoffs:
 - **Flexibility vs Performance**: Enables dynamic behavior but incurs overhead.
 - **Encapsulation**: Breaks private access, potentially leading to fragile code.
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 - **Frameworks**: Spring uses reflection for autowiring beans and AOP.
 - **ORM**: Hibernate inspects entity classes to map to database tables.
@@ -54,7 +47,7 @@ graph TD
 - **Serialization**: Custom serializers dynamically handle object graphs.
 - **Plugin Systems**: Load and instantiate classes at runtime without recompilation.
 
-# Code Examples
+## Code Examples
 
 **Obtaining Class Object:**
 
@@ -154,7 +147,7 @@ public class AnnotatedClass {
 }
 ```
 
-# Common Pitfalls & Edge Cases
+## Common Pitfalls & Edge Cases
 
 - **SecurityManager**: Reflective access may be restricted; handle `SecurityException`.
 - **Performance**: Avoid in hot paths; use direct calls where possible.
@@ -162,16 +155,17 @@ public class AnnotatedClass {
 - **Accessibility**: `setAccessible(true)` required for private members; may fail in modules.
 - **Primitive Types**: Use wrapper classes like `Integer.class` for primitives.
 
-# Tools & Libraries
+## Tools & Libraries
 
 - **Java Reflection API**: Built-in `java.lang.reflect` package.
 - **Libraries**: Apache Commons Lang for utilities; Spring ReflectionUtils for convenience.
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
-[reflection-and-annotations](../reflection-and-annotations/README.md), [java-language-basics](../java-language-basics/README.md), [annotations](../reflection-and-annotations/README.md)
+- [Reflection and Annotations](java/reflection-and-annotations/README.md)
+- [Java Language Basics](java/java-language-basics/README.md)
 
-# References
+## References
 
 - https://docs.oracle.com/javase/tutorial/reflect/
 - https://www.baeldung.com/java-reflection

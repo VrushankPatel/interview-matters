@@ -107,7 +107,10 @@ sequenceDiagram
 - **ZooKeeper:** Similar consensus.
 
 ## Github-README Links & Related Topics
-[[consistency-and-availability]], [[partitioning-and-sharding]], [[distributed-tracing-and-observability]], [[message-queues-and-kafka]]
+- [Consistency and Availability](system-design/consistency-and-availability/README.md)
+- [Partitioning and Sharding](system-design/partitioning-and-sharding/README.md)
+- [Distributed Tracing and Observability](system-design/distributed-tracing-and-observability/README.md)
+- [Message Queues and Kafka](system-design/message-queues-and-kafka/README.md)
 
 ## References
 - https://raft.github.io/

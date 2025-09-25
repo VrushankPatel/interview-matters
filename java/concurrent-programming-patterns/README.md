@@ -6,15 +6,11 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Overview
+## Overview
 
 Common patterns for concurrent programming in Java, including producer-consumer, thread pools, and synchronization idioms. Essential for building scalable and thread-safe applications.
 
-Canonical Interview Prompt: Implement a producer-consumer pattern using Java's concurrency utilities.
-
-# Detailed Explanation
-
-## High-Level Design
+## Detailed Explanation
 
 Concurrency patterns provide reusable solutions for common threading problems, promoting safety and efficiency.
 
@@ -26,32 +22,29 @@ graph TD
     G[Future/Promise] --> H[CompletableFuture]
 ```
 
-## Key Components
-
+Key components:
 - **Producer-Consumer**: Decouples producers and consumers using a shared buffer.
 - **Thread Pools**: Manages a pool of worker threads for task execution.
 - **Reader-Writer Locks**: Allows multiple readers or single writer access.
 - **Futures and Promises**: Asynchronous computation with composable results.
 
-## Capacity and Throughput Targets
-
+Capacity and throughput targets:
 - Thread pools: 10-100 threads depending on CPU cores and I/O.
 - BlockingQueue: Bounded queues prevent memory issues.
 
-## Tradeoffs
-
+Tradeoffs:
 - **Synchronization vs Performance**: Locks reduce contention but add overhead.
 - **Complexity vs Safety**: Higher-level abstractions reduce errors but may hide details.
 - **Blocking vs Non-blocking**: Blocking is simpler but may cause deadlocks.
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 - **Web Servers**: Handling concurrent client requests with thread pools.
 - **Data Processing**: Parallel pipelines for ETL operations.
 - **Caching Systems**: Concurrent access to shared caches with read-write locks.
 - **Asynchronous APIs**: Using futures for non-blocking I/O operations.
 
-# Code Examples
+## Code Examples
 
 **Producer-Consumer Pattern:**
 
@@ -152,7 +145,7 @@ public class FutureExample {
 }
 ```
 
-# Data Models / Message Formats
+## Data Models / Message Formats
 
 **Task Objects:** Implement Runnable or Callable interfaces for thread pool submission.
 
@@ -160,7 +153,7 @@ public class FutureExample {
 
 **Messages:** POJOs or simple data structures passed between threads.
 
-# Common Pitfalls & Edge Cases
+## Common Pitfalls & Edge Cases
 
 - **Deadlocks**: Ensure lock acquisition order is consistent.
 - **Race Conditions**: Use atomic operations or proper locking.
@@ -168,18 +161,20 @@ public class FutureExample {
 - **Memory Visibility**: Use volatile or synchronized for shared variables.
 - **Thread Leaks**: Always shutdown executors properly.
 
-# Tools & Libraries
+## Tools & Libraries
 
 - java.util.concurrent: Core concurrency utilities.
 - Guava: Additional concurrent collections and utilities.
 - RxJava: Reactive programming for complex async flows.
 - Akka: Actor-based concurrency framework.
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
-[Java Memory Model and Concurrency](../java-memory-model-and-concurrency/README.md), [Threads Executors Futures](../threads-executors-futures/README.md), [Concurrent Data Structures](../concurrent-data-structures/README.md)
+- [Java Memory Model and Concurrency](java/java-memory-model-and-concurrency/README.md)
+- [Threads Executors Futures](java/threads-executors-futures/README.md)
+- [Concurrent Data Structures](java/concurrent-data-structures/README.md)
 
-# References
+## References
 
 - https://docs.oracle.com/javase/tutorial/essential/concurrency/
 - https://www.baeldung.com/java-concurrency
