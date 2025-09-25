@@ -24,6 +24,9 @@ This repository contains a comprehensive collection of topics related to softwar
 - [Microservices Architecture](microservices-architecture/README.md)
 - [Database Design Principles](database-design-principles/README.md)
 - [Caching](caching/README.md)
+- [Replication vs Sharding vs Partitioning](replication-vs-sharding-vs-partitioning/README.md)
+- [Latency and Throughput Zero to Hero](latency-and-throughput-zero-to-hero/README.md)
+- [Popular System Designs LLD and HLD](popular-system-designs-lld-and-hld/README.md)
 - [Load Balancing and Strategies](load-balancing-and-strategies/README.md)
 - [API Design Principles](api-design-principles/README.md)
 

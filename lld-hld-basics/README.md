@@ -1,7 +1,7 @@
 ---
 title: LLD HLD Basics
-aliases: ['Low Level Design High Level Design Basics']
-tags: ['#system-design', '#lld', '#hld']
+aliases: [Low Level Design High Level Design Basics]
+tags: [#system-design,#lld,#hld]
 created: 2025-09-25
 updated: 2025-09-25
 ---
@@ -147,4 +147,4 @@ Client -> Load Balancer -> API Gateway -> Shortener Service -> Database
 - [Microservices Architecture](microservices-architecture/)
 - [Database Design Principles](database-design-principles/)
 - [API Design Principles](api-design-principles/)
-- [System Design Basics](lld-hld-basics/)
+- [System Design Basics](system-design-basics/)
