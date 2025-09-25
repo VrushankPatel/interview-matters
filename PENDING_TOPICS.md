@@ -1,10 +1,10 @@
 # One topic per line. Top is oldest.
 
-design-patterns
-system-design-basics
-load-balancing-and-routing
-caching-strategies
-database-design-and-indexing
+partitioning-and-sharding
+consistency-and-availability
+message-queues-and-kafka
+event-sourcing-and-cqrs
+raft-consensus-and-leader-election
 partitioning-and-sharding
 consistency-and-availability
 message-queues-and-kafka

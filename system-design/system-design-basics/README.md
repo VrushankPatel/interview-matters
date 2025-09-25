@@ -22,6 +22,31 @@ System design basics cover the foundational concepts for designing scalable, rel
 - **Consistency:** CAP theorem trade-offs.
 - **Components:** Load balancers, databases, caches, queues.
 
+## Canonical Interview Prompt
+**Design a URL Shortener Service (e.g., bit.ly)**
+
+- **Functional Requirements:** Generate short aliases for long URLs, redirect short URLs to originals, support custom aliases, track click analytics.
+- **Non-Functional Requirements:** High availability (99.9% uptime), low latency (<200ms), scalability to 1B URLs and 100k RPS.
+- **High-Level Design (HLD):**
+
+```mermaid
+graph TD
+    A[Client] --> B[API Gateway]
+    B --> C[Shorten Service]
+    C --> D[Database (URL Store)]
+    B --> E[Redirect Service]
+    E --> F[Cache (Redis)]
+    F --> D
+    E --> G[Analytics DB]
+```
+
+- **Capacity Estimation:** 1B URLs, each ~100 bytes, total storage ~100GB. 100k RPS, daily requests ~8.64B, peak traffic 1M RPS during events.
+- **Tradeoffs:** Consistency vs Availability - use eventual consistency for analytics to prioritize availability. Scalability vs Cost - horizontal scaling with microservices increases complexity but allows elastic scaling.
+- **API Design (OpenAPI-style):**
+  - `POST /shorten` { "url": "https://example.com", "customAlias": "abc" } -> { "shortUrl": "http://short.ly/abc" }
+  - `GET /{alias}` -> 302 redirect to original URL
+- **Deployment Notes:** Deploy on Kubernetes for auto-scaling, use CDN (Cloudflare) for global redirect caching, database sharding by hash for scalability.
+
 ## Real-world Examples
 - Netflix: Uses microservices with API gateways.
 - Twitter: Employs sharding for tweets database.

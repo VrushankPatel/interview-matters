@@ -75,6 +75,13 @@ sequenceDiagram
 - [database-design-and-indexing](../database-design-and-indexing/)
 - [performance-tuning-and-profiling](../performance-tuning-and-profiling/)
 
+## Common Interview Questions
+- What are the main caching strategies and their use cases?
+- Explain cache invalidation problems like cache stampede.
+- How does Redis implement LRU eviction?
+- Describe write-through vs write-behind caching.
+- How to handle cache consistency in distributed systems?
+
 ## References
 - Redis documentation.
 - "Caching in Distributed Systems" articles.

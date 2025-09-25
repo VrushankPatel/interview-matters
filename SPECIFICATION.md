@@ -5,7 +5,11 @@ Last update
 2025-09-25
 
 Summary of recent additions
- - Generated 10 new topic candidates
+ - design-patterns
+ - system-design-basics
+ - load-balancing-and-routing
+ - caching-strategies
+ - database-design-and-indexing
 
 Conventions
  - Dir naming: kebab-case.

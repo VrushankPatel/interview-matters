@@ -86,6 +86,13 @@ classDiagram
 - [oop-design-and-principles](../oop-design-and-principles/)
 - [system-design-basics](../system-design-basics/)
 
+## Common Interview Questions
+- What are the three main categories of design patterns and examples of each?
+- Implement a thread-safe Singleton pattern in Java.
+- Explain the Factory pattern and when to use it over direct instantiation.
+- Describe the Observer pattern and its real-world applications.
+- How does the Decorator pattern differ from inheritance?
+
 ## References
 - "Design Patterns: Elements of Reusable Object-Oriented Software" by Gang of Four.
 - Oracle Java Tutorials on Design Patterns.

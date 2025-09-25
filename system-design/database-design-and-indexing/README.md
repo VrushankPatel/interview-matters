@@ -68,6 +68,13 @@ erDiagram
 - [partitioning-and-sharding](../partitioning-and-sharding/)
 - [nosql-vs-sql-tradeoffs](../nosql-vs-sql-tradeoffs/)
 
+## Common Interview Questions
+- Explain normalization and its forms (1NF, 2NF, 3NF).
+- What are the differences between clustered and non-clustered indexes?
+- How does indexing affect insert/update performance?
+- Describe composite indexes and their usage.
+- When to use denormalization in database design?
+
 ## References
 - "Database System Concepts" by Silberschatz.
 - PostgreSQL indexing guide.

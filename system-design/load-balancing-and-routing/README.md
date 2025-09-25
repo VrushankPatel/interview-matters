@@ -70,6 +70,13 @@ graph LR
 - [system-design-basics](../system-design-basics/)
 - [networking-tcp-ip-http2-tls](../networking-tcp-ip-http2-tls/)
 
+## Common Interview Questions
+- Explain the difference between Layer 4 and Layer 7 load balancing.
+- How does round-robin load balancing work and its drawbacks?
+- What is sticky sessions and when to use them?
+- Describe how NGINX implements load balancing.
+- How to handle health checks in a load balancer?
+
 ## References
 - NGINX Load Balancing documentation.
 - AWS ELB guide.
