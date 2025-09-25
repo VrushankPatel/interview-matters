@@ -1,54 +1,58 @@
 ---
 title: Proxy Forward and Reverse
-aliases: [Forward Proxy, Reverse Proxy]
-tags: [#networking, #system-design]
+aliases: []
+tags: [#proxy,#networking,#system-design]
 created: 2025-09-25
 updated: 2025-09-25
 ---
 
+# Proxy Forward and Reverse
+
 ## Overview
 
-Proxies act as intermediaries in network communications, forwarding requests between clients and servers. Forward proxies serve clients, while reverse proxies serve servers, enhancing security, performance, and scalability.
+Proxies act as intermediaries between clients and servers, enhancing security, performance, and control. Forward proxies handle requests from clients to the internet, while reverse proxies manage requests from the internet to servers. They are essential in modern web architectures for load balancing, caching, and security.
 
 ## Detailed Explanation
 
 ### Forward Proxy
 
-A forward proxy sits between clients and the internet. It forwards client requests to external servers, often for anonymity, caching, or content filtering.
+A forward proxy sits between clients and the external network. Clients send requests to the proxy, which then forwards them to the destination server. The server sees the proxy's IP, not the client's.
 
-- **Use cases**: Corporate firewalls, VPNs, web scraping.
-- **Tools**: Squid, Privoxy.
+**Benefits:**
+- Anonymity and privacy
+- Content filtering and access control
+- Caching to reduce bandwidth
+
+**Use Cases:**
+- Corporate networks restricting internet access
+- VPN-like functionality for secure browsing
 
 ### Reverse Proxy
 
-A reverse proxy sits in front of web servers, receiving requests from clients and forwarding them to backend servers. It provides load balancing, SSL termination, and protection.
+A reverse proxy sits in front of web servers and forwards client requests to the appropriate server. The client sees the proxy's IP, not the server's.
 
-- **Use cases**: Load balancing, API gateways, CDN integration.
-- **Tools**: Nginx, HAProxy, Apache HTTP Server.
+**Benefits:**
+- Load balancing across multiple servers
+- SSL termination
+- Caching static content
+- Security through obscurity
 
-```mermaid
-graph TD;
-    A[Client] --> B[Forward Proxy];
-    B --> C[Internet/Server];
-    D[Client] --> E[Reverse Proxy];
-    E --> F[Backend Server 1];
-    E --> G[Backend Server 2];
-```
+**Use Cases:**
+- Distributing traffic in high-traffic websites
+- API gateways
 
 ## Real-world Examples & Use Cases
 
-- **Forward Proxy**: Companies use it to monitor employee internet usage.
-- **Reverse Proxy**: Cloudflare acts as a reverse proxy for DDoS protection and caching.
-- **Nginx as Reverse Proxy**: Used by many websites for load balancing and serving static content.
-
-Use cases: Improving performance with caching, securing APIs, distributing traffic.
+- **CDN (Content Delivery Network):** Uses reverse proxies to cache and serve content closer to users.
+- **Load Balancers:** Nginx or HAProxy as reverse proxies distributing requests.
+- **Corporate Firewalls:** Forward proxies for employee internet access control.
+- **API Management:** Reverse proxies like Kong for routing and authentication.
 
 ## Code Examples
 
 ### Nginx Reverse Proxy Configuration
 
 ```nginx
-# /etc/nginx/sites-available/default
 server {
     listen 80;
     server_name example.com;
@@ -61,42 +65,44 @@ server {
 }
 
 upstream backend_servers {
-    server 192.168.1.10:8080;
-    server 192.168.1.11:8080;
+    server backend1.example.com;
+    server backend2.example.com;
 }
 ```
 
 ### Squid Forward Proxy Configuration
 
-```conf
-# /etc/squid/squid.conf
+```squid
 http_port 3128
+
 acl localnet src 192.168.1.0/24
 http_access allow localnet
 http_access deny all
+
 cache_dir ufs /var/spool/squid 100 16 256
 ```
 
 ## References
 
-- [Nginx Reverse Proxy](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/)
-- [HAProxy Documentation](http://www.haproxy.org/)
-- [Squid Proxy Wiki](http://wiki.squid-cache.org/)
-
-## Common Pitfalls & Edge Cases
-
-- **Forward Proxy:** Clients bypassing proxy for direct access, leading to security risks; cache poisoning.
-- **Reverse Proxy:** Single point of failure if not highly available; SSL termination issues; misconfiguration exposing backend servers.
-- **Edge Cases:** Handling WebSocket connections; large file uploads/downloads; IPv6 support.
-
-## Tools & Libraries
-
-- **Reverse Proxy:** Nginx, HAProxy, Traefik, Apache mod_proxy
-- **Forward Proxy:** Squid, Privoxy, Charles Proxy
-- **API Gateways:** Kong, Apigee, AWS API Gateway
+- [Nginx Proxy Documentation](https://nginx.org/en/docs/http/ngx_http_proxy_module.html)
+- [HAProxy Documentation](https://www.haproxy.org/)
+- [Squid Proxy](https://www.squid-cache.org/)
 
 ## Github-README Links & Related Topics
 
-- [Load Balancing and Routing](../system-design/load-balancing-and-routing/)
-- [API Gateway Patterns](../system-design/api-gateway-patterns/)
-- [Security in Distributed Systems](../system-design/security-in-distributed-systems/)
+- [Load Balancing and Strategies](./load-balancing-and-strategies/)
+- [API Gateway Design](./api-gateway-design/)
+- [CDN Architecture](./cdn-architecture/)
+
+## Proxy Types Diagram
+
+```mermaid
+graph TD;
+    A[Client] --> B[Forward Proxy];
+    B --> C[Internet];
+    C --> D[Server];
+
+    E[Client] --> F[Reverse Proxy];
+    F --> G[Server 1];
+    F --> H[Server 2];
+```
