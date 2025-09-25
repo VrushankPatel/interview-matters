@@ -151,8 +151,22 @@ public class WeakReferenceDemo {
 - [Java GC Basics](https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/gc01/index.html)
 - [Baeldung Garbage Collection](https://www.baeldung.com/java-garbage-collection)
 
+## Data Models / Message Formats
+
+### Generational GC Architecture
+
+```mermaid
+graph TD
+    A[Young Generation] --> B[Eden]
+    A --> C[Survivor 0]
+    A --> D[Survivor 1]
+    E[Old Generation] --> F[Tenured]
+    G[Permanent Generation] --> H[Method Area]
+    G --> I[Class Metadata]
+```
+
 ## Github-README Links & Related Topics
 
-- [JVM Internals & Class Loading](../jvm-internals-class-loading/README.md)
+- [JVM Internals & Class Loading](../jvm-internals-and-class-loading/README.md)
 - [JVM Performance Tuning](../jvm-performance-tuning/README.md)
 - [Memory Models](../memory-models/README.md)
