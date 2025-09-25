@@ -6,11 +6,11 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Overview
+## Overview
 
 Replication, sharding, and partitioning are key strategies for scaling databases and distributing data across multiple servers. This topic explores the differences between these approaches, their use cases, advantages, and trade-offs in building scalable systems.
 
-# Detailed Explanation
+## Detailed Explanation
 
 ## Replication
 
@@ -89,13 +89,13 @@ Partitioning divides a large table into smaller, more manageable pieces within t
 | Complexity | Moderate | High | Low to moderate |
 | Use Case | High read loads, HA | Massive datasets, high throughput | Large tables, query optimization |
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 - **Replication**: Social media feeds (read-heavy), content delivery networks.
 - **Sharding**: Large e-commerce platforms (user data), search engines (index data).
 - **Partitioning**: Time-series data (logs by date), geographical data.
 
-# Code Examples
+## Code Examples
 
 ## Simple Replication Concept (Pseudocode)
 
@@ -167,14 +167,14 @@ PARTITION BY RANGE (YEAR(sale_date)) (
 SELECT * FROM sales PARTITION (p2021) WHERE amount > 1000;
 ```
 
-# References
+## References
 
 - [Database Sharding: Concepts and Examples](https://www.mongodb.com/blog/post/database-sharding-concepts-and-examples)
 - [Replication vs Sharding](https://www.cockroachlabs.com/blog/replication-vs-sharding/)
 - [Partitioning in PostgreSQL](https://www.postgresql.org/docs/current/ddl-partitioning.html)
 - [Designing Data-Intensive Applications by Martin Kleppmann](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 - [Database Sharding Strategies](database-sharding-strategies/README.md)
 - [Database Replication Strategies](database-replication-strategies/README.md)

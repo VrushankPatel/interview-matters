@@ -35,6 +35,10 @@ Popular designs typically address scalability, reliability, and performance chal
 | Amazon E-commerce | Load Balancer -> Microservices -> Inventory/DB; recommendations. | Transaction volume, personalization. |
 | LinkedIn | Graph DB -> API -> Network Service; job matching. | Professional networking. |
 | Dropbox | Sync Service -> API -> Distributed FS; deduplication. | File storage, synchronization. |
+| Spotify | CDN -> API -> Recommendation Engine -> Distributed Storage. | Music streaming, personalization. |
+| Payment Systems | API Gateway -> Payment Processor -> Secure DB; PCI compliance. | Security, transactions. |
+| IoT System Design | Edge Gateways -> API -> Analytics Service -> Time-series DB. | Sensor data, real-time processing. |
+| Real-time Analytics | Stream Processor -> API -> Dashboard; event-driven. | Data pipelines, insights. |
 
 ```mermaid
 graph TD

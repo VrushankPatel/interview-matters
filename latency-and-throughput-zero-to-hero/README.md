@@ -6,11 +6,11 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Overview
+## Overview
 
 Latency and Throughput are fundamental performance metrics in system design. This comprehensive guide covers their definitions, measurement techniques, optimization strategies, and real-world applications, progressing from basic concepts to advanced optimization techniques.
 
-# Detailed Explanation
+## Detailed Explanation
 
 ## Core Concepts
 
@@ -87,7 +87,7 @@ graph LR
 - **Auto-scaling**: Dynamically adjust resources based on load
 - **Micro-batching**: Balance between latency and throughput
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 - **Financial Trading Systems**: Require ultra-low latency (<1ms) for high-frequency trading
 - **Video Streaming**: High throughput for concurrent users, acceptable latency for buffering
@@ -95,7 +95,7 @@ graph LR
 - **IoT Systems**: Handle high throughput of sensor data with varying latency requirements
 - **Search Engines**: Optimize for both fast response (latency) and handling millions of queries (throughput)
 
-# Code Examples
+## Code Examples
 
 ## Latency Measurement
 
@@ -212,14 +212,14 @@ String result = cache.get("key", k -> {
 });
 ```
 
-# References
+## References
 
 - [Latency vs Throughput](https://www.brendangregg.com/usemethod.html)
 - [Systems Performance: Enterprise and the Cloud by Brendan Gregg](https://www.amazon.com/Systems-Performance-Enterprise-Brendan-Gregg/dp/0133390098)
 - [Designing Data-Intensive Applications by Martin Kleppmann](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321)
 - [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 - [Latency Measurement](latency-measurement/README.md)
 - [Performance Optimization Techniques](performance-optimization-techniques/README.md)
