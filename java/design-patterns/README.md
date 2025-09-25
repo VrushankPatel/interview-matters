@@ -115,7 +115,7 @@ sequenceDiagram
 - Libraries: Apache Commons for utility patterns.
 
 ## Github-README Links & Related Topics
-Related: [[oop-design-and-principles]], [[system-design-basics]], [[java-memory-model-and-concurrency]], [[threads-executors-futures]]
+Related: [oop-design-and-principles](../oop-design-and-principles/), [system-design-basics](../../system-design/system-design-basics/), [java-memory-model-and-concurrency](../java-memory-model-and-concurrency/), [threads-executors-futures](../threads-executors-futures/)
 
 ## Common Interview Questions
 - What are the three main categories of design patterns and examples of each?

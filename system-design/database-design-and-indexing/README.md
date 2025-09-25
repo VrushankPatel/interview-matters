@@ -108,7 +108,7 @@ sequenceDiagram
 - EXPLAIN: Query analysis.
 
 ## Github-README Links & Related Topics
-Related: [[partitioning-and-sharding]], [[nosql-vs-sql-tradeoffs]], [[caching-strategies]], [[consistency-and-availability]]
+Related: [partitioning-and-sharding](../partitioning-and-sharding/), [nosql-vs-sql-tradeoffs](../nosql-vs-sql-tradeoffs/), [caching-strategies](../caching-strategies/), [consistency-and-availability](../consistency-and-availability/)
 
 ## Common Interview Questions
 - Explain normalization and its forms (1NF, 2NF, 3NF).

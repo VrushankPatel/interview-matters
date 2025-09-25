@@ -80,7 +80,7 @@ sequenceDiagram
 - HAProxy: Advanced features.
 
 ## Github-README Links & Related Topics
-Related: [[system-design-basics]], [[networking-tcp-ip-http2-tls]], [[caching-strategies]], [[partitioning-and-sharding]]
+Related: [system-design-basics](../system-design-basics/), [networking-tcp-ip-http2-tls](../../networking/networking-tcp-ip-http2-tls/), [caching-strategies](../caching-strategies/), [partitioning-and-sharding](../partitioning-and-sharding/)
 
 ## Common Interview Questions
 - Explain the difference between Layer 4 and Layer 7 load balancing.

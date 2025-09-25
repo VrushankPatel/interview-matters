@@ -109,7 +109,7 @@ sequenceDiagram
 - Caffeine: Java caching library.
 
 ## Github-README Links & Related Topics
-Related: [[database-design-and-indexing]], [[performance-tuning-and-profiling]], [[load-balancing-and-routing]], [[consistency-and-availability]]
+Related: [database-design-and-indexing](../database-design-and-indexing/), [performance-tuning-and-profiling](../../java/performance-tuning-and-profiling/), [load-balancing-and-routing](../load-balancing-and-routing/), [consistency-and-availability](../consistency-and-availability/)
 
 ## Common Interview Questions
 - What are the main caching strategies and their use cases?

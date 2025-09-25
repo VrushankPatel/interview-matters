@@ -110,7 +110,7 @@ sequenceDiagram
 - Simulation: Apache JMeter for load testing.
 
 ## Github-README Links & Related Topics
-Related: [[load-balancing-and-routing]], [[caching-strategies]], [[database-design-and-indexing]], [[partitioning-and-sharding]], [[consistency-and-availability]]
+Related: [load-balancing-and-routing](../load-balancing-and-routing/), [caching-strategies](../caching-strategies/), [database-design-and-indexing](../database-design-and-indexing/), [partitioning-and-sharding](../partitioning-and-sharding/), [consistency-and-availability](../consistency-and-availability/)
 
 ## Common Interview Questions
 - What are the key components of a scalable web service?
