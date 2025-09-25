@@ -1,6 +1,6 @@
 ---
 title: Monitoring and Logging
-aliases: [observability, logging, monitoring]
+aliases: [Observability, Logging, Monitoring]
 tags: [#system-design,#devops,#observability]
 created: 2025-09-25
 updated: 2025-09-25

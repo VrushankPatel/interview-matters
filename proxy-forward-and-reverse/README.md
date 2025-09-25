@@ -1,12 +1,10 @@
 ---
 title: Proxy Forward and Reverse
-aliases: []
+aliases: [Forward Proxy, Reverse Proxy, Proxy Servers]
 tags: [#proxy,#networking,#system-design]
 created: 2025-09-25
 updated: 2025-09-25
 ---
-
-# Proxy Forward and Reverse
 
 ## Overview
 

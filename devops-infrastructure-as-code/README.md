@@ -6,8 +6,6 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# DevOps & Infrastructure as Code
-
 ## Overview
 
 DevOps is a cultural and technical movement that emphasizes collaboration between development and operations teams to automate and streamline the software delivery process. Infrastructure as Code (IaC) is a key practice in DevOps that involves managing and provisioning infrastructure through machine-readable definition files, rather than physical hardware configuration or interactive configuration tools.
