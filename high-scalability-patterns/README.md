@@ -198,6 +198,62 @@ shard_manager.put('user2', {'name': 'Bob'})
 print(shard_manager.get('user1'))
 ```
 
+## Journey / Sequence
+```mermaid
+sequenceDiagram
+    participant User
+    participant LoadBalancer
+    participant Cache
+    participant DB
+
+    User->>LoadBalancer: Request
+    LoadBalancer->>Cache: Check cache
+    Cache-->>LoadBalancer: Cache miss
+    LoadBalancer->>DB: Query
+    DB-->>LoadBalancer: Data
+    LoadBalancer->>Cache: Store in cache
+    Cache-->>User: Response
+```
+
+## Data Models / Message Formats
+### Scalability Patterns Table
+| Pattern | Description | Benefits | Drawbacks |
+|---------|-------------|----------|-----------|
+| Load Balancing | Distribute traffic | Improved performance, fault tolerance | Complexity, single point of failure |
+| Caching | Store frequent data | Reduced latency, lower load | Cache invalidation, memory usage |
+| Sharding | Split data across nodes | Horizontal scaling, performance | Complexity, rebalancing |
+| Replication | Copy data across nodes | Read scalability, fault tolerance | Write overhead, consistency issues |
+| Asynchronous Processing | Decouple with queues | Responsiveness, load leveling | Ordering issues, monitoring |
+
+### System Architecture Diagram
+```mermaid
+graph TD
+    A[Client] --> B[Load Balancer]
+    B --> C[Web Server 1]
+    B --> D[Web Server 2]
+    C --> E[Cache]
+    D --> E
+    E --> F[Database Shard 1]
+    E --> G[Database Shard 2]
+    H[Message Queue] --> I[Worker 1]
+    H --> J[Worker 2]
+```
+
+## Common Pitfalls & Edge Cases
+- **Over-engineering:** Start simple, scale when needed.
+- **Ignoring Costs:** Scaling increases infrastructure costs.
+- **Cache Thrashing:** Frequent invalidation reduces benefits.
+- **Shard Imbalance:** Uneven data distribution causes hotspots.
+- **Edge Cases:** Sudden traffic spikes, network partitions, data skew.
+
+## Tools & Libraries
+- **Load Balancing:** NGINX, HAProxy, AWS ELB
+- **Caching:** Redis, Memcached, Caffeine
+- **Databases:** Cassandra (sharding), PostgreSQL (replication)
+- **Message Queues:** RabbitMQ, Apache Kafka
+- **Orchestration:** Kubernetes, Docker Swarm
+- **Auto-scaling:** AWS Auto Scaling, Kubernetes HPA
+
 ## References
 
 - [Scalability Rules by Martin L. Abbott and Michael T. Fisher](https://www.amazon.com/Scalability-Rules-50-Principles-Sustainable/dp/0321753887)
