@@ -1,8 +1,3 @@
-Collections & Data Structures
-Java Stream API & Functional Programming
-System Design Basics
-High Scalability Patterns
-Async logging
 DevOps & Infrastructure as Code
 Proxy forward and reverse
 Concurrency & Parallelism
