@@ -6,7 +6,7 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Overview
+## Overview
 Computational geometry involves designing and analyzing algorithms for solving geometric problems, such as determining relationships between points, lines, polygons, and other geometric objects. Core problems include convex hull computation, line segment intersection, closest pair of points, and point location queries.
 
 ## Detailed Explanation
@@ -24,13 +24,13 @@ graph TD
     E --> F[Closest Pair]
 ```
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 - **Geographic Information Systems (GIS)**: Spatial queries like finding nearest neighbors or containment.
 - **Computer Graphics**: Collision detection in games, ray tracing.
 - **Robotics**: Path planning and obstacle avoidance.
 - **CAD Software**: Boolean operations on polygons.
 
-# Code Examples
+## Code Examples
 ### Convex Hull (Graham Scan)
 ```java
 import java.util.*;
@@ -110,5 +110,5 @@ public class LineIntersection {
 - "Computational Geometry: Algorithms and Applications" by Mark de Berg et al.
 - https://www.geeksforgeeks.org/convex-hull-set-1-jarviss-algorithm-or-wrapping/
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 [Algorithms and Data Structures](../algorithms-and-data-structures/README.md), [Divide and Conquer](../divide-and-conquer/README.md), [Sorting Algorithms](../sorting-algorithms/README.md)

@@ -6,13 +6,13 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Overview
+## Overview
 
 Advanced Java Streams API features enable complex data transformations, aggregations, and parallel processing. Crucial for efficient functional programming in Java.
 
 Canonical Interview Prompt: Implement a solution using streams to group a list of transactions by category and sum amounts, handling parallel execution.
 
-# Detailed Explanation
+## Detailed Explanation
 
 ## High-Level Design
 
@@ -45,13 +45,13 @@ graph TD
 - **Stateful Operations**: Collectors like groupingBy can be memory-intensive.
 - **Order Preservation**: Some operations don't guarantee order in parallel streams.
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 - **Data Analytics**: Grouping sales data by region and calculating totals.
 - **Log Processing**: Filtering and aggregating log entries by severity.
 - **Batch Processing**: Parallel transformation of large datasets.
 
-# Code Examples
+## Code Examples
 
 **Grouping and Summing:**
 
@@ -91,7 +91,7 @@ Map<Boolean, List<Transaction>> partitioned = transactions.stream()
     .collect(Collectors.partitioningBy(t -> t.getAmount() > 1000));
 ```
 
-# Data Models / Message Formats
+## Data Models / Message Formats
 
 **Transaction Class:**
 
@@ -107,7 +107,7 @@ public class Transaction {
 
 Source -> Filter -> Map -> Collect
 
-# Journey / Sequence
+## Journey / Sequence
 
 ```mermaid
 sequenceDiagram
@@ -122,22 +122,22 @@ sequenceDiagram
     Collector->>Result: Produce output
 ```
 
-# Common Pitfalls & Edge Cases
+## Common Pitfalls & Edge Cases
 
 - **Infinite Streams**: Avoid with limit() to prevent memory issues.
 - **Side Effects**: Pure functions only; avoid modifying external state.
 - **Parallel Pitfalls**: Ensure thread-safety in custom operations.
 
-# Tools & Libraries
+## Tools & Libraries
 
 - Java Stream API
 - StreamEx library for additional utilities
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 [streams-functional-java](../streams-functional-java/README.md), [collections-framework](../collections-framework/README.md)
 
-# References
+## References
 
 - https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html
 - https://www.baeldung.com/java-8-streams
