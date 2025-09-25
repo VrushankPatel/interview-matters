@@ -6,8 +6,6 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Monitoring and Logging
-
 ## Overview
 
 Monitoring and logging are critical for maintaining reliable, performant systems. Monitoring provides real-time insights into system health and performance, while logging captures historical data for debugging and auditing.
@@ -102,6 +100,21 @@ def process_request(request_id):
     logger.info("Request %s processed in %.2f seconds", request_id, duration)
     # In a real system, send duration to metrics system like Prometheus
 ```
+
+## Common Pitfalls & Edge Cases
+
+- **Log Noise**: Excessive logging leading to storage costs and difficulty finding relevant info; use appropriate log levels.
+- **Monitoring Overhead**: Instrumentation adding latency; optimize metric collection.
+- **Distributed Tracing Complexity**: Correlating logs across services; use trace IDs.
+- **Alert Fatigue**: Too many alerts; set meaningful thresholds.
+- **Data Retention**: Balancing storage costs with audit requirements.
+
+## Tools & Libraries
+
+- **Monitoring**: Prometheus, Grafana, Datadog, New Relic.
+- **Logging**: Logback (Java), Loguru (Python), Winston (Node.js).
+- **ELK Stack**: Elasticsearch, Logstash, Kibana.
+- **Tracing**: Jaeger, Zipkin.
 
 ## References
 
