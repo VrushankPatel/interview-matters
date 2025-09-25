@@ -82,6 +82,21 @@ http_access deny all
 cache_dir ufs /var/spool/squid 100 16 256
 ```
 
+## Common Pitfalls & Edge Cases
+
+- **SSL Termination Issues**: Improper handling of HTTPS requests
+- **Header Spoofing**: Failing to sanitize forwarded headers
+- **Caching Inconsistencies**: Stale cached content in reverse proxies
+- **Single Point of Failure**: Proxy becoming a bottleneck
+- **Configuration Complexity**: Misconfigured routing rules
+
+## Tools & Libraries
+
+- **Reverse Proxies**: Nginx, HAProxy, Apache HTTP Server
+- **Forward Proxies**: Squid, Privoxy
+- **API Gateways**: Kong, Traefik, Envoy
+- **Load Balancers**: AWS ELB, Google Cloud Load Balancing
+
 ## References
 
 - [Nginx Proxy Documentation](https://nginx.org/en/docs/http/ngx_http_proxy_module.html)

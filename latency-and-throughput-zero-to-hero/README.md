@@ -212,6 +212,22 @@ String result = cache.get("key", k -> {
 });
 ```
 
+## Common Pitfalls & Edge Cases
+
+- **Coordinated Omission**: Failing to account for requests that arrive during high load periods
+- **Tail Latency Amplification**: Small increases in p99 latency can significantly impact user experience
+- **Resource Contention**: CPU, memory, or I/O bottlenecks causing unpredictable latency spikes
+- **Measurement Bias**: Using average latency instead of percentiles, hiding performance issues
+- **Cold Starts**: Initial requests after idle periods experiencing higher latency
+
+## Tools & Libraries
+
+- **Benchmarking**: JMH (Java Microbenchmark Harness), wrk, Apache Bench
+- **Monitoring**: Prometheus, Grafana, New Relic
+- **Profiling**: YourKit, VisualVM, async-profiler
+- **Load Testing**: JMeter, Gatling, k6
+- **Tracing**: Jaeger, Zipkin
+
 ## References
 
 - [Latency vs Throughput](https://www.brendangregg.com/usemethod.html)

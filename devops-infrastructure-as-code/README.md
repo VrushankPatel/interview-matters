@@ -76,6 +76,22 @@ resource "aws_instance" "example" {
         state: started
 ```
 
+## Common Pitfalls & Edge Cases
+
+- **State Drift**: Infrastructure changes outside IaC leading to inconsistencies
+- **Secret Management**: Hardcoding credentials in code
+- **Version Compatibility**: Tool versions causing deployment failures
+- **Rollback Complexity**: Difficult to revert complex infrastructure changes
+- **Cost Overruns**: Unmonitored resource provisioning in cloud
+
+## Tools & Libraries
+
+- **IaC Tools**: Terraform, Ansible, Puppet, Chef
+- **CI/CD**: Jenkins, GitHub Actions, GitLab CI, CircleCI
+- **Version Control**: Git, with branching strategies
+- **Monitoring**: Prometheus, ELK Stack
+- **Cloud Providers**: AWS, Azure, GCP with their IaC services
+
 ## References
 
 - [DevOps Handbook](https://itrevolution.com/book/the-devops-handbook/)
