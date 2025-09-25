@@ -90,6 +90,22 @@ sequenceDiagram
 - Not handling encoding properly in character streams.
 - Resource leaks if not using try-with-resources.
 
+## Common Interview Questions
+- **What is the difference between Java IO and NIO?**  
+  IO is blocking, stream-oriented, and suitable for simple operations. NIO is non-blocking, buffer-oriented, and designed for scalable, high-performance applications with multiplexing.
+
+- **Explain blocking vs non-blocking I/O.**  
+  Blocking I/O waits for the operation to complete before proceeding. Non-blocking I/O allows the thread to continue execution while I/O operations are pending.
+
+- **What are Channels, Buffers, and Selectors in NIO?**  
+  Channels are connections to I/O sources. Buffers are data containers. Selectors enable monitoring multiple channels for readiness events.
+
+- **How does NIO improve performance for network applications?**  
+  By allowing a single thread to handle multiple connections using selectors, reducing thread overhead and enabling non-blocking operations.
+
+- **Provide an example of copying a file using NIO.**  
+  Use FileChannel.transferTo() or read/write with ByteBuffers for efficient copying.
+
 ## Tools & Libraries
 - java.io: For basic stream I/O.
 - java.nio: For advanced channel-based I/O.

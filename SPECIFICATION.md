@@ -5,16 +5,11 @@ Last update
 2025-09-25
 
 Summary of recent additions
- - java-language-basics
- - oop-design-and-principles
- - jvm-internals-and-classloading
- - garbage-collection-algorithms
- - java-memory-model-and-concurrency
- - concurrent-data-structures
- - threads-executors-futures
- - collections-framework
- - streams-functional-java
- - exception-handling-and-errors
+ - io-and-nio
+ - serialization-and-deserialization
+ - build-tools-maven-gradle
+ - testing-and-mocking-junit-mockito
+ - performance-tuning-and-profiling
 
 Conventions
  - Dir naming: kebab-case.

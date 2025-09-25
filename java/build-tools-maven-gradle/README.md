@@ -66,6 +66,18 @@ dependencies {
 
 Compile and run: For Maven `mvn compile test package`, for Gradle `gradle build`
 
+### Runnable Java Snippet
+Create `src/main/java/HelloWorld.java`:
+```java
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello from Maven/Gradle!");
+    }
+}
+```
+Run with Maven: `mvn compile exec:java -Dexec.mainClass="HelloWorld"`  
+Run with Gradle: `gradle run` (add `application { mainClass = 'HelloWorld' }` to build.gradle)
+
 ## Data Models / Message Formats
 | Element | Maven | Gradle | Description |
 |---------|-------|--------|-------------|
@@ -98,6 +110,13 @@ sequenceDiagram
 
 ## Github-README Links & Related Topics
 Related: [[testing-and-mocking-junit-mockito]], [[performance-tuning-and-profiling]], [[jvm-internals-and-classloading]]
+
+## Common Interview Questions
+- **What is the difference between Maven and Gradle?** Maven uses XML for declarative configuration, focusing on convention over configuration. Gradle uses Groovy/Kotlin DSL for more flexible, programmatic builds, often faster for incremental changes.
+- **How do you resolve dependency conflicts in Maven?** Use `<exclusions>` in pom.xml or Maven's dependency tree plugin (`mvn dependency:tree`) to identify and exclude conflicting versions.
+- **Explain Maven lifecycle phases.** Key phases: validate, compile, test, package, verify, install, deploy. Each phase binds to plugins for specific tasks.
+- **How does Gradle handle incremental builds?** Gradle tracks input/output changes and only rebuilds what's necessary, using its build cache and daemon for performance.
+- **When would you choose Maven over Gradle?** For projects needing strict conventions, extensive plugin ecosystem, or team familiarity with XML.
 
 ## References
 - https://maven.apache.org/guides/getting-started/
