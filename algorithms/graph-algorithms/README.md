@@ -112,9 +112,9 @@ flowchart TD
 - **Visualization:** Graphviz for diagram generation.
 
 ## Github-README Links & Related Topics
-- [[algorithms-and-data-structures]]
-- [[graphs-trees-heaps-and-tries]]
-- [[dynamic-programming-and-greedy]]
+- [Algorithms and Data Structures](./../algorithms-and-data-structures)
+- [Graphs Trees Heaps and Tries](./../graphs-trees-heaps-and-tries)
+- [Dynamic Programming and Greedy](./../dynamic-programming-and-greedy)
 
 ## References
 - CLRS "Introduction to Algorithms" Chapters 22-24
