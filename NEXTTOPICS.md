@@ -1,15 +1,5 @@
 
-probabilistic-algorithms — 'Bloom filters, skip lists for space efficiency'
-computational-geometry — 'Convex hull, line intersection, geometric algorithms'
-jvm-performance-tuning — 'Heap sizing, GC tuning for low latency'
-order-book-modeling — 'Canonical models for in-memory book and persistence'
-matching-algorithms — 'Batch vs streaming matching, complexity'
-time-in-force-variations — 'Exchange semantics across major venues'
-latency-measurement — 'Instrumentation and microbenchmarks'
-raft-and-leader-election — 'Implementations and failure modes'
--e 
-concurrent-programming-patterns — 'Common patterns for concurrent programming'
-java-reflection — 'Runtime inspection and dynamic code'
+java-annotations — 'Custom annotations and metadata'
 java-annotations — 'Custom annotations and metadata'
 java-generics — 'Type safety and erasure in Java'
 java-lambda-expressions — 'Functional programming with lambdas'
