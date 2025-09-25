@@ -1,8 +1,3 @@
-
-
-
-
-
-Kubernetes Networking
-Docker Volumes and Storage
-Kubernetes Security
+Service Mesh Patterns
+API Rate Limiting
+Distributed Tracing
