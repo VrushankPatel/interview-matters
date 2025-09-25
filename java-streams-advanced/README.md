@@ -6,8 +6,6 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Advanced Java Streams
-
 ## Overview
 
 Advanced Java Streams operations and collectors enable complex data processing pipelines. Streams provide functional-style operations on collections, supporting parallel execution, lazy evaluation, and composable transformations.

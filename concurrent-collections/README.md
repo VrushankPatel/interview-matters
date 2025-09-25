@@ -6,8 +6,6 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Concurrent Collections in Java
-
 ## Overview
 
 Concurrent collections in Java provide thread-safe implementations of common data structures, allowing safe access and modification from multiple threads without external synchronization. They are part of the `java.util.concurrent` package and offer better performance than synchronized wrappers.

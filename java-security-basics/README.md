@@ -6,13 +6,13 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Overview
+## Overview
 
 Java security encompasses secure coding practices, cryptography, and protection against common vulnerabilities. Essential for building robust applications.
 
 Canonical Interview Prompt: Implement secure password hashing and explain why it's important.
 
-# Detailed Explanation
+## Detailed Explanation
 
 ## Secure Coding Principles
 
@@ -42,14 +42,14 @@ graph TD
     C --> G[Access Control]
 ```
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 - **Password Storage**: Hash passwords with salt.
 - **Data Transmission**: Encrypt sensitive data over networks.
 - **Authentication**: Use secure tokens.
 - **Code Signing**: Verify software integrity.
 
-# Code Examples
+## Code Examples
 
 ```java
 // Password hashing with PBKDF2
@@ -101,25 +101,25 @@ public class AESEncryption {
 }
 ```
 
-# Common Pitfalls & Edge Cases
+## Common Pitfalls & Edge Cases
 
 - **Weak Algorithms**: Avoid MD5, use SHA-256 or higher.
 - **Key Management**: Store keys securely, rotate regularly.
 - **Side-Channel Attacks**: Timing attacks on comparisons.
 - **Certificate Validation**: Always validate SSL certificates.
 
-# Tools & Libraries
+## Tools & Libraries
 
 - Java Cryptography Extension (JCE)
 - Bouncy Castle for additional crypto
 - OWASP for security guidelines
 
-# References
+## References
 
 - [Oracle Java Security](https://docs.oracle.com/javase/8/docs/technotes/guides/security/)
 - [OWASP Java Security](https://owasp.org/www-pdf-archive/OWASP_Java_Security.pdf)
 - [Baeldung Java Security](https://www.baeldung.com/java-security)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 [Security Authz Authn Tokens](system-design/security-authz-authn-tokens/README.md), [Security in Distributed Systems](system-design/security-in-distributed-systems/README.md)

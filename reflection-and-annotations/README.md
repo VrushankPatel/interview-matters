@@ -6,13 +6,13 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Overview
+## Overview
 
 Reflection in Java allows programs to inspect and modify the runtime behavior of classes, methods, fields, and other elements. Annotations provide a way to add metadata to code, which can be processed at compile-time or runtime, often in conjunction with reflection.
 
 Canonical Interview Prompt: Implement a simple dependency injection container using reflection and annotations.
 
-# Detailed Explanation
+## Detailed Explanation
 
 ## Reflection API
 
@@ -37,14 +37,14 @@ graph TD
     F --> G[Processed by Reflection]
 ```
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 - **Dependency Injection**: Frameworks like Spring use reflection to inject dependencies based on annotations.
 - **ORM**: Hibernate uses annotations to map classes to database tables.
 - **Testing**: JUnit uses annotations to mark test methods.
 - **Serialization**: Custom serializers use reflection to access private fields.
 
-# Code Examples
+## Code Examples
 
 ```java
 // Getting class information
@@ -87,25 +87,25 @@ if (annotation != null) {
 }
 ```
 
-# Common Pitfalls & Edge Cases
+## Common Pitfalls & Edge Cases
 
 - **Security**: Reflection can bypass access controls; use in trusted code.
 - **Performance**: Cache reflective objects to avoid repeated lookups.
 - **Exceptions**: Handle IllegalAccessException, NoSuchMethodException.
 - **Generic Types**: Type erasure limits reflection on generics.
 
-# Tools & Libraries
+## Tools & Libraries
 
 - Java Reflection API
 - Annotation Processing Tool (APT)
 - Frameworks: Spring, Hibernate
 
-# References
+## References
 
 - [Oracle Reflection Tutorial](https://docs.oracle.com/javase/tutorial/reflect/)
 - [Oracle Annotations Tutorial](https://docs.oracle.com/javase/tutorial/java/annotations/)
 - [Baeldung Reflection](https://www.baeldung.com/java-reflection)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 [Java Reflection](java-reflection/README.md), [Java Annotations](java-annotations/README.md), [JVM Internals and Classloading](java/jvm-internals-and-classloading/README.md)
