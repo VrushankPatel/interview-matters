@@ -1,5 +1,5 @@
-Rate Limiting
-Concurrency & Parallelism
-Java Stream API & Functional Programming
-System Design Basics
-High Scalability Patterns
+Monitoring and Logging
+Async Logging
+DevOps & Infrastructure as Code
+Proxy Forward and Reverse
+Load Balancing and Strategies
