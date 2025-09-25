@@ -1,12 +1,12 @@
 ---
 title: Monitoring and Logging
-aliases: []
-tags: [##system-design, ##devops]
+aliases: [monitoring, logging]
+tags: [#system-design,#devops]
 created: 2025-09-25
 updated: 2025-09-25
 ---
 
-#### Overview
+## Overview
 
 Monitoring and logging are essential practices in system design and DevOps for ensuring the reliability, performance, and security of applications and infrastructure. Monitoring involves collecting, analyzing, and visualizing metrics, events, and traces to provide real-time insights into system health. Logging captures detailed records of events, errors, and activities for debugging, auditing, and compliance. Together, they enable proactive issue detection, root cause analysis, and informed decision-making.
 
@@ -14,7 +14,7 @@ Effective monitoring and logging reduce downtime, improve user experience, and s
 
 ## Detailed Explanation
 
-#### Monitoring
+### Monitoring
 
 Monitoring tracks system performance through metrics, which are numerical measurements of system state over time. Key components include:
 
@@ -25,7 +25,7 @@ Monitoring tracks system performance through metrics, which are numerical measur
 
 Monitoring focuses on "what" is happening, providing quantitative data for trends and thresholds.
 
-#### Logging
+### Logging
 
 Logging records discrete events as structured or unstructured text. It supports debugging and auditing by capturing context like timestamps, severity levels, and metadata.
 
@@ -35,11 +35,11 @@ Logging records discrete events as structured or unstructured text. It supports 
 
 Logging answers "why" something happened, offering qualitative insights.
 
-#### Integration
+### Integration
 
 Monitoring and logging complement each other: metrics show trends, logs provide details. Tools like OpenTelemetry unify them into signals (metrics, logs, traces) for end-to-end observability.
 
-###### Architecture Diagram
+#### Architecture Diagram
 
 ```mermaid
 graph TD
@@ -53,12 +53,12 @@ graph TD
     G --> H[Alerts & Dashboards]
 ```
 
-#### Data Models / Message Formats
+### Data Models / Message Formats
 
 - **Metrics**: Time-series data with labels (e.g., Prometheus format: `metric_name{label="value"} value timestamp`).
 - **Logs**: JSON or plain text with fields like timestamp, level, message, and attributes (e.g., OpenTelemetry log record: timestamp, severity, body, resource).
 
-#### Journey / Sequence
+### Journey / Sequence
 
 1. **Instrumentation**: Add monitoring/logging to code/infrastructure.
 2. **Collection**: Gather metrics/logs via agents or SDKs.
