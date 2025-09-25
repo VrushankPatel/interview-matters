@@ -1,8 +1,3 @@
-latency-measurement — 'Instrumentation and microbenchmarks'
-raft-and-leader-election — 'Implementations and failure modes'
-memory-models — 'JMM deep-dive'
-gc-tuning — 'Practical GC tuning for low-latency services'
-kafka-internals — 'Partitioning, replication, and consumer groups'
 caching-patterns — 'Cache invalidation strategies'
 consistency-models — 'Eventual vs strong consistency tradeoffs'
 microservices-architecture — 'Decomposition, communication patterns, and challenges'
