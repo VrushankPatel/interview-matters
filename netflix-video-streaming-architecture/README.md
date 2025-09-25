@@ -6,11 +6,11 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Overview
+## Overview
 
 Netflix's video streaming architecture delivers high-quality video to millions of users globally, handling encoding, storage, recommendation, and playback with low latency and high availability.
 
-# Detailed Explanation
+## Detailed Explanation
 
 ## Key Components
 - **Content Delivery**: Open Connect CDN for video distribution.
@@ -33,13 +33,13 @@ graph TD
     F --> G[Recommendation Service]
     G --> H[Playback with Adaptive Bitrate]
 ```
+## Real-world Examples & Use Cases
 
-# Real-world Examples & Use Cases
 - **Global Streaming**: Serve content in 190+ countries.
 - **Personalization**: AI-driven recommendations.
 - **Offline Viewing**: Download for offline playback.
 
-# Code Examples
+## Code Examples
 
 ```java
 // Simplified recommendation service
@@ -51,28 +51,28 @@ public class RecommendationService {
 }
 ```
 
-# Journey / Sequence
+## Journey / Sequence
 
 1. **Content Acquisition**: License or produce content.
 2. **Encoding**: Transcode to multiple formats/resolutions.
 3. **Distribution**: Push to CDN edges.
 4. **User Interaction**: Stream with low latency.
 
-# Common Pitfalls & Edge Cases
+## Common Pitfalls & Edge Cases
 - **Buffering**: Handle network variability.
 - **Scalability**: Manage traffic spikes.
 - **DRM**: Secure content with encryption.
+## Tools & Libraries
 
-# Tools & Libraries
 - **Frameworks**: Spring Cloud for microservices.
 - **Databases**: Cassandra, Elasticsearch.
 - **Monitoring**: Atlas for metrics.
 
-# References
+## References
 - [Netflix Tech Blog](https://netflixtechblog.com/)
 - [Open Connect](https://openconnect.netflix.com/)
+## Github-README Links & Related Topics
 
-# Github-README Links & Related Topics
-- [Microservices Architecture](../system-design/microservices-architecture/README.md)
-- [Content Delivery Networks](../system-design/caching-strategies/README.md)
-- [Event-Driven Architecture](../system-design/event-driven-architecture/README.md)
+- [Microservices Architecture](../microservices-architecture/README.md)
+- [CDN Architecture](../cdn-architecture/README.md)
+- [Event-Driven Systems](../event-driven-systems/README.md)
