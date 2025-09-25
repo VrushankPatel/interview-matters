@@ -1,7 +1,7 @@
 ---
 title: Networking Sockets
 aliases: [Socket Programming, Low-level Networking, TCP/UDP Sockets]
-tags: [#networking, #sockets]
+tags: [#java, #networking, #sockets]
 created: 2025-09-25
 updated: 2025-09-25
 ---
