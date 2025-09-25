@@ -1,7 +1,7 @@
 ---
 title: Microservices Communication Patterns
 aliases: [Microservices Communication, Service Communication Patterns]
-tags: [#system-design,#microservices]
+tags: [#system-design, #microservices]
 created: 2025-09-25
 updated: 2025-09-25
 ---

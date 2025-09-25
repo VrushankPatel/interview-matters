@@ -141,7 +141,7 @@ sequenceDiagram
 
 ## Github-README Links & Related Topics
 
-Related: [[threads-executors-futures]], [[concurrent-data-structures]], [[java-memory-model-and-concurrency]]
+Related: [Threads Executors Futures](../java/threads-executors-futures/README.md), [Concurrent Data Structures](../java/concurrent-data-structures/README.md), [Java Memory Model and Concurrency](../java/java-memory-model-and-concurrency/README.md)
 
 ## References
 

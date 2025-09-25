@@ -1,7 +1,7 @@
 ---
 title: Database Indexing Strategies
 aliases: [Database Indexing, Indexing Strategies]
-tags: [#database,#system-design]
+tags: [#database, #system-design]
 created: 2025-09-25
 updated: 2025-09-25
 ---

@@ -1,7 +1,7 @@
 ---
 title: Kubernetes Orchestration
 aliases: [k8s orchestration, container orchestration]
-tags: [#kubernetes,#container-orchestration,#devops,#system-design]
+tags: [#kubernetes, #container-orchestration, #devops, #system-design]
 created: 2025-09-25
 updated: 2025-09-25
 ---
