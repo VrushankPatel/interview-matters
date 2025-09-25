@@ -5,7 +5,7 @@ Last update
 2025-09-25
 
 Summary of recent additions
- - Processed and enhanced: api-design-rest-grpc-openapi, observability-logs-metrics-traces, order-book-modeling, matching-algorithms, time-in-force-variations
+ - latency-measurement, raft-and-leader-election, memory-models, gc-tuning, kafka-internals
 
 Conventions
  - Dir naming: kebab-case.
