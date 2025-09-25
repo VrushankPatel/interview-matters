@@ -1,7 +1,7 @@
 ---
 title: Java Switch Expressions
-aliases: [Switch Expressions, Java 14 Switch]
-tags: [#java,#language-features,#control-flow]
+aliases: [Switch Expressions in Java]
+tags: [#java]
 created: 2025-09-25
 updated: 2025-09-25
 ---

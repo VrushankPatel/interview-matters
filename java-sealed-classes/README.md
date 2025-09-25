@@ -1,7 +1,7 @@
 ---
 title: Java Sealed Classes
-aliases: [Sealed Classes, Java 17 Sealed Classes]
-tags: [#java,#oop,#language-features]
+aliases: [Sealed Classes in Java]
+tags: [#java]
 created: 2025-09-25
 updated: 2025-09-25
 ---
@@ -176,14 +176,6 @@ final class D extends C {}
 - **Cast Restrictions**: Narrowing reference conversions are restricted based on sealed hierarchies; invalid casts (e.g., disjoint types) are compile-time errors.
 - **Module Boundaries**: In named modules, permitted subclasses must be in the same module; cross-module hierarchies require careful module exports.
 - **Inheritance Depth**: Sealed classes can have multiple levels, but each level must adhere to the modifier rules.
-
-## Tools & Libraries
-
-- **Jackson**: Supports JSON serialization/deserialization of sealed class hierarchies via `@JsonSubTypes` or custom deserializers.
-- **Spring Framework**: Enables dependency injection and configuration with sealed classes in bean definitions.
-- **MapStruct**: Provides mapping between sealed hierarchies and DTOs with type-safe conversions.
-- **JUnit 5**: Facilitates testing of sealed class exhaustiveness in parameterized tests.
-- **IDE Support**: IntelliJ IDEA and Eclipse provide refactoring assistance and exhaustiveness checks for sealed classes.
 
 ## References
 
