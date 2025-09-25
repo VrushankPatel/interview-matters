@@ -87,6 +87,23 @@ public static class HttpTriggerFunction
 }
 ```
 
+## Common Pitfalls & Edge Cases
+
+- Cold start latency affecting response times
+- Execution timeouts for long-running tasks
+- Vendor lock-in due to proprietary services
+- Debugging challenges in distributed environments
+- Cost surprises from high-frequency executions
+- Stateless constraints requiring external storage
+
+## Tools & Libraries
+
+- **AWS Lambda**: Amazon's FaaS platform
+- **Azure Functions**: Microsoft's serverless compute service
+- **Google Cloud Functions**: Event-driven serverless functions
+- **Vercel**: Platform for frontend frameworks and serverless
+- **Serverless Framework**: Open-source framework for building serverless architectures
+
 ## References
 
 - [AWS Lambda Developer Guide](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)
