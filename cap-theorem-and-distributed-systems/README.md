@@ -1,7 +1,7 @@
 ---
 title: CAP Theorem & Distributed Systems
 aliases: [cap theorem, distributed systems, consistency availability partition]
-tags: [#system-design,#distributed-systems]
+tags: [#system-design, #distributed-systems]
 created: 2025-09-25
 updated: 2025-09-25
 ---
