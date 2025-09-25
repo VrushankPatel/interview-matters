@@ -5,7 +5,7 @@ Last update
 2025-09-25
 
 Summary of recent additions
- - Processed and verified initial seed topics: java-language-basics, oop-design-and-principles, jvm-internals-and-classloading, garbage-collection-algorithms, java-memory-model-and-concurrency
+ - Processed 5 topics: configuration-management, logging-and-monitoring, security-in-microservices, containerization-docker, data-structures-advanced
 
 Conventions
  - Dir naming: kebab-case.

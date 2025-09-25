@@ -1,14 +1,9 @@
 # One topic per line. Top is oldest.
-concurrent-data-structures
-threads-executors-futures
-collections-framework
-streams-functional-java
-exception-handling-and-errors
-io-and-nio
-serialization-and-deserialization
-build-tools-maven-gradle
-testing-and-mocking-junit-mockito
-performance-tuning-and-profiling
+configuration-management
+logging-and-monitoring
+security-in-microservices
+containerization-docker
+data-structures-advanced
 design-patterns
 system-design-basics
 load-balancing-and-routing
