@@ -68,6 +68,7 @@ This repository contains a comprehensive collection of technical interview prepa
 - [Java Virtual Threads](java-virtual-threads/README.md)
 - [Java Volatile Keyword](java-volatile-keyword/README.md)
 - [Java Wait Notify](java-wait-notify/README.md)
+- [Java Memory Management](java-memory-management/README.md)
 - [Design Patterns in Java](design-patterns-in-java/README.md)
 - [Reflection and Annotations](reflection-and-annotations/README.md)
 

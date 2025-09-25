@@ -1,10 +1,5 @@
-DevOps & Infrastructure as Code
-Proxy forward and reverse
-Load balancing and strategies
-Rate limiting
-Concurrency & Parallelism
-URL Shortener System Design
-Netflix System Design
-Facebook News Feed System Design
-Instagram System Design
-Twitter System Design
+Graph Algorithms
+Kubernetes Basics
+Docker Best Practices
+CI/CD Pipelines
+Security Best Practices in Java

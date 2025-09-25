@@ -1,84 +1,82 @@
 ---
 title: Event-Driven Systems
-aliases: [Event-Driven Architecture]
-tags: [#system-design, #architecture]
+aliases: []
+tags: [#system-design]
 created: 2025-09-25
 updated: 2025-09-25
 ---
 
 ## Overview
 
-Event-driven systems are architectures where components communicate through events, enabling loose coupling, scalability, and real-time processing. Events represent state changes or actions, processed asynchronously by event handlers.
+Event-Driven Systems are architectures where components react to events asynchronously. Events are messages representing state changes, processed by event handlers or consumers.
 
 ## Detailed Explanation
 
-In event-driven architecture (EDA), producers generate events, which are published to a message broker or bus. Consumers subscribe to relevant events and react accordingly. Key components include:
+Key components:
+- **Event Producers**: Generate events (e.g., user actions).
+- **Event Brokers**: Route events (e.g., Kafka, RabbitMQ).
+- **Event Consumers**: Process events.
 
-- **Event Producers**: Generate events (e.g., user actions, sensor data).
-- **Event Consumers**: Process events reactively.
-- **Event Brokers**: Middleware like Apache Kafka or RabbitMQ for routing and queuing.
-- **Event Stores**: Persistent storage for event sourcing.
+Benefits: Decoupling, scalability, real-time processing.
 
-Benefits: Decoupling, scalability, fault tolerance. Challenges: Eventual consistency, debugging complexity.
+Challenges: Eventual consistency, debugging complexity.
+
+### Event Flow Diagram
 
 ```mermaid
-graph TD
+graph LR
     A[Producer] --> B[Event Broker]
     B --> C[Consumer 1]
     B --> D[Consumer 2]
-    B --> E[Event Store]
+    C --> E[Action]
+    D --> F[Action]
 ```
 
 ## Real-world Examples & Use Cases
 
-- **E-commerce**: Order placed event triggers inventory update, shipping notification.
-- **IoT**: Sensor data events processed for real-time analytics.
-- **Financial Systems**: Transaction events for fraud detection and ledger updates.
+- **E-commerce**: Order placed event triggers inventory update and email.
+- **IoT**: Sensor data events processed for analytics.
+- **Social Media**: Like event updates feeds asynchronously.
 
 ## Code Examples
 
-### Simple Event Producer in Java
+### Simple Event System in Java
 
 ```java
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.ProducerRecord;
+import java.util.ArrayList;
+import java.util.List;
 
-public class EventProducer {
-    public static void main(String[] args) {
-        KafkaProducer<String, String> producer = new KafkaProducer<>(config);
-        producer.send(new ProducerRecord<>("events", "user_login", "user123"));
-        producer.close();
-    }
+interface EventListener {
+    void onEvent(String event);
 }
-```
 
-### Event Consumer
-
-```java
-import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
-
-public class EventConsumer {
-    public static void main(String[] args) {
-        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(config);
-        consumer.subscribe(Arrays.asList("events"));
-        while (true) {
-            ConsumerRecords<String, String> records = consumer.poll(100);
-            for (ConsumerRecord<String, String> record : records) {
-                System.out.println(record.value());
-            }
+class EventManager {
+    private List<EventListener> listeners = new ArrayList<>();
+    
+    public void subscribe(EventListener listener) {
+        listeners.add(listener);
+    }
+    
+    public void publish(String event) {
+        for (EventListener listener : listeners) {
+            listener.onEvent(event);
         }
     }
 }
+
+// Usage
+EventManager manager = new EventManager();
+manager.subscribe(e -> System.out.println("Handled: " + e));
+manager.publish("User Logged In");
 ```
 
 ## References
 
-- [Event-Driven Architecture on Martin Fowler](https://martinfowler.com/articles/201701-event-driven.html)
-- [Apache Kafka Documentation](https://kafka.apache.org/documentation/)
+- [Event-Driven Architecture](https://martinfowler.com/articles/201701-event-driven.html)
+- [Kafka Documentation](https://kafka.apache.org/documentation/)
 
 ## Github-README Links & Related Topics
 
-- [Kafka Internals](../kafka-internals/README.md)
-- [Async Logging](../async-logging/README.md)
-- [Microservices Architecture](../microservices-architecture/README.md)
+- [event-driven-architecture](../event-driven-architecture/README.md)
+- [message-queues-and-brokers](../message-queues-and-brokers/README.md)
+- [kafka-internals](../kafka-internals/README.md)
