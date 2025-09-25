@@ -79,6 +79,21 @@ public class VersionManager {
 - [Distributed File Systems](https://en.wikipedia.org/wiki/Distributed_file_system)
 - [Block-Level Sync](https://en.wikipedia.org/wiki/Block-level_backup)
 
+## Common Pitfalls & Edge Cases
+
+- **Sync Conflicts**: Multiple edits to same file; resolve with versioning.
+- **Network Interruptions**: Resume sync, handle partial uploads.
+- **Large Files**: Chunking and resumable uploads.
+- **Security**: Encrypt data at rest and in transit.
+- **Storage Limits**: Quota management and notifications.
+
+## Tools & Libraries
+
+- **Amazon S3**: Scalable storage.
+- **Redis**: Caching metadata.
+- **Kafka**: Event-driven sync.
+- **Docker/Kubernetes**: Deployment.
+
 ## Github-README Links & Related Topics
 - [Distributed File Systems](../system-design/database-design-and-indexing/README.md)
 - [Caching Strategies](../system-design/caching-strategies/README.md)
