@@ -90,12 +90,6 @@ And this is another line.
 ## Common Pitfalls & Edge Cases
 
 - Trailing whitespace on lines may be preserved if not part of common indentation.
-- Empty lines at the start or end are handled carefully.
-- Mixing text blocks with regular strings requires attention to concatenation.
-
-## Common Pitfalls & Edge Cases
-
-- Trailing whitespace on lines may be preserved if not part of common indentation.
 - Empty lines at the start or end are handled carefully; leading/trailing empty lines are stripped.
 - Mixing text blocks with regular strings requires attention to concatenation and formatting.
 - Indentation is based on the closing `"""`; ensure proper alignment to avoid unexpected whitespace.
@@ -107,5 +101,5 @@ And this is another line.
 
 ## Github-README Links & Related Topics
 
-- [Java Language Basics](java/java-language-basics/README.md)
-- [Java Strings and Text Processing](java/java-language-basics/README.md)
+- [Java Language Basics](../java/java-language-basics/README.md)
+- [Java Strings and Text Processing](../java/java-language-basics/README.md)

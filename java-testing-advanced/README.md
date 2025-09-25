@@ -6,7 +6,7 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Overview
+## Overview
 
 Advanced testing in Java involves using frameworks like JUnit for test structure and Mockito for mocking dependencies. Mocks and spies allow isolating units under test by simulating external components.
 
@@ -111,5 +111,5 @@ public class SpyExampleTest {
 
 # Github-README Links & Related Topics
 
-- [Testing and Mocking JUnit Mockito](java/testing-and-mocking-junit-mockito/README.md)
-- [Design Patterns](java/design-patterns/README.md)
+- [Testing and Mocking JUnit Mockito](../java/testing-and-mocking-junit-mockito/README.md)
+- [Design Patterns](../java/design-patterns/README.md)

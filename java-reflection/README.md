@@ -31,10 +31,6 @@ Key components:
 - **Constructor**: Permits creating objects via constructors.
 - **Modifier**: Checks access modifiers (public, private, etc.).
 
-Capacity and throughput targets:
-- Performance: Reflective operations are slower due to dynamic resolution; cache `Class` objects for repeated use.
-- Security: Requires `ReflectPermission` in secured environments.
-
 Tradeoffs:
 - **Flexibility vs Performance**: Enables dynamic behavior but incurs overhead.
 - **Encapsulation**: Breaks private access, potentially leading to fragile code.
@@ -162,11 +158,11 @@ public class AnnotatedClass {
 
 ## Github-README Links & Related Topics
 
-- [Reflection and Annotations](java/reflection-and-annotations/README.md)
-- [Java Language Basics](java/java-language-basics/README.md)
+- [Reflection and Annotations](../java/reflection-and-annotations/README.md)
+- [Java Language Basics](../java/java-language-basics/README.md)
 
 ## References
 
-- https://docs.oracle.com/javase/tutorial/reflect/
-- https://www.baeldung.com/java-reflection
-- https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/package-summary.html
+- [Oracle Java Tutorial](https://docs.oracle.com/javase/tutorial/reflect/)
+- [Baeldung Java Reflection](https://www.baeldung.com/java-reflection)
+- [Java Reflection API](https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/package-summary.html)

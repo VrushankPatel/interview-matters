@@ -129,5 +129,5 @@ public record BinaryOp(Expr left, Expr right, char op) implements Expr {
 
 ## Github-README Links & Related Topics
 
-- [OOP Principles in Java](java/oop-design-and-principles/README.md)
-- [Java Language Basics](java/java-language-basics/README.md)
+- [OOP Principles in Java](../oop-principles-in-java/README.md)
+- [Java Language Basics](../java/java-language-basics/README.md)

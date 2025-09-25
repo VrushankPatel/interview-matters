@@ -92,12 +92,6 @@ String description = switch (shape) {
 
 ## Common Pitfalls & Edge Cases
 
-- Exhaustive cases required for enums and sealed types; use `default` otherwise.
-- Arrow cases cannot have multiple statements without braces.
-- Mixing statements and expressions can lead to confusion.
-
-## Common Pitfalls & Edge Cases
-
 - Exhaustive cases required for enums and sealed types; use `default` otherwise to avoid compilation errors.
 - Arrow cases cannot have multiple statements without braces and `yield`.
 - Mixing statements and expressions can lead to confusion; prefer expressions for consistency.
@@ -110,5 +104,5 @@ String description = switch (shape) {
 
 ## Github-README Links & Related Topics
 
-- [Java Language Basics](java/java-language-basics/README.md)
-- [Java Sealed Classes](java-sealed-classes/README.md)
+- [Java Language Basics](../java/java-language-basics/README.md)
+- [Java Sealed Classes](../java-sealed-classes/README.md)
