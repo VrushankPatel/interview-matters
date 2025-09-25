@@ -116,7 +116,10 @@ sequenceDiagram
 - **Kafka Streams:** Processing library.
 
 ## Github-README Links & Related Topics
-[[message-queues-and-kafka]], [[partitioning-and-sharding]], [[event-sourcing-and-cqrs]], [[consistency-and-availability]]
+- [message-queues-and-kafka](./system-design/message-queues-and-kafka/README.md)
+- [partitioning-and-sharding](./system-design/partitioning-and-sharding/README.md)
+- [event-sourcing-and-cqrs](./system-design/event-sourcing-and-cqrs/README.md)
+- [consistency-and-availability](./system-design/consistency-and-availability/README.md)
 
 ## References
 - https://kafka.apache.org/documentation/

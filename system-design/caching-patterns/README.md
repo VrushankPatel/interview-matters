@@ -135,7 +135,9 @@ Common Interview Questions:
 - Ehcache: Enterprise caching solution.
 
 ## Github-README Links & Related Topics
-Related: [[load-balancing-and-routing]], [[database-design-and-indexing]], [[partitioning-and-sharding]]
+- [load-balancing-and-routing](./load-balancing-and-routing/README.md)
+- [database-design-and-indexing](./database-design-and-indexing/README.md)
+- [partitioning-and-sharding](./partitioning-and-sharding/README.md)
 
 ## References
 - https://redis.io/documentation

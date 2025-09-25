@@ -95,7 +95,10 @@ sequenceDiagram
 - **JMC:** JDK Mission Control.
 
 ## Github-README Links & Related Topics
-[[garbage-collection-algorithms]], [[performance-tuning-and-profiling]], [[jvm-internals-and-classloading]], [[low-latency-systems]]
+- [garbage-collection-algorithms](./java/garbage-collection-algorithms/README.md)
+- [performance-tuning-and-profiling](./java/performance-tuning-and-profiling/README.md)
+- [jvm-internals-and-classloading](./java/jvm-internals-and-classloading/README.md)
+- [low-latency-systems](./system-design/low-latency-systems/README.md)
 
 ## References
 - https://docs.oracle.com/en/java/javase/17/gctuning/

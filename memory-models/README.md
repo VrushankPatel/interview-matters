@@ -97,7 +97,10 @@ sequenceDiagram
 - **Atomic classes:** java.util.concurrent.atomic.
 
 ## Github-README Links & Related Topics
-[[java-memory-model-and-concurrency]], [[threads-executors-futures]], [[concurrent-data-structures]], [[performance-tuning-and-profiling]]
+- [java-memory-model-and-concurrency](./java/java-memory-model-and-concurrency/README.md)
+- [threads-executors-futures](./java/threads-executors-futures/README.md)
+- [concurrent-data-structures](./java/concurrent-data-structures/README.md)
+- [performance-tuning-and-profiling](./java/performance-tuning-and-profiling/README.md)
 
 ## References
 - https://docs.oracle.com/javase/specs/jls/se17/html/jls-17.html

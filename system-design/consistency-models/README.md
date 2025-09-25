@@ -125,7 +125,9 @@ Common Interview Questions:
 - Akka: Actor-based consistency.
 
 ## Github-README Links & Related Topics
-Related: [[consistency-and-availability]], [[partitioning-and-sharding]], [[distributed-tracing-and-observability]]
+- [consistency-and-availability](./consistency-and-availability/README.md)
+- [partitioning-and-sharding](./partitioning-and-sharding/README.md)
+- [distributed-tracing-and-observability](./distributed-tracing-and-observability/README.md)
 
 ## References
 - https://jepsen.io/consistency
