@@ -1,5 +1,10 @@
-Java Future and Callable
-Java CompletableFuture Advanced
-Java Parallel Streams
-Java Synchronized Blocks
-Java Wait Notify
+Java Method References
+Java Var Keyword
+Java Try-With-Resources
+Java Annotations Deep Dive
+Java Class Loaders
+API Gateway vs Service Mesh
+Database Replication Strategies
+Eventual Consistency
+Paxos Algorithm
+Zookeeper for Coordination
