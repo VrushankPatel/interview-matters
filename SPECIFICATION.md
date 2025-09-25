@@ -5,7 +5,7 @@ Last update
 2025-09-25
 
 Summary of recent additions
- - caching-patterns, consistency-models, microservices-architecture, circuit-breaker-pattern, idempotency-in-apis
+ - rate-limiting-algorithms, database-acid-properties, nosql-vs-sql-tradeoffs, distributed-locks, service-mesh-istio
 
 Conventions
  - Dir naming: kebab-case.
@@ -45,7 +45,17 @@ Next Topics Candidates
  - configuration-management: Centralized config in distributed systems
  - logging-and-monitoring: ELK stack and Prometheus for observability
  - security-in-microservices: OAuth, JWT for auth
- - containerization-docker: Images, volumes, and orchestration basics
+  - containerization-docker: Images, volumes, and orchestration basics
+  - container-orchestration-k8s — 'Pods, services, deployments'
+  - event-driven-architecture — 'Pub-sub patterns and event sourcing'
+  - api-gateway-patterns — 'Routing, authentication, and rate limiting in APIs'
+  - observability-patterns — 'Logs, metrics, and traces for system monitoring'
+  - security-in-distributed-systems — 'Encryption, authentication, and authorization'
+  - data-partitioning-strategies — 'Sharding and replication techniques'
+  - fault-tolerance-patterns — 'Retry, circuit breaker, and bulkhead patterns'
+  - cloud-native-architectures — 'Microservices, serverless, and containerization'
+  - real-time-data-processing — 'Stream processing with Kafka and Flink'
+  - machine-learning-infrastructure — 'Model serving and inference pipelines'
 
 TODO
  - High-level open design decisions and split criteria for oversized topics.
