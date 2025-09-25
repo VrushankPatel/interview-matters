@@ -40,6 +40,29 @@ Abstraction focuses on exposing only essential features while hiding implementat
 - **Abstract Classes**: Cannot be instantiated, can have abstract methods.
 - **Interfaces**: Contract for classes to implement.
 
+```mermaid
+classDiagram
+    class Animal {
+        +eat()
+    }
+    class Dog {
+        +bark()
+        +eat()
+    }
+    class Shape {
+        +draw()
+    }
+    class Circle {
+        +draw()
+    }
+    class Square {
+        +draw()
+    }
+    Animal <|-- Dog
+    Shape <|-- Circle
+    Shape <|-- Square
+```
+
 # Real-world Examples & Use Cases
 
 - **Banking System**: Account classes with inheritance (SavingsAccount, CheckingAccount).

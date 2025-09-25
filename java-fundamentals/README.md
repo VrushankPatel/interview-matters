@@ -14,7 +14,17 @@ Java Fundamentals covers the core syntax, data types, control structures, and ba
 
 ## Data Types
 
-- **Primitive Types**: int, long, float, double, boolean, char, byte, short.
+| Type | Size | Range | Default |
+|------|------|-------|---------|
+| byte | 8-bit | -128 to 127 | 0 |
+| short | 16-bit | -32,768 to 32,767 | 0 |
+| int | 32-bit | -2^31 to 2^31-1 | 0 |
+| long | 64-bit | -2^63 to 2^63-1 | 0L |
+| float | 32-bit | ~1.4e-45 to 3.4e38 | 0.0f |
+| double | 64-bit | ~4.9e-324 to 1.8e308 | 0.0d |
+| char | 16-bit | 0 to 65,535 | '\u0000' |
+| boolean | 1-bit | true/false | false |
+
 - **Reference Types**: Objects, arrays, strings.
 
 ## Control Structures
