@@ -6,6 +6,8 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
+# System Design Basics
+
 ## Overview
 System design is the process of defining the architecture, components, modules, interfaces, and data for a system to satisfy specified requirements. It involves making high-level decisions about the system's structure, behavior, and interactions, focusing on scalability, reliability, performance, and maintainability.
 

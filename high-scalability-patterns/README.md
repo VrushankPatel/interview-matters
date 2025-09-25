@@ -6,6 +6,8 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
+# High Scalability Patterns
+
 ## Overview
 
 High Scalability Patterns cover techniques and architectural approaches to build systems that can handle increased load, traffic, and data volume. These patterns help maintain performance, reliability, and cost-effectiveness as systems grow.
@@ -205,8 +207,8 @@ print(shard_manager.get('user1'))
 
 ## Github-README Links & Related Topics
 
-- [Load Balancing and Strategies](load-balancing-and-strategies/README.md)
-- [Caching](caching/README.md)
-- [Replication vs Sharding vs Partitioning](replication-vs-sharding-vs-partitioning/README.md)
-- [Microservices Architecture](microservices-architecture/README.md)
-- [CAP Theorem & Distributed Systems](cap-theorem-and-distributed-systems/README.md)
+- [Load Balancing and Strategies](../load-balancing-and-strategies/)
+- [Caching](../caching/)
+- [Replication vs Sharding vs Partitioning](../replication-vs-sharding-vs-partitioning/)
+- [Microservices Architecture](../microservices-architecture/)
+- [CAP Theorem & Distributed Systems](../cap-theorem-and-distributed-systems/)

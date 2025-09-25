@@ -6,6 +6,8 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
+# CAP Theorem & Distributed Systems
+
 ## Overview
 The CAP theorem, formulated by Eric Brewer, asserts that in a distributed data store, it's impossible to simultaneously provide more than two out of three guarantees: Consistency (C), Availability (A), and Partition Tolerance (P). This theorem is crucial for understanding trade-offs in distributed systems design.
 
