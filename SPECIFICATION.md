@@ -10,6 +10,11 @@ Summary of recent additions
  - jvm-internals-and-classloading
  - garbage-collection-algorithms
  - java-memory-model-and-concurrency
+ - concurrent-data-structures
+ - threads-executors-futures
+ - collections-framework
+ - streams-functional-java
+ - exception-handling-and-errors
 
 Conventions
  - Dir naming: kebab-case.
@@ -20,36 +25,16 @@ Conventions
  - STAR: apply for behavioral/system-case explanations.
 
 Next Topics Candidates
-    - container-orchestration-k8s: Pods, services, deployments for scaling microservices
-    - event-driven-architecture: Pub-sub patterns and decoupling services
-    - api-gateway-patterns: Routing, authentication, and rate limiting at entry point
-    - observability-patterns: Logs, metrics, traces for system health monitoring
-    - security-in-distributed-systems: Encryption, auth, authz in microservices
-    - data-partitioning-strategies: Sharding and replication for scalability
-    - fault-tolerance-patterns: Retry, circuit breaker, bulkhead for resilience
-    - cloud-native-architectures: Microservices, serverless, containerization best practices
-    - real-time-data-processing: Stream processing with Kafka and Flink
-    - machine-learning-infrastructure: Model serving and inference pipelines
-    - microservices-communication-patterns: Sync vs async, REST vs messaging
-    - database-sharding-strategies: Hash, range, consistent hashing
-    - api-rate-limiting: Algorithms and implementations
-    - distributed-transactions: Saga pattern, 2PC
-    - event-sourcing-cqrs: Event stores and read models
-    - service-discovery: Eureka, Consul
-    - configuration-management: Centralized config
-    - logging-and-monitoring: ELK, Prometheus
-    - security-in-microservices: OAuth, JWT
-    - containerization-docker: Images, volumes, basics
-    - order-book-modeling: Canonical models for in-memory book and persistence
-    - matching-algorithms: Batch vs streaming matching, complexity
-    - time-in-force-variations: Exchange semantics across major venues
-    - latency-measurement: Instrumentation and microbenchmarks
-    - raft-and-leader-election: Implementations and failure modes
-    - memory-models: JMM deep-dive
-    - gc-tuning: Practical GC tuning for low-latency services
-    - kafka-internals: Partitioning, replication, and consumer groups
-    - caching-patterns: Cache invalidation strategies
-    - consistency-models: Eventual vs strong consistency tradeoffs
+    - backtracking: N-Queens, Sudoku, combinatorial problem solving
+    - divide-and-conquer: Merge sort, quicksort, closest pair algorithms
+    - probabilistic-algorithms: Bloom filters, skip lists for space efficiency
+    - computational-geometry: Convex hull, line intersection, geometric algorithms
+    - jvm-performance-tuning: Heap sizing, GC tuning for low latency
+    - concurrent-collections: ConcurrentHashMap, CopyOnWriteArrayList usage
+    - java-streams-advanced: Parallel streams, custom collectors
+    - reflection-and-annotations: Runtime inspection and custom annotations
+    - java-security-basics: Cryptography, secure coding practices
+    - networking-sockets: TCP/UDP sockets in Java
 
 TODO
  - High-level open design decisions and split criteria for oversized topics.
