@@ -6,8 +6,6 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Microservices Architecture
-
 ## Overview
 
 Microservices architecture is a design approach where applications are structured as a collection of loosely coupled, independently deployable services. Each service focuses on a specific business capability and communicates via APIs.

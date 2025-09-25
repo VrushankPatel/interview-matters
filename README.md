@@ -74,7 +74,7 @@ This repository contains a comprehensive collection of technical interview prepa
 ### System Design
 - [System Design](system-design/README.md)
 - [System Design Basics](system-design-basics/README.md)
-- [High Scalability Patterns](scalability-patterns/README.md)
+- [Design Patterns](design-patterns/README.md)
 - [CAP Theorem & Distributed Systems](cap-theorem-and-distributed-systems/README.md)
 - [Latency and Throughput Zero to Hero](latency-and-throughput-zero-to-hero/README.md)
 - [API Design REST GRPC OpenAPI](system-design/api-design-rest-grpc-openapi/README.md)
