@@ -22,6 +22,37 @@ Distributed tracing and observability are critical components in modern microser
 
 **Result:** Identified a bottleneck in the payment service due to database connection pooling issues, reduced checkout failure rate by 75%, and improved average response time by 40%.
 
+## Interview Design Case
+
+**Prompt:** Design a distributed tracing system for a microservices architecture handling 10,000 requests per second (RPS) with low latency requirements.
+
+**High-Level Design (HLD):**
+
+```mermaid
+graph TD
+    A[Client] --> B[API Gateway]
+    B --> C[Service 1]
+    B --> D[Service 2]
+    C --> E[Collector]
+    D --> E
+    E --> F[Storage (e.g., Elasticsearch)]
+    F --> G[UI (e.g., Jaeger)]
+```
+
+**Capacity Calculations:**
+- Trace size: ~1KB per request (headers, spans).
+- Sampling rate: 10% to reduce load.
+- Daily traces: 10,000 RPS * 0.1 * 86400 seconds = 86.4 million traces/day.
+- Storage: 86.4M * 1KB = ~86GB/day; for 30 days: ~2.6TB (compressed).
+- Network: 86.4M * 1KB = 86GB/day ingress to collector.
+
+**Tradeoffs:**
+- Sampling: Reduces storage and performance impact but may miss rare issues.
+- Centralized vs Decentralized: Centralized easier to query but single point of failure.
+- Cost: High storage for full traces vs. performance for sampled.
+
+**STAR Case Study:** (See STAR Summary above for a real-world application.)
+
 ## Detailed Explanation
 
 ### Distributed Tracing
@@ -51,6 +82,13 @@ Automatic instrumentation (e.g., via OpenTelemetry agents) or manual span creati
 - **Incident Response:** During outages, traces help isolate failing components (e.g., a downstream API timeout).
 - **Performance Optimization:** Identify hot paths in code causing latency spikes.
 - **Compliance:** In finance, traces ensure audit trails for transactions.
+
+## Common Interview Questions
+
+- How do you propagate trace context across service boundaries?
+- What is the difference between tracing and logging?
+- How do you handle high-volume tracing without impacting performance?
+- Explain sampling strategies in distributed tracing.
 
 ## Code Examples
 

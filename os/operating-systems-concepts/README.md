@@ -22,6 +22,33 @@ Operating systems manage hardware resources and provide services for application
 
 **Result:** CPU usage dropped by 30%, response times improved by 50%, and system handled more concurrent users.
 
+## Interview Design Case
+
+**Prompt:** Design a process scheduler for an operating system handling mixed workloads (CPU-bound and I/O-bound processes).
+
+**High-Level Design (HLD):**
+
+```mermaid
+graph TD
+    A[Process Queue] --> B[Scheduler]
+    B --> C[CPU]
+    B --> D[I/O Devices]
+    C --> E[Context Switch]
+    E --> B
+```
+
+**Capacity Calculations:**
+- Context switch time: 10μs.
+- For 100 processes, switching every 10ms: overhead 1% CPU.
+- Memory for PCBs: 1KB each, 100 processes: 100KB.
+
+**Tradeoffs:**
+- Preemptive vs Cooperative: Preemptive prevents starvation but increases overhead.
+- Priority vs Fairness: Priority scheduling efficient but may starve low-priority.
+- Multilevel queues: Complex but adaptive to workloads.
+
+**STAR Case Study:** (See STAR Summary above for optimization example.)
+
 ## Detailed Explanation
 
 ### Processes and Threads
@@ -47,6 +74,13 @@ Operating systems manage hardware resources and provide services for application
 
 - Web servers: Multi-threaded handling of requests.
 - Databases: Process isolation for security.
+
+## Common Interview Questions
+
+- What is the difference between a process and a thread?
+- Explain virtual memory and paging.
+- How do you prevent deadlocks?
+- Describe CPU scheduling algorithms.
 
 ## Code Examples
 

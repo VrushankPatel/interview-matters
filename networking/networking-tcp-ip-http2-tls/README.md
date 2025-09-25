@@ -22,6 +22,33 @@ Networking fundamentals are crucial for system design, covering the TCP/IP proto
 
 **Result:** Reduced page load time by 50%, improved user experience, and handled 2x traffic without additional servers.
 
+## Interview Design Case
+
+**Prompt:** Design a secure and efficient networking stack for a high-throughput API service handling 50,000 RPS.
+
+**High-Level Design (HLD):**
+
+```mermaid
+graph LR
+    A[Client] --> B[TLS Layer]
+    B --> C[HTTP/2 Multiplexer]
+    C --> D[TCP Connection Pool]
+    D --> E[IP Routing]
+    E --> F[Server]
+```
+
+**Capacity Calculations:**
+- Connection pool: 10,000 concurrent connections.
+- Bandwidth: 50k RPS * 2KB/response = 100MB/s.
+- Latency: TLS 1.3 handshake ~1 RTT, HTTP/2 multiplexing reduces head-of-line blocking.
+
+**Tradeoffs:**
+- TCP vs UDP: TCP reliability vs UDP speed for real-time.
+- TLS overhead: Security vs. performance (use session resumption).
+- HTTP/2 vs HTTP/3: HTTP/2 widely supported vs. HTTP/3's QUIC for lower latency.
+
+**STAR Case Study:** (See STAR Summary above for optimization example.)
+
 ## Detailed Explanation
 
 ### TCP/IP Stack
@@ -46,6 +73,13 @@ Provides encryption, authentication, and integrity. Versions: 1.2 (common), 1.3 
 - Web browsing: HTTP/2 for efficient resource loading.
 - APIs: REST over HTTPS with TLS.
 - Streaming: TCP for reliable video delivery.
+
+## Common Interview Questions
+
+- Explain the TCP three-way handshake.
+- How does HTTP/2 improve over HTTP/1.1?
+- What are the differences between TLS 1.2 and 1.3?
+- How do you handle network congestion in TCP?
 
 ## Code Examples
 
