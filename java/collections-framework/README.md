@@ -158,7 +158,7 @@ sequenceDiagram
 - **VisualVM**: Memory profiling for collection usage
 
 ## Github-README Links & Related Topics
-Related: [[concurrent-data-structures]], [[streams-functional-java]], [[performance-tuning-and-profiling]]
+Related: [concurrent-data-structures](../concurrent-data-structures/README.md), [streams-functional-java](../streams-functional-java/README.md), [performance-tuning-and-profiling](../performance-tuning-and-profiling/README.md)
 
 ## References
 - [Oracle Collections Framework](https://docs.oracle.com/javase/8/docs/technotes/guides/collections/overview.html)

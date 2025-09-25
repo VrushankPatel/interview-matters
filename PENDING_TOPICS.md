@@ -1,5 +1,24 @@
 # One topic per line. Top is oldest.
-
+io-and-nio
+serialization-and-deserialization
+build-tools-maven-gradle
+testing-and-mocking-junit-mockito
+performance-tuning-and-profiling
+design-patterns
+system-design-basics
+load-balancing-and-routing
+caching-strategies
+database-design-and-indexing
+partitioning-and-sharding
+consistency-and-availability
+message-queues-and-kafka
+event-sourcing-and-cqrs
+raft-consensus-and-leader-election
+distributed-tracing-and-observability
+networking-tcp-ip-http2-tls
+operating-systems-concepts
+algorithms-and-data-structures
+graphs-trees-heaps-and-tries
 dynamic-programming-and-greedy
 system-design-interview-cases
 behavioral-star-prep

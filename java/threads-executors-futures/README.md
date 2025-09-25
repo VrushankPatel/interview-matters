@@ -169,7 +169,7 @@ sequenceDiagram
 - **VisualVM/JConsole**: Thread monitoring and profiling
 
 ## Github-README Links & Related Topics
-Related: [[concurrent-data-structures]], [[java-memory-model-and-concurrency]], [[performance-tuning-and-profiling]]
+Related: [concurrent-data-structures](../concurrent-data-structures/README.md), [java-memory-model-and-concurrency](../java-memory-model-and-concurrency/README.md), [performance-tuning-and-profiling](../performance-tuning-and-profiling/README.md)
 
 ## References
 - [Java Concurrency in Practice](https://www.amazon.com/Java-Concurrency-Practice-Brian-Goetz/dp/0321349601)

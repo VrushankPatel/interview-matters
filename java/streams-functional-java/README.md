@@ -141,7 +141,7 @@ sequenceDiagram
 - **IntelliJ IDEA**: Excellent lambda debugging support
 
 ## Github-README Links & Related Topics
-Related: [[collections-framework]], [[performance-tuning-and-profiling]], [[java-language-basics]]
+Related: [collections-framework](../collections-framework/README.md), [performance-tuning-and-profiling](../performance-tuning-and-profiling/README.md), [java-language-basics](../java-language-basics/README.md)
 
 ## References
 - [Oracle Streams API](https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html)

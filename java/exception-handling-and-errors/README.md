@@ -147,7 +147,7 @@ sequenceDiagram
 - **AspectJ**: AOP for cross-cutting exception handling
 
 ## Github-README Links & Related Topics
-Related: [[java-language-basics]], [[performance-tuning-and-profiling]], [[testing-and-mocking-junit-mockito]]
+Related: [java-language-basics](../java-language-basics/README.md), [performance-tuning-and-profiling](../performance-tuning-and-profiling/README.md), [testing-and-mocking-junit-mockito](../testing-and-mocking-junit-mockito/README.md)
 
 ## References
 - [Oracle Exception Handling](https://docs.oracle.com/javase/tutorial/essential/exceptions/)

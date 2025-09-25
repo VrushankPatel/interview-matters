@@ -161,7 +161,7 @@ sequenceDiagram
 - **VisualVM**: Monitoring thread contention and performance
 
 ## Github-README Links & Related Topics
-Related: [[threads-executors-futures]], [[java-memory-model-and-concurrency]], [[collections-framework]], [[performance-tuning-and-profiling]]
+Related: [threads-executors-futures](../threads-executors-futures/README.md), [java-memory-model-and-concurrency](../java-memory-model-and-concurrency/README.md), [collections-framework](../collections-framework/README.md), [performance-tuning-and-profiling](../performance-tuning-and-profiling/README.md)
 
 ## References
 - [Java Concurrency in Practice](https://www.amazon.com/Java-Concurrency-Practice-Brian-Goetz/dp/0321349601)
