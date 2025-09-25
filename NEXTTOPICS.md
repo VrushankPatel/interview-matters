@@ -1,8 +1,3 @@
-java-reflection — 'Runtime inspection and dynamic code'
-java-annotations — 'Custom annotations and metadata'
-backtracking — 'N-Queens, Sudoku, combinatorial problem solving'
-divide-and-conquer — 'Merge sort, quicksort, closest pair algorithms'
-probabilistic-algorithms — 'Bloom filters, skip lists for space efficiency'
 computational-geometry — 'Convex hull, line intersection, geometric algorithms'
 jvm-performance-tuning — 'Heap sizing, GC tuning for low latency'
 order-book-modeling — 'Canonical models for in-memory book and persistence'
