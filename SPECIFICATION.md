@@ -10,6 +10,11 @@ Summary of recent additions
  - build-tools-maven-gradle
  - testing-and-mocking-junit-mockito
  - performance-tuning-and-profiling
+ - design-patterns
+ - system-design-basics
+ - load-balancing-and-routing
+ - caching-strategies
+ - database-design-and-indexing
 
 Conventions
  - Dir naming: kebab-case.
