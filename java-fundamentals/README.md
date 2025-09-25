@@ -1,207 +1,215 @@
 ---
 title: Java Fundamentals
-aliases: []
+aliases: [Java Basics]
 tags: [#java]
 created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Overview
+# Java Fundamentals
 
-Java Fundamentals encompass the core concepts and building blocks of the Java programming language, providing the foundation for writing robust, object-oriented, and platform-independent applications. Key areas include basic syntax, data types, operators, control flow, object-oriented programming (OOP) principles like classes, objects, inheritance, polymorphism, encapsulation, and abstraction, as well as exception handling. These fundamentals enable developers to create efficient, maintainable code that executes on the Java Virtual Machine (JVM), supporting everything from simple scripts to complex enterprise systems.
+## Overview
 
-# Detailed Explanation
+Java Fundamentals cover the core concepts and building blocks of the Java programming language. This includes basic syntax, data types, control structures, object-oriented principles, and essential language features that form the foundation for more advanced Java development.
 
-## Variables and Data Types
+## Detailed Explanation
 
-Variables in Java store data values and are declared with a type. Java distinguishes between primitive types, which hold basic values directly in memory, and reference types, which point to objects on the heap.
+### Basic Syntax and Structure
 
-| Type      | Size (bits) | Range/Example                  | Use Case                  |
-|-----------|-------------|-------------------------------|---------------------------|
-| `byte`   | 8          | -128 to 127                  | Small integers, binary data |
-| `short`  | 16         | -32,768 to 32,767            | Memory-efficient integers |
-| `int`    | 32         | -2^31 to 2^31-1              | General-purpose integers  |
-| `long`   | 64         | -2^63 to 2^63-1              | Large numbers, timestamps |
-| `float`  | 32         | 1.4e-45 to 3.4e+38           | Single-precision floats   |
-| `double` | 64         | 4.9e-324 to 1.8e+308         | Double-precision floats   |
-| `char`   | 16         | Unicode characters           | Text characters          |
-| `boolean`| 1          | `true`/`false`               | Logical flags            |
+Java programs are organized into classes and methods. Every Java application must have a `main` method as the entry point.
 
-Reference types include classes, interfaces, and arrays. Arrays are fixed-size collections: `int[] arr = new int[5];`.
+```java
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+```
 
-## Operators
+### Data Types
 
-Operators perform operations on variables and literals. Categories include:
+Java has two categories of data types: primitive and reference.
+
+**Primitive Types:**
+- `byte`: 8-bit signed integer (-128 to 127)
+- `short`: 16-bit signed integer (-32,768 to 32,767)
+- `int`: 32-bit signed integer (-2^31 to 2^31-1)
+- `long`: 64-bit signed integer (-2^63 to 2^63-1)
+- `float`: 32-bit IEEE 754 floating-point
+- `double`: 64-bit IEEE 754 floating-point
+- `char`: 16-bit Unicode character
+- `boolean`: true or false
+
+**Reference Types:**
+- Objects, arrays, and strings
+
+### Variables and Constants
+
+Variables store data values, while constants are immutable.
+
+```java
+int age = 25;
+final double PI = 3.14159;
+String name = "John Doe";
+```
+
+### Operators
+
+Java supports various operators:
 - Arithmetic: `+`, `-`, `*`, `/`, `%`
-- Relational: `==`, `!=`, `<`, `<=`, `>`, `>=`
+- Relational: `==`, `!=`, `<`, `>`, `<=`, `>=`
 - Logical: `&&`, `||`, `!`
 - Assignment: `=`, `+=`, `-=`, etc.
-- Bitwise: `&`, `|`, `^`, `~`, `<<`, `>>`
-- Ternary: `condition ? trueValue : falseValue`
 
-Operator precedence follows mathematical conventions; use parentheses for clarity.
+### Control Structures
 
-## Control Flow Statements
-
-Control flow directs program execution:
-- Conditional: `if-else`, `switch`
-- Loops: `for`, `while`, `do-while`
-- Branching: `break`, `continue`, `return`
-
-## Object-Oriented Programming (OOP)
-
-Java's OOP paradigm revolves around four pillars:
-- **Encapsulation**: Bundling data and methods, using access modifiers (`private`, `protected`, `public`).
-- **Inheritance**: Subclasses extend superclasses with `extends`, enabling code reuse.
-- **Polymorphism**: Method overriding and overloading allow different behaviors.
-- **Abstraction**: Abstract classes and interfaces define contracts.
-
-```mermaid
-classDiagram
-    class Shape {
-        <<abstract>>
-        +double area()
-        +double perimeter()
-    }
-    class Circle {
-        -double radius
-        +Circle(double r)
-        +double area()
-        +double perimeter()
-    }
-    class Rectangle {
-        -double width
-        -double height
-        +Rectangle(double w, double h)
-        +double area()
-        +double perimeter()
-    }
-    Shape <|-- Circle
-    Shape <|-- Rectangle
-```
-
-This diagram shows abstraction and inheritance, with `Circle` and `Rectangle` implementing `Shape`.
-
-## Methods and Constructors
-
-Methods define behaviors with return types, names, and parameters. Constructors initialize objects and match the class name. Overloading allows multiple methods with the same name but different signatures.
-
-## Packages and Imports
-
-Packages organize classes into namespaces, imported with `import` statements to avoid fully qualified names.
-
-## Exception Handling
-
-Exceptions manage errors. Use `try-catch-finally` for handling, `throw` for raising, and `throws` in method signatures. Checked exceptions require handling; unchecked do not.
-
-# Real-world Examples & Use Cases
-
-- **Web Application**: Model user entities with classes, use inheritance for roles (e.g., `Admin` extends `User`), handle form validations with control flow, and manage database errors with exceptions.
-- **Financial Software**: Encapsulate account logic in classes, perform calculations with operators, iterate over transactions with loops, and ensure data integrity with polymorphism.
-- **Mobile App Backend**: Use OOP for service layers, handle concurrent requests with threads (fundamentals extend to concurrency), and log errors via exception handling.
-- **Data Processing Tool**: Manipulate arrays and collections for batch operations, apply control flow for conditional processing, and abstract common utilities.
-
-# Code Examples
-
-## Basic Variable Declaration and Operations
+**Conditional Statements:**
 ```java
-public class VariablesExample {
-    public static void main(String[] args) {
-        int age = 25;
-        double salary = 50000.0;
-        boolean isEmployed = true;
-        String name = "John Doe";
-        
-        System.out.println("Name: " + name + ", Age: " + age + ", Salary: " + salary + ", Employed: " + isEmployed);
-    }
+if (condition) {
+    // code
+} else if (anotherCondition) {
+    // code
+} else {
+    // code
+}
+
+switch (variable) {
+    case value1:
+        // code
+        break;
+    case value2:
+        // code
+        break;
+    default:
+        // code
 }
 ```
 
-## Class Definition and Inheritance
+**Loops:**
 ```java
-class Animal {
-    String name;
-    
-    Animal(String name) {
-        this.name = name;
-    }
-    
-    void speak() {
-        System.out.println("Animal speaks");
-    }
+for (int i = 0; i < 10; i++) {
+    System.out.println(i);
 }
 
-class Dog extends Animal {
-    Dog(String name) {
-        super(name);
-    }
-    
-    @Override
-    void speak() {
-        System.out.println(name + " barks");
-    }
+while (condition) {
+    // code
 }
 
-public class InheritanceExample {
-    public static void main(String[] args) {
-        Animal dog = new Dog("Buddy");
-        dog.speak(); // Outputs: Buddy barks
-    }
+do {
+    // code
+} while (condition);
+```
+
+### Arrays
+
+Arrays store multiple values of the same type.
+
+```java
+int[] numbers = new int[5];
+int[] primes = {2, 3, 5, 7, 11};
+
+for (int num : primes) {
+    System.out.println(num);
 }
 ```
 
-## Control Flow with Loops and Conditionals
+### Methods
+
+Methods encapsulate reusable code blocks.
+
 ```java
-public class ControlFlowExample {
-    public static void main(String[] args) {
-        int[] numbers = {1, 2, 3, 4, 5};
-        
-        for (int num : numbers) {
-            if (num % 2 == 0) {
-                System.out.println(num + " is even");
-            } else {
-                System.out.println(num + " is odd");
-            }
+public static int add(int a, int b) {
+    return a + b;
+}
+
+public static void main(String[] args) {
+    int result = add(5, 3);
+    System.out.println(result);
+}
+```
+
+## Real-world Examples & Use Cases
+
+1. **Calculator Application**: Using arithmetic operators and methods to perform calculations.
+
+2. **Student Grade Management**: Arrays and loops to store and process student grades.
+
+3. **Simple Banking System**: Variables and conditionals to manage account balances and transactions.
+
+4. **Temperature Converter**: Methods and data types to convert between Celsius and Fahrenheit.
+
+5. **Number Guessing Game**: Loops and random number generation for interactive gameplay.
+
+## Code Examples
+
+### Complete Calculator Class
+
+```java
+public class Calculator {
+    public static double add(double a, double b) {
+        return a + b;
+    }
+
+    public static double subtract(double a, double b) {
+        return a - b;
+    }
+
+    public static double multiply(double a, double b) {
+        return a * b;
+    }
+
+    public static double divide(double a, double b) {
+        if (b == 0) {
+            throw new IllegalArgumentException("Cannot divide by zero");
         }
-    }
-}
-```
-
-## Exception Handling
-```java
-public class ExceptionHandlingExample {
-    public static void main(String[] args) {
-        try {
-            int result = divide(10, 0);
-            System.out.println("Result: " + result);
-        } catch (ArithmeticException e) {
-            System.out.println("Error: " + e.getMessage());
-        } finally {
-            System.out.println("Operation completed");
-        }
-    }
-    
-    static int divide(int a, int b) throws ArithmeticException {
         return a / b;
     }
+
+    public static void main(String[] args) {
+        System.out.println("5 + 3 = " + add(5, 3));
+        System.out.println("5 - 3 = " + subtract(5, 3));
+        System.out.println("5 * 3 = " + multiply(5, 3));
+        System.out.println("5 / 3 = " + divide(5, 3));
+    }
 }
 ```
 
-# References
+### Array Manipulation Example
 
-- [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se21/html/index.html)
-- [Java Tutorials: Language Basics](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html)
-- [OOP Concepts](https://docs.oracle.com/javase/tutorial/java/concepts/index.html)
-- [Classes and Objects](https://docs.oracle.com/javase/tutorial/java/javaOO/index.html)
-- [Operators](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/operators.html)
-- [Control Flow](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/flow.html)
-- [Exceptions](https://docs.oracle.com/javase/tutorial/essential/exceptions/index.html)
+```java
+public class ArrayExample {
+    public static void main(String[] args) {
+        int[] scores = {85, 92, 78, 96, 88};
+        
+        // Calculate average
+        double sum = 0;
+        for (int score : scores) {
+            sum += score;
+        }
+        double average = sum / scores.length;
+        
+        System.out.println("Average score: " + average);
+        
+        // Find maximum
+        int max = scores[0];
+        for (int i = 1; i < scores.length; i++) {
+            if (scores[i] > max) {
+                max = scores[i];
+            }
+        }
+        System.out.println("Highest score: " + max);
+    }
+}
+```
 
-# Github-README Links & Related Topics
+## References
 
-- [Java Collections Deep Dive](./java-collections-deep-dive/README.md)
-- [Java Generics](./java-generics/README.md)
-- [Java Annotations](./java-annotations/README.md)
-- [Java Reflection](./java-reflection/README.md)
-- [OOP Principles in Java](./oop-principles-in-java/README.md)
-- [Java Exception Handling](./java-exception-handling/README.md)
+- [Oracle Java Tutorials - Language Basics](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html)
+- [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se17/html/index.html)
+- [GeeksforGeeks Java Fundamentals](https://www.geeksforgeeks.org/java/)
+
+## Github-README Links & Related Topics
+
+- [java/README.md](../java/README.md)
+- [oop-principles-in-java/README.md](../oop-principles-in-java/README.md)
+- [java-language-basics/README.md](../java/java-language-basics/README.md)

@@ -1,81 +1,26 @@
 ---
 title: OOP Principles in Java
-aliases: []
+aliases: [Object-Oriented Programming in Java]
 tags: [#java,#oop]
 created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Overview
+# OOP Principles in Java
 
-Object-Oriented Programming (OOP) Principles in Java provide the foundation for designing modular, reusable, and maintainable software. The four core principles—Encapsulation, Inheritance, Polymorphism, and Abstraction—enable developers to model real-world entities as objects, promoting code organization, scalability, and ease of debugging in Java applications.
+## Overview
 
-# Detailed Explanation
+Object-Oriented Programming (OOP) principles in Java provide a structured approach to software development. The four main principles are Encapsulation, Inheritance, Polymorphism, and Abstraction. These principles help create modular, reusable, and maintainable code.
 
-## Encapsulation
+## Detailed Explanation
 
-Encapsulation binds data (fields) and methods that operate on that data into a single unit (class), restricting direct access to some components. This is achieved using access modifiers like `private`, `protected`, and `public`, with getter and setter methods for controlled access.
+### Encapsulation
 
-## Inheritance
+Encapsulation binds data and methods that operate on that data within a single unit (class). It restricts direct access to some components and protects the integrity of the data.
 
-Inheritance allows a class (subclass) to inherit properties and behaviors from another class (superclass), fostering code reuse. In Java, use the `extends` keyword for class inheritance and `implements` for interfaces. Multiple inheritance is not supported for classes but can be simulated with interfaces.
-
-## Polymorphism
-
-Polymorphism enables objects to be treated as instances of their parent class or interface, with behavior determined at runtime. It includes compile-time (method overloading) and runtime (method overriding) polymorphism, allowing flexible and extensible code.
-
-## Abstraction
-
-Abstraction hides complex implementation details, exposing only essential features. In Java, abstract classes (using `abstract` keyword) and interfaces define contracts that concrete classes must fulfill, promoting loose coupling and high-level design.
-
-| Principle      | Key Concept                  | Java Mechanism              | Benefit                          |
-|----------------|------------------------------|-----------------------------|----------------------------------|
-| Encapsulation | Data Hiding                  | Access Modifiers           | Security, Modularity             |
-| Inheritance   | Code Reuse                   | `extends`, `implements`    | Hierarchy, Extensibility         |
-| Polymorphism  | Many Forms                   | Overloading, Overriding    | Flexibility, Dynamic Behavior    |
-| Abstraction   | Hide Complexity             | Abstract Classes, Interfaces| Simplicity, Maintainability      |
-
-```mermaid
-classDiagram
-    class Shape {
-        <<abstract>>
-        +double area()
-        +double perimeter()
-    }
-    class Circle {
-        -double radius
-        +double area()
-        +double perimeter()
-    }
-    class Rectangle {
-        -double width
-        -double height
-        +double area()
-        +double perimeter()
-    }
-    Shape <|-- Circle
-    Shape <|-- Rectangle
-```
-
-This diagram shows abstraction with an abstract `Shape` class and concrete implementations `Circle` and `Rectangle`, demonstrating inheritance and polymorphism.
-
-# Real-world Examples & Use Cases
-
-- **Banking System**: Encapsulate account details in a `BankAccount` class with private fields; inherit from a base `Account` class for different types like `SavingsAccount` and `CheckingAccount`; use polymorphism for interest calculation methods; abstract common behaviors into interfaces like `Withdrawable`.
-- **E-commerce Platform**: Model products with inheritance (e.g., `Electronics` extends `Product`); encapsulate pricing logic; polymorphically handle discounts; abstract payment processing into interfaces.
-- **Game Development**: Abstract game entities into a base `Entity` class; inherit for `Player`, `Enemy`; encapsulate health and position; polymorphically update behaviors.
-- **Library Management**: Encapsulate book data; inherit for different media types; use abstraction for search interfaces; polymorphically sort collections.
-
-# Code Examples
-
-## Encapsulation Example
 ```java
 public class BankAccount {
     private double balance;
-    
-    public BankAccount(double initialBalance) {
-        this.balance = initialBalance;
-    }
     
     public void deposit(double amount) {
         if (amount > 0) {
@@ -89,78 +34,181 @@ public class BankAccount {
 }
 ```
 
-## Inheritance and Polymorphism
-```java
-abstract class Animal {
-    abstract void makeSound();
-}
+### Inheritance
 
-class Dog extends Animal {
-    @Override
-    void makeSound() {
-        System.out.println("Woof!");
+Inheritance allows a class to inherit properties and methods from another class. It promotes code reusability and establishes a relationship between parent and child classes.
+
+```java
+public class Animal {
+    public void eat() {
+        System.out.println("Eating...");
     }
 }
 
-class Cat extends Animal {
+public class Dog extends Animal {
+    public void bark() {
+        System.out.println("Woof!");
+    }
+}
+```
+
+### Polymorphism
+
+Polymorphism allows objects to be treated as instances of their parent class, enabling method overriding and overloading. It provides flexibility in method implementation.
+
+**Method Overriding:**
+```java
+public class Shape {
+    public double area() {
+        return 0;
+    }
+}
+
+public class Circle extends Shape {
+    private double radius;
+    
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+    
     @Override
-    void makeSound() {
-        System.out.println("Meow!");
+    public double area() {
+        return Math.PI * radius * radius;
+    }
+}
+```
+
+**Method Overloading:**
+```java
+public class Calculator {
+    public int add(int a, int b) {
+        return a + b;
+    }
+    
+    public double add(double a, double b) {
+        return a + b;
+    }
+}
+```
+
+### Abstraction
+
+Abstraction hides complex implementation details and shows only essential features. It can be achieved through abstract classes and interfaces.
+
+```java
+public abstract class Vehicle {
+    public abstract void start();
+    
+    public void stop() {
+        System.out.println("Vehicle stopped");
+    }
+}
+
+public class Car extends Vehicle {
+    @Override
+    public void start() {
+        System.out.println("Car started");
+    }
+}
+```
+
+## Real-world Examples & Use Cases
+
+1. **Banking System**: Encapsulation for account security, inheritance for different account types.
+
+2. **Game Development**: Polymorphism for different character behaviors, abstraction for game engines.
+
+3. **E-commerce Platform**: Inheritance for product categories, encapsulation for user data protection.
+
+4. **GUI Frameworks**: Abstraction for UI components, polymorphism for event handling.
+
+5. **Database ORM**: Inheritance for entity relationships, encapsulation for data access.
+
+## Code Examples
+
+### Complete OOP Example: Library Management System
+
+```java
+// Abstraction
+public abstract class LibraryItem {
+    protected String title;
+    protected String author;
+    
+    public LibraryItem(String title, String author) {
+        this.title = title;
+        this.author = author;
+    }
+    
+    public abstract void displayInfo();
+}
+
+// Inheritance and Polymorphism
+public class Book extends LibraryItem {
+    private int pageCount;
+    
+    public Book(String title, String author, int pageCount) {
+        super(title, author);
+        this.pageCount = pageCount;
+    }
+    
+    @Override
+    public void displayInfo() {
+        System.out.println("Book: " + title + " by " + author + ", " + pageCount + " pages");
+    }
+}
+
+public class Magazine extends LibraryItem {
+    private String issue;
+    
+    public Magazine(String title, String author, String issue) {
+        super(title, author);
+        this.issue = issue;
+    }
+    
+    @Override
+    public void displayInfo() {
+        System.out.println("Magazine: " + title + " by " + author + ", Issue: " + issue);
+    }
+}
+
+// Encapsulation
+public class Library {
+    private List<LibraryItem> items = new ArrayList<>();
+    
+    public void addItem(LibraryItem item) {
+        items.add(item);
+    }
+    
+    public void displayAllItems() {
+        for (LibraryItem item : items) {
+            item.displayInfo();
+        }
     }
 }
 
 public class Main {
     public static void main(String[] args) {
-        Animal[] animals = {new Dog(), new Cat()};
-        for (Animal animal : animals) {
-            animal.makeSound(); // Polymorphism
-        }
+        Library library = new Library();
+        
+        Book book = new Book("Java Programming", "John Doe", 500);
+        Magazine magazine = new Magazine("Tech Monthly", "Jane Smith", "September 2023");
+        
+        library.addItem(book);
+        library.addItem(magazine);
+        
+        library.displayAllItems();
     }
 }
 ```
 
-## Abstraction with Interfaces
-```java
-interface Drawable {
-    void draw();
-}
+## References
 
-class Circle implements Drawable {
-    @Override
-    public void draw() {
-        System.out.println("Drawing a circle");
-    }
-}
+- [Oracle Java Tutorials - Object-Oriented Programming Concepts](https://docs.oracle.com/javase/tutorial/java/concepts/index.html)
+- [GeeksforGeeks OOP Concepts](https://www.geeksforgeeks.org/object-oriented-programming-oops-concept-in-java/)
+- [Java OOP Principles](https://www.javatpoint.com/java-oops-concepts)
 
-class Square implements Drawable {
-    @Override
-    public void draw() {
-        System.out.println("Drawing a square");
-    }
-}
-```
+## Github-README Links & Related Topics
 
-# Common Pitfalls & Edge Cases
-
-- **Tight Coupling in Inheritance**: Deep hierarchies can lead to tight coupling; prefer composition over inheritance.
-- **Multiple Inheritance Issues**: Java doesn't support multiple class inheritance to avoid the diamond problem; use interfaces to avoid.
-- **Overusing Polymorphism**: Excessive overriding can confuse behavior; ensure clear contracts.
-- **Incomplete Abstraction**: Abstract classes with too many concrete methods reduce flexibility; use interfaces for pure abstraction.
-- **Access Modifier Errors**: Incorrect modifiers can expose sensitive data; review encapsulation regularly.
-- **Method Overloading vs. Overriding Confusion**: Overloading is compile-time polymorphism, overriding is runtime; mixing them inappropriately can lead to unexpected behavior.
-
-# References
-
-- [Object-Oriented Programming Concepts](https://docs.oracle.com/javase/tutorial/java/concepts/index.html)
-- [Inheritance](https://docs.oracle.com/javase/tutorial/java/IandI/subclasses.html)
-- [Polymorphism](https://docs.oracle.com/javase/tutorial/java/IandI/polymorphism.html)
-- [Abstract Classes and Methods](https://docs.oracle.com/javase/tutorial/java/IandI/abstract.html)
-- [Interfaces](https://docs.oracle.com/javase/tutorial/java/IandI/createinterface.html)
-
-# Github-README Links & Related Topics
-
-- [Java Fundamentals](./java-fundamentals/README.md)
-- [Java Design Patterns](./java-design-patterns/README.md)
-- [Java Generics](./java-generics/README.md)
-- [Java Annotations](./java-annotations/README.md)
-- [Java Reflection](./java-reflection/README.md)
+- [java-fundamentals/README.md](../java-fundamentals/README.md)
+- [java/README.md](../java/README.md)
+- [design-patterns/README.md](../java/design-patterns/README.md)
