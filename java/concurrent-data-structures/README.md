@@ -1,114 +1,170 @@
 ---
 title: Concurrent Data Structures
-aliases: [Concurrent Collections, Thread-Safe Data Structures]
-tags: [#java, #interviews]
+aliases: [Concurrent Collections, Thread-Safe Collections]
+tags: [#java, #concurrency, #interviews]
 created: 2025-09-25
 updated: 2025-09-25
 ---
 
 ## Overview
-Concurrent data structures in Java provide thread-safe implementations of common collections, enabling safe access and modification in multi-threaded environments. They are essential for building scalable, concurrent applications without manual synchronization.
+Concurrent data structures in Java provide thread-safe alternatives to standard collections, enabling safe access and modification in multi-threaded environments. They are essential for building scalable, high-performance applications where multiple threads need to share data without external synchronization.
 
 ## STAR Summary
-**Situation:** In a high-throughput trading system, multiple threads needed to update shared order books simultaneously.  
-**Task:** Implement thread-safe data structures to handle concurrent reads and writes.  
-**Action:** Used ConcurrentHashMap for order storage and CopyOnWriteArrayList for listeners, ensuring atomic operations and minimizing lock contention.  
-**Result:** Achieved 10x throughput improvement with reduced deadlock risks.
+**Situation**: In a high-throughput trading system, multiple threads were processing market data and updating shared order books, causing race conditions and data corruption.
+
+**Task**: Implement thread-safe data structures to handle concurrent reads and writes without performance degradation.
+
+**Action**: Replaced synchronized HashMap with ConcurrentHashMap, utilized CopyOnWriteArrayList for read-heavy scenarios, and implemented custom concurrent queues for order processing.
+
+**Result**: Eliminated race conditions, improved throughput by 40%, and reduced latency from 50ms to 15ms under load.
 
 ## Detailed Explanation
-Java's java.util.concurrent package offers structures like ConcurrentHashMap, ConcurrentSkipListMap, ConcurrentLinkedQueue, and CopyOnWriteArraySet. These use lock-striping, optimistic locking, or copy-on-write to allow concurrent access. For example, ConcurrentHashMap divides the map into segments, allowing multiple threads to operate on different segments without blocking.
+Java's concurrent collections are part of the `java.util.concurrent` package, introduced in Java 5. They use advanced techniques like lock striping, optimistic locking, and non-blocking algorithms to minimize contention.
 
-Key features:
-- **Atomic operations:** Methods like putIfAbsent ensure thread-safety without external locks.
-- **Weakly consistent iterators:** Iterators reflect state at creation time, avoiding ConcurrentModificationException.
-- **Performance:** Designed for high concurrency with minimal contention.
+Key characteristics:
+- **Thread-safety**: Safe for concurrent access without external synchronization
+- **Performance**: Optimized for high concurrency with fine-grained locking
+- **Scalability**: Designed to perform well under high thread counts
+- **Consistency**: Maintain data integrity during concurrent operations
 
-Concurrency primitives: ConcurrentHashMap uses CAS (Compare-And-Swap) operations provided by the JVM for atomic updates, ensuring thread-safety without full locks. The Java Memory Model ensures visibility through volatile fields and happens-before relationships.
+Common concurrent data structures include:
+- **ConcurrentHashMap**: High-performance, thread-safe hash map
+- **ConcurrentSkipListMap/Set**: Concurrent navigable maps and sets
+- **CopyOnWriteArrayList/Set**: Thread-safe arrays optimized for read operations
+- **ConcurrentLinkedQueue/Deque**: Non-blocking concurrent queues
+- **BlockingQueue implementations**: ArrayBlockingQueue, LinkedBlockingQueue, etc.
 
-GC algorithms: Concurrent collections minimize GC pauses; CopyOnWriteArrayList creates copies on write, which can increase memory usage and GC load for frequent updates.
+Concurrency primitives: ConcurrentHashMap uses CAS (Compare-And-Swap) operations for atomic updates. The Java Memory Model ensures visibility through volatile fields and happens-before relationships.
 
-Memory visibility: Operations establish memory barriers to ensure changes are visible across threads, preventing stale reads.
+GC algorithms: Concurrent collections minimize GC pauses; CopyOnWriteArrayList creates copies on write, increasing memory usage for frequent updates.
 
-Common libraries: In addition to java.util.concurrent, libraries like Guava offer extended concurrent utilities.
+Memory visibility: Operations establish memory barriers to prevent stale reads.
 
-Sample code: Use Maven for dependencies if needed.
-
-## Common Interview Questions
-- What is the difference between ConcurrentHashMap and synchronized HashMap?
-- How does ConcurrentHashMap achieve thread-safety without locking the entire map?
-- When should you use CopyOnWriteArrayList over ArrayList in multi-threaded environments?
-- Explain the concept of lock-striping in ConcurrentHashMap.
-- What are the trade-offs of using concurrent collections versus manual synchronization?
+Common libraries: java.util.concurrent, Guava for extended utilities.
 
 ## Real-world Examples & Use Cases
-- **Caching:** ConcurrentHashMap in in-memory caches for web servers.
-- **Event handling:** CopyOnWriteArrayList for listener lists in GUI frameworks.
-- **Queueing:** ConcurrentLinkedQueue for producer-consumer patterns in messaging systems.
+- **Web servers**: Handling concurrent HTTP requests with shared session data
+- **Cache implementations**: Thread-safe LRU caches in distributed systems
+- **Message queues**: Producer-consumer patterns in event-driven architectures
+- **Financial systems**: Concurrent order books and trade processing
+- **Game servers**: Managing player states and game worlds
 
 ## Code Examples
+### ConcurrentHashMap Usage
 ```java
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.Map;
 
-public class ConcurrentExample {
-    private final ConcurrentHashMap<String, Integer> map = new ConcurrentHashMap<>();
-    private final CopyOnWriteArrayList<String> list = new CopyOnWriteArrayList<>();
+public class ConcurrentMapExample {
+    private final Map<String, Integer> cache = new ConcurrentHashMap<>();
 
-    public void addToMap(String key, int value) {
-        map.putIfAbsent(key, value);
+    public void put(String key, int value) {
+        cache.put(key, value);
     }
 
-    public Integer getFromMap(String key) {
-        return map.get(key);
+    public Integer get(String key) {
+        return cache.get(key);
     }
 
-    public void addToList(String item) {
-        list.add(item);
+    public void increment(String key) {
+        cache.compute(key, (k, v) -> v == null ? 1 : v + 1);
     }
 }
 ```
 
-To compile and run:
+### CopyOnWriteArrayList for Read-Heavy Scenarios
+```java
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.List;
+
+public class ReadHeavyList {
+    private final List<String> listeners = new CopyOnWriteArrayList<>();
+
+    public void addListener(String listener) {
+        listeners.add(listener);
+    }
+
+    public void notifyAll(String message) {
+        for (String listener : listeners) {
+            // Notify each listener
+            System.out.println("Notifying " + listener + ": " + message);
+        }
+    }
+}
+```
+
+### Producer-Consumer with BlockingQueue
+```java
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+
+public class ProducerConsumer {
+    private final BlockingQueue<Integer> queue = new LinkedBlockingQueue<>(10);
+
+    public void produce(int item) throws InterruptedException {
+        queue.put(item);
+        System.out.println("Produced: " + item);
+    }
+
+    public int consume() throws InterruptedException {
+        int item = queue.take();
+        System.out.println("Consumed: " + item);
+        return item;
+    }
+}
+```
+
+Compile and run:
 ```bash
-javac ConcurrentExample.java
-java ConcurrentExample
+javac ConcurrentMapExample.java
+java ConcurrentMapExample
 ```
 
 ## Data Models / Message Formats
-| Structure | Key Operations | Use Case |
-|-----------|----------------|----------|
-| ConcurrentHashMap | put, get, compute | Key-value storage |
-| ConcurrentSkipListMap | put, get, subMap | Ordered maps |
-| ConcurrentLinkedQueue | offer, poll | FIFO queues |
+For concurrent queues in messaging systems:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| messageId | String | Unique identifier |
+| payload | byte[] | Message content |
+| timestamp | long | Creation time |
+| priority | int | Processing priority |
 
 ## Journey / Sequence
 ```mermaid
 sequenceDiagram
-    participant T1 as Thread 1
-    participant DS as ConcurrentHashMap
-    participant T2 as Thread 2
+    participant Producer
+    participant ConcurrentQueue
+    participant Consumer1
+    participant Consumer2
 
-    T1->>DS: put(key1, value1)
-    T2->>DS: put(key2, value2)
-    T1->>DS: get(key1)
-    T2->>DS: get(key2)
+    Producer->>ConcurrentQueue: offer(item)
+    ConcurrentQueue-->>Producer: success
+    Consumer1->>ConcurrentQueue: poll()
+    ConcurrentQueue-->>Consumer1: item1
+    Consumer2->>ConcurrentQueue: poll()
+    ConcurrentQueue-->>Consumer2: item2
 ```
 
 ## Common Pitfalls & Edge Cases
-- **Iterator inconsistency:** Iterators may not reflect concurrent modifications.
-- **Compound operations:** Use atomic methods like replace to avoid race conditions.
-- **Memory overhead:** CopyOnWrite structures create copies on write, unsuitable for frequent updates.
+- **Infinite loops in compute methods**: Ensure termination conditions in lambda expressions
+- **Memory leaks with CopyOnWrite collections**: Frequent writes create new copies
+- **Blocking operations**: Be aware of blocking behavior in bounded queues
+- **Iterator invalidation**: ConcurrentModificationException in non-concurrent collections
+- **Performance degradation**: Over-synchronization can negate concurrency benefits
 
 ## Tools & Libraries
-- **Java Concurrent Package:** Built-in support.
-- **Guava:** Additional concurrent utilities like ConcurrentMap.
-- **Profilers:** VisualVM for monitoring thread contention.
+- **Java Concurrent Utilities**: `java.util.concurrent` package
+- **Guava**: Additional concurrent collections like Multimap
+- **Eclipse Collections**: High-performance collections with concurrency support
+- **JMH**: Microbenchmarking for performance testing
+- **VisualVM**: Monitoring thread contention and performance
 
 ## Github-README Links & Related Topics
-- [[java-memory-model-and-concurrency]]
-- [[threads-executors-futures]]
-- [[collections-framework]]
+Related: [[threads-executors-futures]], [[java-memory-model-and-concurrency]], [[collections-framework]], [[performance-tuning-and-profiling]]
 
 ## References
-- https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/package-summary.html
-- https://www.baeldung.com/java-concurrent-collections
+- [Java Concurrency in Practice](https://www.amazon.com/Java-Concurrency-Practice-Brian-Goetz/dp/0321349601)
+- [Oracle Java Concurrent Collections Documentation](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/package-summary.html)
+- [ConcurrentHashMap Internals](https://www.baeldung.com/java-concurrent-hashmap)
+- [CopyOnWrite Collections](https://www.baeldung.com/java-copy-on-write-arraylist)

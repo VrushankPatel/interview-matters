@@ -5,11 +5,11 @@ Last update
 2025-09-25
 
 Summary of recent additions
-  - java-language-basics
-  - oop-design-and-principles
-  - jvm-internals-and-classloading
-  - garbage-collection-algorithms
-  - java-memory-model-and-concurrency
+ - concurrent-data-structures
+ - threads-executors-futures
+ - collections-framework
+ - streams-functional-java
+ - exception-handling-and-errors
 
 Conventions
  - Dir naming: kebab-case.
@@ -74,16 +74,26 @@ Next Topics Candidates (added this run)
  - consistency-models: Eventual vs strong consistency tradeoffs
 
 New Next Topics Candidates
-  - order-book-modeling — 'Canonical models for in-memory book and persistence'
-  - matching-algorithms — 'Batch vs streaming matching, complexity'
-  - time-in-force-variations — 'Exchange semantics across major venues'
-  - latency-measurement — 'Instrumentation and microbenchmarks'
-  - raft-and-leader-election — 'Implementations and failure modes'
-  - memory-models — 'JMM deep-dive'
-  - gc-tuning — 'Practical GC tuning for low-latency services'
-  - kafka-internals — 'Partitioning, replication, and consumer groups'
-  - caching-patterns — 'Cache invalidation strategies'
-  - consistency-models — 'Eventual vs strong consistency tradeoffs'
+   - order-book-modeling — 'Canonical models for in-memory book and persistence'
+   - matching-algorithms — 'Batch vs streaming matching, complexity'
+   - time-in-force-variations — 'Exchange semantics across major venues'
+   - latency-measurement — 'Instrumentation and microbenchmarks'
+   - raft-and-leader-election — 'Implementations and failure modes'
+   - memory-models — 'JMM deep-dive'
+   - gc-tuning — 'Practical GC tuning for low-latency services'
+   - kafka-internals — 'Partitioning, replication, and consumer groups'
+   - caching-patterns — 'Cache invalidation strategies'
+   - consistency-models — 'Eventual vs strong consistency tradeoffs'
+   - concurrent-collections — 'Thread-safe collections in Java'
+   - java-streams-advanced — 'Advanced stream operations and collectors'
+   - reflection-and-annotations — 'Runtime inspection and custom annotations'
+   - java-security-basics — 'Secure coding and cryptography'
+   - networking-sockets — 'Low-level network programming'
+   - file-io-nio — 'Efficient file and channel operations'
+   - java-testing-advanced — 'Mocks, spies, and test frameworks'
+   - build-automation — 'CI/CD with Maven and Gradle'
+   - profiling-tools — 'Performance analysis tools'
+   - advanced-java-concepts — 'Generics, type erasure, and more'
 
 TODO
   - High-level open design decisions and split criteria for oversized topics.
