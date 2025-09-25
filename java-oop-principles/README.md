@@ -194,10 +194,10 @@ public class RoadBike extends Bicycle {
 - [What Is Inheritance? - Oracle](https://docs.oracle.com/javase/tutorial/java/concepts/inheritance.html)
 - [Polymorphism - Oracle](https://docs.oracle.com/javase/tutorial/java/IandI/polymorphism.html)
 - [What Is an Interface? - Oracle](https://docs.oracle.com/javase/tutorial/java/concepts/interface.html)
-
 ## Github-README Links & Related Topics
-- [Java Fundamentals](./java-fundamentals)
-- [Design Patterns in Java](./design-patterns-in-java)
-- [Java Classes and Objects](./java-classes-and-objects)
-- [Java Interfaces](./java-interfaces)
-- [Inheritance in Java](./inheritance-in-java)
+
+- [Java Fundamentals](../java-fundamentals/README.md)
+- [Design Patterns in Java](../java-design-patterns/README.md)
+- [Java Classes and Objects](../java-classes-and-objects/README.md)
+- [Java Interfaces](../java-interfaces/README.md)
+- [Inheritance in Java](../inheritance-in-java/README.md)

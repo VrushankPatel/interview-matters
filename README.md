@@ -98,7 +98,7 @@ This repository contains comprehensive documentation on various topics for inter
 - [Java Foreign Function Memory API](./java-foreign-function-memory-api/README.md)
 - [Java ForkJoinPool](./java-forkjoinpool/README.md)
 - [Java Fundamentals](./java-fundamentals/README.md)
-- [OOP Principles in Java](./oop-principles-in-java/README.md)
+- [OOP Principles in Java](./java-oop-principles/README.md)
 - [Java Future and Callable](./java-future-and-callable/README.md)
 - [Java Generics](./java-generics/README.md)
 - [Java HTTP Client](./java-http-client/README.md)
@@ -137,7 +137,7 @@ This repository contains comprehensive documentation on various topics for inter
 - [Java Virtual Threads](./java-virtual-threads/README.md)
 - [Java Volatile Keyword](./java-volatile-keyword/README.md)
 - [Java Wait Notify](./java-wait-notify/README.md)
-- [JVM Internals & Class Loading](./jvm-internals-class-loading/README.md)
+- [JVM Internals & Class Loading](./jvm-internals-and-class-loading/README.md)
 - [JVM Internals Class Loading](./jvm-internals-class-loading/README.md)
 
 ### DevOps

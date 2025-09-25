@@ -178,8 +178,8 @@ This loads classes from JAR files and retrieves the main class from the manifest
 
 ## Github-README Links & Related Topics
 
-- [Java Class Loaders](./java-class-loaders)
-- [JVM Internals Class Loading](./jvm-internals-class-loading)
-- [Java Modules](./java-modules)
-- [Java Reflection](./java-reflection)
-- [Concurrency in Java](./java-concurrent-programming-patterns)
+- [Java Class Loaders](../java-class-loaders/README.md)
+- [JVM Internals Class Loading](../jvm-internals-class-loading/README.md)
+- [Java Modules](../java-modules/README.md)
+- [Java Reflection](../java-reflection/README.md)
+- [Concurrency in Java](../java-multithreading-and-concurrency/README.md)
