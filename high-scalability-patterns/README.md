@@ -6,11 +6,11 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Overview
+## Overview
 
 High Scalability Patterns cover techniques and architectural approaches to build systems that can handle increased load, traffic, and data volume. These patterns help maintain performance, reliability, and cost-effectiveness as systems grow.
 
-# Detailed Explanation
+## Detailed Explanation
 
 Scalability refers to a system's ability to handle growing amounts of work or its potential to accommodate growth. There are two main types of scalability:
 
@@ -87,7 +87,7 @@ Automatically adjusts resources based on demand.
 - Horizontal auto-scaling
 - Vertical auto-scaling
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 - **Social Media Platforms**: Handle millions of users posting and viewing content simultaneously.
 - **E-commerce Sites**: Manage high traffic during sales events like Black Friday.
@@ -95,7 +95,7 @@ Automatically adjusts resources based on demand.
 - **Search Engines**: Process billions of queries daily with low latency.
 - **IoT Systems**: Handle data from thousands of devices in real-time.
 
-# Code Examples
+## Code Examples
 
 ## Simple Load Balancer Implementation
 
@@ -196,14 +196,14 @@ shard_manager.put('user2', {'name': 'Bob'})
 print(shard_manager.get('user1'))
 ```
 
-# References
+## References
 
 - [Scalability Rules by Martin L. Abbott and Michael T. Fisher](https://www.amazon.com/Scalability-Rules-50-Principles-Sustainable/dp/0321753887)
 - [The Art of Scalability by Martin L. Abbott and Michael T. Fisher](https://www.amazon.com/Art-Scalability-Architecture-Organizations-Enterprise/dp/0137030426)
 - [Designing Data-Intensive Applications by Martin Kleppmann](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321)
 - [High Scalability Blog](http://highscalability.com/)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 - [Load Balancing and Strategies](load-balancing-and-strategies/README.md)
 - [Caching](caching/README.md)
