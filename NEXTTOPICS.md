@@ -1,6 +1,6 @@
 file-io-nio — 'Efficient file and channel operations'
 java-testing-advanced — 'Mocks, spies, and test frameworks'
-build-automation — 'CI/CD with Maven and Gradle'
+
 profiling-tools — 'Performance analysis tools'-e concurrent-collections — 'Thread-safe collections in Java'
 java-streams-advanced — 'Advanced stream operations and collectors'
 reflection-and-annotations — 'Runtime inspection and custom annotations'
@@ -9,7 +9,7 @@ networking-sockets — 'Low-level network programming'
 advanced-java-concepts — 'Generics, type erasure, and more'
 -e file-io-nio — 'Efficient file and channel operations'
 java-testing-advanced — 'Mocks, spies, and test frameworks'
-build-automation — 'CI/CD with Maven and Gradle'
+
 profiling-tools — 'Performance analysis tools'
 -e 
 backtracking — 'N-Queens, Sudoku, combinatorial problem solving'
@@ -60,7 +60,7 @@ java-security-basics — 'Secure coding and cryptography'
 networking-sockets — 'Low-level network programming'
 file-io-nio — 'Efficient file and channel operations'
 java-testing-advanced — 'Mocks, spies, and test frameworks'
-build-automation — 'CI/CD with Maven and Gradle'
+
 profiling-tools — 'Performance analysis tools'
 backtracking — 'N-Queens, Sudoku, combinatorial problem solving'
 divide-and-conquer — 'Merge sort, quicksort, closest pair algorithms'
