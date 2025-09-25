@@ -5,11 +5,11 @@ Last update
 2025-09-25
 
 Summary of recent additions
-  - design-patterns
-  - system-design-basics
-  - load-balancing-and-routing
-  - caching-strategies
-  - database-design-and-indexing
+  - partitioning-and-sharding
+  - consistency-and-availability
+  - message-queues-and-kafka
+  - event-sourcing-and-cqrs
+  - raft-consensus-and-leader-election
 
 Conventions
  - Dir naming: kebab-case.
@@ -20,16 +20,26 @@ Conventions
  - STAR: apply for behavioral/system-case explanations.
 
 Next Topics Candidates
- - microservices-architecture: Decomposition, communication patterns, and challenges
- - circuit-breaker-pattern: Fault tolerance in distributed systems
- - idempotency-in-apis: Ensuring safe retries for operations
- - rate-limiting-algorithms: Token bucket, leaky bucket implementations
- - database-acid-properties: Atomicity, consistency, isolation, durability
- - nosql-vs-sql-tradeoffs: When to choose relational vs non-relational
- - distributed-locks: Redlock algorithm and implementations
- - service-mesh-istio: Traffic management and observability
- - container-orchestration-k8s: Pods, services, deployments
- - event-driven-architecture: Pub-sub patterns and event sourcing
+  - microservices-architecture: Decomposition, communication patterns, and challenges
+  - circuit-breaker-pattern: Fault tolerance in distributed systems
+  - idempotency-in-apis: Ensuring safe retries for operations
+  - rate-limiting-algorithms: Token bucket, leaky bucket implementations
+  - database-acid-properties: Atomicity, consistency, isolation, durability
+  - nosql-vs-sql-tradeoffs: When to choose relational vs non-relational
+  - distributed-locks: Redlock algorithm and implementations
+  - service-mesh-istio: Traffic management and observability
+  - container-orchestration-k8s: Pods, services, deployments
+  - event-driven-architecture: Pub-sub patterns and event sourcing
+  - order-book-modeling: Canonical models for in-memory book and persistence
+  - matching-algorithms: Batch vs streaming matching, complexity
+  - time-in-force-variations: Exchange semantics across major venues
+  - latency-measurement: Instrumentation and microbenchmarks
+  - raft-and-leader-election: Implementations and failure modes
+  - memory-models: JMM deep-dive
+  - gc-tuning: Practical GC tuning for low-latency services
+  - kafka-internals: Partitioning, replication, and consumer groups
+  - caching-patterns: Cache invalidation strategies
+  - consistency-models: Eventual vs strong consistency tradeoffs
 
 TODO
  - High-level open design decisions and split criteria for oversized topics.
