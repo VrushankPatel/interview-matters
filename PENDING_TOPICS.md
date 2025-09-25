@@ -1,5 +1,5 @@
-JVM Internals & Class Loading
-Garbage Collection Algorithms
-Multithreading & Concurrency in Java
-Collections & Data Structures
-Popular System Designs (LLD and HLD)
+Raft and Leader Election
+Consensus Algorithms
+Event-Driven Systems
+Kubernetes Orchestration
+Docker Best Practices
