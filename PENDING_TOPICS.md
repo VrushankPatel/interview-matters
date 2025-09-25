@@ -1,9 +1,9 @@
 # One topic per line. Top is oldest.
-io-and-nio
-serialization-and-deserialization
-build-tools-maven-gradle
-testing-and-mocking-junit-mockito
-performance-tuning-and-profiling
+order-book-modeling
+matching-algorithms
+time-in-force-variations
+latency-measurement
+raft-and-leader-election
 design-patterns
 system-design-basics
 load-balancing-and-routing

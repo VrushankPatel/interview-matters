@@ -109,7 +109,7 @@ sequenceDiagram
 - IDE plugins: IntelliJ, Eclipse support.
 
 ## Github-README Links & Related Topics
-Related: [[testing-and-mocking-junit-mockito]], [[performance-tuning-and-profiling]], [[jvm-internals-and-classloading]]
+Related: [testing-and-mocking-junit-mockito](../testing-and-mocking-junit-mockito/), [performance-tuning-and-profiling](../performance-tuning-and-profiling/), [jvm-internals-and-classloading](../jvm-internals-and-classloading/)
 
 ## Common Interview Questions
 - **What is the difference between Maven and Gradle?** Maven uses XML for declarative configuration, focusing on convention over configuration. Gradle uses Groovy/Kotlin DSL for more flexible, programmatic builds, often faster for incremental changes.

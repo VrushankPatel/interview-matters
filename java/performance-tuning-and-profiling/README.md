@@ -107,7 +107,7 @@ sequenceDiagram
 - JFR: Built-in Oracle JDK tool.
 
 ## Github-README Links & Related Topics
-Related: [[jvm-internals-and-classloading]], [[garbage-collection-algorithms]], [[testing-and-mocking-junit-mockito]]
+Related: [jvm-internals-and-classloading](../jvm-internals-and-classloading/), [garbage-collection-algorithms](../garbage-collection-algorithms/), [testing-and-mocking-junit-mockito](../testing-and-mocking-junit-mockito/)
 
 ## References
 - https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jvisualvm.html

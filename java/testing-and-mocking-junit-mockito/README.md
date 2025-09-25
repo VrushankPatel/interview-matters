@@ -97,7 +97,7 @@ sequenceDiagram
 - IDE plugins for running tests.
 
 ## Github-README Links & Related Topics
-Related: [[build-tools-maven-gradle]], [[performance-tuning-and-profiling]], [[jvm-internals-and-classloading]]
+Related: [build-tools-maven-gradle](../build-tools-maven-gradle/), [performance-tuning-and-profiling](../performance-tuning-and-profiling/), [jvm-internals-and-classloading](../jvm-internals-and-classloading/)
 
 ## References
 - https://junit.org/junit5/docs/current/user-guide/

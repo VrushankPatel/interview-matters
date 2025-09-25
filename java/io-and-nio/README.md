@@ -112,7 +112,7 @@ sequenceDiagram
 - Apache Commons IO: Utilities for file operations.
 
 ## Github-README Links & Related Topics
-Related: [[jvm-internals-and-classloading]], [[threads-executors-futures]], [[networking-tcp-ip-http2-tls]]
+Related: [jvm-internals-and-classloading](../jvm-internals-and-classloading/), [threads-executors-futures](../threads-executors-futures/), [networking-tcp-ip-http2-tls](../../networking/networking-tcp-ip-http2-tls/)
 
 ## References
 - https://docs.oracle.com/javase/tutorial/essential/io/

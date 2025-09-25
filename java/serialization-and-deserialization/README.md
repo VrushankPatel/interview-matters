@@ -115,9 +115,9 @@ sequenceDiagram
 - **Jackson:** JSON serialization.
 
 ## Github-README Links & Related Topics
-- [[io-and-nio]]
-- [[exception-handling-and-errors]]
-- [[jvm-internals-and-classloading]]
+- [io-and-nio](../io-and-nio/)
+- [exception-handling-and-errors](../exception-handling-and-errors/)
+- [jvm-internals-and-classloading](../jvm-internals-and-classloading/)
 
 ## References
 - https://docs.oracle.com/javase/tutorial/jndi/objects/serial.html
