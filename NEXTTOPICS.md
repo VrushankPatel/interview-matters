@@ -173,3 +173,9 @@ matching-algorithms — 'Batch vs streaming matching, complexity'
 time-in-force-variations — 'Exchange semantics across major venues'
 
 latency-measurement — 'Instrumentation and microbenchmarks'
+-e 
+memory-models — 'JMM deep-dive for concurrency understanding'
+gc-tuning — 'Practical GC tuning for low-latency services'
+kafka-internals — 'Partitioning, replication, and consumer groups'
+caching-patterns — 'Cache invalidation strategies'
+consistency-models — 'Eventual vs strong consistency tradeoffs'

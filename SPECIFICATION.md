@@ -5,11 +5,11 @@ Last update
 2025-09-25
 
 Summary of recent additions
- - partitioning-and-sharding
- - consistency-and-availability
- - message-queues-and-kafka
- - event-sourcing-and-cqrs
- - raft-consensus-and-leader-election
+ - distributed-tracing-and-observability
+ - networking-tcp-ip-http2-tls
+ - operating-systems-concepts
+ - algorithms-and-data-structures
+ - graphs-trees-heaps-and-tries
 
 Conventions
  - Dir naming: kebab-case.
@@ -47,16 +47,21 @@ Next Topics Candidates
     - advanced-java-concepts: Generics, type erasure, and more
 
 Next Topics Candidates (added this run)
-- backtracking: N-Queens, Sudoku, combinatorial problem solving
-- divide-and-conquer: Merge sort, quicksort, closest pair algorithms
-- probabilistic-algorithms: Bloom filters, skip lists for space efficiency
-- computational-geometry: Convex hull, line intersection, geometric algorithms
-- jvm-performance-tuning: Heap sizing, GC tuning for low latency
-- order-book-modeling: Canonical models for in-memory book and persistence
-- matching-algorithms: Batch vs streaming matching, complexity
-- time-in-force-variations: Exchange semantics across major venues
-- latency-measurement: Instrumentation and microbenchmarks
-- raft-and-leader-election: Implementations and failure modes
+ - backtracking: N-Queens, Sudoku, combinatorial problem solving
+ - divide-and-conquer: Merge sort, quicksort, closest pair algorithms
+ - probabilistic-algorithms: Bloom filters, skip lists for space efficiency
+ - computational-geometry: Convex hull, line intersection, geometric algorithms
+ - jvm-performance-tuning: Heap sizing, GC tuning for low latency
+ - order-book-modeling: Canonical models for in-memory book and persistence
+ - matching-algorithms: Batch vs streaming matching, complexity
+ - time-in-force-variations: Exchange semantics across major venues
+ - latency-measurement: Instrumentation and microbenchmarks
+ - raft-and-leader-election: Implementations and failure modes
+ - memory-models: JMM deep-dive for concurrency understanding
+ - gc-tuning: Practical GC tuning for low-latency services
+ - kafka-internals: Partitioning, replication, and consumer groups
+ - caching-patterns: Cache invalidation strategies
+ - consistency-models: Eventual vs strong consistency tradeoffs
 
 TODO
  - High-level open design decisions and split criteria for oversized topics.
