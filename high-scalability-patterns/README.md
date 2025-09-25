@@ -1,109 +1,81 @@
 ---
 title: High Scalability Patterns
-aliases: [scalability patterns, high scale, distributed patterns]
+aliases: [scalability patterns, high performance patterns]
 tags: [#system-design, #scalability]
 created: 2025-09-25
 updated: 2025-09-25
 ---
 
 ## Overview
-High scalability patterns provide architectural solutions for systems that must handle exponential growth in users, data, and traffic. These patterns distribute load, optimize performance, and maintain reliability under high demand, enabling systems to scale from thousands to billions of operations.
+High scalability patterns are architectural approaches to build systems that can handle growing amounts of work or data. These patterns help in distributing load, improving performance, and ensuring the system remains responsive as demand increases.
 
 ## Detailed Explanation
-Scalability patterns address the challenges of growing systems by distributing work across multiple resources. Key patterns include:
+Common scalability patterns:
 
-### Core Patterns
-- **Load Balancing:** Distributes incoming requests across multiple servers to prevent overload.
-- **Horizontal Scaling:** Adds more servers instead of upgrading existing ones.
-- **Sharding:** Splits data across multiple databases or nodes.
-- **Replication:** Creates copies of data for redundancy and faster access.
-- **Caching:** Stores frequently accessed data in fast storage layers.
-- **Asynchronous Processing:** Decouples operations using queues and background jobs.
-- **CDN (Content Delivery Network):** Distributes static content geographically.
-- **Microservices:** Breaks monolithic applications into smaller, independent services.
-
-### Trade-offs
-| Pattern | Benefits | Drawbacks |
-|---------|----------|-----------|
-| Sharding | Improved read/write performance | Complex queries across shards |
-| Replication | High availability, faster reads | Write conflicts, storage overhead |
-| Caching | Reduced latency, lower load | Cache invalidation, consistency issues |
-| Microservices | Independent scaling, technology diversity | Increased complexity, network overhead |
+- **Horizontal Scaling:** Adding more servers to handle load.
+- **Vertical Scaling:** Increasing the power of existing servers.
+- **Load Balancing:** Distributing requests across multiple servers.
+- **Database Sharding:** Splitting data across multiple databases.
+- **Caching:** Storing frequently accessed data in memory.
+- **CDN:** Distributing content geographically.
+- **Microservices:** Breaking down the system into smaller, independent services.
+- **Asynchronous Processing:** Using queues to handle tasks asynchronously.
 
 ## Real-world Examples & Use Cases
-- **Sharding:** Twitter shards user timelines across databases.
-- **Replication:** Amazon RDS replicates data across regions for global availability.
-- **Caching:** Facebook uses TAO for social graph caching.
-- **CDN:** Netflix uses Akamai to deliver video content worldwide.
-- **Microservices:** Uber's architecture with separate services for rides, payments, etc.
-- **Load Balancing:** Google distributes search queries across data centers.
+- **Horizontal Scaling:** Web applications like Facebook scale by adding more servers.
+- **Database Sharding:** Instagram shards user data across multiple databases.
+- **Caching:** Twitter caches timelines to reduce database load.
+- **Microservices:** Netflix uses microservices for different features.
 
 ## Code Examples
-### Simple Sharding Logic
+### Simple Sharding (Pseudocode)
 ```python
-class ShardingManager:
-    def __init__(self, num_shards):
-        self.num_shards = num_shards
+class ShardedDatabase:
+    def __init__(self, shards):
+        self.shards = shards
 
     def get_shard(self, key):
-        return hash(key) % self.num_shards
+        return self.shards[hash(key) % len(self.shards)]
 
-# Usage
-shard_mgr = ShardingManager(4)
-user_id = "user123"
-shard_id = shard_mgr.get_shard(user_id)
-print(f"User {user_id} goes to shard {shard_id}")
+    def put(self, key, value):
+        shard = self.get_shard(key)
+        shard.put(key, value)
+
+    def get(self, key):
+        shard = self.get_shard(key)
+        return shard.get(key)
 ```
 
-### LRU Cache Implementation
+### Caching with TTL
 ```java
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-class LRUCache<K, V> extends LinkedHashMap<K, V> {
-    private int capacity;
+class Cache {
+    private ConcurrentHashMap<String, CacheEntry> map = new ConcurrentHashMap<>();
 
-    public LRUCache(int capacity) {
-        super(capacity, 0.75f, true);
-        this.capacity = capacity;
+    public void put(String key, Object value, long ttlMs) {
+        map.put(key, new CacheEntry(value, System.currentTimeMillis() + ttlMs));
     }
 
-    @Override
-    protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
-        return size() > capacity;
+    public Object get(String key) {
+        CacheEntry entry = map.get(key);
+        if (entry != null && entry.expiry > System.currentTimeMillis()) {
+            return entry.value;
+        } else {
+            map.remove(key);
+            return null;
+        }
+    }
+
+    static class CacheEntry {
+        Object value;
+        long expiry;
+        CacheEntry(Object value, long expiry) {
+            this.value = value;
+            this.expiry = expiry;
+        }
     }
 }
-
-// Usage
-LRUCache<String, String> cache = new LRUCache<>(100);
-cache.put("key1", "value1");
-cache.put("key2", "value2");
-System.out.println(cache.get("key1")); // Moves to end
-```
-
-### Asynchronous Processing with Queue
-```python
-import queue
-import threading
-import time
-
-def worker(q):
-    while True:
-        item = q.get()
-        if item is None:
-            break
-        print(f"Processing {item}")
-        time.sleep(1)  # Simulate work
-        q.task_done()
-
-q = queue.Queue()
-threading.Thread(target=worker, args=(q,), daemon=True).start()
-
-# Add tasks
-for i in range(5):
-    q.put(f"task-{i}")
-
-q.join()  # Wait for all tasks
 ```
 
 ## Journey / Sequence
@@ -111,82 +83,51 @@ q.join()  # Wait for all tasks
 sequenceDiagram
     participant Client
     participant LoadBalancer
-    participant Server1
-    participant Server2
     participant Cache
     participant DB
 
     Client->>LoadBalancer: Request
-    LoadBalancer->>Server1: Route to server
-    Server1->>Cache: Check cache
-    Cache-->>Server1: Cache miss
-    Server1->>DB: Query DB
-    DB-->>Server1: Data
-    Server1->>Cache: Update cache
-    Server1-->>LoadBalancer: Response
+    LoadBalancer->>Cache: Check Cache
+    Cache-->>LoadBalancer: Cache Hit
+    LoadBalancer-->>Client: Response
+    Cache-->>LoadBalancer: Cache Miss
+    LoadBalancer->>DB: Query
+    DB-->>LoadBalancer: Data
+    LoadBalancer->>Cache: Store in Cache
     LoadBalancer-->>Client: Response
 ```
 
 ## Data Models / Message Formats
-### Sharding Architecture
+### Scalability Patterns Diagram
 ```mermaid
 graph TD
-    A[Application] --> B[Shard Router]
-    B --> C[Shard 1 DB]
-    B --> D[Shard 2 DB]
-    B --> E[Shard 3 DB]
-    C --> F[Replica 1]
-    D --> G[Replica 2]
-```
-
-### Replication Setup
-```mermaid
-graph TD
-    A[Master DB] --> B[Slave 1]
-    A --> C[Slave 2]
-    B --> D[Read Queries]
-    C --> D
-    A --> E[Write Queries]
-```
-
-### JSON Message for Queue
-```json
-{
-  "task_id": "12345",
-  "type": "email_send",
-  "payload": {
-    "to": "user@example.com",
-    "subject": "Welcome",
-    "body": "Welcome to our platform!"
-  },
-  "priority": "high"
-}
+    A[Scalability Patterns]
+    A --> B[Horizontal Scaling]
+    A --> C[Vertical Scaling]
+    A --> D[Load Balancing]
+    A --> E[Caching]
+    A --> F[Sharding]
+    A --> G[Microservices]
 ```
 
 ## Common Pitfalls & Edge Cases
-- **Hot Shards:** Uneven data distribution leading to overloaded shards.
-- **Cache Invalidation:** Stale data causing inconsistencies.
-- **Network Partitioning:** Split-brain scenarios in distributed systems.
-- **Thundering Herd:** Mass cache misses after expiration.
-- **Edge Case:** Single shard failure, extreme traffic spikes, data migration.
+- **Hot Spots:** Uneven load distribution leading to bottlenecks.
+- **Cache Invalidation:** Ensuring cache consistency with database.
+- **Shard Imbalance:** Data skew in sharding.
+- **Edge Case:** Shard failure, cache expiration, high concurrency.
 
 ## Tools & Libraries
-- **Load Balancing:** HAProxy, Nginx, AWS ELB
-- **Caching:** Redis, Memcached, Caffeine
-- **Message Queues:** Apache Kafka, RabbitMQ, AWS SQS
-- **Databases:** Cassandra (sharding), PostgreSQL (replication)
-- **CDN:** Cloudflare, Akamai, AWS CloudFront
-- **Orchestration:** Kubernetes for microservices scaling
+- **Load Balancers:** Nginx, HAProxy
+- **Caching:** Redis, Ehcache
+- **Databases:** Cassandra for sharding
+- **Orchestration:** Kubernetes for microservices
 
 ## Github-README Links & Related Topics
 - [system-design-basics](../system-design-basics/)
-- [caching](../caching/)
 - [load-balancing-and-strategies](../load-balancing-and-strategies/)
-- [replication-vs-sharding-vs-partitioning](../replication-vs-sharding-vs-partitioning/)
+- [caching](../caching/)
 
 ## References
-- "Scalability Rules" by Martin L. Abbott and Michael T. Fisher
-- https://github.com/donnemartin/system-design-primer
-- AWS Well-Architected Framework: https://aws.amazon.com/architecture/well-architected/
-- Google SRE Book: https://sre.google/sre-book/scalability/
-- Netflix Tech Blog: https://netflixtechblog.com/
+- "Scalability Rules" by Martin L. Abbott
+- https://microservices.io/patterns/
+- "Building Scalable Web Sites" by Cal Henderson
