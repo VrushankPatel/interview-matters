@@ -14,6 +14,13 @@ Asynchronous logging decouples log writing from the main application thread, imp
 
 In synchronous logging, the application waits for log writes to complete, which can slow down operations. Async logging uses a queue and separate threads to handle logging, allowing the main thread to continue.
 
+```mermaid
+graph TD;
+    A[Application Thread] -->|Log Message| B[Log Queue];
+    B --> C[Background Thread];
+    C -->|Write| D[File/Database/Destination];
+```
+
 ### Key Components
 
 - **Log Queue:** Buffer for log messages.

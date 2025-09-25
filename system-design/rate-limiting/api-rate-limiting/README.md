@@ -1,6 +1,6 @@
 ---
-title: API Rate Limiting
-aliases: [rate-limiting-algorithms, throttling]
+title: Rate Limiting
+aliases: [API Rate Limiting, rate-limiting-algorithms, throttling]
 tags: [#system-design,#distributed-systems,#security]
 created: 2025-09-25
 updated: 2025-09-25
@@ -90,7 +90,10 @@ sequenceDiagram
 - Nginx rate limiting modules.
 
 ## Github-README Links & Related Topics
-Related: [[api-gateway-patterns]], [[security-in-distributed-systems]], [[circuit-breaker-pattern]]
+
+- [API Gateway Patterns](../api-gateway-patterns/)
+- [Security in Distributed Systems](../security-in-distributed-systems/)
+- [Circuit Breaker Pattern](../circuit-breaker-pattern/)
 
 ## References
 - https://en.wikipedia.org/wiki/Rate_limiting

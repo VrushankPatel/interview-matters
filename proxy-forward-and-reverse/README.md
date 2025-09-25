@@ -85,8 +85,20 @@ cache_dir ufs /var/spool/squid 100 16 256
 - [HAProxy Documentation](http://www.haproxy.org/)
 - [Squid Proxy Wiki](http://wiki.squid-cache.org/)
 
+## Common Pitfalls & Edge Cases
+
+- **Forward Proxy:** Clients bypassing proxy for direct access, leading to security risks; cache poisoning.
+- **Reverse Proxy:** Single point of failure if not highly available; SSL termination issues; misconfiguration exposing backend servers.
+- **Edge Cases:** Handling WebSocket connections; large file uploads/downloads; IPv6 support.
+
+## Tools & Libraries
+
+- **Reverse Proxy:** Nginx, HAProxy, Traefik, Apache mod_proxy
+- **Forward Proxy:** Squid, Privoxy, Charles Proxy
+- **API Gateways:** Kong, Apigee, AWS API Gateway
+
 ## Github-README Links & Related Topics
 
-- [Load Balancing and Routing](load-balancing-and-routing/README.md)
-- [API Gateway Patterns](api-gateway-patterns/README.md)
-- [Security in Distributed Systems](security-in-distributed-systems/README.md)
+- [Load Balancing and Routing](../system-design/load-balancing-and-routing/)
+- [API Gateway Patterns](../system-design/api-gateway-patterns/)
+- [Security in Distributed Systems](../system-design/security-in-distributed-systems/)

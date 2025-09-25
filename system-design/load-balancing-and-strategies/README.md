@@ -233,7 +233,7 @@ Server configuration in JSON:
 
 ## Github-README Links & Related Topics
 
-- [Load Balancing and Routing](load-balancing-and-routing/README.md)
-- [High Scalability Patterns](high-scalability-patterns/README.md)
-- [Fault Tolerance Patterns](fault-tolerance-patterns/README.md)
-- [Microservices Architecture](microservices-architecture/README.md)
+- [Load Balancing and Routing](../load-balancing-and-routing/)
+- [High Scalability Patterns](../high-scalability-patterns/)
+- [Fault Tolerance Patterns](../fault-tolerance-patterns/)
+- [Microservices Architecture](../microservices-architecture/)
