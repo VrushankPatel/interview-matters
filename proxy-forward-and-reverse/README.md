@@ -6,8 +6,6 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Proxy Forward and Reverse
-
 ## Overview
 
 Proxies act as intermediaries in network communications, forwarding requests between clients and servers. Forward proxies serve clients, while reverse proxies serve servers, enhancing security, performance, and scalability.
