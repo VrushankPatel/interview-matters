@@ -1,7 +1,7 @@
 ---
 title: Fault Tolerance in Distributed Systems
-aliases: [Fault Tolerance, Distributed Fault Tolerance]
-tags: [#distributed-systems,#system-design]
+aliases: ["Fault Tolerance", "Distributed Fault Tolerance"]
+tags: ["#distributed-systems","#system-design"]
 created: 2025-09-25
 updated: 2025-09-25
 ---

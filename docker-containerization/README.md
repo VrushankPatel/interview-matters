@@ -1,7 +1,7 @@
 ---
 title: Docker Containerization
-aliases: [Docker Basics]
-tags: [#devops, #containerization]
+aliases: ["Docker Basics"]
+tags: ["#devops", "#containerization"]
 created: 2025-09-25
 updated: 2025-09-25
 ---

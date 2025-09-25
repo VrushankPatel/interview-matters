@@ -1,7 +1,7 @@
 ---
-title: GraphQL APIs
+title: GraphQL API Design
 aliases: []
-tags: [#system-design,#api,#graphql]
+tags: ["#system-design","#api","#graphql"]
 created: 2025-09-25
 updated: 2025-09-25
 ---
