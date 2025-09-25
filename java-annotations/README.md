@@ -58,6 +58,17 @@ if (clazz.isAnnotationPresent(MyAnnotation.class)) {
 }
 ```
 
+### Annotation Lifecycle
+
+```mermaid
+graph TD
+    A[Annotation Defined] --> B[Compiled]
+    B --> C{Retention Policy}
+    C -->|SOURCE| D[Discarded by Compiler]
+    C -->|CLASS| E[Retained in .class Files]
+    C -->|RUNTIME| F[Available at Runtime via Reflection]
+```
+
 ### Repeating Annotations
 
 Since Java 8, use `@Repeatable` for multiple instances of the same annotation.

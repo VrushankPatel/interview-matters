@@ -1,6 +1,6 @@
 # One topic per line. Top is oldest.
-java-annotations — 'Custom annotations and metadata'
-java-annotations — 'Custom annotations and metadata'
-java-generics — 'Type safety and erasure in Java'
-java-lambda-expressions — 'Functional programming with lambdas'
-java-modules — 'Modular system with JPMS'
+java-records — 'Immutable data classes'
+java-sealed-classes — 'Restricted class hierarchies'
+java-text-blocks — 'Multi-line string literals'
+java-switch-expressions — 'Enhanced switch statements'
+concurrent-collections — 'Thread-safe collections in Java'

@@ -40,6 +40,14 @@ Wildcards (`?`) represent unknown types, useful for flexibility.
 
 At runtime, generics are erased to raw types for backward compatibility. Type information is not available at runtime, which is why `List<String>` becomes `List` in bytecode.
 
+```mermaid
+graph TD
+    A[Generic Code: List<String>] --> B[Compilation]
+    B --> C[Type Parameters Erased]
+    C --> D[Bytecode: Raw Type List]
+    D --> E[Runtime: No Generic Info]
+```
+
 ### Raw Types
 
 Using generics without type parameters (e.g., `List` instead of `List<String>`) is allowed for legacy code but unsafe and generates warnings.

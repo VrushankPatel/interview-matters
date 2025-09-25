@@ -43,6 +43,15 @@ module com.example.myapp {
 - **Classpath**: For traditional JARs; modules can access them but not vice versa.
 - **Automatic Modules**: JARs without `module-info.java` become automatic modules.
 
+```mermaid
+graph TD
+    A[JAR File] --> B{Has module-info.java?}
+    B -->|Yes| C[Named Module]
+    B -->|No| D{On Module Path?}
+    D -->|Yes| E[Automatic Module]
+    D -->|No| F[Unnamed Module / Classpath]
+```
+
 ### Services
 
 Modules support service-oriented architecture.

@@ -37,6 +37,19 @@ Shorthand for lambdas calling existing methods.
 - **Constructor**: `ArrayList::new` ≡ `() -> new ArrayList()`
 - **Arbitrary Instance**: `String::compareToIgnoreCase` ≡ `(s1, s2) -> s1.compareToIgnoreCase(s2)`
 
+```mermaid
+graph TD
+    A[Method Reference] --> B{Type}
+    B -->|Static| C[String::valueOf]
+    B -->|Instance| D[String::length]
+    B -->|Constructor| E[ArrayList::new]
+    B -->|Arbitrary| F[String::compareToIgnoreCase]
+    C --> G[Equivalent Lambda]
+    D --> G
+    E --> G
+    F --> G
+```
+
 ### Variable Capture
 
 Lambdas capture variables from enclosing scope.
