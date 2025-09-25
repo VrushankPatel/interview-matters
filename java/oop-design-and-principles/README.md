@@ -1,54 +1,58 @@
 ---
 title: OOP Design and Principles
-aliases: [Object-Oriented Programming, OOP Principles]
-tags: [#java, #system-design, #interviews]
+aliases: [Object-Oriented Programming, SOLID Principles]
+tags: [#java, #design-patterns, #interviews]
 created: 2025-09-25
 updated: 2025-09-25
 ---
 
+# OOP Design and Principles
+
 ## Overview
 
-Object-Oriented Programming (OOP) is a paradigm centered on objects that encapsulate data and behavior. In Java, OOP is fundamental, with principles like encapsulation, inheritance, polymorphism, and abstraction forming the core. SOLID principles (Single Responsibility, Open-Closed, Liskov Substitution, Interface Segregation, Dependency Inversion) guide design for maintainable, scalable code. For interviews, understanding these is key for designing classes, interfaces, and systems that adhere to best practices, avoiding common pitfalls in large codebases.
+Object-Oriented Programming (OOP) in Java is built on four pillars: encapsulation, inheritance, polymorphism, and abstraction. The SOLID principles provide guidelines for designing maintainable and extensible software.
 
 ## STAR Summary
 
-**Situation:** In a legacy codebase, classes were bloated with multiple responsibilities, leading to frequent bugs.
+**Situation:** Designing a scalable e-commerce system with multiple user types and product categories.
 
-**Task:** Refactor to follow SOLID principles for better maintainability.
+**Task:** Create a modular, extensible codebase that adheres to OOP best practices.
 
-**Action:** Applied Single Responsibility by splitting classes, used interfaces for abstraction, and injected dependencies.
+**Action:** Applied encapsulation for data hiding, inheritance for code reuse, polymorphism for flexibility, and SOLID principles for design.
 
-**Result:** Reduced bug rate by 30%, improved testability, and eased future extensions.
+**Result:** Reduced code duplication by 40%, improved testability, and easier maintenance during feature additions.
 
 ## Detailed Explanation
 
-### Core OOP Concepts
+### Four Pillars of OOP
 
-- **Encapsulation:** Hiding internal state and requiring interaction through methods. Use private fields and public getters/setters.
+- **Encapsulation:** Bundling data and methods that operate on the data within a class, hiding internal state from outside access.
 
-- **Inheritance:** Creating subclasses that inherit properties from superclasses. Enables code reuse but can lead to tight coupling.
+- **Inheritance:** Allowing a class to inherit properties and behaviors from a parent class, promoting code reuse.
 
-- **Polymorphism:** Ability of objects to take many forms. Method overriding (runtime) and overloading (compile-time).
+- **Polymorphism:** The ability of objects to take on multiple forms, achieved through method overriding and overloading.
 
-- **Abstraction:** Focusing on essential features, hiding complexities. Achieved via abstract classes and interfaces.
+- **Abstraction:** Hiding complex implementation details and showing only essential features, using abstract classes and interfaces.
 
 ### SOLID Principles
 
-- **S - Single Responsibility:** A class should have one reason to change.
+- **Single Responsibility Principle (SRP):** A class should have only one reason to change.
 
-- **O - Open-Closed:** Open for extension, closed for modification.
+- **Open-Closed Principle (OCP):** Software entities should be open for extension but closed for modification.
 
-- **L - Liskov Substitution:** Subtypes must be substitutable for their base types.
+- **Liskov Substitution Principle (LSP):** Subtypes must be substitutable for their base types.
 
-- **I - Interface Segregation:** Clients should not be forced to depend on interfaces they don't use.
+- **Interface Segregation Principle (ISP):** Clients should not be forced to depend on interfaces they do not use.
 
-- **D - Dependency Inversion:** Depend on abstractions, not concretions.
+- **Dependency Inversion Principle (DIP):** Depend on abstractions, not concretions.
 
 ## Real-world Examples & Use Cases
 
-- Designing user management systems with User, Admin classes inheriting from Person.
-- Payment processing with interfaces for different providers (Stripe, PayPal).
-- GUI frameworks where components extend base classes.
+- Modeling employee hierarchies in a HR system using inheritance.
+
+- Implementing plugin architectures in IDEs using interfaces and polymorphism.
+
+- Designing payment systems where different payment methods (credit card, PayPal) implement a common interface.
 
 ## Code Examples
 
@@ -57,47 +61,110 @@ Object-Oriented Programming (OOP) is a paradigm centered on objects that encapsu
 ```java
 public class BankAccount {
     private double balance;
-    public void deposit(double amount) { balance += amount; }
-    public double getBalance() { return balance; }
+
+    public BankAccount(double initialBalance) {
+        this.balance = initialBalance;
+    }
+
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+        }
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    // No direct access to balance
 }
 ```
 
 ### Inheritance and Polymorphism
 
 ```java
-abstract class Animal {
-    abstract void makeSound();
+abstract class Vehicle {
+    abstract void move();
 }
-class Dog extends Animal {
-    void makeSound() { System.out.println("Woof"); }
+
+class Car extends Vehicle {
+    @Override
+    void move() {
+        System.out.println("Car is driving");
+    }
 }
-class Cat extends Animal {
-    void makeSound() { System.out.println("Meow"); }
+
+class Bike extends Vehicle {
+    @Override
+    void move() {
+        System.out.println("Bike is pedaling");
+    }
 }
-// Usage: Animal a = new Dog(); a.makeSound();
+
+public class Main {
+    public static void main(String[] args) {
+        Vehicle v1 = new Car();
+        Vehicle v2 = new Bike();
+        v1.move(); // Car is driving
+        v2.move(); // Bike is pedaling
+    }
+}
 ```
 
-### SOLID: Single Responsibility
+### SOLID Example: SRP
 
 ```java
-class User {
+// Bad: Single class handling multiple responsibilities
+class Employee {
     private String name;
-    // getters/setters
+    private double salary;
+
+    public Employee(String name, double salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
+    public void calculateSalary() {
+        // logic
+    }
+
+    public void saveToDatabase() {
+        // logic
+    }
 }
-class UserRepository {
-    void save(User user) { /* DB logic */ }
+
+// Good: Separate responsibilities
+class Employee {
+    private String name;
+    private double salary;
+    // ...
+}
+
+class SalaryCalculator {
+    public double calculate(Employee emp) {
+        // logic
+        return emp.getSalary();
+    }
+}
+
+class EmployeeRepository {
+    public void save(Employee emp) {
+        // logic
+    }
 }
 ```
-
-For Maven: Same as before.
 
 ## Data Models / Message Formats
 
-Class diagrams as tables:
+Class hierarchy for a simple library system:
 
-| Class | Fields | Methods |
-|-------|--------|---------|
-| User | name, email | getName(), setEmail() |
+- LibraryItem (abstract)
+
+  - Book
+
+  - DVD
+
+Each with common methods like getTitle(), but specific implementations.
 
 ## Journey / Sequence
 
@@ -118,43 +185,32 @@ classDiagram
 
 ## Common Pitfalls & Edge Cases
 
-- Deep inheritance hierarchies causing fragility.
-- Violating Liskov: Subclass not fully substitutable.
-- Overusing inheritance instead of composition.
-- Tight coupling in inheritance.
+- **Tight Coupling:** Overusing inheritance leading to fragile code.
 
-## Common Interview Questions
+- **Violating LSP:** Subclass methods that don't behave as expected from the base class.
 
-1. What are the four pillars of OOP?
+- **God Classes:** Classes that do too much, violating SRP.
 
-   Encapsulation, Inheritance, Polymorphism, Abstraction.
+- **Diamond Problem:** Multiple inheritance issues (Java avoids with single inheritance + interfaces).
 
-2. Explain SOLID principles.
-
-   S: Single Responsibility, O: Open-Closed, L: Liskov Substitution, I: Interface Segregation, D: Dependency Inversion.
-
-3. Difference between abstract class and interface?
-
-   Abstract class can have concrete methods, interface can't (before Java 8).
-
-4. What is polymorphism?
-
-   Ability to take many forms, method overriding/overloading.
-
-5. How does composition differ from inheritance?
-
-   Composition is has-a relationship, inheritance is is-a.
+- **Over-Abstraction:** Making everything abstract, leading to complexity.
 
 ## Tools & Libraries
 
-- UML tools for class diagrams.
-- Design pattern libraries like Apache Commons.
+- **UML Tools:** For designing class diagrams (e.g., PlantUML, draw.io).
+
+- **IDEs:** IntelliJ IDEA for refactoring support.
+
+- **Libraries:** None specific, but frameworks like Spring encourage SOLID.
 
 ## Github-README Links & Related Topics
 
-[[java-language-basics]], [[design-patterns]], [[system-design-basics]], [[api-design-rest-grpc-openapi]]
+Related: [[design-patterns]], [[java-language-basics]], [[jvm-internals-and-classloading]]
 
 ## References
 
-- https://en.wikipedia.org/wiki/SOLID
-- https://docs.oracle.com/javase/tutorial/java/concepts/index.html
+- [SOLID Principles on Wikipedia](https://en.wikipedia.org/wiki/SOLID)
+
+- [Oracle Java Tutorials - Classes and Objects](https://docs.oracle.com/javase/tutorial/java/javaOO/index.html)
+
+- [Effective Java by Joshua Bloch](https://www.amazon.com/Effective-Java-Joshua-Bloch/dp/0134685997)

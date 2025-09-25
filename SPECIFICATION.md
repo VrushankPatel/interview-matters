@@ -10,6 +10,11 @@ Summary of recent additions
  - operating-systems-concepts
  - algorithms-and-data-structures
  - graphs-trees-heaps-and-tries
+ - java-language-basics
+ - oop-design-and-principles
+ - jvm-internals-and-classloading
+ - garbage-collection-algorithms
+ - java-memory-model-and-concurrency
 
 Conventions
  - Dir naming: kebab-case.
@@ -104,5 +109,17 @@ New Next Topics Candidates
  - build-automation — 'CI/CD with Maven and Gradle'
  - profiling-tools — 'Performance analysis tools'
 
+New Next Topics Candidates
+ - advanced-java-concepts — 'Generics, type erasure, and advanced language features'
+ - java-security-basics — 'Secure coding practices and cryptography in Java'
+ - networking-sockets — 'Low-level network programming with sockets'
+ - file-io-nio — 'Efficient file operations with NIO'
+ - java-testing-advanced — 'Advanced testing with mocks and frameworks'
+ - build-automation — 'CI/CD pipelines with Maven and Gradle'
+ - profiling-tools — 'Performance profiling and monitoring tools'
+ - concurrent-programming-patterns — 'Common patterns for concurrent programming'
+ - java-reflection — 'Runtime inspection and dynamic code'
+ - java-annotations — 'Custom annotations and metadata'
+
 TODO
-  - High-level open design decisions and split criteria for oversized topics.
+ - High-level open design decisions and split criteria for oversized topics.

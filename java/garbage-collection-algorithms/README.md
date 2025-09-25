@@ -1,116 +1,127 @@
 ---
 title: Garbage Collection Algorithms
-aliases: [GC Algorithms, Java GC]
-tags: [#java, #system-design, #interviews]
+aliases: [GC Algorithms, JVM Garbage Collection]
+tags: [#java, #jvm, #performance, #interviews]
 created: 2025-09-25
 updated: 2025-09-25
 ---
 
+# Garbage Collection Algorithms
+
 ## Overview
 
-Garbage Collection (GC) automatically manages memory by reclaiming unused objects. Java's GC is generational, with algorithms like Serial, Parallel, CMS, G1, ZGC. Key for interviews: understanding pauses, throughput, and tuning for low-latency systems.
+Garbage Collection (GC) in the JVM automatically manages memory by reclaiming unused objects. Various algorithms exist, each with tradeoffs in throughput, latency, and memory usage. Essential for low-latency systems in MAANG interviews.
 
 ## STAR Summary
 
-**Situation:** High GC pauses causing request timeouts.
+**Situation:** Optimizing a high-throughput trading system experiencing GC pauses.
 
-**Task:** Optimize GC for sub-100ms pauses.
+**Task:** Reduce GC pause times to under 10ms.
 
-**Action:** Switched to G1GC, tuned heap sizes and pause targets.
+**Action:** Switched from CMS to G1 GC, tuned heap sizes and flags.
 
-**Result:** Reduced pauses to <50ms, improved user experience.
+**Result:** Achieved 50% reduction in pause times, improved system responsiveness.
 
 ## Detailed Explanation
 
-### Generational Hypothesis
+### GC Basics
 
-Most objects die young. Heap divided into Young (Eden, Survivor), Old gen.
+- **Reachability:** Objects reachable from GC roots are live.
+
+- **Generations:** Young (Eden, Survivor), Old, Perm/Metaspace.
 
 ### Algorithms
 
 - **Serial GC:** Single-threaded, for small apps.
 
-- **Parallel GC:** Multi-threaded, for throughput.
+- **Parallel GC:** Multi-threaded for throughput.
 
-- **CMS:** Concurrent mark-sweep, low pauses but fragmentation.
+- **CMS (Concurrent Mark Sweep):** Low pause, concurrent sweeping.
 
-- **G1:** Regional, predictable pauses.
+- **G1 GC:** Regional, predictable pauses.
 
-- **ZGC/Shenandoah:** Low-latency, large heaps.
+- **ZGC/Shenandoah:** Low-latency, concurrent.
 
-Phases: Mark, Sweep, Compact.
+### Phases
+
+- Mark: Identify live objects.
+
+- Sweep/Compact: Reclaim space.
 
 ## Real-world Examples & Use Cases
 
-- Web servers: G1 for balanced throughput/pauses.
-- Big data: Parallel GC for batch jobs.
-- Real-time systems: ZGC for minimal pauses.
+- Web servers requiring low latency.
+
+- Big data processing with large heaps.
+
+- Embedded systems with limited memory.
 
 ## Code Examples
 
-Tuning flags:
+### GC Tuning Flags
 
 ```bash
-java -Xms4g -Xmx4g -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:G1HeapRegionSize=16m Main
+# G1 GC with 2GB heap
+java -XX:+UseG1GC -Xms2g -Xmx2g -XX:MaxGCPauseMillis=200 MyApp
 ```
 
-Monitor GC: `jstat -gc <pid>`
+### Monitoring GC
+
+```java
+import java.lang.management.*;
+
+public class GCMonitor {
+    public static void main(String[] args) {
+        MemoryMXBean memoryBean = ManagementFactory.getMemoryMXBean();
+        // Print heap usage
+        System.out.println(memoryBean.getHeapMemoryUsage());
+    }
+}
+```
 
 ## Data Models / Message Formats
 
 GC log example:
 
-[GC (Allocation Failure)  1024K->512K(2048K), 0.0012345 secs]
+[GC (Allocation Failure)  8192K->1024K(12288K), 0.0012345 secs]
 
 ## Journey / Sequence
 
 ```mermaid
 flowchart TD
-    A[Object Allocation] --> B{Young Gen Full?}
+    A[Object Allocation] --> B{Heap Full?}
+    B -->|No| A
     B -->|Yes| C[Minor GC]
-    C --> D[Promote to Old]
-    D --> E{Old Gen Full?}
-    E -->|Yes| F[Major GC]
+    C --> D{Still Full?}
+    D -->|No| A
+    D -->|Yes| E[Major GC]
+    E --> A
 ```
 
 ## Common Pitfalls & Edge Cases
 
-- GC thrashing: Too frequent collections.
-- Memory leaks: Objects not garbage collected.
-- Tuning without metrics.
+- **GC Pauses:** Long pauses in high-throughput apps.
 
-## Common Interview Questions
+- **Memory Leaks:** Objects not garbage collected.
 
-1. What is garbage collection in Java?
+- **Tuning Overkill:** Over-tuning leading to worse performance.
 
-   Automatic memory management.
-
-2. Explain generational GC.
-
-   Young and old generations.
-
-3. What is the difference between minor and major GC?
-
-   Minor: Young gen, Major: Old gen.
-
-4. What GC to use for low latency?
-
-   G1, ZGC.
-
-5. How to monitor GC?
-
-   jstat, GC logs.
+- **Generational Assumptions:** Apps not fitting generational model.
 
 ## Tools & Libraries
 
-- GCViewer for log analysis.
-- jstat, jmap for monitoring.
+- **JVM Flags:** -XX:+PrintGCDetails, -XX:+PrintGCTimeStamps
+
+- **Tools:** jstat, jvisualvm, GCViewer
+
+- **Libraries:** None specific.
 
 ## Github-README Links & Related Topics
 
-[[jvm-internals-and-classloading]], [[performance-tuning-and-profiling]], [[low-latency-systems]]
+Related: [[jvm-performance-tuning]], [[java-memory-model-and-concurrency]], [[low-latency-systems]]
 
 ## References
 
-- https://docs.oracle.com/javase/9/gctuning/
-- https://www.oracle.com/technetwork/java/javase/gc-tuning-5-138395.html
+- [Oracle GC Tuning](https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/)
+
+- [G1 GC](https://www.oracle.com/technetwork/tutorials/tutorials-1876574.html)

@@ -1,78 +1,112 @@
 ---
 title: Java Memory Model and Concurrency
-aliases: [JMM, Java Concurrency]
-tags: [#java, #system-design, #interviews]
+aliases: [JMM, Java Concurrency Model]
+tags: [#java, #concurrency, #interviews]
 created: 2025-09-25
 updated: 2025-09-25
 ---
 
+# Java Memory Model and Concurrency
+
 ## Overview
 
-The Java Memory Model (JMM) defines how threads interact with memory, ensuring visibility and ordering. Key concepts: happens-before, volatile, synchronized. Essential for concurrent programming in interviews, covering thread safety, race conditions, and performance.
+The Java Memory Model (JMM) defines how threads interact through memory. It ensures visibility and ordering of operations in concurrent programs. Key for writing thread-safe code in MAANG interviews.
 
 ## STAR Summary
 
-**Situation:** Concurrent access to shared counter caused incorrect results.
+**Situation:** Fixing race conditions in a multi-threaded server.
 
-**Task:** Fix race condition in multi-threaded code.
+**Task:** Ensure thread safety without performance loss.
 
-**Action:** Used AtomicInteger and synchronized blocks.
+**Action:** Used volatile and synchronized, applied JMM principles.
 
-**Result:** Ensured thread safety, passed all tests.
+**Result:** Eliminated data races, maintained throughput.
 
 ## Detailed Explanation
 
-### Threads and Synchronization
+### JMM Concepts
 
-Threads: Lightweight processes. Use Runnable or Thread.
+- **Happens-Before:** Ordering of operations.
 
-Synchronization: synchronized keyword for mutual exclusion.
+- **Visibility:** Changes by one thread visible to others.
 
-Volatile: Ensures visibility of changes.
+- **Atomicity:** Operations as single units.
 
-Atomic classes: For lock-free operations.
+### Primitives
 
-Happens-before: Guarantees order of operations.
+- **volatile:** Ensures visibility, no reordering.
+
+- **synchronized:** Mutual exclusion, visibility.
+
+- **Atomic Classes:** java.util.concurrent.atomic
 
 ## Real-world Examples & Use Cases
 
-- Web servers handling concurrent requests.
 - Producer-consumer patterns.
-- Caching with thread-safe maps.
+
+- Caching with multiple readers.
+
+- Shared counters in analytics.
 
 ## Code Examples
-
-### Synchronized Counter
-
-```java
-public class Counter {
-    private int count = 0;
-    public synchronized void increment() { count++; }
-    public synchronized int getCount() { return count; }
-}
-```
 
 ### Volatile Example
 
 ```java
 public class VolatileExample {
     private volatile boolean flag = false;
-    public void setFlag() { flag = true; }
-    public boolean isFlag() { return flag; }
+
+    public void writer() {
+        flag = true;
+    }
+
+    public void reader() {
+        if (flag) {
+            // Safe to read other variables
+        }
+    }
 }
 ```
 
-### Atomic
+### Synchronized Block
+
+```java
+public class SynchronizedExample {
+    private int count = 0;
+
+    public synchronized void increment() {
+        count++;
+    }
+
+    public int getCount() {
+        synchronized (this) {
+            return count;
+        }
+    }
+}
+```
+
+### Atomic Integer
 
 ```java
 import java.util.concurrent.atomic.AtomicInteger;
-AtomicInteger counter = new AtomicInteger(0);
-counter.incrementAndGet();
+
+public class AtomicExample {
+    private AtomicInteger count = new AtomicInteger(0);
+
+    public void increment() {
+        count.incrementAndGet();
+    }
+
+    public int getCount() {
+        return count.get();
+    }
+}
 ```
 
 ## Data Models / Message Formats
 
-Thread states: NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING, TERMINATED.
+Thread interaction diagram.
 
 ## Journey / Sequence
 
@@ -81,48 +115,36 @@ sequenceDiagram
     participant Thread1
     participant Memory
     participant Thread2
-    Thread1->>Memory: Write volatile var
-    Memory->>Thread2: Visible to Thread2
+
+    Thread1->>Memory: write x = 1
+    Thread1->>Memory: write flag = true
+    Memory->>Thread2: happens-before ensures flag visible
+    Thread2->>Memory: read flag
+    Thread2->>Memory: read x (safe)
 ```
 
 ## Common Pitfalls & Edge Cases
 
-- Deadlocks: Circular waits.
-- Visibility issues without volatile.
-- False sharing in arrays.
+- **Race Conditions:** Concurrent access without synchronization.
 
-## Common Interview Questions
+- **Deadlocks:** Circular waits.
 
-1. What is the Java Memory Model?
+- **Visibility Issues:** Stale reads.
 
-   Defines how threads interact with memory.
-
-2. Explain volatile in Java.
-
-   Ensures visibility of changes to all threads.
-
-3. Difference between synchronized and volatile?
-
-   Synchronized provides mutual exclusion, volatile visibility.
-
-4. What is a race condition?
-
-   When multiple threads access shared data concurrently.
-
-5. How to avoid deadlocks?
-
-   Avoid circular waits, use timeouts.
+- **Double-Checked Locking:** Without volatile.
 
 ## Tools & Libraries
 
-- java.util.concurrent package.
-- Thread dumps with jstack.
+- **java.util.concurrent:** Executors, locks.
+
+- **Tools:** jstack for thread dumps.
 
 ## Github-README Links & Related Topics
 
-[[threads-executors-futures]], [[concurrent-data-structures]], [[java-memory-model-and-concurrency]]
+Related: [[threads-executors-futures]], [[concurrent-data-structures]], [[java-memory-model-and-concurrency]]
 
 ## References
 
-- https://docs.oracle.com/javase/specs/jls/se11/html/jls-17.html
-- https://www.oracle.com/technetwork/java/javase/memorymanagement-whitepaper-150215.pdf
+- [JMM Specification](https://docs.oracle.com/javase/specs/jls/se17/html/jls-17.html)
+
+- [Java Concurrency in Practice](https://www.amazon.com/Java-Concurrency-Practice-Brian-Goetz/dp/0321349601)

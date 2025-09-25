@@ -1,93 +1,56 @@
 ---
 title: Java Language Basics
-aliases: [Java Basics, Java Fundamentals]
+aliases: [Java Fundamentals, Basic Java Syntax]
 tags: [#java, #interviews]
 created: 2025-09-25
 updated: 2025-09-25
 ---
 
+# Java Language Basics
+
 ## Overview
 
-Java is a statically-typed, object-oriented programming language developed by Sun Microsystems (now Oracle) in 1995. It's designed for portability, with the "write once, run anywhere" principle enabled by the Java Virtual Machine (JVM). Core concepts include classes, objects, inheritance, polymorphism, and encapsulation. For MAANG interviews, mastering Java basics is essential as it's a primary language for backend systems, Android development, and enterprise applications. This topic covers syntax, data types, control structures, and basic object-oriented features, providing a foundation for advanced topics like concurrency and JVM internals.
+Java language basics cover the fundamental syntax, data types, control structures, and object-oriented concepts that form the foundation of Java programming. This topic is essential for MAANG interviews, where candidates are expected to write clean, correct code for basic problems.
 
 ## STAR Summary
 
-**Situation:** During a coding interview for a backend engineer role at a FAANG company, I was asked to implement a simple data processor in Java without using IDEs.
+**Situation:** Preparing for a software engineering interview at a FAANG company requiring strong Java fundamentals.
 
-**Task:** Write Java code to read input from console, process integers, and output results, demonstrating basic language proficiency.
+**Task:** Demonstrate proficiency in basic Java syntax and concepts during coding interviews.
 
-**Action:** I recalled Java's main method structure, used Scanner for input, arrays for storage, and loops for processing, ensuring proper syntax and error handling.
+**Action:** Studied Oracle's Java tutorials, practiced LeetCode problems in Java, and reviewed common pitfalls.
 
-**Result:** Completed the task efficiently, highlighting my strong grasp of Java fundamentals, which contributed to passing the technical screen.
+**Result:** Successfully solved 80% of easy and medium problems, gaining confidence in interviews.
 
 ## Detailed Explanation
 
-### Variables and Data Types
+Java is a statically-typed, object-oriented language. Key elements include:
 
-Java has two main categories of data types: primitives and reference types.
+- **Data Types:** Primitives (int, long, double, boolean, char) and reference types (objects, arrays).
 
-Primitives: byte, short, int, long, float, double, char, boolean. They are stored on the stack and have default values (e.g., int is 0).
+- **Variables:** Declaration with type, e.g., int x = 5;
 
-Reference types: Objects, arrays, strings. They store references on the stack pointing to heap-allocated objects.
+- **Operators:** Arithmetic (+, -, *, /), relational (==, !=, <, >), logical (&&, ||, !), assignment (=, +=).
 
-Declaration: `int age = 25; String name = "John";`
+- **Control Structures:** if-else, switch, loops (for, while, do-while).
 
-### Operators
+- **Classes and Objects:** Class definition, constructors, methods, instance variables.
 
-Arithmetic: +, -, *, /, %
+- **Arrays:** Fixed-size collections of same type, e.g., int[] arr = new int[10];
 
-Relational: ==, !=, <, >, <=, >=
-
-Logical: &&, ||, !
-
-Assignment: =, +=, etc.
-
-Bitwise: &, |, ^, ~, <<, >>
-
-### Control Flow
-
-If-else: `if (condition) { } else { }`
-
-Switch: For multiple conditions, with fall-through.
-
-Loops: for, while, do-while.
-
-Break and continue for loop control.
-
-### Classes and Objects
-
-Classes are blueprints: `public class Person { private String name; public Person(String name) { this.name = name; } }`
-
-Objects: `Person p = new Person("Alice");`
-
-Methods: Instance methods, static methods.
-
-### Arrays
-
-Fixed-size: `int[] arr = new int[10];`
-
-Initialization: `int[] arr = {1,2,3};`
-
-Multidimensional: `int[][] matrix = new int[3][3];`
-
-### Strings
-
-Immutable: `String s = "Hello"; s = s + " World";` creates new string.
-
-StringBuilder for mutable strings.
-
-Common methods: length(), charAt(), substring(), equals().
+- **Strings:** Immutable string class with methods like substring(), equals(), length().
 
 ## Real-world Examples & Use Cases
 
-- Console-based calculators for quick computations.
-- Simple file readers for log parsing in monitoring tools.
-- Basic data structures like stacks or queues for algorithm implementations.
-- Prototyping business logic in enterprise applications before scaling.
+- Building a simple calculator application to perform arithmetic operations.
+
+- Parsing user input in a console-based application.
+
+- Basic data processing in ETL (Extract, Transform, Load) pipelines for data analysis.
 
 ## Code Examples
 
-### Hello World
+### Hello World Program
 
 ```java
 public class HelloWorld {
@@ -97,112 +60,90 @@ public class HelloWorld {
 }
 ```
 
-Compile and run: `javac HelloWorld.java && java HelloWorld`
+To compile and run:
 
-### Basic Calculator
+```bash
+javac HelloWorld.java
+java HelloWorld
+```
+
+### Basic Class with Methods
 
 ```java
-import java.util.Scanner;
-
 public class Calculator {
+    public int add(int a, int b) {
+        return a + b;
+    }
+
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter two numbers: ");
-        int a = sc.nextInt();
-        int b = sc.nextInt();
-        System.out.println("Sum: " + (a + b));
+        Calculator calc = new Calculator();
+        System.out.println(calc.add(5, 3)); // Output: 8
     }
 }
 ```
 
-### Array Operations
+### Array and Loop Example
 
 ```java
 public class ArrayExample {
     public static void main(String[] args) {
-        int[] arr = {1, 2, 3, 4, 5};
-        for (int i = 0; i < arr.length; i++) {
-            System.out.println(arr[i]);
+        int[] numbers = {1, 2, 3, 4, 5};
+        for (int num : numbers) {
+            System.out.println(num);
         }
     }
 }
 ```
 
-For Maven project, add to pom.xml:
-
-```xml
-<project>
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.example</groupId>
-    <artifactId>java-basics</artifactId>
-    <version>1.0</version>
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-    </properties>
-</project>
-```
-
-Run tests: `mvn test` (though no tests here).
-
 ## Data Models / Message Formats
 
-Not directly applicable, but for simple data: Use classes like `public class User { String name; int age; }`
+| Data Type | Size (bytes) | Default Value | Range |
+|-----------|--------------|---------------|-------|
+| byte | 1 | 0 | -128 to 127 |
+| short | 2 | 0 | -32,768 to 32,767 |
+| int | 4 | 0 | -2^31 to 2^31-1 |
+| long | 8 | 0L | -2^63 to 2^63-1 |
+| float | 4 | 0.0f | IEEE 754 |
+| double | 8 | 0.0d | IEEE 754 |
+| char | 2 | '\u0000' | 0 to 65,535 |
+| boolean | 1 | false | true/false |
 
 ## Journey / Sequence
 
 ```mermaid
-sequenceDiagram
-    participant User
-    participant JVM
-    User->>JVM: javac Main.java
-    JVM->>User: Compiled .class
-    User->>JVM: java Main
-    JVM->>User: Output
+flowchart TD
+    A[Write .java file] --> B[javac compiles to .class]
+    B --> C[JVM loads .class]
+    C --> D[JVM executes bytecode]
+    D --> E[Output to console]
 ```
 
 ## Common Pitfalls & Edge Cases
 
-- Integer overflow: `int max = Integer.MAX_VALUE + 1;` wraps to negative.
-- Null pointer exceptions: Accessing methods on null references.
-- Case sensitivity: `String` vs `string`.
-- Array index out of bounds.
-- Forgetting `public static void main(String[] args)` exactly.
+- **String Comparison:** Using == instead of .equals() for strings, as == checks reference equality.
 
-## Common Interview Questions
+- **Null Pointer Exceptions:** Accessing methods or fields on null objects.
 
-1. What is the difference between == and .equals()?
+- **Integer Overflow:** Not handling large numbers that exceed int range.
 
-   == checks reference equality for objects, .equals() checks value equality.
+- **Array Index Out of Bounds:** Accessing array elements beyond length-1.
 
-2. What is the main method in Java?
-
-   public static void main(String[] args) - entry point.
-
-3. Explain pass-by-value in Java.
-
-   Java is pass-by-value; for primitives, value is copied; for objects, reference is copied.
-
-4. What are the primitive data types?
-
-   byte, short, int, long, float, double, char, boolean.
-
-5. How do you declare an array in Java?
-
-   int[] arr = new int[5]; or int[] arr = {1,2,3}.
+- **Switch with Strings:** Ensure break statements to avoid fall-through.
 
 ## Tools & Libraries
 
-- JDK: For compilation and runtime.
-- Maven/Gradle: Build tools.
-- IntelliJ IDEA or Eclipse: IDEs for development.
-- JUnit: For testing (basic assertions).
+- **JDK (Java Development Kit):** For compiling and running Java programs.
+
+- **IDEs:** IntelliJ IDEA, Eclipse, VS Code with Java extensions.
+
+- **Build Tools:** Maven or Gradle for dependency management (though not required for basics).
 
 ## Github-README Links & Related Topics
 
-[[oop-design-and-principles]], [[jvm-internals-and-classloading]], [[collections-framework]], [[exception-handling-and-errors]], [[build-tools-maven-gradle]]
+Related: [[oop-design-and-principles]], [[jvm-internals-and-classloading]], [[collections-framework]], [[exception-handling-and-errors]]
 
 ## References
 
-- https://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html
-- https://www.oracle.com/java/technologies/javase/codeconventions-introduction.html
+- [Oracle Java Tutorials - Language Basics](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html)
+
+- [Java Language Specification - Chapter 4: Types, Values, and Variables](https://docs.oracle.com/javase/specs/jls/se17/html/jls-4.html)
