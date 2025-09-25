@@ -1,115 +1,173 @@
 ---
 title: Java Testing Advanced
-aliases: [JUnit, Mockito, Unit Testing]
-tags: [#java,#testing]
+aliases: [JUnit 5, Mockito, TestNG, JMH, Testcontainers]
+tags: [#java,#testing,#advanced]
 created: 2025-09-25
 updated: 2025-09-25
 ---
 
 ## Overview
 
-Advanced testing in Java involves using frameworks like JUnit for test structure and Mockito for mocking dependencies. Mocks and spies allow isolating units under test by simulating external components.
+Advanced Java testing encompasses sophisticated techniques for unit, integration, and performance testing. This includes parameterized tests, mocking frameworks, containerized testing, and microbenchmarking to ensure robust, maintainable code.
 
-# Detailed Explanation
+## Detailed Explanation
 
-## JUnit
+### JUnit 5
 
-- Annotations: @Test, @BeforeEach, @AfterEach, @ParameterizedTest
-- Assertions: assertEquals, assertTrue, etc.
-- Test lifecycle: Setup, execution, teardown.
+JUnit 5 introduces modern testing features:
 
-## Mockito
+- **Parameterized Tests**: Run the same test with different inputs using @ParameterizedTest and sources like @ValueSource.
+- **Dynamic Tests**: Generate tests at runtime using @TestFactory.
+- **Nested Tests**: Organize tests hierarchically with @Nested.
+- **Extensions**: Customize test behavior with extensions API.
+- **Conditional Execution**: Run tests based on conditions with @EnabledIf.
+- **Parallel Execution**: Run tests in parallel for faster suites.
 
-- **Mocks**: Completely fake objects with no real behavior.
-- **Spies**: Wrap real objects, allowing partial mocking.
-- **Verification**: Verify method calls on mocks.
-- **Stubbing**: Define return values for methods.
+### Mockito
 
-# Real-world Examples & Use Cases
+Mockito provides powerful mocking capabilities:
 
-- Testing service classes with database dependencies.
-- Verifying interactions in integration tests.
-- Mocking external APIs in unit tests.
+- **Mocking**: Create mock objects to simulate dependencies.
+- **Stubbing**: Define behavior for mock methods.
+- **Verification**: Check interactions with mocks.
+- **Spies**: Partially mock real objects.
+- **Annotations**: Use @Mock, @InjectMocks for declarative mocking.
 
-# Code Examples
+### TestNG
+
+TestNG offers advanced testing features:
+
+- **Data Providers**: Supply test data with @DataProvider.
+- **Groups**: Categorize tests with groups.
+- **Dependencies**: Control test execution order with dependsOnMethods.
+- **Listeners**: Implement custom listeners for test events.
+
+### Spring Boot Testing
+
+Spring Boot provides testing support for integration tests, including @SpringBootTest, test slices, and embedded databases.
+
+### JMH (Java Microbenchmark Harness)
+
+JMH is used for accurate microbenchmarking:
+
+- **Setup**: Annotate methods with @Benchmark.
+- **Modes**: Throughput, AverageTime, etc.
+- **Profiling**: Analyze performance bottlenecks.
+
+### Testcontainers
+
+Testcontainers enable integration testing with real dependencies in containers:
+
+- **Containerized Testing**: Spin up databases, message queues in Docker.
+- **Lifecycle Management**: Automatic start/stop of containers.
+- **Modules**: Pre-built modules for common services.
+
+## Real-world Examples & Use Cases
+
+- Parameterized tests for validating algorithms with multiple inputs.
+- Mocking external services in microservices.
+- Containerized integration tests for database interactions.
+- Microbenchmarking critical performance paths.
+
+## Code Examples
 
 ```java
-// JUnit basic test
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+// JUnit 5 Parameterized Test
+@ParameterizedTest
+@ValueSource(ints = {1, 2, 3})
+void testIsPositive(int number) {
+    assertTrue(number > 0);
+}
+```
 
-public class CalculatorTest {
+```java
+// Mockito with Annotations
+@ExtendWith(MockitoExtension.class)
+public class ServiceTest {
+    @Mock
+    private Repository repo;
+    @InjectMocks
+    private Service service;
+
     @Test
-    void testAddition() {
-        Calculator calc = new Calculator();
-        assertEquals(5, calc.add(2, 3));
+    void test() {
+        when(repo.find()).thenReturn("data");
+        assertEquals("data", service.get());
     }
 }
 ```
 
 ```java
-// Mockito mock example
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import static org.mockito.Mockito.*;
+// TestNG Data Provider
+@DataProvider
+public Object[][] data() {
+    return new Object[][] {{1, 2}, {3, 4}};
+}
 
-public class UserServiceTest {
-    @Test
-    void testUserCreation() {
-        UserRepository mockRepo = mock(UserRepository.class);
-        UserService service = new UserService(mockRepo);
-        
-        User user = new User("John");
-        when(mockRepo.save(user)).thenReturn(user);
-        
-        User saved = service.createUser("John");
-        assertEquals("John", saved.getName());
-        verify(mockRepo).save(user);
-    }
+@Test(dataProvider = "data")
+public void testAdd(int a, int b) {
+    assertEquals(a + b, calc.add(a, b));
 }
 ```
 
 ```java
-// Mockito spy example
-import org.junit.jupiter.api.Test;
-import static org.mockito.Mockito.*;
+// JMH Benchmark
+@Benchmark
+public void testMethod() {
+    // code to benchmark
+}
+```
 
-public class SpyExampleTest {
+```java
+// Testcontainers Example
+@Testcontainers
+public class DatabaseTest {
+    @Container
+    PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:13");
+
     @Test
-    void testSpy() {
-        List<String> list = new ArrayList<>();
-        List<String> spyList = spy(list);
-        
-        spyList.add("one");
-        spyList.add("two");
-        
-        assertEquals(2, spyList.size());
-        verify(spyList).add("one");
-        verify(spyList).add("two");
+    void test() {
+        // test with real DB
     }
 }
 ```
 
-# Common Pitfalls & Edge Cases
+## Mermaid Diagram
 
-- **Over-mocking**: Leads to brittle tests that break with implementation changes.
-- **Incomplete Verification**: Not checking all important interactions.
-- **Mock vs Spy Confusion**: Using mocks when spies are more appropriate.
-- **Test Data Management**: Hardcoded test data causing maintenance issues.
+```mermaid
+graph TD
+    A[Test Setup] --> B[Test Execution]
+    B --> C[Test Teardown]
+    C --> D[Report Generation]
+```
 
-# Tools & Libraries
+## Common Pitfalls & Edge Cases
 
-- JUnit 5: Testing framework with annotations and assertions.
-- Mockito: Mocking framework for creating test doubles.
-- AssertJ: Fluent assertions for readable tests.
-- TestContainers: For integration tests with real dependencies.
+- Ignoring test isolation leading to flaky tests.
+- Overusing mocks instead of integration tests.
+- Not handling asynchronous code in tests.
+- Benchmarking without proper warmup.
 
-# References
+## Tools & Libraries
+
+| Tool | Purpose |
+|------|---------|
+| JUnit 5 | Unit testing framework |
+| Mockito | Mocking library |
+| TestNG | Advanced testing framework |
+| JMH | Microbenchmarking |
+| Testcontainers | Containerized testing |
+
+## References
 
 - [JUnit 5 User Guide](https://junit.org/junit5/docs/current/user-guide/)
-- [Mockito Documentation](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html)
+- [Mockito Docs](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html)
+- [TestNG Docs](https://testng.org/doc/)
+- [JMH](https://openjdk.org/projects/code-tools/jmh/)
+- [Testcontainers](https://www.testcontainers.org/)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
-- [Testing and Mocking JUnit Mockito](../java/testing-and-mocking-junit-mockito/README.md)
-- [Design Patterns](../java/design-patterns/README.md)
+- [Java Fundamentals](../java-fundamentals/README.md)
+- [Spring Framework](../spring-framework/README.md)
+- [Microservices Architecture](../microservices-architecture/README.md)

@@ -1,45 +1,73 @@
 ---
 title: Java Switch Expressions
-aliases: [Switch Expressions, Enhanced Switch]
-tags: [#java]
+aliases: [Switch Expressions, Java 14 Switch]
+tags: [#java,#language-features,#control-flow]
 created: 2025-09-25
 updated: 2025-09-25
 ---
 
 ## Overview
 
-Switch expressions, introduced in Java 12 as a preview and finalized in Java 14, extend the traditional switch statement to be used as expressions that yield values. They support pattern matching, multiple case labels, and arrow syntax, making code more concise and expressive.
+Switch expressions, introduced as a preview feature in Java 12 and 13, and finalized in Java 14 (JEP 361), extend the traditional `switch` statement to support expressions that evaluate to a value. They eliminate fall-through behavior by default, support multiple case labels, and use arrow syntax (`->`) for concise branching. Switch expressions improve code readability, reduce boilerplate, and prepare the language for pattern matching enhancements.
 
 ## Detailed Explanation
 
-Switch expressions use `->` for case branches and `yield` to return values. They can be used in assignments, returns, and method calls. Traditional switch statements are still supported, but expressions eliminate fall-through and require exhaustive cases.
+Switch expressions allow `switch` to return values, making it suitable for assignments, method returns, and functional programming contexts. Key features include:
 
-Key improvements:
-- Arrow syntax (`->`) prevents fall-through
-- `yield` keyword for returning values
-- Support for multiple constants per case
-- Exhaustive checking for enums and sealed classes
+- **Arrow Syntax**: `case L -> expression` prevents fall-through and executes only the right-hand side.
+- **Multiple Labels**: `case A, B -> expression` handles multiple constants in one case.
+- **Yield Statement**: For blocks, `yield value` returns a value from the expression.
+- **Exhaustiveness**: Expressions must cover all possible values (e.g., via `default` or for enums).
+- **Type Inference**: Poly expressions that infer types from context.
+
+Unlike statements, expressions must produce a value or throw an exception, with no implicit fall-through.
+
+### Comparison: Statement vs Expression
+
+| Aspect              | Switch Statement                  | Switch Expression                  |
+|---------------------|-----------------------------------|------------------------------------|
+| Purpose            | Side effects                     | Compute values                     |
+| Fall-through       | Default (requires `break`)       | None (arrow syntax)                |
+| Labels             | `case L:` or `case L ->`         | `case L ->` preferred              |
+| Completion         | Any (e.g., `break`, `return`)    | Must yield value or throw          |
+| Exhaustiveness     | Not required                     | Required for expressions           |
+
+### Flow Diagram
+
+```mermaid
+flowchart TD
+    A[Evaluate Switch Expression] --> B{Match Case?}
+    B -->|Yes| C[Execute Arrow RHS]
+    C --> D[Yield Value or Throw]
+    B -->|No| E[Check Next Case]
+    E --> B
+    D --> F[Return Value]
+```
 
 ## Real-world Examples & Use Cases
 
-- **Enum Handling**: Processing different enum values with specific logic.
-- **State Machines**: Transitioning between states based on input.
-- **Parsing**: Converting strings to enums or objects.
-- **Configuration**: Selecting implementations based on type.
+- **Enum Processing**: Mapping enums to values, e.g., day of week to string or number.
+- **State Machines**: Transition logic in parsers or game states.
+- **Configuration Parsing**: Converting strings to types or settings.
+- **Functional Programming**: Replacing if-else chains in data transformations.
+- **Error Handling**: Returning results or exceptions based on input validation.
 
 ## Code Examples
 
 ### Basic Switch Expression
 
 ```java
-Day day = Day.MONDAY;
+enum Day { MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY }
+
+Day day = Day.WEDNESDAY;
 String type = switch (day) {
     case MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY -> "Weekday";
     case SATURDAY, SUNDAY -> "Weekend";
 };
+System.out.println(type); // Output: Weekday
 ```
 
-### With Yield
+### Using Yield in Blocks
 
 ```java
 int numLetters = switch (day) {
@@ -53,10 +81,10 @@ int numLetters = switch (day) {
 };
 ```
 
-### Traditional vs Expression
+### Traditional Statement vs Expression
 
 ```java
-// Traditional statement
+// Traditional Statement
 String result;
 switch (day) {
     case MONDAY:
@@ -78,31 +106,55 @@ String result = switch (day) {
 };
 ```
 
-### With Sealed Classes
+### With Pattern Matching (Preview in Later Versions)
 
 ```java
-sealed interface Shape permits Circle, Rectangle {}
-// ... implementations
-
-String description = switch (shape) {
-    case Circle c -> "Circle with radius " + c.radius();
-    case Rectangle r -> "Rectangle " + r.width() + "x" + r.height();
+// Requires Java 17+ with pattern matching
+Object obj = "Hello";
+String description = switch (obj) {
+    case String s -> "String: " + s;
+    case Integer i -> "Integer: " + i;
+    default -> "Unknown";
 };
+```
+
+### Exhaustiveness with Enums
+
+For enums, the compiler ensures all cases are covered; otherwise, add `default`.
+
+```java
+// Exhaustive for enum
+String dayName = switch (day) {
+    case MONDAY -> "Mon";
+    case TUESDAY -> "Tue";
+    // ... other cases
+    case SUNDAY -> "Sun";
+}; // No default needed if all enum values covered
 ```
 
 ## Common Pitfalls & Edge Cases
 
-- Exhaustive cases required for enums and sealed types; use `default` otherwise to avoid compilation errors.
-- Arrow cases cannot have multiple statements without braces and `yield`.
-- Mixing statements and expressions can lead to confusion; prefer expressions for consistency.
-- Pattern matching with guards requires careful ordering to avoid unreachable code.
+- **Non-Exhaustive Cases**: Expressions require covering all values; enums auto-insert `default` if incomplete.
+- **Yield in Blocks**: Arrow cases with blocks must use `yield`; simple expressions do not.
+- **Null Handling**: Switch throws `NullPointerException` on null; use guards or checks.
+- **Type Mismatch**: Arms must be compatible types; compiler infers common supertype.
+- **Scoping**: Variables in arrow blocks are scoped locally, avoiding leaks.
+- **Mixing Styles**: Avoid mixing `case L:` and `case L ->` in the same switch for clarity.
+
+## Tools & Libraries
+
+- **IDE Support**: Modern IDEs like IntelliJ IDEA, Eclipse, and VS Code provide syntax highlighting, refactoring, and error detection for switch expressions.
+- **Build Tools**: Maven and Gradle compile Java 14+ code; ensure `--enable-preview` for preview features if applicable.
+- **Testing**: Use JUnit for unit tests; expressions simplify assertions on returned values.
 
 ## References
 
-- [Oracle Java Documentation: Switch Expressions](https://docs.oracle.com/en/java/javase/14/language/switch-expressions.html)
+- [Oracle Java Documentation: Switch Expressions](https://docs.oracle.com/en/java/javase/21/language/switch-expressions-and-statements.html)
 - [JEP 361: Switch Expressions](https://openjdk.org/jeps/361)
+- [Oracle Java Tutorials: The switch Statement](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/switch.html)
 
 ## Github-README Links & Related Topics
 
-- [Java Language Basics](../java/java-language-basics/README.md)
+- [Java Fundamentals](../java-fundamentals/README.md)
 - [Java Sealed Classes](../java-sealed-classes/README.md)
+- [Control Flow Statements](../java/java-language-basics/README.md)
