@@ -5,11 +5,11 @@ Last update
 2025-09-25
 
 Summary of recent additions
-  - backtracking
-  - divide-and-conquer
-  - probabilistic-algorithms
-  - computational-geometry
-  - jvm-performance-tuning
+  - java-language-basics
+  - oop-design-and-principles
+  - jvm-internals-and-classloading
+  - garbage-collection-algorithms
+  - java-memory-model-and-concurrency
 
 Conventions
  - Dir naming: kebab-case.
