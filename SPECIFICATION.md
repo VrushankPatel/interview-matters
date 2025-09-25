@@ -5,16 +5,11 @@ Last update
 2025-09-25
 
 Summary of recent additions
- - distributed-tracing-and-observability
- - networking-tcp-ip-http2-tls
- - operating-systems-concepts
- - algorithms-and-data-structures
- - graphs-trees-heaps-and-tries
- - java-language-basics
- - oop-design-and-principles
- - jvm-internals-and-classloading
- - garbage-collection-algorithms
- - java-memory-model-and-concurrency
+ - concurrent-data-structures
+ - threads-executors-futures
+ - collections-framework
+ - streams-functional-java
+ - exception-handling-and-errors
 
 Conventions
  - Dir naming: kebab-case.
