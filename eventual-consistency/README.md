@@ -1,99 +1,90 @@
 ---
 title: Eventual Consistency
-aliases: []
-tags: [#distributed-systems, #data-consistency]
+aliases: ["Eventual Consistency Model"]
+tags: ["#distributed-systems","#system-design"]
 created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Eventual Consistency
-
 ## Overview
 
-Eventual consistency is a consistency model used in distributed systems where, if no new updates are made to a given data item, eventually all accesses to that item will return the last updated value. It prioritizes availability and partition tolerance over strong consistency.
+Eventual consistency is a consistency model used in distributed systems where, if no new updates are made to a given data item, eventually all accesses to that item will return the last updated value. It prioritizes availability and partition tolerance over strong consistency, as per the CAP theorem.
 
 ## Detailed Explanation
 
-In CAP theorem terms, eventual consistency allows for AP (Availability and Partition tolerance) systems. Updates propagate asynchronously through the system, and conflicts are resolved using techniques like last-write-wins or conflict-free replicated data types (CRDTs).
+In eventual consistency, replicas of data may temporarily diverge due to network partitions or concurrent updates, but they converge to the same state over time through mechanisms like gossip protocols or conflict resolution.
 
 ### Key Concepts
 
-- **Replication Lag**: Time between update and propagation to all replicas
-- **Conflict Resolution**: Strategies for handling concurrent updates
-- **Read Your Writes**: Guarantee that a process can read its own writes
-- **Monotonic Reads**: Once a value is read, future reads won't return older values
+- **Convergence**: All replicas eventually agree on the final value.
+- **Read-your-writes**: A client sees its own writes immediately.
+- **Monotonic Reads**: Once a value is read, subsequent reads return the same or newer values.
+- **Causal Consistency**: Operations that are causally related are seen in order.
 
-### Trade-offs
+### Techniques
 
-Pros: High availability, low latency writes
-
-Cons: Stale reads possible, complex conflict resolution
+- **Version Vectors**: Track updates to detect conflicts.
+- **Conflict-Free Replicated Data Types (CRDTs)**: Data structures that merge automatically.
+- **Gossip Protocols**: Spread updates probabilistically.
 
 ## Real-world Examples & Use Cases
 
-- Social media timelines: Posts appear eventually across all views
-- DNS propagation: Changes take time to spread globally
-- Shopping cart: Items added might not immediately reflect in all sessions
+- **Amazon DynamoDB**: Uses eventual consistency for high availability, with options for strong consistency.
+- **Apache Cassandra**: Default eventual consistency, with tunable consistency levels.
+- **DNS Systems**: Updates propagate eventually across servers.
+- **Social Media Feeds**: Posts appear eventually to all followers.
+- **Collaborative Editing**: Like Google Docs, where changes merge over time.
 
 ## Code Examples
 
-### DynamoDB Eventual Consistency
+### Simple Version Vector in Python
 
 ```python
-import boto3
+class VersionVector:
+    def __init__(self):
+        self.versions = {}  # node_id -> version
 
-dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('my-table')
+    def update(self, node_id):
+        self.versions[node_id] = self.versions.get(node_id, 0) + 1
 
-# Write with eventual consistency
-table.put_item(Item={'id': '123', 'data': 'value'})
+    def merge(self, other):
+        for node, ver in other.versions.items():
+            self.versions[node] = max(self.versions.get(node, 0), ver)
 
-# Read with eventual consistency (default)
-response = table.get_item(Key={'id': '123'})
-print(response['Item'])
+    def dominates(self, other):
+        return all(self.versions.get(n, 0) >= other.versions.get(n, 0) for n in self.versions)
 ```
 
-### CRDT Example (Simple Counter)
+### CRDT Counter Example
 
-```javascript
-class GCounter {
-  constructor(id) {
-    this.id = id;
-    this.counters = {};
-    this.counters[id] = 0;
-  }
+```java
+public class GCounter {
+    private Map<String, Long> counts = new HashMap<>();
 
-  increment() {
-    this.counters[this.id]++;
-  }
-
-  merge(other) {
-    for (let id in other.counters) {
-      this.counters[id] = Math.max(this.counters[id] || 0, other.counters[id]);
+    public void increment(String nodeId) {
+        counts.put(nodeId, counts.getOrDefault(nodeId, 0L) + 1);
     }
-  }
 
-  value() {
-    return Object.values(this.counters).reduce((a, b) => a + b, 0);
-  }
+    public long value() {
+        return counts.values().stream().mapToLong(Long::longValue).sum();
+    }
+
+    public void merge(GCounter other) {
+        other.counts.forEach((node, count) -> 
+            this.counts.merge(node, count, Math::max));
+    }
 }
 ```
 
-## Common Pitfalls & Edge Cases
-
-- Assuming immediate consistency
-- Handling conflicts in application logic
-- Testing eventual consistency scenarios
-- User expectations of data freshness
-
 ## References
 
-- [Eventual Consistency](https://en.wikipedia.org/wiki/Eventual_consistency)
-- [BASE vs ACID](https://www.johndcook.com/blog/2009/07/06/brewer-cap-theorem-base/)
-- [DynamoDB Consistency](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html)
+- [Eventual Consistency - Wikipedia](https://en.wikipedia.org/wiki/Eventual_consistency)
+- [CAP Theorem - Brewer](https://www.cs.berkeley.edu/~brewer/cs262b-2004/PODC-keynote.pdf)
+- [Dynamo Paper](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf)
 
 ## Github-README Links & Related Topics
 
-- [data-consistency-models](../data-consistency-models/README.md)
-- [cap-theorem-and-distributed-systems](../cap-theorem-and-distributed-systems/README.md)
-- [database-replication-strategies](../database-replication-strategies/README.md)
+- [CAP Theorem and Distributed Systems](../cap-theorem-and-distributed-systems/)
+- [Data Consistency Models](../data-consistency-models/)
+- [Replication vs Sharding vs Partitioning](../replication-vs-sharding-vs-partitioning/)
+- [Fault Tolerance in Distributed Systems](../fault-tolerance-in-distributed-systems/)

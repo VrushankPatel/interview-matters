@@ -1,7 +1,7 @@
 ---
 title: Paxos Algorithm
-aliases: []
-tags: [#distributed-systems, #consensus-algorithms]
+aliases: ["Paxos"]
+tags: ["#distributed-systems","#consensus-algorithms"]
 created: 2025-09-25
 updated: 2025-09-25
 ---
@@ -97,6 +97,30 @@ class Paxos:
                 return value
         return None
 ```
+
+## Journey / Sequence
+
+1. **Proposal Initiation**: A proposer selects a unique proposal number and enters the prepare phase.
+2. **Prepare Phase**: The proposer sends prepare requests to a majority of acceptors.
+3. **Promise Phase**: Acceptors respond with promises, revealing any previously accepted values.
+4. **Accept Phase**: If a majority promises, the proposer sends an accept request with the chosen value.
+5. **Accepted Phase**: Acceptors accept the proposal if not promised to a higher number.
+6. **Learn Phase**: Learners are notified of the accepted value once a majority accepts.
+
+## Common Pitfalls & Edge Cases
+
+- **Multiple Proposers**: Can lead to conflicts; higher proposal numbers take precedence.
+- **Network Partitions**: May cause split votes, requiring majority for progress.
+- **Failure of Leader**: Paxos doesn't have a leader; any node can propose.
+- **Byzantine Faults**: Basic Paxos assumes non-Byzantine failures; use PBFT for Byzantine.
+- **Livelock**: Rare, but can occur if proposal numbers conflict repeatedly.
+
+## Tools & Libraries
+
+- **Apache ZooKeeper**: Uses ZAB, a Paxos variant, for coordination.
+- **etcd**: Uses Raft, but Paxos-inspired.
+- **Consul**: Uses Raft for consensus.
+- **Chubby**: Google's lock service using Paxos.
 
 ## References
 
