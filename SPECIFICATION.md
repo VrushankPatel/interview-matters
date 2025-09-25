@@ -5,7 +5,7 @@ Last update
 2025-09-25
 
 Summary of recent additions
- - container-orchestration-k8s, event-driven-architecture, api-gateway-patterns, observability-patterns, security-in-distributed-systems
+ - caching-patterns, consistency-models, microservices-architecture, circuit-breaker-pattern, idempotency-in-apis
 
 Conventions
  - Dir naming: kebab-case.
