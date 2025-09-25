@@ -1,9 +1,5 @@
 # One topic per line. Top is oldest.
-configuration-management
-logging-and-monitoring
-security-in-microservices
-containerization-docker
-data-structures-advanced
+
 design-patterns
 system-design-basics
 load-balancing-and-routing
