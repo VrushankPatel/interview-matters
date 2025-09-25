@@ -5,16 +5,11 @@ Last update
 2025-09-25
 
 Summary of recent additions
- - io-and-nio
- - serialization-and-deserialization
- - build-tools-maven-gradle
- - testing-and-mocking-junit-mockito
- - performance-tuning-and-profiling
- - design-patterns
- - system-design-basics
- - load-balancing-and-routing
- - caching-strategies
- - database-design-and-indexing
+ - partitioning-and-sharding
+ - consistency-and-availability
+ - message-queues-and-kafka
+ - event-sourcing-and-cqrs
+ - raft-consensus-and-leader-election
 
 Conventions
  - Dir naming: kebab-case.
