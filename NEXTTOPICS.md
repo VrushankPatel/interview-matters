@@ -1,5 +1,5 @@
-Kubernetes Basics
-Docker Containerization
-AWS Lambda and Serverless Computing
-GraphQL API Design
-Event-Driven Architecture
+Collections & Data Structures
+Java Stream API & Functional Programming
+System Design Basics
+High Scalability Patterns
+CAP Theorem & Distributed Systems

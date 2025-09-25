@@ -1,6 +1,6 @@
 ---
 title: Java Fundamentals
-aliases: [Java Basics, Core Java Concepts]
+aliases: [Java Basics, Core Java]
 tags: [#java]
 created: 2025-09-25
 updated: 2025-09-25
@@ -10,183 +10,204 @@ updated: 2025-09-25
 
 ## Overview
 
-Java Fundamentals encompass the core elements of the Java programming language, including basic syntax, data types, control structures, and introductory object-oriented programming concepts. These form the foundation for building robust Java applications.
+Java Fundamentals encompass the essential building blocks of the Java programming language, including syntax, data types, control structures, and basic object-oriented concepts. These fundamentals provide the foundation for writing, compiling, and running Java applications across various platforms.
 
 ## Detailed Explanation
 
-### Data Types and Variables
+### Java Program Structure
 
-Java supports primitive data types such as `int`, `long`, `float`, `double`, `char`, `boolean`, `byte`, and `short`. Reference types include classes, interfaces, and arrays.
+Every Java program consists of classes and methods. The `main` method serves as the entry point for execution:
 
-Variables are declared with a type: `int age = 25;`
+```java
+public class MyClass {
+    public static void main(String[] args) {
+        // Program logic here
+    }
+}
+```
 
-Constants use the `final` keyword: `final double PI = 3.14159;`
+### Data Types
 
-### Operators
+Java supports primitive data types and reference types:
 
-- Arithmetic: +, -, *, /, %
-- Relational: ==, !=, <, >, <=, >=
-- Logical: &&, ||, !
-- Bitwise: &, |, ^, ~, <<, >>
-- Assignment: =, +=, -=, etc.
+- **Primitive types**: `int`, `double`, `boolean`, `char`, `byte`, `short`, `long`, `float`
+- **Reference types**: Objects, arrays, strings
+
+```java
+int age = 25;
+double salary = 50000.0;
+boolean isActive = true;
+String name = "John Doe";
+```
 
 ### Control Structures
 
-**Conditional Statements:**
+Java provides standard control flow statements:
+
+- Conditional statements: `if-else`, `switch`
+- Loops: `for`, `while`, `do-while`
 
 ```java
-if (condition) {
-    // code
-} else if (anotherCondition) {
-    // code
+// If-else
+if (age >= 18) {
+    System.out.println("Adult");
 } else {
-    // code
+    System.out.println("Minor");
+}
+
+// For loop
+for (int i = 0; i < 5; i++) {
+    System.out.println(i);
 }
 ```
 
-**Switch Statement:**
+### Object-Oriented Basics
+
+Java is fundamentally object-oriented:
+
+- **Classes and Objects**: Blueprints and instances
+- **Methods**: Functions within classes
+- **Constructors**: Special methods for object initialization
 
 ```java
-switch (variable) {
-    case value1:
-        // code
-        break;
-    case value2:
-        // code
-        break;
-    default:
-        // code
-}
-```
-
-**Loops:**
-
-```java
-for (int i = 0; i < 10; i++) {
-    // code
-}
-while (condition) {
-    // code
-}
-do {
-    // code
-} while (condition);
-```
-
-### Methods
-
-Methods are defined within classes:
-
-```java
-public int add(int a, int b) {
-    return a + b;
-}
-```
-
-### Classes and Objects
-
-Basic class structure:
-
-```java
-public class Person {
-    private String name;
-    private int age;
+class Car {
+    String model;
+    int year;
     
-    public Person(String name, int age) {
-        this.name = name;
-        this.age = age;
+    Car(String model, int year) {
+        this.model = model;
+        this.year = year;
     }
     
-    public String getName() {
-        return name;
+    void display() {
+        System.out.println(model + " " + year);
     }
-    
-    public void setName(String name) {
-        this.name = name;
-    }
+}
+
+Car myCar = new Car("Toyota", 2020);
+myCar.display();
+```
+
+### Exception Handling
+
+Java uses try-catch blocks for error handling:
+
+```java
+try {
+    int result = 10 / 0;
+} catch (ArithmeticException e) {
+    System.out.println("Division by zero: " + e.getMessage());
 }
 ```
 
 ## Real-world Examples & Use Cases
 
-- **Simple Calculator:** Implementing basic arithmetic operations.
-- **User Management System:** Storing and retrieving user information.
-- **Inventory Tracking:** Managing product data in a retail application.
+- **Console Applications**: Command-line tools and utilities
+- **Web Applications**: Backend services using frameworks like Spring
+- **Desktop Applications**: GUI apps with JavaFX or Swing
+- **Android Development**: Mobile apps (though with some differences)
+- **Enterprise Software**: Large-scale business applications
 
 ## Code Examples
-
-### Hello World Program
-
-```java
-public class HelloWorld {
-    public static void main(String[] args) {
-        System.out.println("Hello, World!");
-    }
-}
-```
 
 ### Basic Calculator
 
 ```java
+import java.util.Scanner;
+
 public class Calculator {
     public static void main(String[] args) {
-        Calculator calc = new Calculator();
-        System.out.println(calc.add(5, 3)); // Output: 8
-        System.out.println(calc.multiply(5, 3)); // Output: 15
-    }
-    
-    public int add(int a, int b) {
-        return a + b;
-    }
-    
-    public int multiply(int a, int b) {
-        return a * b;
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter first number: ");
+        double num1 = scanner.nextDouble();
+        
+        System.out.print("Enter operator (+, -, *, /): ");
+        char operator = scanner.next().charAt(0);
+        
+        System.out.print("Enter second number: ");
+        double num2 = scanner.nextDouble();
+        
+        double result = 0;
+        
+        switch (operator) {
+            case '+':
+                result = num1 + num2;
+                break;
+            case '-':
+                result = num1 - num2;
+                break;
+            case '*':
+                result = num1 * num2;
+                break;
+            case '/':
+                if (num2 != 0) {
+                    result = num1 / num2;
+                } else {
+                    System.out.println("Cannot divide by zero");
+                    return;
+                }
+                break;
+            default:
+                System.out.println("Invalid operator");
+                return;
+        }
+        
+        System.out.println("Result: " + result);
     }
 }
 ```
 
-### Person Class with Methods
+### Student Grade Management
 
 ```java
-public class Person {
-    private String name;
-    private int age;
+import java.util.ArrayList;
+import java.util.List;
+
+class Student {
+    String name;
+    List<Integer> grades;
     
-    public Person(String name, int age) {
+    Student(String name) {
         this.name = name;
-        this.age = age;
+        this.grades = new ArrayList<>();
     }
     
-    public String getName() {
-        return name;
+    void addGrade(int grade) {
+        grades.add(grade);
     }
     
-    public int getAge() {
-        return age;
+    double getAverage() {
+        if (grades.isEmpty()) return 0;
+        int sum = 0;
+        for (int grade : grades) {
+            sum += grade;
+        }
+        return (double) sum / grades.size();
     }
-    
-    public void celebrateBirthday() {
-        age++;
-    }
-    
+}
+
+public class GradeManager {
     public static void main(String[] args) {
-        Person person = new Person("Alice", 30);
-        System.out.println(person.getName() + " is " + person.getAge() + " years old.");
-        person.celebrateBirthday();
-        System.out.println("After birthday: " + person.getAge());
+        Student student = new Student("Alice");
+        student.addGrade(85);
+        student.addGrade(92);
+        student.addGrade(78);
+        
+        System.out.println("Average grade: " + student.getAverage());
     }
 }
 ```
 
 ## References
 
-- [Oracle Java Tutorials - Language Basics](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html)
-- [Java Data Types](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html)
-- [Java Control Structures](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/flow.html)
+- [Oracle Java Tutorials - Getting Started](https://docs.oracle.com/javase/tutorial/getStarted/index.html)
+- [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se21/html/index.html)
+- [GeeksforGeeks Java Fundamentals](https://www.geeksforgeeks.org/java/)
 
 ## Github-README Links & Related Topics
 
-- [OOP Principles in Java](./oop-principles-in-java)
-- [JVM Internals & Class Loading](./jvm-internals-and-class-loading)
-- [Collections & Data Structures](../collections-and-data-structures)
-- [Java Stream API & Functional Programming](../java-stream-api-and-functional-programming)
+- [OOP Principles in Java](../oop-principles-in-java/README.md)
+- [JVM Internals & Class Loading](../jvm-internals-class-loading/README.md)
+- [Collections & Data Structures](../collections-and-data-structures/README.md)
+- [Java Stream API & Functional Programming](../java-stream-api-and-functional-programming/README.md)
