@@ -111,9 +111,9 @@ sequenceDiagram
 - **Ecosystem:** Kafka Streams for processing.
 
 ## Github-README Links & Related Topics
-- [[event-sourcing-and-cqrs]]
-- [[distributed-tracing-and-observability]]
-- [[consistency-and-availability]]
+- [event-sourcing-and-cqrs](../event-sourcing-and-cqrs/README.md)
+- [distributed-tracing-and-observability](../distributed-tracing-and-observability/README.md)
+- [consistency-and-availability](../consistency-and-availability/README.md)
 
 ## References
 - Kafka Documentation: https://kafka.apache.org/documentation/

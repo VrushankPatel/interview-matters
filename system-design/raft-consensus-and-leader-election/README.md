@@ -112,9 +112,9 @@ sequenceDiagram
 - **Libraries:** JGroups for Java.
 
 ## Github-README Links & Related Topics
-- [[consistency-and-availability]]
-- [[partitioning-and-sharding]]
-- [[distributed-tracing-and-observability]]
+- [consistency-and-availability](../consistency-and-availability/README.md)
+- [partitioning-and-sharding](../partitioning-and-sharding/README.md)
+- [distributed-tracing-and-observability](../distributed-tracing-and-observability/README.md)
 
 ## References
 - Raft Paper: https://raft.github.io/raft.pdf

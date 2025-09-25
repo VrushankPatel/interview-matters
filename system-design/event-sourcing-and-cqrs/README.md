@@ -116,9 +116,9 @@ sequenceDiagram
 - **Frameworks:** Axon Framework for Java.
 
 ## Github-README Links & Related Topics
-- [[message-queues-and-kafka]]
-- [[consistency-and-availability]]
-- [[database-design-and-indexing]]
+- [message-queues-and-kafka](../message-queues-and-kafka/README.md)
+- [consistency-and-availability](../consistency-and-availability/README.md)
+- [database-design-and-indexing](../database-design-and-indexing/README.md)
 
 ## References
 - Martin Fowler on CQRS: https://martinfowler.com/bliki/CQRS.html

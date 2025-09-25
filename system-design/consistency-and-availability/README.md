@@ -109,9 +109,9 @@ sequenceDiagram
 - **Frameworks:** Akka for actor-based consistency.
 
 ## Github-README Links & Related Topics
-- [[partitioning-and-sharding]]
-- [[message-queues-and-kafka]]
-- [[raft-consensus-and-leader-election]]
+- [partitioning-and-sharding](../partitioning-and-sharding/README.md)
+- [message-queues-and-kafka](../message-queues-and-kafka/README.md)
+- [raft-consensus-and-leader-election](../raft-consensus-and-leader-election/README.md)
 
 ## References
 - Brewer's CAP Theorem: https://www.infoq.com/articles/cap-twelve-years-later/

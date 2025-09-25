@@ -125,10 +125,10 @@ sequenceDiagram
 - **Frameworks:** Spring Data with sharding support.
 
 ## Github-README Links & Related Topics
-- [[database-design-and-indexing]]
-- [[load-balancing-and-routing]]
-- [[caching-strategies]]
-- [[distributed-tracing-and-observability]]
+- [database-design-and-indexing](../database-design-and-indexing/README.md)
+- [load-balancing-and-routing](../load-balancing-and-routing/README.md)
+- [caching-strategies](../caching-strategies/README.md)
+- [distributed-tracing-and-observability](../distributed-tracing-and-observability/README.md)
 
 ## References
 - MongoDB Sharding Documentation: https://docs.mongodb.com/manual/sharding/
