@@ -6,11 +6,11 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Overview
+## Overview
 
 Monitoring and logging are essential practices in system design and operations for ensuring reliability, performance, and maintainability of software systems. Monitoring involves collecting, analyzing, and alerting on metrics and health indicators of systems in real-time. Logging captures detailed records of events, errors, and transactions for debugging, auditing, and analysis. Together, they form the foundation of observability, enabling teams to understand system behavior, detect issues proactively, and respond to incidents effectively. As systems scale, robust monitoring and logging become critical to maintain service level objectives (SLOs) and service level agreements (SLAs).
 
-# Detailed Explanation
+## Detailed Explanation
 
 ## Monitoring
 
@@ -81,7 +81,7 @@ Monitoring and logging contribute to the three pillars of observability:
 - **Privacy**: Ensuring logs don't contain sensitive data.
 - **Correlation**: Linking metrics, logs, and traces for root cause analysis.
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 | System | Monitoring Tool | Logging Tool | Use Case |
 |--------|-----------------|--------------|----------|
@@ -94,7 +94,7 @@ Monitoring and logging contribute to the three pillars of observability:
 ## Case Study: E-commerce Platform
 An e-commerce site uses Prometheus for metrics (order rates, payment failures), ELK for logs (user actions, errors), and Jaeger for traces (checkout flow). This setup enables quick detection of payment gateway issues and user experience degradation.
 
-# Code Examples
+## Code Examples
 
 ## Structured Logging in Python
 
@@ -196,7 +196,7 @@ output.elasticsearch:
   index: "app-logs-%{+yyyy.MM.dd}"
 ```
 
-# References
+## References
 
 - [Observability - Wikipedia](https://en.wikipedia.org/wiki/Observability)
 - [Monitoring and Logging - AWS Well-Architected Framework](https://aws.amazon.com/architecture/well-architected-framework/)
@@ -205,7 +205,7 @@ output.elasticsearch:
 - [Google SRE Book: Monitoring](https://sre.google/sre-book/monitoring/)
 - [CNCF Observability Landscape](https://landscape.cncf.io/card-mode?category=observability-and-analysis)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 - [Observability Logs Metrics Traces](../observability-logs-metrics-traces/README.md)
 - [Distributed Tracing and Observability](../distributed-tracing-and-observability/README.md)

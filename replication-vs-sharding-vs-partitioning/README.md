@@ -131,7 +131,7 @@ CREATE TABLE sales_2024 PARTITION OF sales
 - **Sharding**: MongoDB sharding, Cassandra vnode sharding, Vitess for MySQL sharding.
 - **Partitioning**: PostgreSQL declarative partitioning, Oracle partitioning, SQL Server partition functions.
 
-# References
+## References
 
 - [AWS: What is Database Sharding?](https://aws.amazon.com/what-is/database-sharding/)
 - [Wikipedia: Replication (computing)](https://en.wikipedia.org/wiki/Replication_(computing))
@@ -139,7 +139,7 @@ CREATE TABLE sales_2024 PARTITION OF sales
 - [MongoDB: Sharding](https://www.mongodb.com/basics/sharding)
 - [PostgreSQL: Table Partitioning](https://www.postgresql.org/docs/current/ddl-partitioning.html)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 - [Data Partitioning Strategies](system-design/data-partitioning-strategies/)
 - [Database Sharding Strategies](system-design/database-sharding-strategies/)
