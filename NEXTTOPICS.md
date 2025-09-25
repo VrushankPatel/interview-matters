@@ -1,10 +1,5 @@
 
 
-Garbage Collection Algorithms — 'Mark-sweep, generational GC, G1, ZGC'
-Multithreading & Concurrency in Java — 'Threads, synchronization, locks, atomic operations'
-URL Shortener System Design — 'Design a URL shortening service like bit.ly'
-Netflix Video Streaming Architecture — 'Scalable video delivery and recommendation system'
-Twitter System Design — 'Real-time messaging and timeline generation'
 Instagram System Design — 'Photo sharing with high availability and scalability'
 Uber Ride Sharing System — 'Location-based matching and real-time updates'
 Airbnb Booking System — 'Distributed booking with consistency'
@@ -17,3 +12,7 @@ OOP Principles in Java — 'Encapsulation, inheritance, polymorphism, abstractio
 JVM Internals & Class Loading — 'Class loaders, bytecode, JIT compilation'
 Garbage Collection Algorithms — 'Mark-sweep, generational GC, G1, ZGC'
 Multithreading & Concurrency in Java — 'Threads, synchronization, locks, atomic operations'
+Java Fundamentals — 'Core Java syntax, data types, control structures'
+OOP Principles in Java — 'Encapsulation, inheritance, polymorphism, abstraction'
+JVM Internals & Class Loading — 'Class loaders, bytecode, JIT compilation'
+System Design Basics — 'Scalability, reliability, trade-offs'
