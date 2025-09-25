@@ -6,32 +6,32 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Overview
+## Overview
 
 Order book models for financial trading systems. In-memory data structures for bids/asks, persistence strategies.
 
-# STAR Summary
+## STAR Summary
 
 **Situation:** Built matching engine for crypto exchange.  
 **Task:** Handle high-frequency orders with low latency.  
 **Action:** Implemented priority queues for order book.  
 **Result:** Processed 10k orders/sec with <1ms latency.
 
-# Detailed Explanation
+## Detailed Explanation
 
-## Complexity Analysis
+### Complexity Analysis
 
 - Insertion/Deletion: O(log n) with priority queues or balanced trees.
 - Matching: O(n) in worst case for full traversal, but optimized with heaps.
 - Persistence: O(log n) for updates in LSM trees or B-trees.
 
-## Typical Interview Variants
+### Typical Interview Variants
 
 - Limit orders: Price-specific.
 - Market orders: Immediate execution.
 - Stop orders: Triggered at price levels.
 
-## High-Level Design
+### High-Level Design
 
 ```mermaid
 classDiagram
@@ -50,14 +50,14 @@ classDiagram
     OrderBook --> Order
 ```
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 - **Stock Exchanges (e.g., NYSE, NASDAQ):** Maintain centralized order books for equities, handling millions of orders daily with price-time priority to ensure fair execution.
 - **Cryptocurrency Platforms (e.g., Binance, Coinbase):** Use order books for spot and futures trading, supporting high-frequency trading with sub-millisecond matching.
 - **Options Trading:** Complex order books for derivatives, incorporating strike prices and expiration dates.
 - **Dark Pools:** Private order books for institutional trading to minimize market impact.
 
-# Code Examples
+## Code Examples
 
 **Java Order Book with PriorityQueue:**
 
@@ -107,7 +107,7 @@ class OrderBook:
             # match logic
 ```
 
-# Data Models / Message Formats
+## Data Models / Message Formats
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -116,7 +116,7 @@ class OrderBook:
 | quantity | int | Quantity |
 | type | enum | BUY/SELL |
 
-# Journey / Sequence
+## Journey / Sequence
 
 ```mermaid
 sequenceDiagram
@@ -130,29 +130,29 @@ sequenceDiagram
     MatchingEngine->>Client: Confirmation
 ```
 
-# Common Pitfalls & Edge Cases
+## Common Pitfalls & Edge Cases
 
 - Price-time priority  
 - Partial fills  
 - Market orders  
 - High-frequency updates causing contention
 
-# Common Interview Questions
+## Common Interview Questions
 
 1. **Implement Order Book**: Use two heaps for bids/asks, handle add/match. Test with sample orders.
 2. **Matching Engine**: Process orders, handle partial fills, update quantities.
 3. **Persistence Strategy**: Design for crash recovery, use WAL and snapshots.
 
-# Tools & Libraries
+## Tools & Libraries
 
 Java PriorityQueue, custom heaps.
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
-- [Graphs Trees Heaps and Tries](algorithms/graphs-trees-heaps-and-tries/README.md)
-- [Matching Algorithms](algorithms/matching-algorithms/README.md)
+- [Graphs, Trees, Heaps and Tries](../graphs-trees-heaps-and-tries/README.md)
+- [Matching Algorithms](../matching-algorithms/README.md)
 
-# References
+## References
 
 - https://en.wikipedia.org/wiki/Order_book
 - https://www.investopedia.com/terms/o/order-book.asp

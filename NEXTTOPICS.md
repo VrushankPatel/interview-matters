@@ -1,8 +1,3 @@
-computational-geometry — 'Convex hull, line intersection, geometric algorithms'
-jvm-performance-tuning — 'Heap sizing, GC tuning for low latency'
-order-book-modeling — 'Canonical models for in-memory book and persistence'
-matching-algorithms — 'Batch vs streaming matching, complexity'
-time-in-force-variations — 'Exchange semantics across major venues'
 latency-measurement — 'Instrumentation and microbenchmarks'
 raft-and-leader-election — 'Implementations and failure modes'
 -e 

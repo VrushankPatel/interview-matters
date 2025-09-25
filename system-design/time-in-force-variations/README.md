@@ -6,20 +6,20 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Overview
+## Overview
 
 Time-in-force semantics across exchanges: GTC, IOC, FOK, etc.
 
-# STAR Summary
+## STAR Summary
 
 **Situation:** Implemented order types for trading platform.  
 **Task:** Support various TIF for compliance.  
 **Action:** Added TIF logic in order engine.  
 **Result:** Passed regulatory audits.
 
-# Detailed Explanation
+## Detailed Explanation
 
-## High-Level Design
+### High-Level Design
 
 ```mermaid
 flowchart TD
@@ -35,33 +35,33 @@ flowchart TD
     H --> I[Matching Engine]
 ```
 
-## Capacity and Throughput Targets
+### Capacity and Throughput Targets
 
 - Handle 10k orders/second with TIF logic.
 - Latency: <10ms for IOC/FOK validation.
 
-## Tradeoffs
+### Tradeoffs
 
 - GTC: Persistent but storage intensive.
 - IOC/FOK: Immediate but may reject orders.
 - Flexibility vs Simplicity: More TIF options increase complexity.
 
-## API Design Examples
+### API Design Examples
 
 Order submission: `POST /orders` with `tif: "IOC"`
 
-## Deployment Notes
+### Deployment Notes
 
 Integrate TIF in order engine, use databases for GTC persistence.
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 - **Stock Trading Platforms (e.g., Robinhood, E*TRADE):** Use IOC for day traders seeking immediate execution without slippage.
 - **Cryptocurrency Exchanges (e.g., Kraken, Gemini):** Implement FOK for large orders to ensure full fill or cancellation.
 - **Futures and Options Markets:** GTC orders for long-term positions, with expiration dates.
 - **Algorithmic Trading:** IOC for high-frequency strategies to avoid holding positions overnight.
 
-# Code Examples
+## Code Examples
 
 ```java
 enum TimeInForce {
@@ -100,11 +100,11 @@ public class OrderProcessor {
 }
 ```
 
-# Data Models / Message Formats
+## Data Models / Message Formats
 
 Order with TIF field.
 
-# Journey / Sequence
+## Journey / Sequence
 
 ```mermaid
 sequenceDiagram
@@ -122,20 +122,20 @@ sequenceDiagram
     Exchange-->>Trader: Result
 ```
 
-# Common Pitfalls & Edge Cases
+## Common Pitfalls & Edge Cases
 
 - Partial fills for IOC  
 - Expiration handling
 
-# Tools & Libraries
+## Tools & Libraries
 
 Exchange APIs.
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
-- [Order Book Modeling](algorithms/order-book-modeling/README.md)
-- [Matching Algorithms](algorithms/matching-algorithms/README.md)
+- [Order Book Modeling](../../algorithms/order-book-modeling/README.md)
+- [Matching Algorithms](../../algorithms/matching-algorithms/README.md)
 
-# References
+## References
 
 - https://www.investopedia.com/terms/t/timeinforce.asp

@@ -111,4 +111,4 @@ public class LineIntersection {
 - https://www.geeksforgeeks.org/convex-hull-set-1-jarviss-algorithm-or-wrapping/
 
 ## Github-README Links & Related Topics
-[algorithms-and-data-structures](../algorithms-and-data-structures/README.md), [divide-and-conquer](../divide-and-conquer/README.md), [sorting-algorithms](../sorting-algorithms/README.md)
+[algorithms-and-data-structures](../algorithms-and-data-structures/README.md), [divide-and-conquer](../../divide-and-conquer/README.md), [sorting-algorithms](../../sorting-algorithms/README.md)
