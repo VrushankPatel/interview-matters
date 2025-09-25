@@ -184,9 +184,9 @@ sequenceDiagram
 
 ## Github-README Links & Related Topics
 
-[[load-balancing-and-routing]], [[system-design-basics]]
+[Load Balancing and Routing](../load-balancing-and-routing/README.md), [System Design Basics](../system-design-basics/README.md)
 
-Related: [[caching-strategies]], [[partitioning-and-sharding]]
+Related: [Caching Strategies](../caching-strategies/README.md), [Partitioning and Sharding](../partitioning-and-sharding/README.md)
 
 ## References
 

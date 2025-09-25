@@ -112,7 +112,7 @@ graph TD
 
 ## Github-README Links & Related Topics
 
-[[graphs-trees-heaps-and-tries]], [[dynamic-programming-and-greedy]]
+[Graphs Trees Heaps and Tries](../graphs-trees-heaps-and-tries/README.md), [Dynamic Programming and Greedy](../dynamic-programming-and-greedy/README.md)
 
 ## References
 

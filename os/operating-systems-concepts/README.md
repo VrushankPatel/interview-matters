@@ -153,9 +153,9 @@ stateDiagram-v2
 
 ## Github-README Links & Related Topics
 
-[[threads-executors-futures]], [[java-memory-model-and-concurrency]]
+[Threads, Executors, and Futures](../../java/threads-executors-futures/README.md), [Java Memory Model and Concurrency](../../java/java-memory-model-and-concurrency/README.md)
 
-Related: [[concurrent-data-structures]], [[performance-tuning-and-profiling]]
+Related: [Concurrent Data Structures](../../java/concurrent-data-structures/README.md), [Performance Tuning and Profiling](../../java/performance-tuning-and-profiling/README.md)
 
 ## References
 

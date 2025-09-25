@@ -117,7 +117,7 @@ graph TD
 
 ## Github-README Links & Related Topics
 
-[[algorithms-and-data-structures]], [[dynamic-programming-and-greedy]]
+[Algorithms and Data Structures](../algorithms-and-data-structures/README.md), [Dynamic Programming and Greedy](../dynamic-programming-and-greedy/README.md)
 
 ## References
 

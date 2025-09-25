@@ -226,9 +226,9 @@ sequenceDiagram
 
 ## Github-README Links & Related Topics
 
-[[system-design-basics]], [[load-balancing-and-routing]], [[message-queues-and-kafka]], [[event-sourcing-and-cqrs]]
+[System Design Basics](../system-design-basics/README.md), [Load Balancing and Routing](../load-balancing-and-routing/README.md), [Message Queues and Kafka](../message-queues-and-kafka/README.md), [Event Sourcing and CQRS](../event-sourcing-and-cqrs/README.md)
 
-Related: [[consistency-and-availability]], [[partitioning-and-sharding]]
+Related: [Consistency and Availability](../consistency-and-availability/README.md), [Partitioning and Sharding](../partitioning-and-sharding/README.md)
 
 ## References
 
