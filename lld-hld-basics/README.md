@@ -82,6 +82,6 @@ sequenceDiagram
 - [System Design Basics](../system-design-basics/README.md)
 - [URL Shortener System Design](../url-shortener-system-design/README.md)
 
-## References
+# References
 - "Design Patterns" by Gang of Four
 - https://github.com/iluwatar/java-design-patterns

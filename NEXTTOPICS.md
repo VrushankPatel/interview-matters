@@ -1,5 +1,5 @@
-LLD HLD Basics
-Replication vs Sharding vs Partitioning
-Caching
-Latency and Throughput
-Monitoring and Logging
+Async logging
+DevOps & Infrastructure as Code
+Proxy forward and reverse
+Load balancing and strategies
+Rate limiting
