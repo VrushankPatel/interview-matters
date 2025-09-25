@@ -1,6 +1,6 @@
 ---
 title: Infrastructure Monitoring
-aliases: []
+aliases: [Infrastructure Monitoring, System Monitoring]
 tags: [#monitoring,#devops]
 created: 2025-09-25
 updated: 2025-09-25
@@ -93,6 +93,13 @@ output {
   }
 }
 ```
+
+## Common Pitfalls & Edge Cases
+
+- Alert fatigue from excessive notifications.
+- Missing critical metrics leading to blind spots.
+- Insecure log handling causing data breaches.
+- Complexity in correlating traces across services.
 
 ## References
 

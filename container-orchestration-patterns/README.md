@@ -1,6 +1,6 @@
 ---
 title: Container Orchestration Patterns
-aliases: []
+aliases: [Container Orchestration Patterns, Orchestration Patterns]
 tags: [#containers,#devops]
 created: 2025-09-25
 updated: 2025-09-25
@@ -102,6 +102,13 @@ spec:
         type: Utilization
         averageUtilization: 70
 ```
+
+## Common Pitfalls & Edge Cases
+
+- Resource over-provisioning or under-provisioning.
+- Network latency in distributed deployments.
+- Handling persistent volumes for stateful services.
+- Rollback strategies for failed updates.
 
 ## References
 

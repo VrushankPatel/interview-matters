@@ -1,6 +1,6 @@
 ---
 title: Microservices Security
-aliases: []
+aliases: [Microservices Security, Service Security]
 tags: [#microservices,#security]
 created: 2025-09-25
 updated: 2025-09-25
@@ -83,6 +83,13 @@ public class SecurityFilter extends OncePerRequestFilter {
     }
 }
 ```
+
+## Common Pitfalls & Edge Cases
+
+- Weak inter-service authentication leading to breaches.
+- Inadequate encryption for data in transit.
+- Overly permissive API access controls.
+- Handling security in event-driven architectures.
 
 ## References
 
