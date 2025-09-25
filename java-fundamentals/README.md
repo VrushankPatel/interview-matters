@@ -10,7 +10,7 @@ updated: 2025-09-25
 
 Java Fundamentals covers the core syntax, data types, control structures, and basic concepts of the Java programming language. This forms the foundation for all Java development.
 
-# Detailed Explanation
+## Detailed Explanation
 
 ## Data Types
 
@@ -26,6 +26,14 @@ Java Fundamentals covers the core syntax, data types, control structures, and ba
 | boolean | 1-bit | true/false | false |
 
 - **Reference Types**: Objects, arrays, strings.
+
+```mermaid
+graph TD
+    A[Java Program] --> B[Compilation]
+    B --> C[Bytecode]
+    C --> D[JVM Execution]
+    D --> E[Output]
+```
 
 ## Control Structures
 
@@ -44,13 +52,13 @@ Java Fundamentals covers the core syntax, data types, control structures, and ba
 - **Try-Catch**: Handling runtime errors.
 - **Throw**: Explicitly throwing exceptions.
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 - **Calculator Application**: Using arithmetic operations and control structures.
 - **Student Management System**: Classes and objects for data modeling.
 - **File Reader**: Exception handling for I/O operations.
 
-# Code Examples
+## Code Examples
 
 ## Hello World
 
@@ -129,12 +137,12 @@ public class Person {
 - Incorrect use of == vs equals() for strings.
 - Forgetting to handle exceptions.
 
-# Tools & Libraries
+## Tools & Libraries
 
 - **JDK (Java Development Kit)**: For compiling and running Java programs.
 - **IDE**: Eclipse, IntelliJ IDEA for development.
 
-# References
+## References
 
 - [Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/)
 - [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se8/html/index.html)
