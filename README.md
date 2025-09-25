@@ -121,7 +121,7 @@ This repository contains comprehensive documentation on various topics for inter
 - [Java Security Basics](./java-security-basics/README.md)
 - [Java Semaphore](./java-semaphore/README.md)
 - [Java Stream API and Functional Programming](./java-stream-api-and-functional-programming/README.md)
-- [Multithreading & Concurrency in Java](./multithreading-and-concurrency-in-java/README.md)
+- [Multithreading & Concurrency in Java](./multithreading-concurrency-in-java/README.md)
 - [Java Streams Advanced](./java-streams-advanced/README.md)
 - [Java Structured Concurrency](./java-structured-concurrency/README.md)
 - [Java Switch Expressions](./java-switch-expressions/README.md)

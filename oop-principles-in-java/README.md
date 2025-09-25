@@ -1,7 +1,7 @@
 ---
 title: OOP Principles in Java
-aliases: [Object-Oriented Programming in Java]
-tags: [#java, #oop]
+aliases: [Object-Oriented Programming in Java, Java OOP]
+tags: [#java,#oop]
 created: 2025-09-25
 updated: 2025-09-25
 ---
@@ -10,43 +10,43 @@ updated: 2025-09-25
 
 ## Overview
 
-Object-Oriented Programming (OOP) principles in Java form the foundation of designing modular, reusable, and maintainable code. The four main principles are Encapsulation, Inheritance, Polymorphism, and Abstraction.
+Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects", which can contain data and code. Java implements OOP through four main principles: Encapsulation, Inheritance, Polymorphism, and Abstraction. These principles help in creating modular, reusable, and maintainable code.
 
 ## Detailed Explanation
 
 ### Encapsulation
 
-Encapsulation is the bundling of data and methods that operate on that data within a single unit (class). It restricts direct access to some of an object's components.
+Encapsulation is the bundling of data (attributes) and methods (functions) that operate on the data into a single unit called a class. It restricts direct access to some of an object's components, which is a means of preventing accidental interference and misuse.
 
-- Achieved using access modifiers: private, protected, public.
-- Getters and setters for controlled access.
+- **Access Modifiers**: public, private, protected, default.
+- **Getters and Setters**: Methods to access and modify private fields.
 
 ### Inheritance
 
-Inheritance allows a class (subclass) to inherit properties and methods from another class (superclass). It promotes code reusability.
+Inheritance allows a class (subclass) to inherit properties and methods from another class (superclass). It promotes code reusability and establishes a relationship between classes.
 
-- Use `extends` keyword.
-- Supports single inheritance in Java.
+- **Types**: Single, Multilevel, Hierarchical, Multiple (via interfaces).
+- **Keywords**: extends, super.
 
 ### Polymorphism
 
-Polymorphism means "many forms." It allows objects to be treated as instances of their parent class, enabling method overriding and overloading.
+Polymorphism means "many forms". It allows objects of different classes to be treated as objects of a common superclass. It can be achieved through method overloading and method overriding.
 
-- **Method Overloading**: Same method name, different parameters.
-- **Method Overriding**: Subclass provides specific implementation of a method in superclass.
+- **Compile-time Polymorphism**: Method overloading.
+- **Runtime Polymorphism**: Method overriding.
 
 ### Abstraction
 
-Abstraction hides complex implementation details and shows only essential features. Achieved through abstract classes and interfaces.
+Abstraction is the process of hiding complex implementation details and showing only the essential features of an object. It helps in reducing complexity and increasing efficiency.
 
-- Abstract classes: Can have abstract methods (no body) and concrete methods.
-- Interfaces: All methods are abstract by default (until Java 8).
+- **Abstract Classes**: Cannot be instantiated, can have abstract methods.
+- **Interfaces**: Blueprint for classes, can have abstract methods and constants.
 
 ## Real-world Examples & Use Cases
 
-- **Banking System**: Encapsulation for account details, inheritance for different account types (Savings, Checking), polymorphism for interest calculation.
-- **Vehicle Management**: Abstraction for Vehicle class, inheritance for Car, Bike subclasses.
-- **E-commerce**: Polymorphism for payment methods (Credit Card, PayPal).
+- **Banking System**: Account classes with encapsulation for security, inheritance for different account types (Savings, Checking), polymorphism for interest calculation.
+- **Vehicle Management**: Abstract Vehicle class with concrete implementations like Car, Bike; polymorphism for movement methods.
+- **Employee Management**: Inheritance hierarchy from Employee to Manager, Developer; abstraction for common behaviors.
 
 ## Code Examples
 
@@ -56,19 +56,24 @@ Abstraction hides complex implementation details and shows only essential featur
 public class Person {
     private String name;
     private int age;
-
+    
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    
     public String getName() {
         return name;
     }
-
+    
     public void setName(String name) {
         this.name = name;
     }
-
+    
     public int getAge() {
         return age;
     }
-
+    
     public void setAge(int age) {
         if (age > 0) {
             this.age = age;
@@ -82,20 +87,21 @@ public class Person {
 ```java
 public class Animal {
     public void eat() {
-        System.out.println("Eating...");
+        System.out.println("Animal is eating");
     }
 }
 
 public class Dog extends Animal {
     public void bark() {
-        System.out.println("Barking...");
+        System.out.println("Dog is barking");
+    }
+    
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        dog.eat();  // Inherited method
+        dog.bark(); // Own method
     }
 }
-
-// Usage
-Dog dog = new Dog();
-dog.eat();  // Inherited
-dog.bark();
 ```
 
 ### Polymorphism Example
@@ -103,29 +109,33 @@ dog.bark();
 ```java
 public class Shape {
     public void draw() {
-        System.out.println("Drawing shape");
+        System.out.println("Drawing a shape");
     }
 }
 
 public class Circle extends Shape {
     @Override
     public void draw() {
-        System.out.println("Drawing circle");
+        System.out.println("Drawing a circle");
     }
 }
 
 public class Square extends Shape {
     @Override
     public void draw() {
-        System.out.println("Drawing square");
+        System.out.println("Drawing a square");
     }
 }
 
-// Usage
-Shape s1 = new Circle();
-Shape s2 = new Square();
-s1.draw();  // Drawing circle
-s2.draw();  // Drawing square
+public class Main {
+    public static void main(String[] args) {
+        Shape shape1 = new Circle();
+        Shape shape2 = new Square();
+        
+        shape1.draw(); // Outputs: Drawing a circle
+        shape2.draw(); // Outputs: Drawing a square
+    }
+}
 ```
 
 ### Abstraction Example
@@ -133,27 +143,36 @@ s2.draw();  // Drawing square
 ```java
 abstract class Vehicle {
     abstract void start();
-    void stop() {
+    
+    public void stop() {
         System.out.println("Vehicle stopped");
     }
 }
 
-public class Car extends Vehicle {
+class Car extends Vehicle {
     @Override
     void start() {
         System.out.println("Car started");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Vehicle car = new Car();
+        car.start();
+        car.stop();
     }
 }
 ```
 
 ## References
 
-- [Oracle: Object-Oriented Programming Concepts](https://docs.oracle.com/javase/tutorial/java/concepts/index.html)
+- [Oracle Java Tutorials: Object-Oriented Programming Concepts](https://docs.oracle.com/javase/tutorial/java/concepts/)
 - [GeeksforGeeks: OOPs in Java](https://www.geeksforgeeks.org/object-oriented-programming-oops-concept-in-java/)
-- [Tutorialspoint: Java OOPs Concepts](https://www.tutorialspoint.com/java/java_oop.htm)
+- [Head First Java by Kathy Sierra and Bert Bates](https://www.amazon.com/Head-First-Java-Kathy-Sierra/dp/0596009208)
 
 ## Github-README Links & Related Topics
 
-- [Java Fundamentals](java-fundamentals/)
-- [JVM Internals & Class Loading](jvm-internals-class-loading/)
-- [Design Patterns](design-patterns/)
+- [Java Fundamentals](./java-fundamentals)
+- [Design Patterns in Java](./design-patterns-in-java)
+- [JVM Internals & Class Loading](./jvm-internals-class-loading)
