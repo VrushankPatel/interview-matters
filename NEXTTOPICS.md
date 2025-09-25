@@ -1,5 +1,10 @@
-Docker Best Practices
-API Gateway Implementation
-Event Streaming with Apache Kafka
-Machine Learning in System Design
-Security Best Practices in Microservices
+Java Fundamentals
+OOP Principles in Java
+JVM Internals & Class Loading
+Garbage Collection Algorithms
+Multithreading & Concurrency in Java
+Collections & Data Structures
+Java Stream API & Functional Programming
+System Design Basics
+High Scalability Patterns
+CAP Theorem & Distributed Systems
