@@ -1,13 +1,13 @@
-00001| Popular Systems Design LLD and HLD
-00002| LLD HLD Basics
-00003| Replication vs Sharding vs Partitioning
-00004| Caching
-00005| Latency and Throughput Zero to Hero
-00006| Monitoring and Logging
-00007| Async Logging
-00008| DevOps & Infrastructure as Code
-00009| Proxy Forward and Reverse
-00010| Load Balancing and Strategies
-00011| Rate Limiting
-00012| Concurrency & Parallelism
-00013| 
+00001| 00001| Monitoring and Logging
+00002| 00002| Async Logging
+00003| 00003| DevOps & Infrastructure as Code
+00004| 00004| Proxy Forward and Reverse
+00005| 00005| Load Balancing and Strategies
+00006| 00006| Rate Limiting
+00007| 00007| Concurrency & Parallelism
+00008| 00008| 
+00009| 00009| Java Fundamentals
+00010| 00010| OOP Principles in Java
+00011| 00011| JVM Internals & Class Loading
+00012| 00012| Garbage Collection Algorithms
+00013| 00013| Multithreading & Concurrency in Java
