@@ -263,7 +263,7 @@ This repository contains a comprehensive collection of topics related to softwar
 - [OUCH Protocol](trading/protocols/ouch-protocol/README.md)
 - [Order Entry Protocols](trading/protocols/order-entry-protocols/README.md)
 #### Market Data
-- [Market Data (overview & dissemination)](trading/market-data/market-data-overview-and-dissemination/README.md)
+- [Market Data](trading/market-data/market-data/README.md)
 #### Order Types
 - [Order Types](trading/order-types/order-types/README.md)
 #### Lifecycle
