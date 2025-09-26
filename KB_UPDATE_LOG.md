@@ -13,3 +13,8 @@ created_dirs: ["system-design/lld-hld-basics"]
 updated_files: ["system-design/popular-systems-design-lld-and-hld/README.md", "system-design/replication-vs-sharding-vs-partitioning/README.md", "system-design/caching/README.md", "system-design/latency-and-throughput-zero-to-hero/README.md", "README.md", "SPECIFICATION.md", "PENDING_TOPICS.md"]
 commit_made: true
 commit_message: "kb: add 5 topics (popular-systems-design-lld-and-hld, lld-hld-basics, replication-vs-sharding-vs-partitioning, caching, latency-and-throughput-zero-to-hero) + restructure into system-design + update links"
+topics_processed: ["FIX Protocol", "ITCH Protocol", "OUCH Protocol", "Market Data (overview & dissemination)", "Order Entry Protocols"]
+created_dirs: ["trading/protocols", "trading/market-data", "trading/lifecycle", "trading/exchange-behavior", "trading/compliance"]
+updated_files: ["trading/protocols/fix-protocol/README.md", "trading/protocols/itch-protocol/README.md", "trading/protocols/ouch-protocol/README.md", "trading/market-data/market-data-overview-and-dissemination/README.md", "trading/protocols/order-entry-protocols/README.md", "trading/protocols/README.md", "trading/market-data/README.md", "trading/lifecycle/README.md", "trading/exchange-behavior/README.md", "trading/compliance/README.md", "README.md", "SPECIFICATION.md", "PENDING_TOPICS.md", "NEXTTOPICS.md"]
+commit_made: true
+commit_message: "kb: add 5 topics (fix-protocol, itch-protocol, ouch-protocol, market-data-overview-and-dissemination, order-entry-protocols) + restructure trading into subcategories + update links and root index"

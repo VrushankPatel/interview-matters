@@ -151,9 +151,9 @@ ws.run_forever()
 
 # Github-README Links & Related Topics
 
-- [[FIX Protocol]]
-- [[ITCH Protocol]]
-- [[OUCH Protocol]]
-- [[Order Entry Protocols]]
-- [[Execution Report]]
-- [[Trade Capture Report]]
+- [FIX Protocol](../../protocols/fix-protocol/)
+- [ITCH Protocol](../../protocols/itch-protocol/)
+- [OUCH Protocol](../../protocols/ouch-protocol/)
+- [Order Entry Protocols](../../protocols/order-entry-protocols/)
+- [Execution Report](../../compliance/execution-report/)
+- [Trade Capture Report](../../compliance/trade-capture-report/)

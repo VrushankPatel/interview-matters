@@ -1,15 +1,10 @@
 # Pending Topics
 
-- FIX Protocol
-- ITCH Protocol
-- OUCH Protocol
-- Market Data (overview & dissemination)
-- Order Entry Protocols
-- Journey of a Trade (end-to-end)
-- Order Types (DAY, GTC, FOK, IOC)
-- Quotes & RFQ workflows
-- Execution Report
-- Trade Capture Report
+- Java Fundamentals
+- OOP Principles in Java
+- JVM Internals & Class Loading
+- Garbage Collection Algorithms
+- Multithreading & Concurrency in Java
 - Monitoring and Logging
 - Async Logging
 - DevOps & Infrastructure as Code

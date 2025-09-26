@@ -162,9 +162,9 @@ order_msg = create_enter_order('TOKEN12345678', 'B', 100, 'AAPL', 150.25)
 
 # Github-README Links & Related Topics
 
-- [[FIX Protocol]]
-- [[ITCH Protocol]]
-- [[Order Entry Protocols]]
-- [[Market Data (overview & dissemination)]]
-- [[Execution Report]]
-- [[Trade Capture Report]]
+- [FIX Protocol](../fix-protocol/)
+- [ITCH Protocol](../itch-protocol/)
+- [Order Entry Protocols](../order-entry-protocols/)
+- [Market Data (overview & dissemination)](../market-data/market-data-overview-dissemination/)
+- [Execution Report](../../compliance/execution-report/)
+- [Trade Capture Report](../../compliance/trade-capture-report/)
