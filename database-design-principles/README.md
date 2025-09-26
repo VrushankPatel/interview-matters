@@ -1,8 +1,8 @@
 ---
 title: Database Design Principles
-aliases: [Database Normalization, ER Diagrams, Database Schema Design]
+aliases: [Database Design, DB Design Principles]
 tags: [#database,#design,#principles]
-created: 2025-09-25
+created: 2025-09-26
 updated: 2025-09-26
 ---
 
@@ -10,166 +10,96 @@ updated: 2025-09-26
 
 ## Overview
 
-Database design principles encompass the fundamental guidelines and best practices for creating efficient, scalable, and maintainable database schemas. These principles guide the structuring of data to ensure data integrity, optimal performance, and ease of maintenance.
+Database design principles guide the creation of efficient, scalable, and maintainable database schemas. They cover normalization, indexing, relationships, and performance optimization.
 
 ## Detailed Explanation
 
-### Key Principles
-
-1. **Normalization**: The process of organizing data to minimize redundancy and improve data integrity. Normal forms (1NF, 2NF, 3NF, BCNF) provide progressive levels of normalization.
-
-2. **Denormalization**: Strategic introduction of redundancy to improve read performance, often used in data warehouses or high-read systems.
-
-3. **Indexing Strategies**: Proper use of indexes to speed up data retrieval while balancing write performance.
-
-4. **Data Integrity**: Ensuring data accuracy and consistency through constraints, triggers, and referential integrity.
-
-5. **Scalability Considerations**: Designing for horizontal/vertical scaling, partitioning, and sharding.
-
-6. **Security**: Implementing access controls, encryption, and audit trails.
+Good database design ensures data integrity, reduces redundancy, and supports efficient queries. Key principles include normalization, proper indexing, and choosing appropriate data types.
 
 ### Normalization Forms
 
-| Form | Description | Example |
-|------|-------------|---------|
-| 1NF | Eliminates repeating groups, ensures atomic values | Separate multi-value attributes |
-| 2NF | Removes partial dependencies on the primary key | Move dependent attributes to separate table |
-| 3NF | Eliminates transitive dependencies | Ensure non-key attributes depend only on key |
-| BCNF | Stronger form of 3NF, removes all functional dependencies | Handle overlapping keys |
+- **1NF**: Eliminate repeating groups.
+- **2NF**: Remove partial dependencies.
+- **3NF**: Remove transitive dependencies.
+- **BCNF**: Boyce-Codd Normal Form for complex dependencies.
 
-### Entity-Relationship Diagram Example
+### Relationships
 
-```mermaid
-erDiagram
-    CUSTOMER ||--o{ ORDER : places
-    ORDER ||--|{ LINE-ITEM : contains
-    CUSTOMER {
-        int customer_id PK
-        string name
-        string email
-    }
-    ORDER {
-        int order_id PK
-        date order_date
-        int customer_id FK
-    }
-    LINE-ITEM {
-        int item_id PK
-        int order_id FK
-        string product_name
-        int quantity
-        decimal price
-    }
-```
+- **One-to-One**: Unique relationship between tables.
+- **One-to-Many**: Foreign key relationships.
+- **Many-to-Many**: Junction tables to resolve.
 
 ## Real-world Examples & Use Cases
 
-### E-commerce Platform
-```sql
--- Normalized design for products and categories
-CREATE TABLE categories (
-    category_id INT PRIMARY KEY,
-    category_name VARCHAR(100) NOT NULL
-);
-
-CREATE TABLE products (
-    product_id INT PRIMARY KEY,
-    product_name VARCHAR(200) NOT NULL,
-    category_id INT,
-    price DECIMAL(10,2),
-    FOREIGN KEY (category_id) REFERENCES categories(category_id)
-);
-```
-
-### Social Media Application
-- User profiles normalized to avoid data duplication
-- Posts table with foreign keys to users
-- Many-to-many relationships for followers/following
-
-### Financial System
-- Strict normalization for transaction integrity
-- Audit trails for compliance
-- Partitioning by date for performance
+1. **E-commerce**: Product catalogs with categories and orders.
+2. **Social Networks**: User profiles, friendships, and posts.
+3. **Banking Systems**: Accounts, transactions, and customer data.
 
 ## Code Examples
 
-### Creating a Normalized Schema
+### Normalized Schema (SQL)
+
 ```sql
--- Example of 3NF design for a library system
-CREATE TABLE authors (
-    author_id INT PRIMARY KEY AUTO_INCREMENT,
-    first_name VARCHAR(50),
-    last_name VARCHAR(50),
-    birth_date DATE
+-- Users table
+CREATE TABLE users (
+    user_id INT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE,
+    email VARCHAR(100)
 );
 
-CREATE TABLE books (
-    book_id INT PRIMARY KEY AUTO_INCREMENT,
-    title VARCHAR(200),
-    isbn VARCHAR(13) UNIQUE,
-    publication_year YEAR,
-    author_id INT,
-    FOREIGN KEY (author_id) REFERENCES authors(author_id)
+-- Orders table
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY,
+    user_id INT,
+    order_date DATE,
+    total DECIMAL(10,2),
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
-CREATE TABLE book_copies (
-    copy_id INT PRIMARY KEY AUTO_INCREMENT,
-    book_id INT,
-    location VARCHAR(100),
-    status ENUM('available', 'checked_out', 'lost'),
-    FOREIGN KEY (book_id) REFERENCES books(book_id)
+-- Order Items table
+CREATE TABLE order_items (
+    order_item_id INT PRIMARY KEY,
+    order_id INT,
+    product_id INT,
+    quantity INT,
+    price DECIMAL(10,2),
+    FOREIGN KEY (order_id) REFERENCES orders(order_id)
 );
 ```
 
-### Indexing Strategy
+### Indexing Example
+
 ```sql
--- Adding indexes for performance
-CREATE INDEX idx_books_author ON books(author_id);
-CREATE INDEX idx_books_title ON books(title);
-CREATE INDEX idx_book_copies_status ON book_copies(status);
+-- Add index for faster queries
+CREATE INDEX idx_orders_user_date ON orders(user_id, order_date);
+
+-- Query benefiting from index
+SELECT * FROM orders WHERE user_id = 123 AND order_date > '2023-01-01';
 ```
 
-### Denormalization Example
-```sql
--- Denormalized view for reporting
-CREATE VIEW book_report AS
-SELECT 
-    b.book_id,
-    b.title,
-    CONCAT(a.first_name, ' ', a.last_name) AS author_name,
-    b.publication_year,
-    COUNT(bc.copy_id) AS total_copies,
-    SUM(CASE WHEN bc.status = 'available' THEN 1 ELSE 0 END) AS available_copies
-FROM books b
-JOIN authors a ON b.author_id = a.author_id
-LEFT JOIN book_copies bc ON b.book_id = bc.book_id
-GROUP BY b.book_id, b.title, author_name, b.publication_year;
-```
+## Data Models / Message Formats
+
+| Principle | Description | Example |
+|-----------|-------------|---------|
+| Normalization | Reduce redundancy | Separate tables for users and orders |
+| Denormalization | Improve read performance | Duplicate data in reports |
+| Indexing | Speed up queries | B-tree indexes on frequently queried columns |
+| Partitioning | Distribute data | Range partitioning by date |
 
 ## Common Pitfalls & Edge Cases
 
-- Over-normalization leading to complex joins
-- Under-normalization causing data anomalies
-- Ignoring performance implications of normalization
-- Not planning for future scalability
-- Forgetting to handle NULL values properly
-
-## Tools & Libraries
-
-- **MySQL Workbench**: Visual database design tool
-- **pgAdmin**: PostgreSQL administration and design tool
-- **ERwin**: Enterprise data modeling software
-- **Liquibase**: Database migration and refactoring tool
+- **Over-normalization**: Can lead to complex joins and slow queries.
+- **Under-normalization**: Data redundancy and update anomalies.
+- **Poor Indexing**: Slow queries on large datasets.
+- **Ignoring Constraints**: Data integrity issues.
 
 ## References
 
-- [Database Normalization - Wikipedia](https://en.wikipedia.org/wiki/Database_normalization)
-- [SQL Indexing Best Practices](https://dev.mysql.com/doc/refman/8.0/en/mysql-indexes.html)
-- [PostgreSQL Documentation - Database Design](https://www.postgresql.org/docs/current/ddl.html)
+- [Database Design for Mere Mortals by Michael Hernandez](https://www.amazon.com/Database-Design-Mere-Mortals-Hands/dp/0321884493)
+- [SQL Antipatterns by Bill Karwin](https://www.amazon.com/SQL-Antipatterns-Programming-Pragmatic-Programmers/dp/1934356557)
 
 ## Github-README Links & Related Topics
 
-- [Database Indexing Strategies](../database-indexing-strategies/README.md)
-- [Database Normalization](../database-normalization/README.md)
-- [Database Sharding Strategies](../database-sharding-strategies/README.md)
-- [ACID vs BASE Tradeoffs](../acid-vs-base-tradeoffs/README.md)
+- [database-design](https://github.com/topics/database-design)
+- Related: [Database Normalization](../database-normalization/README.md)
+- Related: [Database Indexing Strategies](../database-indexing-strategies/README.md)
