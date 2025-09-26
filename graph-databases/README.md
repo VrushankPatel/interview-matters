@@ -1,9 +1,9 @@
 ---
 title: Graph Databases
 aliases: [Graph DB]
-tags: [#databases,#data-structures]
+tags: [#databases, #data-structures]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Graph Databases

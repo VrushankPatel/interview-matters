@@ -1,7 +1,7 @@
 ---
 title: Database Indexing Techniques
-aliases: [Database Indexing Strategies, Index Optimization]
-tags: [#database, #performance]
+aliases: [Database Indexes, Indexing Strategies]
+tags: [#database, #performance, #sql]
 created: 2025-09-26
 updated: 2025-09-26
 ---

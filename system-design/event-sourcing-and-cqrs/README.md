@@ -1,9 +1,9 @@
 ---
 title: Event Sourcing and CQRS
 aliases: [event-driven-architecture, cqrs-pattern]
-tags: ['#system-design', '#distributed-systems', '#interviews']
+tags: [#system-design, #distributed-systems, #interviews]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 ## Overview

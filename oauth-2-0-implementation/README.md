@@ -1,7 +1,7 @@
 ---
 title: OAuth 2.0 Implementation
 aliases: [OAuth2 Implementation, OAuth 2.0 Guide]
-tags: [#oauth,#authentication,#security,#api]
+tags: [#oauth, #authentication, #security, #api]
 created: 2025-09-25
 updated: 2025-09-26
 ---

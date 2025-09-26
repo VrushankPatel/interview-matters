@@ -1,7 +1,7 @@
 ---
 title: Machine Learning in System Design
 aliases: [ML in System Design, Machine Learning System Design]
-tags: [#system-design, #machine-learning]
+tags: [#system-design, #machine-learning, #ai]
 created: 2025-09-25
 updated: 2025-09-26
 ---
