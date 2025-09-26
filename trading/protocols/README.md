@@ -102,7 +102,7 @@ public class MyApp implements Application {
 - [ITCH Protocol](../itch-protocol/README.md)
 - [OUCH Protocol](../ouch-protocol/README.md)
 - [Order Entry Protocols](../order-entry-protocols/README.md)
-- [Execution Report](../execution-report/README.md)
+- [Execution Report](../lifecycle/execution-report/README.md)
 
 # References
 
