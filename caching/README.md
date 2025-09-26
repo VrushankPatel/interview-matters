@@ -1,363 +1,153 @@
 ---
 title: Caching
-aliases: [Cache Strategies]
-tags: [#system-design, #performance, #caching]
+aliases: [cache-strategies, memory-caching]
+tags: [#system-design, #performance, #scalability]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+## Overview
 
-Caching is a fundamental technique in system design that stores frequently accessed data in a high-speed storage layer to reduce latency, improve performance, and alleviate load on primary data sources. By maintaining a temporary copy of data closer to the consumer, caching minimizes expensive operations like database queries or API calls, enabling faster response times and better scalability.
+Caching is a technique to store frequently accessed data in fast-access storage to improve application performance and reduce load on primary data sources. It acts as a temporary data store that sits between the application and the database or external services.
 
-# Detailed Explanation
+## Detailed Explanation
 
-### Types of Caches
-
-| Type | Description | Examples | Use Cases |
-|------|-------------|----------|-----------|
-| In-Memory | Fastest access using RAM | Redis, Memcached | Session data, real-time analytics |
-| Database | Query result caching at DB level | MySQL Query Cache, PostgreSQL | Repeated SQL queries |
-| CDN | Distributed content caching | Cloudflare, Akamai | Static assets, media files |
-| Browser | Client-side storage | HTTP caching headers | Web page resources |
-| Application | In-app data structures | Ehcache, Caffeine | Computed results, API responses |
+### Cache Types
+- **In-Memory**: RAM-based (Redis, Memcached)
+- **Disk**: File system or SSD-based
+- **Distributed**: Across multiple nodes
+- **CDN**: Content Delivery Network caching
 
 ### Cache Strategies
-
-Caching strategies define how data flows between cache and primary storage:
-
-- **Cache-Aside (Lazy Loading)**: Application checks cache first; on miss, fetches from source and populates cache
-- **Write-Through**: Writes go to both cache and source simultaneously, ensuring consistency
-- **Write-Behind (Write-Back)**: Writes to cache first, then asynchronously to source for performance
-- **Read-Through**: Cache acts as proxy, handling all reads and populating itself
+- **Cache-Aside**: Application checks cache first, loads from source if miss
+- **Write-Through**: Write to cache and source simultaneously
+- **Write-Behind**: Write to cache first, async to source
+- **Read-Through**: Cache handles reads, loads from source on miss
 
 ```mermaid
 graph TD
-    A[Application] --> B{Cache Check}
-    B -->|Hit| C[Return Cached Data]
-    B -->|Miss| D[Fetch from Source]
-    D --> E[Populate Cache]
-    E --> C
+    A[Application] --> B{Cache}
+    B -->|Hit| C[Return Data]
+    B -->|Miss| D[Data Source]
+    D --> E[Load Data]
+    E --> F[Store in Cache]
+    F --> C
 ```
 
-### Cache Eviction Policies
+### Cache Invalidation
+- **Time-based**: Expire after TTL
+- **Event-based**: Invalidate on data changes
+- **Size-based**: Evict least recently used (LRU)
 
-Eviction policies determine which data to remove when cache is full:
+### Cache Consistency
+- **Strong Consistency**: Immediate updates across cache and source
+- **Eventual Consistency**: Updates propagate over time
+- **Cache-Aside Pattern**: Application manages consistency
 
-| Policy | Description | Pros | Cons |
-|--------|-------------|------|------|
-| LRU | Least Recently Used | Simple, effective for temporal locality | Ignores access frequency |
-| LFU | Least Frequently Used | Good for skewed access patterns | New items may be evicted prematurely |
-| TTL | Time To Live | Automatic expiration | May evict still-useful data |
-| Size-Based | FIFO or random | Simple implementation | No intelligence in eviction |
-
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 ### Web Applications
-- **User Sessions**: Store session data in Redis to avoid repeated authentication checks
-- **API Responses**: Cache public data like weather forecasts or stock prices with short TTL
-- **Page Fragments**: Cache rendered HTML components to reduce server load
+- **Browser Caching**: HTTP headers for static assets
+- **API Response Caching**: Cache REST API responses
+- **Session Storage**: User session data in Redis
 
-### E-commerce Platforms
-- **Product Catalogs**: Cache product details and inventory during flash sales
-- **Recommendation Engines**: Store personalized suggestions based on user behavior
-- **Shopping Carts**: Maintain cart state in distributed cache for multi-device sync
+### E-commerce
+- **Product Catalog**: Cache product details and prices
+- **User Recommendations**: Cache personalized suggestions
+- **Shopping Cart**: Temporary storage during session
 
-### Social Media Platforms
-- **Timeline Feeds**: Cache aggregated posts to handle millions of users
-- **User Profiles**: Store profile data with invalidation on updates
-- **Trending Topics**: Cache computed trends with periodic refresh
+### Social Media
+- **Timeline Feeds**: Cache recent posts for users
+- **User Profiles**: Cache profile data and follower counts
+- **Search Results**: Cache frequent search queries
 
-### Gaming Systems
-- **Game State**: Real-time state synchronization in multiplayer games
-- **Leaderboards**: Cached rankings with frequent updates
-- **Asset Loading**: Preload game assets for faster level transitions
+### Microservices
+- **Service Discovery**: Cache service locations
+- **Configuration**: Cache application config from central store
+- **Rate Limiting**: Cache request counts per user
 
-### IoT and Edge Computing
-- **Sensor Data**: Cache recent readings for local processing
-- **Device Configurations**: Store settings with version control
+## Code Examples
 
-## STAR Summary
+### Redis Cache Implementation (Node.js)
+```javascript
+const redis = require('redis');
+const client = redis.createClient();
 
-**Situation**: A high-traffic e-commerce site experienced slow page loads during peak hours due to repeated database queries for product details.
+async function getCachedData(key) {
+    const cached = await client.get(key);
+    if (cached) {
+        return JSON.parse(cached);
+    }
+    
+    // Fetch from source
+    const data = await fetchFromDatabase(key);
+    
+    // Cache for 1 hour
+    await client.setex(key, 3600, JSON.stringify(data));
+    return data;
+}
 
-**Task**: Implement a caching layer to reduce database load and improve response times by 50%.
-
-**Action**: Deployed Redis as an in-memory cache with cache-aside strategy, setting TTL for product data and implementing cache invalidation on inventory updates.
-
-**Result**: Achieved 60% reduction in database queries, improved page load times from 3s to 1.2s, and handled 2x traffic without additional servers.
-
-## Journey / Sequence
-
-```mermaid
-sequenceDiagram
-    participant Client
-    participant Application
-    participant Cache
-    participant Database
-
-    Client->>Application: Request data
-    Application->>Cache: Check for cached data
-    Cache-->>Application: Cache miss
-    Application->>Database: Fetch data
-    Database-->>Application: Return data
-    Application->>Cache: Store in cache
-    Application-->>Client: Return data
-
-    Note over Client,Database: Subsequent requests hit cache
-    Client->>Application: Request same data
-    Application->>Cache: Check cache
-    Cache-->>Application: Cache hit
-    Application-->>Client: Return cached data
-```
-
-## Data Models / Message Formats
-
-### Cache Entry Structure
-
-```json
-{
-  "key": "user:12345",
-  "value": {
-    "id": 12345,
-    "name": "John Doe",
-    "email": "john@example.com",
-    "lastLogin": "2023-09-26T10:00:00Z"
-  },
-  "metadata": {
-    "ttl": 3600,
-    "createdAt": "2023-09-26T09:00:00Z",
-    "hits": 42,
-    "size": 256
-  }
+async function setCachedData(key, data) {
+    await client.setex(key, 3600, JSON.stringify(data));
 }
 ```
 
-### Cache Invalidation Message
-
-```json
-{
-  "type": "INVALIDATE",
-  "keys": ["user:12345", "product:*"],
-  "reason": "user_profile_updated",
-  "timestamp": "2023-09-26T10:30:00Z"
-}
-```
-
-## Common Pitfalls & Edge Cases
-
-| Pitfall | Description | Mitigation |
-|---------|-------------|------------|
-| Cache Stampede | Multiple requests for same missing key flood the backend | Use mutex locks or probabilistic early expiration |
-| Stale Data | Serving outdated cached data | Implement proper TTL and cache invalidation strategies |
-| Cache Penetration | Frequent requests for non-existent keys | Use bloom filters or cache null values with short TTL |
-| Hot Key Problem | Single key overwhelmed with requests | Shard keys or use local caches with distributed coordination |
-| Memory Leaks | Cache growing indefinitely | Set appropriate eviction policies and memory limits |
-| Invalidation Complexity | Hard to keep cache consistent with source | Use write-through or event-driven invalidation |
-
-## Tools & Libraries
-
-| Tool/Library | Language | Description | Use Case |
-|--------------|----------|-------------|----------|
-| Redis | Multi-language | In-memory data structure store | Distributed caching, pub/sub |
-| Memcached | Multi-language | High-performance memory object caching | Simple key-value caching |
-| Caffeine | Java | High-performance Java caching library | In-application caching |
-| Ehcache | Java | Enterprise-grade caching | Hibernate integration, clustering |
-| Guava Cache | Java | Google Core Libraries cache | Simple in-memory caching |
-| Node-Cache | JavaScript | Simple in-memory cache | Node.js applications |
-| Cachetools | Python | Caching decorators and utilities | Function result caching |
-| Spring Cache | Java | Abstraction over caching providers | Framework integration |
-
-# Code Examples
-
-### Redis In-Memory Caching (Java)
-
+### Spring Boot Cache (Java)
 ```java
-import redis.clients.jedis.Jedis;
-
-public class RedisCacheExample {
-    private final Jedis jedis;
-
-    public RedisCacheExample() {
-        this.jedis = new Jedis("localhost", 6379);
-    }
-
-    public String getUserData(String userId) {
-        String cacheKey = "user:" + userId;
-        String cachedData = jedis.get(cacheKey);
-
-        if (cachedData != null) {
-            return cachedData; // Cache hit
-        }
-
-        // Cache miss - fetch from database
-        String userData = fetchUserFromDatabase(userId);
-        if (userData != null) {
-            jedis.setex(cacheKey, 3600, userData); // Expire in 1 hour
-        }
-        return userData;
-    }
-
-    public void updateUserData(String userId, String data) {
-        String cacheKey = "user:" + userId;
-        // Update database first
-        updateUserInDatabase(userId, data);
-        // Invalidate cache
-        jedis.del(cacheKey);
-    }
-
-    private String fetchUserFromDatabase(String userId) {
-        // Simulate DB call
-        return "{\"id\":\"" + userId + "\",\"name\":\"John Doe\"}";
-    }
-
-    private void updateUserInDatabase(String userId, String data) {
-        // Simulate DB update
-        System.out.println("Updated user " + userId + " in database");
-    }
-}
-```
-
-### Spring Boot Caching with Annotations
-
-```java
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.stereotype.Service;
-
 @Service
 public class UserService {
-
+    
     @Cacheable(value = "users", key = "#id")
     public User getUserById(Long id) {
-        return userRepository.findById(id).orElseThrow();
+        return userRepository.findById(id).orElse(null);
     }
-
+    
     @CachePut(value = "users", key = "#user.id")
     public User updateUser(User user) {
         return userRepository.save(user);
     }
-
+    
     @CacheEvict(value = "users", key = "#id")
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
-
-    @CacheEvict(value = "users", allEntries = true)
-    public void clearCache() {
-        // Clear all user cache entries
-    }
 }
 ```
 
-### Python Cache-Aside with TTL
-
-```python
-import time
-from typing import Dict, Any, Optional
-
-class TTLCache:
-    def __init__(self, ttl_seconds: int = 300):
-        self.cache: Dict[str, tuple[Any, float]] = {}
-        self.ttl = ttl_seconds
-
-    def get(self, key: str) -> Optional[Any]:
-        if key in self.cache:
-            value, timestamp = self.cache[key]
-            if time.time() - timestamp < self.ttl:
-                return value
-            else:
-                del self.cache[key]
-        return None
-
-    def set(self, key: str, value: Any) -> None:
-        self.cache[key] = (value, time.time())
-
-    def invalidate(self, key: str) -> None:
-        self.cache.pop(key, None)
-
-class DataService:
-    def __init__(self):
-        self.cache = TTLCache(ttl_seconds=600)  # 10 minutes
-
-    def get_data(self, key: str) -> str:
-        cached = self.cache.get(key)
-        if cached:
-            return cached
-
-        # Simulate expensive operation
-        data = self._fetch_from_source(key)
-        self.cache.set(key, data)
-        return data
-
-    def _fetch_from_source(self, key: str) -> str:
-        # Simulate database/API call
-        return f"Data for {key}"
+### HTTP Caching Headers
+```http
+HTTP/1.1 200 OK
+Cache-Control: public, max-age=3600
+ETag: "33a64df551425fcc55e4d42a148795d9f25f89d4"
+Last-Modified: Wed, 26 Sep 2025 12:00:00 GMT
 ```
 
-### Node.js with Memory Cache
+## Common Pitfalls & Edge Cases
 
-```javascript
-const NodeCache = require('node-cache');
-const cache = new NodeCache({ stdTTL: 600 }); // 10 minutes default TTL
+- **Cache Stampede**: Multiple requests for expired key
+- **Cache Poisoning**: Stale or incorrect data
+- **Memory Pressure**: Cache consuming too much RAM
+- **Cache Warming**: Pre-populating cache on startup
+- **Distributed Cache Consistency**: Sync issues across nodes
 
-class CacheService {
-    async getData(key) {
-        let data = cache.get(key);
-        if (data) {
-            console.log('Cache hit for', key);
-            return data;
-        }
+## Tools & Libraries
 
-        console.log('Cache miss for', key);
-        data = await this.fetchFromDatabase(key);
-        cache.set(key, data);
-        return data;
-    }
+- **Redis**: In-memory data structure store
+- **Memcached**: High-performance distributed memory cache
+- **Ehcache**: Java-based cache library
+- **Caffeine**: High-performance Java cache
+- **Varnish**: HTTP accelerator and reverse proxy
 
-    async setData(key, value) {
-        await this.saveToDatabase(key, value);
-        cache.set(key, value);
-    }
+## References
 
-    async invalidate(key) {
-        cache.del(key);
-    }
+- [Redis Documentation](https://redis.io/documentation)
+- [Cache Strategies](https://aws.amazon.com/caching/)
+- [HTTP Caching](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching)
+- [Cache-Aside Pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/cache-aside)
 
-    async fetchFromDatabase(key) {
-        // Simulate async DB call
-        return new Promise(resolve => {
-            setTimeout(() => resolve(`Data: ${key}`), 100);
-        });
-    }
+## Github-README Links & Related Topics
 
-    async saveToDatabase(key, value) {
-        // Simulate async save
-        return new Promise(resolve => {
-            setTimeout(() => resolve(), 50);
-        });
-    }
-}
-
-module.exports = CacheService;
-```
-
-# References
-
-- [Redis Documentation - Caching](https://redis.io/docs/manual/data-types/)
-- [Martin Fowler - Caching Patterns](https://martinfowler.com/bliki/Caching.html)
-- [AWS ElastiCache Best Practices](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/BestPractices.html)
-- [Google Cloud Memorystore](https://cloud.google.com/memorystore/docs/redis)
-- [MDN Web Docs - HTTP Caching](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching)
-- [Wikipedia - Cache Replacement Policies](https://en.wikipedia.org/wiki/Cache_replacement_policies)
-- [Netflix Tech Blog - Caching at Scale](https://netflixtechblog.com/caching-at-netflix-9d3b4b6b8f0a)
-- [Facebook Engineering - Tao: Facebook's Distributed Data Store](https://www.usenix.org/conference/atc13/technical-sessions/presentation/tao)
-
-# Github-README Links & Related Topics
-
-- [Distributed Caching with Redis](../distributed-caching-with-redis/README.md)
-- [CDN Architecture](../cdn-architecture/README.md)
-- [Database Performance Tuning](../database-performance-tuning/README.md)
-- [High Scalability Patterns](../high-scalability-patterns/README.md)
-- [Eventual Consistency](../eventual-consistency/README.md)
+- [distributed-caching-with-redis](../distributed-caching-with-redis/)
+- [cdn-architecture](../cdn-architecture/)
+- [high-scalability-patterns](../high-scalability-patterns/)
+- [latency-and-throughput-zero-to-hero](../latency-and-throughput-zero-to-hero/)

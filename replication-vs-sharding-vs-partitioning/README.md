@@ -1,206 +1,144 @@
 ---
 title: Replication vs Sharding vs Partitioning
-aliases: [Data Replication, Database Sharding, Data Partitioning]
-tags: [#database,#scalability,#distributed-systems]
+aliases: [database-scaling-techniques, data-distribution-strategies]
+tags: [#database, #system-design, #scalability]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+## Overview
 
-In distributed databases and systems, replication, sharding, and partitioning are key strategies for achieving scalability, availability, and performance. Replication involves copying data across multiple nodes for redundancy and fault tolerance. Sharding (a form of horizontal partitioning) splits data across nodes to distribute load. Partitioning is a broader concept encompassing ways to divide data, including vertical and horizontal methods.
+Replication, sharding, and partitioning are fundamental techniques for scaling databases and ensuring data availability, consistency, and performance. Replication involves creating copies of data across multiple nodes, sharding distributes data across different servers, and partitioning divides data within a single database for better management.
 
-# Detailed Explanation
+## Detailed Explanation
 
 ### Replication
+Replication creates multiple copies of the same data across different servers. It improves read performance and provides fault tolerance.
 
-Replication creates multiple copies of data across different nodes or servers. It ensures high availability and fault tolerance by allowing reads from any replica and writes to propagate.
+**Types:**
+- Master-Slave: Writes go to master, reads from slaves
+- Master-Master: Writes to any node, syncs between masters
+- Multi-Master: Similar to master-master but with conflict resolution
 
-- **Types**: Synchronous (strong consistency, slower), Asynchronous (eventual consistency, faster).
-- **Benefits**: Read scalability, disaster recovery.
-- **Drawbacks**: Write overhead, potential inconsistencies.
+```mermaid
+graph TD
+    A[Master DB] --> B[Slave 1]
+    A --> C[Slave 2]
+    A --> D[Slave 3]
+    B --> E[Read Queries]
+    C --> E
+    D --> E
+```
 
 ### Sharding
+Sharding (or horizontal partitioning) splits data across multiple databases or servers based on a shard key.
 
-Sharding divides a dataset into smaller, independent pieces (shards) distributed across nodes. Each shard is a subset of the data, often based on a shard key (e.g., user ID).
+**Strategies:**
+- Hash-based: Distribute evenly using hash of key
+- Range-based: Split by value ranges
+- Directory-based: Use lookup table for shard location
 
-- **Types**: Range-based, hash-based, directory-based.
-- **Benefits**: Horizontal scalability, reduced load per node.
-- **Drawbacks**: Complex queries across shards, rebalancing challenges.
+```mermaid
+graph TD
+    A[Shard Key] --> B{Hash Function}
+    B --> C[Shard 1: IDs 1-1000]
+    B --> D[Shard 2: IDs 1001-2000]
+    B --> E[Shard 3: IDs 2001-3000]
+```
 
 ### Partitioning
+Partitioning divides a single database table into smaller, more manageable pieces within the same server.
 
-Partitioning splits data into smaller, manageable pieces. It can be vertical (by columns) or horizontal (by rows/shards).
+**Types:**
+- Horizontal: Rows split across partitions
+- Vertical: Columns split across partitions
+- Composite: Combination of both
 
-- **Vertical Partitioning**: Splits tables by columns (e.g., hot vs. cold data).
-- **Horizontal Partitioning**: Splits by rows (same as sharding).
-- **Benefits**: Improved performance, easier management.
-- **Drawbacks**: Depends on access patterns.
-
-### Key Differences
+**Key Differences:**
 
 | Aspect | Replication | Sharding | Partitioning |
 |--------|-------------|----------|--------------|
-| Purpose | Availability, redundancy | Scalability, load distribution | Data organization, performance |
-| Data Copies | Multiple identical | Subsets, no overlap | Subsets or restructured |
-| Consistency | Eventual or strong | Per shard | Per partition |
-| Query Complexity | Simple | Cross-shard joins hard | Depends on type |
-| Example | Read replicas in RDBMS | User data across servers | Table splits in MySQL |
+| Data Copies | Multiple | Single (distributed) | Single (divided) |
+| Scalability | Read scaling | Write scaling | Management |
+| Consistency | Eventual | Strong (per shard) | Strong |
+| Complexity | Medium | High | Low |
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 ### Replication
-
-- **PostgreSQL Read Replicas**: Multiple read-only copies for high read throughput.
-- **MongoDB Replica Sets**: Automatic failover and data redundancy.
+- **MySQL Replication**: Used in read-heavy applications like social media feeds
+- **PostgreSQL Streaming Replication**: For high availability in financial systems
+- **MongoDB Replica Sets**: Automatic failover in e-commerce platforms
 
 ### Sharding
-
-- **Instagram Sharding**: User photos sharded by user ID for massive scale.
-- **Twitter Sharding**: Tweets partitioned by user or time.
+- **Instagram**: Shards user data by user ID for photo storage
+- **Uber**: Shards trip data by geographic regions
+- **Twitter**: Shards tweets by user ID for timeline queries
 
 ### Partitioning
+- **Time-series Data**: Partition sensor data by date ranges
+- **E-commerce**: Partition order history by year
+- **Logging Systems**: Partition logs by application or time
 
-- **Vertical**: E-commerce DB: user table split into profile and activity.
-- **Horizontal**: BigQuery tables partitioned by date for analytics.
+## Code Examples
 
-# Code Examples
+### MySQL Replication Setup
+```sql
+-- On Master
+CHANGE MASTER TO
+  MASTER_HOST='master_host',
+  MASTER_USER='repl_user',
+  MASTER_PASSWORD='password',
+  MASTER_LOG_FILE='mysql-bin.000001',
+  MASTER_LOG_POS=0;
 
-### Java: Simulating Sharding
-
-```java
-public class ShardManager {
-    private List<Database> shards;
-
-    public ShardManager(List<Database> shards) {
-        this.shards = shards;
-    }
-
-    public Database getShard(String key) {
-        int shardIndex = key.hashCode() % shards.size();
-        return shards.get(shardIndex);
-    }
-
-    public void save(String key, String value) {
-        getShard(key).save(key, value);
-    }
-
-    public String get(String key) {
-        return getShard(key).get(key);
-    }
-}
+START SLAVE;
 ```
 
-### SQL: Partitioning Example
+### MongoDB Sharding
+```javascript
+// Enable sharding on database
+sh.enableSharding("mydb")
 
+// Shard collection by user_id
+sh.shardCollection("mydb.users", { "user_id": 1 })
+```
+
+### PostgreSQL Table Partitioning
 ```sql
--- Horizontal partitioning in PostgreSQL
+-- Create partitioned table
 CREATE TABLE sales (
     id SERIAL,
-    date DATE,
+    sale_date DATE,
     amount DECIMAL
-) PARTITION BY RANGE (date);
+) PARTITION BY RANGE (sale_date);
 
-CREATE TABLE sales_2023 PARTITION OF sales FOR VALUES FROM ('2023-01-01') TO ('2024-01-01');
+-- Create partitions
+CREATE TABLE sales_2023 PARTITION OF sales
+    FOR VALUES FROM ('2023-01-01') TO ('2024-01-01');
+
+CREATE TABLE sales_2024 PARTITION OF sales
+    FOR VALUES FROM ('2024-01-01') TO ('2025-01-01');
 ```
 
-## STAR Summary
+## Common Pitfalls & Edge Cases
 
-**Situation**: A growing e-commerce platform faced performance issues with a monolithic database handling millions of transactions daily.
+- **Replication Lag**: Monitor and handle eventual consistency issues
+- **Shard Key Selection**: Poor choice leads to hotspots
+- **Cross-shard Queries**: Expensive and complex
+- **Rebalancing**: Moving data between shards during growth
+- **Backup/Restore**: More complex with distributed data
 
-**Task**: Implement data distribution strategies to scale the database horizontally while maintaining data consistency and availability.
+## References
 
-**Action**: Analyzed access patterns, chose hash-based sharding for user data and range-based partitioning for order history, implemented read replicas for high availability, and set up automated rebalancing.
+- [MySQL Replication Documentation](https://dev.mysql.com/doc/refman/8.0/en/replication.html)
+- [MongoDB Sharding](https://docs.mongodb.com/manual/sharding/)
+- [PostgreSQL Partitioning](https://www.postgresql.org/docs/current/ddl-partitioning.html)
+- [Database Sharding: Concepts and Best Practices](https://www.cockroachlabs.com/blog/database-sharding/)
 
-**Result**: Achieved 10x improvement in query performance, reduced downtime from hours to minutes, and supported 5x user growth without significant infrastructure costs.
+## Github-README Links & Related Topics
 
-## Journey / Sequence
-
-```mermaid
-sequenceDiagram
-    participant Client
-    participant LoadBalancer
-    participant Shard1
-    participant Shard2
-    participant Replica1
-    participant Replica2
-
-    Client->>LoadBalancer: Query user data
-    LoadBalancer->>Shard1: Route to shard by user ID
-    Shard1->>Replica1: Read from replica
-    Replica1-->>Shard1: Return data
-    Shard1-->>LoadBalancer: Data
-    LoadBalancer-->>Client: Response
-
-    Client->>LoadBalancer: Write user data
-    LoadBalancer->>Shard1: Route to primary shard
-    Shard1->>Shard1: Update primary
-    Shard1->>Replica1: Replicate to replica
-    Shard1->>Replica2: Replicate to cross-shard replica
-    Shard1-->>LoadBalancer: Success
-    LoadBalancer-->>Client: Response
-```
-
-## Data Models / Message Formats
-
-### Shard Metadata
-
-```json
-{
-  "shardId": "shard_001",
-  "range": {
-    "min": "00000000-0000-0000-0000-000000000000",
-    "max": "7fffffff-ffff-ffff-ffff-ffffffffffff"
-  },
-  "replicas": [
-    {
-      "host": "db1.example.com",
-      "port": 5432,
-      "role": "primary"
-    },
-    {
-      "host": "db2.example.com",
-      "port": 5432,
-      "role": "replica"
-    }
-  ],
-  "status": "active",
-  "lastRebalanced": "2023-09-26T00:00:00Z"
-}
-```
-
-### Partition Key Structure
-
-```json
-{
-  "table": "user_orders",
-  "partitionKey": "user_id",
-  "partitionType": "hash",
-  "numPartitions": 256,
-  "partitionFunction": "murmur3_32(user_id) % 256"
-}
-```
-
-# Common Pitfalls & Edge Cases
-
-- **Hot Shards**: Uneven data distribution causes bottlenecks.
-- **Replication Lag**: Stale reads in async replication.
-- **Cross-Shard Queries**: Expensive joins in sharded systems.
-- **Edge Case**: Shard key changes require data migration.
-
-# Tools & Libraries
-
-- **Replication**: PostgreSQL streaming replication, MongoDB replica sets.
-- **Sharding**: Cassandra, Elasticsearch.
-- **Partitioning**: MySQL partitioning, Apache Kafka partitions.
-
-# References
-
-- [Database Sharding Explained](https://www.mongodb.com/basics/database-sharding-explained)
-- [Replication Strategies](https://docs.microsoft.com/en-us/azure/architecture/patterns/replication)
-
-# Github-README Links & Related Topics
-
-- [Database Sharding Strategies](../database-sharding-strategies/)
-- [Distributed Caching with Redis](../distributed-caching-with-redis/)
-- [CAP Theorem & Distributed Systems](../cap-theorem-and-distributed-systems/)
+- [database-replication-strategies](../database-replication-strategies/)
+- [database-sharding-strategies](../database-sharding-strategies/)
+- [cap-theorem-and-distributed-systems](../cap-theorem-and-distributed-systems/)
+- [high-scalability-patterns](../high-scalability-patterns/)
