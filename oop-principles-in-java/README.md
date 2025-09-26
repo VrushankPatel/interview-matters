@@ -25,6 +25,26 @@ Polorphism allows objects of different classes to be treated as objects of a com
 ### Abstraction
 Abstraction is the process of hiding the implementation details and showing only the functionality to the user. It can be achieved using abstract classes and interfaces.
 
+#### OOP Principles Summary Table
+
+| Principle | Description | Benefits |
+|-----------|-------------|----------|
+| Encapsulation | Bundling data and methods, restricting access | Data protection, modularity |
+| Inheritance | Acquiring properties from parent class | Code reusability, hierarchy |
+| Polymorphism | Many forms - method overriding/overloading | Flexibility, extensibility |
+| Abstraction | Hiding implementation details | Simplicity, maintainability |
+
+#### Inheritance Hierarchy Diagram
+
+```mermaid
+classDiagram
+    Animal <|-- Dog
+    Animal <|-- Cat
+    Animal : +makeSound()
+    Dog : +bark()
+    Cat : +meow()
+```
+
 ## Real-world Examples & Use Cases
 - **Banking System**: Account classes with encapsulation for security
 - **Vehicle Hierarchy**: Car, Bike inheriting from Vehicle
@@ -157,6 +177,13 @@ public class Main {
     }
 }
 ```
+
+## Common Pitfalls & Edge Cases
+- Breaking encapsulation by making fields public
+- Using inheritance for code reuse instead of "is-a" relationship
+- Overriding methods incorrectly, changing behavior unexpectedly
+- Not implementing abstract methods in subclasses
+- Tight coupling between classes due to improper abstraction
 
 ## References
 - [Oracle OOP Concepts](https://docs.oracle.com/javase/tutorial/java/concepts/)

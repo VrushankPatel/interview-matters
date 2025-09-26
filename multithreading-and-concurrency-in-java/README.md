@@ -18,6 +18,17 @@ Multithreading and concurrency in Java enable programs to perform multiple tasks
 
 A thread is a lightweight process. Thread states: NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING, TERMINATED.
 
+#### Thread States Table
+
+| State | Description |
+|-------|-------------|
+| NEW | Thread created but not started |
+| RUNNABLE | Thread is running or ready to run |
+| BLOCKED | Thread waiting for monitor lock |
+| WAITING | Thread waiting indefinitely for another thread |
+| TIMED_WAITING | Thread waiting for specified time |
+| TERMINATED | Thread has completed execution |
+
 ## Creating Threads
 
 - Extend Thread class
@@ -142,6 +153,13 @@ public class ExecutorExample {
     }
 }
 ```
+
+## Common Pitfalls & Edge Cases
+- Race conditions due to improper synchronization
+- Deadlocks from circular wait conditions
+- Starvation when threads are perpetually denied access
+- Memory leaks from thread-local variables
+- Visibility issues without proper volatile or synchronization
 
 ## References
 

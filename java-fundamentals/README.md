@@ -117,6 +117,13 @@ public class Person {
 }
 ```
 
+## Common Pitfalls & Edge Cases
+- Forgetting to initialize variables before use
+- Using == for string comparison instead of .equals()
+- Not handling null pointer exceptions
+- Misunderstanding integer overflow
+- Confusing pass-by-value for objects (references are passed by value)
+
 ## References
 - [Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/)
 - [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se17/html/index.html)
