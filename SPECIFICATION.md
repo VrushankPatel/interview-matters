@@ -5,13 +5,14 @@ Last update
 2025-09-26
 
 Summary of recent additions
-   - Processed 5 topics: FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols with comprehensive READMEs following strict format, including STAR summaries, detailed explanations, real-world examples, message formats, mermaid diagrams, common pitfalls, tools/libraries, and proper interlinking
-   - Restructured repository: moved trading/protocols/ to protocols/, trading/market-data/ to market-data/, trading/order-types/ to order-types/, trading/lifecycle/ to lifecycle/, trading/exchange-behavior/ to exchange-behavior/, and subdirs to appropriate categories
-   - Fixed all README links from [[ ]] to proper markdown relative links in processed topics
-   - Updated root README.md index to reflect new structure
-   - Added 10 new candidate topics to NEXTTOPICS.md with rationales
-     - Processed 5 topics: FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols with updated interlinks using [[ ]] format. Restructured system-design/ with subdirs LLD, HLD, concepts, real-world-designs. Moved facebook-news-feed, instagram-system-design, netflix-video-streaming-architecture to real-world-designs/. Created algorithms/README.md.
-     - Processed 5 topics: Order Types (DAY, GTC, FOK, IOC), Quotes & RFQ workflows, Execution Report, Trade Capture Report, Rate Limiting with comprehensive READMEs following strict format, including STAR summaries, detailed explanations, real-world examples, message formats, mermaid diagrams, common pitfalls, tools/libraries, and proper interlinking. Restructured by moving container-security to security/, graph-databases to databases/, http-caching-headers to networking/.
+    - Processed 5 topics: FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols with comprehensive READMEs following strict format, including STAR summaries, detailed explanations, real-world examples, message formats, mermaid diagrams, common pitfalls, tools/libraries, and proper interlinking
+    - Restructured repository: moved trading/protocols/ to protocols/, trading/market-data/ to market-data/, trading/order-types/ to order-types/, trading/lifecycle/ to lifecycle/, trading/exchange-behavior/ to exchange-behavior/, and subdirs to appropriate categories
+    - Fixed all README links from [[ ]] to proper markdown relative links in processed topics
+    - Updated root README.md index to reflect new structure
+    - Added 10 new candidate topics to NEXTTOPICS.md with rationales
+      - Processed 5 topics: FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols with updated interlinks using [[ ]] format. Restructured system-design/ with subdirs LLD, HLD, concepts, real-world-designs. Moved facebook-news-feed, instagram-system-design, netflix-video-streaming-architecture to real-world-designs/. Created algorithms/README.md.
+      - Processed 5 topics: Order Types (DAY, GTC, FOK, IOC), Quotes & RFQ workflows, Execution Report, Trade Capture Report, Rate Limiting with comprehensive READMEs following strict format, including STAR summaries, detailed explanations, real-world examples, message formats, mermaid diagrams, common pitfalls, tools/libraries, and proper interlinking. Restructured by moving container-security to security/, graph-databases to databases/, http-caching-headers to networking/.
+      - Processed 5 topics: Journey of a Trade (end-to-end), Order Types (DAY, GTC, FOK, IOC), Quotes & RFQ workflows, Execution Report, Trade Capture Report with comprehensive READMEs following strict format, including STAR summaries, detailed explanations, real-world examples, message formats, mermaid diagrams, common pitfalls, tools/libraries, and proper interlinking. Fixed README links from [[ ]] to proper markdown relative links. Updated root and category README.md indices.
 
 Conventions
  - Dir naming: kebab-case.
@@ -139,16 +140,26 @@ New Next Topics Candidates (this run)
   - AI in market prediction — 'Machine learning for price forecasting'
 
 New Next Topics Candidates
-               - Order Book modeling — 'Canonical models for in-memory book and persistence'
-               - Matching algorithm internals — 'How exchanges match buy and sell orders'
-               - Time-in-Force variations across exchanges — 'DAY, GTC, IOC behaviors by venue'
-               - Market fragmentation & smart order routing — 'Routing orders across multiple markets'
-               - Latency measurement & monitoring — 'Tools and techniques for latency analysis'
-               - FIX Session Layer (Logon/Heartbeat/Seq numbers) — 'Session management in FIX protocol'
-               - Market data consolidation & TOPS snapshot vs incremental — 'Consolidating feeds from multiple sources'
-               - Latency arbitrage — 'Exploiting latency differences for profit'
-               - Swap & derivatives trade lifecycle — 'Trading non-equity instruments'
-               - Regulatory reports (e.g., MiFID/SEF) — 'Compliance reporting requirements'
+                - Order Book modeling — 'Canonical models for in-memory book and persistence'
+                - Matching algorithm internals — 'How exchanges match buy and sell orders'
+                - Time-in-Force variations across exchanges — 'DAY, GTC, IOC behaviors by venue'
+                - Market fragmentation & smart order routing — 'Routing orders across multiple markets'
+                - Latency measurement & monitoring — 'Tools and techniques for latency analysis'
+                - FIX Session Layer (Logon/Heartbeat/Seq numbers) — 'Session management in FIX protocol'
+                - Market data consolidation & TOPS snapshot vs incremental — 'Consolidating feeds from multiple sources'
+                - Latency arbitrage — 'Exploiting latency differences for profit'
+                - Swap & derivatives trade lifecycle — 'Trading non-equity instruments'
+                - Regulatory reports (e.g., MiFID/SEF) — 'Compliance reporting requirements'
+                - Database sharding strategies — 'Horizontal partitioning for scalability'
+                - Microservices architecture patterns — 'Decomposition and communication'
+                - Kubernetes deployment best practices — 'Container orchestration'
+                - API gateway implementations — 'Routing and security'
+                - Event-driven architecture with Kafka — 'Asynchronous messaging'
+                - Caching strategies for web applications — 'Redis and CDN usage'
+                - Load balancing algorithms — 'Round-robin and least connections'
+                - Fault tolerance in cloud systems — 'Resilience patterns'
+                - Security in microservices — 'Authentication and authorization'
+                - Performance tuning for JVM — 'GC and memory optimization'
 
 New Next Topics Candidates (this run)
 - Order Book modeling
@@ -237,6 +248,16 @@ New Candidate Topics Rationales
 - Database Indexing for High Throughput: Optimization technique for read-heavy workloads
 - Message Queue Reliability Patterns: Ensuring message delivery in event-driven systems
 - Fault Tolerance in Distributed Systems: Building resilient architectures for high availability
+- Database sharding strategies: Key for scaling databases horizontally in distributed systems
+- Microservices architecture patterns: Fundamental for decomposing monolithic applications
+- Kubernetes deployment best practices: Essential for container orchestration in production
+- API gateway implementations: Critical for managing API traffic and security
+- Event-driven architecture with Kafka: Important for building scalable event systems
+- Caching strategies for web applications: Necessary for improving performance and reducing load
+- Load balancing algorithms: Core to distributing traffic efficiently
+- Fault tolerance in cloud systems: Vital for building resilient cloud architectures
+- Security in microservices: Crucial for protecting distributed applications
+- Performance tuning for JVM: Important for optimizing Java application performance
            - High-Frequency Trading strategies — 'HFT algorithms and infrastructure'
            - Order Book depth and liquidity — 'Measuring and managing order book liquidity'
            - FIX message sequencing and recovery — 'Handling message gaps and resends'

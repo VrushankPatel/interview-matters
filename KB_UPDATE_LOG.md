@@ -44,3 +44,10 @@ created_dirs: ["trading/quotes-and-rfq-workflows", "trading/execution-report", "
 updated_files: ["trading/order-types/README.md", "rate-limiting/README.md", "SPECIFICATION.md", "PENDING_TOPICS.md", "NEXTTOPICS.md"]
 commit_made: true
 commit_message: "kb: add 5 topics (order-types, quotes-and-rfq-workflows, execution-report, trade-capture-report, rate-limiting) + restructure security, databases, networking"
+-e 
+--- Update Fri Sep 26 15:38:24 UTC 2025 ---
+topics_processed: ["FIX Protocol", "ITCH Protocol", "OUCH Protocol", "Market Data (overview & dissemination)", "Order Entry Protocols"]
+created_dirs: []
+updated_files: ["protocols/fix-protocol/README.md", "protocols/itch-protocol/README.md", "protocols/ouch-protocol/README.md", "market-data/market-data-overview-and-dissemination/README.md", "protocols/order-entry-protocols/README.md", "SPECIFICATION.md", "PENDING_TOPICS.md", "NEXTTOPICS.md", "README.md"]
+commit_made: true
+commit_message: "kb: processed 5 topics (FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data, Order Entry Protocols) + restructured trading categories to top-level + fixed links and updated indexes"
