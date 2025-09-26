@@ -6,11 +6,11 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+## Overview
 
 Netflix is a leading video streaming platform that provides on-demand entertainment to over 200 million subscribers worldwide. The system design emphasizes scalability, low-latency content delivery, and personalized user experiences through advanced recommendation algorithms.
 
-# Detailed Explanation
+## Detailed Explanation
 
 Netflix's architecture is built on a microservices-based backend, global content delivery networks (CDNs), and distributed data stores. Key components include:
 
@@ -37,14 +37,14 @@ graph TD
     E --> J[Analytics Platform]
 ```
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 - **Global Video Streaming**: Delivering high-quality video to users in different regions with minimal latency.
 - **Personalized Recommendations**: Using viewing history to suggest relevant content.
 - **Offline Viewing**: Allowing downloads for offline consumption.
 - **Live Events**: Streaming live sports or original content.
 
-# Code Examples
+## Code Examples
 
 Here's a simplified Java example of a basic recommendation algorithm using collaborative filtering:
 
@@ -92,7 +92,7 @@ public class RecommendationEngine {
 }
 ```
 
-# Journey / Sequence
+## Journey / Sequence
 
 1. **User Registration/Login**: User creates account or logs in via API Gateway.
 2. **Content Discovery**: User browses catalog or receives recommendations.
@@ -100,20 +100,20 @@ public class RecommendationEngine {
 4. **Streaming**: Video chunks are delivered via CDN with adaptive bitrate.
 5. **Analytics**: Viewing data is collected for future recommendations.
 
-# Data Models / Message Formats
+## Data Models / Message Formats
 
 - **User Model**: {id, email, subscription_plan, preferences}
 - **Movie Model**: {id, title, genre, duration, rating}
 - **Viewing Event**: {user_id, movie_id, timestamp, watch_duration}
 
-# Common Pitfalls & Edge Cases
+## Common Pitfalls & Edge Cases
 
 - **Buffering Issues**: Handle network variability with adaptive streaming.
 - **Regional Restrictions**: Comply with content licensing laws.
 - **Scalability During Peaks**: Use auto-scaling for sudden traffic spikes.
 - **Data Privacy**: Secure user viewing data and recommendations.
 
-# Tools & Libraries
+## Tools & Libraries
 
 - **Backend**: Java/Spring Boot for microservices
 - **Storage**: Cassandra for user data, S3 for video storage
@@ -121,13 +121,13 @@ public class RecommendationEngine {
 - **Analytics**: Spark for big data processing
 - **Orchestration**: Kubernetes for container management
 
-# References
+## References
 
 - [Netflix Tech Blog](https://netflixtechblog.com/)
 - [Netflix Open Source](https://netflix.github.io/)
 - [Adaptive Streaming Overview](https://en.wikipedia.org/wiki/Adaptive_bitrate_streaming)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 - [CDN Architecture](../cdn-architecture/README.md)
 - [Microservices Architecture](../microservices-architecture/README.md)
