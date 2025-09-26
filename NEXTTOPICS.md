@@ -15,3 +15,13 @@ Proxy forward and reverse
 Load balancing and strategies
 Rate limiting
 Concurrency & Parallelism
+Java Exception Handling
+Java Collections Framework
+Design Patterns in Java
+Java I/O and NIO
+Java Networking
+Java Security Basics
+Java Annotations and Reflection
+Java Generics
+Java Lambda Expressions
+Java Modules

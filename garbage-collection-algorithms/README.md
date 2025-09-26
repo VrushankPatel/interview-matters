@@ -1,7 +1,7 @@
 ---
 title: Garbage Collection Algorithms
 aliases: [GC Algorithms, Java GC]
-tags: [#java, #gc]
+tags: [#java]
 created: 2023-10-01
 updated: 2025-09-26
 ---

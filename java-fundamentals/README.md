@@ -1,7 +1,7 @@
 ---
 title: Java Fundamentals
-aliases: [Java Basics, Java Language Basics]
-tags: [#java,#fundamentals,#oop]
+aliases: [Java Basics, Java Essentials]
+tags: [#java]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -10,13 +10,52 @@ updated: 2025-09-26
 
 ## Overview
 
-Java Fundamentals cover the core concepts of the Java programming language, including syntax, object-oriented programming (OOP) principles, data types, control structures, and the Java Virtual Machine (JVM). Mastering these basics is essential for building robust Java applications.
+Java is a high-level, object-oriented programming language developed by Sun Microsystems (now Oracle) in 1995. It is designed to be platform-independent, meaning Java programs can run on any device that has a Java Virtual Machine (JVM) installed. Java emphasizes simplicity, robustness, security, and portability, making it one of the most popular programming languages for building enterprise applications, web services, mobile apps, and more.
 
 ## Detailed Explanation
 
-### Basic Syntax
+### Key Concepts
 
-Java programs consist of classes with a main method as entry point.
+Java programs are organized into classes and objects. The language supports object-oriented programming (OOP) principles, which include encapsulation, inheritance, polymorphism, and abstraction. Java code is compiled into bytecode, which is then interpreted or JIT-compiled by the JVM for execution.
+
+### Language Basics
+
+- **Variables**: Used to store data. Java has primitive types (int, double, boolean, char) and reference types (objects, arrays).
+- **Operators**: Arithmetic (+, -, *, /), relational (==, !=, <, >), logical (&&, ||, !), and assignment (=, +=, etc.).
+- **Control Flow**: Conditional statements (if-else, switch) and loops (for, while, do-while).
+- **Arrays**: Fixed-size collections of elements of the same type.
+
+### Object-Oriented Programming
+
+- **Classes**: Blueprints for objects, defining state (fields) and behavior (methods).
+- **Objects**: Instances of classes, created using the `new` keyword.
+- **Inheritance**: Allows a class to inherit properties from another class using the `extends` keyword.
+- **Interfaces**: Contracts that classes can implement, defining methods that must be provided.
+- **Packages**: Namespaces for organizing classes and avoiding naming conflicts.
+
+### Platform Independence
+
+Java achieves platform independence through:
+- Compilation to bytecode (.class files)
+- JVM interprets bytecode on any platform
+- Write Once, Run Anywhere (WORA) principle
+
+```mermaid
+graph TD;
+    A[Java Source Code (.java)] --> B[Java Compiler (javac)] --> C[Bytecode (.class)] --> D[JVM] --> E[Machine Code for Target Platform]
+```
+
+## Real-world Examples & Use Cases
+
+- **Web Applications**: Frameworks like Spring Boot for building RESTful APIs and microservices.
+- **Mobile Applications**: Android apps are primarily developed in Java (though Kotlin is also supported).
+- **Enterprise Software**: Banking systems, e-commerce platforms, and large-scale data processing.
+- **Big Data**: Tools like Apache Hadoop and Spark use Java for distributed computing.
+- **Embedded Systems**: Java ME for resource-constrained devices.
+
+## Code Examples
+
+### Hello World Program
 
 ```java
 public class HelloWorld {
@@ -26,33 +65,83 @@ public class HelloWorld {
 }
 ```
 
-### Data Types
+### Variables and Data Types
 
-- **Primitive**: int, double, boolean, char.
-- **Reference**: Objects, arrays, strings.
+```java
+public class VariablesExample {
+    public static void main(String[] args) {
+        // Primitive types
+        int age = 25;
+        double salary = 50000.50;
+        boolean isEmployed = true;
+        char grade = 'A';
+        
+        // Reference type
+        String name = "John Doe";
+        
+        System.out.println("Name: " + name + ", Age: " + age + ", Salary: " + salary);
+    }
+}
+```
 
-### OOP Principles
+### Control Structures
 
-- **Encapsulation**: Bundling data and methods.
-- **Inheritance**: Extending classes.
-- **Polymorphism**: Method overriding/overloading.
-- **Abstraction**: Interfaces and abstract classes.
+```java
+public class ControlFlowExample {
+    public static void main(String[] args) {
+        int number = 10;
+        
+        // If-else
+        if (number > 0) {
+            System.out.println("Positive number");
+        } else if (number < 0) {
+            System.out.println("Negative number");
+        } else {
+            System.out.println("Zero");
+        }
+        
+        // For loop
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Count: " + i);
+        }
+        
+        // While loop
+        int j = 1;
+        while (j <= 3) {
+            System.out.println("While count: " + j);
+            j++;
+        }
+    }
+}
+```
 
-### JVM and JRE
+### Simple Class and Object
 
-- **JVM**: Executes bytecode.
-- **JRE**: Runtime environment including JVM and libraries.
-- **JDK**: Development kit with JRE and tools.
+```java
+public class Person {
+    // Fields (state)
+    private String name;
+    private int age;
+    
+    // Constructor
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    // Method (behavior)
+    public void introduce() {
+        System.out.println("Hi, I'm " + name + " and I'm " + age + " years old.");
+    }
+    
+    public static void main(String[] args) {
+        Person person = new Person("Alice", 30);
+        person.introduce();
+    }
+}
+```
 
-## Real-world Examples & Use Cases
-
-- **Web Applications**: Using servlets and JSP.
-- **Android Apps**: Core language for Android development.
-- **Enterprise Software**: Frameworks like Spring.
-
-## Code Examples
-
-### OOP Example
+### OOP Example with Inheritance and Polymorphism
 
 ```java
 class Animal {
@@ -67,15 +156,23 @@ class Dog extends Animal {
     }
 }
 
+class Cat extends Animal {
+    void sound() {
+        System.out.println("Meow");
+    }
+}
+
 public class Main {
     public static void main(String[] args) {
-        Animal a = new Dog();
-        a.sound(); // Polymorphism
+        Animal a1 = new Dog();
+        Animal a2 = new Cat();
+        a1.sound(); // Bark
+        a2.sound(); // Meow
     }
 }
 ```
 
-### Collections
+### Collections Example
 
 ```java
 import java.util.*;
@@ -85,6 +182,15 @@ public class CollectionsExample {
         List<String> list = new ArrayList<>();
         list.add("Java");
         list.add("Fundamentals");
+        
+        Set<String> set = new HashSet<>();
+        set.add("Unique");
+        set.add("Values");
+        
+        Map<String, Integer> map = new HashMap<>();
+        map.put("One", 1);
+        map.put("Two", 2);
+        
         for (String s : list) {
             System.out.println(s);
         }
@@ -94,22 +200,31 @@ public class CollectionsExample {
 
 ## Common Pitfalls & Edge Cases
 
-- **Null Pointer Exceptions**: Always check for null.
-- **Memory Leaks**: Improper object references.
-- **Type Casting**: ClassCastException risks.
+- **Null Pointer Exceptions**: Always check for null before accessing object methods or fields.
+- **Memory Leaks**: Avoid holding references to objects longer than necessary, especially in long-running applications.
+- **Type Casting**: Use instanceof to check before casting to avoid ClassCastException.
+- **Integer Overflow**: Be aware of limits for primitive types; use BigInteger for large numbers.
+- **String Immutability**: Strings are immutable; use StringBuilder for frequent modifications.
 
 ## Tools & Libraries
 
-- **JDK**: Oracle JDK or OpenJDK.
-- **IDEs**: IntelliJ IDEA, Eclipse.
+- **JDK**: Oracle JDK or OpenJDK for development and runtime.
+- **IDEs**: IntelliJ IDEA, Eclipse, NetBeans for coding assistance.
+- **Build Tools**: Maven, Gradle for project management and dependency resolution.
+- **Testing**: JUnit for unit testing.
 
 ## References
 
-- [Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/)
-- [Java Fundamentals on GeeksforGeeks](https://www.geeksforgeeks.org/java/)
+- [Oracle Java Tutorials - Learning the Java Language](https://docs.oracle.com/javase/tutorial/java/index.html)
+- [Oracle Java Tutorials - Object-Oriented Programming Concepts](https://docs.oracle.com/javase/tutorial/java/concepts/index.html)
+- [Oracle Java Tutorials - Language Basics](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html)
+- [Oracle Java Tutorials - Classes and Objects](https://docs.oracle.com/javase/tutorial/java/javaOO/index.html)
+- [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se21/html/index.html)
 
 ## Github-README Links & Related Topics
 
-- [OOP Principles in Java](../oop-principles-in-java/)
-- [JVM Internals & Class Loading](../jvm-internals-class-loading/)
-- [Java Collections](../java-collections/)
+- [OOP Principles in Java](oop-principles-in-java/README.md)
+- [JVM Internals & Class Loading](jvm-internals-class-loading/README.md)
+- [Multithreading & Concurrency in Java](multithreading-concurrency-in-java/README.md)
+- [Collections & Data Structures](collections-data-structures/README.md)
+- [Java Stream API & Functional Programming](java-stream-api-functional-programming/README.md)
