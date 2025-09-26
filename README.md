@@ -94,6 +94,7 @@ This repository contains comprehensive documentation on various topics for inter
 - [Java Atomic Variables](./java-atomic-variables/README.md)
 - [Java BlockingQueue](./java-blockingqueue/README.md)
 - [Java Class Loaders](./java-class-loaders/README.md)
+- [Java Collections](./java-collections/README.md)
 - [Java Collections Deep Dive](./java-collections-deep-dive/README.md)
 - [Java CompletableFuture](./java-completablefuture/README.md)
 - [Java CompletableFuture Advanced](./java-completablefuture-advanced/README.md)

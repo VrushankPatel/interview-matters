@@ -100,6 +100,23 @@ try {
 }
 ```
 
+## Common Pitfalls & Edge Cases
+
+- **Swallowing Exceptions**: Catching exceptions without proper handling or logging can hide bugs.
+- **Overusing Checked Exceptions**: Makes APIs cumbersome; prefer unchecked exceptions for programming errors.
+- **Resource Leaks**: Forgetting to close resources; always use try-with-resources for AutoCloseable.
+- **Exception Chaining**: Use `initCause()` to preserve original exception information.
+- **Performance Impact**: Throwing exceptions is expensive; reserve for truly exceptional cases.
+- **Edge Case**: Exceptions in finally blocks can suppress primary exceptions.
+
+## Tools & Libraries
+
+- **Java Standard Library**: Built-in `Throwable`, `Exception`, `RuntimeException` classes.
+- **Logging Frameworks**: Log4j, SLF4J for exception logging.
+- **Testing**: JUnit's `@Test(expected = ...)` or `assertThrows` for exception testing.
+- **Frameworks**: Spring's `@ExceptionHandler` for web exception handling.
+- **Monitoring**: Tools like New Relic for exception tracking.
+
 ## References
 
 - [Oracle Java Tutorials: Exceptions](https://docs.oracle.com/javase/tutorial/essential/exceptions/)

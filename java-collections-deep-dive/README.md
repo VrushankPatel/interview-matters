@@ -102,6 +102,15 @@ System.out.println(treeSet.first()); // Zebra
 - Concurrent modification exception when modifying during iteration.
 - Null keys/values in HashMap vs TreeMap.
 - Performance degradation with large datasets for O(n) operations.
+- Choosing wrong implementation for use case (e.g., ArrayList for frequent removals).
+
+## Tools & Libraries
+
+- **Java Collections Framework**: Core interfaces and implementations in `java.util`.
+- **Guava**: Google's library with `Multimap`, `BiMap`, immutable collections.
+- **Apache Commons Collections**: Utilities like `Bag`, `MultiSet`.
+- **Eclipse Collections**: High-performance collections with primitive support.
+- **FastUtil**: Memory-efficient collections for large datasets.
 
 ## References
 
