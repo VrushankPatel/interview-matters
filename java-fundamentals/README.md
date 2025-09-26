@@ -1,50 +1,54 @@
 ---
 title: Java Fundamentals
-aliases: [Java Basics, Core Java]
+aliases: [Java Basics, Java Essentials]
 tags: [#java]
-created: 2025-09-26
+created: 2023-10-01
 updated: 2025-09-26
 ---
 
-# Java Fundamentals
+# Overview
 
-## Overview
+Java is a high-level, object-oriented programming language developed by Sun Microsystems (now Oracle). It's designed to be platform-independent, secure, and robust. Key fundamentals include data types, variables, operators, control structures, and basic syntax.
 
-Java Fundamentals cover the essential building blocks of the Java programming language, including syntax, data types, control structures, and basic object-oriented concepts. These form the foundation for writing Java applications.
+# Detailed Explanation
 
-## Detailed Explanation
+## Data Types
 
-### Data Types and Variables
+Java has two categories of data types: primitive and reference.
 
-Java has eight primitive data types: `byte`, `short`, `int`, `long`, `float`, `double`, `char`, `boolean`. Variables must be declared with a type.
+Primitive types: byte, short, int, long, float, double, char, boolean.
 
-Reference types include classes, interfaces, and arrays.
+Reference types: classes, interfaces, arrays.
 
-### Operators
+## Variables
 
-- Arithmetic: `+`, `-`, `*`, `/`, `%`
-- Relational: `==`, `!=`, `<`, `>`, `<=`, `>=`
-- Logical: `&&`, `||`, `!`
-- Assignment: `=`, `+=`, `-=`, etc.
+Variables are containers for storing data values. They must be declared with a data type.
 
-### Control Structures
+Example:
 
-- Conditional statements: `if-else`, `switch`
-- Loops: `for`, `while`, `do-while`
+int age = 25;
 
-### Classes and Objects
+String name = "John";
 
-A class is a blueprint for objects. Objects are instances of classes. Methods define behaviors.
+## Operators
 
-## Real-world Examples & Use Cases
+Arithmetic: +, -, *, /, %
 
-- Building console-based applications
-- Simple data processing tools
-- Educational software for learning programming
+Relational: ==, !=, >, <, >=, <=
 
-## Code Examples
+Logical: &&, ||, !
 
-### Hello World Program
+## Control Structures
+
+If-else, switch, loops (for, while, do-while).
+
+# Real-world Examples & Use Cases
+
+- Building web applications with Spring Framework.
+- Android app development.
+- Enterprise software with Java EE.
+
+# Code Examples
 
 ```java
 public class HelloWorld {
@@ -54,38 +58,21 @@ public class HelloWorld {
 }
 ```
 
-### Basic Calculator
-
 ```java
-public class Calculator {
-    public static void main(String[] args) {
-        int a = 10;
-        int b = 5;
-        System.out.println("Sum: " + (a + b));
-        System.out.println("Difference: " + (a - b));
-    }
-}
+// Variables and operators
+int a = 10;
+int b = 20;
+int sum = a + b;
+System.out.println("Sum: " + sum);
 ```
 
-### Loop Example
+# References
 
-```java
-public class LoopExample {
-    public static void main(String[] args) {
-        for (int i = 1; i <= 5; i++) {
-            System.out.println("Count: " + i);
-        }
-    }
-}
-```
+- [Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/)
+- [Wikipedia - Java](https://en.wikipedia.org/wiki/Java_(programming_language))
 
-## References
+# Github-README Links & Related Topics
 
-- [Oracle Java Tutorials - Language Basics](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html)
-- [GeeksforGeeks - Java Fundamentals](https://www.geeksforgeeks.org/java/)
-
-## Github-README Links & Related Topics
-
-- [OOP Principles in Java](./../oop-principles-in-java/README.md)
-- [Collections & Data Structures](./../collections-and-data-structures/README.md)
-- [Java Data Types](./../java-data-types/README.md)
+- [java-oop-principles](../java-oop-principles/)
+- [java-data-types](../java-data-types/)
+- [java-operators](../java-operators/)

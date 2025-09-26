@@ -1,24 +1,27 @@
-Abstraction in Java
-Encapsulation in Java
-Inheritance in Java
-Polymorphism in Java
-Java Annotations
-Java Reflection
-Java Generics Deep Dive
-Java Exception Handling
-Java Memory Management
-Java Design Patterns
-LLD HLD Basics
-Replication vs Sharding vs Partitioning
-Caching
-Latency and Throughput Zero to Hero
-Java Fundamentals
-OOP Principles in Java
-JVM Internals & Class Loading
-Garbage Collection Algorithms
-Multithreading & Concurrency in Java
-URL Shortener System Design
-Netflix System Design
-Uber System Design
-Twitter System Design
-Instagram System Design
+- Java Fundamentals
+- OOP Principles in Java
+- JVM Internals & Class Loading
+- Garbage Collection Algorithms
+- Multithreading & Concurrency in Java
+- Collections & Data Structures
+- Java Stream API & Functional Programming
+- System Design Basics
+- High Scalability Patterns
+- CAP Theorem & Distributed Systems
+- A separate folder for popular systems design, LLD and HLDs both like url shortner, netflix and identify more yourself
+- LLD HLD basics
+- Replication vs Sharding vs Partitioning
+- Caching
+- Latency and Throughput zero to hero
+- Monitoring and Logging
+- Async logging
+- DevOps & Infrastructure as Code
+- Proxy forward and reverse
+- Load balancing and strategies
+- Rate limiting
+- Concurrency & Parallelism
+- Java Data Types
+- Java Operators
+- Java Control Structures
+- Java Methods
+- Java Arrays
