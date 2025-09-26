@@ -28,15 +28,35 @@ Key concepts:
 - Caching
 - Database Sharding
 
+### System Architecture Diagram
+
+```mermaid
+graph TB
+    A[Client] --> B[Load Balancer]
+    B --> C[Web Server]
+    C --> D[Application Server]
+    D --> E[Database]
+    D --> F[Cache]
+    F --> E
+```
+
 ## Real-world Examples & Use Cases
 
 - **Web Applications**: Designing APIs for millions of users.
 - **E-commerce**: Handling peak loads during sales.
 - **Social Media**: Storing and retrieving user data efficiently.
 
+## Common Pitfalls & Edge Cases
+
+- **Over-Engineering**: Designing for scale that may never come.
+- **Ignoring Bottlenecks**: Not identifying performance bottlenecks early.
+- **Poor Data Modeling**: Leading to inefficient queries.
+- **Lack of Monitoring**: Unable to detect issues in production.
+- **Edge Cases**: Handling zero users, single user, or extreme loads.
+
 ## Code Examples
 
-(Note: System design is more about architecture, but here's a simple load balancer simulation)
+### Simple Load Balancer
 
 ```java
 import java.util.Arrays;
@@ -61,6 +81,37 @@ public class LoadBalancerExample {
     }
 }
 ```
+
+### Basic Caching
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+class SimpleCache {
+    private Map<String, Object> cache = new HashMap<>();
+
+    public Object get(String key) {
+        return cache.get(key);
+    }
+
+    public void put(String key, Object value) {
+        cache.put(key, value);
+    }
+}
+
+// Usage
+SimpleCache cache = new SimpleCache();
+cache.put("user:123", "John Doe");
+System.out.println(cache.get("user:123"));
+```
+
+## Tools & Libraries
+
+- **Diagramming**: Draw.io, PlantUML
+- **Prototyping**: Figma, Sketch
+- **Load Testing**: Apache JMeter, k6
+- **Monitoring**: Prometheus, New Relic
 
 ## References
 
