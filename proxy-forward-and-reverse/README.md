@@ -1,187 +1,144 @@
 ---
 title: Proxy Forward and Reverse
-aliases: [forward proxy, reverse proxy, proxy servers]
-tags: [#system-design,#networking]
+aliases: [Forward Proxy, Reverse Proxy]
+tags: [networking, system-design, security]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Proxy Forward and Reverse
-
 ## Overview
 
-Proxy servers act as intermediaries between clients and servers, providing various functionalities such as caching, security, and load distribution. Forward proxies serve clients by forwarding their requests to the internet, while reverse proxies sit in front of servers and forward client requests to appropriate backend servers.
+Proxies act as intermediaries between clients and servers, providing security, performance, and control over network traffic. Forward proxies handle requests from clients to external servers, while reverse proxies manage requests from external clients to internal servers. They are essential in modern architectures for load balancing, caching, SSL termination, and protecting backend services from direct exposure.
+
+## STAR Summary
+
+- **S (Situation)**: An e-commerce site faced DDoS attacks and performance issues due to direct client connections to application servers.
+- **T (Task)**: Implement reverse proxy architecture to protect backend services, improve performance, and enable horizontal scaling.
+- **A (Action)**: Deployed NGINX as a reverse proxy with SSL termination, rate limiting, and load balancing across multiple app servers. Added caching for static assets and implemented security headers.
+- **R (Result)**: Mitigated 95% of attacks, reduced server load by 60%, and improved page load times by 40%, supporting 10x traffic growth.
 
 ## Detailed Explanation
 
 ### Forward Proxy
-
-A forward proxy acts on behalf of clients, intercepting requests from clients to external servers:
-
-- **Client-Side Proxy**: Positioned between client and internet
-- **Anonymity**: Can hide client IP addresses
-- **Caching**: Stores frequently requested content
-- **Access Control**: Enforces organizational policies
+- **Purpose**: Clients connect through the proxy to access external resources.
+- **Use Cases**: Content filtering, anonymity, caching for outbound traffic.
+- **Architecture**: Client → Proxy → Internet
 
 ### Reverse Proxy
+- **Purpose**: Protects and load-balances internal servers from external clients.
+- **Use Cases**: SSL termination, caching, security, API gateway functionality.
+- **Architecture**: Client → Proxy → Backend Servers
 
-A reverse proxy appears to clients as an ordinary server, forwarding requests to backend servers:
+Key features include:
+- **Load Balancing**: Distribute traffic across servers.
+- **Caching**: Store responses to reduce backend load.
+- **Security**: Hide server details, implement WAF, rate limiting.
+- **SSL Offloading**: Terminate HTTPS at proxy level.
 
-- **Server-Side Proxy**: Positioned between internet and backend servers
-- **Load Balancing**: Distributes requests across multiple servers
-- **SSL Termination**: Handles HTTPS encryption/decryption
-- **Caching**: Serves cached content to reduce backend load
-
-### Key Differences
-
-| Aspect | Forward Proxy | Reverse Proxy |
-|--------|---------------|---------------|
-| Position | Client-side | Server-side |
-| Visibility | Visible to clients | Invisible to clients |
-| Purpose | Client anonymity, content filtering | Load balancing, security |
-| Configuration | Client-configured | Server-configured |
-
-```mermaid
-graph TD
-    subgraph "Forward Proxy"
-        C[Client] --> FP[Forward Proxy]
-        FP --> I[Internet]
-    end
-    
-    subgraph "Reverse Proxy"
-        I2[Internet] --> RP[Reverse Proxy]
-        RP --> S1[Server 1]
-        RP --> S2[Server 2]
-        RP --> S3[Server 3]
-    end
-```
+Common implementations: NGINX, Apache, HAProxy, Envoy.
 
 ## Real-world Examples & Use Cases
 
-1. **Corporate Networks**: Forward proxies for employee internet access control and monitoring
-2. **CDN Networks**: Reverse proxies caching static content at edge locations
-3. **API Gateways**: Reverse proxies managing API traffic, authentication, and rate limiting
-4. **Microservices**: Reverse proxies routing requests to appropriate services
+- **CDN Integration**: Reverse proxies like Cloudflare cache content globally.
+- **Microservices**: API gateways as reverse proxies route requests to services.
+- **Corporate Networks**: Forward proxies enforce policies and monitor employee internet usage.
 
-## Code Examples
+A case study from a major bank showed reverse proxies reduced latency by 50% through caching and load balancing.
 
-### Nginx Reverse Proxy Configuration
+## Message Formats / Data Models
 
-```nginx
-# nginx.conf
-events {
-    worker_connections 1024;
-}
+HTTP proxy requests include additional headers:
 
-http {
-    upstream backend {
-        server backend1.example.com:8080;
-        server backend2.example.com:8080;
-        server backend3.example.com:8080;
-    }
-
-    server {
-        listen 80;
-        server_name api.example.com;
-
-        location / {
-            proxy_pass http://backend;
-            proxy_set_header Host $host;
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header X-Forwarded-Proto $scheme;
-        }
-    }
-}
+Forward Proxy Request:
+```
+GET http://example.com/ HTTP/1.1
+Host: example.com
+User-Agent: ...
+X-Forwarded-For: client-ip
 ```
 
-### Apache Reverse Proxy with Load Balancing
-
-```apache
-<VirtualHost *:80>
-    ServerName api.example.com
-    
-    ProxyPass / balancer://backend/
-    ProxyPassReverse / balancer://backend/
-    
-    <Proxy balancer://backend>
-        BalancerMember http://backend1.example.com:8080
-        BalancerMember http://backend2.example.com:8080
-        BalancerMember http://backend3.example.com:8080
-        ProxySet lbmethod=byrequests
-    </Proxy>
-</VirtualHost>
+Reverse Proxy adds backend info:
+```
+X-Real-IP: client-ip
+X-Forwarded-Proto: https
+X-Forwarded-Host: proxy-host
 ```
 
-### Squid Forward Proxy Configuration
+Table of proxy headers:
 
-```squid
-# squid.conf
-http_port 3128
+| Header | Purpose | Example |
+|--------|---------|---------|
+| X-Forwarded-For | Original client IP | 192.168.1.1 |
+| X-Real-IP | Real client IP | 203.0.113.1 |
+| X-Forwarded-Proto | Original protocol | https |
+| X-Forwarded-Host | Original host | www.example.com |
 
-acl localnet src 192.168.1.0/24
-http_access allow localnet
-http_access deny all
+## Journey of a Trade
 
-cache_dir ufs /var/spool/squid 100 16 256
-maximum_object_size 100 MB
+In trading platforms, reverse proxies handle order submissions:
 
-# Access logging
-access_log /var/log/squid/access.log squid
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Proxy
+    participant TradingEngine
+
+    Client->>Proxy: Submit Order (HTTPS)
+    Proxy->>Proxy: SSL Termination
+    Proxy->>TradingEngine: Forward Order
+    TradingEngine-->>Proxy: Execution Response
+    Proxy-->>Client: Cached/Filtered Response
 ```
 
-### Java Client with Forward Proxy
-
-```java
-import java.net.*;
-import java.io.*;
-
-public class ProxyClient {
-    public static void main(String[] args) throws IOException {
-        // Set system properties for proxy
-        System.setProperty("http.proxyHost", "proxy.example.com");
-        System.setProperty("http.proxyPort", "8080");
-        
-        URL url = new URL("http://target-server.com/api/data");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        
-        // Make request through proxy
-        try (BufferedReader reader = new BufferedReader(
-                new InputStreamReader(connection.getInputStream()))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-            }
-        }
-    }
-}
-```
+This ensures secure, fast order processing.
 
 ## Common Pitfalls & Edge Cases
 
-- **SSL Certificate Issues**: Proper certificate configuration for HTTPS termination
-- **Header Forwarding**: Ensuring correct headers are passed (X-Forwarded-For, etc.)
-- **Session Persistence**: Maintaining session affinity for stateful applications
-- **Caching Invalidation**: Ensuring cached content is properly invalidated
-- **Security Vulnerabilities**: Protecting against proxy-related attacks
+- **Header Spoofing**: Malicious clients can fake X-Forwarded-For; validate trusted proxies.
+- **Caching Issues**: Stale cached responses; implement cache invalidation.
+- **SSL Certificate Management**: Expired certs break connections; automate renewal.
+- **Session Affinity**: Sticky sessions can cause imbalance; use consistent hashing.
+- **Buffer Overflows**: Large payloads overwhelm proxies; configure limits.
+- **Health Checks**: Failed backends not detected; implement active monitoring.
+
+Edge cases include handling WebSocket upgrades and IPv6 transitions.
 
 ## Tools & Libraries
 
-- **Reverse Proxy**: Nginx, Apache HTTP Server, HAProxy, Traefik
-- **Forward Proxy**: Squid, Privoxy, Charles Proxy
-- **Cloud Proxies**: AWS API Gateway, Cloudflare, Akamai
+- **NGINX**: High-performance reverse proxy with extensive modules.
+- **HAProxy**: Load balancer with advanced routing.
+- **Apache HTTP Server**: Modular proxy with mod_proxy.
+- **Squid**: Popular forward proxy for caching.
+- **Envoy**: Cloud-native proxy with service mesh integration.
 
-## References
+Sample NGINX config:
 
-- [Nginx Reverse Proxy](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/)
-- [Apache Proxy Documentation](https://httpd.apache.org/docs/2.4/mod/mod_proxy.html)
-- [Squid Proxy](http://www.squid-cache.org/Doc/)
-- [HAProxy Documentation](http://www.haproxy.org/#docs)
+```nginx
+upstream backend {
+    server backend1.example.com;
+    server backend2.example.com;
+}
+
+server {
+    listen 80;
+    server_name example.com;
+
+    location / {
+        proxy_pass http://backend;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+```
 
 ## Github-README Links & Related Topics
 
-- [API Gateway Design](api-gateway-design/)
-- [Load Balancing and Strategies](load-balancing-and-strategies/)
-- [HTTP Caching Headers](http-caching-headers/)
-- [Security Best Practices in Microservices](security-best-practices-in-microservices/)
-- [Networking](networking/)
+- [Load Balancing and Strategies](system-design/load-balancing-and-strategies/)
+- [Api Gateway Patterns](system-design/api-gateway-patterns/)
+- [Security In Microservices](system-design/security-in-microservices/)
+
+## References
+
+- [NGINX Proxy Documentation](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/)
+- [HAProxy Configuration Manual](https://www.haproxy.org/#docs)
+- [RFC 7239: Forwarded HTTP Extension](https://tools.ietf.org/html/rfc7239)

@@ -5,14 +5,7 @@ Last update
 2025-09-26
 
 Summary of recent additions
-    - Processed 5 trading protocol topics (FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols) + restructured trading topics into categories (protocols, market-data, lifecycle, exchange-behavior, compliance) + updated interlinks and root index
-    - Processed 5 system design topics (popular-systems-design-lld-and-hld, lld-hld-basics, replication-vs-sharding-vs-partitioning, caching, latency-and-throughput-zero-to-hero)
-    - Updated existing README.md files to detailed format with STAR summaries, diagrams, and examples
-    - Restructured topics into system-design category
-    - Updated links and interlinks
-    - Processed 5 trading protocol topics (FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols) + restructured java/ into subcategories (fundamentals, oop, jvm, concurrency, streams, collections, testing, security, networking, annotations, build, profiling, features, io, exceptions, date, design) + updated interlinks and root index
-    - Processed 5 trading lifecycle topics (journey-of-a-trade, order-types, quotes-rfq-workflows, execution-report, trade-capture-report) + updated interlinks to proper markdown links
-    - Processed 5 java topics (Java Fundamentals, OOP Principles in Java, JVM Internals & Class Loading, Garbage Collection Algorithms, Multithreading & Concurrency in Java) + restructured java topics into java/ category + updated interlinks
+    - Processed 5 devops and system design topics (Monitoring and Logging, Async Logging, DevOps & Infrastructure as Code, Proxy Forward and Reverse, Load Balancing and Strategies) + updated root index with new links + fixed interlinks to proper markdown links + updated existing Load Balancing topic with full structure
 
 Conventions
  - Dir naming: kebab-case.
@@ -130,36 +123,16 @@ New Next Topics Candidates (this run)
  - profiling-tools — 'Performance analysis tools'
 
 New Next Topics Candidates
-      - advanced-java-concepts — 'Generics, type erasure, and advanced language features'
-      - java-security-basics — 'Secure coding practices and cryptography in Java'
-      - networking-sockets — 'Low-level network programming with sockets'
-      - file-io-nio — 'Efficient file operations with NIO'
-      - java-testing-advanced — 'Advanced testing with mocks and frameworks'
-      - build-automation — 'CI/CD pipelines with Maven and Gradle'
-      - profiling-tools — 'Performance profiling and monitoring tools'
-      - concurrent-programming-patterns — 'Common patterns for concurrent programming'
-      - java-reflection — 'Runtime inspection and dynamic code'
-      - java-annotations — 'Custom annotations and metadata'
-      - Concurrent Collections — 'Thread-safe collections in Java'
-      - Java Streams Advanced — 'Functional programming with streams'
-      - Reflection and Annotations — 'Runtime inspection and metadata'
-      - Java Security Basics — 'Secure coding and cryptography'
-      - Networking Sockets — 'Low-level network programming'
-      - File IO NIO — 'Efficient file and channel operations'
-      - Java Testing Advanced — 'Mocks, spies, and test frameworks'
-      - Build Automation — 'CI/CD with Maven and Gradle'
-      - Profiling Tools — 'Performance analysis tools'
-      - Advanced Java Concepts — 'Generics, type erasure, and more'
-     - Order Book modeling — 'Canonical models for in-memory book and persistence'
-     - Matching algorithm internals — 'How exchanges match buy and sell orders'
-     - Time-in-Force variations across exchanges — 'DAY, GTC, IOC behaviors by venue'
-     - Market fragmentation & smart order routing — 'Routing orders across multiple markets'
-     - Latency measurement & monitoring — 'Tools and techniques for latency analysis'
-     - FIX Session Layer (Logon/Heartbeat/Seq numbers) — 'Session management in FIX protocol'
-     - Market data consolidation & TOPS snapshot vs incremental — 'Consolidating feeds from multiple sources'
-     - Latency arbitrage — 'Exploiting latency differences for profit'
-     - Swap & derivatives trade lifecycle — 'Trading non-equity instruments'
-     - Regulatory reports (e.g., MiFID/SEF) — 'Compliance reporting requirements'
+       - Order Book modeling — 'Canonical models for in-memory book and persistence'
+       - Matching algorithm internals — 'How exchanges match buy and sell orders'
+       - Time-in-Force variations across exchanges — 'DAY, GTC, IOC behaviors by venue'
+       - Market fragmentation & smart order routing — 'Routing orders across multiple markets'
+       - Latency measurement & monitoring — 'Tools and techniques for latency analysis'
+       - FIX Session Layer (Logon/Heartbeat/Seq numbers) — 'Session management in FIX protocol'
+       - Market data consolidation & TOPS snapshot vs incremental — 'Consolidating feeds from multiple sources'
+       - Latency arbitrage — 'Exploiting latency differences for profit'
+       - Swap & derivatives trade lifecycle — 'Trading non-equity instruments'
+       - Regulatory reports (e.g., MiFID/SEF) — 'Compliance reporting requirements'
     - java-generics — 'Type safety and erasure in Java'
     - java-lambda-expressions — 'Functional programming with lambdas'
     - java-modules — 'Modular system with JPMS'
