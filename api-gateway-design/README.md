@@ -3,7 +3,7 @@ title: API Gateway Design
 aliases: []
 tags: [#api,#gateway,#system-design]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # API Gateway Design
