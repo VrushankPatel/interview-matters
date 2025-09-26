@@ -1,10 +1,22 @@
-00011| Java Fundamentals
-00012| OOP Principles in Java
-00013| JVM Internals & Class Loading
-00014| Garbage Collection Algorithms
-00015| Multithreading & Concurrency in Java
-00016| Collections & Data Structures
-00017| Java Stream API & Functional Programming
-00018| System Design Basics
-00019| CAP Theorem & Distributed Systems
-00020| Replication vs Sharding vs Partitioning
+Java Fundamentals
+OOP Principles in Java
+JVM Internals & Class Loading
+Garbage Collection Algorithms
+Multithreading & Concurrency in Java
+Collections & Data Structures
+Java Stream API & Functional Programming
+System Design Basics
+High Scalability Patterns
+CAP Theorem & Distributed Systems
+A separate folder for popular systems design, LLD and HLDs both like url shortner, netflix and identify more yourself
+LLD HLD basics
+Replication vs Sharding vs Partitioning
+Caching
+Latency and Throughput zero to hero
+Monitoring and Logging
+Async logging
+DevOps & Infrastructure as Code
+Proxy forward and reverse
+Load balancing and strategies
+Rate limiting
+Concurrency & Parallelism
