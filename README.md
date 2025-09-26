@@ -349,3 +349,7 @@
 - [youtube system design](youtube-system-design/README.md)
 - [zookeeper for coordination](zookeeper-for-coordination/README.md)
 - [zoom video conferencing](zoom-video-conferencing/README.md)
+- [latency and throughput zero to hero](latency-and-throughput-zero-to-hero/README.md)
+- [lld hld basics](lld-hld-basics/README.md)
+- [popular system designs](popular-system-designs/README.md)
+- [replication vs sharding vs partitioning](replication-vs-sharding-vs-partitioning/README.md)
