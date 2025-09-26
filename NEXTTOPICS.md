@@ -1,10 +1,7 @@
-- Latency and Throughput zero to hero
 - Monitoring and Logging
 - Async logging
 - DevOps & Infrastructure as Code
 - Proxy forward and reverse
-- OOP Principles in Java
-- JVM Internals & Class Loading
-- Garbage Collection Algorithms
-- System Design Basics
-- High Scalability Patterns
+- Load balancing and strategies
+- Rate limiting
+- Concurrency & Parallelism

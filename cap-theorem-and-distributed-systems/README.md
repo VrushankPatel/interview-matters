@@ -1,7 +1,7 @@
 ---
 title: CAP Theorem & Distributed Systems
-aliases: [CAP Theorem, Consistency Availability Partition Tolerance]
-tags: [#distributed-systems,#cap-theorem,#consistency,#availability,#partition-tolerance]
+aliases: ["CAP Theorem", "Consistency Availability Partition Tolerance"]
+tags: ["#distributed-systems","#cap-theorem","#consistency","#availability","#partition-tolerance"]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -94,7 +94,6 @@ public class ZooKeeperExample {
 
         client.close();
     }
-}
 ```
 
 This code ensures reads are consistent by using `sync()`, but during partitions, writes may block (CP behavior).

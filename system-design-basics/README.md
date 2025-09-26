@@ -1,7 +1,7 @@
 ---
 title: System Design Basics
-aliases: [System Design Fundamentals, Basic System Design]
-tags: [#system-design]
+aliases: ["System Design Fundamentals", "Basic System Design"]
+tags: ["#system-design"]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -102,7 +102,6 @@ public class SimpleCache {
     public void remove(String key) {
         cache.remove(key);
     }
-}
 
 // Usage
 SimpleCache cache = new SimpleCache();
