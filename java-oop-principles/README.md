@@ -1,18 +1,16 @@
 ---
 title: 'OOP Principles in Java'
-aliases: []
+aliases: [Object-Oriented Programming]
 tags: [#java,#oop]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# OOP Principles in Java
-
-## Overview
+# Overview
 
 Object-Oriented Programming (OOP) is a programming paradigm centered around objects and classes. In Java, OOP is fundamental, enabling modular, reusable, and maintainable code. The four core principles are **Encapsulation**, **Abstraction**, **Inheritance**, and **Polymorphism**. These principles help model real-world entities, promote code reusability, and ensure data integrity. Java implements these through classes, interfaces, and inheritance mechanisms, as outlined in the official Java Tutorials.
 
-## Detailed Explanation
+# Detailed Explanation
 
 ### Encapsulation
 Encapsulation bundles data (state) and methods (behavior) into a single unit called a class, hiding internal details from the outside world. Access to data is controlled via public methods, preventing unauthorized modifications. This principle enhances security and modularity.
@@ -65,7 +63,7 @@ classDiagram
     Bicycle <|-- RoadBike
 ```
 
-## Real-world Examples & Use Cases
+# Real-world Examples & Use Cases
 
 - **Encapsulation**: A bank account class hides balance details, exposing only deposit/withdraw methods to prevent invalid operations.
 - **Abstraction**: A vehicle interface defines `start()` and `stop()` methods; car and bike classes implement specifics without revealing engine details.
@@ -74,7 +72,7 @@ classDiagram
 
 Use cases include GUI frameworks (e.g., Swing), where components inherit from base classes and override methods polymorphically.
 
-## Code Examples
+# Code Examples
 
 ### Encapsulation Example
 ```java
@@ -188,13 +186,13 @@ public class RoadBike extends Bicycle {
 }
 ```
 
-## References
+# References
 - [Object-Oriented Programming Concepts - Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/java/concepts/)
 - [What Is an Object? - Oracle](https://docs.oracle.com/javase/tutorial/java/concepts/object.html)
 - [What Is Inheritance? - Oracle](https://docs.oracle.com/javase/tutorial/java/concepts/inheritance.html)
 - [Polymorphism - Oracle](https://docs.oracle.com/javase/tutorial/java/IandI/polymorphism.html)
 - [What Is an Interface? - Oracle](https://docs.oracle.com/javase/tutorial/java/concepts/interface.html)
-## Github-README Links & Related Topics
+# Github-README Links & Related Topics
 
 - [Java Fundamentals](../java-fundamentals/README.md)
 - [Design Patterns in Java](../java-design-patterns/README.md)
