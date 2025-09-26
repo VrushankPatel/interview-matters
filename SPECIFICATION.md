@@ -12,6 +12,7 @@ Summary of recent additions
         - Processed 5 topics from PENDING_TOPICS.md (Journey of a Trade, Order Types, Quotes & RFQ workflows, Execution Report, Trade Capture Report) with content verification and interlink updates.
         - Processed 5 topics: FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols with comprehensive READMEs, including STAR summaries, detailed explanations, real-world examples, message formats, mermaid diagrams, common pitfalls, tools/libraries, and proper interlinking.
         - Processed 5 topics (FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data, Order Entry Protocols) with comprehensive READMEs, restructured trading category by moving related directories under trading/, merged duplicate directories across categories, updated interlinks to use proper markdown links instead of wikilinks, and updated root README index links.
+        - Processed 5 topics: FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols. Restructured by consolidating duplicate directories in system-design/real-world-designs/. Updated interlinks and root index.
 
 Conventions
  - Dir naming: kebab-case.
