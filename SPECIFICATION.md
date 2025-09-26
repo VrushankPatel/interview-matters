@@ -5,9 +5,8 @@ Last update
 2025-09-26
 
 Summary of recent additions
-      - Restructured repository: moved system design topics into subcategories (concepts, lld, hld, real-world-designs); removed duplicate directories in trading/; fixed all README.md files to use proper markdown links instead of obsidian-style [[ ]] wikilinks for better Github-README compatibility.
-      - Processed 5 topics: FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols
-      - Processed 5 topics: FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols
+      - Restructured repository: moved system design topics into subcategories (concepts, lld, hld, real-world-designs); reorganized trading/ into subcategories (protocols, order-types, lifecycle, market-data, exchange-behavior, compliance); fixed all README.md files to use proper markdown links instead of obsidian-style [[ ]] wikilinks for better Github-README compatibility.
+      - Processed 5 topics: Journey of a Trade (end-to-end), Order Types (DAY, GTC, FOK, IOC), Quotes & RFQ workflows, Execution Report, Trade Capture Report
 
 Conventions
  - Dir naming: kebab-case.
