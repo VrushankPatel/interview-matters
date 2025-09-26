@@ -1,82 +1,109 @@
 ---
 title: Event-Driven Systems
 aliases: []
-tags: [#system-design]
-created: 2025-09-25
-updated: 2025-09-25
+tags: [#system-design,#event-driven,#architecture]
+created: 2025-09-26
+updated: 2025-09-26
 ---
+
+# Event-Driven Systems
 
 ## Overview
 
-Event-Driven Systems are architectures where components react to events asynchronously. Events are messages representing state changes, processed by event handlers or consumers.
+Event-driven systems are architectures where the flow of the program is determined by events such as user actions, sensor outputs, or messages from other programs. Instead of a linear execution, components react to events asynchronously, promoting decoupling, scalability, and responsiveness.
 
 ## Detailed Explanation
 
-Key components:
-- **Event Producers**: Generate events (e.g., user actions).
-- **Event Brokers**: Route events (e.g., Kafka, RabbitMQ).
-- **Event Consumers**: Process events.
+### Key Components
+- **Event Producers**: Generate events (e.g., user clicks, data changes).
+- **Event Consumers**: React to events (e.g., update UI, process data).
+- **Event Brokers/Message Queues**: Middleware like Kafka, RabbitMQ for routing events.
+- **Event Channels**: Topics or queues for event distribution.
 
-Benefits: Decoupling, scalability, real-time processing.
+### Patterns
+- **Publish-Subscribe (Pub-Sub)**: Producers publish to channels, consumers subscribe.
+- **Event Sourcing**: Store state as sequence of events.
+- **CQRS**: Separate read/write models, often event-driven.
 
-Challenges: Eventual consistency, debugging complexity.
+### Benefits
+- Loose coupling between components.
+- Scalability through asynchronous processing.
+- Real-time responsiveness.
 
-### Event Flow Diagram
-
-```mermaid
-graph LR
-    A[Producer] --> B[Event Broker]
-    B --> C[Consumer 1]
-    B --> D[Consumer 2]
-    C --> E[Action]
-    D --> F[Action]
-```
+### Challenges
+- Eventual consistency.
+- Debugging complex event flows.
+- Handling event ordering and duplicates.
 
 ## Real-world Examples & Use Cases
 
-- **E-commerce**: Order placed event triggers inventory update and email.
-- **IoT**: Sensor data events processed for analytics.
-- **Social Media**: Like event updates feeds asynchronously.
+- **User Interfaces**: GUI frameworks like Java Swing use event listeners for button clicks.
+- **IoT Systems**: Sensors publish events to central hubs for processing.
+- **E-commerce**: Order placement triggers inventory updates, notifications.
+- **Financial Trading**: Market data events drive algorithmic trading systems.
 
 ## Code Examples
 
-### Simple Event System in Java
-
+### Simple Event Listener in Java
 ```java
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 
-interface EventListener {
-    void onEvent(String event);
-}
+public class EventExample {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame();
+        JButton button = new JButton("Click Me");
 
-class EventManager {
-    private List<EventListener> listeners = new ArrayList<>();
-    
-    public void subscribe(EventListener listener) {
-        listeners.add(listener);
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Button clicked!");
+            }
+        });
+
+        frame.add(button);
+        frame.setSize(200, 200);
+        frame.setVisible(true);
     }
-    
-    public void publish(String event) {
-        for (EventListener listener : listeners) {
-            listener.onEvent(event);
-        }
-    }
 }
+```
 
-// Usage
-EventManager manager = new EventManager();
-manager.subscribe(e -> System.out.println("Handled: " + e));
-manager.publish("User Logged In");
+### Using Kafka for Event Streaming (Producer)
+```java
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerRecord;
+
+Properties props = new Properties();
+props.put("bootstrap.servers", "localhost:9092");
+props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+
+KafkaProducer<String, String> producer = new KafkaProducer<>(props);
+producer.send(new ProducerRecord<>("events", "key", "event data"));
+producer.close();
+```
+
+## Journey / Sequence
+
+```mermaid
+sequenceDiagram
+    participant Producer
+    participant Broker
+    participant Consumer
+
+    Producer->>Broker: Publish Event
+    Broker->>Consumer: Deliver Event
+    Consumer->>Consumer: Process Event
 ```
 
 ## References
 
-- [Event-Driven Architecture](https://martinfowler.com/articles/201701-event-driven.html)
-- [Kafka Documentation](https://kafka.apache.org/documentation/)
+- [Event-Driven Architecture - Microservices.io](https://microservices.io/patterns/data/event-driven-architecture.html)
+- [Apache Kafka Documentation](https://kafka.apache.org/documentation/)
 
 ## Github-README Links & Related Topics
 
-- [event-driven-architecture](../event-driven-architecture/README.md)
-- [message-queues-and-brokers](../message-queues-and-brokers/README.md)
-- [kafka-internals](../kafka-internals/README.md)
+- [Event-Driven Architecture](../event-driven-architecture/)
+- [Message Queues and Brokers](../message-queues-and-brokers/)
