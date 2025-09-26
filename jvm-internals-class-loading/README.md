@@ -1,8 +1,8 @@
 ---
 title: JVM Internals & Class Loading
-aliases: [JVM Architecture, Java Class Loading]
+aliases: [Java Virtual Machine, Class Loaders]
 tags: [#java, #jvm]
-created: 2023-10-01
+created: 2025-09-26
 updated: 2025-09-26
 ---
 
@@ -10,51 +10,53 @@ updated: 2025-09-26
 
 ## Overview
 
-The Java Virtual Machine (JVM) is the runtime environment for Java applications. It handles memory management, bytecode execution, and class loading. Class loading is the process of loading class files into memory, verifying them, and preparing them for execution.
+The Java Virtual Machine (JVM) is the runtime environment that executes Java bytecode. Class loading is the process by which the JVM loads, links, and initializes classes at runtime.
 
 ## Detailed Explanation
 
 ### JVM Architecture
 
-The JVM consists of several key components:
+- **Class Loader Subsystem**: Loads classes into memory.
 
-- **Class Loader Subsystem**: Loads class files into memory.
-- **Runtime Data Areas**: Includes Heap, Stack, Method Area, Program Counter, and Native Method Stack.
-- **Execution Engine**: Interprets or compiles bytecode. Includes Interpreter and JIT Compiler.
-- **JNI (Java Native Interface)**: Allows interaction with native libraries.
+- **Runtime Data Areas**: Method area, heap, stack, PC registers, native method stacks.
+
+- **Execution Engine**: Interprets or JIT compiles bytecode.
+
+- **Native Interface**: Interacts with native libraries.
 
 ### Class Loading Process
 
-Class loading occurs in three phases:
+1. **Loading**: Finding and importing the binary data of a class.
 
-1. **Loading**: The class loader finds the class file and loads it into memory.
-2. **Linking**: 
-   - Verification: Ensures the bytecode is valid.
-   - Preparation: Allocates memory for static variables.
-   - Resolution: Resolves symbolic references.
-3. **Initialization**: Executes static initializers and assigns initial values.
+2. **Linking**: Verifying, preparing, and resolving symbolic references.
 
-**Types of Class Loaders:**
-- Bootstrap Class Loader: Loads core Java classes.
-- Extension Class Loader: Loads extension classes.
-- System/Application Class Loader: Loads application classes.
+3. **Initialization**: Executing static initializers.
+
+### Types of Class Loaders
+
+- **Bootstrap Class Loader**: Loads core Java classes.
+
+- **Extension Class Loader**: Loads extension classes.
+
+- **System/Application Class Loader**: Loads application classes.
 
 ```mermaid
 graph TD
-    A[Loading] --> B[Linking]
-    B --> C[Verification]
-    B --> D[Preparation]
-    B --> E[Resolution]
-    C --> F[Initialization]
-    D --> F
-    E --> F
+    A[Class Loading] --> B[Loading]
+    B --> C[Linking]
+    C --> D[Verification]
+    C --> E[Preparation]
+    C --> F[Resolution]
+    D --> G[Initialization]
 ```
 
 ## Real-world Examples & Use Cases
 
-- **Performance Tuning**: Understanding JVM internals helps optimize memory usage and garbage collection.
-- **Custom Class Loaders**: Used in application servers for hot deployment or plugin systems.
-- **Security**: Class loading verification prevents malicious code execution.
+- **Dynamic Loading**: Loading plugins at runtime.
+
+- **Modular Applications**: Using custom class loaders for isolation.
+
+- **Hot Swapping**: Reloading classes in development.
 
 ## Code Examples
 
@@ -63,42 +65,35 @@ graph TD
 ```java
 public class CustomClassLoader extends ClassLoader {
     @Override
-    protected Class<?> findClass(String name) throws ClassNotFoundException {
-        // Implement custom loading logic
-        byte[] classData = loadClassData(name);
-        if (classData == null) {
-            throw new ClassNotFoundException();
-        }
-        return defineClass(name, classData, 0, classData.length);
-    }
-
-    private byte[] loadClassData(String name) {
-        // Load class data from file, network, etc.
-        return new byte[0]; // Placeholder
+    public Class<?> findClass(String name) throws ClassNotFoundException {
+        // Custom loading logic
+        return super.findClass(name);
     }
 }
 ```
 
-### Using Class Loader
+### Class Loading Example
 
 ```java
-public class Main {
-    public static void main(String[] args) throws Exception {
-        CustomClassLoader loader = new CustomClassLoader();
-        Class<?> clazz = loader.loadClass("com.example.MyClass");
-        Object instance = clazz.newInstance();
+public class ClassLoadingExample {
+    public static void main(String[] args) {
+        try {
+            Class<?> clazz = Class.forName("java.lang.String");
+            System.out.println("Class loaded: " + clazz.getName());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
 ```
 
 ## References
 
-- [JVM Specification](https://docs.oracle.com/javase/specs/jvms/se21/html/index.html)
-- [Oracle Class Loading Tutorial](https://docs.oracle.com/javase/tutorial/ext/basics/load.html)
-- [Baeldung - JVM Internals](https://www.baeldung.com/jvm)
+- [Oracle JVM Specification](https://docs.oracle.com/javase/specs/jvms/se8/html/)
+- [Baeldung Class Loading](https://www.baeldung.com/java-classloaders)
 
 ## Github-README Links & Related Topics
 
-- [Java Class Loaders](../java-class-loaders/README.md)
-- [Garbage Collection Algorithms](../garbage-collection-algorithms/README.md)
-- [JVM Memory Model](../jvm-memory-model/README.md)
+- [Java Fundamentals](java-fundamentals/)
+- [JVM Memory Model](jvm-memory-model/)
+- [Class Loading Mechanism](class-loading-mechanism/)
