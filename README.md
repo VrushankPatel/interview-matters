@@ -337,6 +337,7 @@ This repository contains comprehensive guides on various topics in software engi
 - [Twitter System Design](./twitter-system-design/)
 - [Two Phase Commit](./two-phase-commit/)
 - [Uber System Design](./uber-system-design/)
+- [Uber Ride Sharing System](./uber-ride-sharing-system/)
 - [Url Shortener](./url-shortener/)
 - [Url Shortener System Design](./url-shortener-system-design/)
 - [User Authentication](./user-authentication/)

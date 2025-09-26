@@ -1,9 +1,9 @@
 ---
-title: Google Search Engine
+title: Google Search Engine Design
 aliases: [Google Search, Search Engine Design]
 tags: [#system-design, #search, #distributed-systems]
 created: 2023-01-01
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 ## Overview

@@ -3,7 +3,7 @@ title: WhatsApp Messaging System
 aliases: [WhatsApp System Design, End-to-End Encrypted Messaging]
 tags: [#system-design, #messaging, #encryption]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # WhatsApp Messaging System

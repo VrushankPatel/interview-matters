@@ -1,5 +1,5 @@
 ---
-title: Dropbox File Storage
+title: Dropbox File Storage System
 aliases: ["Dropbox", "File Storage System"]
 tags: [#system-design, #storage, #distributed-systems]
 created: 2023-01-01
