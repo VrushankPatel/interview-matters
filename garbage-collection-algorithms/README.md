@@ -6,6 +6,8 @@ created: '2025-09-26'
 updated: '2025-09-26'
 ---
 
+# Garbage Collection Algorithms
+
 ## Overview
 
 Garbage Collection (GC) algorithms are mechanisms used by runtime environments, particularly in languages like Java, to automatically manage memory by reclaiming space occupied by objects that are no longer in use. This prevents memory leaks and optimizes application performance. GC algorithms vary in approach, from tracing live objects to reference counting, each with trade-offs in terms of pause times, throughput, and memory overhead.
