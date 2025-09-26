@@ -113,12 +113,11 @@ This diagram illustrates the lifecycle: order submission, acknowledgment, execut
 - **FIXimate:** Online dictionary for message validation.
 - **Esprow FIX Tools:** Browser-based parser for testing.
 
-# Github-README Links & Related Topics
-
+## Github-README Links & Related Topics
 - [fix-protocol](../fix-protocol/)
-- [[api-design-principles]]
-- [high-scalability-patterns](../../../system-design/high-scalability-patterns/)
-- [distributed-consensus](../../../system-design/distributed-consensus/)
+- [api-design-principles](../../networking/api-design-principles/)
+- [high-scalability-patterns](../../system-design/high-scalability-patterns/)
+- [distributed-consensus](../../system-design/distributed-consensus/)
 
 # References
 

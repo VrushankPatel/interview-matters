@@ -6,21 +6,17 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+## Overview
 
 Market data refers to real-time and historical information about financial instruments, including prices, volumes, and order book details. Dissemination involves distributing this data to market participants via protocols like ITCH, FIX, and proprietary feeds. Effective dissemination ensures transparency, supports trading decisions, and complies with regulations.
 
-# STAR Summary
+## STAR Summary
+- **SITUATION**: Financial markets require timely, accurate data for fair trading.
+- **TASK**: Develop systems for efficient market data collection and distribution.
+- **ACTION**: Exchanges and vendors implemented protocols like ITCH for binary feeds and FIX for structured messages.
+- **RESULT**: Market data is disseminated globally, enabling informed trading and market surveillance.
 
-**SITUATION:** Financial markets require timely, accurate data for fair trading.
-
-**TASK:** Develop systems for efficient market data collection and distribution.
-
-**ACTION:** Exchanges and vendors implemented protocols like ITCH for binary feeds and FIX for structured messages.
-
-**RESULT:** Market data is disseminated globally, enabling informed trading and market surveillance.
-
-# Detailed Explanation
+## Detailed Explanation
 
 Market data types:
 
@@ -40,13 +36,13 @@ Dissemination methods:
 
 Protocols: ITCH for NASDAQ, FIX for global, proprietary for others.
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 Exchanges like NYSE use proprietary feeds; data vendors like Bloomberg aggregate and redistribute.
 
 Use cases: HFT, portfolio management, risk assessment.
 
-# Message Formats / Data Models
+## Message Formats / Data Models
 
 Example FIX MarketDataSnapshot:
 
@@ -58,7 +54,7 @@ Example FIX MarketDataSnapshot:
 | 269 | 0 | Bid |
 | 270 | 150.00 | Price |
 
-# Journey of a Trade
+## Journey of a Trade
 
 ```mermaid
 sequenceDiagram
@@ -69,7 +65,7 @@ sequenceDiagram
     Data Feed->>Subscriber: Multicast
 ```
 
-# Common Pitfalls & Edge Cases
+## Common Pitfalls & Edge Cases
 
 - Data delays in high volatility.
 
@@ -77,17 +73,16 @@ sequenceDiagram
 
 - Regulatory reporting.
 
-# Tools & Libraries
+## Tools & Libraries
 
 - Refinitiv or Bloomberg APIs.
 
 - Open-source market data parsers.
 
-# Github-README Links & Related Topics
-
-- [[FIX Protocol]]
+## Github-README Links & Related Topics
+- [FIX Protocol](../../protocols/fix-protocol/)
 - [ITCH Protocol](../../protocols/itch-protocol/)
-- [Execution Report](../../execution-report/)
+- [Execution Report](../../lifecycle/execution-report/)
 
 # References
 

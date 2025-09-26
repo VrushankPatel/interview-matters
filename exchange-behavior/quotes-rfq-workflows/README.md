@@ -117,12 +117,12 @@ best_quote = min(quotes, key=lambda q: q['ask'])
 print(f"Best ask: {best_quote['ask']} from {best_quote['dealer']}")
 ```
 
-## Github-README Links & Related Topics
+# Github-README Links & Related Topics
 
-- [FIX Protocol](/fix-protocol)
-- [Order Entry Protocols](/order-entry-protocols)
-- [Market Data](/market-data-overview-dissemination)
-- [Execution Report](/execution-report)
+- [FIX Protocol](../../protocols/fix-protocol/README.md)
+- [Order Entry Protocols](../../protocols/order-entry-protocols/README.md)
+- [Market Data](../../market-data/market-data-overview-and-dissemination/README.md)
+- [Execution Report](../../compliance/execution-report/README.md)
 
 ## References
 

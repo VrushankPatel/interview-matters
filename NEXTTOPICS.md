@@ -212,3 +212,14 @@
 - Latency arbitrage
 - Swap & derivatives trade lifecycle
 - Regulatory reports (e.g., MiFID/SEF)
+-e 
+- Database sharding strategies — 'Horizontal partitioning for scalability'
+- Microservices architecture patterns — 'Decomposition and communication'
+- Kubernetes deployment best practices — 'Container orchestration'
+- API gateway implementations — 'Routing and security'
+- Event-driven architecture with Kafka — 'Asynchronous messaging'
+- Caching strategies for web applications — 'Redis and CDN usage'
+- Load balancing algorithms — 'Round-robin and least connections'
+- Fault tolerance in cloud systems — 'Resilience patterns'
+- Security in microservices — 'Authentication and authorization'
+- Performance tuning for JVM — 'GC and memory optimization'
