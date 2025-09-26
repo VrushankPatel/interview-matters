@@ -1,14 +1,16 @@
 ---
 title: Proxy Forward and Reverse
-aliases: [forward proxy, reverse proxy]
-tags: [#networking,#system-design]
+aliases: [forward proxy, reverse proxy, proxy servers]
+tags: [#proxy,#networking,#security]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+# Proxy Forward and Reverse
 
-Proxy servers act as intermediaries between clients and servers, facilitating requests and responses. There are two primary types: **forward proxies** (client-side proxies) and **reverse proxies** (server-side proxies). Forward proxies handle requests from clients to external servers, often for anonymity or access control. Reverse proxies manage requests from clients to internal servers, providing load balancing, caching, and security. Understanding both is crucial for network architecture, security, and performance optimization in distributed systems.
+## Overview
+
+Proxies act as intermediaries between clients and servers, facilitating requests and responses. Forward proxies handle client requests to external servers, often for anonymity or access control. Reverse proxies manage server-side requests, directing them to backend servers for load balancing, caching, and security. This topic covers their mechanisms, differences, and applications in system design.
 
 # Detailed Explanation
 
@@ -178,15 +180,15 @@ if __name__ == '__main__':
 - [Proxy server - Wikipedia](https://en.wikipedia.org/wiki/Proxy_server)
 - [Proxy servers and tunneling - MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling)
 - [NGINX Reverse Proxy - NGINX Documentation](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/)
+- [Apache Reverse Proxy Guide](https://httpd.apache.org/docs/2.4/howto/reverse_proxy.html)
 
 # Github-README Links & Related Topics
 
-- [api-gateway-design](../api-gateway-design/README.md)
-- [api-gateway-vs-load-balancer](../api-gateway-vs-load-balancer/README.md)
-- [load-balancing](../load-balancing/README.md)
-- [cdn-architecture](../cdn-architecture/README.md)
-- [distributed-caching-with-redis](../distributed-caching-with-redis/README.md)
-- [circuit-breaker-pattern](../circuit-breaker-pattern/README.md)
+- [API Gateway Design](../api-gateway-design/)
+- [Load Balancing Strategies](../load-balancing-strategies/)
+- [CDN Architecture](../cdn-architecture/)
+- [Security in Distributed Systems](../system-design/security-in-distributed-systems/)
+- [Microservices Architecture](../system-design/microservices-architecture/)
 
 # STAR Summary
 

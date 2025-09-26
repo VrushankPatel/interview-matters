@@ -1,12 +1,12 @@
 ---
-title: Load Balancing Strategies
-aliases: [load balancing]
-tags: [#system-design,#scalability]
+title: Load Balancing and Strategies
+aliases: [load balancing, load distribution, balancing algorithms]
+tags: [#load-balancing,#scalability,#networking]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Load Balancing Strategies
+# Load Balancing and Strategies
 
 ## Overview
 
@@ -16,12 +16,20 @@ Load balancing distributes incoming network traffic across multiple servers to e
 
 ### Load Balancing Algorithms
 
-- **Round Robin**: Cycles through servers sequentially.
-- **Least Connections**: Routes to server with fewest active connections.
-- **IP Hash**: Uses client IP to consistently route to same server.
-- **Weighted Round Robin**: Assigns weights based on server capacity.
-- **Least Response Time**: Routes to server with fastest response.
-- **Random**: Randomly selects a server.
+| Algorithm | Description | Pros | Cons |
+|-----------|-------------|------|------|
+| Round Robin | Cycles through servers sequentially | Simple, fair distribution | Ignores server load or capacity |
+| Least Connections | Routes to server with fewest active connections | Balances load better for varying request times | Requires tracking connections |
+| IP Hash | Uses client IP to consistently route to same server | Ensures session persistence | Can lead to uneven load if IPs cluster |
+| Weighted Round Robin | Assigns weights based on server capacity | Accounts for heterogeneous servers | More complex configuration |
+| Least Response Time | Routes to server with fastest response | Optimizes for performance | Requires monitoring response times |
+| Random | Randomly selects a server | Simple, no state needed | Can be uneven in small samples |
+| Power of Two Choices | Randomly selects two servers, chooses the better | Better load distribution than random | Slightly more complex |
+
+### Static vs Dynamic Algorithms
+
+- **Static**: Do not consider current system state (e.g., Round Robin, IP Hash). Efficient for predictable workloads but may lead to imbalance.
+- **Dynamic**: Adapt based on real-time load (e.g., Least Connections, Least Response Time). More efficient for variable loads but require communication overhead.
 
 ### Types of Load Balancers
 
@@ -46,10 +54,14 @@ graph TD
 
 ## Real-world Examples & Use Cases
 
-- **Web Applications**: Distribute HTTP requests across app servers.
-- **Databases**: Read replicas for query load balancing.
-- **Microservices**: API gateway load balancing across service instances.
-- **CDNs**: Global load balancing for content delivery.
+- **Web Applications**: Distribute HTTP requests across app servers to handle high traffic.
+- **Databases**: Load balance read queries across replicas for scalability.
+- **Microservices**: API gateways route requests to service instances dynamically.
+- **CDNs**: Global load balancing directs users to nearest content servers.
+- **Telecommunications**: Balance traffic across multiple network links for redundancy and bandwidth.
+- **Data Centers**: Distribute workloads in cloud environments for efficient resource use.
+- **AI Data Ingestion**: Manage high-volume data pipelines for model training and inference.
+- **Failover Systems**: Ensure service continuity by rerouting traffic from failed servers.
 
 ## Code Examples
 
@@ -125,6 +137,27 @@ resource "aws_lb_listener" "app_listener" {
 }
 ```
 
+### Simple Round-Robin Load Balancer in Python
+
+```python
+class RoundRobinLoadBalancer:
+    def __init__(self, servers):
+        self.servers = servers
+        self.index = 0
+
+    def get_server(self):
+        if not self.servers:
+            return None
+        server = self.servers[self.index]
+        self.index = (self.index + 1) % len(self.servers)
+        return server
+
+# Usage
+lb = RoundRobinLoadBalancer(['server1.example.com', 'server2.example.com', 'server3.example.com'])
+for _ in range(5):
+    print(lb.get_server())
+```
+
 ## STAR Summary
 
 **Situation**: An e-commerce platform experiencing downtime during peak shopping seasons due to server overload.
@@ -182,13 +215,20 @@ sequenceDiagram
 
 ## References
 
+- [Load Balancing (computing) - Wikipedia](https://en.wikipedia.org/wiki/Load_balancing_(computing))
 - [Nginx Load Balancing](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/)
 - [HAProxy Documentation](http://www.haproxy.org/#docs)
 - [AWS Load Balancing](https://aws.amazon.com/elasticloadbalancing/)
 - [Load Balancing Algorithms](https://www.nginx.com/resources/glossary/load-balancing/)
+- [F5 Load Balancing 101](https://f5.com/resources/white-papers/load-balancing-101-nuts-and-bolts)
+- [NGINX Power of Two Choices](https://www.nginx.com/blog/nginx-power-of-two-choices-load-balancing-algorithm/)
 
 ## Github-README Links & Related Topics
 
-- [proxy-forward-reverse](proxy-forward-reverse/)
-- [high-scalability-patterns](high-scalability-patterns/)
+- [api-gateway-design](api-gateway-design/)
+- [api-gateway-patterns](api-gateway-patterns/)
+- [cloud-architecture-patterns](cloud-architecture-patterns/)
+- [distributed-caching-with-redis](distributed-caching-with-redis/)
 - [fault-tolerance-in-distributed-systems](fault-tolerance-in-distributed-systems/)
+- [high-scalability-patterns](high-scalability-patterns/)
+- [proxy-forward-reverse](proxy-forward-reverse/)

@@ -1,7 +1,7 @@
 ---
 title: DevOps & Infrastructure as Code
-aliases: [IaC, devops practices]
-tags: [#devops,#infrastructure]
+aliases: [devops, infrastructure as code, IaC]
+tags: [#devops,#infrastructure,#automation]
 created: 2025-09-26
 updated: 2025-09-26
 ---
