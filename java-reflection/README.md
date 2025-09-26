@@ -3,7 +3,7 @@ title: Java Reflection
 aliases: [Reflection in Java, Runtime Inspection]
 tags: [#java, #advanced-java]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 ## Overview
