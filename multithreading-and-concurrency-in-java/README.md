@@ -264,8 +264,8 @@ public class AtomicExample {
 
 ## Github-README Links & Related Topics
 
-- [Java Fundamentals](../java-fundamentals/README.md)
-- [Java ExecutorService](../java-executorservice/README.md)
-- [Java Synchronized Blocks](../java-synchronized-blocks/README.md)
-- [Java Atomic Variables](../java-atomic-variables/README.md)
-- [Java Memory Model](../java-memory-model/README.md)
+- [Java Fundamentals](java-fundamentals/README.md)
+- [Java ExecutorService](java-executorservice/README.md)
+- [Java Synchronized Blocks](java-synchronized-blocks/README.md)
+- [Java Atomic Variables](java-atomic-variables/README.md)
+- [Java Memory Model](java-memory-model/README.md)

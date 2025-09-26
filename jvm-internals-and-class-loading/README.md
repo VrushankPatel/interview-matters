@@ -206,7 +206,7 @@ public class InitializationOrder {
 
 ## Github-README Links & Related Topics
 
-- [Java Fundamentals](../java-fundamentals/README.md)
-- [Garbage Collection Algorithms](../garbage-collection-algorithms/README.md)
-- [JVM Performance Tuning](../jvm-performance-tuning/README.md)
-- [Java Memory Management](../java-memory-management/README.md)
+- [Java Fundamentals](java-fundamentals/README.md)
+- [Garbage Collection Algorithms](garbage-collection-algorithms/README.md)
+- [JVM Performance Tuning](jvm-performance-tuning/README.md)
+- [Java Memory Management](java-memory-management/README.md)

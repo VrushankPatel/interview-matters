@@ -139,6 +139,6 @@ java -XX:+UseG1GC \
 
 ## Github-README Links & Related Topics
 
-- [GC Tuning](../gc-tuning/README.md)
-- [Java Memory Management](../java-memory-management/README.md)
-- [JVM Internals & Class Loading](../jvm-internals-class-loading/README.md)
+- [GC Tuning](gc-tuning/README.md)
+- [Java Memory Management](java-memory-management/README.md)
+- [JVM Internals & Class Loading](jvm-internals-and-class-loading/README.md)
