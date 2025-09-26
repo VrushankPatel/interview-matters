@@ -3,7 +3,7 @@ title: Divide and Conquer Algorithms
 aliases: [D&C Algorithms, Recursive Algorithms]
 tags: [#algorithms,#divide-and-conquer,#recursion]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Overview
