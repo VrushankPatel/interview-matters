@@ -3,11 +3,6 @@ devops-and-infrastructure-as-code
 proxy-forward-and-reverse
 load-balancing-and-strategies
 rate-limiting
-multithreading-and-concurrency-in-java
-devops-and-infrastructure-as-code
-proxy-forward-and-reverse
-load-balancing-and-strategies
-rate-limiting
 java-fundamentals
 oop-principles-in-java
 jvm-internals-class-loading

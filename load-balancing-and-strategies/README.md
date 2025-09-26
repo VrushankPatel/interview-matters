@@ -1,121 +1,127 @@
 ---
-title: Load Balancing and Strategies
-aliases: ["Load Balancing Strategies", "Load Balancer Types"]
-tags: ["#system-design", "#scalability", "#networking"]
-created: 2025-09-26
-updated: 2025-09-26
+title: 'Load Balancing and Strategies'
+aliases: ['Load Balancer', 'Load Distribution']
+tags: ['#system-design', '#scalability']
+created: '2025-09-26'
+updated: '2025-09-26'
 ---
 
 ## Overview
 
-Load balancing distributes incoming network traffic across multiple servers to ensure no single server becomes overwhelmed, improving reliability, performance, and scalability.
-
-## STAR Summary
-
-**Situation:** E-commerce platform experiencing downtime during peak traffic due to single server overload.  
-**Task:** Implement load balancing to handle increased traffic and improve availability.  
-**Action:** Deployed HAProxy with round-robin algorithm and health checks across 3 web servers.  
-**Result:** Achieved 99.9% uptime, reduced response time by 40%, and supported 3x traffic increase.
+Load balancing is the process of distributing network traffic across multiple servers to ensure optimal resource utilization, maximize throughput, minimize response time, and avoid overload on any single server. It enhances application availability, scalability, and fault tolerance by directing client requests to healthy backend instances based on predefined algorithms and health checks.
 
 ## Detailed Explanation
 
-### Types of Load Balancing
+### Key Concepts
 
-- **Layer 4 (Transport Layer)**: Routes based on IP and port. Fast, but less intelligent.
-- **Layer 7 (Application Layer)**: Routes based on content, cookies, headers. More flexible.
+- **Frontend**: The entry point that receives incoming traffic.
+- **Backend Pool**: A group of servers (VMs, containers, or services) that handle the distributed load.
+- **Load Balancing Rules**: Define how traffic is distributed, including protocols, ports, and algorithms.
+- **Health Probes**: Mechanisms to check server health and route traffic only to operational instances.
+- **Session Persistence**: Ensures requests from the same client are directed to the same server for stateful applications.
+
+### Types of Load Balancers
+
+1. **Hardware Load Balancers**: Physical devices like F5 BIG-IP, offering high performance but less flexibility.
+2. **Software Load Balancers**: Applications like NGINX, HAProxy, or cloud-native services (e.g., AWS ELB, Azure Load Balancer).
+3. **Cloud Load Balancers**: Managed services that scale automatically, such as Elastic Load Balancing (ELB) on AWS.
 
 ### Load Balancing Algorithms
 
+Load balancing algorithms determine how traffic is distributed. Common types include:
+
 | Algorithm | Description | Pros | Cons | Use Case |
 |-----------|-------------|------|------|----------|
-| Round Robin | Cycles through servers sequentially | Simple, fair distribution | Ignores server load/capacity | Equal capacity servers |
-| Least Connections | Routes to server with fewest active connections | Considers current load | Requires connection tracking | Variable request times |
-| IP Hash | Routes based on client IP hash | Session persistence | Uneven distribution if IP ranges vary | Session stickiness needed |
-| Weighted Round Robin | Assigns weights to servers | Handles different capacities | Manual weight management | Mixed server capacities |
-| Least Response Time | Routes to fastest responding server | Optimizes performance | Complex to implement | Performance-critical apps |
-| Random | Random server selection | Very simple | Unpredictable distribution | Testing/development |
+| Round Robin | Cycles through servers sequentially | Simple, fair distribution | Ignores server load | Static content serving |
+| Least Connections | Routes to server with fewest active connections | Balances load dynamically | Assumes equal server capacity | Variable request processing |
+| IP Hash | Uses client IP to assign server | Session persistence | Uneven distribution if IPs cluster | Stateful applications |
+| Weighted Round Robin | Assigns weights based on server capacity | Accounts for heterogeneous servers | Manual weight tuning | Mixed server capacities |
+| Least Response Time | Routes to server with fastest response | Optimizes performance | Requires monitoring | Latency-sensitive apps |
 
-### Components
+### Strategies
 
-- **Load Balancer**: Hardware (F5) or software (Nginx, HAProxy).
-- **Health Checks**: Monitors server health to avoid routing to failed servers.
+- **DNS-Based Load Balancing**: Distributes traffic at the DNS level using round-robin or geo-based routing.
+- **Layer 4 (Transport Layer)**: Balances based on IP and port, e.g., TCP/UDP load balancing.
+- **Layer 7 (Application Layer)**: Inspects HTTP headers, cookies, etc., for intelligent routing.
+- **Global Server Load Balancing (GSLB)**: Distributes across geographically dispersed data centers.
+
+### Architecture Diagram
 
 ```mermaid
 graph TD
-    A[Client Request] --> B[Load Balancer]
-    B --> C[Server 1]
-    B --> D[Server 2]
-    B --> E[Server 3]
-    C --> F[Response]
-    D --> F
-    E --> F
-```
-
-## Journey / Sequence
-
-```mermaid
-sequenceDiagram
-    participant Client
-    participant LB as Load Balancer
-    participant S1 as Server 1
-    participant S2 as Server 2
-
-    Client->>LB: HTTP Request
-    LB->>LB: Health Check Servers
-    LB->>S1: Route Request (Round Robin)
-    S1->>LB: Process Response
-    LB->>Client: Return Response
-
-    Client->>LB: Next Request
-    LB->>S2: Route to Server 2
-    S2->>LB: Process Response
-    LB->>Client: Return Response
+    A[Client Request] --> B[Load Balancer Frontend]
+    B --> C{Health Check}
+    C -->|Healthy| D[Backend Pool]
+    D --> E[Server 1]
+    D --> F[Server 2]
+    D --> G[Server 3]
+    C -->|Unhealthy| H[Failover/Reroute]
+    E --> I[Response to Client]
+    F --> I
+    G --> I
 ```
 
 ## Real-world Examples & Use Cases
 
-### Web Application Scaling
-```nginx
-upstream backend {
-    least_conn;
-    server backend1.example.com:8080 weight=3;
-    server backend2.example.com:8080 weight=2;
-    server backend3.example.com:8080 weight=1;
-}
+- **Web Applications**: Netflix uses load balancers to handle millions of concurrent streams, distributing traffic across global CDNs and servers.
+- **E-commerce**: Amazon ELB manages traffic spikes during sales events, ensuring high availability for millions of users.
+- **Microservices**: Companies like Uber employ service mesh load balancers (e.g., Istio) to route requests between microservices.
+- **Gaming**: Online games like Fortnite use load balancers for matchmaking and session management across regions.
+- **API Gateways**: Load balancers integrate with API gateways to throttle and route API calls, as seen in Stripe's payment processing.
 
-server {
-    listen 80;
-    location / {
-        proxy_pass http://backend;
+## Code Examples
+
+### Simple Round-Robin Load Balancer in Python
+
+```python
+class RoundRobinLoadBalancer:
+    def __init__(self, servers):
+        self.servers = servers
+        self.index = 0
+
+    def get_server(self):
+        server = self.servers[self.index]
+        self.index = (self.index + 1) % len(self.servers)
+        return server
+
+# Usage
+lb = RoundRobinLoadBalancer(['server1', 'server2', 'server3'])
+print(lb.get_server())  # server1
+print(lb.get_server())  # server2
+```
+
+### Least Connections in Java
+
+```java
+import java.util.*;
+
+public class LeastConnectionsLoadBalancer {
+    private Map<String, Integer> serverConnections = new HashMap<>();
+
+    public LeastConnectionsLoadBalancer(List<String> servers) {
+        for (String server : servers) {
+            serverConnections.put(server, 0);
+        }
+    }
+
+    public String getServer() {
+        return serverConnections.entrySet().stream()
+                .min(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse(null);
+    }
+
+    public void incrementConnection(String server) {
+        serverConnections.put(server, serverConnections.get(server) + 1);
+    }
+
+    public void decrementConnection(String server) {
+        serverConnections.put(server, Math.max(0, serverConnections.get(server) - 1));
     }
 }
 ```
 
-### Kubernetes Service Load Balancing
-```yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: my-service
-spec:
-  selector:
-    app: my-app
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8080
-  type: LoadBalancer
-```
-
-### Database Read Replicas
-```java
-// JDBC URL for MySQL read replicas
-String jdbcUrl = "jdbc:mysql:loadbalance://master,slave1,slave2/db?loadBalanceStrategy=random";
-```
-
-## Code Examples
-
-### Nginx Load Balancing
+### NGINX Configuration for Load Balancing
 
 ```nginx
 upstream backend {
@@ -128,178 +134,46 @@ server {
     listen 80;
     location / {
         proxy_pass http://backend;
-        proxy_set_header Host $host;
     }
 }
 ```
-
-### HAProxy Configuration
-
-```haproxy
-frontend http_front
-    bind *:80
-    default_backend http_back
-
-backend http_back
-    balance roundrobin
-    server server1 192.168.1.1:80 check
-    server server2 192.168.1.2:80 check
-```
-
-### AWS Application Load Balancer
-
-```hcl
-resource "aws_lb" "app_lb" {
-  name               = "app-lb"
-  internal           = false
-  load_balancer_type = "application"
-  subnets            = [aws_subnet.public.id]
-}
-
-resource "aws_lb_target_group" "app_tg" {
-  name     = "app-tg"
-  port     = 80
-  protocol = "HTTP"
-  vpc_id   = aws_vpc.main.id
-}
-
-resource "aws_lb_listener" "app_listener" {
-  load_balancer_arn = aws_lb.app_lb.arn
-  port              = "80"
-  protocol          = "HTTP"
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.app_tg.arn
-  }
-}
-```
-
-## Common Pitfalls & Edge Cases
-
-- **Session Stickiness**: Ensuring user sessions stay on same server.
-- **Health Check Failures**: False positives/negatives.
-- **Overload**: Load balancer itself becoming bottleneck.
-- **SSL Termination**: Handling encrypted traffic.
-
-## Tools & Libraries
-
-- Nginx
-- HAProxy
-- AWS ELB
-- Google Cloud Load Balancing
 
 ## References
 
-- [Nginx Load Balancing](https://nginx.org/en/docs/http/load_balancing.html)
-- [HAProxy Documentation](https://www.haproxy.org/)
-- [AWS Load Balancing](https://aws.amazon.com/elasticloadbalancing/)
-- [Load Balancing Algorithms](https://www.nginx.com/resources/glossary/load-balancing/)
+- [Wikipedia: Load Balancing (Computing)](https://en.wikipedia.org/wiki/Load_balancing_(computing))
+- [NGINX: Load Balancing](https://www.nginx.com/resources/glossary/load-balancing/)
+- [AWS: What is Load Balancing?](https://aws.amazon.com/what-is/load-balancing/)
+- [Microsoft Azure: What is Azure Load Balancer?](https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-overview)
 
 ## Github-README Links & Related Topics
 
-- [Proxy Forward and Reverse](../proxy-forward-and-reverse/)
-- [API Gateway vs Load Balancer](../api-gateway-vs-load-balancer/)
-- [High Scalability Patterns](../high-scalability-patterns/)
-- [Fault Tolerance in Distributed Systems](../fault-tolerance-in-distributed-systems/)
+- [API Gateway vs Load Balancer](./api-gateway-vs-load-balancer/README.md)
+- [API Gateway Design](./api-gateway-design/README.md)
+- [Cloud Architecture Patterns](./cloud-architecture-patterns/README.md)
+- [Scalability Patterns](./high-scalability-patterns/README.md)
 
-# Data Models / Message Formats
+## STAR Summary
 
-## Load Balancer Configuration Formats
+**Situation**: In a high-traffic e-commerce platform, uneven server load caused frequent outages during peak hours.
 
-### Nginx Upstream Block
+**Task**: Implement load balancing to distribute traffic evenly and improve availability.
 
-```nginx
-upstream backend {
-    # Algorithm: round_robin (default), least_conn, ip_hash, etc.
-    least_conn;
-    
-    # Server definitions
-    server backend1.example.com:8080 weight=3 max_fails=3 fail_timeout=30s;
-    server backend2.example.com:8080 weight=2 backup;
-    server backend3.example.com:8080 down;
-}
-```
+**Action**: Deployed AWS ELB with least connections algorithm, configured health probes, and integrated auto-scaling.
 
-### HAProxy Backend Configuration
+**Result**: Reduced response time by 40%, eliminated outages, and handled 3x traffic spikes seamlessly.
 
-```haproxy
-backend web_servers
-    # Load balancing algorithm
-    balance roundrobin
-    
-    # Health check options
-    option httpchk GET /health HTTP/1.1\r\nHost:\ www.example.com
-    http-check expect status 200
-    
-    # Server definitions
-    server web1 192.168.1.10:80 check weight 3
-    server web2 192.168.1.11:80 check weight 2
-    server web3 192.168.1.12:80 check backup
-```
+## Common Pitfalls & Edge Cases
 
-## Health Check Protocols
+- **Sticky Sessions Overhead**: Over-relying on session persistence can prevent even distribution; use when necessary.
+- **Health Probe Misconfiguration**: Incorrect probes may mark healthy servers as down; test thoroughly.
+- **Single Point of Failure**: Load balancer itself can fail; use redundant setups or cloud-managed services.
+- **Geo-Load Balancing Latency**: Routing to distant servers increases latency; prioritize regional balancing.
+- **Algorithm Mismatch**: Round-robin on heterogeneous servers leads to overload; use weighted algorithms.
 
-### HTTP Health Check Request
+## Tools & Libraries
 
-```
-GET /health HTTP/1.1
-Host: backend.example.com
-User-Agent: LoadBalancer/1.0
-Connection: close
-```
-
-### TCP Health Check
-
-Simple TCP connection attempt to server port, with optional send/expect strings.
-
-## Session Persistence Mechanisms
-
-### Cookie-Based Sticky Sessions
-
-Load balancer sets a cookie with server identifier:
-
-```
-Set-Cookie: SERVERID=server1; Path=/; HttpOnly
-```
-
-Subsequent requests include this cookie to route to the same server.
-
-### IP Hash Persistence
-
-Client IP address hashed to determine server:
-
-```python
-server_index = hash(client_ip) % num_servers
-```
-
-## Metrics and Monitoring Data
-
-Load balancer exposes metrics in formats like:
-
-### Prometheus Exposition Format
-
-```
-# HELP haproxy_backend_current_sessions Current sessions on backend
-# TYPE haproxy_backend_current_sessions gauge
-haproxy_backend_current_sessions{backend="web_servers"} 42
-```
-
-### Stats Endpoint JSON
-
-```json
-{
-  "backends": [
-    {
-      "name": "web_servers",
-      "servers": [
-        {
-          "name": "web1",
-          "status": "UP",
-          "current_sessions": 15,
-          "max_sessions": 100
-        }
-      ]
-    }
-  ]
-}
-```
+- **NGINX**: Open-source web server and load balancer.
+- **HAProxy**: High-performance TCP/HTTP load balancer.
+- **AWS Elastic Load Balancing**: Managed service for EC2 instances.
+- **Azure Load Balancer**: Cloud-native load balancing for VMs.
+- **Istio**: Service mesh with built-in load balancing for Kubernetes.
