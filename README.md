@@ -176,6 +176,8 @@ This repository contains comprehensive documentation on various topics for inter
 - [Java Wait Notify](./java-wait-notify/README.md)
 - [Java Generics Deep Dive](./java-generics-deep-dive/README.md)
 - [Java Annotations and Reflection](./java-annotations-and-reflection/README.md)
+- [Java 21 Features](./java-21-features/README.md)
+- [Kotlin for Java Developers](./kotlin-for-java-developers/README.md)
 
 - [JVM Internals & Class Loading](./jvm-internals-and-class-loading/README.md)
 - [JVM Performance Tuning](./jvm-performance-tuning/README.md)
@@ -237,6 +239,8 @@ This repository contains comprehensive documentation on various topics for inter
 - [DevOps & Infrastructure as Code](./devops-and-infrastructure-as-code/README.md)
 - [Docker Kubernetes Integration](./docker-kubernetes-integration/README.md)
 - [AWS Architecture Patterns](./aws-architecture-patterns/README.md)
+- [Docker Kubernetes Integration](./docker-kubernetes-integration/README.md)
+- [Spring Boot Microservices](./spring-boot-microservices/README.md)
 
 ### Networking
 - [API Authentication Methods](./api-authentication-methods/README.md)

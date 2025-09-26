@@ -1,10 +1,10 @@
-java-21-features
-kotlin-for-java-developers
-spring-boot-microservices
-docker-kubernetes-integration
-aws-architecture-patterns
 machine-learning-system-design
 blockchain-system-design
 iot-architecture
 real-time-systems
 security-in-system-design
+java-fundamentals
+oop-principles-in-java
+jvm-internals-class-loading
+garbage-collection-algorithms
+multithreading-concurrency-in-java
