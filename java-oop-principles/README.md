@@ -1,8 +1,8 @@
 ---
 title: 'OOP Principles in Java'
 aliases: []
-tags: [#java, #oop]
-created: 2025-09-25
+tags: [#java,#oop]
+created: 2025-09-26
 updated: 2025-09-26
 ---
 

@@ -1,8 +1,8 @@
 ---
 title: Multithreading & Concurrency in Java
-aliases: [Java Concurrency, Threading in Java]
+aliases: []
 tags: [#java,#concurrency]
-created: 2025-09-25
+created: 2025-09-26
 updated: 2025-09-26
 ---
 
@@ -253,7 +253,7 @@ public class ProducerConsumer {
 - **Thread Leaks**: Threads not properly terminated, consuming resources.
 - **Over-synchronization**: Excessive locking reducing performance.
 
-## Data Models / Message Formats
+## Data Models
 
 ### Thread Model Diagram
 
