@@ -1,7 +1,7 @@
 ---
 title: Latency and Throughput Zero to Hero
-aliases: []
-tags: [#system-design,#performance]
+aliases: [Latency Throughput Guide, Performance Metrics]
+tags: [#performance,#system-design,#latency,#throughput]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -51,6 +51,30 @@ In distributed systems, CAP theorem implies tradeoffs: low latency favors availa
 - **Throughput Metrics**: Goodput (useful data rate), channel utilization.
 - **Tools**: Ping for RTT, Iperf for throughput testing.
 
+## Journey / Sequence
+
+Understanding latency and throughput progresses through these stages:
+
+1. **Fundamentals**: Grasp definitions and differences.
+2. **Measurement**: Learn tools and techniques to quantify metrics.
+3. **Tradeoffs**: Analyze how optimizations affect each other.
+4. **Real-world Application**: Apply concepts to system design.
+5. **Advanced Optimization**: Handle edge cases, monitoring, and scaling.
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Server
+    Client->>Server: Send Request
+    Server-->>Client: Receive Response
+    Note over Client,Server: Latency: Time for one cycle
+    loop Concurrent Requests
+        Client->>Server: Send Request
+        Server-->>Client: Receive Response
+    end
+    Note over Client,Server: Throughput: Requests per second
+```
+
 ## Real-world Examples & Use Cases
 
 ### Web Servers
@@ -68,6 +92,23 @@ Real-time video streaming requires <50ms latency for smooth playback. Online gam
 ### IoT and Edge Computing
 
 Sensor networks need high throughput for data ingestion but low latency for real-time alerts, often using edge processing to balance both.
+
+## Common Pitfalls & Edge Cases
+
+- **Misinterpreting Metrics**: Average latency hides outliers; always check percentiles (e.g., P99 latency).
+- **Over-optimization**: Reducing latency at the cost of throughput can lead to bottlenecks under load.
+- **Network Effects**: WAN latency (e.g., 100ms+ for transatlantic) dwarfs local optimizations.
+- **Concurrency Issues**: Parallelism boosts throughput but introduces contention, increasing latency.
+- **Edge Cases**: 
+  - Cold starts in serverless (high initial latency).
+  - Thundering herd: Sudden load spikes cause queueing.
+  - Hardware limits: CPU-bound vs. I/O-bound operations.
+
+| Pitfall | Impact | Mitigation |
+|---------|--------|------------|
+| Ignoring percentiles | Underestimates user experience | Use P95/P99 metrics |
+| No load testing | Unpredictable performance | Simulate real traffic |
+| Synchronous processing | Low throughput | Implement async patterns |
 
 ## Code Examples
 
@@ -127,6 +168,89 @@ print(f"Throughput: {throughput:.2f} RPS")
 
 These snippets use `requests` for HTTP calls; install via `pip install requests`. Adjust URLs for real testing.
 
+### Measuring Latency in Java
+
+```java
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.URI;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+
+public class LatencyMeasurer {
+    public static void main(String[] args) throws Exception {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://httpbin.org/delay/1"))
+                .timeout(Duration.ofSeconds(10))
+                .build();
+
+        List<Long> latencies = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            Instant start = Instant.now();
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            Instant end = Instant.now();
+            long latency = Duration.between(start, end).toMillis();
+            latencies.add(latency);
+        }
+        double avg = latencies.stream().mapToLong(Long::longValue).average().orElse(0.0);
+        System.out.printf("Average Latency: %.2f ms%n", avg);
+    }
+}
+```
+
+### Measuring Throughput in Java
+
+```java
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.URI;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ThroughputMeasurer {
+    public static void main(String[] args) throws Exception {
+        HttpClient client = HttpClient.newBuilder().build();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://httpbin.org/get"))
+                .timeout(Duration.ofSeconds(5))
+                .build();
+
+        AtomicInteger count = new AtomicInteger(0);
+        Instant start = Instant.now();
+        List<CompletableFuture<Void>> futures = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            CompletableFuture<Void> future = client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                    .thenRun(() -> count.incrementAndGet());
+            futures.add(future);
+        }
+        CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
+        Instant end = Instant.now();
+        long durationMs = Duration.between(start, end).toMillis();
+        double throughput = (double) count.get() / (durationMs / 1000.0);
+        System.out.printf("Throughput: %.2f RPS%n", throughput);
+    }
+}
+```
+
+## Tools & Libraries
+
+- **Load Testing**: JMeter, Gatling, Locust for simulating high throughput and measuring latency.
+- **Monitoring**: Prometheus with Grafana for real-time metrics visualization.
+- **Libraries**:
+  - Java: Micrometer for application metrics.
+  - Python: aiohttp for asynchronous HTTP clients to improve throughput.
+  - Go: fasthttp for low-latency HTTP handling.
+- **Profiling**: perf, Valgrind for system-level latency analysis.
+
 ## References
 
 - [Latency (engineering) - Wikipedia](https://en.wikipedia.org/wiki/Latency_(engineering))
@@ -134,6 +258,16 @@ These snippets use `requests` for HTTP calls; install via `pip install requests`
 - [What is Latency? - AWS](https://aws.amazon.com/what-is/latency/)
 - [What is Throughput? - Cloudflare](https://www.cloudflare.com/learning/performance/glossary/what-is-throughput/)
 - [Understanding Latency vs Throughput - NGINX](https://www.nginx.com/blog/understanding-latency-vs-throughput/)
+- [Latency vs Throughput - Martin Fowler](https://martinfowler.com/bliki/LatencyVsThroughput.html)
+- [Performance Testing Tools - Guru99](https://www.guru99.com/performance-testing.html)
+- [Understanding Latency and Throughput - ACM Queue](https://queue.acm.org/detail.cfm?id=3028685)
+
+## STAR Summary
+
+- **Situation**: Applications must deliver fast responses and handle high loads.
+- **Task**: Optimize for both low latency and high throughput.
+- **Action**: Measure metrics, identify bottlenecks, apply caching, parallelism, and load balancing.
+- **Result**: Enhanced user experience, scalable systems, and efficient resource use.
 
 ## Github-README Links & Related Topics
 

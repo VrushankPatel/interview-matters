@@ -1,7 +1,7 @@
 ---
 title: Caching
-aliases: []
-tags: [#system-design,#caching]
+aliases: [Cache Strategies, Distributed Caching]
+tags: [#caching,#system-design,#performance]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -76,6 +76,97 @@ Eviction policies determine which data to remove when cache is full:
 ### IoT and Edge Computing
 - **Sensor Data**: Cache recent readings for local processing
 - **Device Configurations**: Store settings with version control
+
+## STAR Summary
+
+**Situation**: A high-traffic e-commerce site experienced slow page loads during peak hours due to repeated database queries for product details.
+
+**Task**: Implement a caching layer to reduce database load and improve response times by 50%.
+
+**Action**: Deployed Redis as an in-memory cache with cache-aside strategy, setting TTL for product data and implementing cache invalidation on inventory updates.
+
+**Result**: Achieved 60% reduction in database queries, improved page load times from 3s to 1.2s, and handled 2x traffic without additional servers.
+
+## Journey / Sequence
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Application
+    participant Cache
+    participant Database
+
+    Client->>Application: Request data
+    Application->>Cache: Check for cached data
+    Cache-->>Application: Cache miss
+    Application->>Database: Fetch data
+    Database-->>Application: Return data
+    Application->>Cache: Store in cache
+    Application-->>Client: Return data
+
+    Note over Client,Database: Subsequent requests hit cache
+    Client->>Application: Request same data
+    Application->>Cache: Check cache
+    Cache-->>Application: Cache hit
+    Application-->>Client: Return cached data
+```
+
+## Data Models / Message Formats
+
+### Cache Entry Structure
+
+```json
+{
+  "key": "user:12345",
+  "value": {
+    "id": 12345,
+    "name": "John Doe",
+    "email": "john@example.com",
+    "lastLogin": "2023-09-26T10:00:00Z"
+  },
+  "metadata": {
+    "ttl": 3600,
+    "createdAt": "2023-09-26T09:00:00Z",
+    "hits": 42,
+    "size": 256
+  }
+}
+```
+
+### Cache Invalidation Message
+
+```json
+{
+  "type": "INVALIDATE",
+  "keys": ["user:12345", "product:*"],
+  "reason": "user_profile_updated",
+  "timestamp": "2023-09-26T10:30:00Z"
+}
+```
+
+## Common Pitfalls & Edge Cases
+
+| Pitfall | Description | Mitigation |
+|---------|-------------|------------|
+| Cache Stampede | Multiple requests for same missing key flood the backend | Use mutex locks or probabilistic early expiration |
+| Stale Data | Serving outdated cached data | Implement proper TTL and cache invalidation strategies |
+| Cache Penetration | Frequent requests for non-existent keys | Use bloom filters or cache null values with short TTL |
+| Hot Key Problem | Single key overwhelmed with requests | Shard keys or use local caches with distributed coordination |
+| Memory Leaks | Cache growing indefinitely | Set appropriate eviction policies and memory limits |
+| Invalidation Complexity | Hard to keep cache consistent with source | Use write-through or event-driven invalidation |
+
+## Tools & Libraries
+
+| Tool/Library | Language | Description | Use Case |
+|--------------|----------|-------------|----------|
+| Redis | Multi-language | In-memory data structure store | Distributed caching, pub/sub |
+| Memcached | Multi-language | High-performance memory object caching | Simple key-value caching |
+| Caffeine | Java | High-performance Java caching library | In-application caching |
+| Ehcache | Java | Enterprise-grade caching | Hibernate integration, clustering |
+| Guava Cache | Java | Google Core Libraries cache | Simple in-memory caching |
+| Node-Cache | JavaScript | Simple in-memory cache | Node.js applications |
+| Cachetools | Python | Caching decorators and utilities | Function result caching |
+| Spring Cache | Java | Abstraction over caching providers | Framework integration |
 
 # Code Examples
 
@@ -254,12 +345,14 @@ module.exports = CacheService;
 
 # References
 
-- [Redis Caching Best Practices](https://redis.io/topics/lru-cache)
-- [Martin Fowler - Caching](https://martinfowler.com/bliki/Caching.html)
-- [AWS Caching Strategies](https://aws.amazon.com/caching/)
-- [Google Cloud Caching Overview](https://cloud.google.com/caching)
+- [Redis Documentation - Caching](https://redis.io/docs/manual/data-types/)
+- [Martin Fowler - Caching Patterns](https://martinfowler.com/bliki/Caching.html)
+- [AWS ElastiCache Best Practices](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/BestPractices.html)
+- [Google Cloud Memorystore](https://cloud.google.com/memorystore/docs/redis)
 - [MDN Web Docs - HTTP Caching](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching)
-- [Cache Eviction Policies Explained](https://en.wikipedia.org/wiki/Cache_replacement_policies)
+- [Wikipedia - Cache Replacement Policies](https://en.wikipedia.org/wiki/Cache_replacement_policies)
+- [Netflix Tech Blog - Caching at Scale](https://netflixtechblog.com/caching-at-netflix-9d3b4b6b8f0a)
+- [Facebook Engineering - Tao: Facebook's Distributed Data Store](https://www.usenix.org/conference/atc13/technical-sessions/presentation/tao)
 
 # Github-README Links & Related Topics
 
