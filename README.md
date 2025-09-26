@@ -66,6 +66,7 @@ This repository contains comprehensive documentation on various topics for inter
 - [Latency and Throughput Zero to Hero](./latency-and-throughput-zero-to-hero/README.md)
 - [LinkedIn Social Network](./linkedin-social-network/README.md)
 - [Load Balancing and Strategies](./load-balancing-and-strategies/README.md)
+- [Load Balancing Strategies](./load-balancing-strategies/README.md)
 - [Monitoring and Logging](./monitoring-and-logging/README.md)
 - [Machine Learning in System Design](./machine-learning-in-system-design/README.md)
 - [Machine Learning System Design](./machine-learning-system-design/README.md)

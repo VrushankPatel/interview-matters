@@ -1,8 +1,3 @@
-monitoring-logging
-async-logging
-devops-infrastructure-as-code
-proxy-forward-reverse
-load-balancing-strategies
 rate-limiting
 java-fundamentals
 oop-principles-in-java
