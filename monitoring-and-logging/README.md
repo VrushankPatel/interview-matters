@@ -1,126 +1,199 @@
 ---
 title: Monitoring and Logging
-aliases: []
-tags: [system-design, observability, monitoring, logging]
-created: "2025-09-26"
-updated: "2025-09-26"
-
+aliases: [monitoring, logging, observability]
+tags: [#system-design,#devops,#monitoring]
+created: 2025-09-26
+updated: 2025-09-26
 ---
 
 ## Overview
 
-Monitoring and logging are essential components of observability in system design, enabling teams to track system health, diagnose issues, and ensure reliability. Monitoring involves collecting and analyzing metrics, events, and performance data in real-time, while logging captures detailed records of events, errors, and transactions for auditing and debugging. Together, they provide insights into system behavior, support proactive maintenance, and facilitate troubleshooting in distributed systems like microservices and cloud-native applications.
+Monitoring and logging are critical components of system observability, enabling teams to track system health, diagnose issues, and ensure reliable operation. Monitoring provides real-time insights into system performance and behavior, while logging captures detailed records of events and errors for analysis and debugging.
 
 ## Detailed Explanation
 
 ### Monitoring
-Monitoring tracks the performance and health of systems by collecting metrics such as CPU usage, memory consumption, disk I/O, network traffic, and application-specific KPIs. It includes:
 
-- **Metrics**: Quantitative data aggregated over time (e.g., request latency, error rates).
-- **Alerts**: Notifications triggered when metrics exceed thresholds (e.g., high CPU usage).
-- **Tools**: Prometheus for metrics collection, Grafana for visualization, Nagios or Zabbix for alerting.
+Monitoring involves collecting, analyzing, and alerting on metrics from systems, applications, and infrastructure to ensure optimal performance and availability.
 
-Monitoring can be software-based (e.g., using agents) or hardware-based (e.g., sensors on motherboards). In distributed systems, it ensures reliability by detecting anomalies early.
+**Types of Monitoring:**
+- **Infrastructure Monitoring**: CPU, memory, disk, network usage
+- **Application Monitoring**: Response times, error rates, throughput
+- **Business Monitoring**: User engagement, revenue metrics, conversion rates
+- **Synthetic Monitoring**: Simulated user interactions to test availability
+
+**Key Metrics:**
+- **Availability**: Uptime percentage, SLA compliance
+- **Performance**: Latency, throughput, error rates
+- **Resource Utilization**: CPU, memory, disk, network
+- **Business KPIs**: Conversion rates, user satisfaction
 
 ### Logging
-Logging records events in a system, providing a chronological history for analysis. Key aspects include:
 
-- **Log Levels**: DEBUG, INFO, WARN, ERROR, FATAL.
-- **Formats**: Structured (e.g., JSON) or unstructured (plain text).
-- **Types**:
-  - Event logs: Record system activities.
-  - Transaction logs: Track database changes.
-  - Server logs: Capture web server requests.
-- **Standards**: Syslog (RFC 5424) for standardized logging.
-- **Tools**: ELK Stack (Elasticsearch, Logstash, Kibana), Splunk, or cloud services like AWS CloudWatch.
+Logging involves recording events, errors, and operational information to provide audit trails and debugging capabilities.
 
-Logs are crucial for debugging, auditing, and compliance but must be managed to avoid performance overhead.
+**Logging Levels:**
+- **DEBUG**: Detailed diagnostic information
+- **INFO**: General information about application operation
+- **WARN**: Potentially harmful situations
+- **ERROR**: Error conditions that don't stop execution
+- **FATAL**: Severe errors that cause application termination
 
-### Relationship to Observability
-Monitoring and logging contribute to observability by providing metrics, logs, and traces. In microservices, they enable end-to-end visibility.
+**Logging Best Practices:**
+- **Structured Logging**: Consistent format with key-value pairs
+- **Log Aggregation**: Centralized collection from multiple sources
+- **Log Rotation**: Automatic archiving and cleanup
+- **Contextual Information**: Include request IDs, user IDs, timestamps
 
-| Aspect | Monitoring | Logging |
-|--------|------------|---------|
-| Data Type | Metrics (numeric) | Events (textual) |
-| Purpose | Real-time health | Historical analysis |
-| Tools | Prometheus, Grafana | ELK, Splunk |
-| Example | CPU usage alert | Error stack trace |
+### Observability
+
+Observability combines monitoring, logging, and tracing to provide comprehensive system visibility.
+
+**Three Pillars:**
+- **Metrics**: Quantitative measurements
+- **Logs**: Qualitative event records
+- **Traces**: Request flow through distributed systems
 
 ```mermaid
 graph TD
-    A[Application] --> B[Metrics Collection]
-    A --> C[Log Generation]
-    B --> D[Monitoring Tools]
-    C --> E[Logging Tools]
-    D --> F[Alerts & Dashboards]
-    E --> G[Search & Analysis]
-    F --> H[Observability]
-    G --> H
+    A[Observability] --> B[Monitoring]
+    A --> C[Logging]
+    A --> D[Tracing]
+    B --> E[Metrics & Alerts]
+    C --> F[Event Records]
+    D --> G[Request Flow]
 ```
 
 ## Real-world Examples & Use Cases
 
-- **E-commerce Platform**: Monitoring tracks order processing latency; logging captures failed payments for fraud detection.
-- **Social Media App**: Logs user interactions for content moderation; monitors API response times to handle traffic spikes.
-- **Microservices Architecture**: Centralized logging aggregates logs from services; monitoring detects cascading failures.
-- **Cloud Infrastructure**: Tools like AWS CloudWatch monitor EC2 instances and log Lambda executions.
-
-In high-traffic systems like Netflix or Uber, monitoring prevents outages, while logging aids in post-mortem analysis.
+- **E-commerce Platform**: Monitor checkout flow latency, log failed transactions, alert on high error rates during peak traffic.
+- **Microservices Architecture**: Distributed tracing for request flows, centralized logging for debugging inter-service issues.
+- **Cloud Infrastructure**: Auto-scaling based on CPU metrics, log analysis for security incidents.
+- **Financial Services**: Real-time monitoring of transaction processing, audit logging for compliance.
 
 ## Code Examples
 
-### Logging in Java (using SLF4J)
+### Java Logging with SLF4J
+
 ```java
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ExampleService {
-    private static final Logger logger = LoggerFactory.getLogger(ExampleService.class);
+public class UserService {
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
-    public void processRequest(String request) {
-        logger.info("Processing request: {}", request);
+    public User getUser(String userId) {
+        logger.debug("Fetching user with ID: {}", userId);
+
         try {
-            // Business logic
+            User user = userRepository.findById(userId);
+            logger.info("Successfully retrieved user: {}", user.getUsername());
+            return user;
         } catch (Exception e) {
-            logger.error("Error processing request", e);
+            logger.error("Failed to retrieve user {}: {}", userId, e.getMessage(), e);
+            throw e;
         }
     }
 }
 ```
 
-### Monitoring with Prometheus (Java Metrics)
+### Spring Boot Actuator for Monitoring
+
 ```java
-import io.prometheus.client.Counter;
-import io.prometheus.client.Histogram;
+// application.properties
+management.endpoints.web.exposure.include=health,metrics,info
+management.endpoint.health.show-details=always
 
-public class MetricsExample {
-    private static final Counter requests = Counter.build()
-        .name("requests_total").help("Total requests.").register();
-    private static final Histogram requestLatency = Histogram.build()
-        .name("request_latency_seconds").help("Request latency.").register();
+// Custom metrics
+@Service
+public class OrderService {
+    private final MeterRegistry meterRegistry;
 
-    public void handleRequest() {
-        requests.inc();
-        Histogram.Timer timer = requestLatency.startTimer();
-        try {
-            // Process request
-        } finally {
-            timer.observeDuration();
-        }
+    public OrderService(MeterRegistry meterRegistry) {
+        this.meterRegistry = meterRegistry;
+    }
+
+    public void processOrder(Order order) {
+        Counter.builder("orders_processed")
+            .tag("status", "success")
+            .register(meterRegistry)
+            .increment();
+
+        Timer.Sample sample = Timer.start(meterRegistry);
+        // Process order
+        sample.stop(Timer.builder("order_processing_time").register(meterRegistry));
     }
 }
 ```
+
+### ELK Stack Log Aggregation (Logstash Configuration)
+
+```ruby
+input {
+  file {
+    path => "/var/log/application/*.log"
+    start_position => "beginning"
+  }
+}
+
+filter {
+  grok {
+    match => { "message" => "%{TIMESTAMP_ISO8601:timestamp} %{LOGLEVEL:level} %{DATA:class} - %{GREEDYDATA:message}" }
+  }
+  date {
+    match => ["timestamp", "ISO8601"]
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => ["localhost:9200"]
+    index => "application-logs-%{+YYYY.MM.dd}"
+  }
+}
+```
+
+### Prometheus Metrics Collection
+
+```yaml
+# prometheus.yml
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'spring-boot-app'
+    static_configs:
+      - targets: ['localhost:8080']
+    metrics_path: '/actuator/prometheus'
+```
+
+## Common Pitfalls & Edge Cases
+
+- **Log Noise**: Excessive logging overwhelming systems; use appropriate log levels.
+- **Metric Cardinality**: High-cardinality metrics causing performance issues; avoid unbounded tags.
+- **Alert Fatigue**: Too many alerts leading to ignored warnings; define clear alert thresholds.
+- **Distributed Tracing Complexity**: Overhead in highly distributed systems; sample requests strategically.
+- **Edge Case**: Log loss during system crashes; implement durable logging with buffering.
+
+## Tools & Libraries
+
+- **Monitoring**: Prometheus, Grafana, Nagios, Zabbix
+- **Logging**: ELK Stack (Elasticsearch, Logstash, Kibana), Splunk, Fluentd
+- **Tracing**: Jaeger, Zipkin, OpenTelemetry
+- **Application Metrics**: Micrometer, Dropwizard Metrics, StatsD
 
 ## References
 
-- [OpenTelemetry Observability Primer](https://opentelemetry.io/docs/concepts/observability-primer/)
-- [Logging (computing) - Wikipedia](https://en.wikipedia.org/wiki/Logging_(computing))
-- [System monitor - Wikipedia](https://en.wikipedia.org/wiki/System_monitor)
+- [Monitoring Distributed Systems](https://www.oreilly.com/library/view/monitoring-distributed-systems/9781492035147/)
+- [Site Reliability Engineering](https://sre.google/sre-book/table-of-contents/)
+- [The Three Pillars of Observability](https://www.oreilly.com/library/view/distributed-systems-observability/9781492033433/)
+- [Prometheus Documentation](https://prometheus.io/docs/)
+- [ELK Stack Guide](https://www.elastic.co/guide/en/elastic-stack-get-started/current/get-started-elastic-stack.html)
 
 ## Github-README Links & Related Topics
 
-- [observability-logs-metrics-traces](./observability-logs-metrics-traces/)
-- [logging-with-elk-stack](./logging-with-elk-stack/)
-- [infrastructure-monitoring](./infrastructure-monitoring/)
-- [distributed-tracing-and-observability](./distributed-tracing-and-observability/)
-- [observability-patterns](./observability-patterns/)
+- [Infrastructure Monitoring](infrastructure-monitoring/README.md)
+- [Distributed Tracing](distributed-tracing/README.md)
+- [Logging Frameworks](logging-frameworks/README.md)
+- [Async Logging](async-logging/README.md)
+- [Fault Tolerance in Distributed Systems](fault-tolerance-in-distributed-systems/README.md)
