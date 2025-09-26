@@ -1,8 +1,3 @@
-Java Exception Handling
-Java Generics
-Java Collections Deep Dive
-Java Design Patterns
-Java Memory Management
 Java Testing Frameworks
 Database Design Principles
 API Design Principles

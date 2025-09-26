@@ -3,7 +3,7 @@ title: Java Exception Handling
 aliases: []
 tags: [#java]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Java Exception Handling

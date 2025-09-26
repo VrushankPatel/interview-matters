@@ -3,7 +3,7 @@ title: Java Collections Deep Dive
 aliases: [Java Collections, Collections Framework]
 tags: [#java,#collections]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Java Collections Deep Dive
