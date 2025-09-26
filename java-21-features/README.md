@@ -1,6 +1,6 @@
 ---
 title: Java 21 Features
-aliases: [Java 21, JDK 21]
+aliases: [Java 21, JDK 21 Features]
 tags: [#java]
 created: 2025-09-26
 updated: 2025-09-26
@@ -33,6 +33,15 @@ Support for key encapsulation mechanisms, enhancing cryptographic capabilities f
 - Foreign Function & Memory API (Third Preview)
 - Vector API (Sixth Incubator)
 - Scoped Values (Second Preview)
+
+```mermaid
+graph TD
+    A[Platform Thread] --> B[JVM Scheduler]
+    B --> C[OS Thread]
+    D[Virtual Thread] --> B
+    B --> E[Carrier Thread Pool]
+    E --> C
+```
 
 ## Real-world Examples & Use Cases
 
