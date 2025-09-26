@@ -124,11 +124,15 @@ This diagram shows the order lifecycle from submission to potential cancellation
 
 # Github-README Links & Related Topics
 
-- [FIX Protocol](../fix-protocol/README.md)
-- [OUCH Protocol](../ouch-protocol/README.md)
-- [Order Types](../order-types/README.md)
-- [Journey of a Trade](../journey-of-a-trade/README.md)
-- [Execution Report](../execution-report/README.md)
+[[FIX Protocol]]
+[[ITCH Protocol]]
+[[OUCH Protocol]]
+[[Market Data (overview & dissemination)]]
+[[Journey of a Trade (end-to-end)]]
+[[Order Types (DAY, GTC, FOK, IOC)]]
+[[Quotes & RFQ workflows]]
+[[Execution Report]]
+[[Trade Capture Report]]
 
 # References
 

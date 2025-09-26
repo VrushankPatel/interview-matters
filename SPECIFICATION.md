@@ -5,8 +5,8 @@ Last update
 2025-09-26
 
 Summary of recent additions
-   - Processed 5 topics: Journey of a Trade (end-to-end), Order Types (DAY, GTC, FOK, IOC), Quotes & RFQ workflows, Execution Report, Trade Capture Report
-   - Updated trading/README.md with links to new topics
+   - Processed 5 topics: FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols
+   - Updated interlinks to use wikilinks in existing trading READMEs
 
 Conventions
  - Dir naming: kebab-case.
@@ -134,16 +134,28 @@ New Next Topics Candidates (this run)
   - AI in market prediction — 'Machine learning for price forecasting'
 
 New Next Topics Candidates
-           - Order Book modeling — 'Canonical models for in-memory book and persistence'
-           - Matching algorithm internals — 'How exchanges match buy and sell orders'
-           - Time-in-Force variations across exchanges — 'DAY, GTC, IOC behaviors by venue'
-           - Market fragmentation & smart order routing — 'Routing orders across multiple markets'
-           - Latency measurement & monitoring — 'Tools and techniques for latency analysis'
-           - FIX Session Layer (Logon/Heartbeat/Seq numbers) — 'Session management in FIX protocol'
-           - Market data consolidation & TOPS snapshot vs incremental — 'Consolidating feeds from multiple sources'
-           - Latency arbitrage — 'Exploiting latency differences for profit'
-           - Swap & derivatives trade lifecycle — 'Trading non-equity instruments'
-           - Regulatory reports (e.g., MiFID/SEF) — 'Compliance reporting requirements'
+            - Order Book modeling — 'Canonical models for in-memory book and persistence'
+            - Matching algorithm internals — 'How exchanges match buy and sell orders'
+            - Time-in-Force variations across exchanges — 'DAY, GTC, IOC behaviors by venue'
+            - Market fragmentation & smart order routing — 'Routing orders across multiple markets'
+            - Latency measurement & monitoring — 'Tools and techniques for latency analysis'
+            - FIX Session Layer (Logon/Heartbeat/Seq numbers) — 'Session management in FIX protocol'
+            - Market data consolidation & TOPS snapshot vs incremental — 'Consolidating feeds from multiple sources'
+            - Latency arbitrage — 'Exploiting latency differences for profit'
+            - Swap & derivatives trade lifecycle — 'Trading non-equity instruments'
+            - Regulatory reports (e.g., MiFID/SEF) — 'Compliance reporting requirements'
+
+New Candidate Topics Rationales
+- Order Book modeling: Essential for understanding HFT and matching engines
+- Matching algorithm internals: Core to exchange operations and interview questions
+- Time-in-Force variations across exchanges: Important for order lifecycle management
+- Market fragmentation & smart order routing: Key in multi-venue trading
+- Latency measurement & monitoring: Critical for performance optimization
+- FIX Session Layer: Fundamental for reliable FIX connections
+- Market data consolidation: Necessary for unified market views
+- Latency arbitrage: Advanced trading strategy
+- Swap & derivatives trade lifecycle: Expands beyond equities
+- Regulatory reports: Compliance knowledge for interviews
            - High-Frequency Trading strategies — 'HFT algorithms and infrastructure'
            - Order Book depth and liquidity — 'Measuring and managing order book liquidity'
            - FIX message sequencing and recovery — 'Handling message gaps and resends'
@@ -180,7 +192,8 @@ New Next Topics Candidates
 - Regulatory reports (e.g., MiFID/SEF) — 'Compliance reporting requirements'
 
 TODO
-   - High-level open design decisions and split criteria for oversized topics.
+    - High-level open design decisions and split criteria for oversized topics.
+    - Restructure Plan: Move individual topic directories under appropriate category directories (e.g., backtracking/ under algorithms/). Create subdirs under system-design/ for LLD, HLD. This requires git mv operations.
 
 New Next Topics Candidates (this run)
 - Order Book modeling — 'Canonical models for in-memory book and persistence'

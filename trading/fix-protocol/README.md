@@ -149,11 +149,15 @@ This diagram illustrates the end-to-end flow from order submission to execution 
 
 # Github-README Links & Related Topics
 
-- [ITCH Protocol](../itch-protocol/README.md)
-- [OUCH Protocol](../ouch-protocol/README.md)
-- [Market Data (overview & dissemination)](../market-data-overview-and-dissemination/README.md)
-- [Order Entry Protocols](../order-entry-protocols/README.md)
-- [Journey of a Trade](../journey-of-a-trade/README.md)
+[[ITCH Protocol]]
+[[OUCH Protocol]]
+[[Market Data (overview & dissemination)]]
+[[Order Entry Protocols]]
+[[Journey of a Trade (end-to-end)]]
+[[Order Types (DAY, GTC, FOK, IOC)]]
+[[Quotes & RFQ workflows]]
+[[Execution Report]]
+[[Trade Capture Report]]
 
 # References
 
