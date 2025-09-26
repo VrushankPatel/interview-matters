@@ -6,6 +6,8 @@ created: 2025-09-25
 updated: 2025-09-26
 ---
 
+# OOP Principles in Java
+
 ## Overview
 
 Object-Oriented Programming (OOP) is a programming paradigm that uses objects and classes to structure software. Java is an object-oriented language that implements four main principles: Encapsulation, Inheritance, Polymorphism, and Abstraction. These principles help in creating modular, reusable, and maintainable code.

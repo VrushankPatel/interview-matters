@@ -1,8 +1,8 @@
 ---
 title: Multithreading & Concurrency in Java
-aliases: []
-tags: [#java,#concurrency,#multithreading]
-created: 2025-09-25
+aliases: [Java Concurrency, Java Threads]
+tags: [#java,#concurrency]
+created: 2025-09-26
 updated: 2025-09-26
 ---
 
@@ -10,23 +10,14 @@ updated: 2025-09-26
 
 ## Overview
 
-Multithreading and concurrency in Java allow programs to perform multiple tasks simultaneously, improving performance and responsiveness. This topic covers thread creation, synchronization, communication, and common concurrency utilities in Java.
+Multithreading in Java allows multiple threads to execute concurrently within a single process, enabling better resource utilization and responsiveness. Understanding concurrency concepts is essential for developing high-performance, thread-safe Java applications.
 
 ## Detailed Explanation
 
-### Thread Basics
+### Threads vs Processes
 
-- **Thread:** A lightweight process, the smallest unit of processing.
-- **Process:** A program in execution with its own memory space.
-- **Concurrency vs Parallelism:** Concurrency is about dealing with multiple tasks, parallelism is about executing them simultaneously.
-
-### Thread Lifecycle
-
-1. **New:** Thread created but not started.
-2. **Runnable:** Ready to run, waiting for CPU.
-3. **Running:** Currently executing.
-4. **Blocked/Waiting:** Waiting for resources or I/O.
-5. **Terminated:** Execution completed.
+- **Process:** Independent execution unit with its own memory space.
+- **Thread:** Lightweight subprocess sharing the same memory space.
 
 ### Creating Threads
 
@@ -44,7 +35,7 @@ MyThread thread = new MyThread();
 thread.start();
 ```
 
-#### Implementing Runnable
+#### Implementing Runnable Interface
 
 ```java
 public class MyRunnable implements Runnable {
@@ -58,132 +49,131 @@ Thread thread = new Thread(new MyRunnable());
 thread.start();
 ```
 
+### Thread Lifecycle
+
+```mermaid
+stateDiagram-v2
+    [*] --> New
+    New --> Runnable : start()
+    Runnable --> Running : scheduled
+    Running --> Runnable : yield/preempted
+    Running --> Blocked : wait/sleep/IO
+    Blocked --> Runnable : notify/resume
+    Running --> Terminated : run() completes
+    Terminated --> [*]
+```
+
+States: New, Runnable, Running, Blocked, Terminated.
+
 ### Synchronization
 
-Synchronization ensures that only one thread can access a shared resource at a time.
-
-- **synchronized keyword:** Locks the object or method.
+#### Synchronized Methods
 
 ```java
 public synchronized void synchronizedMethod() {
-    // Only one thread can execute this at a time
+    // Only one thread can execute at a time
 }
 ```
 
-- **synchronized block:**
+#### Synchronized Blocks
 
 ```java
-synchronized (this) {
+public void method() {
+    synchronized(this) {
+        // Critical section
+    }
+}
+```
+
+#### Locks
+
+```java
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+Lock lock = new ReentrantLock();
+lock.lock();
+try {
     // Critical section
+} finally {
+    lock.unlock();
 }
 ```
 
-### Volatile Keyword
+### Concurrent Collections
 
-Ensures visibility of changes to variables across threads.
-
-```java
-private volatile boolean flag = false;
-```
+- **ConcurrentHashMap:** Thread-safe hash map.
+- **CopyOnWriteArrayList:** Thread-safe list for read-heavy operations.
+- **BlockingQueue:** Thread-safe queue with blocking operations.
 
 ### Atomic Variables
 
-Classes like AtomicInteger provide thread-safe operations without locks.
-
 ```java
+import java.util.concurrent.atomic.AtomicInteger;
+
 AtomicInteger counter = new AtomicInteger(0);
-counter.incrementAndGet();
+counter.incrementAndGet(); // Thread-safe increment
 ```
 
-### Thread Communication
-
-- **wait(), notify(), notifyAll():** For inter-thread communication.
+### Executors
 
 ```java
-synchronized (obj) {
-    obj.wait(); // Release lock and wait
-    // ...
-    obj.notify(); // Wake up waiting threads
-}
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+ExecutorService executor = Executors.newFixedThreadPool(10);
+executor.submit(() -> {
+    // Task
+});
+executor.shutdown();
 ```
-
-### Concurrency Utilities
-
-- **ExecutorService:** For managing thread pools.
-- **Lock interface:** More flexible than synchronized.
-- **Semaphore:** Controls access to resources.
-- **CountDownLatch:** Allows threads to wait for each other.
-- **CyclicBarrier:** Synchronizes threads at a barrier.
 
 ## Real-world Examples & Use Cases
 
 - **Web Servers:** Handling multiple client requests concurrently.
-- **Data Processing:** Parallel processing of large datasets.
 - **GUI Applications:** Keeping UI responsive while performing background tasks.
-- **Game Development:** Updating game state and rendering simultaneously.
+- **Data Processing:** Parallel processing of large datasets.
+- **Game Development:** Managing game loops, physics, and rendering in separate threads.
 
 ## Code Examples
 
-### Basic Thread Creation
+### Producer-Consumer Problem
 
 ```java
-public class ThreadExample {
-    public static void main(String[] args) {
-        Thread thread1 = new Thread(() -> {
-            for (int i = 0; i < 5; i++) {
-                System.out.println("Thread 1: " + i);
-            }
-        });
-        
-        Thread thread2 = new Thread(() -> {
-            for (int i = 0; i < 5; i++) {
-                System.out.println("Thread 2: " + i);
-            }
-        });
-        
-        thread1.start();
-        thread2.start();
-    }
-}
-```
+import java.util.LinkedList;
+import java.util.Queue;
 
-### Synchronization Example
+public class ProducerConsumer {
+    private final Queue<Integer> queue = new LinkedList<>();
+    private final int capacity = 10;
 
-```java
-public class Counter {
-    private int count = 0;
-    
-    public synchronized void increment() {
-        count++;
+    public void produce() throws InterruptedException {
+        int value = 0;
+        while (true) {
+            synchronized (this) {
+                while (queue.size() == capacity) {
+                    wait();
+                }
+                System.out.println("Produced: " + value);
+                queue.add(value++);
+                notify();
+                Thread.sleep(1000);
+            }
+        }
     }
-    
-    public int getCount() {
-        return count;
-    }
-}
 
-public class SyncExample {
-    public static void main(String[] args) throws InterruptedException {
-        Counter counter = new Counter();
-        
-        Thread t1 = new Thread(() -> {
-            for (int i = 0; i < 1000; i++) {
-                counter.increment();
+    public void consume() throws InterruptedException {
+        while (true) {
+            synchronized (this) {
+                while (queue.isEmpty()) {
+                    wait();
+                }
+                int val = queue.remove();
+                System.out.println("Consumed: " + val);
+                notify();
+                Thread.sleep(1000);
             }
-        });
-        
-        Thread t2 = new Thread(() -> {
-            for (int i = 0; i < 1000; i++) {
-                counter.increment();
-            }
-        });
-        
-        t1.start();
-        t2.start();
-        t1.join();
-        t2.join();
-        
-        System.out.println("Final count: " + counter.getCount()); // Should be 2000
+        }
     }
 }
 ```
@@ -193,40 +183,54 @@ public class SyncExample {
 ```java
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class ExecutorExample {
     public static void main(String[] args) {
-        ExecutorService executor = Executors.newFixedThreadPool(2);
+        ExecutorService executor = Executors.newFixedThreadPool(3);
         
-        executor.submit(() -> System.out.println("Task 1"));
-        executor.submit(() -> System.out.println("Task 2"));
+        for (int i = 0; i < 5; i++) {
+            executor.submit(() -> {
+                System.out.println("Task executed by " + Thread.currentThread().getName());
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            });
+        }
         
         executor.shutdown();
+        try {
+            executor.awaitTermination(10, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 }
 ```
 
 ## Common Pitfalls & Edge Cases
 
-- **Race Conditions:** When multiple threads access shared data without proper synchronization.
+- **Race Conditions:** Multiple threads accessing shared data without synchronization.
 - **Deadlocks:** Threads waiting for each other indefinitely.
-- **Starvation:** A thread unable to gain access to resources.
-- **Memory Consistency Issues:** Changes not visible across threads without volatile or synchronization.
+- **Starvation:** Some threads never get CPU time.
+- **Memory Visibility:** Changes not visible across threads without proper synchronization.
 
 ## Tools & Libraries
 
-- **Thread Dump:** jstack for analyzing thread states.
-- **VisualVM:** Monitor threads and detect deadlocks.
-- **Java Concurrency Utilities:** java.util.concurrent package.
+- **Thread Dump Analysis:** jstack for analyzing thread states.
+- **VisualVM:** Monitoring thread activity.
+- **Concurrent Utilities:** java.util.concurrent package.
 
 ## References
 
-- [Oracle Concurrency Tutorial](https://docs.oracle.com/javase/tutorial/essential/concurrency/)
+- [Oracle Java Concurrency Tutorial](https://docs.oracle.com/javase/tutorial/essential/concurrency/)
 - [Baeldung: Java Concurrency](https://www.baeldung.com/java-concurrency)
 - [GeeksforGeeks: Multithreading in Java](https://www.geeksforgeeks.org/multithreading-in-java/)
 
 ## Github-README Links & Related Topics
 
-- [Java Concurrent Collections](../java-concurrent-collections)
-- [Java Locks and Synchronizers](../java-locks-and-synchronizers)
-- [Java Atomic Variables](../java-atomic-variables)
+- [Java Atomic Variables](../java-atomic-variables/README.md)
+- [Java Locks](../java-locks/README.md)
+- [Java ExecutorService](../java-executorservice/README.md)

@@ -1,14 +1,16 @@
 ---
 title: Java Fundamentals
-aliases: [Java Basics, Core Java]
+aliases: []
 tags: [#java]
-created: 2025-09-25
+created: 2025-09-26
 updated: 2025-09-26
 ---
 
+# Java Fundamentals
+
 ## Overview
 
-Java Fundamentals cover the basic building blocks of the Java programming language, including data types, variables, operators, control structures, and basic syntax. These concepts form the foundation for writing Java programs.
+Java Fundamentals cover the basic building blocks of the Java programming language, including data types, variables, operators, control structures, methods, and classes. These concepts form the foundation for writing Java programs and are essential for understanding more advanced topics.
 
 ## Detailed Explanation
 
@@ -16,57 +18,51 @@ Java Fundamentals cover the basic building blocks of the Java programming langua
 
 Java has two categories of data types: primitive and reference.
 
-**Primitive types:**
-- byte: 8-bit signed integer
-- short: 16-bit signed integer
-- int: 32-bit signed integer
-- long: 64-bit signed integer
-- float: 32-bit floating point
-- double: 64-bit floating point
-- char: 16-bit Unicode character
-- boolean: true or false
+| Primitive Type | Size | Range |
+|----------------|------|-------|
+| byte | 1 byte | -128 to 127 |
+| short | 2 bytes | -32,768 to 32,767 |
+| int | 4 bytes | -2^31 to 2^31-1 |
+| long | 8 bytes | -2^63 to 2^63-1 |
+| float | 4 bytes | ~6-7 decimal digits |
+| double | 8 bytes | ~15 decimal digits |
+| char | 2 bytes | 0 to 65,535 |
+| boolean | 1 byte | true or false |
 
-**Reference types:** classes, interfaces, arrays, etc., which store references to objects.
+Reference types include classes, interfaces, arrays, etc.
 
 ### Variables
 
-Variables are containers for storing data values. They must be declared with a data type before use.
+Variables are containers for storing data values.
 
 ```java
 int age = 25;
-String name = "John Doe";
-boolean isStudent = true;
+String name = "John";
+final double PI = 3.14159; // constant
 ```
-
-Variables can be local, instance, or static.
 
 ### Operators
 
-**Arithmetic operators:** +, -, *, /, %
-
-**Comparison operators:** ==, !=, <, >, <=, >=
-
-**Logical operators:** && (and), || (or), ! (not)
-
-**Assignment operators:** =, +=, -=, *=, /=, %=
-
-**Bitwise operators:** &, |, ^, ~, <<, >>
+- Arithmetic: +, -, *, /, %
+- Relational: ==, !=, >, <, >=, <=
+- Logical: &&, ||, !
+- Assignment: =, +=, -=, etc.
 
 ### Control Structures
 
-**Conditional statements:**
+#### If-Else
 
 ```java
 if (condition) {
-    // execute if true
+    // code
 } else if (anotherCondition) {
-    // execute if another true
+    // code
 } else {
-    // execute otherwise
+    // code
 }
 ```
 
-**Switch statement:**
+#### Switch
 
 ```java
 switch (variable) {
@@ -81,42 +77,66 @@ switch (variable) {
 }
 ```
 
-**Loops:**
-
-- For loop:
+#### Loops
 
 ```java
+// For loop
 for (int i = 0; i < 10; i++) {
     System.out.println(i);
 }
-```
 
-- While loop:
-
-```java
+// While loop
 while (condition) {
     // code
 }
-```
 
-- Do-while loop:
-
-```java
+// Do-while
 do {
     // code
 } while (condition);
 ```
 
+### Methods
+
+Methods are blocks of code that perform specific tasks.
+
+```java
+public static int add(int a, int b) {
+    return a + b;
+}
+```
+
+### Classes and Objects
+
+```java
+public class Car {
+    String model;
+    int year;
+    
+    public Car(String model, int year) {
+        this.model = model;
+        this.year = year;
+    }
+    
+    public void display() {
+        System.out.println(model + " " + year);
+    }
+}
+
+// Usage
+Car myCar = new Car("Toyota", 2020);
+myCar.display();
+```
+
 ## Real-world Examples & Use Cases
 
-- **User Input Validation:** Using conditionals to check if user input meets criteria.
-- **Data Processing:** Looping through arrays or lists to perform calculations.
-- **Configuration Settings:** Using variables to store application settings.
-- **Simple Calculator:** Implementing arithmetic operations based on user choice.
+- **Calculator Application:** Using arithmetic operators and methods for calculations.
+- **Student Grade System:** Using variables, arrays, and control structures to manage student data.
+- **Simple Banking System:** Classes and objects to represent accounts with basic operations.
 
 ## Code Examples
 
-### Hello World Program
+### Hello World
 
 ```java
 public class HelloWorld {
@@ -126,38 +146,30 @@ public class HelloWorld {
 }
 ```
 
-### Basic Calculator
+### Simple Calculator
 
 ```java
+import java.util.Scanner;
+
 public class Calculator {
     public static void main(String[] args) {
-        int a = 10;
-        int b = 5;
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter first number: ");
+        double num1 = scanner.nextDouble();
+        System.out.print("Enter operator (+, -, *, /): ");
+        char operator = scanner.next().charAt(0);
+        System.out.print("Enter second number: ");
+        double num2 = scanner.nextDouble();
         
-        System.out.println("Addition: " + (a + b));
-        System.out.println("Subtraction: " + (a - b));
-        System.out.println("Multiplication: " + (a * b));
-        System.out.println("Division: " + (a / b));
-    }
-}
-```
-
-### Using Control Structures
-
-```java
-public class GradeCalculator {
-    public static void main(String[] args) {
-        int score = 85;
-        
-        if (score >= 90) {
-            System.out.println("Grade: A");
-        } else if (score >= 80) {
-            System.out.println("Grade: B");
-        } else if (score >= 70) {
-            System.out.println("Grade: C");
-        } else {
-            System.out.println("Grade: F");
+        double result = 0;
+        switch (operator) {
+            case '+': result = num1 + num2; break;
+            case '-': result = num1 - num2; break;
+            case '*': result = num1 * num2; break;
+            case '/': result = num1 / num2; break;
+            default: System.out.println("Invalid operator");
         }
+        System.out.println("Result: " + result);
     }
 }
 ```
@@ -169,6 +181,6 @@ public class GradeCalculator {
 
 ## Github-README Links & Related Topics
 
-- [OOP Principles in Java](../oop-principles-in-java)
-- [Collections & Data Structures](../collections-and-data-structures)
-- [Java Stream API & Functional Programming](../java-stream-api-and-functional-programming)
+- [OOP Principles in Java](../oop-principles-in-java/README.md)
+- [JVM Internals & Class Loading](../jvm-internals-and-class-loading/README.md)
+- [Java Collections Deep Dive](../java-collections-deep-dive/README.md)
