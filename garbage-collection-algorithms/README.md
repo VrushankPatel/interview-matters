@@ -155,7 +155,7 @@ public class GCMonitor {
 
 ## Github-README Links & Related Topics
 
-- [Java Memory Management](./java-memory-management/)
-- [GC Tuning](./gc-tuning/)
-- [JVM Internals & Class Loading](./jvm-internals-and-class-loading/)
-- [Java](./java/)
+- [Java Memory Management](../java-memory-management/README.md)
+- [GC Tuning](../gc-tuning/README.md)
+- [JVM Internals & Class Loading](../jvm-internals-and-class-loading/README.md)
+- [Java](../java/README.md)

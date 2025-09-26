@@ -222,9 +222,9 @@ public class ExecutorExample {
 
 ## Github-README Links & Related Topics
 
-- [Java Fundamentals](./java-fundamentals/)
-- [Java Atomic Variables](./java-atomic-variables/)
-- [Java ConcurrentHashMap](./java-concurrenthashmap/)
-- [Java ExecutorService](./java-executorservice/)
-- [Java Synchronized Blocks](./java-synchronized-blocks/)
-- [Java Volatile Keyword](./java-volatile-keyword/)
+- [Java Fundamentals](../java-fundamentals/README.md)
+- [Java Atomic Variables](../java-atomic-variables/README.md)
+- [Java ConcurrentHashMap](../java-concurrenthashmap/README.md)
+- [Java ExecutorService](../java-executorservice/README.md)
+- [Java Synchronized Blocks](../java-synchronized-blocks/README.md)
+- [Java Volatile Keyword](../java-volatile-keyword/README.md)

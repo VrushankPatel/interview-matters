@@ -167,8 +167,8 @@ public class Main {
 
 ## Github-README Links & Related Topics
 
-- [Java Fundamentals](./java-fundamentals/)
-- [Inheritance in Java](./inheritance-in-java/)
-- [Polymorphism in Java](./polymorphism-in-java/)
-- [Encapsulation in Java](./encapsulation-in-java/)
-- [Abstraction in Java](./abstraction-in-java/)
+- [Java Fundamentals](../java-fundamentals/README.md)
+- [Inheritance in Java](../inheritance-in-java/README.md)
+- [Polymorphism in Java](../polymorphism-in-java/README.md)
+- [Encapsulation in Java](../encapsulation-in-java/README.md)
+- [Abstraction in Java](../abstraction-in-java/README.md)

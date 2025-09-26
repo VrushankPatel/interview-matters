@@ -56,6 +56,17 @@ Java has two categories of data types: primitive and reference.
 - **Streams**: For reading/writing data.
 - **Files**: Using File, FileReader, etc.
 
+### Java Program Execution Flow
+
+```mermaid
+graph TD;
+    A[Write Java Code (.java)] --> B[Compile with javac];
+    B --> C[Generate Bytecode (.class)];
+    C --> D[Run with java command];
+    D --> E[JVM loads and executes bytecode];
+    E --> F[Output results];
+```
+
 ## Real-world Examples & Use Cases
 
 - **Web Applications**: Building REST APIs with Spring Boot.
@@ -164,7 +175,7 @@ public class Person {
 
 ## Github-README Links & Related Topics
 
-- [OOP Principles in Java](./oop-principles-in-java/)
-- [JVM Internals & Class Loading](./jvm-internals-and-class-loading/)
-- [Collections & Data Structures](./collections-and-data-structures/)
-- [Java Stream API & Functional Programming](./java-stream-api-and-functional-programming/)
+- [OOP Principles in Java](../oop-principles-in-java/README.md)
+- [JVM Internals & Class Loading](../jvm-internals-and-class-loading/README.md)
+- [Collections & Data Structures](../collections-and-data-structures/README.md)
+- [Java Stream API & Functional Programming](../java-stream-api-and-functional-programming/README.md)
