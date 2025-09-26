@@ -1,9 +1,4 @@
-
-Monitoring and Logging
-Async logging
-DevOps & Infrastructure as Code
-Proxy forward and reverse
-Load balancing and strategies
+ 
 Rate limiting
 Concurrency & Parallelism
 Java Fundamentals
@@ -14,3 +9,8 @@ Multithreading & Concurrency in Java
 Twitter System Design
 Instagram System Design
 Google Maps System Design
+System Design Basics
+High Scalability Patterns
+CAP Theorem & Distributed Systems
+LLD HLD basics
+Replication vs Sharding vs Partitioning
