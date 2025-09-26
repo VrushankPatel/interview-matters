@@ -326,3 +326,11 @@ This repository contains comprehensive documentation on various topics for inter
 - [Three Phase Commit](./three-phase-commit/README.md)
 - [Time in Force Variations](./time-in-force-variations/README.md)
 - [Zookeeper for Coordination](./zookeeper-for-coordination/README.md)
+
+### Interview Preparation
+- [Behavioral Interview Questions](./behavioral-interview-questions/README.md)
+- [System Design Interview Tips](./system-design-interview-tips/README.md)
+- [Coding Interview Strategies](./coding-interview-strategies/README.md)
+- [Resume Optimization for Tech Jobs](./resume-optimization-for-tech-jobs/README.md)
+- [Negotiation Strategies for Offers](./negotiation-strategies-for-offers/README.md)
+
