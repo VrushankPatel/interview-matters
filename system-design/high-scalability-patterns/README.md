@@ -3,7 +3,7 @@ title: High Scalability Patterns
 aliases: [Horizontal Scaling, Vertical Scaling, Load Distribution]
 tags: [#system-design,#scalability,#performance]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Overview
@@ -170,6 +170,22 @@ def get_data():
 if __name__ == '__main__':
     app.run(port=5001)
 ```
+
+# Common Pitfalls & Edge Cases
+
+- Choosing vertical scaling for applications expecting exponential growth
+- Ignoring data consistency issues in horizontal scaling
+- Poor load balancer configuration causing uneven load distribution
+- Auto-scaling policies that react too slowly to traffic spikes
+- Over-provisioning resources leading to high costs
+
+# Tools & Libraries
+
+- **Horizontal Scaling:** Kubernetes, Docker Swarm, AWS ECS
+- **Vertical Scaling:** Cloud VMs (AWS EC2, GCP Compute Engine)
+- **Load Balancing:** NGINX, HAProxy, AWS ELB
+- **Caching:** Redis, Memcached
+- **Monitoring:** Prometheus, Grafana, New Relic
 
 # References
 

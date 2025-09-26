@@ -1,8 +1,3 @@
-- System Design Basics
-- High Scalability Patterns
-- CAP Theorem & Distributed Systems
-- Replication vs Sharding vs Partitioning
-- Caching
 - LLD HLD Basics
 - Latency and Throughput Zero to Hero
 - Monitoring and Logging

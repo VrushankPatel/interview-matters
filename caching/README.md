@@ -133,6 +133,21 @@ app.get('/api/data', (req, res) => {
 });
 ```
 
+## Common Pitfalls & Edge Cases
+
+- Cache invalidation leading to stale data
+- Thundering herd problem when cache expires
+- Cache poisoning from malicious inputs
+- Memory exhaustion in in-memory caches
+- Over-caching reducing performance gains
+
+## Tools & Libraries
+
+- **In-Memory:** Redis, Memcached
+- **Disk-Based:** Ehcache, Caffeine
+- **HTTP Caching:** Browser caches, CDN
+- **Frameworks:** Spring Cache, Hibernate Cache
+
 ## References
 
 - [Cache (computing)](https://en.wikipedia.org/wiki/Cache_(computing))

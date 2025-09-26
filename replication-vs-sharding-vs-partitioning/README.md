@@ -168,6 +168,20 @@ INSERT INTO sales (sale_date, amount) VALUES ('2023-06-01', 100.00);
 INSERT INTO sales (sale_date, amount) VALUES ('2024-06-01', 200.00);
 ```
 
+## Common Pitfalls & Edge Cases
+
+- Selecting a shard key that causes hotspots
+- Replication lag leading to stale data reads
+- Partition maintenance causing downtime
+- Cross-shard queries degrading performance
+- Backup complexities in sharded systems
+
+## Tools & Libraries
+
+- **Replication:** PostgreSQL, MySQL, MongoDB
+- **Sharding:** MongoDB, Cassandra, Elasticsearch
+- **Partitioning:** PostgreSQL, Oracle, SQL Server
+
 ## References
 
 - [Replication (computing) - Wikipedia](https://en.wikipedia.org/wiki/Replication_(computing))
