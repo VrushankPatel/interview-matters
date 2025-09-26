@@ -1,8 +1,8 @@
 ---
 title: Event-Driven Architecture
-aliases: []
+aliases: [EDA, Event Driven Architecture]
 tags: [#system-design,#distributed-systems]
-created: 2025-09-25
+created: 2025-09-26
 updated: 2025-09-26
 ---
 

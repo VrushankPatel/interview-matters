@@ -2,9 +2,11 @@
 title: CI/CD Best Practices
 aliases: [Continuous Integration Best Practices, Continuous Deployment]
 tags: [#devops,#ci-cd,#automation]
-created: 2025-09-25
+created: 2025-09-26
 updated: 2025-09-26
 ---
+
+# CI/CD Best Practices
 
 ## Overview
 

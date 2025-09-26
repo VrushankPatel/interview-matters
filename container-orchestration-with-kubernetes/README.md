@@ -1,7 +1,7 @@
 ---
 title: Container Orchestration with Kubernetes
-aliases: []
-tags: [#kubernetes, #container-orchestration, #devops]
+aliases: [Kubernetes Orchestration, K8s]
+tags: [#devops,#container-orchestration]
 created: 2025-09-26
 updated: 2025-09-26
 ---

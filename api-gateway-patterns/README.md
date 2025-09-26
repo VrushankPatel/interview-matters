@@ -1,8 +1,8 @@
 ---
 title: API Gateway Patterns
-aliases: [api gateway patterns]
-tags: [#api-gateway,#microservices,#system-design]
-created: 2025-09-25
+aliases: [API Gateway, Gateway Patterns]
+tags: [#system-design,#microservices]
+created: 2025-09-26
 updated: 2025-09-26
 ---
 
