@@ -6,6 +6,8 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
+# LLD HLD Basics
+
 ## Overview
 
 Low Level Design (LLD) and High Level Design (HLD) are fundamental concepts in system design interviews. HLD provides a bird's-eye view of the system's architecture, focusing on components, data flow, and scalability. LLD dives into the implementation details, including class diagrams, data structures, algorithms, and APIs. Mastering both is essential for designing robust, scalable systems.

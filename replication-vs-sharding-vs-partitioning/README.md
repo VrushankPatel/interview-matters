@@ -6,6 +6,8 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
+# Replication vs Sharding vs Partitioning
+
 ## Overview
 
 Data distribution strategies are essential for scaling databases to handle large volumes of data and high traffic. This document compares three key strategies: **Replication**, **Sharding**, and **Partitioning**. Each serves different purposes in achieving scalability, availability, and performance.
