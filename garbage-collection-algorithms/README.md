@@ -81,6 +81,56 @@ public class ResourceHolder {
 }
 ```
 
+### Memory Leak Detection
+
+```java
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
+
+public class MemoryLeakDemo {
+    private static List<Object> leakList = new ArrayList<>();
+
+    public static void main(String[] args) {
+        // Simulate memory leak
+        for (int i = 0; i < 100000; i++) {
+            leakList.add(new byte[1024]); // 1KB objects
+        }
+
+        // Use jmap or VisualVM to observe heap growth
+        System.out.println("Objects created: " + leakList.size());
+    }
+}
+```
+
+### GC Tuning Example
+
+```bash
+# JVM flags for G1 GC tuning
+java -XX:+UseG1GC \
+     -XX:MaxGCPauseMillis=200 \
+     -XX:G1HeapRegionSize=16m \
+     -XX:InitiatingHeapOccupancyPercent=45 \
+     -Xmx4g -Xms4g \
+     MyApplication
+```
+
+## Common Pitfalls & Edge Cases
+
+- **Premature optimization**: Tuning GC without profiling can degrade performance
+- **Memory leaks**: Objects held by static references or long-lived collections
+- **GC thrashing**: Frequent GC due to insufficient heap size
+- **Reference cycles**: Soft/weak references not being cleared appropriately
+- **Large object allocation**: Objects larger than region size in G1 causing inefficiencies
+
+## Tools & Libraries
+
+- **JDK Tools**: jstat, jmap, jstack, jcmd for GC monitoring
+- **VisualVM**: GUI tool for heap analysis and GC visualization
+- **GCViewer**: Analyzes GC logs and provides detailed statistics
+- **JProfiler**: Commercial profiler with advanced GC analysis
+- **Eclipse Memory Analyzer (MAT)**: Heap dump analysis for memory leak detection
+
 ## References
 
 - [Oracle GC Tuning Guide](https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/)

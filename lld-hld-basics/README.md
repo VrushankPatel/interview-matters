@@ -196,6 +196,23 @@ CREATE TABLE sessions (
 );
 ```
 
+## Common Pitfalls & Edge Cases
+
+- **Over-engineering in HLD**: Adding unnecessary complexity without clear requirements
+- **Under-specification in LLD**: Missing edge cases leading to bugs in implementation
+- **Tight coupling**: Poor abstraction causing difficulties in testing and maintenance
+- **Ignoring scalability**: HLD that doesn't account for future growth
+- **Inconsistent naming**: Across classes, APIs, and databases causing confusion
+- **Missing error handling**: In LLD, not defining how exceptions are managed
+
+## Tools & Libraries
+
+- **Diagramming Tools**: Draw.io, Lucidchart, PlantUML for HLD diagrams
+- **UML Tools**: StarUML, Enterprise Architect for class and sequence diagrams
+- **API Design**: Swagger/OpenAPI for API specifications
+- **Database Design**: ERwin, MySQL Workbench for schema design
+- **Version Control**: Git for collaborative design reviews
+
 ## References
 
 - [Difference between High Level Design(HLD) and Low Level Design(LLD) - GeeksforGeeks](https://www.geeksforgeeks.org/difference-between-high-level-design-and-low-level-design/)
