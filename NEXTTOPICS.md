@@ -1,10 +1,5 @@
-Java Fundamentals
-OOP Principles in Java
-JVM Internals & Class Loading
-Garbage Collection Algorithms
-Multithreading & Concurrency in Java
-Collections & Data Structures
-Java Stream API & Functional Programming
-System Design Basics
-High Scalability Patterns
-CAP Theorem & Distributed Systems
+00006| Collections & Data Structures
+00007| Java Stream API & Functional Programming
+00008| System Design Basics
+00009| High Scalability Patterns
+00010| CAP Theorem & Distributed Systems
