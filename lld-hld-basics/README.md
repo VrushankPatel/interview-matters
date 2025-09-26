@@ -1,7 +1,7 @@
 ---
 title: LLD HLD Basics
-aliases: [Low Level Design High Level Design Basics, LLD HLD Fundamentals]
-tags: [#system-design, #lld, #hld]
+aliases: ["Low Level Design High Level Design Basics", "LLD HLD Fundamentals"]
+tags: [#system-design,#lld,#hld]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -32,6 +32,17 @@ LLD dives into the specifics of each component:
 - **API Contracts**: Endpoints, request/response formats.
 - **Algorithms**: Detailed logic for operations.
 - **Concurrency Handling**: Threading, locking mechanisms.
+
+### HLD vs LLD Comparison
+```mermaid
+graph TD
+    A[HLD] --> B[System Architecture]
+    A --> C[Component Interactions]
+    A --> D[Technology Stack]
+    E[LLD] --> F[Class Design]
+    E --> G[Algorithm Details]
+    E --> H[Data Structures]
+```
 
 ## Real-world Examples & Use Cases
 

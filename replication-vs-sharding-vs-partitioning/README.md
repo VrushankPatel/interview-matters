@@ -1,7 +1,7 @@
 ---
 title: Replication vs Sharding vs Partitioning
-aliases: [Database Replication Sharding Partitioning, Data Distribution Strategies]
-tags: [#system-design, #database, #scalability]
+aliases: ["Database Replication Sharding Partitioning", "Data Distribution Strategies"]
+tags: [#system-design,#database,#scalability]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -40,6 +40,13 @@ Partitioning divides a single database into smaller pieces:
 - **Benefits**: Improved query performance, easier maintenance
 - **Trade-offs**: Limited to single database instance
 - **Use Cases**: Large tables in traditional RDBMS
+
+### Comparison Table
+| Strategy | Purpose | Scalability | Complexity | Consistency |
+|----------|---------|-------------|------------|-------------|
+| Replication | Availability & Read Performance | Read Scalable | Low | Eventual |
+| Sharding | Write Scalability | Highly Scalable | High | Strong (per shard) |
+| Partitioning | Query Performance | Limited | Medium | Strong |
 
 ## Real-world Examples & Use Cases
 
