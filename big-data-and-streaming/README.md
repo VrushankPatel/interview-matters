@@ -1,6 +1,6 @@
 # big data and streaming
-- [apache-flink](0/README.md)
-- [apache-kafka](0/README.md)
-- [apache-kafka-streams](0/README.md)
-- [event-streaming-with-apache-kafka](0/README.md)
-- [README.md](0/README.md)
+- [apache-flink](apache-flink/README.md)
+- [apache-kafka](apache-kafka/README.md)
+- [apache-kafka-streams](apache-kafka-streams/README.md)
+- [event-streaming-with-apache-kafka](event-streaming-with-apache-kafka/README.md)
+- [README.md](README.md/README.md)
