@@ -3,7 +3,7 @@ title: Database ACID Properties
 aliases: []
 tags: [#database, #system-design]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Database ACID Properties
