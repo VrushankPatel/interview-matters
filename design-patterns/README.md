@@ -1,66 +1,115 @@
 ---
 title: Design Patterns
-aliases: [software design patterns, gang of four patterns]
-tags: [#system-design,#design-patterns]
-created: 2025-09-25
+aliases: [Software Design Patterns, OOP Patterns]
+tags: [#design-patterns, #software-engineering, #oop]
+created: 2025-09-26
 updated: 2025-09-26
 ---
 
-## Overview
-Design patterns are proven solutions to recurring design problems in software development. They provide a template for how to solve a problem in a way that is reusable, maintainable, and efficient. Introduced by the Gang of Four (GoF) in their book "Design Patterns: Elements of Reusable Object-Oriented Software", design patterns are categorized into three main types: Creational, Structural, and Behavioral.
+# Overview
 
-## Detailed Explanation
+Design patterns are general, reusable solutions to commonly occurring problems in software design. They provide templates for structuring code to improve maintainability, scalability, and reusability, particularly in object-oriented programming. Originating from architecture and formalized in the 1990s by the "Gang of Four" (GoF), they are categorized into creational, structural, behavioral, and concurrency patterns.
+
+# Detailed Explanation
+
+Design patterns emerged from Christopher Alexander's architectural patterns in the 1970s and were adapted to software by Kent Beck and Ward Cunningham in the 1980s. The seminal book *Design Patterns: Elements of Reusable Object-Oriented Software* by Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides (1994) cataloged 23 patterns, influencing modern software engineering.
+
+Patterns are not rigid code but adaptable templates. They promote best practices like loose coupling, high cohesion, and separation of concerns. While primarily OOP-focused, they apply to other paradigms too.
+
+## Categories of Design Patterns
+
+Design patterns are grouped by purpose:
+
+- **Creational**: Handle object creation mechanisms.
+- **Structural**: Compose classes and objects into larger structures.
+- **Behavioral**: Define communication and responsibility between objects.
+- **Concurrency**: Manage multi-threaded programming.
+
+```mermaid
+graph TD
+    A[Design Patterns] --> B[Creational]
+    A --> C[Structural]
+    A --> D[Behavioral]
+    A --> E[Concurrency]
+    B --> F[Singleton]
+    B --> G[Factory Method]
+    C --> H[Adapter]
+    C --> I[Decorator]
+    D --> J[Observer]
+    D --> K[Strategy]
+    E --> L[Thread Pool]
+    E --> M[Reactor]
+```
+
 ### Creational Patterns
-These patterns deal with object creation mechanisms, trying to create objects in a manner suitable to the situation.
 
-- **Singleton**: Ensures a class has only one instance and provides a global point of access to it.
-- **Factory Method**: Defines an interface for creating an object, but lets subclasses decide which class to instantiate.
-- **Abstract Factory**: Provides an interface for creating families of related or dependent objects without specifying their concrete classes.
-- **Builder**: Separates the construction of a complex object from its representation.
-- **Prototype**: Creates new objects by copying an existing object.
+| Pattern | Description | Use Case |
+|---------|-------------|----------|
+| Singleton | Ensures a class has only one instance and provides global access. | Logging, configuration managers. |
+| Factory Method | Defines an interface for creating objects, letting subclasses decide instantiation. | UI component creation. |
+| Abstract Factory | Provides an interface for creating families of related objects. | Cross-platform UI toolkits. |
+| Builder | Separates construction of complex objects from representation. | Building SQL queries or documents. |
+| Prototype | Creates new objects by copying existing ones. | Game object cloning. |
 
 ### Structural Patterns
-These patterns concern class and object composition, focusing on how classes and objects are composed to form larger structures.
 
-- **Adapter**: Allows incompatible interfaces to work together.
-- **Bridge**: Decouples an abstraction from its implementation.
-- **Composite**: Composes objects into tree structures to represent part-whole hierarchies.
-- **Decorator**: Adds additional responsibilities to an object dynamically.
-- **Facade**: Provides a unified interface to a set of interfaces in a subsystem.
-- **Flyweight**: Uses sharing to support large numbers of fine-grained objects efficiently.
-- **Proxy**: Provides a placeholder or surrogate for another object to control access to it.
+| Pattern | Description | Use Case |
+|---------|-------------|----------|
+| Adapter | Converts interface of a class into another expected by clients. | Integrating legacy code with new systems. |
+| Bridge | Decouples abstraction from implementation. | GUI frameworks with multiple rendering engines. |
+| Composite | Composes objects into tree structures for uniform treatment. | File system hierarchies. |
+| Decorator | Adds responsibilities to objects dynamically. | Adding features like encryption to streams. |
+| Facade | Provides a simplified interface to a complex subsystem. | API gateways. |
+| Flyweight | Shares objects to support large numbers of fine-grained objects efficiently. | Text editors with character objects. |
+| Proxy | Provides a placeholder for another object to control access. | Lazy loading or security proxies. |
 
 ### Behavioral Patterns
-These patterns are concerned with algorithms and the assignment of responsibilities between objects.
 
-- **Chain of Responsibility**: Passes requests along a chain of handlers.
-- **Command**: Encapsulates a request as an object.
-- **Interpreter**: Defines a representation for a grammar and an interpreter.
-- **Iterator**: Provides a way to access elements of an aggregate object sequentially.
-- **Mediator**: Defines how a set of objects interact.
-- **Memento**: Captures and externalizes an object's internal state.
-- **Observer**: Defines a one-to-many dependency between objects.
-- **State**: Allows an object to alter its behavior when its internal state changes.
-- **Strategy**: Defines a family of algorithms, encapsulates each one, and makes them interchangeable.
-- **Template Method**: Defines the skeleton of an algorithm in a method, deferring some steps to subclasses.
-- **Visitor**: Represents an operation to be performed on elements of an object structure.
+| Pattern | Description | Use Case |
+|---------|-------------|----------|
+| Chain of Responsibility | Passes requests along a chain of handlers. | Event handling in UI. |
+| Command | Encapsulates requests as objects. | Undo/redo functionality. |
+| Interpreter | Defines a grammar and interpreter for sentences. | SQL parsers. |
+| Iterator | Provides sequential access to elements without exposing internals. | Collections traversal. |
+| Mediator | Defines communication between objects. | Chat rooms. |
+| Memento | Captures and restores object state. | Save/load game states. |
+| Observer | Notifies dependents of state changes. | Model-view updates. |
+| State | Allows objects to change behavior based on state. | Vending machines. |
+| Strategy | Defines interchangeable algorithms. | Sorting algorithms. |
+| Template Method | Defines algorithm skeleton, deferring steps to subclasses. | Frameworks like Spring. |
+| Visitor | Defines operations on elements of an object structure. | Compilers traversing ASTs. |
 
-## Real-world Examples & Use Cases
-- **Singleton**: Database connection pool, logging service.
-- **Factory Method**: GUI components creation in different operating systems.
-- **Observer**: Event handling in user interfaces, publish-subscribe systems.
-- **Strategy**: Payment processing with different algorithms (credit card, PayPal).
-- **Decorator**: Adding features to a base object, like adding toppings to a pizza.
-- **Adapter**: Integrating legacy code with new systems.
+### Concurrency Patterns
 
-## Code Examples
-### Singleton Pattern
+| Pattern | Description | Use Case |
+|---------|-------------|----------|
+| Active Object | Decouples method execution from invocation. | Asynchronous processing. |
+| Balking | Only executes if object is in correct state. | Resource management. |
+| Double-Checked Locking | Optimizes singleton in multi-threaded environments. | Thread-safe singletons. |
+| Reactor | Handles service requests concurrently. | Network servers. |
+| Thread Pool | Manages pool of worker threads. | Web servers. |
+
+# Real-world Examples & Use Cases
+
+- **Singleton**: Used in Java's `Runtime.getRuntime()` for JVM management or Python's `logging` module for centralized logging.
+- **Factory Method**: In Java's `Calendar.getInstance()` for locale-specific calendars.
+- **Observer**: GUI frameworks like JavaFX or React's state management for reactive updates.
+- **Strategy**: Payment processing systems allowing different algorithms (credit card, PayPal).
+- **Decorator**: Java's `BufferedReader` wrapping `FileReader` for buffering.
+- **Facade**: Simplifying complex APIs, e.g., JDBC for database access.
+- **Command**: Undo systems in text editors like VS Code.
+- **Adapter**: Wrapping third-party libraries to match application interfaces.
+- **Proxy**: Virtual proxies for lazy loading images in web apps.
+- **Thread Pool**: Executors in Java for managing concurrent tasks.
+
+# Code Examples
+
+## Singleton (Java)
+
 ```java
 public class Singleton {
     private static Singleton instance;
-    
     private Singleton() {}
-    
     public static Singleton getInstance() {
         if (instance == null) {
             instance = new Singleton();
@@ -70,40 +119,59 @@ public class Singleton {
 }
 ```
 
-### Factory Method Pattern
+## Singleton (Python)
+
+```python
+class Singleton:
+    _instance = None
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+```
+
+## Factory Method (Java)
+
 ```java
-interface Shape {
-    void draw();
+interface Product {}
+class ConcreteProductA implements Product {}
+class ConcreteProductB implements Product {}
+
+interface Creator {
+    Product factoryMethod();
 }
 
-class Circle implements Shape {
-    public void draw() {
-        System.out.println("Drawing Circle");
-    }
-}
-
-class Rectangle implements Shape {
-    public void draw() {
-        System.out.println("Drawing Rectangle");
-    }
-}
-
-abstract class ShapeFactory {
-    abstract Shape createShape();
-}
-
-class CircleFactory extends ShapeFactory {
-    Shape createShape() {
-        return new Circle();
+class ConcreteCreatorA implements Creator {
+    public Product factoryMethod() {
+        return new ConcreteProductA();
     }
 }
 ```
 
-### Observer Pattern
-```java
-import java.util.ArrayList;
-import java.util.List;
+## Factory Method (Python)
 
+```python
+from abc import ABC, abstractmethod
+
+class Product(ABC):
+    pass
+
+class ConcreteProductA(Product):
+    pass
+
+class Creator(ABC):
+    @abstractmethod
+    def factory_method(self):
+        pass
+
+class ConcreteCreatorA(Creator):
+    def factory_method(self):
+        return ConcreteProductA()
+```
+
+## Observer (Java)
+
+```java
 interface Observer {
     void update(String message);
 }
@@ -114,27 +182,54 @@ class ConcreteObserver implements Observer {
     }
 }
 
-class Subject {
+interface Subject {
+    void attach(Observer o);
+    void notifyObservers();
+}
+
+class ConcreteSubject implements Subject {
     private List<Observer> observers = new ArrayList<>();
-    
-    public void addObserver(Observer observer) {
-        observers.add(observer);
-    }
-    
-    public void notifyObservers(String message) {
-        for (Observer observer : observers) {
-            observer.update(message);
+    public void attach(Observer o) { observers.add(o); }
+    public void notifyObservers() {
+        for (Observer o : observers) {
+            o.update("State changed");
         }
     }
 }
 ```
 
-## References
-- "Design Patterns: Elements of Reusable Object-Oriented Software" by Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides
-- https://refactoring.guru/design-patterns
-- https://github.com/iluwatar/java-design-patterns
+## Observer (Python)
 
-## Github-README Links & Related Topics
-- [lld-hld-basics](../lld-hld-basics/)
-- [java-design-patterns](../java-design-patterns/)
-- [system-design-basics](../system-design-basics/)
+```python
+class Observer:
+    def update(self, message):
+        pass
+
+class ConcreteObserver(Observer):
+    def update(self, message):
+        print(f"Received: {message}")
+
+class Subject:
+    def __init__(self):
+        self._observers = []
+    def attach(self, observer):
+        self._observers.append(observer)
+    def notify_observers(self):
+        for obs in self._observers:
+            obs.update("State changed")
+```
+
+# References
+
+- [Wikipedia: Software Design Pattern](https://en.wikipedia.org/wiki/Software_design_pattern)
+- Gamma, Erich, et al. *Design Patterns: Elements of Reusable Object-Oriented Software*. Addison-Wesley, 1994. ISBN: 978-0201633610.
+- Fowler, Martin. *Patterns of Enterprise Application Architecture*. Addison-Wesley, 2002. ISBN: 978-0321127426.
+- Hohpe, Gregor, and Bobby Woolf. *Enterprise Integration Patterns*. Addison-Wesley, 2003. ISBN: 978-0321200686.
+
+# Github-README Links & Related Topics
+
+- [Design Patterns in Java](../design-patterns-in-java/)
+- [OOP Principles](../java-oop-principles/)
+- [Behavioral Interview Questions](../behavioral-interview-questions/)
+- [Software Engineering](../algorithms/) (related to algorithmic patterns)
+- [Concurrency and Parallelism](../concurrency-and-parallelism/)

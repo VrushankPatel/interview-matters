@@ -1,113 +1,103 @@
 ---
 title: API Design Best Practices
-aliases: [REST API Design, API Best Practices, Web API Design]
-tags: [#api, #system-design]
+aliases: [REST API Design, API Best Practices]
+tags: [#api, #design, #rest]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
 # Overview
 
-API design best practices ensure that APIs are intuitive, efficient, secure, and maintainable. This covers RESTful APIs, GraphQL, and general principles for designing interfaces between systems.
+API design best practices focus on creating intuitive, scalable, and maintainable interfaces that follow REST principles. Key aspects include resource modeling, consistent URI structures, proper HTTP method usage, versioning strategies, and ensuring security, performance, and developer experience. Effective API design minimizes misuse, supports evolution, and adheres to standards like OpenAPI for documentation.
 
 # Detailed Explanation
 
-## REST Principles
-- **Stateless**: Each request contains all necessary information.
-- **Uniform Interface**: Consistent resource identification and manipulation.
-- **Client-Server**: Separation of concerns.
-- **Cacheable**: Responses should be cacheable when appropriate.
-- **Layered System**: Architecture allows for intermediaries.
+## Core Principles
 
-## HTTP Methods
-- GET: Retrieve resources
-- POST: Create resources
-- PUT: Update resources (full update)
-- PATCH: Partial updates
-- DELETE: Remove resources
+- **Resource-Oriented Design**: Model APIs around resources (nouns) rather than actions. Use hierarchical URIs to represent relationships, e.g., `/users/{id}/posts`.
+- **HTTP Methods**: Leverage standard methods for CRUD operations:
+  - GET: Retrieve resources
+  - POST: Create resources
+  - PUT: Update entire resources (idempotent)
+  - PATCH: Partial updates
+  - DELETE: Remove resources
+- **Statelessness**: Each request should contain all necessary information; avoid server-side sessions.
+- **Uniform Interface**: Consistent use of URIs, HTTP methods, and representations (e.g., JSON/XML).
+- **HATEOAS (Hypermedia as the Engine of Application State)**: Include links in responses to guide clients through API interactions.
 
-## Status Codes
-- 200 OK: Success
-- 201 Created: Resource created
-- 400 Bad Request: Invalid input
-- 401 Unauthorized: Authentication required
-- 403 Forbidden: Access denied
-- 404 Not Found: Resource not found
-- 500 Internal Server Error: Server error
+## Key Best Practices
 
-## Versioning Strategies
-- URI versioning: `/v1/users`
-- Header versioning: `Accept: application/vnd.api+json; version=1`
-- Query parameter: `/users?version=1`
+| Aspect | Best Practice | Example |
+|--------|---------------|---------|
+| URIs | Use nouns, plural for collections, avoid verbs | `/orders` (good), `/create-order` (bad) |
+| Versioning | Use URI versioning for clarity, e.g., `/v1/users` | Supports backward compatibility |
+| Error Handling | Use HTTP status codes (200 OK, 404 Not Found, 500 Internal Server Error); provide descriptive messages | `{"error": "User not found", "code": 404}` |
+| Pagination & Filtering | Implement query parameters like `?limit=10&offset=20` for large datasets | Prevents performance issues |
+| Security | Use HTTPS, authentication (OAuth, JWT), rate limiting | Avoid exposing sensitive data |
+| Documentation | Adopt OpenAPI/Swagger for machine-readable specs | Enables auto-generation of client SDKs |
 
-## Security
-- Use HTTPS
-- Authentication: OAuth2, JWT
-- Authorization: Role-based access control
-- Rate limiting
-- Input validation
+## API Maturity Model
 
-## GraphQL Considerations
-- Schema-first design
-- Avoid over-fetching/under-fetching
-- Pagination for large datasets
+APIs evolve through maturity levels (Richardson Maturity Model):
+
+```mermaid
+graph TD
+    A[Level 0: RPC-style, single endpoint] --> B[Level 1: Resources, multiple URIs]
+    B --> C[Level 2: HTTP Methods, proper status codes]
+    C --> D[Level 3: HATEOAS, hypermedia links]
+```
+
+Aim for Level 3 for fully RESTful APIs.
+
+## Additional Considerations
+
+- **Performance**: Support caching with headers (ETag, Cache-Control); use compression.
+- **Multitenancy**: Handle tenant isolation via headers or paths.
+- **Async Operations**: For long-running tasks, return 202 Accepted with status endpoints.
+- **Content Negotiation**: Support multiple formats via Accept headers.
 
 # Real-world Examples & Use Cases
 
-- **E-commerce API**: RESTful design for products, orders, users with proper versioning.
-- **Social Media API**: GraphQL for flexible queries on posts, comments, users.
-- **Banking API**: Strict security with OAuth2 and comprehensive logging.
+- **E-commerce Platform**: `/products/{id}` for product details, `/orders` for order management. Use pagination for product listings to handle large catalogs.
+- **Social Media API**: `/users/{id}/posts` for user posts, `/posts/{id}/comments` for nested resources. Implement filtering by date or popularity.
+- **IoT Device Management**: `/devices/{id}/configurations` for device configs. Use PUT for updates to ensure idempotency in unreliable networks.
+- **Banking API**: Strict versioning (`/v2/accounts`) for regulatory compliance; HATEOAS for secure navigation through account operations.
 
 # Code Examples
 
-## REST API with Spring Boot
-```java
-@RestController
-@RequestMapping("/api/v1/users")
-public class UserController {
-    
-    @GetMapping
-    public ResponseEntity<List<User>> getUsers() {
-        List<User> users = userService.getAllUsers();
-        return ResponseEntity.ok(users);
-    }
-    
-    @PostMapping
-    public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
-        User created = userService.createUser(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(created);
-    }
-    
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(@PathVariable Long id) {
-        User user = userService.getUserById(id);
-        return ResponseEntity.ok(user);
-    }
-    
-    @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @Valid @RequestBody User user) {
-        User updated = userService.updateUser(id, user);
-        return ResponseEntity.ok(updated);
-    }
-    
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
-        return ResponseEntity.noContent().build();
-    }
+## JSON Response Example
+
+```json
+{
+  "orderId": 123,
+  "customerId": 456,
+  "items": [
+    {"productId": 789, "quantity": 2}
+  ],
+  "total": 99.99,
+  "links": [
+    {"rel": "self", "href": "/orders/123"},
+    {"rel": "customer", "href": "/customers/456"}
+  ]
 }
 ```
 
-## OpenAPI Specification Example
+## OpenAPI Specification Snippet
+
 ```yaml
 openapi: 3.0.0
 info:
-  title: User API
+  title: Sample API
   version: 1.0.0
 paths:
   /users:
     get:
       summary: Get all users
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
       responses:
         '200':
           description: Successful response
@@ -117,17 +107,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/User'
-    post:
-      summary: Create a user
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-      responses:
-        '201':
-          description: User created
 components:
   schemas:
     User:
@@ -137,42 +116,19 @@ components:
           type: integer
         name:
           type: string
-        email:
-          type: string
-```
-
-## GraphQL Schema
-```graphql
-type Query {
-  users: [User!]!
-  user(id: ID!): User
-}
-
-type Mutation {
-  createUser(input: CreateUserInput!): User!
-  updateUser(id: ID!, input: UpdateUserInput!): User!
-}
-
-type User {
-  id: ID!
-  name: String!
-  email: String!
-}
-
-input CreateUserInput {
-  name: String!
-  email: String!
-}
 ```
 
 # References
 
-- [REST API Design Rulebook](https://www.oreilly.com/library/view/rest-api-design/9781449317904/)
-- [Microsoft REST API Guidelines](https://github.com/microsoft/api-guidelines)
-- [GraphQL Specification](https://spec.graphql.org/)
+- [Google API Design Guide](https://developers.google.com/api-design-guide/)
+- [Microsoft Azure API Design Best Practices](https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design)
+- [Swagger Best Practices in API Design](https://swagger.io/resources/articles/best-practices-in-api-design/)
+- [REST API Design Tutorial](https://restfulapi.net/rest-api-design-tutorial-with-example/)
 
 # Github-README Links & Related Topics
 
-- [API Gateway Design](../api-gateway-design/README.md)
-- [API Authentication Methods](../api-authentication-methods/README.md)
-- [API Versioning Strategies](../api-versioning-strategies/README.md)
+- [API Design Principles](./api-design-principles/)
+- [API Gateway Design](./api-gateway-design/)
+- [API Security Best Practices](./api-security-best-practices/)
+- [API Versioning Strategies](./api-versioning-strategies/)
+- [REST API Best Practices](./rest-api-best-practices/)
