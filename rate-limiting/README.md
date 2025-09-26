@@ -6,8 +6,6 @@ created: '2025-09-26'
 updated: '2025-09-26'
 ---
 
-# Rate Limiting
-
 ## Overview
 
 Rate limiting controls the rate of requests to prevent abuse, ensure fair usage, and protect resources. It limits the number of requests a client can make in a given time period, commonly used in APIs, web servers, and network devices to mitigate DoS attacks, brute-force attempts, and resource exhaustion.
@@ -186,10 +184,10 @@ app.listen(3000);
 
 ## Github-README Links & Related Topics
 
-- [API Rate Limiting](api-rate-limiting/)
-- [API Security Best Practices](api-security-best-practices/)
-- [Circuit Breaker Pattern](circuit-breaker-pattern/)
-- [Distributed Caching with Redis](distributed-caching-with-redis/)
+- [API Rate Limiting](../api-rate-limiting/README.md)
+- [API Security Best Practices](../api-security-best-practices/README.md)
+- [Circuit Breaker Pattern](../circuit-breaker-pattern/README.md)
+- [Distributed Caching with Redis](../distributed-caching-with-redis/README.md)
 
 ## STAR Summary
 
