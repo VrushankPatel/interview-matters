@@ -1,8 +1,3 @@
-url-shortener-system-design
-netflix-system-design
-cap-theorem-and-distributed-systems
-caching
-lld-hld-basics
 multithreading-and-concurrency-in-java
 devops-and-infrastructure-as-code
 proxy-forward-and-reverse
@@ -13,3 +8,13 @@ devops-and-infrastructure-as-code
 proxy-forward-and-reverse
 load-balancing-and-strategies
 rate-limiting
+java-fundamentals
+oop-principles-in-java
+jvm-internals-class-loading
+garbage-collection-algorithms
+multithreading-concurrency-in-java
+collections-data-structures
+java-stream-api-functional-programming
+system-design-basics
+high-scalability-patterns
+latency-throughput-zero-to-hero

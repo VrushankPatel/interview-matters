@@ -3,7 +3,7 @@ title: URL Shortener System Design
 aliases: [URL Shortening Service, Link Shortener]
 tags: [#system-design,#web-services,#scalability]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # URL Shortener System Design

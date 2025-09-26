@@ -1,7 +1,7 @@
 ---
 title: Netflix System Design
-aliases: [Netflix Video Streaming, Netflix Architecture]
-tags: [#system-design, #lld, #hld, #video-streaming]
+aliases: [netflix-video-streaming, video-on-demand-system]
+tags: [#system-design,#streaming,#scalability]
 created: 2025-09-26
 updated: 2025-09-26
 ---
