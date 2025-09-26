@@ -1,7 +1,7 @@
 ---
 title: Async Logging
 aliases: [Asynchronous Logging]
-tags: [#java,#logging]
+tags: [#system-design, #logging, #performance, #concurrency]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -225,10 +225,10 @@ asyncio.run(async_log())
 
 # Github-README Links & Related Topics
 
-- [Concurrency Parallelism](concurrency-parallelism/)
-- [Java Multithreading and Concurrency](java-multithreading-and-concurrency/)
-- [Event Driven Architecture](event-driven-architecture/)
-- [Distributed Tracing](distributed-tracing/)
+- [Concurrency Parallelism](./concurrency-parallelism/README.md)
+- [Java Multithreading and Concurrency](./java-multithreading-and-concurrency/README.md)
+- [Event Driven Architecture](./event-driven-architecture/README.md)
+- [Distributed Tracing](./distributed-tracing/README.md)
 
 # STAR Summary
 
