@@ -81,9 +81,22 @@ public void method() {
 
 Java provides thread-safe collections in `java.util.concurrent`:
 
-- `ConcurrentHashMap`: Thread-safe HashMap
-- `CopyOnWriteArrayList`: Thread-safe ArrayList for read-heavy operations
-- `BlockingQueue`: Thread-safe queue with blocking operations
+| Collection | Description | Best For | Thread Safety Mechanism |
+|------------|-------------|----------|-------------------------|
+| ConcurrentHashMap | Thread-safe HashMap implementation | High-concurrency read/write operations | Lock striping |
+| CopyOnWriteArrayList | Thread-safe ArrayList | Read-heavy operations, infrequent writes | Copy-on-write |
+| BlockingQueue | Thread-safe queue with blocking operations | Producer-consumer patterns | Locks and conditions |
+| ConcurrentSkipListMap | Concurrent NavigableMap | Sorted key-value storage | Lock-free algorithms |
+| ConcurrentLinkedQueue | Concurrent Queue | FIFO operations | CAS (Compare-and-Swap) |
+
+### Thread Lifecycle Journey
+
+1. **Creation**: Instantiate Thread or Runnable
+2. **Start**: Call `start()` method (moves to Runnable state)
+3. **Scheduling**: JVM schedules thread for execution (Runnable → Running)
+4. **Execution**: `run()` method executes
+5. **Blocking**: Thread may block on I/O, locks, or `wait()`
+6. **Termination**: Thread completes `run()` or is interrupted
 
 ### Executors Framework
 
@@ -250,7 +263,7 @@ public class AtomicCounter {
 
 ## Github-README Links & Related Topics
 
-- [Java Fundamentals](../java-fundamentals)
-- [Concurrent Collections](../concurrent-collections)
-- [Java Memory Model](../java-memory-model-and-concurrency)
-- [Threading Executors Futures](../java/threads-executors-futures)
+- [Java Fundamentals](../java-fundamentals/README.md)
+- [Concurrent Collections](../concurrent-collections/README.md)
+- [Java Memory Model](../java-memory-model-and-concurrency/README.md)
+- [Threading Executors Futures](../java/threads-executors-futures/README.md)

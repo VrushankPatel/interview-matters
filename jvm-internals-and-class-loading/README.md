@@ -53,11 +53,24 @@ Class loading is performed by the Class Loader Subsystem in three phases:
 
 ### Memory Areas
 
-- **Method Area**: Stores class-level information, constants, static variables
-- **Heap**: Runtime data area for objects and arrays
-- **Stack**: Stores method calls, local variables, partial results
-- **PC Registers**: Holds address of current executing instruction
-- **Native Method Stacks**: For native method calls
+| Memory Area | Purpose | Characteristics |
+|-------------|---------|-----------------|
+| Method Area | Stores class-level information, constants, static variables | Shared among threads, part of permanent generation in older JVMs |
+| Heap | Runtime data area for objects and arrays | Garbage collected, divided into young and old generations |
+| Stack | Stores method calls, local variables, partial results | Thread-specific, LIFO structure |
+| PC Registers | Holds address of current executing instruction | Thread-specific, small memory |
+| Native Method Stacks | For native method calls | Thread-specific, used for JNI calls |
+
+```mermaid
+graph LR
+    A[Method Area] --> B[Class Metadata]
+    A --> C[Constants]
+    A --> D[Static Variables]
+    E[Heap] --> F[Objects]
+    E --> G[Arrays]
+    H[Stack] --> I[Method Frames]
+    H --> J[Local Variables]
+```
 
 ## Real-world Examples & Use Cases
 
@@ -140,6 +153,6 @@ public class MemoryDemo {
 
 ## Github-README Links & Related Topics
 
-- [Java Fundamentals](../java-fundamentals)
-- [Garbage Collection Algorithms](../garbage-collection-algorithms)
-- [JVM Performance Tuning](../java/jvm-performance-tuning)
+- [Java Fundamentals](../java-fundamentals/README.md)
+- [Garbage Collection Algorithms](../garbage-collection-algorithms/README.md)
+- [JVM Performance Tuning](../java/jvm-performance-tuning/README.md)

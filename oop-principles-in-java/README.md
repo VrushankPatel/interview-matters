@@ -49,6 +49,19 @@ Achieved through:
 - Abstract classes
 - Interfaces
 
+#### OOP Principles Relationship Diagram
+
+```mermaid
+graph TD
+    A[OOP Principles] --> B[Encapsulation]
+    A --> C[Inheritance]
+    A --> D[Polymorphism]
+    A --> E[Abstraction]
+    C --> F[Code Reusability]
+    D --> G[Flexibility]
+    E --> H[Simplification]
+```
+
 ## Real-world Examples & Use Cases
 
 1. **Banking System**: Account classes with encapsulation for balance, inheritance for different account types (Savings, Checking), polymorphism for interest calculation.

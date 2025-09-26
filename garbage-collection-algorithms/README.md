@@ -78,6 +78,17 @@ graph TD
 - Available since Java 12
 - JVM option: `-XX:+UseShenandoahGC`
 
+### GC Algorithms Comparison
+
+| GC Algorithm | Pause Time | Throughput | Heap Size Suitability | Best For |
+|--------------|------------|------------|----------------------|----------|
+| Serial | High | Low | Small heaps | Single-threaded, small applications |
+| Parallel | Medium | High | Medium heaps | Batch processing, throughput-critical apps |
+| CMS | Low | Medium | Large heaps | Web applications (deprecated) |
+| G1 | Low | High | Large heaps | General purpose, balanced performance |
+| ZGC | Very Low | High | Very large heaps (8MB-16TB) | Low-latency, large-scale applications |
+| Shenandoah | Very Low | High | Large heaps | Low-latency applications |
+
 ### Generational Hypothesis
 
 Most objects die young, and objects that survive become long-lived. This leads to generational GC:
