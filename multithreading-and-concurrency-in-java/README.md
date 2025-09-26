@@ -1,104 +1,67 @@
 ---
 title: Multithreading & Concurrency in Java
 aliases: [Java Concurrency, Threading in Java]
-tags: [#java,#concurrency,#multithreading]
+tags: [#java, #concurrency]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Multithreading & Concurrency in Java
+# Overview
 
-## Overview
+Multithreading & Concurrency in Java enable parallel execution of tasks, improving performance and responsiveness. Key concepts include threads, synchronization, and concurrent utilities.
 
-Multithreading allows a program to perform multiple tasks concurrently. Java provides built-in support for multithreading through the Thread class and concurrency utilities in java.util.concurrent package.
+# Detailed Explanation
 
-## Detailed Explanation
+Java supports concurrency through threads, executors, and synchronization mechanisms:
 
-### Threads
+- **Threads**: Lightweight processes for concurrent execution.
+- **Synchronization**: Using synchronized blocks, locks to prevent race conditions.
+- **Concurrent Collections**: Thread-safe data structures.
+- **Executors**: Managing thread pools.
+- **Futures**: Asynchronous computation results.
 
-- Creating threads: Extend Thread or implement Runnable.
+Challenges include deadlocks, race conditions, and visibility issues.
 
-- Thread lifecycle: New, Runnable, Running, Blocked, Terminated.
+# Real-world Examples & Use Cases
 
-### Synchronization
+- **Web Servers**: Handling multiple client requests concurrently.
+- **Data Processing**: Parallel computation in big data applications.
+- **GUI Applications**: Responsive UIs with background tasks.
 
-- synchronized keyword for mutual exclusion.
+Example: Producer-consumer pattern in a messaging system.
 
-- volatile for visibility.
+# Code Examples
 
-### Concurrency Utilities
-
-- ExecutorService for thread pools.
-
-- Locks: ReentrantLock, ReadWriteLock.
-
-- Atomic variables: AtomicInteger, etc.
-
-- Concurrent collections: ConcurrentHashMap, etc.
-
-### Problems
-
-- Race conditions
-
-- Deadlocks
-
-- Starvation
-
-## Real-world Examples & Use Cases
-
-- Web servers handling multiple requests.
-
-- GUI applications with responsive UI.
-
-- Parallel processing of large datasets.
-
-## Code Examples
-
-### Creating Threads
+Creating and starting threads:
 
 ```java
-// Extending Thread
-public class MyThread extends Thread {
-    public void run() {
-        System.out.println("Thread running");
-    }
-}
-
-// Implementing Runnable
-public class MyRunnable implements Runnable {
-    public void run() {
-        System.out.println("Runnable running");
-    }
-}
-
-public class Main {
+public class ThreadExample {
     public static void main(String[] args) {
-        MyThread t1 = new MyThread();
-        t1.start();
-
-        Thread t2 = new Thread(new MyRunnable());
-        t2.start();
+        Thread thread = new Thread(() -> {
+            System.out.println("Hello from thread");
+        });
+        thread.start();
     }
 }
 ```
 
-### Synchronization
+Synchronization example:
 
 ```java
 public class Counter {
     private int count = 0;
-
+    
     public synchronized void increment() {
         count++;
     }
-
+    
     public int getCount() {
         return count;
     }
 }
 ```
 
-### Using ExecutorService
+Using ExecutorService:
 
 ```java
 import java.util.concurrent.ExecutorService;
@@ -108,40 +71,19 @@ public class ExecutorExample {
     public static void main(String[] args) {
         ExecutorService executor = Executors.newFixedThreadPool(5);
         for (int i = 0; i < 10; i++) {
-            Runnable worker = new WorkerThread("" + i);
-            executor.execute(worker);
+            executor.submit(() -> System.out.println("Task executed"));
         }
         executor.shutdown();
     }
 }
-
-class WorkerThread implements Runnable {
-    private String message;
-
-    public WorkerThread(String s) {
-        this.message = s;
-    }
-
-    public void run() {
-        System.out.println(Thread.currentThread().getName() + " Start. Message = " + message);
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println(Thread.currentThread().getName() + " End.");
-    }
-}
 ```
 
-## References
+# References
 
 - [Oracle Concurrency Tutorial](https://docs.oracle.com/javase/tutorial/essential/concurrency/)
+- [Baeldung Java Concurrency](https://www.baeldung.com/java-concurrency)
 
-- [Java Concurrency in Practice](https://www.amazon.com/Java-Concurrency-Practice-Brian-Goetz/dp/0321349601)
+# Github-README Links & Related Topics
 
-## Github-README Links & Related Topics
-
-- [Java ExecutorService](../java-executorservice/README.md)
-
-- [Java Locks](../java-reentrantlock/README.md)
+- [Java Stream API & Functional Programming](../java-stream-api-and-functional-programming/)
+- [Concurrency & Parallelism](../concurrency-parallelism/)

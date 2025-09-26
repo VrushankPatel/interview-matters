@@ -1,20 +1,17 @@
-# NEXT TOPICS
-Mark and Sweep Algorithm
-Generational GC
-Thread Lifecycle
-Synchronization in Java
-Encapsulation in Java
-Class Loading Mechanism
-JVM Memory Model
-Mark and Sweep Algorithm
-Generational GC
-Thread Lifecycle
-Synchronization in Java
-Java Annotations
-Java Generics
-Java Reflection
-Java Design Patterns
-System Design Basics
-URL Shortener LLD
-Netflix System Design LLD
-Twitter System Design HLD
+- A separate folder for popular systems design, LLD and HLDs both like url shortner, netflix and identify more yourself
+- LLD HLD basics
+- Replication vs Sharding vs Partitioning
+- Caching
+- Latency and Throughput zero to hero
+- Monitoring and Logging
+- Async logging
+- DevOps & Infrastructure as Code
+- Proxy forward and reverse
+- Load balancing and strategies
+- Rate limiting
+- Concurrency & Parallelism
+- Java Exception Handling
+- Java Generics
+- Java Reflection
+- Java Annotations
+- Java Modules
