@@ -1,8 +1,3 @@
-Java Fundamentals
-OOP Principles in Java
-JVM Internals & Class Loading
-Garbage Collection Algorithms
-Multithreading & Concurrency in Java
 Collections & Data Structures
 Java Stream API & Functional Programming
 LLD HLD Basics
@@ -17,3 +12,9 @@ kafka-internals
 caching-patterns
 consistency-models
 concurrent-collections
+
+System Design Basics
+High Scalability Patterns
+CAP Theorem & Distributed Systems
+Latency and Throughput zero to hero
+Monitoring and Logging
