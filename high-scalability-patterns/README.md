@@ -1,142 +1,179 @@
 ---
-title: High Scalability Patterns
-aliases: [Scalability Patterns, High Availability Patterns]
-tags: [#system-design,#scalability,#patterns]
-created: 2025-09-26
-updated: 2025-09-26
+title: 'High Scalability Patterns'
+aliases: ['Scalability Patterns']
+tags: ['#system-design', '#scalability']
+created: '2025-09-26'
+updated: '2025-09-26'
 ---
 
 # Overview
 
-High scalability patterns are architectural strategies designed to handle increased load, user growth, and data volume in software systems. These patterns ensure systems remain performant, reliable, and cost-effective as they scale from small applications to enterprise-level platforms. Key patterns include load balancing, caching, database sharding, and microservices, each addressing specific scalability challenges like bottlenecks in processing, storage, or network traffic.
+High scalability patterns are architectural strategies designed to enable systems to handle increasing loads efficiently by distributing resources, optimizing performance, and ensuring reliability. These patterns address challenges in distributed systems, such as load balancing, data partitioning, caching, and fault tolerance. Key principles include horizontal scaling (adding more nodes), decoupling components, and asynchronous processing. Patterns like sharding, circuit breaker, and CQRS are essential for building resilient, high-performance applications that scale from thousands to billions of users.
 
 # Detailed Explanation
 
-Scalability patterns focus on distributing workload, optimizing resources, and minimizing single points of failure. They are categorized into horizontal (adding more nodes) and vertical (enhancing existing nodes) scaling.
+Scalability patterns can be categorized into structural, behavioral, and operational types. Structural patterns focus on system architecture (e.g., sharding), behavioral on runtime interactions (e.g., circuit breaker), and operational on deployment and monitoring (e.g., deployment stamps).
 
-## Load Balancing
-Distributes incoming traffic across multiple servers to prevent overload.
-- **Types**: Round-robin, least connections, IP hash.
-- **Benefits**: Improves availability and fault tolerance.
+## Key Patterns
 
-## Caching
-Stores frequently accessed data in fast-access storage to reduce database load.
-- **Strategies**: Cache-aside, write-through, write-behind.
-- **Tools**: Redis, Memcached.
+### Load Balancing
+Distributes incoming requests across multiple servers to prevent overload. Types include round-robin, least connections, and IP hashing.
 
-## Database Sharding
-Splits large databases into smaller, manageable pieces (shards) distributed across servers.
-- **Types**: Horizontal (rows), vertical (columns).
-- **Challenges**: Cross-shard queries, rebalancing.
+```mermaid
+graph TD
+    A[Client] --> B[Load Balancer]
+    B --> C[Server 1]
+    B --> D[Server 2]
+    B --> E[Server 3]
+```
 
-## Replication
-Creates copies of data across multiple nodes for redundancy and read scalability.
-- **Types**: Master-slave, master-master.
-- **Benefits**: High availability, load distribution.
+### Caching
+Stores frequently accessed data in memory for faster retrieval. Patterns include cache-aside, write-through, and write-behind.
 
-## Microservices
-Breaks monolithic applications into small, independent services.
-- **Benefits**: Easier scaling, technology diversity, fault isolation.
-- **Challenges**: Inter-service communication, data consistency.
+### Sharding
+Partitions data across multiple databases or nodes. Horizontal sharding distributes rows, vertical sharding splits columns.
 
-## CDN (Content Delivery Network)
-Distributes static content globally to reduce latency.
-- **Use Cases**: Images, videos, static files.
+```mermaid
+graph TD
+    A[User Data] --> B[Shard 1: Users A-M]
+    A --> C[Shard 2: Users N-Z]
+    B --> D[Database 1]
+    C --> E[Database 2]
+```
 
-## Message Queues
-Decouples services for asynchronous processing.
-- **Tools**: Kafka, RabbitMQ.
-- **Benefits**: Handles spikes, improves reliability.
+### Circuit Breaker
+Prevents cascading failures by temporarily halting requests to a failing service.
 
-## Auto-scaling
-Dynamically adjusts resources based on demand.
-- **Cloud Tools**: AWS Auto Scaling, Kubernetes HPA.
+### CQRS (Command Query Responsibility Segregation)
+Separates read and write operations for optimized performance.
+
+### Event Sourcing
+Stores state changes as events for auditability and scalability.
+
+### Saga
+Manages distributed transactions using compensating actions.
+
+### Microservices Decomposition
+Breaks monolithic apps into independent services, enabling independent scaling.
+
+| Pattern | Purpose | Example Use Case |
+|---------|---------|------------------|
+| Load Balancing | Distribute load | Web servers |
+| Sharding | Partition data | User databases |
+| Circuit Breaker | Fault tolerance | API calls |
+| CQRS | Optimize reads/writes | E-commerce inventory |
 
 # Real-world Examples & Use Cases
 
-- **Netflix**: Uses microservices, CDNs, and caching for global video streaming, handling millions of concurrent users.
-- **Amazon**: Employs sharding, replication, and load balancing for e-commerce, ensuring fast checkout during peak times.
-- **Facebook**: Leverages caching, sharding, and message queues for real-time feeds and notifications.
-- **Google**: Uses load balancing and replication for search engines, distributing queries across data centers.
-- **Uber**: Applies microservices and auto-scaling for ride-sharing, managing variable demand.
+- **Netflix**: Uses microservices with circuit breakers and event sourcing for video streaming, handling millions of concurrent users.
+- **Amazon**: Employs sharding for product catalogs and load balancing for e-commerce traffic.
+- **Twitter**: Implements caching and asynchronous processing for real-time feeds.
+- **Uber**: Uses sagas for ride booking transactions across services.
+- **Facebook**: Applies sharding and CQRS for social graph data.
 
 # Code Examples
 
-### Simple Load Balancer (Pseudocode)
-```python
-class LoadBalancer:
-    def __init__(self, servers):
-        self.servers = servers
-        self.index = 0
+## Load Balancing with Java (Simple Round-Robin)
 
-    def get_server(self):
-        server = self.servers[self.index]
-        self.index = (self.index + 1) % len(self.servers)
-        return server
-```
-
-### Cache Implementation (Java)
 ```java
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
-class SimpleCache {
-    private Map<String, String> cache = new HashMap<>();
+public class RoundRobinLoadBalancer {
+    private final List<String> servers;
+    private final AtomicInteger counter = new AtomicInteger(0);
 
-    public String get(String key) {
-        return cache.get(key);
+    public RoundRobinLoadBalancer(List<String> servers) {
+        this.servers = servers;
     }
 
-    public void put(String key, String value) {
-        cache.put(key, value);
+    public String getNextServer() {
+        int index = counter.getAndIncrement() % servers.size();
+        return servers.get(index);
     }
 }
 ```
 
-### Database Sharding (SQL Example)
-```sql
--- Shard 1: Users with ID 1-1000
-CREATE TABLE users_shard1 (
-    id INT PRIMARY KEY,
-    name VARCHAR(50)
-);
+## Circuit Breaker in Java (Using Resilience4j)
 
--- Shard 2: Users with ID 1001-2000
-CREATE TABLE users_shard2 (
-    id INT PRIMARY KEY,
-    name VARCHAR(50)
-);
+```java
+import io.github.resilience4j.circuitbreaker.CircuitBreaker;
+import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig;
+
+CircuitBreakerConfig config = CircuitBreakerConfig.custom()
+    .failureRateThreshold(50)
+    .waitDurationInOpenState(Duration.ofMillis(1000))
+    .build();
+
+CircuitBreaker circuitBreaker = CircuitBreaker.of("backendService", config);
+
+Supplier<String> decoratedSupplier = CircuitBreaker.decorateSupplier(circuitBreaker, () -> callBackendService());
 ```
 
-# STAR Summary
+## Sharding Example (Simple Hash-Based)
 
-- **Situation**: A monolithic e-commerce site experiences slowdowns during sales.
-- **Task**: Implement scalability patterns to handle 10x traffic increase.
-- **Action**: Introduced load balancing, caching, and database sharding.
-- **Result**: Reduced response time by 50%, improved uptime to 99.9%.
+```java
+public class ShardManager {
+    private final int numShards;
 
-# Journey / Sequence
+    public ShardManager(int numShards) {
+        this.numShards = numShards;
+    }
 
-```mermaid
-graph TD
-    A[Assess Current Load] --> B[Identify Bottlenecks]
-    B --> C[Choose Patterns: Load Balancing, Caching]
-    C --> D[Implement and Test]
-    D --> E[Monitor and Scale]
-    E --> F[Optimize Iteratively]
+    public int getShard(String key) {
+        return Math.abs(key.hashCode()) % numShards;
+    }
+}
 ```
 
 # References
 
-- [Scalability Patterns](https://microservices.io/patterns/scalability/)
-- [Database Sharding](https://www.mongodb.com/features/database-sharding)
+- [AWS Well-Architected Framework](https://aws.amazon.com/architecture/well-architected-framework/)
+- [Microsoft Cloud Design Patterns](https://learn.microsoft.com/en-us/azure/architecture/patterns/)
 - [Microservices Patterns](https://microservices.io/patterns/)
-- [AWS Scalability Best Practices](https://aws.amazon.com/architecture/well-architected/)
-- [Google SRE Book](https://sre.google/sre-book/scalability/)
+- [Wikipedia: Scalability](https://en.wikipedia.org/wiki/Scalability)
 
 # Github-README Links & Related Topics
 
-- [Load Balancing Strategies](../load-balancing-strategies/)
-- [Caching](../caching/)
-- [Database Sharding Strategies](../database-sharding-strategies/)
 - [Microservices Architecture](../microservices-architecture/)
+- [Load Balancing](../load-balancing/)
+- [Caching Strategies](../caching-strategies/)
+- [Database Sharding](../database-sharding/)
+- [Circuit Breaker Pattern](../circuit-breaker-pattern/)
+- [CQRS Pattern](../cqrs-pattern/)
+- [Event Sourcing](../event-sourcing/)
+
+# STAR Summary
+
+- **Situation**: Systems face bottlenecks under high load.
+- **Task**: Implement patterns to scale horizontally.
+- **Action**: Apply load balancing, sharding, and caching.
+- **Result**: Improved throughput and reliability.
+
+# Journey / Sequence
+
+1. Assess current bottlenecks (e.g., via profiling).
+2. Choose patterns (e.g., sharding for data).
+3. Implement incrementally (e.g., add load balancer).
+4. Monitor and iterate (e.g., using metrics).
+
+# Data Models / Message Formats
+
+- **Event**: JSON with fields like `eventType`, `timestamp`, `payload`.
+- **Command**: REST/JSON for CQRS writes.
+- **Shard Key**: Hash-based identifier for partitioning.
+
+# Common Pitfalls & Edge Cases
+
+- Over-sharding leading to complex queries.
+- Cache inconsistency in distributed systems.
+- Saga failures without proper compensation.
+- Ignoring network latency in horizontal scaling.
+
+# Tools & Libraries
+
+- **Load Balancing**: NGINX, HAProxy.
+- **Caching**: Redis, Memcached.
+- **Circuit Breaker**: Resilience4j, Hystrix.
+- **Sharding**: Apache ShardingSphere, Vitess.
+- **Monitoring**: Prometheus, Grafana.

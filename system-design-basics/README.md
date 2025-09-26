@@ -1,125 +1,170 @@
 ---
-title: System Design Basics
-aliases: [System Design Fundamentals, Basic System Design]
-tags: [#system-design, #basics]
-created: 2025-09-26
-updated: 2025-09-26
+title: 'System Design Basics'
+aliases: ['System Design Fundamentals']
+tags: ['#system-design']
+created: '2025-09-26'
+updated: '2025-09-26'
 ---
 
 # Overview
 
-System design basics encompass the fundamental principles and concepts required to architect scalable, reliable, and efficient software systems. At its core, system design involves understanding trade-offs between performance, scalability, availability, and consistency. Key elements include evaluating system requirements, identifying bottlenecks, and applying patterns like load balancing, caching, and database sharding. This foundation prepares engineers to design systems that handle growth from thousands to millions of users, ensuring reliability under varying loads and failure scenarios.
+System design is the process of defining the architecture, components, modules, interfaces, and data for a system to satisfy specified requirements. It involves high-level design (HLD) for overall structure and low-level design (LLD) for detailed implementation. Key principles include scalability, reliability, maintainability, and performance. System design addresses trade-offs in distributed systems, such as CAP theorem, and incorporates patterns like load balancing, caching, and microservices.
 
 # Detailed Explanation
 
-System design basics build on core computer science principles, focusing on distributed systems. Here's a breakdown of essential concepts:
+## Core Concepts
 
-## Performance vs Scalability
-- **Performance**: Measures how fast a system responds to a single user or request. A performance issue means the system is slow for individual operations.
-- **Scalability**: Refers to the system's ability to handle increased load by adding resources proportionally. Vertical scaling (adding more power to a single machine) is limited, while horizontal scaling (adding more machines) is preferred for large systems.
-
-## Latency vs Throughput
-- **Latency**: The time to complete a single operation (e.g., response time for a web request).
-- **Throughput**: The number of operations completed per unit time (e.g., requests per second).
-- Aim for maximal throughput with acceptable latency, as they often trade off.
-
-## Availability vs Consistency (CAP Theorem)
-The CAP theorem states that in a distributed system, you can only guarantee two of the following three properties:
-- **Consistency**: Every read receives the most recent write or an error.
-- **Availability**: Every request receives a response, without guarantee of the latest data.
-- **Partition Tolerance**: The system continues operating despite network failures.
-- Most systems prioritize availability and partition tolerance (AP), accepting eventual consistency.
-
-## Consistency Patterns
-- **Weak Consistency**: Reads may not see the latest writes; suitable for real-time apps like VoIP.
-- **Eventual Consistency**: Reads will eventually reflect writes; common in DNS and email systems.
-- **Strong Consistency**: Reads always see the latest writes; used in RDBMS for transactions.
-
-## Availability Patterns
-- **Fail-over**: Active-passive (standby takes over) or active-active (both handle traffic).
-- **Replication**: Master-slave or master-master to ensure data redundancy.
-
-## Core Components
-- **Load Balancers**: Distribute traffic across servers (e.g., Layer 4 for TCP/UDP, Layer 7 for HTTP).
-- **Caching**: Store frequently accessed data in memory (e.g., Redis, Memcached) to reduce database load.
-- **Databases**: Choose SQL for structured data/transactions or NoSQL for flexibility/scalability.
-- **CDNs**: Serve static content from geographically distributed servers to reduce latency.
-- **Message Queues**: Enable asynchronous processing (e.g., RabbitMQ for decoupling services).
+- **Scalability**: Ability to handle growth in users, data, or traffic. Horizontal (adding nodes) vs. vertical (upgrading hardware).
+- **Reliability**: System's ability to function correctly despite failures. Achieved through redundancy, failover, and fault tolerance.
+- **Availability**: Percentage of time the system is operational (e.g., 99.9% uptime).
+- **Consistency**: Data remains accurate and uniform across the system.
+- **Performance**: Response time, throughput, and latency metrics.
+- **Security**: Protecting data and systems from threats.
 
 ## Design Process
-1. **Requirements Gathering**: Define use cases, constraints, and assumptions (e.g., users, requests/second, data volume).
-2. **High-Level Design**: Sketch components and connections.
-3. **Component Deep Dive**: Detail core elements like APIs, databases, and scaling strategies.
-4. **Scaling and Optimization**: Address bottlenecks with caching, sharding, etc.
-5. **Back-of-the-Envelope Calculations**: Estimate capacity using latency numbers (e.g., memory reference: 100ns, disk seek: 10ms).
+
+1. **Requirements Gathering**: Functional (features) and non-functional (performance, security).
+2. **High-Level Design**: System architecture, components, data flow.
+3. **Low-Level Design**: Detailed class diagrams, database schemas, APIs.
+4. **Trade-off Analysis**: Evaluate options using metrics like CAP theorem.
+5. **Prototyping and Validation**: Build proofs-of-concept.
+
+## Key Components
+
+- **Load Balancer**: Distributes traffic.
+- **Database**: Relational (SQL) vs. NoSQL for scalability.
+- **Cache**: In-memory storage for fast access.
+- **Message Queue**: Asynchronous communication.
+- **CDN**: Content delivery for global users.
+
+```mermaid
+graph TD
+    A[Client] --> B[Load Balancer]
+    B --> C[Web Server]
+    C --> D[Application Server]
+    D --> E[Database]
+    D --> F[Cache]
+    D --> G[Message Queue]
+```
+
+## Distributed Systems Challenges
+
+- **Partition Tolerance**: System continues operating despite network failures.
+- **Consistency vs. Availability**: Trade-offs in CAP theorem.
+- **Data Partitioning**: Sharding for scalability.
+- **Concurrency**: Handling simultaneous operations.
 
 # Real-world Examples & Use Cases
 
-- **Web Search Engine (e.g., Google)**: Uses distributed indexing, caching, and load balancing to handle billions of queries daily. Sharding data across servers ensures scalability, while eventual consistency allows for fast responses.
-- **Social Media Feed (e.g., Facebook/Twitter)**: Employs caching for timelines, replication for availability, and message queues for notifications. Trade-offs prioritize availability over strict consistency to support real-time updates.
-- **E-commerce Platform (e.g., Amazon)**: Leverages CDNs for product images, load balancers for traffic distribution, and database sharding for user data. High availability ensures uptime during peak shopping seasons.
-- **Video Streaming (e.g., Netflix)**: Uses CDNs to deliver content globally, caching for popular videos, and microservices for recommendation engines. Partition tolerance handles regional outages.
+- **E-commerce Platform**: Design for high traffic during sales, using load balancers, caches, and microservices.
+- **Social Media App**: Handle millions of users with sharding, CDNs, and event-driven architecture.
+- **Banking System**: Ensure security, consistency, and compliance with distributed databases and encryption.
+- **IoT System**: Process sensor data with message queues and real-time analytics.
+- **Video Streaming**: Use CDNs, adaptive bitrate, and edge computing for global delivery.
 
 # Code Examples
 
-Here are simple pseudocode examples illustrating basic system design concepts:
+## Simple Load Balancer in Java
 
-### Load Balancing (Round Robin)
-```
-servers = ["server1", "server2", "server3"]
-index = 0
+```java
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
-function getServer() {
-    server = servers[index]
-    index = (index + 1) % servers.length
-    return server
-}
-```
+public class LoadBalancer {
+    private final List<String> servers;
+    private final AtomicInteger index = new AtomicInteger(0);
 
-### Cache-aside Pattern
-```
-cache = {}  // In-memory cache
-
-function getUser(userId) {
-    if (cache[userId]) {
-        return cache[userId]
+    public LoadBalancer(List<String> servers) {
+        this.servers = servers;
     }
-    user = db.query("SELECT * FROM users WHERE id = ?", userId)
-    if (user) {
-        cache[userId] = user  // Cache for future requests
+
+    public String getServer() {
+        return servers.get(index.getAndIncrement() % servers.size());
     }
-    return user
 }
 ```
 
-### Simple Message Queue
-```
-queue = []
+## Caching with HashMap
 
-function enqueue(message) {
-    queue.push(message)
-}
+```java
+import java.util.HashMap;
+import java.util.Map;
 
-function dequeue() {
-    if (queue.length > 0) {
-        return queue.shift()
+public class SimpleCache<K, V> {
+    private final Map<K, V> cache = new HashMap<>();
+
+    public V get(K key) {
+        return cache.get(key);
     }
-    return null
+
+    public void put(K key, V value) {
+        cache.put(key, value);
+    }
 }
+```
+
+## Database Connection Pooling
+
+```java
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
+HikariConfig config = new HikariConfig();
+config.setJdbcUrl("jdbc:mysql://localhost:3306/mydb");
+config.setUsername("user");
+config.setPassword("password");
+config.setMaximumPoolSize(10);
+
+HikariDataSource dataSource = new HikariDataSource(config);
 ```
 
 # References
 
-- [System Design Primer on GitHub](https://github.com/donnemartin/system-design-primer) - Comprehensive guide with diagrams and examples.
-- [CAP Theorem Revisited](http://robertgreiner.com/2014/08/cap-theorem-revisited/) - In-depth explanation of CAP theorem.
-- [Scalability for Dummies](https://web.archive.org/web/20220530193911/https://www.lecloud.net/post/7295452622/scalability-for-dummies-part-1-clones) - Series on scaling principles.
-- [Latency Numbers Every Programmer Should Know](https://gist.github.com/jboner/2841832) - Key performance benchmarks.
-- [System Design Interview Prep](https://www.educative.io/courses/grokking-the-system-design-interview) - Interactive course on basics.
+- [Designing Data-Intensive Applications](https://dataintensive.net/)
+- [System Design Primer](https://github.com/donnemartin/system-design-primer)
+- [AWS Architecture Center](https://aws.amazon.com/architecture/)
+- [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
 
 # Github-README Links & Related Topics
 
-- [Scalability Patterns](./scalability-patterns/) - Advanced scaling techniques.
-- [Database Design Principles](./database-design-principles/) - In-depth database choices and trade-offs.
-- [Caching Strategies](./caching/) - Detailed caching mechanisms.
-- [Load Balancing](./load-balancer/) - Types and implementations.
-- [Microservices Architecture](./microservices/) - Breaking down monolithic systems.
+- [Scalability Patterns](../high-scalability-patterns/)
+- [CAP Theorem](../cap-theorem-and-distributed-systems/)
+- [Microservices Architecture](../microservices-architecture/)
+- [Load Balancing](../load-balancing/)
+- [Caching](../caching/)
+- [Database Design](../database-design/)
+
+# STAR Summary
+
+- **Situation**: Building a scalable web app for growing user base.
+- **Task**: Design system to handle 10x traffic increase.
+- **Action**: Implemented load balancing, caching, and database sharding.
+- **Result**: Achieved 99.9% uptime and sub-second response times.
+
+# Journey / Sequence
+
+1. Assess requirements and constraints.
+2. Sketch high-level architecture.
+3. Detail components and interfaces.
+4. Prototype critical parts.
+5. Iterate based on testing and feedback.
+
+# Data Models / Message Formats
+
+- **User Entity**: JSON with id, name, email.
+- **API Request**: RESTful JSON payloads.
+- **Event Message**: Kafka message with headers and body.
+
+# Common Pitfalls & Edge Cases
+
+- Ignoring network latency in distributed systems.
+- Over-engineering for non-existent scale.
+- Neglecting security in design phase.
+- Failing to monitor and iterate.
+
+# Tools & Libraries
+
+- **Diagramming**: Draw.io, Lucidchart.
+- **Prototyping**: Figma, Balsamiq.
+- **Simulation**: JMeter for load testing.
+- **Frameworks**: Spring Boot for Java apps.
