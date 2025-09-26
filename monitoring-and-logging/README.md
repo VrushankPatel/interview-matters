@@ -1,7 +1,7 @@
 ---
 title: Monitoring and Logging
-aliases: [Monitoring, Logging]
-tags: [#devops,#system-design]
+aliases: [Observability, System Monitoring]
+tags: [#devops,#monitoring,#logging]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -36,11 +36,27 @@ Logging supports debugging, compliance, and performance analysis.
 
 Monitoring and logging complement each other: metrics provide high-level insights, while logs offer detailed context. Tools like OpenTelemetry enable unified collection and correlation.
 
+## Architecture
+
+```mermaid
+flowchart TD
+    A[Application] --> B[Instrumentation Libraries]
+    B --> C[Metrics Exporter]
+    B --> D[Logs Exporter]
+    C --> E[Monitoring Backend e.g., Prometheus]
+    D --> F[Logging Backend e.g., Elasticsearch]
+    E --> G[Visualization e.g., Grafana]
+    F --> G
+    G --> H[Alert Manager]
+    H --> I[Notifications]
+```
+
 # Real-world Examples & Use Cases
 
 - **E-commerce Platform**: Monitor API response times and error rates to detect bottlenecks during peak traffic. Log user authentication events for security audits.
 - **Microservices Architecture**: Use distributed tracing with logs to track requests across services, identifying failures in payment processing.
 - **Cloud Infrastructure**: Monitor server CPU and memory usage with alerts for scaling. Log deployment events for change tracking.
+- **IoT Platform**: Monitor device connectivity and battery levels. Log sensor data anomalies for predictive maintenance.
 
 # Code Examples
 
@@ -88,12 +104,32 @@ public class UserService {
 }
 ```
 
+## Node.js Logging with Winston
+
+```javascript
+const winston = require('winston');
+
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.json(),
+  transports: [
+    new winston.transports.Console(),
+    new winston.transports.File({ filename: 'error.log', level: 'error' }),
+  ],
+});
+
+logger.info('User login attempt', { userId: 12345, ip: '192.168.1.1' });
+```
+
 # References
 
 - [OpenTelemetry Observability Primer](https://opentelemetry.io/docs/concepts/observability-primer/)
 - [OpenTelemetry Logs](https://opentelemetry.io/docs/concepts/signals/logs/)
 - [Prometheus Overview](https://prometheus.io/docs/introduction/overview/)
 - [ELK Stack Documentation](https://www.elastic.co/guide/en/elastic-stack/current/elastic-stack.html)
+- [CNCF Observability Landscape](https://landscape.cncf.io/card-mode?category=observability-and-analysis&grouping=category)
+- [AWS CloudWatch Documentation](https://docs.aws.amazon.com/cloudwatch/)
+- [Google Cloud Monitoring](https://cloud.google.com/monitoring)
 
 # Github-README Links & Related Topics
 
@@ -150,6 +186,16 @@ sequenceDiagram
 - **JSON**: `{"timestamp": "2025-09-26T10:00:00Z", "level": "INFO", "message": "User logged in", "user_id": 12345}`
 - **Syslog**: `<priority>timestamp hostname app: message`
 - **CLF**: `127.0.0.1 - user [timestamp] "GET /path HTTP/1.1" 200 1234`
+
+## Log Levels
+
+| Level | Description | Use Case |
+|-------|-------------|----------|
+| DEBUG | Detailed diagnostic information | Development and troubleshooting |
+| INFO | General information about application operation | Normal operations |
+| WARN | Potentially harmful situations | Non-critical issues |
+| ERROR | Error conditions | Failures that don't stop the application |
+| FATAL | Severe errors causing application termination | Critical failures |
 
 ## Metric Types
 

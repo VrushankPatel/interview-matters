@@ -220,7 +220,7 @@ public class GradeCalculator {
 
 # Github-README Links & Related Topics
 
-- [OOP Principles in Java](oop-principles-in-java)
-- [JVM Internals & Class Loading](jvm-internals-class-loading)
-- [Java Collections](java-collections)
-- [Java Exception Handling](java-exception-handling)
+- [OOP Principles in Java](./oop-principles-in-java/README.md)
+- [JVM Internals & Class Loading](./jvm-internals-class-loading/README.md)
+- [Java Collections](./java-collections/README.md)
+- [Java Exception Handling](./java-exception-handling/README.md)

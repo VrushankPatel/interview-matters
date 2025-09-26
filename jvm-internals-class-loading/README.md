@@ -132,7 +132,7 @@ public class StaticInitializationDemo {
 
 # Github-README Links & Related Topics
 
-- [Java Fundamentals](java-fundamentals)
-- [Garbage Collection Algorithms](garbage-collection-algorithms)
-- [JVM Memory Management](java-memory-management)
-- [Java Reflection](java-reflection)
+- [Java Fundamentals](./java-fundamentals/README.md)
+- [Garbage Collection Algorithms](./garbage-collection-algorithms/README.md)
+- [JVM Memory Management](./java-memory-management/README.md)
+- [Java Reflection](./java-reflection/README.md)

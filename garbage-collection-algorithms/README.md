@@ -165,7 +165,7 @@ public class WeakReferenceExample {
 
 # Github-README Links & Related Topics
 
-- [JVM Internals & Class Loading](jvm-internals-class-loading)
-- [Java Memory Management](java-memory-management)
-- [GC Tuning](gc-tuning)
-- [Java Performance Tuning](java-performance-tuning)
+- [JVM Internals & Class Loading](./jvm-internals-class-loading/README.md)
+- [Java Memory Management](./java-memory-management/README.md)
+- [GC Tuning](./gc-tuning/README.md)
+- [Java Performance Tuning](./java-performance-tuning/README.md)

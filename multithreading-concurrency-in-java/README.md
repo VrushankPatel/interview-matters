@@ -263,7 +263,7 @@ public class AtomicExample {
 
 # Github-README Links & Related Topics
 
-- [Java Fundamentals](java-fundamentals)
-- [Java Memory Model and Concurrency](java-memory-model-and-concurrency)
-- [Concurrent Collections](concurrent-collections)
-- [Java Locks](java-locks)
+- [Java Fundamentals](./java-fundamentals/README.md)
+- [Java Memory Model and Concurrency](./java-memory-model-and-concurrency/README.md)
+- [Concurrent Collections](./concurrent-collections/README.md)
+- [Java Locks](./java-locks/README.md)

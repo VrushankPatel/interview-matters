@@ -1,8 +1,4 @@
-00016| java-fundamentals
-00017| oop-principles-in-java
-00018| jvm-internals-class-loading
-00019| garbage-collection-algorithms
-00020| multithreading-concurrency-in-java
+
 00021| concurrency-parallelism
 00022| async-logging
 00023| ci-cd-best-practices

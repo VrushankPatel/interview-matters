@@ -181,7 +181,7 @@ public class Car extends Vehicle {
 
 # Github-README Links & Related Topics
 
-- [Java Fundamentals](java-fundamentals)
-- [Java Design Patterns](java-design-patterns)
-- [Java Collections](java-collections)
-- [JVM Internals & Class Loading](jvm-internals-class-loading)
+- [Java Fundamentals](./java-fundamentals/README.md)
+- [Java Design Patterns](./java-design-patterns/README.md)
+- [Java Collections](./java-collections/README.md)
+- [JVM Internals & Class Loading](./jvm-internals-class-loading/README.md)
