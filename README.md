@@ -19,7 +19,7 @@ This repository contains a comprehensive collection of topics related to softwar
 - [Interview](interview/README.md)
 - [ML](ml/README.md)
 - [Protocols](trading/protocols/README.md)
-- [Market Data](market-data/README.md)
+- [Market Data](trading/market-data/README.md)
 - [Order Types](order-types/README.md)
 - [Lifecycle](lifecycle/README.md)
 - [Exchange Behavior](exchange-behavior/README.md)
