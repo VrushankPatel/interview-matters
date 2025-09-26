@@ -125,6 +125,61 @@ resource "aws_lb_listener" "app_listener" {
 }
 ```
 
+## STAR Summary
+
+**Situation**: An e-commerce platform experiencing downtime during peak shopping seasons due to server overload.
+
+**Task**: Implement load balancing to handle 10x traffic increase and maintain 99.9% uptime.
+
+**Action**: Deployed HAProxy with least connections algorithm, configured health checks, and set up auto-scaling. Implemented session persistence for shopping carts.
+
+**Result**: Successfully handled Black Friday traffic with zero downtime, improved response time by 50%, and reduced server costs through efficient resource utilization.
+
+## Journey / Sequence
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant DNS
+    participant LB
+    participant Server1
+    participant Server2
+    participant Server3
+
+    Client->>DNS: Resolve domain
+    DNS->>Client: Return LB IP
+    Client->>LB: HTTP Request
+    LB->>LB: Select server (algorithm)
+    LB->>Server1: Forward request
+    Server1->>LB: Response
+    LB->>Client: Return response
+    LB->>LB: Health check servers
+```
+
+## Common Pitfalls & Edge Cases
+
+| Pitfall | Description | Mitigation |
+|---------|-------------|------------|
+| Session Stickiness Issues | User sessions lost during server failures | Use distributed sessions or sticky sessions |
+| Health Check Flapping | Servers marked unhealthy due to transient issues | Tune health check intervals and thresholds |
+| Uneven Load Distribution | Some servers overloaded despite balancing | Monitor and adjust weights/algorithms |
+| SSL Termination Overhead | Load balancer becomes bottleneck for HTTPS | Use hardware acceleration or dedicated SSL terminators |
+| Database Connection Pooling | Load balanced app servers exhaust DB connections | Implement connection pooling per server |
+| Cache Inconsistency | Different cached data across servers | Use shared cache or cache invalidation strategies |
+
+## Tools & Libraries
+
+| Category | Tool/Library | Description | Language/Framework |
+|----------|--------------|-------------|-------------------|
+| Software LB | Nginx | High-performance web server with LB | C |
+| Software LB | HAProxy | TCP/HTTP load balancer | C |
+| Software LB | Apache Traffic Server | Caching proxy and LB | C++ |
+| Cloud LB | AWS ELB/ALB | Managed load balancing service | - |
+| Cloud LB | Azure Load Balancer | Cloud load balancing | - |
+| Cloud LB | GCP Load Balancing | Global load balancing | - |
+| Library | Ribbon | Client-side load balancing | Java |
+| Library | Eureka | Service discovery with LB | Java |
+
 ## References
 
 - [Nginx Load Balancing](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/)
