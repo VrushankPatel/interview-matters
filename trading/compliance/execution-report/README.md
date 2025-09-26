@@ -102,12 +102,12 @@ public void handleExecutionReport(Message message) {
 }
 ```
 
-## Github-README Links & Related Topics
+# Github-README Links & Related Topics
 
-- [FIX Protocol](/fix-protocol)
-- [Journey of a Trade](/journey-of-a-trade)
-- [Trade Capture Report](/trade-capture-report)
-- [Order Types](/order-types)
+- [FIX Protocol](../../protocols/fix-protocol/README.md)
+- [Journey of a Trade](../../lifecycle/journey-of-a-trade/README.md)
+- [Trade Capture Report](../../compliance/trade-capture-report/README.md)
+- [Order Types](../../order-types/order-types/README.md)
 
 ## References
 

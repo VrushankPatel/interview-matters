@@ -17,4 +17,15 @@ topics_processed: ["FIX Protocol", "ITCH Protocol", "OUCH Protocol", "Market Dat
 created_dirs: ["trading/protocols", "trading/market-data", "trading/lifecycle", "trading/exchange-behavior", "trading/compliance"]
 updated_files: ["trading/protocols/fix-protocol/README.md", "trading/protocols/itch-protocol/README.md", "trading/protocols/ouch-protocol/README.md", "trading/market-data/market-data-overview-and-dissemination/README.md", "trading/protocols/order-entry-protocols/README.md", "trading/protocols/README.md", "trading/market-data/README.md", "trading/lifecycle/README.md", "trading/exchange-behavior/README.md", "trading/compliance/README.md", "README.md", "SPECIFICATION.md", "PENDING_TOPICS.md", "NEXTTOPICS.md"]
 commit_made: true
-commit_message: "kb: add 5 topics (fix-protocol, itch-protocol, ouch-protocol, market-data-overview-and-dissemination, order-entry-protocols) + restructure trading into subcategories + update links and root index"
+commit_message: "kb: add 5 topics (fix-protocol, itch-protocol, ouch-protocol, market-data-overview-and-dissemination, order-entry-protocols) + restructure trading into subcategories + update links and root index"-e 
+topics_processed: ["FIX Protocol", "ITCH Protocol", "OUCH Protocol", "Market Data (overview & dissemination)", "Order Entry Protocols"]
+created_dirs: ["trading/protocols/order-entry-protocols"]
+updated_files: ["trading/protocols/fix-protocol/README.md", "trading/protocols/itch-protocol/README.md", "trading/protocols/ouch-protocol/README.md", "trading/market-data/market-data-overview-dissemination/README.md", "trading/protocols/order-entry-protocols/README.md", "SPECIFICATION.md", "PENDING_TOPICS.md", "NEXTTOPICS.md"]
+commit_made: true
+commit_message: "kb: processed 5 trading topics (FIX, ITCH, OUCH, Market Data, Order Entry Protocols) + restructured java/ into subcategories + updated interlinks"
+-e 
+topics_processed: ["Journey of a Trade (end-to-end)", "Order Types (DAY, GTC, FOK, IOC)", "Quotes & RFQ workflows", "Execution Report", "Trade Capture Report"]
+created_dirs: ["trading/order-types/order-types"]
+updated_files: ["trading/lifecycle/journey-of-a-trade/README.md", "trading/exchange-behavior/quotes-rfq-workflows/README.md", "trading/compliance/execution-report/README.md", "trading/compliance/trade-capture-report/README.md", "README.md", "SPECIFICATION.md", "PENDING_TOPICS.md", "NEXTTOPICS.md"]
+commit_made: true
+commit_message: "kb: process 5 trading topics + update interlinks to markdown"

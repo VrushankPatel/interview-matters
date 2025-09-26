@@ -103,12 +103,12 @@ tcr = generate_tcr('T123', 'AAPL', 100, 150.00, '2023-09-26T10:00:00Z')
 print(tcr)
 ```
 
-## Github-README Links & Related Topics
+# Github-README Links & Related Topics
 
-- [FIX Protocol](/fix-protocol)
-- [Execution Report](/execution-report)
-- [Journey of a Trade](/journey-of-a-trade)
-- [Regulatory Reports](/regulatory-reports)
+- [FIX Protocol](../../protocols/fix-protocol/README.md)
+- [Execution Report](../../compliance/execution-report/README.md)
+- [Journey of a Trade](../../lifecycle/journey-of-a-trade/README.md)
+- [Regulatory Reports](../../compliance/regulatory-reports/README.md)
 
 ## References
 

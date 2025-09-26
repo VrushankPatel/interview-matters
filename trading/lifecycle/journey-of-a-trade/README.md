@@ -129,13 +129,13 @@ msg = parse_fix_message("8=FIX.4.4|35=D|55=AAPL|...")
 print(msg['55'])  # AAPL
 ```
 
-## Github-README Links & Related Topics
+# Github-README Links & Related Topics
 
-- [FIX Protocol](/fix-protocol)
-- [Execution Report](/execution-report)
-- [Trade Capture Report](/trade-capture-report)
-- [Order Types](/order-types)
-- [Market Data](/market-data-overview-dissemination)
+- [FIX Protocol](../../protocols/fix-protocol/README.md)
+- [Execution Report](../../compliance/execution-report/README.md)
+- [Trade Capture Report](../../compliance/trade-capture-report/README.md)
+- [Order Types](../../order-types/order-types/README.md)
+- [Market Data](../../market-data/market-data-overview-and-dissemination/README.md)
 
 ## References
 

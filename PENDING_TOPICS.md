@@ -1,5 +1,10 @@
 # Pending Topics
 
+- FIX Protocol
+- ITCH Protocol
+- OUCH Protocol
+- Market Data (overview & dissemination)
+- Order Entry Protocols
 - Java Fundamentals
 - OOP Principles in Java
 - JVM Internals & Class Loading
