@@ -95,6 +95,37 @@ public class Counter {
 }
 ```
 
+```mermaid
+stateDiagram-v2
+    [*] --> New
+    New --> Runnable : start()
+    Runnable --> Running : scheduled
+    Running --> Runnable : yield/preempted
+    Running --> Blocked : wait/sleep
+    Blocked --> Runnable : notify/timeout
+    Running --> Waiting : wait()
+    Waiting --> Runnable : notify()
+    Running --> TimedWaiting : sleep/wait(timeout)
+    TimedWaiting --> Runnable : timeout
+    Running --> Terminated : run() completes
+    Terminated --> [*]
+```
+
+## Common Pitfalls & Edge Cases
+
+- **Race Conditions**: Use synchronization or atomic variables.
+- **Deadlocks**: Avoid nested locks; use tryLock.
+- **Visibility Issues**: Use volatile or synchronized for shared variables.
+- **Thread Safety**: Immutable objects or proper synchronization.
+- **Performance**: Too many threads can cause overhead; use thread pools.
+
+## Tools & Libraries
+
+- **Java Concurrency Utilities**: java.util.concurrent package.
+- **Thread Dump Tools**: jstack for analyzing deadlocks.
+- **Profilers**: VisualVM, JProfiler for concurrency issues.
+- **Libraries**: Akka for actor-based concurrency.
+
 ## References
 
 - [Oracle Concurrency Tutorial](https://docs.oracle.com/javase/tutorial/essential/concurrency/)

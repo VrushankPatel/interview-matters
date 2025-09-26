@@ -76,6 +76,20 @@ public class Main {
 }
 ```
 
+## Common Pitfalls & Edge Cases
+
+- **Class Loading Deadlocks**: Circular dependencies between classes can cause deadlocks during initialization.
+- **ClassNotFoundException**: Ensure classpath is correct; use try-catch for dynamic loading.
+- **Memory Leaks from Class Loaders**: Custom class loaders can hold references, preventing GC.
+- **Security Issues**: Malicious code in loaded classes; use security managers.
+- **Performance Overhead**: Excessive class loading can slow startup; use lazy loading.
+
+## Tools & Libraries
+
+- **JVM Tools**: jmap, jstack for monitoring class loading.
+- **IDEs**: IntelliJ IDEA with class loader visualization.
+- **Libraries**: OSGi for modular class loading.
+
 ## References
 
 - [Oracle JVM Documentation](https://docs.oracle.com/javase/specs/jvms/se21/html/)

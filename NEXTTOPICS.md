@@ -1,8 +1,3 @@
-Java Fundamentals
-OOP Principles in Java
-JVM Internals & Class Loading
-Garbage Collection Algorithms
-Multithreading & Concurrency in Java
 Collections & Data Structures
 Java Stream API & Functional Programming
 System Design Basics
@@ -25,4 +20,12 @@ API Design Best Practices
 Microservices Architecture
 Event-Driven Architecture
 Container Orchestration with Kubernetes
- 
+Database Indexing Strategies
+API Authentication Methods
+Microservices Communication Patterns
+Event Sourcing and CQRS
+Graph Algorithms
+Dynamic Programming
+Behavioral Interview Questions
+Coding Interview Strategies
+DevOps CI/CD Pipelines

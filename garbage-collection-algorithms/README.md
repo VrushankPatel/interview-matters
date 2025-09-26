@@ -222,6 +222,13 @@ public class ExampleObject {
 - **NUMA Systems**: Parallel GC may not distribute threads optimally; consider affinity settings.
 - **Containerized Environments**: Memory limits can trigger aggressive GC; monitor with JVM flags.
 
+## Tools & Libraries
+
+- **JVM Tools**: jstat, jmap, jconsole for GC monitoring.
+- **VisualVM**: GUI for GC analysis.
+- **GC Logs**: -XX:+PrintGCDetails for logging.
+- **Libraries**: JMX for programmatic monitoring.
+
 ## References
 
 - [Wikipedia: Garbage Collection (Computer Science)](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science))
