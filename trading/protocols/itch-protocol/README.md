@@ -116,9 +116,9 @@ sequenceDiagram
   ```
 
 # Github-README Links & Related Topics
-- [[FIX Protocol]]
-- [[Market Data (overview & dissemination)]]
-- [[Order Book Modeling]]
+- [FIX Protocol](../fix-protocol/)
+- [Market Data (overview & dissemination)](../../market-data/market-data-overview-and-dissemination/)
+- [Order Book Modeling](../../../algorithms/order-book-modeling/)
 
 # References
 - https://www.nasdaq.com/solutions/technology/trading-platforms/itch-protocol

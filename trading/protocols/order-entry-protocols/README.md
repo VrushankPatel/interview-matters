@@ -115,10 +115,10 @@ This diagram illustrates the lifecycle: order submission, acknowledgment, execut
 
 # Github-README Links & Related Topics
 
-- [[fix-protocol]]
+- [fix-protocol](../fix-protocol/)
 - [[api-design-principles]]
-- [[high-scalability-patterns]]
-- [[distributed-consensus]]
+- [high-scalability-patterns](../../../system-design/high-scalability-patterns/)
+- [distributed-consensus](../../../system-design/distributed-consensus/)
 
 # References
 

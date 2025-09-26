@@ -123,9 +123,9 @@ For Java, similar using ByteBuffer.
 # Github-README Links & Related Topics
 
 - [[FIX Protocol]]
-- [[API Design Principles]]
+- [API Design Principles](../../../networking/api-design-principles/)
 - [[High-Frequency Trading]]
-- [[Distributed Systems]]
+- [Distributed Systems](../../../system-design/distributed-systems/)
 
 # References
 

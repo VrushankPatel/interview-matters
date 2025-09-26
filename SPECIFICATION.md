@@ -141,16 +141,28 @@ New Next Topics Candidates (this run)
   - AI in market prediction — 'Machine learning for price forecasting'
 
 New Next Topics Candidates
-              - Order Book modeling — 'Canonical models for in-memory book and persistence'
-              - Matching algorithm internals — 'How exchanges match buy and sell orders'
-              - Time-in-Force variations across exchanges — 'DAY, GTC, IOC behaviors by venue'
-              - Market fragmentation & smart order routing — 'Routing orders across multiple markets'
-              - Latency measurement & monitoring — 'Tools and techniques for latency analysis'
-              - FIX Session Layer (Logon/Heartbeat/Seq numbers) — 'Session management in FIX protocol'
-              - Market data consolidation & TOPS snapshot vs incremental — 'Consolidating feeds from multiple sources'
-              - Latency arbitrage — 'Exploiting latency differences for profit'
-              - Swap & derivatives trade lifecycle — 'Trading non-equity instruments'
-              - Regulatory reports (e.g., MiFID/SEF) — 'Compliance reporting requirements'
+               - Order Book modeling — 'Canonical models for in-memory book and persistence'
+               - Matching algorithm internals — 'How exchanges match buy and sell orders'
+               - Time-in-Force variations across exchanges — 'DAY, GTC, IOC behaviors by venue'
+               - Market fragmentation & smart order routing — 'Routing orders across multiple markets'
+               - Latency measurement & monitoring — 'Tools and techniques for latency analysis'
+               - FIX Session Layer (Logon/Heartbeat/Seq numbers) — 'Session management in FIX protocol'
+               - Market data consolidation & TOPS snapshot vs incremental — 'Consolidating feeds from multiple sources'
+               - Latency arbitrage — 'Exploiting latency differences for profit'
+               - Swap & derivatives trade lifecycle — 'Trading non-equity instruments'
+               - Regulatory reports (e.g., MiFID/SEF) — 'Compliance reporting requirements'
+
+New Next Topics Candidates (this run)
+- Order Book modeling
+- Matching algorithm internals
+- Time-in-Force variations across exchanges
+- Market fragmentation & smart order routing
+- Latency measurement & monitoring
+- FIX Session Layer (Logon/Heartbeat/Seq numbers)
+- Market data consolidation & TOPS snapshot vs incremental
+- Latency arbitrage
+- Swap & derivatives trade lifecycle
+- Regulatory reports (e.g., MiFID/SEF)
               - High-Frequency Trading strategies — 'HFT algorithms and infrastructure'
               - Order Book depth and liquidity — 'Measuring and managing order book liquidity'
               - FIX message sequencing and recovery — 'Handling message gaps and resends'

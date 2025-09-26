@@ -86,8 +86,8 @@ sequenceDiagram
 # Github-README Links & Related Topics
 
 - [[FIX Protocol]]
-- [[ITCH Protocol]]
-- [[Execution Report]]
+- [ITCH Protocol](../../protocols/itch-protocol/)
+- [Execution Report](../../execution-report/)
 
 # References
 
