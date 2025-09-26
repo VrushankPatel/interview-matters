@@ -1,191 +1,185 @@
 ---
-title: LLD HLD Basics
-aliases: ["low level design", "high level design"]
-tags: [#system-design,#lld,#hld]
-created: 2025-09-26
-updated: 2025-09-26
+title: 'LLD HLD Basics'
+aliases: ['Low Level Design Basics', 'High Level Design Basics']
+tags: ['#system-design', '#lld', '#hld', '#design-principles']
+created: '2025-09-26'
+updated: '2025-09-26'
 ---
 
 # LLD HLD Basics
 
 ## Overview
 
-Low Level Design (LLD) and High Level Design (HLD) are fundamental concepts in system design interviews. HLD provides a bird's-eye view of the system's architecture, focusing on components, data flow, and scalability. LLD dives into the implementation details, including class diagrams, data structures, algorithms, and APIs. Mastering both is essential for designing robust, scalable systems.
+Low Level Design (LLD) and High Level Design (HLD) are fundamental phases in software system design. HLD provides a high-level view of the system architecture, while LLD delves into detailed component specifications. Together, they ensure a structured approach to building scalable, maintainable software systems.
 
 ## Detailed Explanation
 
 ### High Level Design (HLD)
 
-HLD outlines the overall system architecture without delving into code specifics. It includes:
+HLD, also known as macro-level design, outlines the overall system architecture. It includes:
 
-- **System Architecture**: Description of hardware, software interfaces, and user interfaces.
-- **Database Design**: High-level database schema and relationships.
-- **Components**: Services, databases, caches, load balancers.
-- **Data Flow**: How data moves between components.
-- **Scalability**: Horizontal/vertical scaling, partitioning.
-- **Reliability**: Fault tolerance, redundancy.
-- **Security**: Authentication, encryption.
+- System architecture diagrams
+- Database design
+- Descriptions of systems, services, platforms, and module relationships
+- Hardware and software interfaces
+- User interfaces
+- Performance specifications
 
-HLD answers "what" and "why" at a high level. It is created by solution architects based on Software Requirement Specification (SRS).
+HLD is typically created by solution architects and serves as a blueprint for the entire system.
 
 ### Low Level Design (LLD)
 
-LLD focuses on the internals of components identified in HLD. It includes:
+LLD, or micro-level design, provides detailed specifications for each module. It encompasses:
 
-- **Class Diagrams**: Relationships between classes, interfaces.
-- **Data Structures**: Choices for storage and retrieval (e.g., hash maps, trees).
-- **Algorithms**: Sorting, searching, optimization.
-- **APIs**: Endpoints, request/response formats.
-- **Database Schemas**: Detailed tables, relationships, indexes.
-- **Program Specifications**: Detailed logic for each module.
+- Detailed logic for system components
+- Algorithms and data structures
+- Interface definitions
+- Unit test plans
+- Program specifications
 
-LLD answers "how" with implementation details. It is created by designers and developers based on reviewed HLD.
+LLD is developed by designers and developers to guide implementation.
 
 ### Key Differences
 
-| Aspect          | HLD (High-Level Design)     | LLD (Low-Level Design)     |
-|-----------------|-----------------------------|-----------------------------|
-| **Scope**      | System-wide architecture    | Component internals         |
-| **Detail Level**| High-level components       | Code-level design           |
-| **Audience**   | Architects, stakeholders    | Developers, engineers       |
-| **Tools**      | Diagrams, flowcharts        | UML, pseudocode             |
-| **Focus**      | Scalability, reliability    | Efficiency, correctness     |
-| **Input**      | SRS (Software Requirement Specification) | Reviewed HLD               |
-| **Output**     | Database design, functional design, review record | Program specification, unit test plan |
-| **Created By** | Solution Architect           | Designers and Developers    |
+| Aspect | High Level Design (HLD) | Low Level Design (LLD) |
+|--------|-------------------------|-------------------------|
+| Scope | Overall system design | Component-level details |
+| Also Known As | Macro level/system design | Micro level/detailed design |
+| Description | Brief architecture and functionality | Detailed logic and specifications |
+| Created By | Solution architect | Designers and developers |
+| Input | Software Requirement Specification (SRS) | Reviewed HLD |
+| Output | Database design, functional design | Program specs, unit test plans |
+| Participants | Design team, review team, client | Design team, operations, implementers |
+
+### Process Flow
 
 ```mermaid
 graph TD
-    A[System Design] --> B[HLD: Architecture]
-    A --> C[LLD: Implementation]
-    B --> D[Components & Flow]
-    C --> E[Classes & Algorithms]
-```
-
-### HLD Diagram Example
-
-```mermaid
-graph LR
-    Client --> LB[Load Balancer]
-    LB --> AG[API Gateway]
-    AG --> S[Shortener Service]
-    S --> DB[(Database)]
-    S --> C[(Cache)]
-```
-
-### LLD Class Diagram Example
-
-```mermaid
-classDiagram
-    class UrlShortener {
-        -Map<String, String> urlToShort
-        -Map<String, String> shortToUrl
-        -String BASE_URL
-        +String shorten(String longUrl)
-        +String expand(String shortUrl)
-        -String generateKey(String url)
-    }
+    A[Requirements Gathering] --> B[High Level Design]
+    B --> C[Low Level Design]
+    C --> D[Implementation]
+    D --> E[Testing]
 ```
 
 ## Real-world Examples & Use Cases
 
-### URL Shortener System
-- **HLD Example**: Designing a URL shortener with API gateway, service layer, database, and cache for high availability and scalability.
-- **LLD Example**: Implementing the shortening algorithm using base62 encoding, hash maps for storage, and handling collisions.
+### Example 1: E-commerce Platform
 
-### E-commerce Platform
-- **HLD Example**: Microservices architecture with user service, product catalog, order management, payment gateway, and notification service.
-- **LLD Example**: Detailed class diagrams for user authentication, database schemas for products, and algorithms for recommendation engines.
+**HLD Use Case:** For an e-commerce platform, HLD would define the overall architecture including web servers, application servers, databases, and load balancers. It might specify microservices for user management, product catalog, and order processing.
 
-### Social Media Feed
-- **HLD Example**: Fan-out on write for timeline generation, sharded databases, and CDN for media delivery.
-- **LLD Example**: Data structures like priority queues for ranking posts, graph algorithms for friend suggestions.
+**LLD Use Case:** For the user authentication module, LLD would detail the classes, methods, database schemas, and API endpoints. It would specify algorithms for password hashing, session management, and error handling.
 
-- **Use Case**: In system design interviews, start with HLD to outline the system architecture, then dive into LLD for specific components to show technical depth.
-- **Industry Application**: HLD for cloud-native applications on AWS/Azure; LLD for optimizing database queries and API endpoints in fintech systems.
+### Example 2: Social Media Application
+
+**HLD Use Case:** HLD outlines the system with components like user feeds, messaging, notifications, and data storage. It includes decisions on scalability, such as using CDNs for media and distributed databases.
+
+**LLD Use Case:** For the feed generation algorithm, LLD provides detailed pseudocode for ranking posts, caching strategies, and database queries.
+
+### Example 3: Banking System
+
+**HLD Use Case:** Defines secure architecture with firewalls, encryption layers, and compliance modules.
+
+**LLD Use Case:** Details transaction processing logic, including concurrency controls and audit trails.
 
 ## Code Examples
 
-### LLD: URL Shortener Implementation
+### HLD Example: System Architecture Diagram
+
+```mermaid
+graph TB
+    subgraph "Client Layer"
+        A[Web Browser]
+        B[Mobile App]
+    end
+    subgraph "API Gateway"
+        C[API Gateway]
+    end
+    subgraph "Microservices"
+        D[User Service]
+        E[Product Service]
+        F[Order Service]
+    end
+    subgraph "Data Layer"
+        G[(Database)]
+        H[(Cache)]
+    end
+    A --> C
+    B --> C
+    C --> D
+    C --> E
+    C --> F
+    D --> G
+    E --> G
+    F --> G
+    D --> H
+    E --> H
+    F --> H
+```
+
+### LLD Example: User Authentication Class (Pseudocode)
 
 ```java
-import java.util.HashMap;
-import java.util.Map;
-
-public class UrlShortener {
-    private Map<String, String> urlToShort = new HashMap<>();
-    private Map<String, String> shortToUrl = new HashMap<>();
-    private static final String BASE_URL = "http://short.ly/";
-    private int counter = 0;
-
-    public String shorten(String longUrl) {
-        if (urlToShort.containsKey(longUrl)) {
-            return urlToShort.get(longUrl);
+class UserAuthentication {
+    private Database db;
+    private Cache cache;
+    
+    public boolean authenticate(String username, String password) {
+        // Check cache first
+        User user = cache.get(username);
+        if (user != null) {
+            return verifyPassword(password, user.getHashedPassword());
         }
-        String shortKey = generateKey();
-        String shortUrl = BASE_URL + shortKey;
-        urlToShort.put(longUrl, shortUrl);
-        shortToUrl.put(shortUrl, longUrl);
-        return shortUrl;
+        
+        // Fetch from database
+        user = db.getUser(username);
+        if (user == null) {
+            return false;
+        }
+        
+        boolean isValid = verifyPassword(password, user.getHashedPassword());
+        if (isValid) {
+            cache.put(username, user);
+        }
+        return isValid;
     }
-
-    public String expand(String shortUrl) {
-        return shortToUrl.get(shortUrl);
-    }
-
-    private String generateKey() {
-        return Integer.toString(counter++, 36); // Base36 encoding
-    }
-}
-```
-
-### HLD: Conceptual Architecture
-
-```
-Client -> Load Balancer -> API Gateway -> Shortener Service -> Database
-                                       -> Cache
-```
-
-### LLD: Simple Cache Implementation
-
-```java
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-public class LRUCache<K, V> extends LinkedHashMap<K, V> {
-    private final int capacity;
-
-    public LRUCache(int capacity) {
-        super(capacity, 0.75f, true);
-        this.capacity = capacity;
-    }
-
-    @Override
-    protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
-        return size() > capacity;
+    
+    private boolean verifyPassword(String input, String hashed) {
+        // Use bcrypt or similar for verification
+        return BCrypt.checkpw(input, hashed);
     }
 }
 ```
 
-## Best Practices
+### LLD Example: Database Schema
 
-- **Start with HLD**: Always begin with high-level design to ensure scalability and reliability before diving into details.
-- **Iterate on LLD**: Refine low-level designs based on code reviews and performance testing.
-- **Use Standard Notations**: Employ UML for class diagrams, ER diagrams for databases, and flowcharts for data flow.
-- **Consider Trade-offs**: Balance between simplicity, performance, and maintainability in design choices.
-- **Document Assumptions**: Clearly state assumptions in HLD and validate them in LLD.
+```sql
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    hashed_password VARCHAR(255) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE sessions (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    session_token VARCHAR(255) UNIQUE NOT NULL,
+    expires_at TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+```
 
 ## References
 
-- [Difference between High Level Design(HLD) and Low Level Design(LLD)](https://www.geeksforgeeks.org/difference-between-high-level-design-and-low-level-design/)
-- [System Design Interview Guide](https://github.com/donnemartin/system-design-primer)
-- [Grokking the System Design Interview](https://www.educative.io/courses/grokking-the-system-design-interview)
-- [Martin Kleppmann: Designing Data-Intensive Applications](https://dataintensive.net/)
+- [Difference between High Level Design(HLD) and Low Level Design(LLD) - GeeksforGeeks](https://www.geeksforgeeks.org/difference-between-high-level-design-and-low-level-design/)
+- [Software Design - Tutorialspoint](https://www.tutorialspoint.com/software_engineering/software_design.htm)
+- [What is High Level Design? - GeeksforGeeks](https://www.geeksforgeeks.org/system-design/what-is-high-level-design-learn-system-design/)
+- [What is Low Level Design or LLD? - GeeksforGeeks](https://www.geeksforgeeks.org/system-design/what-is-low-level-design-or-lld-learn-system-design/)
 
 ## Github-README Links & Related Topics
 
-- [Design Patterns](design-patterns/)
-- [Microservices Architecture](microservices-architecture/)
-- [Database Design Principles](database-design-principles/)
-- [API Design Principles](api-design-principles/)
-- [System Design Basics](system-design-basics/)
+- [Design Patterns](../design-patterns/)
+- [API Design Principles](../api-design-principles/)
+- [Database Design Principles](../database-design-principles/)
+- [Interview Cases](../interview-cases/)

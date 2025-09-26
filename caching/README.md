@@ -1,81 +1,101 @@
 ---
-title: Caching
-aliases: [cache strategies]
-tags: [#performance,#scalability,#system-design]
-created: 2025-09-26
-updated: 2025-09-26
+title: 'Caching'
+aliases: ['Cache Strategies', 'Memory Caching']
+tags: ['#system-design', '#performance', '#databases']
+created: '2025-09-26'
+updated: '2025-09-26'
 ---
 
 # Caching
 
 ## Overview
 
-Caching is a technique used to store frequently accessed data in a temporary storage layer (cache) to reduce access time and improve system performance. It minimizes the need to recompute or refetch data from slower sources like databases or external APIs. Caches can be in-memory, on-disk, or distributed across multiple nodes. Effective caching enhances scalability by reducing latency and load on backend systems, but requires careful management of cache invalidation, eviction policies, and consistency.
+Caching is a fundamental technique in computer systems that stores copies of frequently accessed data in a temporary storage layer, known as a cache, to reduce access time and improve overall system performance. By minimizing the need to recompute results or fetch data from slower sources like databases, disks, or external APIs, caching enhances scalability, reduces latency, and lowers resource utilization. Caches can be implemented in hardware (e.g., CPU caches), software (e.g., in-memory stores), or distributed across networks.
 
-Key benefits include faster response times, lower resource usage, and better user experience. However, challenges involve cache misses, stale data, and synchronization in distributed environments.
+Key benefits include faster response times, decreased load on backend systems, and improved user experience. However, effective caching requires addressing challenges such as cache invalidation, eviction policies, data consistency, and handling cache misses. In distributed systems, caching must balance performance gains with coherence protocols to prevent stale data issues.
 
 ## Detailed Explanation
 
+### What is Caching?
+
+A cache acts as an intermediary layer between the client and the primary data source. When data is requested:
+
+- **Cache Hit**: Data is found in the cache and returned quickly.
+- **Cache Miss**: Data is not in the cache, so it's fetched from the source, stored in the cache, and then returned.
+
+Caches exploit locality of reference: temporal (recently accessed data is likely to be accessed again) and spatial (nearby data is likely to be accessed together).
+
 ### Cache Types
 
-| Type | Description | Examples | Pros | Cons |
-|------|-------------|----------|------|------|
-| In-Memory | Stores data in RAM for ultra-fast access | Redis, Memcached | Low latency, high throughput | Volatile (data lost on restart), limited by memory |
-| On-Disk | Persists data to disk | Filesystem caches, SSD-based | Durable, larger capacity | Slower than in-memory |
-| Distributed | Spread across multiple servers | Redis Cluster, Hazelcast | Scalable, fault-tolerant | Network latency, complexity |
+| Type          | Description                                                                 | Examples                  | Pros                          | Cons                          |
+|---------------|-----------------------------------------------------------------------------|---------------------------|-------------------------------|-------------------------------|
+| In-Memory    | Stores data in RAM for ultra-fast access.                                   | Redis, Memcached          | Low latency, high throughput  | Volatile, memory-limited      |
+| Disk-Based   | Persists data to disk or SSD.                                              | Browser cache, OS page cache | Durable, large capacity       | Slower access                 |
+| Distributed  | Spread across multiple nodes for scalability.                              | Redis Cluster, Cassandra  | Fault-tolerant, scalable      | Network overhead, complexity  |
+| Client-Side  | Cached on the client (e.g., browser).                                      | HTTP cache headers        | Reduces server load           | Limited control               |
+| Server-Side  | Cached on servers (e.g., reverse proxies).                                 | Varnish, Nginx            | Centralized management        | Requires server resources     |
 
-### Cache Strategies
+### Cache Strategies (Write Policies)
 
-- **Write-Through**: Data is written to both cache and primary storage simultaneously. Ensures consistency but increases write latency.
-- **Write-Back**: Data is written to cache first, then asynchronously to primary storage. Improves write performance but risks data loss.
-- **Write-Around**: Bypasses cache for writes, reading from primary storage. Simple but may lead to cache misses.
+- **Write-Through**: Writes go to both cache and primary storage simultaneously. Ensures consistency but increases write latency.
+- **Write-Back (Write-Behind)**: Writes to cache first, then asynchronously to primary storage. Improves performance but risks data loss on failure.
+- **Write-Around**: Writes bypass the cache, going directly to primary storage. Cache is populated only on reads.
 
-### Eviction Policies
+### Cache Eviction Policies
 
-Common algorithms for removing data when cache is full:
+When the cache reaches capacity, data must be evicted. Common policies:
 
 - **LRU (Least Recently Used)**: Evicts the least recently accessed item.
 - **LFU (Least Frequently Used)**: Evicts the least frequently accessed item.
 - **FIFO (First In, First Out)**: Evicts the oldest item.
-- **TTL (Time To Live)**: Evicts items after a set expiration time.
+- **Random**: Evicts a random item.
+- **TTL (Time To Live)**: Evicts items after expiration.
 
 ### Cache Invalidation
 
-- **Explicit**: Manually remove or update cache entries.
-- **Implicit**: Use TTL or version-based invalidation.
-- **Cache Busting**: Append query parameters (e.g., `?v=123`) to force fresh fetches.
+Ensures cached data remains fresh:
+
+- **Explicit Invalidation**: Manually remove entries on updates.
+- **Implicit Invalidation**: Use TTL or version checks.
+- **Cache Busting**: Append parameters (e.g., `?v=123`) to URLs for fresh fetches.
+
+### Cache Coherence
+
+In multi-cache environments, protocols like MESI ensure consistency, but add complexity.
 
 ### Cache Flow Diagram
 
 ```mermaid
 graph TD
-    A[Client Request] --> B{Cache Check}
-    B -->|Hit| C[Return Cached Data]
-    B -->|Miss| D[Fetch from Source]
+    A[Client Request] --> B{Cache Hit?}
+    B -->|Yes| C[Return Cached Data]
+    B -->|No| D[Fetch from Source]
     D --> E[Store in Cache]
     E --> C
-    C --> F[Response to Client]
+    C --> F[Respond to Client]
 ```
 
-This diagram illustrates the basic cache hit/miss flow, where a miss triggers data retrieval and storage.
+This diagram shows the basic hit/miss flow.
 
 ## Real-world Examples & Use Cases
 
-- **Web Browsers**: Cache HTML, CSS, JS, and images to reduce load times. Browsers use HTTP caching headers like `Cache-Control` and `ETag`.
-- **Content Delivery Networks (CDNs)**: Distribute cached static assets globally (e.g., Cloudflare, Akamai). Reduces latency for users worldwide.
-- **Databases**: Query result caching in ORM layers (e.g., Hibernate second-level cache) or database query caches.
-- **API Gateways**: Cache API responses to handle high traffic (e.g., Kong with Redis).
-- **Microservices**: In-memory caches for service-to-service calls to avoid repeated computations.
-- **E-commerce Platforms**: Cache product catalogs and user sessions to handle flash sales.
+- **Web Browsers**: Cache static assets (HTML, CSS, JS, images) using HTTP headers like `Cache-Control`, `ETag`, and `Last-Modified` to reduce page load times.
+- **Content Delivery Networks (CDNs)**: Globally distribute cached content (e.g., Amazon CloudFront, Cloudflare) to minimize latency for users worldwide.
+- **Databases**: Cache query results or frequently accessed data (e.g., MySQL query cache, Redis as a database cache) to reduce I/O.
+- **APIs and Microservices**: Cache responses in gateways (e.g., Kong with Redis) to handle high traffic and reduce backend load.
+- **Session Management**: Store user sessions in distributed caches (e.g., Redis) for scalability across servers.
+- **E-commerce**: Cache product catalogs and user carts (e.g., during flash sales) to handle spikes.
+- **Social Media**: Cache feeds and user data (e.g., Facebook's TAO) for real-time updates.
+- **Gaming**: Cache game state and leaderboards for low-latency interactions.
+- **IoT**: Cache sensor data in edge caches for real-time processing.
 
-In a high-traffic e-commerce site, caching user session data in Redis can reduce database queries by 80%, improving throughput during peak loads.
+In a CDN, caching reduces origin server requests by 70-90%, improving global performance.
 
 ## Code Examples
 
-### Simple In-Memory Cache in Python
+### Simple LRU Cache in Python
 
 ```python
-import time
 from collections import OrderedDict
 
 class LRUCache:
@@ -83,13 +103,13 @@ class LRUCache:
         self.cache = OrderedDict()
         self.capacity = capacity
 
-    def get(self, key: str):
+    def get(self, key):
         if key in self.cache:
             self.cache.move_to_end(key)
             return self.cache[key]
-        return None
+        return -1
 
-    def put(self, key: str, value):
+    def put(self, key, value):
         if key in self.cache:
             self.cache.move_to_end(key)
         self.cache[key] = value
@@ -98,16 +118,14 @@ class LRUCache:
 
 # Usage
 cache = LRUCache(2)
-cache.put("key1", "value1")
-cache.put("key2", "value2")
-print(cache.get("key1"))  # value1
-cache.put("key3", "value3")  # Evicts key2
-print(cache.get("key2"))  # None
+cache.put(1, 1)
+cache.put(2, 2)
+print(cache.get(1))  # 1
+cache.put(3, 3)      # Evicts 2
+print(cache.get(2))  # -1
 ```
 
 ### Distributed Cache with Redis in Java
-
-Using Jedis client:
 
 ```java
 import redis.clients.jedis.Jedis;
@@ -115,8 +133,8 @@ import redis.clients.jedis.Jedis;
 public class RedisCache {
     private Jedis jedis;
 
-    public RedisCache() {
-        this.jedis = new Jedis("localhost", 6379);
+    public RedisCache(String host, int port) {
+        this.jedis = new Jedis(host, port);
     }
 
     public String get(String key) {
@@ -133,43 +151,47 @@ public class RedisCache {
 }
 
 // Usage
-RedisCache cache = new RedisCache();
-cache.set("user:123", "{\"name\":\"John\"}", 3600);
+RedisCache cache = new RedisCache("localhost", 6379);
+cache.set("user:123", "{\"name\":\"Alice\"}", 3600);
 String data = cache.get("user:123");
-System.out.println(data);  // {"name":"John"}
+System.out.println(data);  // {"name":"Alice"}
 cache.close();
 ```
 
-Ensure Redis is running locally. For production, use connection pooling.
+### HTTP Caching with Node.js (Express)
 
-## Common Pitfalls
+```javascript
+const express = require('express');
+const app = express();
 
-- **Cache Stampede**: Multiple requests for the same missing key. Mitigate with locks or probabilistic early expiration.
-- **Thundering Herd**: Similar to stampede, but for cache warming.
-- **Stale Data**: Invalidate caches on data updates.
-- **Memory Leaks**: Monitor cache size and implement eviction.
+// Middleware for caching
+app.use((req, res, next) => {
+    res.set('Cache-Control', 'public, max-age=300');  // Cache for 5 minutes
+    next();
+});
 
-## Performance Metrics
+app.get('/api/data', (req, res) => {
+    res.json({ message: 'Cached data' });
+});
 
-| Metric | Description | Target |
-|--------|-------------|--------|
-| Hit Rate | Percentage of requests served from cache | >90% |
-| Miss Rate | Percentage of cache misses | <10% |
-| Latency | Time to retrieve data | <10ms for in-memory |
-| Throughput | Requests per second | Varies by system |
+app.listen(3000, () => console.log('Server running'));
+```
+
+These examples demonstrate basic implementations; for production, use libraries like Caffeine (Java) or node-cache (Node.js).
 
 ## References
 
-- [Redis Caching Guide](https://redis.io/topics/lru-cache)
+- [Wikipedia: Cache (computing)](https://en.wikipedia.org/wiki/Cache_(computing))
+- [AWS Caching Overview](https://aws.amazon.com/caching/)
+- [Redis Caching Guide](https://redis.io/docs/latest/develop/get-started/cache/)
 - [Memcached Documentation](https://memcached.org/)
 - [HTTP Caching (MDN)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching)
-- [Cache Invalidation Strategies](https://martinfowler.com/bliki/TwoHardThings.html)
-- [AWS Caching Best Practices](https://aws.amazon.com/caching/)
+- [Cache Replacement Policies](https://en.wikipedia.org/wiki/Cache_replacement_policies)
 
 ## Github-README Links & Related Topics
 
 - [Distributed Caching with Redis](../distributed-caching-with-redis/)
 - [CDN Architecture](../cdn-architecture/)
 - [Database Performance Tuning](../database-performance-tuning/)
-- [Load Balancing and Strategies](../load-balancing-and-strategies/)
 - [HTTP Caching Headers](../http-caching-headers/)
+- [Load Balancing and Strategies](../load-balancing-and-strategies/)
