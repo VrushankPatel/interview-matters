@@ -1,7 +1,7 @@
 ---
 title: Java Fundamentals
-aliases: [Java Basics, Java Core Concepts]
-tags: [#java,#fundamentals]
+aliases: []
+tags: [#java]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -10,52 +10,81 @@ updated: 2025-09-26
 
 ## Overview
 
-Java is a high-level, object-oriented programming language designed to be platform-independent, secure, and robust. Developed by Sun Microsystems (now part of Oracle) in 1995, Java runs on the Java Virtual Machine (JVM), allowing "write once, run anywhere" capability. It's widely used for building enterprise applications, Android mobile apps, web servers, big data processing, and more. Key features include automatic memory management via garbage collection, strong typing, and extensive standard libraries.
+Java Fundamentals encompass the core concepts and building blocks of the Java programming language. This includes syntax, data types, operators, control structures, methods, and the basics of object-oriented programming. Mastering these fundamentals is essential for writing efficient, readable, and maintainable Java code. Java's "write once, run anywhere" philosophy, enabled by the Java Virtual Machine (JVM), makes it a versatile language for various applications.
 
 ## Detailed Explanation
 
 ### Basic Syntax and Structure
-Java programs are organized into classes and methods. Every Java application must have a `main` method as the entry point.
+
+Java programs are structured around classes and methods. A basic Java program consists of:
+
+- **Package Declaration** (optional): Groups related classes.
+- **Import Statements** (optional): Brings in classes from other packages.
+- **Class Declaration**: Defines a class with fields and methods.
+- **Main Method**: The entry point for execution.
+
+```java
+package com.example;
+
+import java.util.Scanner;
+
+public class BasicProgram {
+    public static void main(String[] args) {
+        System.out.println("Hello, Java!");
+    }
+}
+```
 
 ### Data Types
-Java has two categories of data types: primitive and reference.
+
+Java supports primitive and reference data types.
 
 #### Primitive Data Types
-| Type | Size | Range | Example |
-|------|------|-------|---------|
-| byte | 1 byte | -128 to 127 | `byte b = 100;` |
-| short | 2 bytes | -32,768 to 32,767 | `short s = 1000;` |
-| int | 4 bytes | -2^31 to 2^31-1 | `int i = 100000;` |
-| long | 8 bytes | -2^63 to 2^63-1 | `long l = 100000L;` |
-| float | 4 bytes | ~ -3.4e38 to 3.4e38 | `float f = 3.14f;` |
-| double | 8 bytes | ~ -1.7e308 to 1.7e308 | `double d = 3.14159;` |
-| char | 2 bytes | 0 to 65,535 (Unicode) | `char c = 'A';` |
-| boolean | 1 bit | true or false | `boolean flag = true;` |
+
+| Type    | Size    | Range                          | Default | Example          |
+|---------|---------|--------------------------------|---------|------------------|
+| byte    | 1 byte  | -128 to 127                   | 0       | `byte b = 100;`  |
+| short   | 2 bytes | -32,768 to 32,767             | 0       | `short s = 1000;`|
+| int     | 4 bytes | -2^31 to 2^31-1               | 0       | `int i = 42;`    |
+| long    | 8 bytes | -2^63 to 2^63-1               | 0L      | `long l = 100L;` |
+| float   | 4 bytes | ~ -3.4e38 to 3.4e38           | 0.0f    | `float f = 3.14f;`|
+| double  | 8 bytes | ~ -1.7e308 to 1.7e308         | 0.0d    | `double d = 3.14159;`|
+| char    | 2 bytes | 0 to 65,535 (Unicode)         | '\u0000'| `char c = 'A';`  |
+| boolean | 1 bit   | true or false                 | false   | `boolean flag = true;`|
 
 #### Reference Data Types
-These include classes, interfaces, arrays, and strings. They store references to objects in memory.
+
+Reference types include classes, interfaces, arrays, and enums. They store references to objects on the heap.
+
+- **Arrays**: Fixed-size collections of elements of the same type.
+- **Strings**: Immutable sequences of characters.
+- **Objects**: Instances of classes.
 
 ### Operators
-Java supports various operators for performing operations on variables and values.
 
-- **Arithmetic Operators**: +, -, *, /, %
-- **Relational Operators**: ==, !=, >, <, >=, <=
-- **Logical Operators**: &&, ||, !
-- **Assignment Operators**: =, +=, -=, *=, /=, %=
-- **Bitwise Operators**: &, |, ^, ~, <<, >>, >>>
-- **Unary Operators**: +, -, ++, --
+Operators perform operations on operands.
+
+- **Arithmetic**: `+`, `-`, `*`, `/`, `%`
+- **Relational**: `==`, `!=`, `>`, `<`, `>=`, `<=`
+- **Logical**: `&&`, `||`, `!`
+- **Bitwise**: `&`, `|`, `^`, `~`, `<<`, `>>`, `>>>`
+- **Assignment**: `=`, `+=`, `-=`, `*=`, `/=`, `%=`, etc.
+- **Unary**: `+`, `-`, `++`, `--`, `!`
+- **Ternary**: `condition ? trueValue : falseValue`
 
 ### Control Structures
-Control structures direct the flow of program execution.
+
+Control structures manage program flow.
 
 #### Conditional Statements
+
 ```java
 if (condition) {
-    // code
+    // execute if true
 } else if (anotherCondition) {
-    // code
+    // execute if true
 } else {
-    // code
+    // execute otherwise
 }
 
 switch (expression) {
@@ -71,10 +100,17 @@ switch (expression) {
 ```
 
 #### Loops
+
 ```java
 // For loop
 for (int i = 0; i < 10; i++) {
     System.out.println(i);
+}
+
+// Enhanced for loop (for arrays/collections)
+int[] numbers = {1, 2, 3, 4, 5};
+for (int num : numbers) {
+    System.out.println(num);
 }
 
 // While loop
@@ -85,37 +121,54 @@ while (i < 10) {
 }
 
 // Do-while loop
-int i = 0;
+int j = 0;
 do {
-    System.out.println(i);
-    i++;
-} while (i < 10);
+    System.out.println(j);
+    j++;
+} while (j < 10);
 ```
 
 ### Methods
-Methods are blocks of code that perform specific tasks.
+
+Methods encapsulate reusable code blocks.
 
 ```java
 public static int add(int a, int b) {
     return a + b;
 }
+
+public void printMessage(String message) {
+    System.out.println(message);
+}
 ```
 
 ### Classes and Objects
-Java is object-oriented. Classes are blueprints for objects.
+
+Classes define blueprints for objects, encapsulating data (fields) and behavior (methods).
 
 ```java
 public class Car {
-    String model;
-    int year;
-    
+    // Fields
+    private String model;
+    private int year;
+
+    // Constructor
     public Car(String model, int year) {
         this.model = model;
         this.year = year;
     }
-    
+
+    // Methods
     public void display() {
         System.out.println("Model: " + model + ", Year: " + year);
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
     }
 }
 
@@ -124,129 +177,187 @@ Car myCar = new Car("Toyota", 2020);
 myCar.display();
 ```
 
+### Arrays
+
+Arrays store fixed-size sequences of elements.
+
+```java
+// Declaration and initialization
+int[] numbers = new int[5];
+int[] primes = {2, 3, 5, 7, 11};
+
+// Accessing elements
+System.out.println(numbers[0]); // 0
+System.out.println(primes[2]);  // 5
+
+// Multi-dimensional arrays
+int[][] matrix = new int[3][3];
+matrix[0][0] = 1;
+```
+
 ## Real-world Examples & Use Cases
 
-1. **Simple Calculator Application**: Using arithmetic operators and control structures to perform calculations based on user input.
-2. **Bank Account Management**: Creating classes to represent bank accounts with methods for deposit, withdrawal, and balance checking.
-3. **Student Grade Calculator**: Using arrays and loops to calculate average grades for a class.
-4. **Temperature Converter**: Converting between Celsius, Fahrenheit, and Kelvin using methods and conditional logic.
-5. **Basic Inventory System**: Managing product inventory with classes, arrays, and basic CRUD operations.
+1. **Console-Based Calculator**: Implements arithmetic operations using operators and control structures for user input handling.
+2. **Student Management System**: Uses classes and objects to represent students, with methods for calculating grades and managing records.
+3. **Simple Banking Application**: Demonstrates encapsulation with account classes, handling deposits, withdrawals, and balance checks.
+4. **Temperature Monitoring System**: Utilizes arrays and loops to store and process temperature readings over time.
+5. **Basic File Processor**: Reads and processes text files using strings and control structures for data validation.
 
 ## Code Examples
 
-### Hello World Program
+### Hello World with User Input
+
 ```java
+import java.util.Scanner;
+
 public class HelloWorld {
     public static void main(String[] args) {
-        System.out.println("Hello, World!");
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter your name: ");
+        String name = scanner.nextLine();
+        System.out.println("Hello, " + name + "!");
+        scanner.close();
     }
 }
 ```
 
-### Data Types and Operators Example
+### Calculator Class
+
 ```java
-public class DataTypesExample {
+public class Calculator {
+    public static double add(double a, double b) {
+        return a + b;
+    }
+
+    public static double subtract(double a, double b) {
+        return a - b;
+    }
+
+    public static double multiply(double a, double b) {
+        return a + b; // Note: This should be a * b
+    }
+
+    public static double divide(double a, double b) {
+        if (b == 0) {
+            throw new IllegalArgumentException("Division by zero");
+        }
+        return a / b;
+    }
+
     public static void main(String[] args) {
-        // Primitive data types
-        int age = 25;
-        double salary = 50000.50;
-        char grade = 'A';
-        boolean isEmployed = true;
+        System.out.println("5 + 3 = " + add(5, 3));
+        System.out.println("5 - 3 = " + subtract(5, 3));
+        System.out.println("5 * 3 = " + multiply(5, 3));
+        System.out.println("5 / 3 = " + divide(5, 3));
+    }
+}
+```
+
+### Array Operations
+
+```java
+public class ArrayExample {
+    public static void main(String[] args) {
+        int[] numbers = {10, 20, 30, 40, 50};
         
-        // Reference data type
-        String name = "John Doe";
+        // Print array elements
+        System.out.println("Array elements:");
+        for (int i = 0; i < numbers.length; i++) {
+            System.out.println("Index " + i + ": " + numbers[i]);
+        }
         
-        // Operators
-        int sum = age + 5;
-        boolean isAdult = age >= 18;
-        
-        System.out.println("Name: " + name);
-        System.out.println("Age: " + age);
+        // Calculate sum
+        int sum = 0;
+        for (int num : numbers) {
+            sum += num;
+        }
         System.out.println("Sum: " + sum);
-        System.out.println("Is Adult: " + isAdult);
+        
+        // Find maximum
+        int max = numbers[0];
+        for (int num : numbers) {
+            if (num > max) {
+                max = num;
+            }
+        }
+        System.out.println("Maximum: " + max);
     }
 }
 ```
 
-### Control Structures Example
-```java
-public class ControlStructuresExample {
-    public static void main(String[] args) {
-        int number = 15;
-        
-        // If-else
-        if (number > 10) {
-            System.out.println("Number is greater than 10");
-        } else {
-            System.out.println("Number is 10 or less");
-        }
-        
-        // Switch
-        switch (number % 2) {
-            case 0:
-                System.out.println("Even number");
-                break;
-            case 1:
-                System.out.println("Odd number");
-                break;
-        }
-        
-        // For loop
-        System.out.println("Counting to 5:");
-        for (int i = 1; i <= 5; i++) {
-            System.out.println(i);
-        }
-    }
-}
-```
+### Student Class with Methods
 
-### Class and Object Example
 ```java
-public class Person {
-    String name;
-    int age;
+public class Student {
+    private String name;
+    private int[] grades;
     
-    public Person(String name, int age) {
+    public Student(String name, int[] grades) {
         this.name = name;
-        this.age = age;
+        this.grades = grades;
     }
     
-    public void introduce() {
-        System.out.println("Hi, I'm " + name + " and I'm " + age + " years old.");
+    public double getAverageGrade() {
+        int sum = 0;
+        for (int grade : grades) {
+            sum += grade;
+        }
+        return (double) sum / grades.length;
+    }
+    
+    public char getLetterGrade() {
+        double average = getAverageGrade();
+        if (average >= 90) return 'A';
+        else if (average >= 80) return 'B';
+        else if (average >= 70) return 'C';
+        else if (average >= 60) return 'D';
+        else return 'F';
+    }
+    
+    public void displayInfo() {
+        System.out.println("Name: " + name);
+        System.out.println("Average Grade: " + getAverageGrade());
+        System.out.println("Letter Grade: " + getLetterGrade());
     }
     
     public static void main(String[] args) {
-        Person person = new Person("Alice", 30);
-        person.introduce();
+        int[] grades = {85, 92, 78, 96, 88};
+        Student student = new Student("Alice Johnson", grades);
+        student.displayInfo();
     }
 }
 ```
 
 ## Common Pitfalls & Edge Cases
 
-1. **Integer Overflow:** Be careful with large numbers that exceed the range of `int` or `long`.
-2. **Division by Zero:** Always check for zero before division operations.
-3. **Array Index Out of Bounds:** Ensure array indices are within valid range.
-4. **String Immutability:** Remember that strings are immutable in Java.
-5. **Floating-Point Precision:** Be aware of precision issues with `float` and `double` for financial calculations.
+1. **Null Pointer Exceptions**: Always check for null before accessing object methods or fields.
+2. **Array Index Out of Bounds**: Validate indices before accessing array elements.
+3. **Integer Division**: Be aware that dividing integers truncates the decimal part.
+4. **Floating-Point Comparison**: Use epsilon for comparing floating-point numbers due to precision issues.
+5. **String Concatenation in Loops**: Use StringBuilder for efficient string building in loops.
+6. **Variable Scope**: Understand block scope to avoid unintended variable shadowing.
 
 ## Tools & Libraries
 
-- **JDK (Java Development Kit):** Essential for compiling and running Java programs.
-- **IDE:** Eclipse, IntelliJ IDEA, or VS Code for development.
-- **Build Tools:** Maven or Gradle for project management and dependency management.
-- **JUnit:** For unit testing Java applications.
+- **JDK**: Java Development Kit for compilation and runtime.
+- **IDEs**: IntelliJ IDEA, Eclipse, NetBeans for development environments.
+- **Build Tools**: Maven, Gradle for dependency management and project building.
+- **Testing Frameworks**: JUnit, TestNG for unit testing.
+- **Code Quality**: Checkstyle, PMD for static analysis.
 
 ## References
 
 - [Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/)
-- [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se17/html/index.html)
-- [Baeldung Java Tutorials](https://www.baeldung.com/java)
+- [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se21/html/index.html)
+- [Baeldung Java Guides](https://www.baeldung.com/java)
 - [GeeksforGeeks Java](https://www.geeksforgeeks.org/java/)
+- [Java API Documentation](https://docs.oracle.com/en/java/javase/21/docs/api/index.html)
 
 ## Github-README Links & Related Topics
 
-- [OOP Principles in Java](../oop-principles-in-java/README.md)
-- [JVM Internals & Class Loading](../jvm-internals-and-class-loading/README.md)
-- [Java Data Types](../java-data-types/README.md)
-- [Java Operators](../java-operators/README.md)
+- [Java OOP Principles](../java-oop-principles/)
+- [JVM Internals and Class Loading](../jvm-internals-and-class-loading/)
+- [Java Data Types](../java-data-types/)
+- [Java Operators](../java-operators/)
+- [Java Collections](../java-collections/)
+- [Java Exception Handling](../java-exception-handling/)
