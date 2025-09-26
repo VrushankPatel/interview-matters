@@ -1,6 +1,6 @@
 ---
 title: 'OOP Principles in Java'
-aliases: ['Object-Oriented Programming in Java']
+aliases: ['Object-Oriented Programming in Java', 'Java OOP']
 tags: ['#java', '#oop']
 created: '2025-09-26'
 updated: '2025-09-26'
@@ -177,6 +177,38 @@ class PayPal implements Payment {
 Payment payment = new CreditCard();
 payment.process(100.0);  // Outputs: Processing credit card payment: $100.0
 ```
+
+## Journey / Sequence
+
+When designing OOP systems in Java, follow this sequence:
+
+1. **Identify Entities**: Determine classes based on real-world objects.
+2. **Apply Abstraction**: Define interfaces or abstract classes for common behaviors.
+3. **Implement Encapsulation**: Hide data with private fields and public methods.
+4. **Use Inheritance**: Extend classes to reuse code.
+5. **Incorporate Polymorphism**: Override methods for specific behaviors.
+
+This order ensures modular and extensible code.
+
+## Common Pitfalls & Edge Cases
+
+- **Overusing Inheritance**: Leads to tight coupling; prefer composition over inheritance.
+- **Violating Encapsulation**: Exposing internal state directly.
+- **Misusing Polymorphism**: Forgetting to override methods properly, causing unexpected behavior.
+- **Diamond Problem**: Avoid multiple inheritance with classes; use interfaces.
+- **Edge Case**: Abstract classes with no abstract methods; consider interfaces instead.
+
+| Pitfall | Symptom | Solution |
+|---------|---------|----------|
+| Tight Coupling | Hard to change code | Use interfaces and dependency injection |
+| God Object | One class doing everything | Split into smaller, focused classes |
+| Inheritance Abuse | Deep hierarchies | Favor composition |
+
+## Tools & Libraries
+
+- **IDEs**: IntelliJ IDEA, Eclipse for OOP code navigation and refactoring.
+- **Libraries**: Lombok for reducing boilerplate in encapsulation (getters/setters).
+- **Frameworks**: Spring Framework leverages OOP for dependency injection and AOP.
 
 ## References
 

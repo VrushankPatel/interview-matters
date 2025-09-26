@@ -1,9 +1,9 @@
 ---
-title: 'Multithreading & Concurrency in Java'
-aliases: ['Java Concurrency']
-tags: ['#java', '#concurrency']
-created: '2025-09-26'
-updated: '2025-09-26'
+title: Multithreading & Concurrency in Java
+aliases: [Java Multithreading, Concurrent Programming in Java]
+tags: [#java,#multithreading,#concurrency]
+created: 2025-09-26
+updated: 2025-09-26
 ---
 
 # Overview
