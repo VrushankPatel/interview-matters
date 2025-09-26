@@ -3,7 +3,7 @@ title: Instagram System Design
 aliases: [Instagram Photo Sharing, Instagram Architecture]
 tags: [#system-design, #social-media, #scalability]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 ## Overview
