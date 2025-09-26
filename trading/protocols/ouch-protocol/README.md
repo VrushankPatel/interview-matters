@@ -122,10 +122,10 @@ For Java, similar using ByteBuffer.
 
 # Github-README Links & Related Topics
 
-- [FIX Protocol](../fix-protocol/README.md)
-- [API Design Principles](../api-design-principles/)
-- [High-Frequency Trading](../high-frequency-trading/) (assuming)
-- [Distributed Systems](../distributed-systems/README.md)
+- [[FIX Protocol]]
+- [[API Design Principles]]
+- [[High-Frequency Trading]]
+- [[Distributed Systems]]
 
 # References
 

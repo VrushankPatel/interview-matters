@@ -115,12 +115,12 @@ sequenceDiagram
   // Process
   ```
 
-## Github-README Links & Related Topics
-- [FIX Protocol](../fix-protocol/)
-- [Market Data (overview & dissemination)](../../../market-data-overview-and-dissemination/)
-- [Order Book Modeling](../../../algorithms/order-book-modeling/)
+# Github-README Links & Related Topics
+- [[FIX Protocol]]
+- [[Market Data (overview & dissemination)]]
+- [[Order Book Modeling]]
 
-## References
+# References
 - https://www.nasdaq.com/solutions/technology/trading-platforms/itch-protocol
 - NASDAQ ITCH Specification
 - Engineering blogs on low-latency parsing

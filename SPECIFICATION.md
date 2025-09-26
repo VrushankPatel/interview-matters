@@ -5,10 +5,10 @@ Last update
 2025-09-26
 
 Summary of recent additions
-   - Processed 5 topics: Journey of a Trade (end-to-end), Order Types (DAY, GTC, FOK, IOC), Quotes & RFQ workflows, Execution Report, Trade Capture Report with comprehensive READMEs following strict format, including STAR summaries, detailed explanations, real-world examples, message formats, mermaid diagrams, common pitfalls, tools/libraries, and proper interlinking
-   - Performed repository restructuring: removed duplicate directories, organized trading topics under appropriate subcategories (protocols/, market-data/, lifecycle/, exchange-behavior/)
-   - Fixed all [[ ]] wikilinks to proper markdown links across README files
-   - Updated root and category README indexes to reflect new structure
+    - Processed 5 topics: FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols with comprehensive READMEs following strict format, including STAR summaries, detailed explanations, real-world examples, message formats, mermaid diagrams, common pitfalls, tools/libraries, and proper interlinking
+    - Updated trading/protocols/ and trading/market-data/ indexes
+    - Added authoritative references from FIX Trading Community and NASDAQ docs
+    - Processed 5 topics: FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols with updated interlinks using [[ ]] format. Restructured system-design/ with subdirs LLD, HLD, concepts, real-world-designs. Moved facebook-news-feed, instagram-system-design, netflix-video-streaming-architecture to real-world-designs/. Created algorithms/README.md.
 
 Conventions
  - Dir naming: kebab-case.

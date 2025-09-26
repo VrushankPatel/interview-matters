@@ -33,3 +33,9 @@ created_dirs: []
 updated_files: ['trading/fix-protocol/README.md', 'trading/itch-protocol/README.md', 'trading/ouch-protocol/README.md', 'trading/market-data-overview-and-dissemination/README.md', 'trading/order-entry-protocols/README.md', 'trading/lifecycle/execution-report/README.md', 'trading/lifecycle/trade-capture-report/README.md', 'PENDING_TOPICS.md', 'NEXTTOPICS.md', 'SPECIFICATION.md']
 commit_made: true
 commit_message: kb: updated 5 trading topics (FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data, Order Entry Protocols) with enhanced content and proper markdown links + merged compliance/ into lifecycle/ for better organization
+-e 
+topics_processed: ["Journey of a Trade (end-to-end)", "Order Types (DAY, GTC, FOK, IOC)", "Quotes & RFQ workflows", "Execution Report", "Trade Capture Report"]
+created_dirs: []
+updated_files: ["SPECIFICATION.md", "PENDING_TOPICS.md", "NEXTTOPICS.md", "java/jvm/gc-tuning/README.md", "java/fundamentals/java-language-basics/README.md", "java/design/oop-design-and-principles/README.md", "system-design/caching/README.md", "system-design/replication-vs-sharding-vs-partitioning/README.md"]
+commit_made: true
+commit_message: "kb: process 5 topics (journey-of-a-trade, order-types, quotes-rfq-workflows, execution-report, trade-capture-report) + restructure trading/ subdirs + fix wikilinks to markdown links"

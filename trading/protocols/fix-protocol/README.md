@@ -143,11 +143,13 @@ This diagram illustrates a typical order lifecycle, including session management
 ## Github-README Links & Related Topics
 - [ITCH Protocol](../protocols/itch-protocol/)
 - [Order Types](../order-types/)
-- [Market Data](../market-data/)
-- [High-Frequency Trading](../high-frequency-trading/)
-- [Straight-Through Processing](../straight-through-processing/)
+# Github-README Links & Related Topics
 
-## References
+- [[Market Data]]
+- [[High-Frequency Trading]]
+- [[Straight-Through Processing]]
+
+# References
 - https://www.fixtrading.org/what-is-fix/
 - https://www.fixtrading.org/standards/
 - https://en.wikipedia.org/wiki/Financial_Information_eXchange

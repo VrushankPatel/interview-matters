@@ -85,9 +85,9 @@ sequenceDiagram
 
 # Github-README Links & Related Topics
 
-- [FIX Protocol](../fix-protocol/README.md)
-- [ITCH Protocol](../itch-protocol/README.md)
-- [Execution Report](../execution-report/README.md)
+- [[FIX Protocol]]
+- [[ITCH Protocol]]
+- [[Execution Report]]
 
 # References
 
