@@ -319,6 +319,7 @@ A comprehensive collection of technical interview preparation materials covering
 - [YouTube System Design](youtube-system-design/)
 - [ZooKeeper for Coordination](zookeeper-for-coordination/)
 - [Zoom Video Conferencing](zoom-video-conferencing/)
+- [Popular Systems Design Examples](popular-systems-design-examples/)
 
 ### Algorithms and Data Structures
 - [Algorithms](algorithms/)

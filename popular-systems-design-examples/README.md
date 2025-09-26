@@ -64,6 +64,54 @@ graph TD;
     C --> E[Cache]
 ```
 
+### Journey / Sequence
+
+1. Understand requirements and constraints.
+2. Estimate scale (users, data, requests).
+3. Design HLD: Architecture diagram.
+4. Design LLD: Component details.
+5. Discuss bottlenecks, optimizations, and monitoring.
+
+### Data Models / Message Formats
+
+#### URL Shortener
+
+- **URL Table:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| id | BIGINT | Primary key |
+| short_code | VARCHAR(10) | Short URL code |
+| long_url | TEXT | Original URL |
+| created_at | TIMESTAMP | Creation time |
+| expires_at | TIMESTAMP | Expiration time |
+
+#### Twitter Feed
+
+- **User Table:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| user_id | BIGINT | Primary key |
+| username | VARCHAR(50) | Unique username |
+| email | VARCHAR(100) | User email |
+
+- **Tweet Table:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| tweet_id | BIGINT | Primary key |
+| user_id | BIGINT | Foreign key to User |
+| content | TEXT | Tweet text |
+| created_at | TIMESTAMP | Creation time |
+
+- **Follower Table:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| follower_id | BIGINT | User following |
+| followee_id | BIGINT | User being followed |
+
 ## Real-world Examples & Use Cases
 
 - **E-commerce Platforms:** Like Amazon, handling millions of transactions
