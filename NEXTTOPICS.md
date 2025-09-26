@@ -1,8 +1,3 @@
-machine-learning-system-design
-blockchain-system-design
-iot-architecture
-real-time-systems
-security-in-system-design
 java-fundamentals
 oop-principles-in-java
 jvm-internals-class-loading

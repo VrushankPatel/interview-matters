@@ -6,7 +6,9 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+# Security in System Design
+
+## Overview
 
 Security in system design involves implementing protective measures across all layers of an application to prevent unauthorized access, data breaches, and other threats. This encompasses authentication, authorization, encryption, and secure communication protocols.
 
@@ -42,7 +44,16 @@ Security in system design involves implementing protective measures across all l
 - **Zero Trust**: Verify all access requests.
 - **Secrets Management**: Vault, AWS KMS for key storage.
 
-# Real-world Examples & Use Cases
+```mermaid
+graph TD
+    A[User] --> B[Authentication]
+    B --> C[Authorization]
+    C --> D[Secure API]
+    D --> E[Encrypted Data]
+    E --> F[Audit Logs]
+```
+
+## Real-world Examples & Use Cases
 
 - **Banking App**: MFA, end-to-end encryption, audit logging.
 - **E-commerce Platform**: PCI DSS compliance, secure payment processing.
