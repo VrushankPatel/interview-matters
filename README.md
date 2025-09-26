@@ -79,6 +79,7 @@ A comprehensive collection of technical interview preparation materials covering
 - [Java Virtual Machine JVM Architecture](java-virtual-machine-jvm-architecture/)
 - [Java Virtual Threads](java-virtual-threads/)
 - [Java Volatile Keyword](java-volatile-keyword/)
+- [JVM Internals & Class Loading](jvm-internals-class-loading/)
 - [Java Wait Notify](java-wait-notify/)
 - [Java](java/)
 - [JVM Internals and Class Loading](jvm-internals-and-class-loading/)
