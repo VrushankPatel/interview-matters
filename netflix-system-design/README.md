@@ -1,135 +1,165 @@
 ---
 title: Netflix System Design
 aliases: [Netflix Video Streaming, Netflix Architecture]
-tags: [#system-design,#video-streaming,#scalability]
+tags: [#system-design, #video-streaming, #scalability, #microservices]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
+# Netflix System Design
+
 ## Overview
 
-Netflix is a leading video streaming platform that provides on-demand entertainment to over 200 million subscribers worldwide. The system design emphasizes scalability, low-latency content delivery, and personalized user experiences through advanced recommendation algorithms.
+Netflix is a global video streaming platform that delivers personalized content to millions of users. The system handles video storage, encoding, recommendation, and streaming with high scalability and low latency.
 
 ## Detailed Explanation
 
-Netflix's architecture is built on a microservices-based backend, global content delivery networks (CDNs), and distributed data stores. Key components include:
+### Functional Requirements
+- User registration and authentication.
+- Content catalog browsing and search.
+- Video playback with adaptive bitrate.
+- Personalized recommendations.
+- Offline downloads.
 
-- **User Interface**: Web applications and mobile apps for various devices.
-- **API Gateway**: Handles authentication, routing, and load balancing for incoming requests.
-- **Microservices**: Modular services for user management, billing, content catalog, and recommendations.
-- **Content Storage**: Distributed object storage for video files, using formats like adaptive bitrate streaming.
-- **CDN Network**: Akamai and custom CDNs for efficient global distribution.
-- **Recommendation Engine**: Machine learning models for personalized content suggestions.
-- **Data Analytics**: Big data processing for user behavior analysis and content optimization.
+### Non-Functional Requirements
+- Handle billions of hours of streaming monthly.
+- Global CDN for low latency.
+- 99.99% availability.
+- Scalable to 200+ million subscribers.
 
-The system uses event-driven architecture for real-time updates and ensures high availability with multi-region deployments.
+### System Components
+- **Client Apps**: Mobile, TV, web apps for playback.
+- **API Gateway**: Route requests to microservices.
+- **Microservices**: User management, catalog, recommendations, billing.
+- **Content Delivery**: CDN for video distribution.
+- **Data Pipeline**: Ingest, encode, and store videos.
+- **Recommendation Engine**: ML-based suggestions.
+- **Databases**: Cassandra for user data, Elasticsearch for search.
+
+### Architecture Diagram
 
 ```mermaid
 graph TD
-    A[User Device] --> B[API Gateway]
-    B --> C[Authentication Service]
-    B --> D[Content Service]
-    D --> E[Recommendation Engine]
-    D --> F[CDN]
-    F --> G[Video Playback]
-    C --> H[User Database]
-    D --> I[Content Metadata DB]
-    E --> J[Analytics Platform]
+    A[User Device] --> B[CDN Edge]
+    B --> C[API Gateway]
+    C --> D[Microservices]
+    D --> E[Databases]
+    D --> F[Recommendation Engine]
+    F --> G[ML Models]
+    H[Content Ingest] --> I[Encoding Pipeline]
+    I --> J[Storage (S3)]
+    J --> B
 ```
+
+### Data Models / Message Formats
+- User Profile: JSON with preferences, watch history.
+- Video Metadata: Title, genre, duration, encodings.
+- Recommendation Events: User actions streamed to Kafka.
+
+### Common Pitfalls & Edge Cases
+- Video buffering: Adaptive bitrate streaming.
+- Regional restrictions: Geo-blocking.
+- High concurrency: Microservices with auto-scaling.
+- Data privacy: GDPR compliance.
 
 ## Real-world Examples & Use Cases
 
-- **Global Video Streaming**: Delivering high-quality video to users in different regions with minimal latency.
-- **Personalized Recommendations**: Using viewing history to suggest relevant content.
-- **Offline Viewing**: Allowing downloads for offline consumption.
-- **Live Events**: Streaming live sports or original content.
+- Netflix itself: Streaming movies and shows globally.
+- Similar platforms: Amazon Prime Video, Disney+.
+
+Use cases: Entertainment, education (documentaries), personalized content discovery.
 
 ## Code Examples
 
-Here's a simplified Java example of a basic recommendation algorithm using collaborative filtering:
+### Simple Video Player in JavaScript
+
+```javascript
+class VideoPlayer {
+    constructor(videoElement) {
+        this.video = videoElement;
+        this.currentQuality = '720p';
+    }
+
+    play() {
+        this.video.play();
+    }
+
+    changeQuality(quality) {
+        // Switch to different bitrate
+        this.currentQuality = quality;
+        this.video.src = `path/to/video_${quality}.mp4`;
+        this.video.load();
+    }
+}
+
+// Usage
+const player = new VideoPlayer(document.getElementById('video'));
+player.play();
+```
+
+### Microservice for Recommendations (Spring Boot)
 
 ```java
-import java.util.*;
+@RestController
+@RequestMapping("/recommendations")
+public class RecommendationController {
+    @Autowired
+    private RecommendationService service;
 
-public class RecommendationEngine {
-    private Map<String, List<String>> userPreferences; // User -> List of watched movies
-
-    public RecommendationEngine() {
-        this.userPreferences = new HashMap<>();
+    @GetMapping("/{userId}")
+    public List<Video> getRecommendations(@PathVariable String userId) {
+        return service.getPersonalizedRecommendations(userId);
     }
+}
 
-    public List<String> recommendMovies(String userId, int topN) {
-        if (!userPreferences.containsKey(userId)) {
-            return new ArrayList<>();
-        }
-
-        List<String> watched = userPreferences.get(userId);
-        Map<String, Integer> scores = new HashMap<>();
-
-        // Simple collaborative filtering: recommend movies watched by similar users
-        for (Map.Entry<String, List<String>> entry : userPreferences.entrySet()) {
-            if (!entry.getKey().equals(userId)) {
-                List<String> otherWatched = entry.getValue();
-                for (String movie : otherWatched) {
-                    if (!watched.contains(movie)) {
-                        scores.put(movie, scores.getOrDefault(movie, 0) + 1);
-                    }
-                }
-            }
-        }
-
-        // Sort by score and return top N
-        return scores.entrySet().stream()
-                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-                .limit(topN)
-                .map(Map.Entry::getKey)
-                .collect(ArrayList::new, (list, item) -> list.add(item), ArrayList::addAll);
-    }
-
-    public void addUserPreference(String userId, String movieId) {
-        userPreferences.computeIfAbsent(userId, k -> new ArrayList<>()).add(movieId);
+@Service
+public class RecommendationService {
+    public List<Video> getPersonalizedRecommendations(String userId) {
+        // ML logic here
+        return List.of(new Video("Movie1"), new Video("Movie2"));
     }
 }
 ```
 
-## Journey / Sequence
+### Kafka Producer for User Events
 
-1. **User Registration/Login**: User creates account or logs in via API Gateway.
-2. **Content Discovery**: User browses catalog or receives recommendations.
-3. **Video Request**: API routes to content service, which selects optimal CDN.
-4. **Streaming**: Video chunks are delivered via CDN with adaptive bitrate.
-5. **Analytics**: Viewing data is collected for future recommendations.
+```java
+@Configuration
+public class KafkaConfig {
+    @Bean
+    public ProducerFactory<String, String> producerFactory() {
+        Map<String, Object> config = new HashMap<>();
+        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        return new DefaultKafkaProducerFactory<>(config);
+    }
 
-## Data Models / Message Formats
+    @Bean
+    public KafkaTemplate<String, String> kafkaTemplate() {
+        return new KafkaTemplate<>(producerFactory());
+    }
+}
 
-- **User Model**: {id, email, subscription_plan, preferences}
-- **Movie Model**: {id, title, genre, duration, rating}
-- **Viewing Event**: {user_id, movie_id, timestamp, watch_duration}
+@Service
+public class EventService {
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
 
-## Common Pitfalls & Edge Cases
-
-- **Buffering Issues**: Handle network variability with adaptive streaming.
-- **Regional Restrictions**: Comply with content licensing laws.
-- **Scalability During Peaks**: Use auto-scaling for sudden traffic spikes.
-- **Data Privacy**: Secure user viewing data and recommendations.
-
-## Tools & Libraries
-
-- **Backend**: Java/Spring Boot for microservices
-- **Storage**: Cassandra for user data, S3 for video storage
-- **CDN**: Custom Open Connect appliances
-- **Analytics**: Spark for big data processing
-- **Orchestration**: Kubernetes for container management
+    public void sendWatchEvent(String userId, String videoId) {
+        kafkaTemplate.send("watch-events", userId + ":" + videoId);
+    }
+}
+```
 
 ## References
 
 - [Netflix Tech Blog](https://netflixtechblog.com/)
+- [Designing Netflix's Video Streaming Architecture](https://www.youtube.com/watch?v=psQzyFfsUGU)
 - [Netflix Open Source](https://netflix.github.io/)
-- [Adaptive Streaming Overview](https://en.wikipedia.org/wiki/Adaptive_bitrate_streaming)
 
 ## Github-README Links & Related Topics
 
-- [CDN Architecture](../cdn-architecture/README.md)
-- [Microservices Architecture](../microservices-architecture/README.md)
-- [Event-Driven Architecture](../event-driven-architecture/README.md)
-- [Distributed Caching with Redis](../distributed-caching-with-redis/README.md)
+- [Microservices Architecture](microservices-architecture/)
+- [CDN Architecture](cdn-architecture/)
+- [Event Streaming with Apache Kafka](event-streaming-with-apache-kafka/)
+- [Distributed Caching with Redis](distributed-caching-with-redis/)
+- [Machine Learning in System Design](machine-learning-in-system-design/)

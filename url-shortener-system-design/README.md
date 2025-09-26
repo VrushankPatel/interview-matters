@@ -1,85 +1,94 @@
 ---
 title: URL Shortener System Design
-aliases: [url shortener, tinyurl design]
-tags: [#system-design,#lld,#hld]
-created: 2025-09-25
+aliases: [URL Shortener, TinyURL Design]
+tags: [#system-design, #web-development, #scalability]
+created: 2025-09-26
 updated: 2025-09-26
 ---
 
+# URL Shortener System Design
+
 ## Overview
 
-A URL shortener service, like bit.ly or TinyURL, converts long URLs into short, shareable links. It involves generating unique short codes, storing URL mappings, and handling redirections at scale.
+A URL shortener service, such as Bitly or TinyURL, converts long URLs into short, unique aliases that redirect to the original URLs. This enables easier sharing, tracking of clicks, and analytics for marketing campaigns.
 
 ## Detailed Explanation
 
-## Requirements
+### Functional Requirements
+- Shorten a given URL to a unique short code.
+- Redirect from short URL to original URL.
+- Support custom short URLs (if requested).
+- Handle URL expiration and deletion.
+- Provide analytics on click counts and sources.
 
-- Functional: Shorten URLs, redirect to original
-- Non-functional: High availability, low latency, scalability
+### Non-Functional Requirements
+- High availability (99.9% uptime).
+- Low latency (<100ms for redirects).
+- Scalability to handle millions of URLs and billions of redirects.
+- Security against malicious URLs.
 
-## High-Level Design (HLD)
+### System Components
+- **API Layer**: RESTful endpoints for shortening and redirecting.
+- **Application Servers**: Handle business logic, validation, and generation of short codes.
+- **Database**: Store URL mappings, metadata, and analytics.
+- **Cache**: In-memory store for frequent redirects to reduce database load.
+- **CDN**: Distribute redirects globally for low latency.
+- **Analytics Service**: Track and aggregate click data.
 
-- API Gateway for requests
-- Shortening service
-- Database for storage
-- Cache for fast lookups
-- Load balancer
+### Architecture Diagram
 
 ```mermaid
 graph TD
-    A[User] --> B[API Gateway]
-    B --> C[Shortening Service]
-    C --> D[Database]
-    C --> E[Cache]
-    B --> F[Redirection Service]
-    F --> E
-    F --> D
+    A[User] --> B[CDN / Load Balancer]
+    B --> C[API Gateway]
+    C --> D[Application Servers]
+    D --> E[Cache (Redis)]
+    D --> F[Database (NoSQL like DynamoDB)]
+    D --> G[Analytics Service]
+    G --> F
 ```
 
-## Low-Level Design (LLD)
+### Data Models
+- URL Table: short_code (PK), original_url, created_at, expires_at, user_id.
+- Click Table: short_code, timestamp, ip, user_agent.
 
-- Short code generation: Base62 encoding of counter or hash
-- Database schema: table with short_code, long_url, created_at, expires_at
-- Caching: Redis for hot URLs
-
-## Journey / Sequence
-
-```mermaid
-sequenceDiagram
-    participant User
-    participant API
-    participant DB
-    User->>API: POST /shorten {url: "https://longurl.com"}
-    API->>API: Generate short code
-    API->>DB: Store mapping
-    API->>User: Return short URL
-    User->>API: GET /abc123
-    API->>DB: Lookup original URL
-    API->>User: Redirect (301) to original
-```
+### Common Pitfalls & Edge Cases
+- Collision in short codes: Use base62 encoding with sufficient length.
+- Malicious URLs: Implement URL validation and blacklisting.
+- High traffic spikes: Auto-scaling and rate limiting.
+- Data consistency: Use eventual consistency for analytics.
 
 ## Real-world Examples & Use Cases
 
-- Social media sharing
-- Marketing campaigns
-- Analytics tracking
+- **Bitly**: Provides link shortening with detailed analytics for social media and marketing.
+- **TinyURL**: Simple shortening service used in emails and forums.
+- **Google URL Shortener (goo.gl)**: Integrated with Google Analytics.
+
+Use cases include social media sharing (e.g., Twitter character limits), email campaigns, QR codes for offline marketing, and affiliate link tracking.
 
 ## Code Examples
 
-## Java Implementation (Simple)
+### Simple In-Memory URL Shortener in Java
 
 ```java
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class URLShortener {
     private Map<String, String> urlMap = new HashMap<>();
-    private int counter = 0;
+    private Map<String, String> reverseMap = new HashMap<>();
+    private AtomicInteger counter = new AtomicInteger(0);
+    private static final String BASE_URL = "http://short.ly/";
 
     public String shorten(String longUrl) {
+        if (reverseMap.containsKey(longUrl)) {
+            return BASE_URL + reverseMap.get(longUrl);
+        }
         String shortCode = generateShortCode();
         urlMap.put(shortCode, longUrl);
-        return "http://short.ly/" + shortCode;
+        reverseMap.put(longUrl, shortCode);
+        return BASE_URL + shortCode;
     }
 
     public String redirect(String shortCode) {
@@ -87,66 +96,73 @@ public class URLShortener {
     }
 
     private String generateShortCode() {
-        return Integer.toString(counter++, 36); // base36
+        return Integer.toString(counter.incrementAndGet(), 36);
     }
 }
 ```
 
-## Python with Flask
+### REST API with Spring Boot
 
-```python
-from flask import Flask, redirect, request
-import hashlib
+```java
+@RestController
+@RequestMapping("/api")
+public class URLController {
+    @Autowired
+    private URLService urlService;
 
-app = Flask(__name__)
-url_store = {}
+    @PostMapping("/shorten")
+    public ResponseEntity<Map<String, String>> shorten(@RequestBody Map<String, String> request) {
+        String longUrl = request.get("url");
+        String shortUrl = urlService.shorten(longUrl);
+        Map<String, String> response = new HashMap<>();
+        response.put("shortUrl", shortUrl);
+        return ResponseEntity.ok(response);
+    }
 
-@app.route('/shorten', methods=['POST'])
-def shorten():
-    long_url = request.form['url']
-    short_code = hashlib.md5(long_url.encode()).hexdigest()[:6]
-    url_store[short_code] = long_url
-    return f"http://short.ly/{short_code}"
-
-@app.route('/<short_code>')
-def redirect(short_code):
-    if short_code in url_store:
-        return redirect(url_store[short_code])
-    return "Not found", 404
-```
-
-## Data Models / Message Formats
-
-```json
-{
-  "shortUrl": "http://short.ly/abc123",
-  "longUrl": "https://example.com/very/long/path",
-  "createdAt": "2023-09-25T00:00:00Z",
-  "clicks": 42
+    @GetMapping("/{shortCode}")
+    public ResponseEntity<Void> redirect(@PathVariable String shortCode) {
+        String longUrl = urlService.redirect(shortCode);
+        if (longUrl == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.status(HttpStatus.FOUND)
+                .header(HttpHeaders.LOCATION, longUrl)
+                .build();
+    }
 }
 ```
 
-## Common Pitfalls & Edge Cases
+### Database Schema (SQL)
 
-- Collisions: Handle hash collisions.
-- Expiration: Implement TTL for URLs.
-- Analytics: Track clicks without slowing redirects.
+```sql
+CREATE TABLE urls (
+    short_code VARCHAR(10) PRIMARY KEY,
+    original_url TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    expires_at TIMESTAMP,
+    user_id VARCHAR(50)
+);
 
-## Tools & Libraries
-
-- Databases: PostgreSQL, Cassandra.
-- Caching: Redis.
-- Frameworks: Spring Boot for API.
+CREATE TABLE clicks (
+    id SERIAL PRIMARY KEY,
+    short_code VARCHAR(10),
+    clicked_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ip_address VARCHAR(45),
+    user_agent TEXT,
+    FOREIGN KEY (short_code) REFERENCES urls(short_code)
+);
+```
 
 ## References
 
-- [System Design: URL Shortening Service](https://www.geeksforgeeks.org/system-design-url-shortening-service/)
-- [Designing a URL Shortening service like TinyURL](https://medium.com/@sandeep4.verma/designing-a-url-shortening-service-like-tinyurl-73a04d986e8f)
-- [System Design Primer: URL Shortener](https://github.com/donnemartin/system-design-primer#url-shortener)
-- [Bitly Architecture](https://bitly.com/blog/)
+- [System Design: Designing a URL Shortening service like TinyURL](https://www.educative.io/courses/grokking-the-system-design-interview/m2ygV4E81AR)
+- [URL Shortener System Design Interview](https://www.youtube.com/watch?v=JQDHz72OA3c)
+- [Bitly Engineering Blog](https://engineering.bitly.com/)
 
 ## Github-README Links & Related Topics
 
-- [Caching](../caching/README.md)
-- [Database Sharding Strategies](../database-sharding-strategies/README.md)
-- [Load Balancing and Strategies](../load-balancing-and-strategies/README.md)
+- [Caching](caching/)
+- [Database Sharding Strategies](database-sharding-strategies/)
+- [API Rate Limiting](api-rate-limiting/)
+- [CDN Architecture](cdn-architecture/)
+- [Load Balancing Strategies](load-balancing-strategies/)

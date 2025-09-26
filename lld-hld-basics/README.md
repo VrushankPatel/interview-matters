@@ -1,149 +1,123 @@
 ---
 title: LLD HLD Basics
-aliases: [Low Level Design, High Level Design, System Design Fundamentals]
-tags: [#system-design,#lld,#hld,#design]
+aliases: [Low Level Design, High Level Design, LLD vs HLD]
+tags: [#system-design, #software-engineering, #design-patterns]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+# LLD HLD Basics
 
-Low Level Design (LLD) and High Level Design (HLD) are fundamental concepts in software engineering and system design, particularly in interviews and architecture discussions. HLD provides a bird's-eye view of the system, focusing on overall architecture, while LLD delves into the detailed implementation, including data structures, algorithms, and component interactions. Together, they bridge the gap between requirements and code.
+## Overview
 
-# Detailed Explanation
+Low Level Design (LLD) and High Level Design (HLD) are phases in software system design. HLD provides a bird's-eye view of the system architecture, while LLD delves into detailed component designs, data structures, and algorithms.
+
+## Detailed Explanation
 
 ### High Level Design (HLD)
-
-HLD outlines the system's architecture at a high level, identifying major components, their interactions, and technologies. It answers "what" the system does and "how" at a macro level.
-
-- **Components**: System boundaries, modules, databases, APIs.
-- **Diagrams**: Architecture diagrams, data flow diagrams.
-- **Focus**: Scalability, reliability, technology stack.
+- Focuses on system architecture, modules, and interactions.
+- Includes diagrams like system context, component diagrams.
+- Defines technologies, databases, and high-level data flow.
+- Used in initial planning and stakeholder discussions.
 
 ### Low Level Design (LLD)
-
-LLD specifies the internal workings of each component from HLD, including classes, interfaces, data models, and algorithms. It answers "how" at a micro level.
-
-- **Components**: Class diagrams, sequence diagrams, database schemas.
-- **Focus**: Code structure, error handling, performance optimizations.
-
-### Key Differences
-
-| Aspect | HLD | LLD |
-|--------|-----|-----|
-| Scope | System-wide | Component-specific |
-| Detail Level | High-level | Detailed |
-| Audience | Architects, stakeholders | Developers |
-| Output | Diagrams, tech choices | Code blueprints |
-| Example | Microservices architecture | REST API endpoints |
+- Detailed design of individual components.
+- Class diagrams, sequence diagrams, database schemas.
+- Algorithms, data structures, error handling.
+- Basis for coding and implementation.
 
 ### When to Use
+- HLD: Early design phase, system interviews.
+- LLD: After HLD, for coding interviews or detailed specs.
 
-- **HLD**: Early design phase, requirement analysis.
-- **LLD**: After HLD, before coding.
+### Journey / Sequence
+1. Requirements gathering.
+2. HLD: Architecture design.
+3. LLD: Component design.
+4. Implementation, testing.
 
-# Real-world Examples & Use Cases
+### Data Models / Message Formats
+- HLD: High-level entities (e.g., User, Order).
+- LLD: Detailed schemas (e.g., SQL tables with constraints).
 
-### URL Shortener System
+### Common Pitfalls & Edge Cases
+- Skipping HLD leads to poor architecture.
+- Over-designing LLD without constraints.
+- Not considering scalability in HLD.
 
-#### HLD Example
+## Real-world Examples & Use Cases
+
+- **E-commerce Platform**: HLD shows microservices for user, product, order; LLD details user service classes.
+- **URL Shortener**: HLD architecture; LLD URL shortening algorithm.
+
+Use cases: System design interviews, software development lifecycle.
+
+## Code Examples
+
+### HLD Diagram (Mermaid)
 
 ```mermaid
 graph TD
-    A[User] --> B[API Gateway]
-    B --> C[Shorten Service]
-    B --> D[Redirect Service]
+    A[Client] --> B[API Gateway]
+    B --> C[User Service]
+    B --> D[Product Service]
     C --> E[Database]
     D --> E
 ```
 
-- Components: API Gateway, Shorten/Redirect services, Database.
-
-#### LLD Example
-
-For Shorten Service:
-
-```mermaid
-classDiagram
-    class UrlShortener {
-        +shortenUrl(longUrl: String): String
-        +getOriginalUrl(shortUrl: String): String
-    }
-    class Database {
-        +save(mapping: UrlMapping)
-        +find(shortUrl: String): UrlMapping
-    }
-    UrlShortener --> Database
-```
-
-- Classes: UrlShortener, Database interface.
-
-### E-commerce Platform
-
-- **HLD**: User auth, product catalog, order processing, payment gateway.
-- **LLD**: Detailed user session management, product search algorithms.
-
-# Code Examples
-
-### Java LLD Example: URL Shortener Class
+### LLD Class Diagram (Java)
 
 ```java
-public class UrlShortener {
-    private Map<String, String> urlMap = new HashMap<>();
-    private Map<String, String> reverseMap = new HashMap<>();
-    private static final String BASE_URL = "http://short.ly/";
+// High Level: Interfaces
+interface PaymentService {
+    boolean processPayment(Order order);
+}
 
-    public String shortenUrl(String longUrl) {
-        if (reverseMap.containsKey(longUrl)) {
-            return BASE_URL + reverseMap.get(longUrl);
-        }
-        String shortCode = generateShortCode();
-        urlMap.put(shortCode, longUrl);
-        reverseMap.put(longUrl, shortCode);
-        return BASE_URL + shortCode;
+// Low Level: Implementation
+@Service
+public class StripePaymentService implements PaymentService {
+    @Override
+    public boolean processPayment(Order order) {
+        // Stripe API call
+        return true;
     }
+}
 
-    public String getOriginalUrl(String shortCode) {
-        return urlMap.get(shortCode);
-    }
-
-    private String generateShortCode() {
-        // Simple random generation
-        return UUID.randomUUID().toString().substring(0, 8);
-    }
+@Entity
+public class Order {
+    @Id
+    private Long id;
+    private String userId;
+    private List<Item> items;
+    private BigDecimal total;
 }
 ```
 
-This is a basic LLD implementation; in production, use databases and hash functions.
+### Sequence Diagram for Payment
 
-# Journey / Sequence
+```mermaid
+sequenceDiagram
+    participant User
+    participant API
+    participant PaymentService
+    participant Stripe
 
-1. **Requirements Gathering**: Understand functional/non-functional requirements.
-2. **HLD Creation**: Design high-level architecture.
-3. **LLD Creation**: Detail each component.
-4. **Implementation**: Code based on LLD.
-5. **Testing & Iteration**: Validate and refine.
+    User->>API: Place Order
+    API->>PaymentService: Process Payment
+    PaymentService->>Stripe: Charge Card
+    Stripe-->>PaymentService: Success
+    PaymentService-->>API: Confirmed
+    API-->>User: Order Placed
+```
 
-# Common Pitfalls & Edge Cases
+## References
 
-- **Over-designing HLD**: Too many components complicate LLD.
-- **Ignoring Scalability in HLD**: Leads to LLD rework.
-- **LLD without HLD**: Misses big picture.
-- **Edge Case**: Handling collisions in URL shortener.
-
-# Tools & Libraries
-
-- **Diagramming**: Draw.io, Lucidchart for HLD diagrams.
-- **Modeling**: UML tools like PlantUML for LLD.
-- **Frameworks**: Spring Boot for Java LLD.
-
-# References
-
-- [System Design Interview Guide](https://github.com/donnemartin/system-design-primer)
 - [Low Level Design vs High Level Design](https://www.geeksforgeeks.org/difference-between-high-level-design-and-low-level-design/)
+- [System Design Interview Guide](https://github.com/donnemartin/system-design-primer)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
-- [System Design Basics](../system-design-basics/)
-- [Popular Systems Design LLD HLD](../popular-systems-design-lld-hld/)
-- [Design Patterns](../design-patterns/)
+- [System Design Basics](system-design-basics/)
+- [Design Patterns in Java](design-patterns-in-java/)
+- [Database Design Principles](database-design-principles/)
+- [Microservices Architecture](microservices-architecture/)
