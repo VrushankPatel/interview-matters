@@ -1,5 +1,5 @@
-java-fundamentals
-oop-principles-in-java
-jvm-internals-class-loading
-garbage-collection-algorithms
-collections-data-structures
+java-stream-api-functional-programming
+system-design-basics
+high-scalability-patterns
+latency-throughput-zero-to-hero
+cap-theorem-and-distributed-systems

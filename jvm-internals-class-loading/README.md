@@ -6,13 +6,11 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# JVM Internals & Class Loading
-
 ## Overview
 
 The Java Virtual Machine (JVM) is the runtime environment that executes Java bytecode. Understanding JVM internals and the class loading mechanism is crucial for Java developers to optimize performance, troubleshoot issues, and write efficient code. This topic covers the JVM architecture, memory management, and the class loading process.
 
-# Detailed Explanation
+## Detailed Explanation
 
 ## JVM Architecture
 
@@ -54,14 +52,14 @@ Java uses a hierarchical class loading system:
 - **Visibility Principle**: Child class loaders can see classes loaded by parent class loaders, but not vice versa
 - **Uniqueness Principle**: Ensures that classes are loaded only once
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 1. **Plugin Systems**: Using custom class loaders to load plugins dynamically
 2. **Application Servers**: Managing multiple applications with different class versions
 3. **Hot Deployment**: Reloading classes without restarting the application
 4. **Security**: Isolating classes from different sources for security purposes
 
-# Code Examples
+## Code Examples
 
 ### Understanding Class Loading Order
 ```java
@@ -125,14 +123,14 @@ public class StaticInitializationDemo {
 }
 ```
 
-# References
+## References
 
 - [Oracle JVM Documentation](https://docs.oracle.com/javase/specs/jvms/se11/html/index.html)
 - [Java Class Loading](https://docs.oracle.com/javase/tutorial/ext/basics/load.html)
 - [Understanding JVM Internals](https://www.oracle.com/technetwork/java/javase/tech/index-jsp-140228.html)
 - [Class Loader Architecture](https://docs.oracle.com/javase/8/docs/technotes/guides/lang/cl-mt.html)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 - [Java Fundamentals](./java-fundamentals/README.md)
 - [Garbage Collection Algorithms](./garbage-collection-algorithms/README.md)

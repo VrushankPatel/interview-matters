@@ -156,14 +156,14 @@ public class WeakReferenceExample {
 3. **Large Object Allocation**: Objects larger than survivor space go directly to old generation
 4. **GC Pauses**: Long pauses in high-throughput systems
 
-# References
+## References
 
 - [Oracle GC Tuning Guide](https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/index.html)
 - [JVM Garbage Collection](https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/gc01/index.html)
 - [G1 Garbage Collector](https://docs.oracle.com/javase/9/gctuning/g1-garbage-collector.htm)
 - [Z Garbage Collector](https://docs.oracle.com/en/java/javase/11/gctuning/z-garbage-collector.html)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 - [JVM Internals & Class Loading](./jvm-internals-and-class-loading/README.md)
 - [Java Memory Management](./java-memory-management/README.md)

@@ -288,6 +288,7 @@ This repository contains comprehensive documentation on various topics for inter
 - [Blockchain Consensus](./blockchain-consensus/README.md)
 - [Byzantine Fault Tolerance](./byzantine-fault-tolerance/README.md)
 - [Collections and Data Structures](./collections-and-data-structures/README.md)
+- [Collections Data Structures](./collections-data-structures/README.md)
 - [Consensus Algorithms](./consensus-algorithms/README.md)
 - [Consensus Algorithms Overview](./consensus-algorithms-overview/README.md)
 - [Edge Computing](./edge-computing/README.md)
