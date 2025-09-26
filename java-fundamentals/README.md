@@ -6,8 +6,6 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Java Fundamentals
-
 ## Overview
 
 Java Fundamentals encompass the core concepts and syntax of the Java programming language. This includes data types, variables, operators, control structures, methods, and basic object-oriented principles. Understanding these fundamentals is essential for building robust Java applications.
@@ -223,6 +221,6 @@ public class GradeCalculator {
 ## Github-README Links & Related Topics
 
 - [OOP Principles in Java](./oop-principles-in-java/README.md)
-- [JVM Internals & Class Loading](./jvm-internals-class-loading/README.md)
+- [JVM Internals & Class Loading](./jvm-internals-and-class-loading/README.md)
 - [Java Collections](./java-collections/README.md)
 - [Java Exception Handling](./java-exception-handling/README.md)

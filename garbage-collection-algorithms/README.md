@@ -6,13 +6,11 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Garbage Collection Algorithms
-
 ## Overview
 
 Garbage Collection (GC) is an automatic memory management feature in Java that reclaims memory occupied by objects that are no longer in use. Understanding GC algorithms is essential for optimizing Java application performance, reducing pause times, and preventing memory leaks. This topic covers various GC algorithms, their mechanisms, and best practices.
 
-# Detailed Explanation
+## Detailed Explanation
 
 ## What is Garbage Collection?
 
@@ -70,14 +68,14 @@ The JVM divides heap memory into generations:
 - `-XX:NewRatio`: Ratio of old to young generation
 - `-XX:SurvivorRatio`: Ratio of Eden to survivor space
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 1. **High-Throughput Applications**: Using Parallel GC for batch processing
 2. **Low-Latency Systems**: Implementing G1 or ZGC for real-time applications
 3. **Memory-Constrained Environments**: Tuning heap sizes for embedded systems
 4. **Microservices**: Configuring GC for containerized applications
 
-# Code Examples
+## Code Examples
 
 ### Monitoring GC Activity
 ```java
@@ -151,7 +149,7 @@ public class WeakReferenceExample {
 }
 ```
 
-# Common Pitfalls & Edge Cases
+## Common Pitfalls & Edge Cases
 
 1. **Premature Optimization**: Don't tune GC unless there's a proven performance issue
 2. **Memory Leaks**: Holding references longer than necessary
@@ -167,7 +165,7 @@ public class WeakReferenceExample {
 
 # Github-README Links & Related Topics
 
-- [JVM Internals & Class Loading](./jvm-internals-class-loading/README.md)
+- [JVM Internals & Class Loading](./jvm-internals-and-class-loading/README.md)
 - [Java Memory Management](./java-memory-management/README.md)
 - [GC Tuning](./gc-tuning/README.md)
 - [Java Performance Tuning](./java-performance-tuning/README.md)

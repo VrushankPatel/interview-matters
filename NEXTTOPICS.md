@@ -1,8 +1,3 @@
-replication-vs-sharding-vs-partitioning
-java-fundamentals
-oop-principles-in-java
-jvm-internals-and-class-loading
-garbage-collection-algorithms
 collections-and-data-structures
 java-stream-api-and-functional-programming
 system-design-basics
@@ -13,3 +8,8 @@ netflix-system-design
 cap-theorem-and-distributed-systems
 caching
 lld-hld-basics
+multithreading-and-concurrency-in-java
+devops-and-infrastructure-as-code
+proxy-forward-and-reverse
+load-balancing-and-strategies
+rate-limiting

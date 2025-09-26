@@ -6,8 +6,6 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# JVM Internals & Class Loading
-
 ## Overview
 
 The Java Virtual Machine (JVM) is the runtime environment that executes Java bytecode. Understanding JVM internals and the class loading mechanism is crucial for Java developers to write efficient, secure, and optimized applications. The class loading process involves loading, linking, and initializing classes at runtime, enabling dynamic loading and hot-swapping of code.
@@ -208,10 +206,10 @@ public class StaticInitializationExample {
 
 ## Github-README Links & Related Topics
 
-- [java-fundamentals/](java-fundamentals/)
-- [garbage-collection-algorithms/](garbage-collection-algorithms/)
-- [jvm-memory-model/](jvm-memory-model/)
-- [java-security-basics/](java-security-basics/)
+- [Java Fundamentals](./java-fundamentals/README.md)
+- [Garbage Collection Algorithms](./garbage-collection-algorithms/README.md)
+- [JVM Memory Model](./jvm-memory-model/README.md)
+- [Java Security Basics](./java-security-basics/README.md)
 
 # STAR Summary
 
