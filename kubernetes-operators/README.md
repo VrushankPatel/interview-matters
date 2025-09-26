@@ -3,7 +3,7 @@ title: Kubernetes Operators
 aliases: [k8s operators, operator pattern]
 tags: [#kubernetes,#devops,#automation]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Kubernetes Operators

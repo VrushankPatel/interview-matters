@@ -1,5 +1,5 @@
-URL Shortener System Design
-Netflix Video Streaming Architecture
-Facebook News Feed
-Google Search Engine
-WhatsApp Messaging System
+Database Indexing Best Practices
+API Gateway Implementation
+Container Orchestration with Kubernetes
+Behavioral Interview Questions
+Coding Interview Strategies

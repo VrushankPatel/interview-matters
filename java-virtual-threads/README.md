@@ -3,7 +3,7 @@ title: Java Virtual Threads
 aliases: [Virtual Threads, Project Loom]
 tags: [#java,#concurrency]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Java Virtual Threads
