@@ -1,203 +1,166 @@
 ---
 title: WhatsApp System Design
-aliases: ["Messaging App Architecture", "Real-time Chat System"]
-tags: [#system-design, #messaging, #real-time]
-created: 2025-09-25
+aliases: [WhatsApp Architecture, WhatsApp Messaging]
+tags: [#system-design,#messaging,#real-time]
+created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# WhatsApp System Design
-
 ## Overview
 
-WhatsApp System Design focuses on building a scalable, real-time messaging platform capable of handling billions of users worldwide. Key features include end-to-end encryption, instant message delivery, media sharing, group chats, voice/video calls, and status updates. The architecture emphasizes low latency, high availability, and efficient resource usage, drawing from client-server models with proprietary protocols for secure communication. Challenges involve managing massive scale, ensuring message reliability, and maintaining privacy through encryption.
+WhatsApp is a cross-platform messaging application that enables real-time text, voice, video, and media sharing with end-to-end encryption. Acquired by Facebook in 2014 for $19 billion, it serves over 2 billion users globally, processing billions of messages daily. The system emphasizes simplicity, privacy, and scalability, using Erlang for the backend to handle millions of concurrent connections per server. Key features include offline message queuing, group chats, and no storage of chat history on servers.
 
 ## Detailed Explanation
 
-WhatsApp's system is designed for real-time communication with a focus on simplicity and security. It uses a centralized server architecture with distributed components for scaling.
+WhatsApp's architecture is designed for high scalability, low latency, and minimal server-side data retention. It consists of client applications, a distributed server infrastructure, and supporting components for message routing, encryption, and storage.
 
-## Core Components
+### Key Components
 
-1. **Clients**: Mobile apps (iOS, Android) and web/desktop clients that handle UI, encryption, and connection to servers.
-2. **Servers**: Backend servers running on FreeBSD, using Erlang for concurrency and fault tolerance. Key technologies include Mnesia (distributed DB) for message storage and Ejabberd for XMPP-like messaging.
-3. **Protocol**: Proprietary protocol over TCP/UDP, supporting real-time messaging via long polling or WebSockets. Messages are encrypted end-to-end using Signal Protocol.
-4. **Data Storage**: Messages are stored temporarily on servers (up to 30 days) and permanently on clients. Media is offloaded to CDNs.
-5. **Scaling Mechanisms**: User sharding by phone number, load balancers, and geo-distributed data centers.
+- **Clients**: Mobile apps (iOS, Android, etc.) using SQLite for local storage. Clients maintain persistent connections via SSL sockets and queue messages for offline delivery.
+- **Servers**: Erlang-based backend on FreeBSD, handling message routing, user authentication, and media uploads. Servers use custom XMPP-like protocol internally, evolved from ejabberd.
+- **Message Routing**: Messages are queued on servers until the recipient connects. Delivery is acknowledged, and messages are deleted post-delivery to minimize storage.
+- **Encryption**: End-to-end encryption using the Signal protocol (Curve25519, AES-256, HMAC-SHA256). Keys are generated per session, with no server access to decrypted content.
+- **Storage**: Minimal server-side storage; media is uploaded to HTTP servers and linked. User data (phone numbers, contacts) is stored in databases like Mnesia.
+- **Scalability**: Supports 2+ million connections per server through Erlang's concurrency model, custom BEAM patches, and optimizations like reduced lock contention and per-scheduler allocators.
 
-## Key Design Decisions
-
-- **Real-time Delivery**: Uses push notifications and persistent connections to deliver messages instantly.
-- **Encryption**: All messages are encrypted; keys are generated per chat and not stored on servers.
-- **Offline Handling**: Messages are queued on servers and delivered when recipients come online.
-- **Media Handling**: Images/videos are compressed, stored in CDNs, and shared via links to reduce server load.
-- **Groups and Calls**: Groups support up to 256 members; calls use WebRTC for peer-to-peer where possible, falling back to server relay.
-
-## Architecture Diagram
+### Architecture Diagram
 
 ```mermaid
 graph TD
-    A[Mobile Client] --> B[Load Balancer]
-    B --> C[WhatsApp Server Cluster]
-    C --> D[Mnesia DB]
-    C --> E[CDN for Media]
-    C --> F[Push Notification Service]
-    G[Recipient Client] --> B
-    H[Web Client] --> I[Web Gateway]
-    I --> C
+    A[Client App] -->|SSL Socket| B[WhatsApp Server Cluster]
+    B --> C[Message Router]
+    C --> D[Queue Messages]
+    D --> E[Recipient Client]
+    B --> F[Media Upload Server]
+    F --> G[HTTP Link]
+    B --> H[Database: User Auth, Contacts]
+    I[End-to-End Encryption] --> A
+    I --> E
+```
+
+### Performance Stats
+
+| Metric | Value |
+|--------|-------|
+| Daily Messages | 50+ billion |
+| Concurrent Connections per Server | 2+ million |
+| Servers | Hundreds of nodes, 8000+ cores |
+| RAM | Hundreds of terabytes |
+| Erlang Messages/sec | 70+ million |
+
+## Real-world Examples & Use Cases
+
+- **Personal Messaging**: Users send texts, photos, and videos globally without SMS costs. Example: A user in the US messages family in Europe; messages queue if offline.
+- **Group Chats**: Supports up to 256 members for events like family reunions or project teams.
+- **Media Sharing**: Voice notes, videos, and documents are uploaded and linked, used in business for quick file sharing (e.g., Singapore entrepreneurs using WhatsApp for deals).
+- **Event-Driven Spikes**: Handles traffic surges during soccer matches (35% outbound spike) or earthquakes without downtime.
+- **Business Applications**: Police in Spain use it for coordination; taxi hailing in China via integrations.
+
+## Code Examples
+
+### Pseudocode for Message Sending
+
+```python
+def send_message(sender_id, recipient_id, content):
+    # Encrypt message with recipient's public key
+    encrypted_content = encrypt(content, get_public_key(recipient_id))
+    
+    # Queue on server
+    server_queue.add({
+        'sender': sender_id,
+        'recipient': recipient_id,
+        'content': encrypted_content,
+        'timestamp': now()
+    })
+    
+    # Notify sender of send status
+    notify_sender(sender_id, 'sent')
+```
+
+### Erlang Snippet for Connection Handling
+
+```erlang
+% Simplified process for handling a client connection
+handle_connection(Socket) ->
+    receive
+        {tcp, Socket, Data} ->
+            % Parse and route message
+            Message = parse_message(Data),
+            route_message(Message),
+            handle_connection(Socket);
+        {tcp_closed, Socket} ->
+            % Clean up
+            ok
+    end.
+```
+
+### Encryption Key Exchange (Simplified)
+
+```javascript
+// Client-side key generation
+const keyPair = generateKeyPair(); // Curve25519
+const sharedSecret = deriveSharedSecret(recipientPublicKey, keyPair.privateKey);
+const encryptionKey = hkdf(sharedSecret, 'WhatsApp'); // HKDF for AES key
 ```
 
 ## STAR Summary
 
-**Situation**: Designing a messaging app for global scale with real-time features.
-
-**Task**: Ensure low-latency message delivery, end-to-end encryption, and handling of 2B+ users.
-
-**Action**: Implemented client-server architecture with Erlang backend, sharding by phone number, and Signal encryption. Used load balancers and CDNs for scaling.
-
-**Result**: Achieved <1s latency for messages, 99.9% uptime, and secure communication for billions of users.
+- **Situation**: Rapid user growth to 450 million active users, processing 50 billion messages daily, requiring extreme scalability.
+- **Task**: Optimize server infrastructure to handle 2+ million connections per server while maintaining low latency and privacy.
+- **Action**: Adopted Erlang, patched BEAM for reduced contention, added instrumentation (e.g., message queue monitoring), and tuned FreeBSD networking.
+- **Result**: Achieved 2.8 million connections per server, linear SMP scalability, and reliable service during global events.
 
 ## Journey / Sequence
 
-A message flow from sender to receiver:
+1. **Registration**: User provides phone number; server sends SMS PIN for verification and generates permanent key.
+2. **Connection**: Client establishes SSL socket; server authenticates via key.
+3. **Message Send**: Client encrypts message, sends to server; server queues until recipient connects.
+4. **Delivery**: Recipient fetches queued messages; server deletes post-acknowledgment.
+5. **Media**: Uploaded to HTTP server; link sent in message with thumbnail.
 
-```mermaid
-sequenceDiagram
-    participant Sender
-    participant Server
-    participant DB
-    participant Receiver
-    Sender->>Server: Send encrypted message
-    Server->>DB: Store message temporarily
-    Server->>Receiver: Push notification
-    Receiver->>Server: Fetch message
-    Server->>Receiver: Deliver encrypted message
-    Receiver->>Sender: Send read receipt (optional)
-```
+## Data Models / Message Formats
 
-# Data Models / Message Formats
+- **Message Format** (JSON-like):
+  ```json
+  {
+    "id": "msg123",
+    "sender": "phone123",
+    "recipient": "phone456",
+    "type": "text|media",
+    "content": "encrypted_payload",
+    "timestamp": 1634567890,
+    "status": "sent|delivered|read"
+  }
+  ```
+- **User Model**: Phone number as ID; no usernames; contacts synced from phone book.
 
-Messages use JSON-like structures over the proprietary protocol.
+## Common Pitfalls & Edge Cases
 
-## Message Model
+- **Scalability Bottlenecks**: Lock contention in BEAM; mitigated by per-scheduler allocators and reduced port interactions.
+- **Offline Delivery**: Messages queue indefinitely; edge case: device change invalidates key, requiring re-registration.
+- **Encryption Flaws**: Early versions lacked end-to-end; now uses Signal protocol, but key management is critical.
+- **Network Glitches**: Burst loads cause backlogs; monitored via message queue lengths.
+- **Privacy Risks**: Metadata (e.g., who messaged whom) is visible to servers; no content access.
 
-```json
-{
-  "id": "msg_123",
-  "sender": "+1234567890",
-  "recipient": "+0987654321",
-  "type": "text",
-  "content": "Hello World",
-  "timestamp": 1633072800,
-  "encrypted": true,
-  "media_url": null
-}
-```
+## Tools & Libraries
 
-## Group Message
+- **Backend**: Erlang/OTP, FreeBSD, ejabberd (modified), Mnesia (database).
+- **Encryption**: Libsignal (Signal protocol library).
+- **Monitoring**: Custom tools like wsar for stats, pmcstat for CPU counters, dtrace for debugging.
+- **Deployment**: Softlayer hosting, custom BEAM patches for performance.
 
-```json
-{
-  "id": "grp_msg_456",
-  "group_id": "grp_789",
-  "sender": "+1234567890",
-  "content": "Group hello",
-  "participants": ["+1234567890", "+0987654321"]
-}
-```
+## References
 
-# Real-world Examples & Use Cases
+- [The WhatsApp Architecture Facebook Bought For $19 Billion](https://highscalability.com/blog/2014/2/26/the-whatsapp-architecture-facebook-bought-for-19-billion.html) - High Scalability blog detailing backend, scalability optimizations, and stats.
+- [WhatsApp Engineering](https://engineering.fb.com/2014/02/19/core-data/whatsapp-engineering/) - Facebook Engineering blog on acquisition and technical insights.
+- [WhatsApp Security Whitepaper](https://www.whatsapp.com/security/) - Official security overview, including encryption details.
+- [Wikipedia: WhatsApp](https://en.wikipedia.org/wiki/WhatsApp) - General overview and history.
+- [Erlang Factory Talk: Scaling to Millions of Simultaneous Connections](http://vimeo.com/44312354) - Rick Reed's presentation on optimizations.
 
-- **Personal Messaging**: One-to-one chats with read receipts and typing indicators.
-- **Group Chats**: Coordination in teams or families, e.g., event planning.
-- **Business Use**: WhatsApp Business API for customer support and notifications.
-- **Media Sharing**: Instant photo/video sharing in social contexts.
-- **Voice/Video Calls**: Real-time communication for remote work or personal calls.
-- **Status Updates**: Ephemeral stories similar to Snapchat.
+## Github-README Links & Related Topics
 
-# Code Examples
-
-## Simple Java Client for Sending Message (using WebSocket simulation)
-
-```java
-import java.net.*;
-import java.io.*;
-
-public class WhatsAppClient {
-    public static void main(String[] args) throws Exception {
-        Socket socket = new Socket("whatsapp-server.com", 5222);
-        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-        // Simulate sending a message
-        out.println("SEND: {\"to\": \"+1234567890\", \"message\": \"Hello\"}");
-        String response = in.readLine();
-        System.out.println("Response: " + response);
-
-        socket.close();
-    }
-}
-```
-
-## Erlang Server Snippet for Message Handling
-
-```erlang
--module(whatsapp_server).
--export([handle_message/1]).
-
-handle_message(Message) ->
-    % Decrypt and process
-    Decrypted = decrypt(Message),
-    % Store in Mnesia
-    mnesia:write({message, Message#message.id, Decrypted}),
-    % Forward to recipient
-    forward_to_recipient(Message#message.recipient, Decrypted).
-```
-
-## Encryption Example (Signal Protocol in Java)
-
-```java
-import org.whispersystems.libsignal.*;
-
-public class EncryptionExample {
-    public static void main(String[] args) {
-        SignalProtocolAddress address = new SignalProtocolAddress("+1234567890", 1);
-        // Generate keys and encrypt
-        SessionCipher cipher = new SessionCipher(store, address);
-        CiphertextMessage encrypted = cipher.encrypt("Hello".getBytes());
-        // Send encrypted message
-    }
-}
-```
-
-# Common Pitfalls & Edge Cases
-
-- **Message Loss**: Handle network failures with retries and acknowledgments.
-- **Encryption Key Management**: Keys must be rotated; loss means message inaccessibility.
-- **Scalability Bottlenecks**: Sharding by phone number prevents hotspots.
-- **Offline Messages**: Store up to 30 days; notify users of limits.
-- **Group Management**: Limit group size to prevent spam and overload.
-- **Media Compression**: Ensure compatibility across devices; handle large files.
-- **Edge Case: International Roaming**: Optimize for low bandwidth with compression.
-
-# Tools & Libraries
-
-- **Backend**: Erlang/Ejabberd for messaging, Mnesia for storage.
-- **Encryption**: Signal Protocol libraries (libsignal).
-- **Scaling**: Load balancers (HAProxy), CDNs (Akamai).
-- **Monitoring**: Prometheus for metrics, Grafana for dashboards.
-- **Client Development**: React Native for cross-platform apps.
-
-# References
-
-- [WhatsApp Architecture Overview - Quora](https://www.quora.com/How-does-WhatsApp-work-from-a-technical-standpoint)
-- [WhatsApp System Design - Medium](https://medium.com/@sahilrajput.19/whatsapp-system-design-architecture-8b0e8b3b3b3b)
-- [WhatsApp System Design - InterviewBit](https://www.interviewbit.com/blog/whatsapp-system-design/)
-- [Signal Protocol - Signal.org](https://signal.org/docs/)
-
-# Github-README Links & Related Topics
-
-- [Real-time Systems](../real-time-systems/README.md)
-- [Microservices Architecture](../microservices-architecture/README.md)
-- [End-to-End Encryption](../end-to-end-encryption/README.md)
+- [Event-Driven Architecture](../event-driven-architecture/README.md)
 - [Distributed Systems](../distributed-systems/README.md)
-- [Message Queues](../message-queues-and-brokers/README.md)
+- [Real-Time Messaging](../real-time-messaging/README.md)
+- [End-to-End Encryption](../end-to-end-encryption/README.md)
+- [Scalability Patterns](../scalability-patterns/README.md)

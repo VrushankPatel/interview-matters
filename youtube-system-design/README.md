@@ -1,310 +1,178 @@
 ---
 title: YouTube System Design
-aliases: [YouTube Architecture, YouTube Scalability, Video Streaming Platform Design]
-tags: [system-design, video-streaming, scalability, distributed-systems, cdn, database-sharding]
+aliases: [YouTube Architecture, YouTube Scalability]
+tags: [#system-design,#video-streaming,#scalability]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# YouTube System Design
+# Overview
 
-## Overview
+YouTube is a massive video streaming platform handling billions of daily active users, with over 500 hours of video uploaded per minute and 694,000 hours streamed per minute. Designing a system like YouTube requires addressing high availability (99%+ uptime), low latency, scalability for millions of concurrent users, and reliability for persistent video storage. Key components include video upload/transcoding, distributed storage, content delivery networks (CDNs), recommendation engines, search, and user management. The architecture leverages microservices, distributed databases, and cloud infrastructure to manage petabytes of data and trillions of views annually.
 
-YouTube is a global video-sharing platform that handles billions of video views daily, requiring robust scalability, low-latency delivery, and efficient storage. This document outlines the system design principles, architecture, and lessons learned from YouTube's evolution, focusing on handling massive scale while maintaining performance.
+# Detailed Explanation
 
-Key challenges include:
-- Delivering over 1 billion daily views (as of 2009 updates)
-- Managing petabytes of video data
-- Ensuring global low-latency access
-- Handling the "long tail" of content popularity
+YouTube's architecture is a distributed system built on microservices, utilizing Google Cloud Platform (GCP) for scalability. Core components include:
 
-## Detailed Explanation
+- **Video Upload and Transcoding**: Users upload videos via clients, processed by application servers, transcoded into multiple formats/resolutions (e.g., MP4, WebM, HLS) for compatibility and adaptive bitrate streaming (ABR).
+- **Storage**: Videos stored in blob storage (e.g., Google Cloud Storage), thumbnails in fast-access databases like Bigtable. Temporary upload storage holds raw files before transcoding.
+- **Content Delivery**: CDNs (e.g., Google Cloud CDN) cache and deliver videos globally, reducing latency. Colocation sites ensure regional availability.
+- **Recommendation Engine**: Machine learning models analyze user behavior, video metadata, and engagement to suggest content, powered by data pipelines and real-time processing.
+- **Search and Metadata**: Inverted indexes for fast search on titles, descriptions, tags. Metadata stored in relational/NoSQL databases (e.g., MySQL, Bigtable).
+- **User Management**: Handles authentication, profiles, subscriptions via user services and databases.
+- **Load Balancing and Scaling**: Load balancers distribute traffic; auto-scaling groups handle peak loads.
 
-### Architecture Components
-
-YouTube's architecture evolved from a simple setup to a distributed, sharded system. Here's a high-level overview:
+The system prioritizes availability over strict consistency (eventual consistency for metadata), using sharding, replication, and caching for performance.
 
 ```mermaid
-graph TB
-    A[User] --> B[Load Balancer/NetScaler]
-    B --> C[Web Servers - Apache + Python]
+graph TD
+    A[Client] --> B[Load Balancer]
+    B --> C[Web Servers]
     C --> D[Application Servers]
-    D --> E[Databases - MySQL Shards]
-    D --> F[Video Storage Clusters]
-    F --> G[CDN for Popular Content]
-    F --> H[Colo Sites for Long Tail]
-    C --> I[Thumbnail Storage - BigTable]
+    D --> E[Video Service]
+    D --> F[User Service]
+    E --> G[Transcoding Service]
+    G --> H[Blob Storage]
+    H --> I[CDN]
+    I --> J[Client]
+    F --> K[User Metadata DB]
+    E --> L[Video Metadata DB]
+    D --> M[Recommendation Engine]
+    M --> N[Search Index]
 ```
 
-#### Web Tier
-- **Load Balancing**: NetScaler for static content caching and request distribution
-- **Web Servers**: Apache with mod_fastcgi, running Python applications
-- **Application Logic**: Python for rapid development, with psyco JIT compiler for performance
-- **Caching**: Row-level DB caching, pre-calculated values sent to all servers
+| Component | Purpose | Technologies |
+|-----------|---------|--------------|
+| Load Balancer | Distribute traffic | Nginx, AWS ELB |
+| Application Servers | Business logic | Java/Spring, Node.js |
+| Transcoding Service | Format conversion | FFmpeg, Google Transcoder API |
+| Blob Storage | Video files | GCS, S3 |
+| CDN | Global delivery | Cloudflare, Akamai |
+| Databases | Metadata | Bigtable, Cassandra |
+| Recommendation | ML suggestions | TensorFlow, Spark |
 
-#### Video Serving
-- **Mini-Clusters**: Each video hosted on multiple machines for redundancy
-- **Web Server**: lighttpd with epoll for high concurrency
-- **CDN Integration**: Popular content served via CDN for global distribution
-- **Long Tail Handling**: Less popular videos served from colo sites with optimized I/O
+# Real-world Examples & Use Cases
 
-#### Database Layer
-- **Evolution**: Single server → Master-slave → Partitioning → Sharding
-- **Sharding Strategy**: User-based sharding for better cache locality
-- **Benefits**: 30% hardware reduction, zero replica lag
+- **YouTube Platform**: Handles live streams, shorts, and 4K videos; scales during events like Super Bowl with billions of views.
+- **Similar Platforms**: Vimeo for creator-focused streaming, TikTok for short-form video with algorithmic feeds, Netflix for on-demand with personalized recommendations.
+- **Use Cases**:
+  - **Video Streaming**: ABR adjusts quality based on network (e.g., 1080p to 480p for slow connections).
+  - **Upload and Monetization**: Creators upload, transcode, and earn via ads/analytics.
+  - **Search and Discovery**: Query-based search with filters; recommendations drive 70%+ of watch time.
+  - **Live Broadcasting**: Real-time transcoding and global CDN delivery.
 
-### Scalability Strategies
+# Code Examples
 
-| Strategy | Description | Impact |
-|----------|-------------|--------|
-| Sharding | User-based data partitioning | Improved write performance, reduced lag |
-| CDN | Content delivery networks | Reduced latency, lower bandwidth costs |
-| Caching | Multi-level caching (DB, app, CDN) | Faster response times |
-| Commodity Hardware | Standard servers vs. expensive hardware | Cost-effective scaling |
+Pseudocode for key flows:
 
-## Real-world Examples & Use Cases
-
-### Video Upload Flow
-1. User uploads video via web interface
-2. Video processed for multiple formats/resolutions
-3. Metadata stored in sharded database
-4. Video files distributed to mini-clusters
-5. Thumbnails generated and stored in BigTable
-
-### Video Playback
-1. User requests video
-2. Load balancer routes to nearest server/CDN
-3. Video stream delivered with adaptive bitrate
-4. Analytics data collected for recommendations
-
-### Search and Discovery
-- Inverted index for video metadata
-- Recommendation engine using view patterns
-- Trending algorithms based on real-time metrics
-
-## Code Examples
-
-### Python Video Upload Handler (Simplified)
-
+**Video Upload Flow**:
 ```python
-import os
-from flask import Flask, request, jsonify
-
-app = Flask(__name__)
-
-@app.route('/upload', methods=['POST'])
-def upload_video():
-    file = request.files['video']
-    user_id = request.form['user_id']
+def upload_video(user_id, video_file):
+    # Authenticate user
+    if not authenticate(user_id):
+        return "Unauthorized"
     
-    # Determine shard based on user_id
-    shard_id = get_shard_for_user(user_id)
+    # Store raw video temporarily
+    temp_id = store_temp(video_file)
     
-    # Save video to distributed storage
-    video_path = save_to_cluster(file, shard_id)
+    # Queue for transcoding
+    queue_transcode(temp_id, formats=["mp4", "webm"], resolutions=[480, 720, 1080])
     
-    # Store metadata
-    metadata = {
-        'title': request.form['title'],
-        'user_id': user_id,
-        'path': video_path,
-        'duration': get_video_duration(file)
-    }
-    store_metadata(metadata, shard_id)
+    # Update metadata
+    metadata = {"title": "Sample", "user": user_id}
+    save_metadata(metadata)
     
-    return jsonify({'video_id': generate_video_id()})
-
-def get_shard_for_user(user_id):
-    # Simple hash-based sharding
-    return hash(user_id) % NUM_SHARDS
+    return "Upload queued"
 ```
 
-### Database Schema (MySQL)
-
-```sql
-CREATE TABLE videos (
-    video_id BIGINT PRIMARY KEY,
-    user_id BIGINT,
-    title VARCHAR(255),
-    description TEXT,
-    upload_time TIMESTAMP,
-    duration INT,
-    view_count BIGINT DEFAULT 0,
-    thumbnail_path VARCHAR(500),
-    video_path VARCHAR(500)
-) ENGINE=InnoDB;
-
-CREATE TABLE users (
-    user_id BIGINT PRIMARY KEY,
-    username VARCHAR(255),
-    email VARCHAR(255),
-    created_at TIMESTAMP
-) ENGINE=InnoDB;
+**Recommendation Algorithm (Simplified Collaborative Filtering)**:
+```python
+def recommend_videos(user_id, watched_videos):
+    # Fetch user preferences
+    user_prefs = get_user_prefs(user_id)
+    
+    # Compute similarities
+    similar_users = find_similar_users(user_prefs)
+    candidates = get_videos_from_similar(similar_users)
+    
+    # Rank by engagement
+    ranked = rank_by_engagement(candidates, watched_videos)
+    
+    return ranked[:10]  # Top 10 recommendations
 ```
 
-### Load Balancer Configuration (Nginx Example)
-
-```nginx
-upstream app_servers {
-    server app1.youtube.com:80;
-    server app2.youtube.com:80;
-    server app3.youtube.com:80;
-}
-
-server {
-    listen 80;
-    location / {
-        proxy_pass http://app_servers;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-    }
-    
-    location /static/ {
-        proxy_pass http://cdn.youtube.com;
-    }
+**Adaptive Bitrate Streaming Chunk Selection**:
+```javascript
+function selectChunk(network_speed, current_quality) {
+    const thresholds = { slow: 480, medium: 720, fast: 1080 };
+    if (network_speed < 1) return getChunk(480);
+    if (network_speed < 5) return getChunk(720);
+    return getChunk(1080);
 }
 ```
 
-## STAR Summary
+# References
 
-**Situation**: YouTube experienced explosive growth, reaching 100 million video views per day by July 2006 with limited staff.
+- [YouTube System Design - Educative](https://www.educative.io/blog/youtube-system-design)
+- [Design a System Like YouTube - GeeksforGeeks](https://www.geeksforgeeks.org/design-a-system-like-youtube/)
+- [System Design for Beginners - YouTube Video](https://www.youtube.com/watch?v=sgqFmKPPKRg)
+- [Google Cloud YouTube Architecture Overview](https://cloud.google.com/solutions/youtube-architecture)
 
-**Task**: Scale the platform to handle massive video delivery while maintaining performance and keeping costs low.
+# Github-README Links & Related Topics
 
-**Action**: 
-- Implemented database sharding to reduce replica lag
-- Adopted CDN for popular content
-- Used commodity hardware and open-source tools
-- Continuously iterated on bottlenecks across software, OS, and hardware layers
+- [Video Streaming](../video-streaming/README.md)
+- [CDN Architecture](../cdn-architecture/README.md)
+- [Distributed Caching with Redis](../distributed-caching-with-redis/README.md)
+- [API Design Principles](../api-design-principles/README.md)
+- [Scalability Patterns](../high-scalability-patterns/README.md)
 
-**Result**: Achieved 30% hardware reduction, zero replica lag, and ability to scale arbitrarily while serving billions of daily views.
+# Journey / Sequence
 
-## Journey / Sequence
+1. **Upload**: Client uploads video → Load Balancer → Application Server → Temp Storage → Transcoding Queue.
+2. **Processing**: Transcoder converts formats → Blob Storage → Metadata DB update.
+3. **Streaming**: Client requests video → CDN checks cache → If miss, fetch from Blob → Deliver chunks via ABR.
+4. **Recommendation**: User watches → Log engagement → ML pipeline processes → Suggest videos.
 
-### User Upload Journey
-```mermaid
-sequenceDiagram
-    participant U as User
-    participant W as Web Server
-    participant A as App Server
-    participant DB as Database
-    participant S as Storage Cluster
+# Data Models / Message Formats
 
-    U->>W: Upload video file
-    W->>A: Process upload
-    A->>DB: Store metadata
-    A->>S: Store video files
-    S-->>A: Confirmation
-    A-->>W: Upload complete
-    W-->>U: Success response
-```
-
-### Video Playback Journey
-```mermaid
-sequenceDiagram
-    participant U as User
-    participant LB as Load Balancer
-    participant C as CDN
-    participant S as Storage Server
-
-    U->>LB: Request video
-    LB->>C: Check CDN
-    C-->>LB: Video available
-    LB->>C: Stream video
-    C-->>U: Video chunks
-    Note over U,S: For long tail: LB -> Storage Server
-```
-
-## Data Models / Message Formats
-
-### Video Metadata Model
+**Video Metadata** (JSON):
 ```json
 {
-  "video_id": "dQw4w9WgXcQ",
-  "user_id": 12345,
-  "title": "Rick Astley - Never Gonna Give You Up",
-  "description": "Official music video",
-  "tags": ["music", "80s", "classic"],
-  "duration": 213,
-  "upload_date": "2009-10-25T00:00:00Z",
-  "view_count": 1000000000,
-  "like_count": 50000000,
-  "thumbnail_urls": {
-    "default": "https://img.youtube.com/vi/dQw4w9WgXcQ/default.jpg",
-    "medium": "https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg",
-    "high": "https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg"
-  },
-  "video_urls": {
-    "360p": "https://r1---sn-abc123.googlevideo.com/videoplayback?...",
-    "720p": "https://r2---sn-def456.googlevideo.com/videoplayback?..."
-  }
+  "video_id": "uuid",
+  "title": "Sample Video",
+  "description": "Description",
+  "user_id": "uuid",
+  "tags": ["tag1", "tag2"],
+  "duration": 300,
+  "formats": ["mp4", "webm"],
+  "views": 1000000,
+  "likes": 50000
 }
 ```
 
-### User Session Message
+**User Profile** (JSON):
 ```json
 {
-  "session_id": "abc123def456",
-  "user_id": 12345,
-  "ip_address": "192.168.1.1",
-  "user_agent": "Mozilla/5.0...",
-  "actions": [
-    {
-      "timestamp": "2023-09-26T10:00:00Z",
-      "action": "view",
-      "video_id": "dQw4w9WgXcQ",
-      "watch_time": 45
-    }
-  ]
+  "user_id": "uuid",
+  "username": "creator",
+  "subscriptions": ["channel1", "channel2"],
+  "preferences": {"genre": "tech"}
 }
 ```
 
-## Common Pitfalls & Edge Cases
+# Common Pitfalls & Edge Cases
 
-### Long Tail Content
-- **Pitfall**: Optimizing for popular content neglects the majority of videos with low views
-- **Solution**: Use colo sites with optimized I/O for random access patterns
-- **Edge Case**: Viral videos transitioning from long tail to popular require migration to CDN
+- **Buffering**: Poor ABR implementation; mitigate with pre-buffering and network monitoring.
+- **Data Loss**: Single storage failure; use replication and backups.
+- **Scalability Bottlenecks**: Viral videos overload CDNs; employ geo-sharding and auto-scaling.
+- **Edge Cases**: Zero views on new videos (cold start problem); use content-based recommendations.
+- **Security**: Unauthorized uploads; implement rate limiting and content moderation.
 
-### Thumbnail Serving
-- **Pitfall**: High number of small files causing disk seek issues and inode cache problems
-- **Solution**: Use distributed storage like BigTable to clump files and provide multi-level caching
-- **Edge Case**: Page loads with 60+ thumbnails requiring sub-100ms response times
+# Tools & Libraries
 
-### Database Scaling
-- **Pitfall**: Replica lag in master-slave setups causing inconsistent reads
-- **Solution**: Implement sharding with user-based partitioning
-- **Edge Case**: Cross-shard queries requiring careful schema design
-
-### Bandwidth Costs
-- **Pitfall**: Exponential bandwidth growth with video quality improvements
-- **Solution**: Adaptive bitrate streaming and CDN partnerships
-- **Edge Case**: Live streaming events with unpredictable viewership spikes
-
-## Tools & Libraries
-
-| Component | Tools Used | Purpose |
-|-----------|------------|---------|
-| Web Servers | Apache, lighttpd | HTTP serving, static content |
-| Application | Python, psyco | Rapid development, JIT compilation |
-| Database | MySQL | Metadata storage, sharding |
-| Storage | BigTable | Thumbnail storage, distributed data |
-| Load Balancing | NetScaler | Request distribution, caching |
-| CDN | Multiple providers | Global content delivery |
-| Monitoring | Custom scripts | Bottleneck identification |
-
-## References
-
-- [YouTube Architecture - High Scalability](https://highscalability.com/youtube-architecture)
-- [7 Years Of YouTube Scalability Lessons In 30 Minutes](https://highscalability.com/7-years-of-youtube-scalability-lessons-in-30-minutes/)
-- [YouTube Reaches One Billion Views Per Day](https://mashable.com/2009/10/09/youtube-billion-views/)
-- [Google Video Presentation on YouTube Architecture](https://www.youtube.com/watch?v=w5WVu624fY8)
-
-## Github-README Links & Related Topics
-
-- [CDN Architecture](../cdn-architecture/README.md) - Content delivery networks for global distribution
-- [Distributed Caching with Redis](../distributed-caching-with-redis/README.md) - Caching strategies for performance
-- [Database Sharding Strategies](../database-sharding-strategies/README.md) - Horizontal scaling techniques
-- [CAP Theorem and Distributed Systems](../cap-theorem-and-distributed-systems/README.md) - Consistency trade-offs
-- [Event-Driven Architecture](../event-driven-architecture/README.md) - Asynchronous processing patterns
-- [Fault Tolerance in Distributed Systems](../fault-tolerance-in-distributed-systems/README.md) - Building resilient systems
+- **Transcoding**: FFmpeg, AWS Elemental MediaConvert.
+- **Storage**: Google Cloud Storage, Amazon S3.
+- **CDN**: Cloudflare, Akamai.
+- **Databases**: Bigtable for metadata, Redis for caching.
+- **ML/Recommendations**: TensorFlow, Apache Spark.
+- **Monitoring**: Prometheus, Grafana for metrics.

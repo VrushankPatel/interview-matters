@@ -1,9 +1,9 @@
 ---
-title: 'Facebook System Design'
-aliases: ['Meta Platform Design']
-tags: [#system-design,#distributed-systems,#social-networking]
-created: '2025-09-26'
-updated: '2025-09-26'
+title: Facebook System Design
+aliases: [Facebook Architecture, Facebook Social Network]
+tags: [#system-design,#social-network,#scalability]
+created: 2025-09-26
+updated: 2025-09-26
 ---
 
 ## Overview
@@ -41,24 +41,24 @@ flowchart TD
 
 - **API Gateway**: Handles incoming requests, routing to microservices using Thrift or GraphQL for efficient data fetching.
 - **Authentication & User Service**: Manages user logins, profiles, friendships, and privacy settings. Uses OAuth and custom auth protocols.
-- **News Feed Service**: Aggregates and ranks content from friends, pages, and groups using ML models for personalization.
-- **Messaging Service**: Provides real-time chat, voice/video calls, and encryption (end-to-end for Messenger).
-- **Ads & Monetization Service**: Runs real-time auctions for ad placements, targeting based on user data and behavior.
-- **Groups & Pages Service**: Manages community interactions, events, and business pages.
-- **Marketplace & Commerce Service**: Handles buying/selling, payments, and logistics.
-- **Database Layer**: TAO for graph queries (friendships, likes), sharded MySQL for structured data, HDFS for analytics.
-- **Caching & CDN**: Memcached for hot data, CDN for media delivery.
+- **News Feed Service**: Aggregates and ranks content from friends, pages, and groups using ML models for personalization. Employs EdgeRank algorithm to prioritize content based on affinity, weight, and time decay.
+- **Messaging Service**: Provides real-time chat, voice/video calls, and encryption (end-to-end for Messenger). Supports group chats, file sharing, and integrations like payments.
+- **Ads & Monetization Service**: Runs real-time auctions for ad placements, targeting based on user data and behavior. Uses lookalike audiences and detailed profiling.
+- **Groups & Pages Service**: Manages community interactions, events, and business pages. Supports public and private groups with moderation tools.
+- **Marketplace & Commerce Service**: Handles buying/selling, payments, and logistics. Integrates with shipping and payment providers.
+- **Database Layer**: TAO (The Associations and Objects) for graph queries (friendships, likes), sharded MySQL for structured data, HDFS for analytics, Cassandra for time-series data.
+- **Caching & CDN**: Memcached for hot data, custom edge network (fbcdn.net) for media delivery, previously relied on Akamai.
 
 #### Scalability Considerations
 
-- **Horizontal Scaling**: Microservices allow independent scaling; auto-scaling based on load.
-- **Database Sharding**: User data partitioned by user ID across thousands of MySQL instances; TAO uses consistent hashing.
+- **Horizontal Scaling**: Microservices allow independent scaling; auto-scaling based on load. Monolithic app compiled to large binary and distributed via BitTorrent for updates.
+- **Database Sharding**: User data partitioned by user ID across thousands of MySQL instances; TAO uses consistent hashing for graph data.
 - **Replication**: Multi-region replication for disaster recovery and low latency (e.g., data centers in US, Europe, Asia).
-- **Caching Strategies**: Multi-level caching (L1: application, L2: Memcached, L3: CDN) to reduce database load.
+- **Caching Strategies**: Multi-level caching (L1: application, L2: Memcached, L3: CDN) to reduce database load. Uses Ptail for real-time log aggregation.
 - **Load Balancing**: DNS-based global load balancing, L4/L7 proxies (HAProxy, custom).
-- **Asynchronous Processing**: Queues (e.g., Scribe for logging, custom queues for notifications) to handle spikes.
+- **Asynchronous Processing**: Queues (e.g., Scribe for logging, custom queues for notifications) to handle spikes. Data batched every 1.5 seconds to manage IO.
 - **Machine Learning at Scale**: Distributed training on GPUs/TPUs for feed ranking and ad targeting.
-- **Fault Tolerance**: Redundant systems, circuit breakers, and graceful degradation.
+- **Fault Tolerance**: Redundant systems, circuit breakers, and graceful degradation. Handles billions of events daily with HBase and MapReduce.
 
 #### Data Models
 
@@ -183,3 +183,58 @@ def run_ad_auction(user, ad_slots, bidders):
 - [Ad Targeting at Scale](https://engineering.fb.com/2014/05/21/core-data/scaling-facebooks-ad-infrastructure/)
 - [Privacy and Security](https://engineering.fb.com/security/)
 - [Meta Engineering Blog](https://engineering.fb.com/)
+- [Facebook - Wikipedia](https://en.wikipedia.org/wiki/Facebook)
+- [Scaling Facebook to 500 Million Users](https://www.facebook.com/notes/facebook-engineering/scaling-facebook-to-500-million-users/409881258130)
+
+## Github-README Links & Related Topics
+
+- [Facebook News Feed](../facebook-news-feed/README.md)
+- [Facebook News Feed Design](../facebook-news-feed-design/README.md)
+- [Facebook News Feed System Design](../facebook-news-feed-system-design/README.md)
+- [Distributed Caching with Redis](../distributed-caching-with-redis/README.md)
+- [API Design Best Practices](../api-design-best-practices/README.md)
+- [Scalability Patterns](../high-scalability-patterns/README.md)
+
+## Common Pitfalls & Edge Cases
+
+- **Privacy Breaches**: Handling user data securely to avoid leaks like Cambridge Analytica.
+- **Fake News Propagation**: Algorithms must balance engagement with misinformation detection.
+- **Scalability Bottlenecks**: News Feed ranking can become computationally expensive with billions of users.
+- **Edge Cases**: Handling inactive users, sudden traffic spikes (e.g., global events), or regional outages.
+- **Data Consistency**: Ensuring real-time updates across distributed databases without conflicts.
+
+## Tools & Libraries
+
+- **TAO (The Associations and Objects)**: Facebook's distributed graph database for social graph queries.
+- **Memcached**: For caching hot data to reduce database load.
+- **MySQL Shards**: For structured data storage, horizontally partitioned.
+- **Cassandra**: For analytics and time-series data.
+- **Scribe**: For logging events.
+- **Thrift**: For cross-language service communication.
+- **Hack/PHP/HHVM**: Programming languages and runtime for backend.
+- **React**: For frontend components.
+
+## Journey / Sequence
+
+### User Posting to News Feed
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant API Gateway
+    participant Feed Service
+    participant Ranking Engine
+    participant Database (TAO/MySQL)
+    participant Cache (Memcached)
+    participant Friends
+
+    User->>API Gateway: Post content
+    API Gateway->>Feed Service: Process post
+    Feed Service->>Database: Store post
+    Feed Service->>Ranking Engine: Rank for friends' feeds
+    Ranking Engine->>Cache: Cache ranked posts
+    Feed Service->>Friends: Push to friends' feeds
+    Friends->>Cache: Retrieve feed
+```
+
+This sequence shows the flow from a user posting to it appearing in friends' News Feeds, involving ranking and caching for efficiency.
