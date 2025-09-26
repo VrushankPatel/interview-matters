@@ -3,3 +3,8 @@
 - [JVM Internals & Class Loading](jvm-internals-class-loading/README.md)
 - [Garbage Collection Algorithms](garbage-collection-algorithms/README.md)
 - [Multithreading & Concurrency in Java](multithreading-concurrency-in-java/README.md)
+- [Collections & Data Structures](collections-and-data-structures/README.md)
+- [Java Stream API & Functional Programming](java-stream-api-and-functional-programming/README.md)
+- [System Design Basics](system-design-basics/README.md)
+- [High Scalability Patterns](high-scalability-patterns/README.md)
+- [CAP Theorem & Distributed Systems](cap-theorem-and-distributed-systems/README.md)
