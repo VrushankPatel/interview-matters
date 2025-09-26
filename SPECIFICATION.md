@@ -5,10 +5,11 @@ Last update
 2025-09-26
 
 Summary of recent additions
-   - Processed 5 topics: FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols with comprehensive READMEs following strict format, including STAR summaries, detailed explanations, real-world examples, message formats, mermaid diagrams, common pitfalls, tools/libraries, and proper interlinking
-      - Processed 5 topics: FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols with updated interlinks using [[ ]] format. Restructured system-design/ with subdirs LLD, HLD, concepts, real-world-designs. Moved facebook-news-feed, instagram-system-design, netflix-video-streaming-architecture to real-world-designs/. Created algorithms/README.md.
-      - Processed 5 topics: Order Types (DAY, GTC, FOK, IOC), Quotes & RFQ workflows, Execution Report, Trade Capture Report, Rate Limiting with comprehensive READMEs following strict format, including STAR summaries, detailed explanations, real-world examples, message formats, mermaid diagrams, common pitfalls, tools/libraries, and proper interlinking. Restructured by moving container-security to security/, graph-databases to databases/, http-caching-headers to networking/.
-      - Processed 5 topics: Journey of a Trade (end-to-end), Order Types (DAY, GTC, FOK, IOC), Quotes & RFQ workflows, Execution Report, Trade Capture Report with comprehensive READMEs following strict format, including STAR summaries, detailed explanations, real-world examples, message formats, mermaid diagrams, common pitfalls, tools/libraries, and proper interlinking. Fixed README links from [[ ]] to proper markdown relative links. Updated root and category README.md indices.
+    - Processed 5 topics: FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols with comprehensive READMEs following strict format, including STAR summaries, detailed explanations, real-world examples, message formats, mermaid diagrams, common pitfalls, tools/libraries, and proper interlinking
+       - Processed 5 topics: FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols with updated interlinks using [[ ]] format. Restructured system-design/ with subdirs LLD, HLD, concepts, real-world-designs. Moved facebook-news-feed, instagram-system-design, netflix-video-streaming-architecture to real-world-designs/. Created algorithms/README.md.
+       - Processed 5 topics: Order Types (DAY, GTC, FOK, IOC), Quotes & RFQ workflows, Execution Report, Trade Capture Report, Rate Limiting with comprehensive READMEs following strict format, including STAR summaries, detailed explanations, real-world examples, message formats, mermaid diagrams, common pitfalls, tools/libraries, and proper interlinking. Restructured by moving container-security to security/, graph-databases to databases/, http-caching-headers to networking/.
+       - Processed 5 topics: Journey of a Trade (end-to-end), Order Types (DAY, GTC, FOK, IOC), Quotes & RFQ workflows, Execution Report, Trade Capture Report with comprehensive READMEs following strict format, including STAR summaries, detailed explanations, real-world examples, message formats, mermaid diagrams, common pitfalls, tools/libraries, and proper interlinking. Fixed README links from [[ ]] to proper markdown relative links. Updated root and category README.md indices.
+       - Processed 5 topics from PENDING_TOPICS.md (Journey of a Trade, Order Types, Quotes & RFQ workflows, Execution Report, Trade Capture Report) with content verification and interlink updates.
 
 Conventions
  - Dir naming: kebab-case.
@@ -323,6 +324,18 @@ New Candidate Topics Rationales (this run)
 - Database Indexing for High Throughput: Optimization technique for read-heavy workloads
 - Message Queue Reliability Patterns: Ensuring message delivery in event-driven systems
 - Fault Tolerance in Distributed Systems: Building resilient architectures for high availability
+
+New Next Topics Candidates (this run)
+- Order Book modeling: Essential for understanding HFT and matching engines
+- Matching algorithm internals: Core to exchange operations and interview questions
+- Time-in-Force variations across exchanges: Important for order lifecycle management
+- Market fragmentation & smart order routing: Key in multi-venue trading
+- Latency measurement & monitoring: Critical for performance optimization
+- FIX Session Layer: Fundamental for reliable FIX connections
+- Market data consolidation: Necessary for unified market views
+- Latency arbitrage: Advanced trading strategy
+- Swap & derivatives trade lifecycle: Expands beyond equities
+- Regulatory reports: Compliance knowledge for interviews
 
 TODO
     - High-level open design decisions and split criteria for oversized topics.
