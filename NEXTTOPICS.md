@@ -1,6 +1,11 @@
 # NEXT TOPICS
-- CAP Theorem & Distributed Systems
-- Replication vs Sharding vs Partitioning
-- Caching
-- Latency and Throughput zero to hero
-- Monitoring and Logging
+- Design Patterns in Java
+- Microservices Design Patterns
+- API Design Best Practices
+- Database Design Patterns
+- Security in System Design
+- Scalability Patterns
+- Performance Optimization Techniques
+- Cloud Architecture Patterns
+- Event-Driven Microservices
+- Serverless Architecture

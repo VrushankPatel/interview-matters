@@ -6,6 +6,8 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
+# Caching
+
 ## Overview
 
 Caching is a technique used to store frequently accessed data in a temporary storage layer (cache) to reduce access time and improve system performance. It minimizes the need to recompute or refetch data from slower sources like databases or external APIs. Caches can be in-memory, on-disk, or distributed across multiple nodes. Effective caching enhances scalability by reducing latency and load on backend systems, but requires careful management of cache invalidation, eviction policies, and consistency.

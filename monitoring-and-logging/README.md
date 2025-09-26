@@ -6,6 +6,8 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
+# Monitoring and Logging
+
 ## Overview
 
 Monitoring and logging are critical components of system observability, enabling teams to track system health, diagnose issues, and ensure reliable operation. Monitoring provides real-time insights into system performance and behavior, while logging captures detailed records of events and errors for analysis and debugging.

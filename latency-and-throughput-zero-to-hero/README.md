@@ -6,6 +6,8 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
+# Latency and Throughput Zero to Hero
+
 ## Overview
 
 Latency and Throughput are fundamental performance metrics in system design. This comprehensive guide covers their definitions, measurement techniques, optimization strategies, and real-world applications, progressing from basic concepts to advanced optimization techniques.
