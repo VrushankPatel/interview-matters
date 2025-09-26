@@ -20,4 +20,9 @@ Fault Tolerance Patterns
 Distributed Caching
 Message Queues
 Service Mesh Architecture
+Replication vs Sharding vs Partitioning
+Database Indexing Strategies
+Event Driven Architecture
+Microservices Architecture
+Security Best Practices
 Container Orchestration

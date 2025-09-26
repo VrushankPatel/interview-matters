@@ -1,7 +1,7 @@
 ---
 title: Latency and Throughput Zero to Hero
-aliases: [Latency Throughput Guide, Performance Metrics]
-tags: [#performance,#system-design,#latency,#throughput]
+aliases: ["Latency Throughput Guide", "Performance Metrics"]
+tags: ["#performance", "#system-design", "#latency", "#throughput"]
 created: 2025-09-26
 updated: 2025-09-26
 ---
