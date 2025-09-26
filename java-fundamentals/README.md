@@ -1,7 +1,7 @@
 ---
 title: Java Fundamentals
-aliases: [Java Basics, Java Essentials]
-tags: [#java]
+aliases: [Java Basics, Core Java]
+tags: [#java, #fundamentals]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -20,18 +20,51 @@ Java programs are organized into classes and objects. The language supports obje
 
 ### Language Basics
 
-- **Variables**: Used to store data. Java has primitive types (int, double, boolean, char) and reference types (objects, arrays).
+- **Variables**: Used to store data. Java has primitive types and reference types (objects, arrays).
+
+| Primitive Type | Size | Range | Default Value |
+|----------------|------|-------|---------------|
+| byte | 8 bits | -128 to 127 | 0 |
+| short | 16 bits | -32,768 to 32,767 | 0 |
+| int | 32 bits | -2^31 to 2^31-1 | 0 |
+| long | 64 bits | -2^63 to 2^63-1 | 0L |
+| float | 32 bits | ~1.4e-45 to 3.4e38 | 0.0f |
+| double | 64 bits | ~4.9e-324 to 1.8e308 | 0.0d |
+| char | 16 bits | '\u0000' to '\uffff' | '\u0000' |
+| boolean | 1 bit | true or false | false |
 - **Operators**: Arithmetic (+, -, *, /), relational (==, !=, <, >), logical (&&, ||, !), and assignment (=, +=, etc.).
 - **Control Flow**: Conditional statements (if-else, switch) and loops (for, while, do-while).
 - **Arrays**: Fixed-size collections of elements of the same type.
 
 ### Object-Oriented Programming
 
+Java supports four main OOP principles:
+
+- **Encapsulation**: Bundling data and methods into classes, with access control via modifiers (public, private, protected).
+- **Inheritance**: Allows a class to inherit properties from another class using the `extends` keyword.
+- **Polymorphism**: Ability of objects to take on many forms, achieved through method overriding and overloading.
+- **Abstraction**: Hiding complex implementation details, often using abstract classes and interfaces.
+
+Key concepts:
 - **Classes**: Blueprints for objects, defining state (fields) and behavior (methods).
 - **Objects**: Instances of classes, created using the `new` keyword.
-- **Inheritance**: Allows a class to inherit properties from another class using the `extends` keyword.
 - **Interfaces**: Contracts that classes can implement, defining methods that must be provided.
 - **Packages**: Namespaces for organizing classes and avoiding naming conflicts.
+
+```mermaid
+classDiagram
+    class Animal {
+        +sound(): void
+    }
+    class Dog {
+        +sound(): void
+    }
+    class Cat {
+        +sound(): void
+    }
+    Animal <|-- Dog
+    Animal <|-- Cat
+```
 
 ### Platform Independence
 
@@ -182,18 +215,39 @@ public class CollectionsExample {
         List<String> list = new ArrayList<>();
         list.add("Java");
         list.add("Fundamentals");
-        
+
         Set<String> set = new HashSet<>();
         set.add("Unique");
         set.add("Values");
-        
+
         Map<String, Integer> map = new HashMap<>();
         map.put("One", 1);
         map.put("Two", 2);
-        
+
         for (String s : list) {
             System.out.println(s);
         }
+    }
+}
+```
+
+### Exception Handling Example
+
+```java
+public class ExceptionExample {
+    public static void main(String[] args) {
+        try {
+            int result = divide(10, 0);
+            System.out.println("Result: " + result);
+        } catch (ArithmeticException e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            System.out.println("Execution completed.");
+        }
+    }
+
+    public static int divide(int a, int b) {
+        return a / b;
     }
 }
 ```
@@ -223,8 +277,9 @@ public class CollectionsExample {
 
 ## Github-README Links & Related Topics
 
-- [OOP Principles in Java](oop-principles-in-java/README.md)
-- [JVM Internals & Class Loading](jvm-internals-class-loading/README.md)
-- [Multithreading & Concurrency in Java](multithreading-concurrency-in-java/README.md)
-- [Collections & Data Structures](collections-data-structures/README.md)
-- [Java Stream API & Functional Programming](java-stream-api-functional-programming/README.md)
+- [OOP Principles in Java](../java-oop-principles/README.md)
+- [Java Collections](../java-collections/README.md)
+- [Multithreading & Concurrency in Java](../java-multithreading-and-concurrency/README.md)
+- [Collections & Data Structures](../collections-data-structures/README.md)
+- [Java Generics](../java-generics/README.md)
+- [Exception Handling in Java](../java-exception-handling/README.md)
