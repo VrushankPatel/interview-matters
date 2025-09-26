@@ -1,122 +1,175 @@
 ---
 title: Caching
-aliases: [cache, caching strategies]
-tags: [#system-design,#performance]
-created: 2025-09-25
+aliases: [cache strategies]
+tags: [#performance,#scalability,#system-design]
+created: 2025-09-26
 updated: 2025-09-26
 ---
 
+# Caching
+
 ## Overview
 
-Caching is a technique to store frequently accessed data in a fast-access storage layer to reduce latency, improve performance, and decrease load on primary data sources like databases or APIs. It acts as a temporary data store that serves requests faster than the original source, enhancing user experience and system efficiency in high-traffic applications.
+Caching is a technique used to store frequently accessed data in a temporary storage layer (cache) to reduce access time and improve system performance. It minimizes the need to recompute or refetch data from slower sources like databases or external APIs. Caches can be in-memory, on-disk, or distributed across multiple nodes. Effective caching enhances scalability by reducing latency and load on backend systems, but requires careful management of cache invalidation, eviction policies, and consistency.
+
+Key benefits include faster response times, lower resource usage, and better user experience. However, challenges involve cache misses, stale data, and synchronization in distributed environments.
 
 ## Detailed Explanation
 
 ### Cache Types
-- **In-Memory Cache**: Stores data in RAM for ultra-fast access (e.g., Redis, Memcached).
-- **Distributed Cache**: Spans multiple nodes for scalability and fault tolerance (e.g., Redis Cluster).
-- **CDN (Content Delivery Network)**: Caches static assets like images, CSS, JS at edge locations (e.g., Cloudflare, Akamai).
-- **Database Cache**: Built-in caching in databases (e.g., MySQL Query Cache, though deprecated).
-- **Application-Level Cache**: Code-based caching (e.g., Caffeine in Java).
 
-### Caching Strategies
-- **Cache-Aside (Lazy Loading)**: Application checks cache first; if miss, fetches from source and populates cache.
-- **Write-Through**: Writes go to both cache and source simultaneously.
-- **Write-Behind (Write-Back)**: Writes to cache first, then asynchronously to source.
-- **Read-Through**: Cache sits between application and source, handling misses transparently.
+| Type | Description | Examples | Pros | Cons |
+|------|-------------|----------|------|------|
+| In-Memory | Stores data in RAM for ultra-fast access | Redis, Memcached | Low latency, high throughput | Volatile (data lost on restart), limited by memory |
+| On-Disk | Persists data to disk | Filesystem caches, SSD-based | Durable, larger capacity | Slower than in-memory |
+| Distributed | Spread across multiple servers | Redis Cluster, Hazelcast | Scalable, fault-tolerant | Network latency, complexity |
+
+### Cache Strategies
+
+- **Write-Through**: Data is written to both cache and primary storage simultaneously. Ensures consistency but increases write latency.
+- **Write-Back**: Data is written to cache first, then asynchronously to primary storage. Improves write performance but risks data loss.
+- **Write-Around**: Bypasses cache for writes, reading from primary storage. Simple but may lead to cache misses.
 
 ### Eviction Policies
-- **LRU (Least Recently Used)**: Evicts least recently accessed items.
-- **LFU (Least Frequently Used)**: Evicts least frequently accessed items.
-- **TTL (Time-To-Live)**: Expires items after a set time.
-- **Size-Based**: Evicts when cache reaches max size.
+
+Common algorithms for removing data when cache is full:
+
+- **LRU (Least Recently Used)**: Evicts the least recently accessed item.
+- **LFU (Least Frequently Used)**: Evicts the least frequently accessed item.
+- **FIFO (First In, First Out)**: Evicts the oldest item.
+- **TTL (Time To Live)**: Evicts items after a set expiration time.
 
 ### Cache Invalidation
-- **Explicit**: Manual deletion (e.g., after updates).
-- **Time-Based**: Automatic expiration.
-- **Event-Based**: Triggers on data changes (e.g., via pub/sub).
+
+- **Explicit**: Manually remove or update cache entries.
+- **Implicit**: Use TTL or version-based invalidation.
+- **Cache Busting**: Append query parameters (e.g., `?v=123`) to force fresh fetches.
+
+### Cache Flow Diagram
 
 ```mermaid
 graph TD
-    A[Client Request] --> B{Cache Hit?}
-    B -->|Yes| C[Return Cached Data]
-    B -->|No| D[Fetch from Source]
+    A[Client Request] --> B{Cache Check}
+    B -->|Hit| C[Return Cached Data]
+    B -->|Miss| D[Fetch from Source]
     D --> E[Store in Cache]
     E --> C
+    C --> F[Response to Client]
 ```
+
+This diagram illustrates the basic cache hit/miss flow, where a miss triggers data retrieval and storage.
 
 ## Real-world Examples & Use Cases
 
-- **E-commerce**: Product catalog cached in Redis to handle flash sales; invalidates on price changes.
-- **Social Media**: User timelines cached with LRU; CDN for profile images.
-- **API Rate Limiting**: Cache request counts per user/IP.
-- **Search Engines**: Query results cached for popular searches.
-- **Gaming**: Game state cached in-memory for real-time updates.
+- **Web Browsers**: Cache HTML, CSS, JS, and images to reduce load times. Browsers use HTTP caching headers like `Cache-Control` and `ETag`.
+- **Content Delivery Networks (CDNs)**: Distribute cached static assets globally (e.g., Cloudflare, Akamai). Reduces latency for users worldwide.
+- **Databases**: Query result caching in ORM layers (e.g., Hibernate second-level cache) or database query caches.
+- **API Gateways**: Cache API responses to handle high traffic (e.g., Kong with Redis).
+- **Microservices**: In-memory caches for service-to-service calls to avoid repeated computations.
+- **E-commerce Platforms**: Cache product catalogs and user sessions to handle flash sales.
+
+In a high-traffic e-commerce site, caching user session data in Redis can reduce database queries by 80%, improving throughput during peak loads.
 
 ## Code Examples
 
-### Caffeine In-Memory Cache (Java)
-```java
-import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
-import java.util.concurrent.TimeUnit;
+### Simple In-Memory Cache in Python
 
-Cache<String, String> cache = Caffeine.newBuilder()
-    .expireAfterWrite(10, TimeUnit.MINUTES)
-    .maximumSize(10_000)
-    .build();
-
-cache.put("key", "value");
-String value = cache.getIfPresent("key");
-```
-
-### Redis Distributed Cache
 ```python
-import redis
+import time
+from collections import OrderedDict
 
-r = redis.Redis(host='localhost', port=6379, db=0)
-r.set('key', 'value', ex=3600)  # Expire in 1 hour
-value = r.get('key')
+class LRUCache:
+    def __init__(self, capacity: int):
+        self.cache = OrderedDict()
+        self.capacity = capacity
+
+    def get(self, key: str):
+        if key in self.cache:
+            self.cache.move_to_end(key)
+            return self.cache[key]
+        return None
+
+    def put(self, key: str, value):
+        if key in self.cache:
+            self.cache.move_to_end(key)
+        self.cache[key] = value
+        if len(self.cache) > self.capacity:
+            self.cache.popitem(last=False)
+
+# Usage
+cache = LRUCache(2)
+cache.put("key1", "value1")
+cache.put("key2", "value2")
+print(cache.get("key1"))  # value1
+cache.put("key3", "value3")  # Evicts key2
+print(cache.get("key2"))  # None
 ```
 
-### Cache-Aside Pattern
+### Distributed Cache with Redis in Java
+
+Using Jedis client:
+
 ```java
-public String getData(String key) {
-    String cached = cache.getIfPresent(key);
-    if (cached != null) {
-        return cached;
+import redis.clients.jedis.Jedis;
+
+public class RedisCache {
+    private Jedis jedis;
+
+    public RedisCache() {
+        this.jedis = new Jedis("localhost", 6379);
     }
-    String data = fetchFromDatabase(key);
-    cache.put(key, data);
-    return data;
+
+    public String get(String key) {
+        return jedis.get(key);
+    }
+
+    public void set(String key, String value, int ttlSeconds) {
+        jedis.setex(key, ttlSeconds, value);
+    }
+
+    public void close() {
+        jedis.close();
+    }
 }
+
+// Usage
+RedisCache cache = new RedisCache();
+cache.set("user:123", "{\"name\":\"John\"}", 3600);
+String data = cache.get("user:123");
+System.out.println(data);  // {"name":"John"}
+cache.close();
 ```
 
-## Common Pitfalls & Edge Cases
+Ensure Redis is running locally. For production, use connection pooling.
 
-- **Cache Penetration**: Frequent misses for non-existent keys; use null value caching.
-- **Cache Avalanche**: Mass expiration causes load spike; stagger TTLs.
-- **Stale Data**: Inconsistent cache; use versioning or event invalidation.
-- **Thundering Herd**: Multiple requests for same miss; use locks or probabilistic early expiration.
-- **Edge Case**: In distributed cache, network partitions can cause inconsistencies; use strong consistency or accept eventual.
+## Common Pitfalls
 
-## Tools & Libraries
+- **Cache Stampede**: Multiple requests for the same missing key. Mitigate with locks or probabilistic early expiration.
+- **Thundering Herd**: Similar to stampede, but for cache warming.
+- **Stale Data**: Invalidate caches on data updates.
+- **Memory Leaks**: Monitor cache size and implement eviction.
 
-- **In-Memory**: Caffeine (Java), Guava Cache, Ehcache.
-- **Distributed**: Redis, Memcached, Hazelcast.
-- **CDN**: Cloudflare, Fastly, AWS CloudFront.
-- **Database**: MySQL InnoDB Buffer Pool, PostgreSQL shared buffers.
+## Performance Metrics
+
+| Metric | Description | Target |
+|--------|-------------|--------|
+| Hit Rate | Percentage of requests served from cache | >90% |
+| Miss Rate | Percentage of cache misses | <10% |
+| Latency | Time to retrieve data | <10ms for in-memory |
+| Throughput | Requests per second | Varies by system |
 
 ## References
 
-- [Redis Documentation](https://redis.io/docs/)
-- [Caffeine GitHub](https://github.com/ben-manes/caffeine)
+- [Redis Caching Guide](https://redis.io/topics/lru-cache)
+- [Memcached Documentation](https://memcached.org/)
+- [HTTP Caching (MDN)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching)
+- [Cache Invalidation Strategies](https://martinfowler.com/bliki/TwoHardThings.html)
 - [AWS Caching Best Practices](https://aws.amazon.com/caching/)
-- [Martin Fowler: Caching](https://martinfowler.com/bliki/Caching.html)
 
 ## Github-README Links & Related Topics
 
-- [Caching Patterns](caching-patterns/)
-- [Caching Strategies](caching-strategies/)
-- [Latency and Throughput](latency-and-throughput/)
-- [Distributed Locks](system-design/distributed-locks/)
+- [Distributed Caching with Redis](../distributed-caching-with-redis/)
+- [CDN Architecture](../cdn-architecture/)
+- [Database Performance Tuning](../database-performance-tuning/)
+- [Load Balancing and Strategies](../load-balancing-and-strategies/)
+- [HTTP Caching Headers](../http-caching-headers/)

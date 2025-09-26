@@ -1,8 +1,8 @@
 ---
 title: LLD HLD Basics
-aliases: [Low Level Design High Level Design Basics]
+aliases: [low level design, high level design]
 tags: [#system-design,#lld,#hld]
-created: 2025-09-25
+created: 2025-09-26
 updated: 2025-09-26
 ---
 
@@ -87,10 +87,20 @@ classDiagram
 
 ## Real-world Examples & Use Cases
 
-- **HLD Example**: Designing a URL shortener with API gateway, service layer, and database.
-- **LLD Example**: Implementing the shortening algorithm using base62 encoding and hash maps.
-- **Use Case**: In interviews, start with HLD to show big-picture thinking, then LLD to demonstrate technical depth.
-- **Industry Application**: HLD for microservices architecture in e-commerce platforms; LLD for specific service implementations.
+### URL Shortener System
+- **HLD Example**: Designing a URL shortener with API gateway, service layer, database, and cache for high availability and scalability.
+- **LLD Example**: Implementing the shortening algorithm using base62 encoding, hash maps for storage, and handling collisions.
+
+### E-commerce Platform
+- **HLD Example**: Microservices architecture with user service, product catalog, order management, payment gateway, and notification service.
+- **LLD Example**: Detailed class diagrams for user authentication, database schemas for products, and algorithms for recommendation engines.
+
+### Social Media Feed
+- **HLD Example**: Fan-out on write for timeline generation, sharded databases, and CDN for media delivery.
+- **LLD Example**: Data structures like priority queues for ranking posts, graph algorithms for friend suggestions.
+
+- **Use Case**: In system design interviews, start with HLD to outline the system architecture, then dive into LLD for specific components to show technical depth.
+- **Industry Application**: HLD for cloud-native applications on AWS/Azure; LLD for optimizing database queries and API endpoints in fintech systems.
 
 ## Code Examples
 
@@ -133,6 +143,35 @@ public class UrlShortener {
 Client -> Load Balancer -> API Gateway -> Shortener Service -> Database
                                        -> Cache
 ```
+
+### LLD: Simple Cache Implementation
+
+```java
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+public class LRUCache<K, V> extends LinkedHashMap<K, V> {
+    private final int capacity;
+
+    public LRUCache(int capacity) {
+        super(capacity, 0.75f, true);
+        this.capacity = capacity;
+    }
+
+    @Override
+    protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
+        return size() > capacity;
+    }
+}
+```
+
+## Best Practices
+
+- **Start with HLD**: Always begin with high-level design to ensure scalability and reliability before diving into details.
+- **Iterate on LLD**: Refine low-level designs based on code reviews and performance testing.
+- **Use Standard Notations**: Employ UML for class diagrams, ER diagrams for databases, and flowcharts for data flow.
+- **Consider Trade-offs**: Balance between simplicity, performance, and maintainability in design choices.
+- **Document Assumptions**: Clearly state assumptions in HLD and validate them in LLD.
 
 ## References
 

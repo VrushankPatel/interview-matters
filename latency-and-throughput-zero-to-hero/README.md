@@ -1,8 +1,8 @@
 ---
-title: Latency and Throughput: Zero to Hero
-aliases: [Latency vs Throughput, Performance Metrics, System Performance]
-tags: [#system-design,#performance]
-created: 2025-09-25
+title: Latency and Throughput Zero to Hero
+aliases: [performance metrics]
+tags: [#performance,#scalability,#system-design]
+created: 2025-09-26
 updated: 2025-09-26
 ---
 
