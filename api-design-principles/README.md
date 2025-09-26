@@ -1,9 +1,9 @@
 ---
 title: API Design Principles
 aliases: [API Design, REST API Principles]
-tags: [#api,#system-design]
+tags: [#api,#system-design,#design,#principles]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Overview

@@ -92,6 +92,7 @@ This repository contains comprehensive documentation on various topics for inter
 - [Java CyclicBarrier](./java-cyclicbarrier/README.md)
 - [Java Date Time API](./java-date-time-api/README.md)
 - [Java Design Patterns](./java-design-patterns/README.md)
+- [Java Testing Frameworks](./java-testing-frameworks/README.md)
 - [Java Testing Frameworks (JUnit, Mockito)](./java-testing-frameworks-junit-mockito/README.md)
 - [Java Exception Handling](./java-exception-handling/README.md)
 - [Java Exchanger](./java-exchanger/README.md)

@@ -1,12 +1,12 @@
 ---
 title: Microservices Architecture
 aliases: [Microservices, Service-Oriented Architecture]
-tags: [#system-design,#microservices]
+tags: [#system-design,#microservices,#architecture]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
-## Overview
+# Overview
 
 Microservices architecture is a design approach where applications are structured as a collection of loosely coupled, independently deployable services. Each service focuses on a specific business capability and communicates via APIs.
 
@@ -27,6 +27,20 @@ Microservices architecture is a design approach where applications are structure
 ### Communication Patterns
 - Synchronous: REST, gRPC
 - Asynchronous: Message queues, event-driven
+
+### Architecture Diagram
+
+```mermaid
+graph TD
+    A[API Gateway] --> B[User Service]
+    A --> C[Order Service]
+    A --> D[Payment Service]
+    B --> E[(User DB)]
+    C --> F[(Order DB)]
+    D --> G[(Payment DB)]
+    C --> H{Message Queue}
+    H --> D
+```
 
 ### Challenges
 - Service discovery
@@ -113,6 +127,22 @@ public class OrderCreatedEvent {
     private BigDecimal amount;
     // getters and setters
 }
+```
+
+## Journey / Sequence
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Gateway
+    participant UserSvc
+    participant OrderSvc
+    Client->>Gateway: POST /orders
+    Gateway->>UserSvc: GET /users/{id}
+    UserSvc-->>Gateway: User data
+    Gateway->>OrderSvc: POST /orders
+    OrderSvc-->>Gateway: Order created
+    Gateway-->>Client: 201 Created
 ```
 
 ## Common Pitfalls & Edge Cases

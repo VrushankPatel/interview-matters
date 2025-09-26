@@ -1,23 +1,25 @@
 ---
 title: Kubernetes Basics
-aliases: ["k8s fundamentals"]
-tags: ["#kubernetes", "#container-orchestration", "#devops"]
+aliases: [k8s fundamentals]
+tags: [#kubernetes,#container-orchestration,#devops]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
-## Overview
+# Overview
 
 Kubernetes (K8s) is an open-source platform for automating deployment, scaling, and management of containerized applications. It provides orchestration for containers across clusters of machines.
 
 ## Detailed Explanation
 
-Core concepts:
+## Core Concepts
 
-- **Pods**: Smallest deployable units, containing one or more containers.
-- **Services**: Abstractions for pod networking and load balancing.
-- **Deployments**: Manage replica sets and updates.
-- **Namespaces**: Virtual clusters for resource isolation.
+| Concept | Description | Purpose |
+|---------|-------------|---------|
+| Pods | Smallest deployable units, containing one or more containers | Run containers |
+| Services | Abstractions for pod networking and load balancing | Expose pods |
+| Deployments | Manage replica sets and updates | Deploy and update apps |
+| Namespaces | Virtual clusters for resource isolation | Organize resources |
 
 K8s uses a control plane (API server, scheduler, etc.) and worker nodes. It supports self-healing, scaling, and rolling updates.
 
@@ -81,6 +83,13 @@ spec:
       - name: my-container
         image: nginx
 ```
+
+## Tools & Libraries
+
+- kubectl: Command-line tool for interacting with clusters
+- Helm: Package manager for Kubernetes
+- Kustomize: Configuration management
+- Lens: GUI for Kubernetes management
 
 ## Common Pitfalls & Edge Cases
 

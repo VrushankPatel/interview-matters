@@ -1,9 +1,9 @@
 ---
 title: Database Design Principles
-aliases: []
-tags: [#system-design,#database]
+aliases: [Database Normalization, ER Diagrams, Database Schema Design]
+tags: [#database,#design,#principles]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Database Design Principles
@@ -30,10 +30,37 @@ Database design principles encompass the fundamental guidelines and best practic
 
 ### Normalization Forms
 
-- **1NF (First Normal Form)**: Eliminates repeating groups, ensures atomic values
-- **2NF**: Removes partial dependencies on the primary key
-- **3NF**: Eliminates transitive dependencies
-- **BCNF**: Stronger form of 3NF, removes all functional dependencies
+| Form | Description | Example |
+|------|-------------|---------|
+| 1NF | Eliminates repeating groups, ensures atomic values | Separate multi-value attributes |
+| 2NF | Removes partial dependencies on the primary key | Move dependent attributes to separate table |
+| 3NF | Eliminates transitive dependencies | Ensure non-key attributes depend only on key |
+| BCNF | Stronger form of 3NF, removes all functional dependencies | Handle overlapping keys |
+
+### Entity-Relationship Diagram Example
+
+```mermaid
+erDiagram
+    CUSTOMER ||--o{ ORDER : places
+    ORDER ||--|{ LINE-ITEM : contains
+    CUSTOMER {
+        int customer_id PK
+        string name
+        string email
+    }
+    ORDER {
+        int order_id PK
+        date order_date
+        int customer_id FK
+    }
+    LINE-ITEM {
+        int item_id PK
+        int order_id FK
+        string product_name
+        int quantity
+        decimal price
+    }
+```
 
 ## Real-world Examples & Use Cases
 
