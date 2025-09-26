@@ -169,6 +169,9 @@ graph TD
 - **Performance:** Parallel streams have overhead; benchmark for large datasets.
 - **Edge Cases:** Empty streams, single-element streams, streams with duplicates.
 
+## STAR Summary
+Not applicable for this programming paradigm topic.
+
 ## Tools & Libraries
 - Java 8+ Stream API (java.util.stream).
 - Vavr: Functional programming library with enhanced streams.

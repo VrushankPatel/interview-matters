@@ -128,6 +128,15 @@ graph TD
 - **Over-emphasizing Consistency:** For non-critical data, eventual consistency suffices.
 - **Edge Case:** Network heals after partition; reconciling divergent data.
 
+## STAR Summary
+**Situation:** A financial services company faced data inconsistencies across global data centers during network outages.
+
+**Task:** As the distributed systems engineer, I needed to redesign the architecture to maintain consistency during partitions while ensuring high availability.
+
+**Action:** Applied CAP theorem analysis, chose CP approach for critical financial data using quorum-based consensus, implemented eventual consistency for non-critical features, and added circuit breakers for fault tolerance.
+
+**Result:** System maintained 99.99% consistency for transactions during partitions, reduced data conflicts by 80%, and improved overall availability to 99.95%.
+
 ## Tools & Libraries
 - **AP Systems:** Apache Cassandra, Amazon DynamoDB, Riak
 - **CP Systems:** MongoDB (configurable), HBase, ZooKeeper

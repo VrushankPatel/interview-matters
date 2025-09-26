@@ -212,6 +212,39 @@ System.out.println(deque.removeLast()); // Last
 - **Capacity Issues:** ArrayList resizes inefficiently; pre-size if known.
 - **Synchronization:** Use Collections.synchronizedList() for thread-safety, but prefer concurrent collections.
 
+## STAR Summary
+Not applicable for this foundational topic.
+
+## Journey / Sequence
+```mermaid
+sequenceDiagram
+    participant Developer
+    participant Collection
+    participant Iterator
+
+    Developer->>Collection: add(element)
+    Collection-->>Developer: true/false
+    Developer->>Collection: iterator()
+    Collection-->>Developer: Iterator
+    Developer->>Iterator: hasNext()
+    Iterator-->>Developer: true/false
+    Developer->>Iterator: next()
+    Iterator-->>Developer: element
+```
+
+## Data Models / Message Formats
+### Collection Hierarchy JSON
+```json
+{
+  "Collection": {
+    "List": ["ArrayList", "LinkedList", "Vector"],
+    "Set": ["HashSet", "LinkedHashSet", "TreeSet"],
+    "Queue": ["PriorityQueue", "ArrayDeque"],
+    "Map": ["HashMap", "LinkedHashMap", "TreeMap", "Hashtable"]
+  }
+}
+```
+
 ## Tools & Libraries
 - Java Collections Framework (java.util).
 - Google Guava: Enhanced collections.

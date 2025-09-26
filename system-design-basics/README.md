@@ -135,6 +135,59 @@ System.out.println(cache.get("user:123"));  // Outputs: John Doe
 
 These examples illustrate fundamental patterns; in real systems, consider thread safety and persistence.
 
+## STAR Summary
+**Situation:** A startup needed to design a scalable e-commerce platform from scratch with no prior architecture.
+
+**Task:** As the lead architect, I was responsible for creating both HLD and LLD to support 1M users initially, with plans for 10x growth.
+
+**Action:** I conducted stakeholder interviews, analyzed requirements, created HLD with microservices architecture, load balancing, and caching. Then developed LLD with detailed API specs, database schemas, and error handling. Implemented monitoring and logging from day one.
+
+**Result:** The platform launched successfully, handling peak loads of 500K concurrent users, with 99.9% uptime and sub-500ms response times, enabling the company to scale to 5M users within a year.
+
+## Journey / Sequence
+```mermaid
+sequenceDiagram
+    participant Stakeholder
+    participant Architect
+    participant Developer
+    participant Tester
+
+    Stakeholder->>Architect: Requirements Gathering
+    Architect->>Architect: HLD Creation
+    Architect->>Developer: LLD Handover
+    Developer->>Developer: Implementation
+    Developer->>Tester: Code Review
+    Tester->>Architect: Feedback
+    Architect->>Stakeholder: Validation
+```
+
+## Data Models / Message Formats
+### System Design Flow JSON
+```json
+{
+  "systemDesignProcess": {
+    "phase1": "Requirements Analysis",
+    "phase2": "High-Level Design (HLD)",
+    "phase3": "Low-Level Design (LLD)",
+    "phase4": "Implementation",
+    "phase5": "Testing & Deployment",
+    "artifacts": ["Architecture Diagrams", "API Specs", "Database Schemas", "Test Plans"]
+  }
+}
+```
+
+## Common Pitfalls & Edge Cases
+- **Over-engineering:** Start with simple monolith, evolve to microservices as needed.
+- **Ignoring Non-functional Requirements:** Always consider scalability, security, and performance early.
+- **Poor Communication:** Ensure HLD and LLD are well-documented and understood by all teams.
+- **Edge Cases:** Handling sudden traffic spikes, data migration during scaling, backward compatibility.
+
+## Tools & Libraries
+- **Diagramming:** Lucidchart, Draw.io, Mermaid for diagrams.
+- **Documentation:** Confluence, Notion for collaborative docs.
+- **Modeling:** UML tools like Enterprise Architect.
+- **Prototyping:** Figma for UI/UX, Postman for API design.
+
 ## References
 
 - [What is System Design - Learn System Design](https://www.geeksforgeeks.org/what-is-system-design-learn-system-design/) - Comprehensive guide on system design fundamentals, HLD, LLD, and key concepts.
