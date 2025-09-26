@@ -1,8 +1,8 @@
 ---
 title: Garbage Collection Algorithms
-aliases: [GC Algorithms, Java GC]
-tags: [#java, #gc]
-created: 2023-10-01
+aliases: [GC Algorithms, JVM Garbage Collection]
+tags: [#java,#jvm,#performance]
+created: 2025-09-26
 updated: 2025-09-26
 ---
 
@@ -10,135 +10,158 @@ updated: 2025-09-26
 
 ## Overview
 
-Garbage Collection (GC) is the automatic process of reclaiming memory occupied by objects that are no longer reachable in a Java application. The JVM provides various GC algorithms optimized for different use cases, balancing throughput, latency, and memory efficiency.
+Garbage Collection (GC) is the process of automatically reclaiming memory occupied by objects that are no longer in use. The JVM provides several GC algorithms with different trade-offs in terms of throughput, latency, and memory usage. Understanding these algorithms is essential for optimizing Java application performance.
 
 ## Detailed Explanation
 
-### Basic Concepts
-- **Reachability**: Objects are considered garbage if they are not reachable from root references (stack, static fields, etc.).
-- **Generations**: Heap is divided into Young Generation (Eden, Survivor spaces) and Old Generation.
+### Generational Hypothesis
 
-### Common GC Algorithms
+Most objects die young (generational hypothesis). This leads to generational GC:
+- **Young Generation:** Where new objects are allocated
+- **Old Generation:** Long-lived objects
+- **Permanent Generation/Metaspace:** Class metadata (Java 8+)
+
+### GC Algorithms
 
 #### Serial GC
-- Single-threaded, stops-the-world collection.
-- Suitable for small applications.
+- Single-threaded
+- Suitable for small applications
+- Uses mark-sweep-compact
 
 #### Parallel GC
-- Multi-threaded version of Serial GC.
-- Default for server applications.
+- Multi-threaded version of Serial GC
+- Default in Java 8
+- Good for throughput
 
-#### CMS (Concurrent Mark Sweep)
-- Concurrent marking and sweeping to reduce pause times.
-- Deprecated in favor of G1.
+#### Concurrent Mark Sweep (CMS)
+- Concurrent marking phase
+- Low pause times
+- Deprecated in Java 9, removed in Java 14
 
-#### G1 (Garbage First)
-- Divides heap into regions, prioritizes regions with most garbage.
-- Balances throughput and latency.
+#### G1 GC
+- Default since Java 9
+- Divides heap into regions
+- Predictable pause times
+- Good balance of throughput and latency
 
-#### ZGC and Shenandoah
-- Low-latency GCs with sub-millisecond pauses.
+#### Z Garbage Collector (ZGC)
+- Available since Java 11
+- Sub-millisecond pause times
+- Handles heaps up to 16TB
+- Concurrent compaction
+
+#### Shenandoah
+- Similar to ZGC
+- Concurrent evacuation
+- Low pause times
+
+### GC Phases
+
+1. **Mark:** Identify live objects
+2. **Sweep:** Remove dead objects
+3. **Compact:** Defragment memory (optional)
 
 ```mermaid
 graph TD
-    A[Young Generation] --> B[Minor GC]
-    B --> C[Survivor Space]
-    C --> D[Old Generation]
-    D --> E[Major GC]
-    E --> F[Full GC]
+    A[GC Triggered] --> B[Mark Phase]
+    B --> C[Sweep Phase]
+    C --> D[Compact Phase]
+    D --> E[GC Complete]
 ```
 
 ## Real-world Examples & Use Cases
 
-- **Web Servers**: Use G1 GC for balanced performance.
-- **Real-time Systems**: ZGC for minimal pauses.
-- **Batch Processing**: Parallel GC for high throughput.
+- **High-throughput applications:** Use Parallel GC for maximum throughput
+- **Low-latency applications:** Use G1 or ZGC for predictable pause times
+- **Large heap applications:** ZGC for heaps > 4GB with low latency requirements
+- **Microservices:** Tune GC based on workload characteristics
 
 ## Code Examples
 
 ### Monitoring GC
-
 ```java
-// JVM options for GC logging
-// -XX:+PrintGC -XX:+PrintGCDetails -XX:+PrintGCTimeStamps
-
-// Programmatic GC (use sparingly)
-System.gc();
-
-// Weak references for custom cleanup
-WeakReference<String> weakRef = new WeakReference<>(new String("test"));
-```
-
-### Custom Finalizer (Avoid if possible)
-
-```java
-public class ResourceHolder {
-    @Override
-    protected void finalize() throws Throwable {
-        // Cleanup resources
-        super.finalize();
+public class GCMonitoring {
+    public static void main(String[] args) {
+        // Print GC information
+        System.out.println("GC Information:");
+        for (java.lang.management.GarbageCollectorMXBean gc : 
+             java.lang.management.ManagementFactory.getGarbageCollectorMXBeans()) {
+            System.out.println("Name: " + gc.getName());
+            System.out.println("Collection count: " + gc.getCollectionCount());
+            System.out.println("Collection time: " + gc.getCollectionTime() + "ms");
+        }
+        
+        // Force GC (not recommended in production)
+        System.gc();
     }
 }
 ```
 
-### Memory Leak Detection
-
+### Memory Leak Simulation
 ```java
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MemoryLeakDemo {
-    private static List<Object> leakList = new ArrayList<>();
-
+public class MemoryLeakExample {
+    private static List<Object> leak = new ArrayList<>();
+    
     public static void main(String[] args) {
-        // Simulate memory leak
-        for (int i = 0; i < 100000; i++) {
-            leakList.add(new byte[1024]); // 1KB objects
+        while (true) {
+            leak.add(new byte[1024 * 1024]); // 1MB objects
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
         }
-
-        // Use jmap or VisualVM to observe heap growth
-        System.out.println("Objects created: " + leakList.size());
     }
 }
 ```
 
-### GC Tuning Example
+### Weak References
+```java
+import java.lang.ref.WeakReference;
 
-```bash
-# JVM flags for G1 GC tuning
-java -XX:+UseG1GC \
-     -XX:MaxGCPauseMillis=200 \
-     -XX:G1HeapRegionSize=16m \
-     -XX:InitiatingHeapOccupancyPercent=45 \
-     -Xmx4g -Xms4g \
-     MyApplication
+public class WeakReferenceExample {
+    public static void main(String[] args) {
+        Object strongRef = new Object();
+        WeakReference<Object> weakRef = new WeakReference<>(strongRef);
+        
+        System.out.println("Strong ref: " + strongRef);
+        System.out.println("Weak ref: " + weakRef.get());
+        
+        // Remove strong reference
+        strongRef = null;
+        System.gc();
+        
+        System.out.println("After GC - Weak ref: " + weakRef.get());
+    }
+}
 ```
 
 ## Common Pitfalls & Edge Cases
 
-- **Premature optimization**: Tuning GC without profiling can degrade performance
-- **Memory leaks**: Objects held by static references or long-lived collections
-- **GC thrashing**: Frequent GC due to insufficient heap size
-- **Reference cycles**: Soft/weak references not being cleared appropriately
-- **Large object allocation**: Objects larger than region size in G1 causing inefficiencies
+- **GC thrashing:** Too frequent GC due to small heap
+- **Memory leaks:** Objects not being garbage collected
+- **Long GC pauses:** Impacting application responsiveness
+- **Incorrect GC tuning:** Using wrong GC for workload
 
 ## Tools & Libraries
 
-- **JDK Tools**: jstat, jmap, jstack, jcmd for GC monitoring
-- **VisualVM**: GUI tool for heap analysis and GC visualization
-- **GCViewer**: Analyzes GC logs and provides detailed statistics
-- **JProfiler**: Commercial profiler with advanced GC analysis
-- **Eclipse Memory Analyzer (MAT)**: Heap dump analysis for memory leak detection
+- **JVM flags:** -XX:+UseG1GC, -XX:MaxGCPauseMillis=200
+- **Monitoring tools:** VisualVM, JConsole, GC logs
+- **Profiling tools:** YourKit, JProfiler
 
 ## References
 
 - [Oracle GC Tuning Guide](https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/)
-- [JVM GC Algorithms Overview](https://www.oracle.com/technetwork/java/javase/gc-tuning-5-138395.html)
-- [Baeldung - Java Garbage Collection](https://www.baeldung.com/java-garbage-collection)
+- [G1 GC](https://www.oracle.com/technetwork/tutorials/tutorials-1876574.html)
+- [ZGC](https://wiki.openjdk.java.net/display/zgc/Main)
+- [JVM GC Algorithms](https://www.baeldung.com/jvm-garbage-collectors)
 
 ## Github-README Links & Related Topics
 
-- [GC Tuning](gc-tuning/README.md)
-- [Java Memory Management](java-memory-management/README.md)
-- [JVM Internals & Class Loading](jvm-internals-and-class-loading/README.md)
+- [JVM Internals & Class Loading](../jvm-internals-and-class-loading/README.md)
+- [Java Memory Management](../java-memory-management/README.md)
+- [GC Tuning](../gc-tuning/README.md)
+- [JVM Performance Tuning](../jvm-performance-tuning/README.md)
