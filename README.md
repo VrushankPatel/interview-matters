@@ -18,6 +18,8 @@ This repository contains comprehensive documentation on various topics for inter
 - [Acid vs Base Tradeoffs](./acid-vs-base-tradeoffs/README.md)
 - [Async Logging](./async-logging/README.md)
 - [LLD HLD Basics](./lld-hld-basics/README.md)
+- [Replication vs Sharding vs Partitioning](./replication-vs-sharding-vs-partitioning/README.md)
+- [Latency and Throughput Zero to Hero](./latency-and-throughput-zero-to-hero/README.md)
 - [Blockchain System Design](./blockchain-system-design/README.md)
 - [Airbnb System Design](./airbnb-system-design/README.md)
 - [Amazon E-commerce Platform](./amazon-e-commerce-platform/README.md)
