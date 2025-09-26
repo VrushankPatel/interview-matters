@@ -3,7 +3,7 @@ title: Java Modules
 aliases: [JPMS, Java Platform Module System]
 tags: [#java]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 ## Overview
