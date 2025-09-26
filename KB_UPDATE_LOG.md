@@ -61,3 +61,10 @@ created_dirs: ["fix-protocol", "itch-protocol", "ouch-protocol"]
 updated_files: ["market-data/README.md", "order-entry-protocols/README.md", "SPECIFICATION.md", "PENDING_TOPICS.md", "NEXTTOPICS.md"]
 commit_made: true
 commit_message: "kb: add 5 topics (fix-protocol, itch-protocol, ouch-protocol, market-data, order-entry-protocols) + update spec and pending"
+-e 
+--- Update Fri Sep 26 15:50:54 UTC 2025 ---
+topics_processed: ["Journey of a Trade (end-to-end)", "Order Types (DAY, GTC, FOK, IOC)", "Quotes & RFQ workflows", "Execution Report", "Trade Capture Report"]
+created_dirs: []
+updated_files: ["SPECIFICATION.md", "PENDING_TOPICS.md", "NEXTTOPICS.md", "trading/lifecycle/README.md", "trading/order-types/README.md", "trading/protocols/README.md", "trading/protocols/itch-protocol/README.md", "trading/protocols/order-entry-protocols/README.md", "trading/protocols/ouch-protocol/README.md"]
+commit_made: true
+commit_message: "kb: processed 5 topics from PENDING_TOPICS.md (Journey of a Trade, Order Types, Quotes & RFQ workflows, Execution Report, Trade Capture Report) + updated SPECIFICATION.md and NEXTTOPICS.md with new candidates"
