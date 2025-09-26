@@ -329,8 +329,13 @@ This repository contains comprehensive documentation on various topics for inter
 
 ### Interview Preparation
 - [Behavioral Interview Questions](./behavioral-interview-questions/README.md)
-- [System Design Interview Tips](./system-design-interview-tips/README.md)
 - [Coding Interview Strategies](./coding-interview-strategies/README.md)
+- [Common Interview Mistakes](./common-interview-mistakes/README.md)
+- [Mock Interview Preparation](./mock-interview-preparation/README.md)
+- [Post-Interview Follow-up](./post-interview-follow-up/README.md)
 - [Resume Optimization for Tech Jobs](./resume-optimization-for-tech-jobs/README.md)
+- [STAR Method for Interviews](./star-method-for-interviews/README.md)
+- [System Design Interview Tips](./system-design-interview-tips/README.md)
+- [Technical Interview Formats](./technical-interview-formats/README.md)
 - [Negotiation Strategies for Offers](./negotiation-strategies-for-offers/README.md)
 
