@@ -19,7 +19,15 @@ The Java Virtual Machine (JVM) is the runtime environment that executes Java byt
 The JVM consists of several key components:
 
 - **Class Loader Subsystem**: Responsible for loading class files into memory.
-- **Runtime Data Areas**: Including Method Area, Heap, Stack, PC Registers, and Native Method Stacks.
+- **Runtime Data Areas**: Memory areas used during program execution.
+
+| Area | Description | Thread-shared | Stores |
+|------|-------------|---------------|--------|
+| Method Area | Stores class-level information | Yes | Class data, method info, static variables |
+| Heap | Runtime data area for objects | Yes | Objects, arrays |
+| Java Stack | Stores method calls | No | Local variables, method calls |
+| PC Register | Current instruction pointer | No | Address of executing instruction |
+| Native Method Stack | For native methods | No | Native method calls |
 - **Execution Engine**: Interprets or compiles bytecode into machine code.
 - **JNI and Native Libraries**: For interfacing with native code.
 
@@ -31,11 +39,30 @@ Class loading occurs in three phases:
 2. **Linking**: Involves verification, preparation, and resolution.
 3. **Initialization**: Executes static initializers and assigns initial values.
 
+```mermaid
+flowchart TD
+    A[Class Loading Requested] --> B{Class Already Loaded?}
+    B -->|No| C[Loading Phase]
+    C --> D[Find .class file]
+    D --> E[Read binary data]
+    E --> F[Create Class object]
+    F --> G[Linking Phase]
+    G --> H[Verification]
+    H --> I[Preparation]
+    I --> J[Resolution]
+    J --> K[Initialization Phase]
+    K --> L[Execute static blocks]
+    L --> M[Class Ready for Use]
+    B -->|Yes| M
+```
+
 #### Types of Class Loaders
 
-- **Bootstrap Class Loader**: Loads core Java classes.
-- **Extension Class Loader**: Loads extension classes.
-- **System/Application Class Loader**: Loads application classes.
+| Class Loader Type | Parent | Description | Example Classes |
+|-------------------|--------|-------------|-----------------|
+| Bootstrap Class Loader | None | Loads core Java classes from rt.jar and other bootstrap classpath | java.lang.*, java.util.* |
+| Extension Class Loader | Bootstrap | Loads classes from jre/lib/ext or java.ext.dirs | Security extensions, XML parsers |
+| System/Application Class Loader | Extension | Loads classes from application classpath | User-defined classes, third-party libraries |
 
 ### Class Loading Delegation Model
 

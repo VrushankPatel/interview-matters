@@ -17,7 +17,16 @@ Multithreading allows a program to execute multiple threads concurrently, improv
 ### Threads in Java
 
 - **Creating Threads**: Using Thread class or Runnable interface.
-- **Thread Lifecycle**: New, Runnable, Blocked, Waiting, Timed Waiting, Terminated.
+- **Thread Lifecycle**: Threads transition through various states during execution.
+
+| State | Description | Transitions |
+|-------|-------------|-------------|
+| NEW | Thread created but not started | start() → RUNNABLE |
+| RUNNABLE | Ready to run or running | schedule → RUNNING, yield/preempt → RUNNABLE |
+| BLOCKED | Waiting for monitor lock | acquire lock → RUNNABLE |
+| WAITING | Waiting indefinitely for another thread | notify() → RUNNABLE |
+| TIMED_WAITING | Waiting for specified time | timeout/notify() → RUNNABLE |
+| TERMINATED | Execution completed | - |
 
 ### Synchronization
 
@@ -27,9 +36,17 @@ Multithreading allows a program to execute multiple threads concurrently, improv
 
 ### Concurrency Utilities
 
-- **Executor Framework**: Thread pools for managing threads.
-- **Concurrent Collections**: ConcurrentHashMap, etc.
-- **Atomic Variables**: AtomicInteger for lock-free operations.
+Java provides high-level concurrency utilities in java.util.concurrent package:
+
+| Utility | Description | Example Use Case |
+|---------|-------------|------------------|
+| ExecutorService | Manages thread pools | Submitting tasks for execution |
+| ConcurrentHashMap | Thread-safe hash map | Shared cache with concurrent access |
+| AtomicInteger/Long | Lock-free atomic operations | Counters in multi-threaded environments |
+| CountDownLatch | Synchronization aid | Waiting for multiple threads to complete |
+| CyclicBarrier | Synchronization aid | Coordinating multiple threads |
+| Semaphore | Controlling access to resources | Limiting concurrent access |
+| Future/CompletableFuture | Asynchronous computation | Non-blocking task execution |
 
 ### Common Issues
 
@@ -91,6 +108,46 @@ public class Counter {
 
     public int getCount() {
         return count;
+    }
+}
+```
+
+### Using ExecutorService
+
+```java
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ExecutorExample {
+    public static void main(String[] args) {
+        ExecutorService executor = Executors.newFixedThreadPool(5);
+
+        for (int i = 0; i < 10; i++) {
+            Runnable task = () -> {
+                System.out.println("Task executed by " + Thread.currentThread().getName());
+            };
+            executor.submit(task);
+        }
+
+        executor.shutdown();
+    }
+}
+```
+
+### Atomic Variables
+
+```java
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class AtomicExample {
+    private AtomicInteger counter = new AtomicInteger(0);
+
+    public void increment() {
+        counter.incrementAndGet();
+    }
+
+    public int getCounter() {
+        return counter.get();
     }
 }
 ```
