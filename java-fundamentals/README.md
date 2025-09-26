@@ -1,6 +1,6 @@
 ---
 title: Java Fundamentals
-aliases: []
+aliases: [Java Basics, Core Java]
 tags: [#java]
 created: 2025-09-26
 updated: 2025-09-26
@@ -9,128 +9,31 @@ updated: 2025-09-26
 # Java Fundamentals
 
 ## Overview
-Java is a high-level, object-oriented programming language designed for portability and robustness. It follows the "write once, run anywhere" principle through the Java Virtual Machine (JVM). Key features include automatic memory management, strong typing, and extensive standard libraries.
+Java Fundamentals cover the core concepts and building blocks of the Java programming language, including syntax, data types, control structures, and basic object-oriented principles. These form the foundation for more advanced Java topics and are essential for any Java developer.
 
 ## Detailed Explanation
-Java fundamentals encompass the core concepts and syntax that form the building blocks of Java programming. This includes data types, variables, operators, control structures, and basic object-oriented principles.
+Java is a high-level, object-oriented programming language developed by Sun Microsystems (now Oracle). It follows the "Write Once, Run Anywhere" (WORA) principle through the Java Virtual Machine (JVM).
 
-### Data Types
-Java has two categories of data types: primitive and reference.
+### Key Concepts
+- **Data Types**: Primitive types (int, double, boolean, char) and reference types (objects, arrays)
+- **Variables**: Declaration, initialization, and scope
+- **Operators**: Arithmetic, relational, logical, assignment, and bitwise operators
+- **Control Structures**: if-else, switch, loops (for, while, do-while)
+- **Methods**: Declaration, parameters, return types, and method overloading
+- **Classes and Objects**: Basic OOP concepts like encapsulation, inheritance, and polymorphism
 
-**Primitive Types:**
-- `byte`: 8-bit signed integer (-128 to 127)
-- `short`: 16-bit signed integer (-32,768 to 32,767)
-- `int`: 32-bit signed integer (-2^31 to 2^31-1)
-- `long`: 64-bit signed integer (-2^63 to 2^63-1)
-- `float`: 32-bit IEEE 754 floating-point
-- `double`: 64-bit IEEE 754 floating-point
-- `char`: 16-bit Unicode character
-- `boolean`: true or false
-
-**Reference Types:**
-- Classes, interfaces, arrays, and enums
-
-### Variables
-Variables are containers for storing data values. They must be declared with a data type.
-
-```java
-int age = 25;
-String name = "John Doe";
-double salary = 50000.0;
-```
-
-### Operators
-Java supports various operators for arithmetic, comparison, logical, and assignment operations.
-
-**Arithmetic Operators:**
-```java
-int a = 10, b = 5;
-int sum = a + b;        // 15
-int difference = a - b; // 5
-int product = a * b;    // 50
-int quotient = a / b;   // 2
-int remainder = a % b;  // 0
-```
-
-**Comparison Operators:**
-```java
-boolean isEqual = (a == b);     // false
-boolean isGreater = (a > b);    // true
-boolean isLessOrEqual = (a <= b); // false
-```
-
-**Logical Operators:**
-```java
-boolean condition1 = true, condition2 = false;
-boolean andResult = condition1 && condition2; // false
-boolean orResult = condition1 || condition2;  // true
-boolean notResult = !condition1;              // false
-```
-
-### Control Structures
-Control structures direct the flow of program execution.
-
-**If-Else Statement:**
-```java
-int score = 85;
-if (score >= 90) {
-    System.out.println("Grade: A");
-} else if (score >= 80) {
-    System.out.println("Grade: B");
-} else {
-    System.out.println("Grade: C");
-}
-```
-
-**Switch Statement:**
-```java
-int day = 3;
-switch (day) {
-    case 1:
-        System.out.println("Monday");
-        break;
-    case 2:
-        System.out.println("Tuesday");
-        break;
-    case 3:
-        System.out.println("Wednesday");
-        break;
-    default:
-        System.out.println("Other day");
-}
-```
-
-**Loops:**
-```java
-// For loop
-for (int i = 0; i < 5; i++) {
-    System.out.println("Iteration: " + i);
-}
-
-// While loop
-int count = 0;
-while (count < 3) {
-    System.out.println("Count: " + count);
-    count++;
-}
-
-// Do-while loop
-int num = 1;
-do {
-    System.out.println("Number: " + num);
-    num++;
-} while (num <= 3);
-```
+### JVM Architecture Basics
+Java code is compiled to bytecode, which runs on the JVM. The JVM provides platform independence and memory management through garbage collection.
 
 ## Real-world Examples & Use Cases
-1. **Simple Calculator Application:** Implementing basic arithmetic operations using variables, operators, and control structures.
-2. **Student Grade Management System:** Using arrays and loops to store and process student grades.
-3. **Bank Account Simulator:** Demonstrating object creation and method calls for basic banking operations.
-4. **Temperature Converter:** Converting between Celsius, Fahrenheit, and Kelvin using mathematical formulas.
-5. **Number Guessing Game:** Implementing game logic with random number generation and user input validation.
+- **Web Applications**: Building servlets and JSPs for dynamic web content
+- **Mobile Apps**: Android development using Java (though Kotlin is gaining popularity)
+- **Enterprise Software**: Large-scale applications using frameworks like Spring
+- **Embedded Systems**: Java ME for resource-constrained devices
 
 ## Code Examples
-### Hello World Program
+
+### Basic Hello World
 ```java
 public class HelloWorld {
     public static void main(String[] args) {
@@ -139,81 +42,77 @@ public class HelloWorld {
 }
 ```
 
-### Basic Calculator
+### Data Types and Variables
 ```java
-import java.util.Scanner;
-
-public class Calculator {
+public class DataTypesExample {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        // Primitive types
+        int age = 25;
+        double salary = 50000.50;
+        boolean isEmployed = true;
+        char grade = 'A';
         
-        System.out.print("Enter first number: ");
-        double num1 = scanner.nextDouble();
+        // Reference type
+        String name = "John Doe";
         
-        System.out.print("Enter operator (+, -, *, /): ");
-        char operator = scanner.next().charAt(0);
-        
-        System.out.print("Enter second number: ");
-        double num2 = scanner.nextDouble();
-        
-        double result;
-        switch (operator) {
-            case '+':
-                result = num1 + num2;
-                break;
-            case '-':
-                result = num1 - num2;
-                break;
-            case '*':
-                result = num1 * num2;
-                break;
-            case '/':
-                if (num2 != 0) {
-                    result = num1 / num2;
-                } else {
-                    System.out.println("Error: Division by zero");
-                    return;
-                }
-                break;
-            default:
-                System.out.println("Error: Invalid operator");
-                return;
-        }
-        
-        System.out.println("Result: " + result);
-        scanner.close();
+        System.out.println("Name: " + name + ", Age: " + age);
     }
 }
 ```
 
-### Array Operations
+### Control Structures
 ```java
-public class ArrayExample {
+public class ControlStructures {
     public static void main(String[] args) {
-        // Declare and initialize an array
-        int[] numbers = {10, 20, 30, 40, 50};
+        int number = 10;
         
-        // Print array elements
-        System.out.println("Array elements:");
-        for (int i = 0; i < numbers.length; i++) {
-            System.out.println("Index " + i + ": " + numbers[i]);
+        // If-else
+        if (number > 0) {
+            System.out.println("Positive number");
+        } else if (number < 0) {
+            System.out.println("Negative number");
+        } else {
+            System.out.println("Zero");
         }
         
-        // Calculate sum
-        int sum = 0;
-        for (int num : numbers) {
-            sum += num;
+        // For loop
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Count: " + i);
         }
-        System.out.println("Sum of array elements: " + sum);
         
-        // Find maximum
-        int max = numbers[0];
-        for (int num : numbers) {
-            if (num > max) {
-                max = num;
-            }
+        // Switch
+        switch (number) {
+            case 1:
+                System.out.println("One");
+                break;
+            case 10:
+                System.out.println("Ten");
+                break;
+            default:
+                System.out.println("Other");
         }
-        System.out.println("Maximum value: " + max);
+    }
+}
+```
+
+### Simple Class and Object
+```java
+public class Person {
+    private String name;
+    private int age;
+    
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    public void displayInfo() {
+        System.out.println("Name: " + name + ", Age: " + age);
+    }
+    
+    public static void main(String[] args) {
+        Person person = new Person("Alice", 30);
+        person.displayInfo();
     }
 }
 ```
@@ -221,9 +120,9 @@ public class ArrayExample {
 ## References
 - [Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/)
 - [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se17/html/index.html)
-- [Baeldung Java Guides](https://www.baeldung.com/java)
+- "Java: A Beginner's Guide" by Herbert Schildt
 
 ## Github-README Links & Related Topics
-- [OOP Principles in Java](../oop-principles-in-java/)
-- [Collections & Data Structures](../collections-and-data-structures/)
-- [Java Stream API & Functional Programming](../java-stream-api-functional-programming/)
+- [java-language-basics](../java/java-language-basics/)
+- [oop-principles-in-java](../oop-principles-in-java/)
+- [java-data-types](../java-data-types/)
