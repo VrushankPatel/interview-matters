@@ -19,4 +19,10 @@ DevOps & Infrastructure as Code
 Proxy forward and reverse
 Load balancing and strategies
 Rate limiting
-Concurrency & Parallelism
+ Concurrency & Parallelism
+Database Design Principles
+API Design Best Practices
+Microservices Architecture
+Event-Driven Architecture
+Container Orchestration with Kubernetes
+ 
