@@ -1,5 +1,10 @@
-00011| LLD HLD Basics
-00012| Replication vs Sharding vs Partitioning
-00013| Latency and Throughput Zero to Hero
-00014| Monitoring and Logging
-00015| DevOps & Infrastructure as Code
+Java Fundamentals
+OOP Principles in Java
+JVM Internals & Class Loading
+Garbage Collection Algorithms
+Multithreading & Concurrency in Java
+Collections & Data Structures
+Java Stream API & Functional Programming
+System Design Basics
+High Scalability Patterns
+CAP Theorem & Distributed Systems
