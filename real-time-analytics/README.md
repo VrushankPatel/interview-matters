@@ -3,7 +3,7 @@ title: Real-time Analytics
 aliases: [Real-time Data Analytics, Streaming Analytics]
 tags: [#system-design,#data,#analytics]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Real-time Analytics

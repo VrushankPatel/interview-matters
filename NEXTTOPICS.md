@@ -1,8 +1,3 @@
-Real-Time Analytics
-Probabilistic Data Structures
-Vector Databases
-Time Series Databases
-Blockchain Consensus Mechanisms
 Java Fundamentals
 OOP Principles in Java
 JVM Internals & Class Loading

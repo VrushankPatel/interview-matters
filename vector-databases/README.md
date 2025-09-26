@@ -3,7 +3,7 @@ title: Vector Databases
 aliases: [Vector DB, Embedding Databases]
 tags: [#database,#ai,#machine-learning]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Vector Databases
