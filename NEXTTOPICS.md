@@ -1,7 +1,7 @@
-- LLD HLD Basics
-- Latency and Throughput Zero to Hero
-- Monitoring and Logging
-- DevOps & Infrastructure as Code
-- Proxy Forward and Reverse
 - Load Balancing and Strategies
 - Rate Limiting
+- Replication vs Sharding vs Partitioning
+- Caching
+- Concurrency & Parallelism
+- Java Stream API & Functional Programming
+- System Design Basics
