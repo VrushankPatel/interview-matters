@@ -28,6 +28,17 @@ Ability of objects to take on many forms, through method overriding and overload
 
 Focusing on essential qualities rather than specific characteristics.
 
+```mermaid
+classDiagram
+    class Animal {
+        +sound()
+    }
+    class Dog {
+        +sound()
+    }
+    Animal <|-- Dog
+```
+
 # Real-world Examples & Use Cases
 
 - Designing software systems like banking applications where accounts can be savings or checking (inheritance and polymorphism).

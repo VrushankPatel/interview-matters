@@ -1,56 +1,73 @@
 ---
 title: Java Fundamentals
-aliases: [Java Basics, Core Java]
+aliases: []
 tags: [#java]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+# Java Fundamentals
 
-Java Fundamentals encompass the basic building blocks of the Java programming language, including syntax, data types, operators, control structures, and introductory object-oriented concepts.
+## Overview
 
-# Detailed Explanation
+Java Fundamentals cover the basic building blocks of the Java programming language, including syntax, data types, control structures, and object-oriented concepts.
 
-## Data Types
+## Detailed Explanation
 
-Java supports primitive types (int, double, boolean, char, etc.) and reference types (objects, arrays).
+### Data Types
 
-## Operators
+Java has primitive data types: int, long, float, double, boolean, char, byte, short.
 
-Arithmetic, relational, logical, assignment, and bitwise operators.
+Reference types: classes, interfaces, arrays.
 
-## Control Flow
+### Variables and Constants
 
-Conditional statements (if-else, switch) and loops (for, while, do-while).
+Variables declared with type, e.g., int x = 5;
 
-## Classes and Objects
+Constants with final, e.g., final int MAX = 100;
 
-Basic class definition, instantiation, and method invocation.
+### Operators
 
-# Real-world Examples & Use Cases
+Arithmetic: +, -, *, /, %
 
-- Developing console-based applications like calculators or simple games.
-- Backend services for web applications.
+Relational: ==, !=, <, >, <=, >=
 
-# Code Examples
+Logical: &&, ||, !
+
+### Control Structures
+
+If-else, switch, loops: for, while, do-while.
+
+## Real-world Examples & Use Cases
+
+Used in enterprise applications, Android apps, web servers.
+
+Example: Calculating average salary in a company.
+
+## Code Examples
 
 ```java
-public class Calculator {
+public class HelloWorld {
     public static void main(String[] args) {
-        int a = 5, b = 3;
-        System.out.println("Sum: " + (a + b));
+        System.out.println("Hello, World!");
     }
 }
 ```
 
-# References
+```java
+int[] numbers = {1, 2, 3, 4, 5};
+int sum = 0;
+for (int num : numbers) {
+    sum += num;
+}
+System.out.println("Sum: " + sum);
+```
 
-- [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se21/html/index.html)
+## References
+
 - [Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
-- [OOP Principles in Java](../oop-principles-in-java/README.md)
-- [JVM Internals & Class Loading](../jvm-internals-class-loading/README.md)
-- [Multithreading & Concurrency in Java](../multithreading-concurrency-in-java/README.md)
+- [OOP Principles in Java](../oop-principles-in-java/)
+- [Collections & Data Structures](../collections-and-data-structures/)

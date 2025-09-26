@@ -18,6 +18,17 @@ Garbage Collection (GC) in Java automatically manages memory by reclaiming unuse
 - Generational GC: Divides heap into young and old generations.
 - G1 GC: Garbage-First, divides heap into regions.
 
+```mermaid
+graph TD
+    A[Application Running] --> B[Object Allocation]
+    B --> C{Heap Full?}
+    C -->|Yes| D[GC Triggered]
+    D --> E[Mark Phase]
+    E --> F[Sweep Phase]
+    F --> G[Compact Phase]
+    G --> A
+```
+
 # Real-world Examples & Use Cases
 
 - Long-running server applications where manual memory management is error-prone.
