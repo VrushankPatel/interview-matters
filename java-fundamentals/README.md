@@ -1,35 +1,81 @@
 ---
 title: Java Fundamentals
-aliases: [java basics, java syntax]
-tags: [#java, #fundamentals]
+aliases: []
+tags: [#java]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Java Fundamentals
+# Overview
 
-## Overview
+Java Fundamentals encompass the core concepts and syntax of the Java programming language, providing the foundation for building robust applications. This includes understanding data types, variables, operators, control structures, and basic object-oriented programming elements.
 
-Java fundamentals cover the core building blocks of the Java programming language, including basic syntax, data types, control structures, and introductory object-oriented programming concepts. These form the foundation for writing, compiling, and running Java applications.
+# Detailed Explanation
 
-## Detailed Explanation
+## Data Types and Variables
 
-Java is a statically-typed, object-oriented language that compiles to bytecode for the Java Virtual Machine (JVM). Key fundamentals include:
+Java supports eight primitive data types: `byte`, `short`, `int`, `long`, `float`, `double`, `char`, and `boolean`. Variables must be declared with a type before use.
 
-- **Basic Syntax**: Java programs start with `public class ClassName { public static void main(String[] args) { ... } }`. Statements end with semicolons, blocks use curly braces.
-- **Data Types**: Primitive types (int, double, boolean, char) and reference types (objects, arrays, strings).
-- **Control Structures**: if-else, loops (for, while, do-while), switch statements for decision-making and iteration.
-- **OOP Basics**: Classes, objects, methods, constructors as the basis for encapsulation and modularity.
+```java
+int age = 25;
+double salary = 50000.0;
+boolean isActive = true;
+```
 
-## Real-world Examples & Use Cases
+Reference types include classes, interfaces, and arrays.
 
-- **Console Applications**: Simple calculators or text processors.
-- **Data Processing**: Reading files, parsing data, basic computations.
-- **Educational Tools**: Teaching programming concepts through small programs.
+## Operators
 
-## Code Examples
+- Arithmetic: `+`, `-`, `*`, `/`, `%`
+- Relational: `==`, `!=`, `<`, `>`, `<=`, `>=`
+- Logical: `&&`, `||`, `!`
+- Assignment: `=`, `+=`, etc.
 
-### Hello World
+## Control Structures
+
+### Conditional Statements
+
+```java
+if (condition) {
+    // code
+} else if (anotherCondition) {
+    // code
+} else {
+    // code
+}
+```
+
+### Loops
+
+```java
+for (int i = 0; i < 10; i++) {
+    System.out.println(i);
+}
+
+while (condition) {
+    // code
+}
+```
+
+## Methods
+
+Methods are defined within classes and can have parameters and return types.
+
+```java
+public int add(int a, int b) {
+    return a + b;
+}
+```
+
+# Real-world Examples & Use Cases
+
+- Building a simple banking application to manage account balances using variables and arithmetic operators.
+- Creating a temperature converter that uses conditional statements to handle different units.
+- Developing a basic calculator with methods for different operations.
+
+# Code Examples
+
+### Hello World Program
 
 ```java
 public class HelloWorld {
@@ -39,59 +85,26 @@ public class HelloWorld {
 }
 ```
 
-### Variables and Data Types
+### Simple Calculator
 
 ```java
-public class Variables {
+public class Calculator {
     public static void main(String[] args) {
-        int age = 25; // Primitive
-        String name = "John"; // Reference
-        double salary = 50000.0;
-        boolean isEmployed = true;
-        
-        System.out.println(name + " is " + age + " years old.");
+        int a = 10;
+        int b = 5;
+        System.out.println("Addition: " + (a + b));
+        System.out.println("Subtraction: " + (a - b));
     }
 }
 ```
 
-### Control Structures
+# References
 
-```java
-public class ControlStructures {
-    public static void main(String[] args) {
-        int number = 10;
-        
-        // If-else
-        if (number > 0) {
-            System.out.println("Positive");
-        } else {
-            System.out.println("Non-positive");
-        }
-        
-        // For loop
-        for (int i = 0; i < 5; i++) {
-            System.out.println("Count: " + i);
-        }
-        
-        // Switch
-        switch (number) {
-            case 10:
-                System.out.println("Ten");
-                break;
-            default:
-                System.out.println("Other");
-        }
-    }
-}
-```
+- [Oracle Java Tutorials - Language Basics](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html)
+- [GeeksforGeeks - Java Fundamentals](https://www.geeksforgeeks.org/java/)
 
-## References
+# Github-README Links & Related Topics
 
-- [Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/)
-- [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se21/html/index.html)
-
-## Github-README Links & Related Topics
-
-- [OOP Principles in Java](oop-principles-in-java/)
-- [JVM Internals & Class Loading](jvm-internals-class-loading/)
-- [Java Data Types](java-data-types/)
+- [oop-principles-in-java](../oop-principles-in-java/README.md)
+- [java-stream-api-and-functional-programming](../java-stream-api-and-functional-programming/README.md)
+- [collections-and-data-structures](../collections-and-data-structures/README.md)

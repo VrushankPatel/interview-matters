@@ -1,433 +1,404 @@
 # Interview Matters Knowledge Base
 
-A comprehensive collection of technical interview preparation materials covering Java, System Design, Algorithms, DevOps, and more.
+This repository contains a comprehensive collection of topics related to software engineering interviews, system design, Java programming, and more.
 
-## Table of Contents
+## Topics
 
-### Java Fundamentals
-- [Abstraction in Java](abstraction-in-java/)
-- [Encapsulation in Java](encapsulation-in-java/)
-- [Inheritance in Java](inheritance-in-java/)
-- [Java Annotations](java-annotations/)
-- [Java Annotations and Reflection](java-annotations-and-reflection/)
-- [Java Annotations Deep Dive](java-annotations-deep-dive/)
-- [Java Annotations Advanced](java-annotations-advanced/)
-- [Java Atomic Variables](java-atomic-variables/)
-- [Java BlockingQueue](java-blockingqueue/)
-- [Java Class Loaders](java-class-loaders/)
-- [Java Collections](java-collections/)
-- [Java Collections Deep Dive](java-collections-deep-dive/)
-- [Java CompletableFuture](java-completablefuture/)
-- [Java CompletableFuture Advanced](java-completablefuture-advanced/)
-- [Java ConcurrentHashMap](java-concurrenthashmap/)
-- [Java ConcurrentLinkedQueue](java-concurrentlinkedqueue/)
-- [Java Condition Interface](java-condition-interface/)
-- [Java CountDownLatch](java-countdownlatch/)
-- [Java CyclicBarrier](java-cyclicbarrier/)
-- [Java Data Types](java-data-types/)
-- [Java Date Time API](java-date-time-api/)
-- [Java Design Patterns](java-design-patterns/)
-- [Java Exception Handling](java-exception-handling/)
-- [Java Exchanger](java-exchanger/)
-- [Java ExecutorService](java-executorservice/)
-- [Java Foreign Function Memory API](java-foreign-function-memory-api/)
-- [Java ForkJoinPool](java-forkjoinpool/)
-- [Java Fundamentals](java-fundamentals/)
-- [Java 17 Features](java-17-features/)
-- [Java 18 Features](java-18-features/)
-- [Java 19 Features](java-19-features/)
-- [Java 20 Features](java-20-features/)
-- [Java 21 Features](java-21-features/)
-- [Java 22 Features](java-22-features/)
-- [Java 23 Features](java-23-features/)
-- [Java 24 Features](java-24-features/)
-- [Java 25 Features](java-25-features/)
-- [Java 26 Features](java-26-features/)
-- [Java 27 Features](java-27-features/)
-- [Java 28 Features](java-28-features/)
-- [Java Future and Callable](java-future-and-callable/)
-- [Java Generics](java-generics/)
-- [Java Generics Deep Dive](java-generics-deep-dive/)
-- [Advanced Java Generics](advanced-java-generics/)
-- [Java HTTP Client](java-http-client/)
-- [Java IO and NIO](java-io-and-nio/)
-- [Java Lambda Expressions](java-lambda-expressions/)
-- [Java LockSupport](java-locksupport/)
-- [Java Memory Management](java-memory-management/)
-- [Java Method References](java-method-references/)
-- [Java Microbenchmarking](java-microbenchmarking/)
-- [Java Modules](java-modules/)
-- [Java Multithreading and Concurrency](java-multithreading-and-concurrency/)
-- [Java Networking](java-networking/)
-- [Java OOP Principles](java-oop-principles/)
-- [Java Operators](java-operators/)
-- [Java Optional Class](java-optional-class/)
-- [Java Parallel Streams](java-parallel-streams/)
-- [Java Pattern Matching](java-pattern-matching/)
-- [Java Phaser](java-phaser/)
-- [Java Reactive Streams](java-reactive-streams/)
-- [Java ReadWriteLock](java-readwritelock/)
-- [Java Records](java-records/)
-- [Java Records and Sealed Classes](java-records-and-sealed-classes/)
-- [Java Records Patterns](java-records-patterns/)
-- [Java Reflection](java-reflection/)
-- [Java Reflection Deep Dive](java-reflection-deep-dive/)
-- [Java Scoped Values](java-scoped-values/)
-- [Java Sealed Classes](java-sealed-classes/)
-- [Java Security Basics](java-security-basics/)
-- [Java Security Best Practices](java-security-best-practices/)
-- [Java Semaphore](java-semaphore/)
-- [Java Stream API and Functional Programming](java-stream-api-and-functional-programming/)
-- [Java Stream API Functional Programming](java-stream-api-functional-programming/)
-- [Java Streams Advanced](java-streams-advanced/)
-- [Java Structured Concurrency](java-structured-concurrency/)
-- [Java Switch Expressions](java-switch-expressions/)
-- [Java Synchronized Blocks](java-synchronized-blocks/)
-- [Java Testing Advanced](java-testing-advanced/)
-- [Java Testing Frameworks](java-testing-frameworks/)
-- [Java Testing Frameworks JUnit Mockito](java-testing-frameworks-junit-mockito/)
-- [Java Text Blocks](java-text-blocks/)
-- [Java ThreadLocal](java-threadlocal/)
-- [Java Try With Resources](java-try-with-resources/)
-- [Java Var Keyword](java-var-keyword/)
-- [Java Vector API](java-vector-api/)
-- [Java Virtual Machine JVM Architecture](java-virtual-machine-jvm-architecture/)
-- [Java Virtual Threads](java-virtual-threads/)
-- [Java Volatile Keyword](java-volatile-keyword/)
-- [JVM Internals & Class Loading](jvm-internals-class-loading/)
-- [Java Wait Notify](java-wait-notify/)
-- [Java](java/)
-- [JVM Internals and Class Loading](jvm-internals-and-class-loading/)
-- [JVM Internals Class Loading](jvm-internals-class-loading/)
-- [JVM Memory Management](jvm-memory-management/)
-- [JVM Memory Model](jvm-memory-model/)
-- [JVM Performance Tuning](jvm-performance-tuning/)
-- [OOP Principles in Java](oop-principles-in-java/)
-- [Polymorphism in Java](polymorphism-in-java/)
-- [Reflection and Annotations](reflection-and-annotations/)
-- [Security Best Practices in Java](security-best-practices-in-java/)
-
-### System Design
-- [Airbnb System Design](airbnb-system-design/)
-- [Amazon E Commerce Platform](amazon-e-commerce-platform/)
-- [API Authentication Methods](api-authentication-methods/)
-- [API Design Best Practices](api-design-best-practices/)
-- [API Design Principles](api-design-principles/)
-- [API Gateway Design](api-gateway-design/)
-- [API Gateway Implementation](api-gateway-implementation/)
-- [API Gateway Implementations](api-gateway-implementations/)
-- [API Gateway Patterns](api-gateway-patterns/)
-- [API Gateway vs Load Balancer](api-gateway-vs-load-balancer/)
-- [API Gateway vs Service Mesh](api-gateway-vs-service-mesh/)
-- [API Rate Limiting](api-rate-limiting/)
-- [API Security Best Practices](api-security-best-practices/)
-- [API Versioning Strategies](api-versioning-strategies/)
-- [AWS Architecture Patterns](aws-architecture-patterns/)
-- [AWS Lambda and Serverless Computing](aws-lambda-and-serverless-computing/)
-- [Blockchain Basics](blockchain-basics/)
-- [Blockchain Consensus](blockchain-consensus/)
-- [Blockchain Consensus Mechanisms](blockchain-consensus-mechanisms/)
-- [Blockchain System Design](blockchain-system-design/)
-- [Blue Green Deployment](blue-green-deployment/)
-- [Caching](caching/)
-- [Canary Deployment](canary-deployment/)
-- [CAP Theorem and Distributed Systems](cap-theorem-and-distributed-systems/)
-- [CDN Architecture](cdn-architecture/)
-- [Chaos Engineering](chaos-engineering/)
-- [Chaos Engineering Practices](chaos-engineering-practices/)
-- [Circuit Breaker Pattern](circuit-breaker-pattern/)
-- [Circuit Breaker Pattern in Microservices](circuit-breaker-pattern-in-microservices/)
-- [Cloud Architecture Patterns](cloud-architecture-patterns/)
-- [Cloud Computing Basics](cloud-computing-basics/)
-- [Cloud Deployment Strategies](cloud-deployment-strategies/)
-- [CQRS Pattern](cqrs-pattern/)
-- [Data Consistency Models](data-consistency-models/)
-- [Database ACID Properties](database-acid-properties/)
-- [Database Connection Pooling](database-connection-pooling/)
-- [Database Design Patterns](database-design-patterns/)
-- [Database Design Principles](database-design-principles/)
-- [Database Indexing Best Practices](database-indexing-best-practices/)
-- [Database Indexing Strategies](database-indexing-strategies/)
-- [Database Indexing Techniques](database-indexing-techniques/)
-- [Database Migration Strategies](database-migration-strategies/)
-- [Database Migration Tools](database-migration-tools/)
-- [Database Normalization](database-normalization/)
-- [Database Normalization Techniques](database-normalization-techniques/)
-- [Database Performance Tuning](database-performance-tuning/)
-- [Database Replication Strategies](database-replication-strategies/)
-- [Database Sharding Strategies](database-sharding-strategies/)
-- [Design Patterns](design-patterns/)
-- [Design Patterns in Java](design-patterns-in-java/)
-- [Discord System Design](discord-system-design/)
-- [Distributed Caching with Redis](distributed-caching-with-redis/)
-- [Distributed Consensus](distributed-consensus/)
-- [Distributed Locks](distributed-locks/)
-- [Distributed Tracing](distributed-tracing/)
-- [Distributed Tracing Tools](distributed-tracing-tools/)
-- [Distributed Tracing with OpenTelemetry](distributed-tracing-with-opentelemetry/)
-- [Distributed Transactions](distributed-transactions/)
-- [Dropbox File Storage](dropbox-file-storage/)
-- [Edge Computing](edge-computing/)
-- [Elasticsearch for Search](elasticsearch-for-search/)
-- [Event Driven Architecture](event-driven-architecture/)
-- [Event Driven Architecture Patterns](event-driven-architecture-patterns/)
-- [Event Driven Microservices](event-driven-microservices/)
-- [Event Driven Systems](event-driven-systems/)
-- [Event Sourcing](event-sourcing/)
-- [Event Sourcing and CQRS](event-sourcing-and-cqrs/)
-- [Event Streaming with Apache Kafka](event-streaming-with-apache-kafka/)
-- [Eventual Consistency](eventual-consistency/)
-- [Eventual Consistency in Distributed Systems](eventual-consistency-in-distributed-systems/)
-- [Eventual Consistency Patterns](eventual-consistency-patterns/)
-- [Facebook News Feed](facebook-news-feed/)
-- [Facebook News Feed Design](facebook-news-feed-design/)
-- [Facebook News Feed System Design](facebook-news-feed-system-design/)
-- [Facebook System Design](facebook-system-design/)
-- [Fault Tolerance in Distributed Systems](fault-tolerance-in-distributed-systems/)
-- [Fault Tolerance Patterns](fault-tolerance-patterns/)
-- [Garbage Collection Algorithms](garbage-collection-algorithms/)
-- [GC Tuning](gc-tuning/)
-- [Geospatial Databases](geospatial-databases/)
-- [Google Maps System Design](google-maps-system-design/)
-- [Google Search Engine](google-search-engine/)
-- [Google Search Engine System Design](google-search-engine-system-design/)
-- [Graph Databases](graph-databases/)
-- [GraphQL API Design](graphql-api-design/)
-- [GraphQL APIs](graphql-apis/)
-- [GraphQL Subscriptions](graphql-subscriptions/)
-- [GraphQL vs REST](graphql-vs-rest/)
-- [GraphQL vs REST API Comparison](graphql-vs-rest-api-comparison/)
-- [GraphQL vs REST APIs](graphql-vs-rest-apis/)
-- [High Scalability Patterns](high-scalability-patterns/)
-- [HTTP Caching Headers](http-caching-headers/)
-- [Infrastructure as Code with Terraform](infrastructure-as-code-with-terraform/)
-- [Infrastructure Monitoring](infrastructure-monitoring/)
-- [Instagram System Design](instagram-system-design/)
-- [IoT Architecture](iot-architecture/)
-- [IoT System Design](iot-system-design/)
-- [Latency and Throughput](latency-and-throughput/)
-- [Latency and Throughput Zero to Hero](latency-and-throughput-zero-to-hero/)
-- [Latency Measurement](latency-measurement/)
-- [Latency Throughput Zero to Hero](latency-throughput-zero-to-hero/)
-- [Leader Election Algorithms](leader-election-algorithms/)
-- [LinkedIn Social Network](linkedin-social-network/)
-- [LLD HLD Basics](lld-hld-basics/)
-- [Load Balancing and Strategies](load-balancing-and-strategies/)
-- [Load Balancing Strategies](load-balancing-strategies/)
-- [Machine Learning in System Design](machine-learning-in-system-design/)
-- [Machine Learning Model Deployment](machine-learning-model-deployment/)
-- [Machine Learning Model Serving](machine-learning-model-serving/)
-- [Machine Learning System Design](machine-learning-system-design/)
-- [Matching Algorithms](matching-algorithms/)
-- [Memcached](memcached/)
-- [Memory Models](memory-models/)
-- [Message Queue Patterns](message-queue-patterns/)
-- [Message Queues and Brokers](message-queues-and-brokers/)
-- [Microservices Architecture](microservices-architecture/)
-- [Microservices Communication Patterns](microservices-communication-patterns/)
-- [Microservices Decomposition](microservices-decomposition/)
-- [Microservices Design Patterns](microservices-design-patterns/)
-- [Microservices Security](microservices-security/)
-- [Microservices vs Monoliths](microservices-vs-monoliths/)
-- [Microservices with Spring Boot](microservices-with-spring-boot/)
-- [Monitoring and Logging](monitoring-and-logging/)
-- [Monitoring Dashboards](monitoring-dashboards/)
-- [Monitoring Logging](monitoring-logging/)
-- [Monitoring Tools](monitoring-tools/)
-- [Monitoring with Prometheus and Grafana](monitoring-with-prometheus-and-grafana/)
-- [Multithreading and Concurrency in Java](multithreading-and-concurrency-in-java/)
-- [Multithreading Concurrency in Java](multithreading-concurrency-in-java/)
-- [Netflix System Design](netflix-system-design/)
-- [Netflix Video Streaming](netflix-video-streaming/)
-- [Netflix Video Streaming Architecture](netflix-video-streaming-architecture/)
-- [Netflix Video Streaming System Design](netflix-video-streaming-system-design/)
-- [OAuth 2 0 Implementation](oauth-2-0-implementation/)
-- [OAuth and JWT](oauth-and-jwt/)
-- [OAuth and JWT Authentication](oauth-and-jwt-authentication/)
-- [Paxos Algorithm](paxos-algorithm/)
-- [Payment Systems](payment-systems/)
-- [Performance Optimization Techniques](performance-optimization-techniques/)
-- [Performance Tuning in Java Applications](performance-tuning-in-java-applications/)
-- [Popular System Designs](popular-system-designs/)
-- [Popular System Designs LLD and HLD](popular-system-designs-lld-and-hld/)
-- [Popular System Designs LLD HLD](popular-system-designs-lld-hld/)
-- [Popular Systems Design Examples](popular-systems-design-examples/)
-- [Popular Systems Design LLD and HLD](popular-systems-design-lld-and-hld/)
-- [Popular Systems Design LLD HLD](popular-systems-design-lld-hld/)
-- [Popular Systems Design](popular-systems-design/)
-- [Probabilistic Algorithms](probabilistic-algorithms/)
-- [Probabilistic Data Structures](probabilistic-data-structures/)
-- [Proxy Forward and Reverse](proxy-forward-and-reverse/)
-- [Proxy Forward Reverse](proxy-forward-reverse/)
-- [RabbitMQ Message Queue](rabbitmq-message-queue/)
-- [Raft and Leader Election](raft-and-leader-election/)
-- [Raft Consensus](raft-consensus/)
-- [Rate Limiting](rate-limiting/)
-- [Reactive Programming with RxJava](reactive-programming-with-rxjava/)
-- [Real Time Analytics](real-time-analytics/)
-- [Real Time Feeds](real-time-feeds/)
-- [Real Time Systems](real-time-systems/)
-- [Recommendation Systems](recommendation-systems/)
-- [Redis Caching](redis-caching/)
-- [Replication vs Sharding vs Partitioning](replication-vs-sharding-vs-partitioning/)
-- [RESTful API Design](restful-api-design/)
-- [RESTful APIs](restful-apis/)
-- [Saga Pattern](saga-pattern/)
-- [Scalability Patterns](scalability-patterns/)
-- [Security Best Practices in Microservices](security-best-practices-in-microservices/)
-- [Security in Distributed Systems](security-in-distributed-systems/)
-- [Security in System Design](security-in-system-design/)
-- [Serverless Architecture](serverless-architecture/)
-- [Serverless Architecture Patterns](serverless-architecture-patterns/)
-- [Serverless Computing](serverless-computing/)
-- [Serverless Function Optimization](serverless-function-optimization/)
-- [Serverless Function Patterns](serverless-function-patterns/)
-- [Serverless Functions](serverless-functions/)
-- [Service Discovery](service-discovery/)
-- [Service Mesh Architecture](service-mesh-architecture/)
-- [Service Mesh Patterns](service-mesh-patterns/)
-- [Service Mesh with Istio](service-mesh-with-istio/)
-- [Slack Messaging System](slack-messaging-system/)
-- [Slack Messaging System Design](slack-messaging-system-design/)
-- [Slack System Design](slack-system-design/)
-- [Spotify System Design](spotify-system-design/)
-- [Spring Boot Microservices](spring-boot-microservices/)
-- [Spring Cloud Config](spring-cloud-config/)
-- [Spring Framework](spring-framework/)
-- [System Design](system-design/)
-- [System Design Basics](system-design-basics/)
-- [System Design Interview Tips](system-design-interview-tips/)
-- [Three Phase Commit](three-phase-commit/)
-- [TikTok System Design](tiktok-system-design/)
-- [Time Series Databases](time-series-databases/)
-- [Twitter System Design](twitter-system-design/)
-- [Two Phase Commit](two-phase-commit/)
-- [Uber Ride Sharing System](uber-ride-sharing-system/)
-- [Uber Ride Sharing System Design](uber-ride-sharing-system-design/)
-- [Uber System Design](uber-system-design/)
-- [URL Shortener](url-shortener/)
-- [URL Shortener System Design](url-shortener-system-design/)
-- [User Authentication](user-authentication/)
-- [Vector Databases](vector-databases/)
-- [WebSocket Protocols](websocket-protocols/)
-- [WebSocket Scaling](websocket-scaling/)
-- [WebSockets for Real Time Apps](websockets-for-real-time-apps/)
-- [WebSockets vs Server Sent Events](websockets-vs-server-sent-events/)
-- [WhatsApp Messaging System](whatsapp-messaging-system/)
-- [WhatsApp Messaging System Design](whatsapp-messaging-system-design/)
-- [WhatsApp System Design](whatsapp-system-design/)
-- [YouTube System Design](youtube-system-design/)
-- [ZooKeeper for Coordination](zookeeper-for-coordination/)
-- [Zoom Video Conferencing](zoom-video-conferencing/)
-- [Popular Systems Design Examples](popular-systems-design-examples/)
-
-### Algorithms and Data Structures
-- [Algorithms](algorithms/)
-- [Backtracking](backtracking/)
-- [Collections and Data Structures](collections-and-data-structures/)
-- [Collections Data Structures](collections-data-structures/)
-- [Computational Geometry](computational-geometry/)
-- [Concurrency and Parallelism](concurrency-and-parallelism/)
-- [Concurrency Parallelism](concurrency-parallelism/)
-- [Concurrency Patterns in Java](concurrency-patterns-in-java/)
-- [Concurrent Collections](concurrent-collections/)
-- [Concurrent Programming Patterns](concurrent-programming-patterns/)
-- [Divide and Conquer](divide-and-conquer/)
-- [Divide and Conquer Algorithms](divide-and-conquer-algorithms/)
-- [Dynamic Programming](dynamic-programming/)
-- [Graph Algorithms](graph-algorithms/)
-- [Probabilistic Algorithms](probabilistic-algorithms/)
-- [Probabilistic Data Structures](probabilistic-data-structures/)
-
-### DevOps and Infrastructure
-- [Ansible Configuration Management](ansible-configuration-management/)
-- [Apache Flink](apache-flink/)
-- [Apache Kafka](apache-kafka/)
-- [Apache Kafka Streams](apache-kafka-streams/)
-- [Async Logging](async-logging/)
-- [Build Automation](build-automation/)
-- [Byzantine Fault Tolerance](byzantine-fault-tolerance/)
-- [CI CD Best Practices](ci-cd-best-practices/)
-- [CI CD Pipelines](ci-cd-pipelines/)
-- [CI CD with Github Actions](ci-cd-with-github-actions/)
-- [CI CD with Jenkins](ci-cd-with-jenkins/)
-- [Class Loading Mechanism](class-loading-mechanism/)
-- [Configuration Management](configuration-management/)
-- [Consensus Algorithms](consensus-algorithms/)
-- [Consensus Algorithms Overview](consensus-algorithms-overview/)
-- [Container Orchestration](container-orchestration/)
-- [Container Orchestration Patterns](container-orchestration-patterns/)
-- [Container Orchestration with Kubernetes](container-orchestration-with-kubernetes/)
-- [Container Security](container-security/)
-- [DevOps and Infrastructure as Code](devops-and-infrastructure-as-code/)
-- [DevOps Infrastructure as Code](devops-infrastructure-as-code/)
-- [Docker Best Practices](docker-best-practices/)
-- [Docker Compose Best Practices](docker-compose-best-practices/)
-- [Docker Container Orchestration](docker-container-orchestration/)
-- [Docker Containerization](docker-containerization/)
-- [Docker Kubernetes Integration](docker-kubernetes-integration/)
-- [Docker Networking](docker-networking/)
-- [Docker Security](docker-security/)
-- [Docker Security Best Practices](docker-security-best-practices/)
-- [Docker Swarm Orchestration](docker-swarm-orchestration/)
-- [Docker Volumes and Storage](docker-volumes-and-storage/)
-- [Eureka Service Discovery](eureka-service-discovery/)
-- [File IO NIO](file-io-nio/)
-- [Grafana Dashboards](grafana-dashboards/)
-- [Helm Charts for Kubernetes](helm-charts-for-kubernetes/)
-- [Helm for Kubernetes](helm-for-kubernetes/)
-- [Infrastructure as Code with Terraform](infrastructure-as-code-with-terraform/)
-- [Infrastructure Monitoring](infrastructure-monitoring/)
-- [Istio Service Mesh](istio-service-mesh/)
-- [JPA and Hibernate](jpa-and-hibernate/)
-- [Kafka Internals](kafka-internals/)
-- [Kibana](kibana/)
-- [Kubernetes Advanced Concepts](kubernetes-advanced-concepts/)
-- [Kubernetes Basics](kubernetes-basics/)
-- [Kubernetes Ingress and Load Balancing](kubernetes-ingress-and-load-balancing/)
-- [Kubernetes Networking](kubernetes-networking/)
-- [Kubernetes Networking and Services](kubernetes-networking-and-services/)
-- [Kubernetes Operators](kubernetes-operators/)
-- [Kubernetes Orchestration](kubernetes-orchestration/)
-- [Kubernetes Security](kubernetes-security/)
-- [Logging Frameworks](logging-frameworks/)
-- [Logging with ELK Stack](logging-with-elk-stack/)
-- [Monitoring and Logging](monitoring-and-logging/)
-- [Monitoring Dashboards](monitoring-dashboards/)
-- [Monitoring Logging](monitoring-logging/)
-- [Monitoring Tools](monitoring-tools/)
-- [Monitoring with Prometheus and Grafana](monitoring-with-prometheus-and-grafana/)
-- [Networking](networking/)
-- [Networking Sockets](networking-sockets/)
-- [Prometheus Monitoring](prometheus-monitoring/)
-- [Profiling Tools](profiling-tools/)
-- [RabbitMQ Message Queue](rabbitmq-message-queue/)
-- [Service Discovery](service-discovery/)
-- [Spring Boot Actuator](spring-boot-actuator/)
-- [Spring Boot Microservices](spring-boot-microservices/)
-- [Spring Cloud Config](spring-cloud-config/)
-- [Spring Framework](spring-framework/)
-- [ZooKeeper for Coordination](zookeeper-for-coordination/)
-
-### Interview Preparation
-- [Behavioral Interview Preparation](behavioral-interview-preparation/)
-- [Behavioral Interview Questions](behavioral-interview-questions/)
-- [Coding Interview Strategies](coding-interview-strategies/)
-- [Common Interview Mistakes](common-interview-mistakes/)
-- [Interview Cases](interview-cases/)
-- [Interview Matters](interview-matters/)
-- [Mock Interview Preparation](mock-interview-preparation/)
-- [Negotiation Strategies for Offers](negotiation-strategies-for-offers/)
-- [Post Interview Follow Up](post-interview-follow-up/)
-- [Resume Optimization for Tech Jobs](resume-optimization-for-tech-jobs/)
-- [STAR Method for Interviews](star-method-for-interviews/)
-- [System Design Interview Tips](system-design-interview-tips/)
-- [Technical Interview Formats](technical-interview-formats/)
-
-### Other Topics
-- [Acid vs Base Tradeoffs](acid-vs-base-tradeoffs/)
-- [Hibernate ORM](hibernate-orm/)
-- [Java](java/)
-- [Kotlin for Java Developers](kotlin-for-java-developers/)
-- [OS](os/)
-- [Time in Force Variations](time-in-force-variations/)
+- [****](/)abstraction-in-java
+- [****](/)acid-vs-base-tradeoffs
+- [****](/)advanced-java-generics
+- [****](/)airbnb-system-design
+- [****](/)algorithms
+- [****](/)amazon-e-commerce-platform
+- [****](/)ansible-configuration-management
+- [****](/)apache-flink
+- [****](/)apache-kafka-streams
+- [****](/)apache-kafka
+- [****](/)api-authentication-methods
+- [****](/)api-design-best-practices
+- [****](/)api-design-principles
+- [****](/)api-gateway-design
+- [****](/)api-gateway-implementation
+- [****](/)api-gateway-implementations
+- [****](/)api-gateway-patterns
+- [****](/)api-gateway-vs-load-balancer
+- [****](/)api-gateway-vs-service-mesh
+- [****](/)api-rate-limiting
+- [****](/)api-security-best-practices
+- [****](/)api-versioning-strategies
+- [****](/)async-logging
+- [****](/)aws-architecture-patterns
+- [****](/)aws-lambda-and-serverless-computing
+- [****](/)backtracking
+- [****](/)behavioral-interview-preparation
+- [****](/)behavioral-interview-questions
+- [****](/)blockchain-basics
+- [****](/)blockchain-consensus-mechanisms
+- [****](/)blockchain-consensus
+- [****](/)blockchain-system-design
+- [****](/)blue-green-deployment
+- [****](/)build-automation
+- [****](/)byzantine-fault-tolerance
+- [****](/)caching
+- [****](/)canary-deployment
+- [****](/)cap-theorem-and-distributed-systems
+- [****](/)cdn-architecture
+- [****](/)chaos-engineering-practices
+- [****](/)chaos-engineering
+- [****](/)ci-cd-best-practices
+- [****](/)ci-cd-pipelines
+- [****](/)ci-cd-with-github-actions
+- [****](/)ci-cd-with-jenkins
+- [****](/)circuit-breaker-pattern-in-microservices
+- [****](/)circuit-breaker-pattern
+- [****](/)class-loading-mechanism
+- [****](/)cloud-architecture-patterns
+- [****](/)cloud-computing-basics
+- [****](/)cloud-deployment-strategies
+- [****](/)coding-interview-strategies
+- [****](/)collections-and-data-structures
+- [****](/)collections-data-structures
+- [****](/)common-interview-mistakes
+- [****](/)computational-geometry
+- [****](/)concurrency-and-parallelism
+- [****](/)concurrency-parallelism
+- [****](/)concurrency-patterns-in-java
+- [****](/)concurrent-collections
+- [****](/)concurrent-programming-patterns
+- [****](/)configuration-management
+- [****](/)consensus-algorithms-overview
+- [****](/)consensus-algorithms
+- [****](/)container-orchestration-patterns
+- [****](/)container-orchestration-with-kubernetes
+- [****](/)container-orchestration
+- [****](/)container-security
+- [****](/)cqrs-pattern
+- [****](/)data-consistency-models
+- [****](/)database-acid-properties
+- [****](/)database-connection-pooling
+- [****](/)database-design-patterns
+- [****](/)database-design-principles
+- [****](/)database-indexing-best-practices
+- [****](/)database-indexing-strategies
+- [****](/)database-indexing-techniques
+- [****](/)database-migration-strategies
+- [****](/)database-migration-tools
+- [****](/)database-normalization-techniques
+- [****](/)database-normalization
+- [****](/)database-performance-tuning
+- [****](/)database-replication-strategies
+- [****](/)database-sharding-strategies
+- [****](/)design-patterns-in-java
+- [****](/)design-patterns
+- [****](/)devops-and-infrastructure-as-code
+- [****](/)devops-infrastructure-as-code
+- [****](/)discord-system-design
+- [****](/)distributed-caching-with-redis
+- [****](/)distributed-consensus
+- [****](/)distributed-locks
+- [****](/)distributed-tracing-tools
+- [****](/)distributed-tracing-with-opentelemetry
+- [****](/)distributed-tracing
+- [****](/)distributed-transactions
+- [****](/)divide-and-conquer-algorithms
+- [****](/)divide-and-conquer
+- [****](/)docker-best-practices
+- [****](/)docker-compose-best-practices
+- [****](/)docker-container-orchestration
+- [****](/)docker-containerization
+- [****](/)docker-kubernetes-integration
+- [****](/)docker-networking
+- [****](/)docker-security-best-practices
+- [****](/)docker-security
+- [****](/)docker-swarm-orchestration
+- [****](/)docker-volumes-and-storage
+- [****](/)dropbox-file-storage
+- [****](/)dynamic-programming
+- [****](/)edge-computing
+- [****](/)elasticsearch-for-search
+- [****](/)encapsulation-in-java
+- [****](/)eureka-service-discovery
+- [****](/)event-driven-architecture-patterns
+- [****](/)event-driven-architecture
+- [****](/)event-driven-microservices
+- [****](/)event-driven-systems
+- [****](/)event-sourcing-and-cqrs
+- [****](/)event-sourcing
+- [****](/)event-streaming-with-apache-kafka
+- [****](/)eventual-consistency-in-distributed-systems
+- [****](/)eventual-consistency-patterns
+- [****](/)eventual-consistency
+- [****](/)facebook-news-feed-design
+- [****](/)facebook-news-feed-system-design
+- [****](/)facebook-news-feed
+- [****](/)facebook-system-design
+- [****](/)fault-tolerance-in-distributed-systems
+- [****](/)fault-tolerance-patterns
+- [****](/)file-io-nio
+- [****](/)garbage-collection-algorithms
+- [****](/)gc-tuning
+- [****](/)geospatial-databases
+- [****](/)google-maps-system-design
+- [****](/)google-search-engine-system-design
+- [****](/)google-search-engine
+- [****](/)grafana-dashboards
+- [****](/)graph-algorithms
+- [****](/)graph-databases
+- [****](/)graphql-api-design
+- [****](/)graphql-apis
+- [****](/)graphql-subscriptions
+- [****](/)graphql-vs-rest-api-comparison
+- [****](/)graphql-vs-rest-apis
+- [****](/)graphql-vs-rest
+- [****](/)helm-charts-for-kubernetes
+- [****](/)helm-for-kubernetes
+- [****](/)hibernate-orm
+- [****](/)high-scalability-patterns
+- [****](/)http-caching-headers
+- [****](/)infrastructure-as-code-with-terraform
+- [****](/)infrastructure-monitoring
+- [****](/)inheritance-in-java
+- [****](/)instagram-system-design
+- [****](/)interview-cases
+- [****](/)interview-matters
+- [****](/)iot-architecture
+- [****](/)iot-system-design
+- [****](/)istio-service-mesh
+- [****](/)java-17-features
+- [****](/)java-18-features
+- [****](/)java-19-features
+- [****](/)java-20-features
+- [****](/)java-21-features
+- [****](/)java-22-features
+- [****](/)java-23-features
+- [****](/)java-24-features
+- [****](/)java-25-features
+- [****](/)java-26-features
+- [****](/)java-27-features
+- [****](/)java-28-features
+- [****](/)java-annotations-advanced
+- [****](/)java-annotations-and-reflection
+- [****](/)java-annotations-deep-dive
+- [****](/)java-annotations
+- [****](/)java-atomic-variables
+- [****](/)java-blockingqueue
+- [****](/)java-class-loaders
+- [****](/)java-collections-deep-dive
+- [****](/)java-collections
+- [****](/)java-completablefuture-advanced
+- [****](/)java-completablefuture
+- [****](/)java-concurrenthashmap
+- [****](/)java-concurrentlinkedqueue
+- [****](/)java-condition-interface
+- [****](/)java-countdownlatch
+- [****](/)java-cyclicbarrier
+- [****](/)java-data-types
+- [****](/)java-date-time-api
+- [****](/)java-design-patterns
+- [****](/)java-exception-handling
+- [****](/)java-exchanger
+- [****](/)java-executorservice
+- [****](/)java-foreign-function-memory-api
+- [****](/)java-forkjoinpool
+- [****](/)java-fundamentals
+- [****](/)java-future-and-callable
+- [****](/)java-generics-deep-dive
+- [****](/)java-generics
+- [****](/)java-http-client
+- [****](/)java-io-and-nio
+- [****](/)java-lambda-expressions
+- [****](/)java-locksupport
+- [****](/)java-memory-management
+- [****](/)java-method-references
+- [****](/)java-microbenchmarking
+- [****](/)java-modules
+- [****](/)java-multithreading-and-concurrency
+- [****](/)java-networking
+- [****](/)java-oop-principles
+- [****](/)java-operators
+- [****](/)java-optional-class
+- [****](/)java-parallel-streams
+- [****](/)java-pattern-matching
+- [****](/)java-phaser
+- [****](/)java-reactive-streams
+- [****](/)java-readwritelock
+- [****](/)java-records-and-sealed-classes
+- [****](/)java-records-patterns
+- [****](/)java-records
+- [****](/)java-reentrantlock
+- [****](/)java-reflection-deep-dive
+- [****](/)java-reflection
+- [****](/)java-scoped-values
+- [****](/)java-sealed-classes
+- [****](/)java-security-basics
+- [****](/)java-security-best-practices
+- [****](/)java-semaphore
+- [****](/)java-stream-api-and-functional-programming
+- [****](/)java-stream-api-functional-programming
+- [****](/)java-streams-advanced
+- [****](/)java-structured-concurrency
+- [****](/)java-switch-expressions
+- [****](/)java-synchronized-blocks
+- [****](/)java-testing-advanced
+- [****](/)java-testing-frameworks-junit-mockito
+- [****](/)java-testing-frameworks
+- [****](/)java-text-blocks
+- [****](/)java-threadlocal
+- [****](/)java-try-with-resources
+- [****](/)java-var-keyword
+- [****](/)java-vector-api
+- [****](/)java-virtual-machine-jvm-architecture
+- [****](/)java-virtual-threads
+- [****](/)java-volatile-keyword
+- [****](/)java-wait-notify
+- [****](/)java
+- [****](/)jpa-and-hibernate
+- [****](/)jvm-internals-and-class-loading
+- [****](/)jvm-internals-class-loading
+- [****](/)jvm-memory-management
+- [****](/)jvm-memory-model
+- [****](/)jvm-performance-tuning
+- [****](/)kafka-internals
+- [****](/)kibana
+- [****](/)kotlin-for-java-developers
+- [****](/)kubernetes-advanced-concepts
+- [****](/)kubernetes-basics
+- [****](/)kubernetes-ingress-and-load-balancing
+- [****](/)kubernetes-networking-and-services
+- [****](/)kubernetes-networking
+- [****](/)kubernetes-operators
+- [****](/)kubernetes-orchestration
+- [****](/)kubernetes-security
+- [****](/)latency-and-throughput-zero-to-hero
+- [****](/)latency-and-throughput
+- [****](/)latency-measurement
+- [****](/)latency-throughput-zero-to-hero
+- [****](/)leader-election-algorithms
+- [****](/)linkedin-social-network
+- [****](/)lld-hld-basics
+- [****](/)load-balancing-and-strategies
+- [****](/)load-balancing-strategies
+- [****](/)logging-frameworks
+- [****](/)logging-with-elk-stack
+- [****](/)machine-learning-in-system-design
+- [****](/)machine-learning-model-deployment
+- [****](/)machine-learning-model-serving
+- [****](/)machine-learning-system-design
+- [****](/)matching-algorithms
+- [****](/)memcached
+- [****](/)memory-models
+- [****](/)message-queue-patterns
+- [****](/)message-queues-and-brokers
+- [****](/)microservices-architecture
+- [****](/)microservices-communication-patterns
+- [****](/)microservices-decomposition
+- [****](/)microservices-design-patterns
+- [****](/)microservices-security
+- [****](/)microservices-vs-monoliths
+- [****](/)microservices-with-spring-boot
+- [****](/)mock-interview-preparation
+- [****](/)monitoring-and-logging
+- [****](/)monitoring-dashboards
+- [****](/)monitoring-logging
+- [****](/)monitoring-tools
+- [****](/)monitoring-with-prometheus-and-grafana
+- [****](/)multithreading-and-concurrency-in-java
+- [****](/)multithreading-concurrency-in-java
+- [****](/)negotiation-strategies-for-offers
+- [****](/)netflix-system-design
+- [****](/)netflix-video-streaming-architecture
+- [****](/)netflix-video-streaming-system-design
+- [****](/)netflix-video-streaming
+- [****](/)networking-sockets
+- [****](/)networking
+- [****](/)oauth-2-0-implementation
+- [****](/)oauth-and-jwt-authentication
+- [****](/)oauth-and-jwt
+- [****](/)oop-principles-in-java
+- [****](/)os
+- [****](/)paxos-algorithm
+- [****](/)payment-systems
+- [****](/)performance-optimization-techniques
+- [****](/)performance-tuning-in-java-applications
+- [****](/)polymorphism-in-java
+- [****](/)popular-system-designs-lld-and-hld
+- [****](/)popular-system-designs-lld-hld
+- [****](/)popular-system-designs
+- [****](/)popular-systems-design-examples
+- [****](/)popular-systems-design-lld-and-hld
+- [****](/)popular-systems-design-lld-hld
+- [****](/)popular-systems-design
+- [****](/)post-interview-follow-up
+- [****](/)probabilistic-algorithms
+- [****](/)probabilistic-data-structures
+- [****](/)profiling-tools
+- [****](/)prometheus-monitoring
+- [****](/)proxy-forward-and-reverse
+- [****](/)proxy-forward-reverse
+- [****](/)rabbitmq-message-queue
+- [****](/)raft-and-leader-election
+- [****](/)raft-consensus
+- [****](/)rate-limiting
+- [****](/)reactive-programming-with-rxjava
+- [****](/)real-time-analytics
+- [****](/)real-time-feeds
+- [****](/)real-time-systems
+- [****](/)recommendation-systems
+- [****](/)redis-caching
+- [****](/)reflection-and-annotations
+- [****](/)replication-vs-sharding-vs-partitioning
+- [****](/)restful-api-design
+- [****](/)restful-apis
+- [****](/)resume-optimization-for-tech-jobs
+- [****](/)saga-pattern
+- [****](/)scalability-patterns
+- [****](/)security-best-practices-in-java
+- [****](/)security-best-practices-in-microservices
+- [****](/)security-in-distributed-systems
+- [****](/)security-in-system-design
+- [****](/)serverless-architecture-patterns
+- [****](/)serverless-architecture
+- [****](/)serverless-computing
+- [****](/)serverless-function-optimization
+- [****](/)serverless-function-patterns
+- [****](/)serverless-functions
+- [****](/)service-discovery
+- [****](/)service-mesh-architecture
+- [****](/)service-mesh-patterns
+- [****](/)service-mesh-with-istio
+- [****](/)slack-messaging-system-design
+- [****](/)slack-messaging-system
+- [****](/)slack-system-design
+- [****](/)spotify-system-design
+- [****](/)spring-boot-actuator
+- [****](/)spring-boot-microservices
+- [****](/)spring-cloud-config
+- [****](/)spring-framework
+- [****](/)star-method-for-interviews
+- [****](/)system-design-basics
+- [****](/)system-design-interview-tips
+- [****](/)system-design
+- [****](/)technical-interview-formats
+- [****](/)three-phase-commit
+- [****](/)tiktok-system-design
+- [****](/)time-in-force-variations
+- [****](/)time-series-databases
+- [****](/)twitter-system-design
+- [****](/)two-phase-commit
+- [****](/)uber-ride-sharing-system-design
+- [****](/)uber-ride-sharing-system
+- [****](/)uber-system-design
+- [****](/)url-shortener-system-design
+- [****](/)url-shortener
+- [****](/)user-authentication
+- [****](/)vector-databases
+- [****](/)websocket-protocols
+- [****](/)websocket-scaling
+- [****](/)websockets-for-real-time-apps
+- [****](/)websockets-vs-server-sent-events
+- [****](/)whatsapp-messaging-system-design
+- [****](/)whatsapp-messaging-system
+- [****](/)whatsapp-system-design
+- [****](/)youtube-system-design
+- [****](/)zookeeper-for-coordination
+- [****](/)zoom-video-conferencing
