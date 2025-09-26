@@ -1,156 +1,157 @@
 ---
 title: Load Balancing and Strategies
-aliases: [load balancer, distribution strategies, load distribution]
-tags: [#system-design, #scalability, #networking]
+aliases: [Load Balancer Strategies, Load Distribution Techniques]
+tags: [system-design, load-balancing, scalability, networking]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
 ## Overview
 
-Load balancing is the process of distributing network traffic across multiple servers to optimize resource utilization, maximize throughput, minimize response time, and avoid overload of any single server. It ensures high availability, fault tolerance, and scalability in distributed systems.
+Load balancing is a technique used in system design to distribute incoming network traffic across multiple servers or resources. This ensures optimal resource utilization, prevents any single server from becoming a bottleneck, and improves overall system availability, scalability, and fault tolerance. Load balancers act as intermediaries between clients and servers, routing requests based on predefined algorithms and strategies.
 
 ## Detailed Explanation
 
-Load balancers act as intermediaries between clients and server pools, routing requests based on predefined algorithms. They can operate at different layers of the OSI model (L4 for transport, L7 for application).
+### Types of Load Balancers
+
+- **Hardware Load Balancers**: Dedicated physical devices (e.g., F5 BIG-IP) that handle high-volume traffic with built-in security features.
+- **Software Load Balancers**: Applications running on general-purpose servers (e.g., NGINX, HAProxy) or cloud services (e.g., AWS ELB).
 
 ### Load Balancing Algorithms
 
-- **Round Robin**: Distributes requests sequentially across servers. Simple but doesn't consider server load.
-- **Least Connections**: Routes to the server with the fewest active connections. Better for variable request processing times.
-- **IP Hash**: Uses client IP to determine server assignment. Ensures session persistence.
-- **Weighted Round Robin**: Assigns weights to servers based on capacity.
-- **Least Response Time**: Routes to the server with the fastest response time.
-- **Random**: Randomly selects a server, useful for simple implementations.
+Load balancers use algorithms to decide how to distribute traffic:
 
-### Types of Load Balancers
+| Algorithm | Description | Pros | Cons |
+|-----------|-------------|------|------|
+| Round-Robin | Cycles through servers sequentially | Simple, even distribution | Ignores server load |
+| Least Connections | Routes to server with fewest active connections | Balances load dynamically | Assumes equal server capacity |
+| IP Hash | Uses client IP to consistently route to same server | Session persistence | Uneven distribution if IPs cluster |
+| Weighted Round-Robin | Assigns weights based on server capacity | Prioritizes powerful servers | Requires manual tuning |
+| Least Response Time | Routes to server with fastest response | Optimizes performance | Computationally intensive |
 
-- **Hardware Load Balancers**: Dedicated devices like F5 BIG-IP.
-- **Software Load Balancers**: Nginx, HAProxy, Apache mod_proxy.
-- **Cloud Load Balancers**: AWS ELB, Google Cloud Load Balancing.
+### Load Balancing Strategies
+
+- **Layer 4 (Transport Layer)**: Routes based on IP and port (e.g., TCP/UDP). Fast but less intelligent.
+- **Layer 7 (Application Layer)**: Routes based on HTTP headers, cookies, or content (e.g., URL paths). Enables advanced features like content-based routing.
+- **DNS Load Balancing**: Distributes traffic via DNS resolution (e.g., round-robin DNS).
+- **Global Server Load Balancing (GSLB)**: Routes across geographically distributed servers for low latency.
+
+### Architecture Diagram
 
 ```mermaid
 graph TD
-    C[Client] --> LB[Load Balancer]
+    Client[Client] --> LB[Load Balancer]
     LB --> S1[Server 1]
     LB --> S2[Server 2]
     LB --> S3[Server 3]
-    LB --> H[Health Check]
-    H --> LB
+    S1 --> DB[(Database)]
+    S2 --> DB
+    S3 --> DB
 ```
 
 ## Real-world Examples & Use Cases
 
-- **Web Applications**: Distributing HTTP requests across web server clusters.
-- **Microservices**: Routing API calls to service instances in a Kubernetes cluster.
+- **Web Applications**: Distributing HTTP requests across web servers (e.g., Netflix uses load balancing for video streaming).
+- **Microservices**: Routing API calls in containerized environments (e.g., Kubernetes Ingress).
+- **CDNs**: Balancing traffic across edge servers (e.g., Cloudflare).
 - **Databases**: Read replicas load balancing for query distribution.
-- **CDNs**: Global traffic distribution to edge servers.
+- **Gaming**: Handling millions of concurrent users (e.g., Roblox).
 
 ## Code Examples
 
-### Nginx Load Balancing Configuration
+### NGINX Configuration for Round-Robin Load Balancing
 
 ```nginx
 upstream backend {
-    least_conn;  # Use least connections algorithm
-    server backend1.example.com:8080 weight=3;
-    server backend2.example.com:8080 weight=2;
-    server backend3.example.com:8080 weight=1;
-    server backend4.example.com:8080 backup;  # Backup server
+    server backend1.example.com;
+    server backend2.example.com;
+    server backend3.example.com;
 }
 
 server {
     listen 80;
     location / {
         proxy_pass http://backend;
-        proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
-        proxy_connect_timeout 2s;
-        proxy_send_timeout 10s;
-        proxy_read_timeout 10s;
     }
 }
 ```
 
-### HAProxy Configuration
+### Simple Python Load Balancer (Round-Robin)
 
-```haproxy
-frontend http_front
-    bind *:80
-    default_backend http_back
+```python
+import socket
+import select
 
-backend http_back
-    balance roundrobin
-    option httpchk GET /health
-    http-check expect status 200
-    server web1 192.168.1.10:80 check weight 1
-    server web2 192.168.1.11:80 check weight 2
-    server web3 192.168.1.12:80 check weight 1
+servers = [('127.0.0.1', 8081), ('127.0.0.1', 8082)]
+current = 0
+
+def handle_client(client_socket):
+    global current
+    server = servers[current % len(servers)]
+    current += 1
+    # Forward request to server (simplified)
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.connect(server)
+    # ... proxy logic ...
 ```
 
-### Simple Load Balancer in Go
+### AWS ELB Configuration (CLI Example)
 
-```go
-package main
+```bash
+aws elb create-load-balancer --load-balancer-name my-load-balancer \
+    --listeners Protocol=HTTP,LoadBalancerPort=80,InstancePort=80 \
+    --availability-zones us-east-1a
+```
 
-import (
-    "net/http"
-    "net/http/httputil"
-    "net/url"
-    "sync/atomic"
-)
+## References
 
-type LoadBalancer struct {
-    backends []*url.URL
-    counter  int64
-}
+- [Wikipedia: Load Balancing (Computing)](https://en.wikipedia.org/wiki/Load_balancing_(computing))
+- [AWS: What is Load Balancing?](https://aws.amazon.com/what-is/load-balancing/)
+- [NGINX: Using nginx as HTTP load balancer](https://nginx.org/en/docs/http/load_balancing.html)
 
-func (lb *LoadBalancer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-    backend := lb.backends[atomic.AddInt64(&lb.counter, 1)%int64(len(lb.backends))]
-    proxy := httputil.NewSingleHostReverseProxy(backend)
-    proxy.ServeHTTP(w, r)
-}
+## Github-README Links & Related Topics
 
-func main() {
-    backends := []*url.URL{
-        {Scheme: "http", Host: "localhost:8081"},
-        {Scheme: "http", Host: "localhost:8082"},
-    }
-    lb := &LoadBalancer{backends: backends}
-    http.ListenAndServe(":8080", lb)
-}
+- [API Gateway vs Load Balancer](../api-gateway-vs-load-balancer/README.md)
+- [API Gateway Design](../api-gateway-design/README.md)
+- [Scalability Patterns](../high-scalability-patterns/README.md)
+- [Fault Tolerance Patterns](../fault-tolerance-patterns/README.md)
+
+## STAR Summary
+
+- **Situation**: High-traffic applications risk server overload.
+- **Task**: Implement load balancing to distribute traffic.
+- **Action**: Choose algorithm (e.g., least connections), configure balancer (e.g., NGINX).
+- **Result**: Improved uptime, reduced latency, better user experience.
+
+## Journey / Sequence
+
+1. Identify bottlenecks in single-server setups.
+2. Select load balancer type (hardware/software).
+3. Configure upstream servers and algorithm.
+4. Implement health checks and monitoring.
+5. Test failover and scale horizontally.
+
+## Data Models / Message Formats
+
+Load balancers handle HTTP requests/responses. For session persistence, use cookies or headers.
+
+Example HTTP Request:
+```
+GET /api/data HTTP/1.1
+Host: example.com
+X-Session-ID: abc123
 ```
 
 ## Common Pitfalls & Edge Cases
 
-| Pitfall | Description | Mitigation |
-|---------|-------------|------------|
-| Session Affinity Issues | Sticky sessions break load distribution | Use distributed sessions or IP hash |
-| Health Check Failures | Unhealthy servers still receive traffic | Implement proper health checks |
-| Thundering Herd | All servers hit simultaneously after restart | Use gradual traffic increase |
-| SSL Termination Overhead | Load balancer becomes bottleneck | Use hardware acceleration or offload |
-| Algorithm Mismatch | Wrong algorithm for workload type | Analyze traffic patterns to choose algorithm |
+- **Session Stickiness Issues**: IP hash fails with NAT or proxies.
+- **Health Check Delays**: Slow detection of failed servers.
+- **Thundering Herd**: Sudden traffic spikes after recovery.
+- **SSL Termination**: Offloading can introduce latency.
 
 ## Tools & Libraries
 
-| Tool | Type | Description |
-|------|------|-------------|
-| Nginx | Software LB | High-performance HTTP load balancer |
-| HAProxy | Software LB | TCP/HTTP load balancer and proxy |
-| AWS ELB/ALB | Cloud LB | Managed load balancing service |
-| Google Cloud Load Balancing | Cloud LB | Global load balancing |
-| Apache Traffic Server | Software LB | Caching proxy and load balancer |
-| Envoy | Service Proxy | Modern L7 proxy and load balancer |
-
-## References
-
-- [Nginx Load Balancing](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/)
-- [HAProxy Documentation](https://www.haproxy.org/#docs)
-- [AWS Elastic Load Balancing](https://aws.amazon.com/elasticloadbalancing/)
-- [Load Balancing Algorithms](https://kemptechnologies.com/load-balancer/load-balancing-algorithms/)
-
-## Github-README Links & Related Topics
-
-- [Proxy Forward and Reverse](./proxy-forward-and-reverse/README.md)
-- [High Scalability Patterns](./high-scalability-patterns/README.md)
-- [Fault Tolerance Patterns](./fault-tolerance-patterns/README.md)
-- [Container Orchestration](./container-orchestration/README.md)
+- **NGINX**: Open-source load balancer.
+- **HAProxy**: High-performance proxy.
+- **AWS ELB/ALB**: Managed cloud load balancing.
+- **Traefik**: Modern reverse proxy for containers.

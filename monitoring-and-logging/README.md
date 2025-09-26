@@ -1,264 +1,207 @@
 ---
 title: Monitoring and Logging
-aliases: [observability, logs, metrics, system observability]
-tags: [#system-design, #devops, #observability]
+aliases: [monitoring, logging, observability]
+tags: [system-design, devops, monitoring, logging]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+## Overview
 
-Monitoring and logging are critical components of system observability, enabling engineers to maintain, troubleshoot, and optimize software systems. Monitoring focuses on real-time data collection for system health and performance, while logging provides historical records of events and errors for analysis and debugging.
+Monitoring and logging are fundamental practices in system design and DevOps, enabling observability—the ability to understand a system's internal state from its external outputs. Monitoring involves tracking system performance, health, and behavior through metrics, alerts, and dashboards. Logging captures detailed records of events, errors, and transactions for debugging, auditing, and analysis. Together, they ensure reliability, facilitate troubleshooting, and support proactive maintenance in distributed systems.
 
-# Detailed Explanation
+## Detailed Explanation
 
-## Monitoring
+### Monitoring
 
-Monitoring involves collecting, processing, and analyzing metrics to understand system behavior. Key aspects include:
+Monitoring collects and analyzes data about system performance and health. Key components include:
 
-- **Metrics Collection**: Gathering quantitative data like CPU usage, memory consumption, response times, and throughput.
-- **Alerting**: Setting thresholds to notify teams of anomalies or failures.
-- **Visualization**: Using dashboards to display metrics in real-time.
+- **Metrics**: Numerical measurements (e.g., CPU usage, request latency, error rates) collected over time.
+- **Alerts**: Notifications triggered when metrics exceed thresholds, enabling rapid response to issues.
+- **Dashboards**: Visual representations of metrics for real-time insights.
 
-## Logging
+Monitoring helps answer questions like "Is the system performing as expected?" and "Where are the bottlenecks?"
 
-Logging captures qualitative data about system events, providing context for issues:
+### Logging
 
-- **Log Levels**: DEBUG, INFO, WARN, ERROR, FATAL.
-- **Structured Logging**: Using JSON format for better searchability.
-- **Log Aggregation**: Centralizing logs from multiple sources.
+Logging records events occurring in a system, providing a chronological audit trail. Types include:
 
-## Key Concepts
+- **Event Logs**: Record system activities, errors, and user interactions for debugging and analysis.
+- **Transaction Logs**: Track database changes for recovery and consistency.
+- **Message Logs**: Capture communications in chat systems or multiplayer games.
+- **Server Logs**: Document web server requests, including IP addresses, timestamps, and HTTP codes.
 
-| Concept | Description | Example |
-|---------|-------------|---------|
-| Metrics | Quantitative measurements | Response time: 200ms |
-| Logs | Event records | "User login failed: invalid credentials" |
-| Tracing | Request path tracking | Distributed tracing with Jaeger |
-| Alerting | Notification of issues | Email/SMS when CPU > 90% |
+Logs are stored in files, databases, or dedicated systems like ELK Stack.
+
+### Relationship to Observability
+
+Observability encompasses monitoring, logging, and tracing to provide a holistic view. OpenTelemetry standardizes signals (metrics, logs, traces) for vendor-neutral instrumentation.
 
 ```mermaid
 graph TD
-    A[Application] --> B[Metrics Collector]
-    A --> C[Log Aggregator]
-    B --> D[Time Series DB]
-    C --> E[Log Storage]
-    D --> F[Dashboards]
-    E --> F
-    F --> G[Alerts]
+    A[Application/Service] --> B[Instrumentation]
+    B --> C[Metrics]
+    B --> D[Logs]
+    B --> E[Traces]
+    C --> F[Monitoring System e.g., Prometheus]
+    D --> G[Logging System e.g., ELK Stack]
+    E --> H[Tracing System e.g., Jaeger]
+    F --> I[Alerts/Dashboards]
+    G --> J[Search/Analysis]
+    H --> K[Distributed Debugging]
 ```
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
-### E-commerce Platform Monitoring
-- Track order processing latency during peak sales.
-- Monitor inventory levels and alert on low stock.
-- Log payment failures for fraud detection.
+1. **E-commerce Platform**: Monitor API response times with Prometheus; log user transactions for fraud detection.
+2. **Microservices Architecture**: Use centralized logging (e.g., ELK) to correlate events across services during outages.
+3. **Database Systems**: Transaction logs ensure data consistency; event logs track query performance.
+4. **Web Servers**: Server logs analyze traffic patterns; metrics alert on high error rates.
+5. **IoT Systems**: Log sensor data; monitor device connectivity and battery levels.
 
-### Microservices Architecture
-- Distributed tracing for request flows across services.
-- Centralized logging for debugging inter-service issues.
-- Metrics on API response times and error rates.
+| Use Case | Monitoring Focus | Logging Focus |
+|----------|------------------|---------------|
+| Web Application | Latency, throughput | Request errors, user actions |
+| Database | Query performance, locks | Transaction commits, rollbacks |
+| Network | Bandwidth, packet loss | Connection attempts, failures |
+| Security | Failed logins, anomalies | Audit trails, intrusion attempts |
 
-### Cloud Infrastructure
-- Auto-scaling based on CPU/memory metrics.
-- Logging access patterns for security audits.
-- Monitoring network traffic for DDoS detection.
+## Code Examples
 
-# Code Examples
-
-### Java with SLF4J and Micrometer
+### Java Logging with SLF4J
 
 ```java
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import io.micrometer.core.instrument.MeterRegistry;
-import io.micrometer.core.instrument.Counter;
-import io.micrometer.core.instrument.Timer;
 
-public class OrderService {
-    private static final Logger logger = LoggerFactory.getLogger(OrderService.class);
-    private final Counter ordersProcessed;
-    private final Timer orderProcessingTime;
+public class ExampleService {
+    private static final Logger logger = LoggerFactory.getLogger(ExampleService.class);
 
-    public OrderService(MeterRegistry registry) {
-        this.ordersProcessed = Counter.builder("orders.processed")
-                .description("Number of orders processed")
-                .register(registry);
-        this.orderProcessingTime = Timer.builder("orders.processing.time")
-                .description("Time taken to process orders")
-                .register(registry);
-    }
-
-    public void processOrder(Order order) {
-        logger.info("Processing order for user: {}", order.getUserId());
-        Timer.Sample sample = Timer.start();
-
+    public void processRequest(String request) {
+        logger.info("Processing request: {}", request);
         try {
             // Business logic
-            validateOrder(order);
-            saveOrder(order);
-            sendConfirmation(order);
-
-            ordersProcessed.increment();
-            logger.info("Order processed successfully: {}", order.getId());
+            logger.debug("Request processed successfully");
         } catch (Exception e) {
-            logger.error("Failed to process order: {}", order.getId(), e);
-            throw e;
-        } finally {
-            sample.stop(orderProcessingTime);
+            logger.error("Error processing request", e);
         }
     }
 }
 ```
 
-### Python with Logging and Prometheus Client
+### Python Logging
 
 ```python
 import logging
-import time
-from prometheus_client import Counter, Histogram, start_http_server
 
-# Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-# Prometheus metrics
-REQUEST_COUNT = Counter('http_requests_total', 'Total HTTP requests', ['method', 'endpoint'])
-REQUEST_LATENCY = Histogram('http_request_duration_seconds', 'HTTP request latency', ['method', 'endpoint'])
-
-def process_request(method, endpoint):
-    REQUEST_COUNT.labels(method=method, endpoint=endpoint).inc()
-    start_time = time.time()
-
-    logger.info(f"Processing {method} request to {endpoint}")
-
+def handle_request(request):
+    logger.info(f"Handling request: {request}")
     try:
-        # Simulate processing
-        time.sleep(0.1)
-        logger.info(f"Request to {endpoint} completed successfully")
+        # Process request
+        logger.debug("Request handled successfully")
     except Exception as e:
-        logger.error(f"Error processing request to {endpoint}: {str(e)}")
-        raise
-    finally:
-        REQUEST_LATENCY.labels(method=method, endpoint=endpoint).observe(time.time() - start_time)
-
-if __name__ == '__main__':
-    start_http_server(8000)
-    process_request('GET', '/api/orders')
+        logger.error(f"Error handling request: {e}")
 ```
 
-### Go with Zap Logger and Metrics
+### Prometheus Metrics in Java (Micrometer)
 
-```go
-package main
+```java
+import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.Timer;
 
-import (
-    "time"
-    "github.com/gin-gonic/gin"
-    "go.uber.org/zap"
-    "github.com/prometheus/client_golang/prometheus"
-    "github.com/prometheus/client_golang/prometheus/promhttp"
-)
+public class MetricsExample {
+    private final Counter requestsTotal;
+    private final Timer requestTimer;
 
-var (
-    requestsTotal = prometheus.NewCounterVec(
-        prometheus.CounterOpts{
-            Name: "http_requests_total",
-            Help: "Total number of HTTP requests",
-        },
-        []string{"method", "endpoint"},
-    )
-    requestDuration = prometheus.NewHistogramVec(
-        prometheus.HistogramOpts{
-            Name: "http_request_duration_seconds",
-            Help: "HTTP request duration",
-        },
-        []string{"method", "endpoint"},
-    )
-)
+    public MetricsExample(MeterRegistry registry) {
+        this.requestsTotal = registry.counter("http_requests_total", "method", "GET");
+        this.requestTimer = registry.timer("http_request_duration");
+    }
 
-func init() {
-    prometheus.MustRegister(requestsTotal)
-    prometheus.MustRegister(requestDuration)
-}
-
-func main() {
-    logger, _ := zap.NewProduction()
-    defer logger.Sync()
-
-    r := gin.New()
-
-    r.Use(func(c *gin.Context) {
-        start := time.Now()
-        path := c.Request.URL.Path
-        method := c.Request.Method
-
-        logger.Info("Request started",
-            zap.String("method", method),
-            zap.String("path", path),
-        )
-
-        c.Next()
-
-        duration := time.Since(start)
-        requestsTotal.WithLabelValues(method, path).Inc()
-        requestDuration.WithLabelValues(method, path).Observe(duration.Seconds())
-
-        logger.Info("Request completed",
-            zap.String("method", method),
-            zap.String("path", path),
-            zap.Duration("duration", duration),
-            zap.Int("status", c.Writer.Status()),
-        )
-    })
-
-    r.GET("/metrics", gin.WrapH(promhttp.Handler()))
-    r.GET("/api/users", func(c *gin.Context) {
-        c.JSON(200, gin.H{"message": "Users endpoint"})
-    })
-
-    r.Run(":8080")
+    public void handleRequest() {
+        requestsTotal.increment();
+        requestTimer.record(() -> {
+            // Simulate request processing
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        });
+    }
 }
 ```
 
-# Tools & Libraries
+## STAR Summary
+
+- **Situation**: System experiencing intermittent slowdowns.
+- **Task**: Implement monitoring and logging to identify root causes.
+- **Action**: Deploy Prometheus for metrics, ELK Stack for logs; instrument code with OpenTelemetry.
+- **Result**: Reduced downtime by 50%; proactive alerts prevented outages.
+
+## Journey / Sequence
+
+1. **Instrument Application**: Add logging and metrics collection.
+2. **Collect Data**: Use agents/exporters to gather metrics and logs.
+3. **Store and Process**: Send to monitoring/logging systems (e.g., Prometheus, Elasticsearch).
+4. **Analyze and Alert**: Query data, set up dashboards and alerts.
+5. **Iterate**: Refine based on insights; automate responses.
+
+```mermaid
+sequenceDiagram
+    participant App
+    participant Collector
+    participant Storage
+    participant Dashboard
+
+    App->>Collector: Emit metrics/logs
+    Collector->>Storage: Store data
+    Storage->>Dashboard: Query data
+    Dashboard->>Ops: Display insights/alerts
+```
+
+## Data Models / Message Formats
+
+- **Metrics**: Time-series data with labels (e.g., Prometheus format: `metric_name{label="value"} value timestamp`).
+- **Logs**: Structured entries (e.g., JSON: `{"timestamp": "2023-01-01T00:00:00Z", "level": "INFO", "message": "Request processed", "service": "web"}`).
+- **Traces**: Spans with attributes (e.g., OpenTelemetry span: ID, parent ID, start/end time, tags).
+
+## Common Pitfalls & Edge Cases
+
+- **Over-logging**: Excessive logs impact performance; use log levels (DEBUG, INFO, WARN, ERROR).
+- **Metric Cardinality**: High label combinations cause storage issues; limit dynamic labels.
+- **Log Rotation**: Unmanaged logs fill disks; implement rotation and retention policies.
+- **Distributed Tracing Gaps**: Missing instrumentation in microservices leads to incomplete traces.
+- **Security**: Logs may contain sensitive data; redact or encrypt.
+- **Alert Fatigue**: Too many false positives; tune thresholds carefully.
+
+## Tools & Libraries
 
 | Category | Tools/Libraries | Description |
 |----------|-----------------|-------------|
-| **Monitoring** | Prometheus | Time-series database and monitoring system |
-| | Grafana | Visualization and dashboarding |
-| | Datadog | Cloud monitoring and analytics |
-| | New Relic | Application performance monitoring |
-| **Logging** | ELK Stack (Elasticsearch, Logstash, Kibana) | Log aggregation and analysis |
-| | Splunk | Enterprise logging and monitoring |
-| | Fluentd | Log collection and aggregation |
-| | Loki | Log aggregation for Kubernetes |
-| **Tracing** | Jaeger | Distributed tracing |
-| | Zipkin | Distributed tracing system |
-| | OpenTelemetry | Observability framework |
+| Monitoring | Prometheus, Grafana, Datadog | Metrics collection, visualization, alerting |
+| Logging | ELK Stack (Elasticsearch, Logstash, Kibana), Splunk | Log aggregation, search, analysis |
+| Tracing | Jaeger, Zipkin, OpenTelemetry | Distributed tracing |
+| Libraries | Micrometer (Java), logging (Python), Winston (Node.js) | Instrumentation helpers |
+| Alerting | Alertmanager, PagerDuty | Notification management |
 
-# Common Pitfalls & Edge Cases
+## References
 
-- **Log Noise**: Excessive logging leading to storage costs and analysis difficulty. Solution: Use appropriate log levels and sampling.
-- **Metrics Cardinality**: High-cardinality metrics causing performance issues. Avoid unbounded label values.
-- **Alert Fatigue**: Too many alerts leading to ignored notifications. Implement alert hierarchies and auto-silencing.
-- **Distributed Tracing Overhead**: Tracing all requests impacting performance. Use sampling rates.
-- **Log Data Privacy**: Sensitive information in logs. Implement log sanitization and masking.
-- **Time Zone Issues**: Inconsistent timestamps across services. Use UTC and include timezone info.
+- [OpenTelemetry Observability Primer](https://opentelemetry.io/docs/concepts/observability-primer/)
+- [Prometheus Overview](https://prometheus.io/docs/introduction/overview/)
+- [Elastic Stack Get Started](https://www.elastic.co/guide/en/elastic-stack-get-started/current/get-started-elastic-stack.html)
+- [Monitoring (computing) - Wikipedia](https://en.wikipedia.org/wiki/Monitoring_(computing))
+- [Computer data logging - Wikipedia](https://en.wikipedia.org/wiki/Computer_data_logging)
 
-# References
+## Github-README Links & Related Topics
 
-- [Monitoring and Observability Guide](https://opentelemetry.io/docs/concepts/observability-principles/)
-- [Prometheus Documentation](https://prometheus.io/docs/introduction/overview/)
-- [ELK Stack Tutorial](https://www.elastic.co/guide/en/elastic-stack-get-started/current/get-started-elastic-stack.html)
-- [Logging Best Practices](https://12factor.net/logs)
-- [Google SRE Book - Monitoring](https://sre.google/sre-book/monitoring-distributed-systems/)
-
-# Github-README Links & Related Topics
-
-- [Async Logging](./async-logging/README.md)
-- [DevOps & Infrastructure as Code](./devops-and-infrastructure-as-code/README.md)
-- [Distributed Tracing](./distributed-tracing/README.md)
-- [Infrastructure Monitoring](./infrastructure-monitoring/README.md)
-- [Monitoring Dashboards](./monitoring-dashboards/README.md)
+- [Async Logging](async-logging/)
+- [Logging with ELK Stack](logging-with-elk-stack/)
+- [Distributed Tracing](distributed-tracing/)
+- [Infrastructure Monitoring](infrastructure-monitoring/)
+- [CI/CD Pipelines](ci-cd-pipelines/)
+- [Chaos Engineering](chaos-engineering/)
