@@ -151,8 +151,8 @@ ws.run_forever()
 
 # Github-README Links & Related Topics
 
-- [[fix-protocol]]
-- [[itch-protocol]]
-- [[ouch-protocol]]
-- [[order-entry-protocols]]
-- [[execution-report]]
+- [FIX Protocol](../../protocols/fix-protocol/)
+- [FIX Protocol](../../protocols/fix-protocol/)
+- [FIX Protocol](../../protocols/fix-protocol/)
+- [FIX Protocol](../../protocols/fix-protocol/)
+- [FIX Protocol](../../protocols/fix-protocol/)
