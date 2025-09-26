@@ -1,7 +1,7 @@
 ---
 title: High Scalability Patterns
-aliases: ["Scalability Patterns", "System Scalability"]
-tags: ["#system-design","#scalability"]
+aliases: [Scalability Patterns, System Scalability]
+tags: [#system-design, #scalability]
 created: 2025-09-26
 updated: 2025-09-26
 ---

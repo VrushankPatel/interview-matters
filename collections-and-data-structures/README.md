@@ -1,7 +1,7 @@
 ---
 title: Collections & Data Structures
 aliases: [Collections in Java, Data Structures]
-tags: [#java,#data-structures]
+tags: [#java, #data-structures]
 created: 2025-09-26
 updated: 2025-09-26
 ---
