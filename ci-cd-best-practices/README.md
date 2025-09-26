@@ -6,7 +6,7 @@ created: 2025-09-25
 updated: 2025-09-26
 ---
 
-## Overview
+# Overview
 
 CI/CD (Continuous Integration/Continuous Deployment) best practices ensure fast, reliable, and secure software delivery. They involve automating build, test, and deployment processes to reduce errors and improve collaboration.
 
@@ -109,6 +109,6 @@ pipeline {
 
 ## Github-README Links & Related Topics
 
-- [ci-cd-pipelines](../ci-cd-pipelines/README.md)
-- [ci-cd-with-jenkins](../ci-cd-with-jenkins/README.md)
-- [devops-infrastructure-as-code](../devops-infrastructure-as-code/README.md)
+- [ci-cd-pipelines](./ci-cd-pipelines/)
+- [ci-cd-with-jenkins](./ci-cd-with-jenkins/)
+- [devops-infrastructure-as-code](./devops-infrastructure-as-code/)

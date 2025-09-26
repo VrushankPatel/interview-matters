@@ -6,7 +6,7 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Event-Driven Systems
+# Overview
 
 ## Overview
 
@@ -105,5 +105,5 @@ sequenceDiagram
 
 ## Github-README Links & Related Topics
 
-- [Event-Driven Architecture](../event-driven-architecture/)
-- [Message Queues and Brokers](../message-queues-and-brokers/)
+- [Event-Driven Architecture](./event-driven-architecture/)
+- [Message Queues and Brokers](./message-queues-and-brokers/)

@@ -160,6 +160,6 @@ sequenceDiagram
 
 ## Github-README Links & Related Topics
 
-- [API Gateway Patterns](../system-design/api-gateway-patterns/README.md)
-- [Service Mesh Istio](../system-design/service-mesh-istio/README.md)
-- [Container Orchestration with Kubernetes](../system-design/container-orchestration-k8s/README.md)
+- [API Gateway Patterns](./api-gateway-patterns/)
+- [Service Mesh Istio](./istio-service-mesh/)
+- [Container Orchestration with Kubernetes](./container-orchestration-with-kubernetes/)
