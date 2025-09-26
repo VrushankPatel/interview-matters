@@ -1,8 +1,3 @@
-DevOps & Infrastructure as Code
-Proxy forward and reverse
-Load balancing and strategies
-Rate limiting
-Concurrency & Parallelism
 Java Fundamentals
 OOP Principles in Java
 JVM Internals & Class Loading
