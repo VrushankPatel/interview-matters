@@ -3,7 +3,7 @@ title: Latency and Throughput: Zero to Hero
 aliases: [performance metrics, system performance]
 tags: [#system-design,#performance]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 ## Overview
