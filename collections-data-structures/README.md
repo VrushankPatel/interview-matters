@@ -66,5 +66,5 @@ System.out.println(map.get("key"));
 
 ## Github-README Links & Related Topics
 
-- [Java Collections](java-collections/)
-- [Data Structures](data-structures/)
+- [Java Collections](../java-collections/)
+- [Data Structures](../data-structures/)

@@ -60,5 +60,5 @@ int sum = list.stream()
 
 ## Github-README Links & Related Topics
 
-- [Java Stream API](java-stream-api/)
-- [Functional Programming](functional-programming/)
+- [Java Stream API](../java-stream-api/)
+- [Functional Programming](../functional-programming/)
