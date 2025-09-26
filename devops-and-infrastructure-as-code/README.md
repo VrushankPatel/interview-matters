@@ -1,12 +1,10 @@
 ---
 title: DevOps & Infrastructure as Code
 aliases: [devops, infrastructure as code, IaC]
-tags: [#devops,#infrastructure,#automation]
+tags: [#devops, #infrastructure, #automation]
 created: 2025-09-26
 updated: 2025-09-26
 ---
-
-# DevOps & Infrastructure as Code
 
 ## Overview
 
@@ -333,12 +331,12 @@ This Jenkins pipeline demonstrates a complete CI/CD workflow with IaC integratio
 - [The Phoenix Project](https://itrevolution.com/book/the-phoenix-project/)
 - [Site Reliability Engineering](https://sre.google/books/)
 
-## Github-README Links & Related Topics
+# Github-README Links & Related Topics
 
-- [CI/CD Pipelines](./ci-cd-pipelines/README.md)
-- [Docker Containerization](./docker-containerization/README.md)
-- [Kubernetes Fundamentals](./kubernetes-fundamentals/README.md)
-- [Cloud Architecture Patterns](./cloud-architecture-patterns/README.md)
-- [Monitoring and Logging](./monitoring-and-logging/README.md)
-- [Configuration Management](./configuration-management/README.md)
-- [Container Orchestration](./container-orchestration/README.md)
+- [CI/CD Pipelines](../ci-cd-pipelines/README.md)
+- [Docker Containerization](../docker-containerization/README.md)
+- [Kubernetes Fundamentals](../kubernetes-fundamentals/README.md)
+- [Cloud Architecture Patterns](../cloud-architecture-patterns/README.md)
+- [Monitoring and Logging](../monitoring-and-logging/README.md)
+- [Configuration Management](../configuration-management/README.md)
+- [Container Orchestration](../container-orchestration/README.md)

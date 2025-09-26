@@ -1,12 +1,10 @@
 ---
 title: Monitoring and Logging
 aliases: [observability, application monitoring]
-tags: [#devops,#system-design]
+tags: [#devops, #system-design]
 created: 2025-09-26
 updated: 2025-09-26
 ---
-
-# Monitoring and Logging
 
 ## Overview
 
@@ -190,12 +188,12 @@ Metrics with too many label combinations (e.g., user IDs) can overwhelm storage.
 - [Google SRE Book - Monitoring](https://sre.google/sre-book/monitoring-distributed-systems/)
 - [AWS Observability Best Practices](https://aws.amazon.com/architecture/observability/)
 
-## Github-README Links & Related Topics
+# Github-README Links & Related Topics
 
-- [Infrastructure Monitoring](./infrastructure-monitoring/)
-- [Distributed Tracing](./distributed-tracing/)
-- [Distributed Tracing with OpenTelemetry](./distributed-tracing-with-opentelemetry/)
-- [Event-Driven Architecture](./event-driven-architecture/)
-- [Fault Tolerance in Distributed Systems](./fault-tolerance-in-distributed-systems/)
-- [CI/CD Pipelines](./ci-cd-pipelines/)
-- [DevOps and Infrastructure as Code](./devops-and-infrastructure-as-code/)
+- [Infrastructure Monitoring](../infrastructure-monitoring/README.md)
+- [Distributed Tracing](../distributed-tracing/README.md)
+- [Distributed Tracing with OpenTelemetry](../distributed-tracing-with-opentelemetry/README.md)
+- [Event-Driven Architecture](../event-driven-architecture/README.md)
+- [Fault Tolerance in Distributed Systems](../fault-tolerance-in-distributed-systems/README.md)
+- [CI/CD Pipelines](../ci-cd-pipelines/README.md)
+- [DevOps and Infrastructure as Code](../devops-and-infrastructure-as-code/README.md)

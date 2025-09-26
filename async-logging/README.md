@@ -1,7 +1,7 @@
 ---
 title: Async Logging
 aliases: [asynchronous logging, non-blocking logging]
-tags: [#logging,#async,#concurrency]
+tags: [#logging, #async, #concurrency]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -306,12 +306,10 @@ public class AsyncLoggingService
 - [NLog Async Logging](https://nlog-project.org/) - .NET logging framework async features
 - [Serilog Async Sink](https://github.com/serilog/serilog-sinks-async) - .NET structured logging async sink
 
-## Github-README Links & Related Topics
+# Github-README Links & Related Topics
 
-- [Async Logging](./async-logging/README.md)
-- [Concurrency and Parallelism](./concurrency-and-parallelism/README.md)
-- [Event Driven Architecture](./event-driven-architecture/README.md)
-- [High Scalability Patterns](./high-scalability-patterns/README.md)
-- [Java Multithreading and Concurrency](./java-multithreading-and-concurrency/README.md)
-- [Logging Frameworks](./logging-frameworks/README.md)
-- [Monitoring and Logging](./monitoring-and-logging/README.md)
+- [Concurrency and Parallelism](../concurrency-and-parallelism/README.md)
+- [Event Driven Architecture](../event-driven-architecture/README.md)
+- [High Scalability Patterns](../high-scalability-patterns/README.md)
+- [Java Multithreading and Concurrency](../java-multithreading-and-concurrency/README.md)
+- [Monitoring and Logging](../monitoring-and-logging/README.md)

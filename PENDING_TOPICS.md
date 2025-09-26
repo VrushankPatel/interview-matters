@@ -1,5 +1,0 @@
-Caching
-Latency and Throughput zero to hero
-Monitoring and Logging
-Async logging
-DevOps & Infrastructure as Code

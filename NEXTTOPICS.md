@@ -2,3 +2,9 @@
 - Load balancing and strategies
 - Rate limiting
 - Concurrency & Parallelism
+- Java Fundamentals
+- OOP Principles in Java
+- JVM Internals & Class Loading
+- System Design Basics
+- High Scalability Patterns
+- Replication vs Sharding vs Partitioning
