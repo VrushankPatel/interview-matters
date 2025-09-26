@@ -366,3 +366,7 @@
 - [jpa and hibernate](jpa-and-hibernate/README.md)
 - [istio service mesh](istio-service-mesh/README.md)
 - [prometheus monitoring](prometheus-monitoring/README.md)
+- [kibana](kibana/README.md)
+- [memcached](memcached/README.md)
+- [apache kafka](apache-kafka/README.md)
+- [apache flink](apache-flink/README.md)

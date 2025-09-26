@@ -1,7 +1,7 @@
 ---
 title: Prometheus Monitoring
-aliases: [Prometheus, Metrics Monitoring]
-tags: [#monitoring,#observability,#kubernetes]
+aliases: [Prometheus, Monitoring with Prometheus]
+tags: [#monitoring,#observability,#prometheus]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -159,6 +159,6 @@ spec:
 
 ## Github-README Links & Related Topics
 
-- [monitoring-and-logging](monitoring-and-logging/README.md)
-- [grafana-dashboards](grafana-dashboards/README.md)
-- [kubernetes-orchestration](kubernetes-orchestration/README.md)
+- [Monitoring and Logging](./monitoring-and-logging/)
+- [Grafana Dashboards](./grafana-dashboards/)
+- [Kubernetes Ingress and Load Balancing](./kubernetes-ingress-and-load-balancing/)
