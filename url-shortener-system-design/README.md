@@ -1,9 +1,9 @@
 ---
 title: URL Shortener System Design
-aliases: [URL Shortener, TinyURL Design]
-tags: [#system-design,#lld,#hld]
+aliases: [url-shortening-service, tinyurl-system]
+tags: [#system-design, #url-shortener]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 ## Overview
@@ -41,6 +41,22 @@ graph TD
 - Short code generation: Base62 encoding of counter or hash
 - Database schema: table with short_code, long_url, created_at, expires_at
 - Caching: Redis for hot URLs
+
+## Journey / Sequence
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant API
+    participant DB
+    User->>API: POST /shorten {url: "https://longurl.com"}
+    API->>API: Generate short code
+    API->>DB: Store mapping
+    API->>User: Return short URL
+    User->>API: GET /abc123
+    API->>DB: Lookup original URL
+    API->>User: Redirect (301) to original
+```
 
 ## Real-world Examples & Use Cases
 
