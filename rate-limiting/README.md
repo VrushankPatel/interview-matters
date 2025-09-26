@@ -3,8 +3,10 @@ title: Rate Limiting
 aliases: [API Rate Limiting, Throttling]
 tags: [#api-design,#system-design,#security]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
+
+# Rate Limiting
 
 ## Overview
 

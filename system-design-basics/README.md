@@ -1,11 +1,12 @@
 ---
 title: System Design Basics
 aliases: [system-design-fundamentals, system-design-intro]
-tags: [system-design, scalability, reliability, architecture]
+tags: [#system-design,#scalability,#reliability,#architecture]
 created: 2025-09-26
 updated: 2025-09-26
-
 ---
+
+# System Design Basics
 
 ## Overview
 

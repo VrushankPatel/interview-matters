@@ -3,8 +3,10 @@ title: Concurrency & Parallelism
 aliases: [Concurrent Programming, Parallel Computing]
 tags: [#concurrency,#parallelism,#system-design,#java]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
+
+# Concurrency & Parallelism
 
 ## Overview
 
