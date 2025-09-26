@@ -1,8 +1,3 @@
-Kubernetes Ingress and Load Balancing
-Docker Security Best Practices
-GraphQL API Design
-OAuth 2.0 Implementation
-WebSocket Protocols
 Real-Time Analytics
 Probabilistic Data Structures
 Vector Databases
@@ -17,4 +12,8 @@ Java Stream API & Functional Programming
 System Design Basics
 High Scalability Patterns
 CAP Theorem & Distributed Systems
-Concurrency & Parallelism
+Concurrency & Parallelism-e 00016| Popular Systems Design LLD HLD
+00017| LLD HLD Basics
+00018| Replication vs Sharding vs Partitioning
+00019| Latency and Throughput Zero to Hero
+00020| Monitoring and Logging

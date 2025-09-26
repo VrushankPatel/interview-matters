@@ -3,7 +3,7 @@ title: GraphQL API Design
 aliases: [GraphQL, API Design]
 tags: [#api-design, #graphql, #backend]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # GraphQL API Design

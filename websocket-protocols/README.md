@@ -3,7 +3,7 @@ title: WebSocket Protocols
 aliases: [WebSockets, Real-time Protocols]
 tags: [#networking, #protocols, #real-time]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # WebSocket Protocols

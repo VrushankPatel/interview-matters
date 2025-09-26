@@ -3,7 +3,7 @@ title: Kubernetes Ingress and Load Balancing
 aliases: []
 tags: [#kubernetes,#load-balancing]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Overview
