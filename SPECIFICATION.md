@@ -5,7 +5,7 @@ Last update
 2025-09-26
 
 Summary of recent additions
-     - Restructured repository into category-based README.md files for better organization; updated root index to link to category overviews; ensured all topic README.md use proper markdown links for interlinking
+      - Added comprehensive README.md for FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols with detailed explanations, STAR summaries, diagrams, examples, and references. Restructured trading topics into trading/ category and moved numerous directories into appropriate categories (system-design, java, algorithms, devops, cloud, networking, security, os, ml, design-patterns, behavioral, interview) for better organization.
 
 Conventions
  - Dir naming: kebab-case.

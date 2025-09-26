@@ -8,148 +8,140 @@ updated: 2025-09-26
 
 # Overview
 
-ITCH is NASDAQ's protocol for disseminating real-time market data, providing detailed order book updates, trades, and market statistics. It enables efficient distribution of Level 2 quotes and time & sales data to market participants.
+The ITCH protocol is a binary message protocol developed by NASDAQ for the real-time dissemination of market data, including order book updates, trade executions, and quote information. It is designed for high-throughput, low-latency environments, providing a detailed view of market activity. ITCH feeds are used by traders, algorithms, and data vendors to monitor and react to market changes instantly.
 
 # STAR Summary
 
-**SITUATION:** Early electronic markets needed efficient ways to broadcast detailed market data without overwhelming network bandwidth.
+**SITUATION:** In the early 2000s, NASDAQ needed a more efficient way to distribute market data beyond text-based feeds, to support growing electronic trading volumes.
 
-**TASK:** Develop a binary protocol for high-speed dissemination of order book and trade information.
+**TASK:** Develop a protocol that minimizes bandwidth and latency while providing comprehensive market data.
 
-**ACTION:** Created ITCH as a multicast UDP protocol with compact binary messages for add/delete/modify order events.
+**ACTION:** NASDAQ created ITCH, a binary protocol with fixed-length messages, eliminating the need for parsing delimiters. It includes messages for order additions, modifications, executions, and cancellations.
 
-**RESULT:** ITCH became NASDAQ's primary market data protocol, supporting real-time trading and market surveillance with minimal latency.
+**RESULT:** ITCH became NASDAQ's primary market data protocol, enabling real-time order book reconstruction and supporting high-frequency trading strategies.
 
 # Detailed Explanation
 
-ITCH provides real-time market data through multicast UDP feeds:
-
-- **Order Book Updates:** Add, delete, modify orders with full depth visibility
-- **Trade Reports:** Executed transactions with buyer/seller anonymity
-- **Market Statistics:** Opening/closing prices, volume summaries
-- **System Events:** Market open/close, trading halts
+ITCH messages are binary-encoded for efficiency, with each message type having a fixed size. The protocol uses big-endian byte order and includes a message type byte followed by fields specific to the type.
 
 Key message types:
-- **Add Order (A):** New order added to book
-- **Delete Order (D):** Order removed from book
-- **Modify Order (U):** Order quantity/price changed
-- **Trade (P/E):** Executed trade report
-- **System Event (S):** Market status changes
 
-Messages are binary-encoded for efficiency, with fixed field sizes.
+- Add Order (A): Adds a new order to the book.
+
+- Add Order with MPID (F): Adds order with market participant identifier.
+
+- Execute Order (E): Reports a trade execution.
+
+- Cancel Order (X): Removes quantity from an order.
+
+- Delete Order (D): Removes an entire order.
+
+- Replace Order (U): Modifies an existing order.
+
+- System Event (S): Indicates market open/close.
+
+- Stock Directory (R): Provides stock reference data.
+
+ITCH supports multiple versions; ITCH 5.0 is current for equities.
+
+The protocol ensures data integrity through sequencing and timestamps, allowing receivers to maintain accurate order books.
 
 # Real-world Examples & Use Cases
 
-ITCH is used by:
-- **Market Makers:** Monitor full order book for liquidity provision
-- **HFT Algorithms:** Detect order flow patterns for prediction
-- **Risk Systems:** Real-time position and exposure monitoring
-- **Regulators:** Market surveillance and anomaly detection
-- **Data Vendors:** Feed aggregation and redistribution
+In HFT, an algorithm subscribes to ITCH feeds to track the order book for AAPL. Upon receiving an 'Add Order' message, it updates its local book and may trigger a trade if conditions are met.
 
-Example: A market maker uses ITCH to track order book imbalances and adjust quotes accordingly.
+Case Study: During market volatility, ITCH feeds help detect anomalies like the 2010 Flash Crash precursors by monitoring order imbalances.
+
+Use cases:
+
+- Order book reconstruction for market making.
+
+- Trade surveillance and compliance monitoring.
+
+- Algorithmic trading strategies based on real-time data.
+
+- Data aggregation for market analytics.
 
 # Message Formats / Data Models
 
-ITCH messages have fixed binary structure with big-endian byte order.
+ITCH messages start with a 1-byte message type. Example: Add Order (A) - 36 bytes.
 
-## Add Order Message (Type 'A')
+Binary format (hex example for Add Order):
 
-| Field | Size | Description |
-|-------|------|-------------|
-| Message Type | 1 byte | 'A' |
-| Stock Locate | 2 bytes | Stock symbol index |
-| Tracking Number | 2 bytes | Message tracking |
-| Timestamp | 6 bytes | Nanosecond timestamp |
-| Order Reference | 8 bytes | Unique order ID |
-| Side | 1 byte | 'B' or 'S' |
-| Shares | 4 bytes | Quantity |
-| Stock | 8 bytes | Symbol (padded) |
-| Price | 4 bytes | Price * 10000 |
-| Attribution | 4 bytes | MPID |
+| Offset | Length | Field | Description |
+|--------|--------|-------|-------------|
+| 0 | 1 | Message Type | 'A' |
+| 1 | 2 | Stock Locate | Stock identifier |
+| 3 | 2 | Tracking Number | Sequence |
+| 5 | 6 | Timestamp | Nanoseconds since midnight |
+| 11 | 8 | Order Reference Number | Unique order ID |
+| 19 | 1 | Buy/Sell Indicator | 'B' or 'S' |
+| 20 | 4 | Shares | Quantity |
+| 24 | 8 | Stock | Symbol (padded) |
+| 32 | 4 | Price | Price * 10000 |
 
-Sample hex: 41 00 01 00 02 00 00 00 00 00 00 00 01 42 00 00 03 E8 41 41 50 4C 20 20 20 20 00 00 96 00 00 00 00 00
-
-## Trade Message (Type 'P')
-
-| Field | Size | Description |
-|-------|------|-------------|
-| Message Type | 1 byte | 'P' |
-| Stock Locate | 2 bytes | Stock symbol index |
-| Tracking Number | 2 bytes | Message tracking |
-| Timestamp | 6 bytes | Nanosecond timestamp |
-| Order Reference | 8 bytes | Executed order ID |
-| Side | 1 byte | 'B' or 'S' |
-| Shares | 4 bytes | Executed quantity |
-| Stock | 8 bytes | Symbol |
-| Price | 4 bytes | Price * 10000 |
-| Match Number | 8 bytes | Trade ID |
+Data models: Order book as a map of price levels with queues of orders.
 
 # Journey of a Trade
 
 ```mermaid
 sequenceDiagram
     participant Exchange
-    participant ITCH Feed
-    participant Market Participant
-
-    Exchange->>ITCH Feed: Order Book Change
-    ITCH Feed->>Market Participant: Multicast Add/Delete/Modify
-    Exchange->>ITCH Feed: Trade Execution
-    ITCH Feed->>Market Participant: Trade Message
-    Market Participant->>Market Participant: Update Local Order Book
-    Market Participant->>Market Participant: Analyze for Trading Signals
+    participant Feed Handler
+    participant Trader
+    Exchange->>Feed Handler: Add Order (A)
+    Exchange->>Feed Handler: Execute Order (E)
+    Feed Handler->>Trader: Processed Update
+    Trader->>Exchange: New Order (via OUCH)
 ```
+
+This shows data dissemination; actual trading uses separate protocols like OUCH.
 
 # Common Pitfalls & Edge Cases
 
-- **Sequence Gaps:** Missing messages require recovery from snapshots
-- **Symbol Mapping:** Stock Locate codes change; maintain current mappings
-- **Binary Parsing:** Endianness and alignment critical for performance
-- **High Volume:** Handle bursts during market open/close
-- **Feed Redundancy:** Multiple feeds for reliability
-- **Regulatory Data:** Handle special messages for halts/dividends
+- **Message Sequencing:** Out-of-order messages can corrupt order book state; receivers must buffer and sort.
+
+- **Timestamp Precision:** Nanosecond timestamps require high-precision clocks.
+
+- **High Volume:** During peaks, feeds can exceed 1M messages/sec; systems need optimized parsing.
+
+- **Symbol Changes:** Handling stock splits or mergers via System Event messages.
+
+- **Edge Case:** Orders with zero quantity or invalid prices must be filtered.
 
 # Tools & Libraries
 
-- **ITCH Parsers:** Open-source decoders in C++/Python
-- **Market Data Platforms:** Integration with Kafka/Redis
-- **Testing Tools:** NASDAQ simulation environments
+- **ITCH Parser Libraries:** Open-source parsers in C++ and Python for decoding binary messages.
 
-Sample Python parser:
+  Example (Python with struct):
 
-```python
-import struct
+  ```python
+  import struct
 
-def parse_add_order(data):
-    msg_type, stock_locate, tracking, timestamp, order_ref, side, shares, stock, price, attribution = struct.unpack('>cHH6sQcI8sIc', data[:42])
-    stock = stock.decode().strip()
-    price = price / 10000.0
-    side = 'Buy' if side == b'B' else 'Sell'
-    print(f"Add Order: {stock} {side} {shares}@{price} (Order: {order_ref})")
+  def parse_add_order(data):
+      msg_type, stock_locate, tracking, timestamp, order_ref, side, shares, stock, price = struct.unpack('>cHHQ QB 8s I', data)
+      # Process
+      return {
+          'type': msg_type,
+          'stock': stock.decode().strip(),
+          'side': side,
+          'shares': shares,
+          'price': price / 10000
+      }
+  ```
 
-# Usage with UDP socket
-# data = sock.recv(1024)
-# if data[0] == ord('A'):
-#     parse_add_order(data)
-```
+- **NASDAQ ITCH Simulator:** For testing.
 
 # Github-README Links & Related Topics
 
-[FIX Protocol](../fix-protocol/)
-
-[OUCH Protocol](../ouch-protocol/)
-
-[Market Data (overview & dissemination)](../market-data/market-data-overview-dissemination/)
-
-[Order Entry Protocols](../order-entry-protocols/)
-
-[Execution Report](../compliance/execution-report/)
-
-[Journey of a Trade](../lifecycle/journey-of-a-trade/)
+- [FIX Protocol](../fix-protocol/README.md)
+- [OUCH Protocol](../ouch-protocol/README.md)
+- [Market Data (overview & dissemination)](../market-data-overview-and-dissemination/README.md)
+- [Order Entry Protocols](../order-entry-protocols/README.md)
+- [Execution Report](../execution-report/README.md)
 
 # References
 
-- [NASDAQ ITCH Specification](https://www.nasdaqtrader.com/content/technicalsupport/specifications/dataproducts/nqtv-itch-v4_1.pdf)
-- [ITCH Protocol Overview](https://www.nasdaq.com/solutions/technology-innovation/trading-protocols)
-- [Market Data Best Practices](https://www.fixtrading.org/resources/recommended-practices/)
+- NASDAQ ITCH Specification: https://www.nasdaqtrader.com/content/technicalsupport/specifications/dataproducts/itch5.0.pdf
+- NASDAQ Market Data: https://www.nasdaq.com/solutions/nasdaq-market-data-platform
+- Investopedia on ITCH: https://www.investopedia.com/terms/i/itch.asp
