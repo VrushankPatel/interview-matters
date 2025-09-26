@@ -1,10 +1,10 @@
-- Collections & Data Structures
-- Java Stream API & Functional Programming
-- System Design Basics
-- Replication vs Sharding vs Partitioning
-- Caching
-- Java Collections
-- Java Design Patterns
-- Java Exception Handling
-- Java Generics
-- Java Memory Management
+- Java Fundamentals
+- OOP Principles in Java
+- JVM Internals & Class Loading
+- Garbage Collection Algorithms
+- Multithreading & Concurrency in Java
+- High Scalability Patterns
+- CAP Theorem & Distributed Systems
+- Latency and Throughput zero to hero
+- Monitoring and Logging
+- DevOps & Infrastructure as Code
