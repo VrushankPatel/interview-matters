@@ -1,7 +1,7 @@
 ---
 title: Caching
-aliases: [Cache Strategies, Distributed Caching]
-tags: [#caching,#system-design,#performance]
+aliases: [Cache Strategies]
+tags: [#system-design, #performance, #caching]
 created: 2025-09-26
 updated: 2025-09-26
 ---

@@ -8,3 +8,8 @@
 - [System Design Basics](system-design-basics/README.md)
 - [High Scalability Patterns](high-scalability-patterns/README.md)
 - [CAP Theorem & Distributed Systems](cap-theorem-and-distributed-systems/README.md)
+- [LLD HLD Basics](lld-hld-basics/README.md)
+- [Replication vs Sharding vs Partitioning](replication-vs-sharding-vs-partitioning/README.md)
+- [Caching](caching/README.md)
+- [Latency and Throughput Zero to Hero](latency-and-throughput-zero-to-hero/README.md)
+- [Monitoring and Logging](monitoring-and-logging/README.md)
