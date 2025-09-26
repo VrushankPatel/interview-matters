@@ -169,10 +169,10 @@ func main() {
 
 ## Github-README Links & Related Topics
 
-- [Multithreading & Concurrency in Java](./java-multithreading-concurrency/)
-- [Distributed Systems](./cap-theorem-and-distributed-systems/)
-- [Java ConcurrentHashMap](./java-concurrenthashmap/)
-- [Java ExecutorService](./java-executorservice/)
+- [Multithreading & Concurrency in Java](../java-multithreading-and-concurrency/README.md)
+- [Distributed Systems](../cap-theorem-and-distributed-systems/README.md)
+- [Java ConcurrentHashMap](../java-concurrenthashmap/README.md)
+- [Java ExecutorService](../java-executorservice/README.md)
 
 ```mermaid
 graph TD

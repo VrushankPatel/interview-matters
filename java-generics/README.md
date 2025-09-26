@@ -6,6 +6,8 @@ created: 2025-09-25
 updated: 2025-09-26
 ---
 
+# Java Generics
+
 ## Overview
 
 Java Generics provide compile-time type safety by allowing classes, interfaces, and methods to operate on parameterized types. Introduced in Java 5, generics eliminate the need for explicit casting and prevent ClassCastException at runtime, enabling reusable and type-safe code for collections and algorithms.
@@ -156,10 +158,10 @@ public class BoundedExample {
 
 ## Github-README Links & Related Topics
 
-- [Collections Framework](java/collections-framework/README.md)
-- [Advanced Java Concepts](java/advanced-java-concepts/README.md)
-- [Java Language Basics](java/java-language-basics/README.md)
-- [Reflection and Annotations](java/reflection-and-annotations/README.md)
+- [Collections Framework](../java/collections-framework/README.md)
+- [Advanced Java Concepts](../java/advanced-java-concepts/README.md)
+- [Java Language Basics](../java/java-language-basics/README.md)
+- [Reflection and Annotations](../java/reflection-and-annotations/README.md)
 
 ## References
 
