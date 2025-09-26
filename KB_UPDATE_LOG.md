@@ -67,4 +67,8 @@ topics_processed: []
 created_dirs: []
 updated_files: [SPECIFICATION.md, PENDING_TOPICS.md, NEXTTOPICS.md, trading/order-types/README.md]
 commit_made: true
-commit_message: "kb: restructured system-design subcategories + removed duplicates + fixed links to markdown + updated candidates"
+commit_message: "kb: restructured system-design subcategories + removed duplicates + fixed links to markdown + updated candidates"topics_processed: ["FIX Protocol", "ITCH Protocol", "OUCH Protocol", "Market Data (overview & dissemination)", "Order Entry Protocols"]
+created_dirs: []
+updated_files: ["SPECIFICATION.md", "PENDING_TOPICS.md", "NEXTTOPICS.md"]
+commit_made: true
+commit_message: "kb: process 5 topics (fix-protocol, itch-protocol, ouch-protocol, market-data-overview-and-dissemination, order-entry-protocols) + update spec and pending"
