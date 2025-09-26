@@ -1,76 +1,101 @@
 ---
 title: Garbage Collection Algorithms
-aliases: [GC Algorithms, Java Garbage Collection]
-tags: [#java, #jvm, #performance]
+aliases: [GC Algorithms, Memory Management]
+tags: [#java, #jvm, #gc]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+# Garbage Collection Algorithms
 
-Garbage Collection (GC) in Java automatically manages memory by reclaiming unused objects. Understanding GC algorithms is essential for optimizing application performance and preventing memory leaks. Java provides several GC algorithms, each with different trade-offs in terms of throughput, latency, and memory usage.
+## Overview
 
-# Detailed Explanation
+Garbage Collection (GC) is the process of automatically managing memory by reclaiming space occupied by objects that are no longer in use. Java provides several GC algorithms with different trade-offs in terms of throughput, latency, and memory usage.
 
-## Mark and Sweep
+## Detailed Explanation
+
+### Mark-Sweep
 
 The basic algorithm:
-1. Mark: Identify reachable objects starting from GC roots.
-2. Sweep: Remove unmarked objects and reclaim memory.
 
-## Generational GC
+1. **Mark**: Traverse the object graph, marking reachable objects
+2. **Sweep**: Reclaim memory from unmarked objects
 
-Divides heap into generations:
-- Young Generation: For short-lived objects (Eden, Survivor spaces).
-- Old Generation: For long-lived objects.
+**Pros:** Simple
+**Cons:** Fragmentation, pauses
 
-Algorithms:
-- Serial GC: Single-threaded, for small applications.
-- Parallel GC: Multi-threaded, for throughput.
-- CMS (Concurrent Mark Sweep): Low latency, concurrent with application.
-- G1: Regional, predictable pauses.
-- ZGC/Shenandoah: Low latency, large heaps.
+### Mark-Sweep-Compact
 
-## Common Pitfalls & Edge Cases
+Adds a compaction phase to defragment memory.
 
-- Memory leaks from static references.
-- Large object allocation causing fragmentation.
-- Tuning GC parameters for specific workloads.
+### Copying Collectors
 
-# Real-world Examples & Use Cases
+Divide heap into two spaces (from-space and to-space).
 
-- Web servers: Using G1 GC for predictable response times.
-- Batch processing: Parallel GC for high throughput.
-- Real-time systems: ZGC for sub-millisecond pauses.
+1. Copy live objects from from-space to to-space
+2. Swap spaces
 
-# Code Examples
+**Pros:** No fragmentation
+**Cons:** Uses only half the heap
 
-### Monitoring GC
+### Generational GC
+
+Based on the generational hypothesis: most objects die young.
+
+- **Young Generation**: Eden, Survivor spaces
+- **Old Generation**: Long-lived objects
+
+### Common Algorithms
+
+- **Serial GC**: Single-threaded, for small applications
+- **Parallel GC**: Multi-threaded, for throughput
+- **CMS (Concurrent Mark Sweep)**: Low pause times
+- **G1**: Regional, predictable pauses
+- **ZGC/Shenandoah**: Low latency, large heaps
+
+```mermaid
+graph TD
+    A[Object Allocation] --> B{Young Generation?}
+    B -->|Yes| C[Eden Space]
+    B -->|No| D[Old Generation]
+    C --> E{Minor GC}
+    E --> F[Survivor Space]
+    F --> G[Old Generation]
+    G --> H{Major GC}
+```
+
+## Real-world Examples & Use Cases
+
+- Tuning GC for high-throughput web servers
+- Minimizing GC pauses in real-time systems
+- Optimizing memory usage in microservices
+
+## Code Examples
 
 ```java
-public class GCMonitoring {
+// GC Tuning Example
+public class GCTuningExample {
     public static void main(String[] args) {
+        // Force GC (not recommended in production)
+        System.gc();
+        
+        // Get GC information
         Runtime runtime = Runtime.getRuntime();
-        System.out.println("Max Memory: " + runtime.maxMemory());
-        System.out.println("Total Memory: " + runtime.totalMemory());
-        System.out.println("Free Memory: " + runtime.freeMemory());
+        long totalMemory = runtime.totalMemory();
+        long freeMemory = runtime.freeMemory();
+        long usedMemory = totalMemory - freeMemory;
+        
+        System.out.println("Used Memory: " + usedMemory / 1024 / 1024 + " MB");
     }
 }
 ```
 
-### Forcing GC (Not Recommended)
-
-```java
-System.gc(); // Request GC, but JVM may ignore
-```
-
-# References
+## References
 
 - [Oracle GC Tuning Guide](https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/)
-- [Baeldung - Java Garbage Collection](https://www.baeldung.com/java-garbage-collection)
+- "The Garbage Collection Handbook" by Richard Jones et al.
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
-- [jvm-internals-class-loading](../jvm-internals-class-loading/README.md)
-- [gc-tuning](../gc-tuning/README.md)
-- [jvm-performance-tuning](../jvm-performance-tuning/README.md)
+- [JVM Internals](jvm-internals-class-loading)
+- [JVM Performance Tuning](jvm-performance-tuning)

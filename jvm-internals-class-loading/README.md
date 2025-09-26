@@ -1,96 +1,88 @@
 ---
 title: JVM Internals & Class Loading
-aliases: [Java Virtual Machine Internals, Class Loading Mechanism]
+aliases: [JVM Architecture, Java Virtual Machine]
 tags: [#java, #jvm]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+# JVM Internals & Class Loading
 
-The Java Virtual Machine (JVM) is the runtime environment for Java applications. Understanding JVM internals and the class loading mechanism is crucial for performance tuning, debugging, and advanced Java development. This includes the class loading process, memory management, and execution engine.
+## Overview
 
-# Detailed Explanation
+The Java Virtual Machine (JVM) is the runtime environment for Java applications. Understanding JVM internals and the class loading mechanism is crucial for performance tuning, debugging, and advanced Java development.
 
-## JVM Architecture
+## Detailed Explanation
 
-The JVM consists of:
-- Class Loader Subsystem
-- Runtime Data Areas
-- Execution Engine
-- Native Method Interface
+### JVM Architecture
 
-## Class Loading Process
+The JVM consists of several components:
 
-Class loading occurs in three phases:
-1. Loading: Finding and importing the binary data for a class.
-2. Linking: Verifying, preparing, and resolving symbolic references.
-3. Initialization: Executing static initializers and assigning initial values.
+1. **Class Loader Subsystem**: Loads class files
+2. **Runtime Data Areas**: Method area, heap, stack, PC registers, native method stack
+3. **Execution Engine**: Interprets or compiles bytecode
+4. **JNI & Native Method Libraries**: Interfaces with native code
+
+### Class Loading Process
+
+Class loading happens in three phases:
+
+1. **Loading**: Finding and importing the binary data
+2. **Linking**: Verification, preparation, resolution
+3. **Initialization**: Executing static initializers
+
+```mermaid
+graph TD
+    A[Loading] --> B[Linking]
+    B --> C[Verification]
+    B --> D[Preparation]
+    B --> E[Resolution]
+    E --> F[Initialization]
+```
 
 ### Class Loaders
 
-- Bootstrap Class Loader: Loads core Java classes.
-- Extension Class Loader: Loads extension classes.
-- Application Class Loader: Loads application classes.
+- **Bootstrap Class Loader**: Loads core Java classes
+- **Extension Class Loader**: Loads extension classes
+- **System/Application Class Loader**: Loads application classes
+
+### Memory Areas
+
+- **Heap**: Runtime data area for objects
+- **Stack**: Thread-specific, stores method calls
+- **Method Area**: Stores class metadata
+- **PC Registers**: Holds address of current instruction
+
+## Real-world Examples & Use Cases
+
+- Troubleshooting OutOfMemoryError
+- Optimizing application startup time
+- Implementing custom class loaders for plugin systems
+
+## Code Examples
 
 ```java
-public class ClassLoaderExample {
-    public static void main(String[] args) {
-        ClassLoader classLoader = ClassLoaderExample.class.getClassLoader();
-        System.out.println("Class Loader: " + classLoader);
-    }
-}
-```
-
-## Runtime Data Areas
-
-- Method Area: Stores class-level data.
-- Heap: Stores objects.
-- Stack: Stores method calls and local variables.
-- PC Register: Holds the address of the current instruction.
-- Native Method Stack: For native methods.
-
-# Real-world Examples & Use Cases
-
-- Custom class loaders for plugin systems in applications like Eclipse or Maven.
-- Debugging class loading issues in enterprise applications.
-- Optimizing memory usage in high-performance systems.
-
-# Code Examples
-
-### Custom Class Loader
-
-```java
+// Custom Class Loader Example
 public class CustomClassLoader extends ClassLoader {
     @Override
     public Class<?> findClass(String name) throws ClassNotFoundException {
-        // Custom loading logic
-        return super.findClass(name);
+        byte[] b = loadClassFromFile(name);
+        return defineClass(name, b, 0, b.length);
+    }
+    
+    private byte[] loadClassFromFile(String fileName) {
+        // Implementation to load class bytes from file
+        return new byte[0];
     }
 }
 ```
 
-### Inspecting Class Loaders
+## References
 
-```java
-public class ClassLoaderHierarchy {
-    public static void main(String[] args) {
-        ClassLoader cl = ClassLoaderHierarchy.class.getClassLoader();
-        while (cl != null) {
-            System.out.println(cl);
-            cl = cl.getParent();
-        }
-    }
-}
-```
+- [JVM Specification](https://docs.oracle.com/javase/specs/jvms/se17/html/)
+- "Inside the Java Virtual Machine" by Bill Venners
 
-# References
+## Github-README Links & Related Topics
 
-- [Oracle JVM Documentation](https://docs.oracle.com/javase/specs/jvms/se21/html/index.html)
-- [GeeksforGeeks - JVM Class Loading](https://www.geeksforgeeks.org/class-loading-and-static-blocks-execution-using-statements-in-java/)
-
-# Github-README Links & Related Topics
-
-- [garbage-collection-algorithms](../garbage-collection-algorithms/README.md)
-- [java-memory-model-and-concurrency](../java-memory-model-and-concurrency/README.md)
-- [jvm-performance-tuning](../jvm-performance-tuning/README.md)
+- [Garbage Collection Algorithms](garbage-collection-algorithms)
+- [JVM Performance Tuning](jvm-performance-tuning)

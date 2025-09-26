@@ -1,110 +1,130 @@
 ---
 title: Java Fundamentals
-aliases: []
+aliases: [Java Basics, Core Java]
 tags: [#java]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+# Java Fundamentals
 
-Java Fundamentals encompass the core concepts and syntax of the Java programming language, providing the foundation for building robust applications. This includes understanding data types, variables, operators, control structures, and basic object-oriented programming elements.
+## Overview
 
-# Detailed Explanation
+Java Fundamentals cover the basic building blocks of the Java programming language, including data types, variables, operators, control structures, and object-oriented concepts. These are essential for writing any Java program.
 
-## Data Types and Variables
+## Detailed Explanation
 
-Java supports eight primitive data types: `byte`, `short`, `int`, `long`, `float`, `double`, `char`, and `boolean`. Variables must be declared with a type before use.
+### Data Types
+
+Java has two categories of data types: primitive and reference.
+
+**Primitive Data Types:**
+
+| Type | Size | Range |
+|------|------|-------|
+| byte | 1 byte | -128 to 127 |
+| short | 2 bytes | -32,768 to 32,767 |
+| int | 4 bytes | -2^31 to 2^31-1 |
+| long | 8 bytes | -2^63 to 2^63-1 |
+| float | 4 bytes | ~6-7 decimal digits |
+| double | 8 bytes | ~15 decimal digits |
+| char | 2 bytes | 0 to 65,535 |
+| boolean | 1 bit | true or false |
+
+**Reference Types:** Objects, arrays, strings.
+
+### Variables
+
+Variables are containers for storing data values.
 
 ```java
 int age = 25;
-double salary = 50000.0;
-boolean isActive = true;
+String name = "John";
+final double PI = 3.14159; // constant
 ```
 
-Reference types include classes, interfaces, and arrays.
+### Operators
 
-## Operators
+- Arithmetic: +, -, *, /, %
+- Relational: ==, !=, >, <, >=, <=
+- Logical: &&, ||, !
+- Assignment: =, +=, -=, etc.
 
-- Arithmetic: `+`, `-`, `*`, `/`, `%`
-- Relational: `==`, `!=`, `<`, `>`, `<=`, `>=`
-- Logical: `&&`, `||`, `!`
-- Assignment: `=`, `+=`, etc.
+### Control Structures
 
-## Control Structures
-
-### Conditional Statements
+**If-else:**
 
 ```java
 if (condition) {
-    // code
-} else if (anotherCondition) {
     // code
 } else {
     // code
 }
 ```
 
-### Loops
+**Switch:**
+
+```java
+switch (expression) {
+    case value1:
+        // code
+        break;
+    case value2:
+        // code
+        break;
+    default:
+        // code
+}
+```
+
+**Loops:**
 
 ```java
 for (int i = 0; i < 10; i++) {
-    System.out.println(i);
+    // code
 }
 
 while (condition) {
     // code
 }
+
+do {
+    // code
+} while (condition);
 ```
 
-## Methods
+## Real-world Examples & Use Cases
 
-Methods are defined within classes and can have parameters and return types.
+- Building a simple calculator application
+- Processing user input in a console application
+- Implementing basic algorithms like sorting or searching
 
-```java
-public int add(int a, int b) {
-    return a + b;
-}
-```
-
-# Real-world Examples & Use Cases
-
-- Building a simple banking application to manage account balances using variables and arithmetic operators.
-- Creating a temperature converter that uses conditional statements to handle different units.
-- Developing a basic calculator with methods for different operations.
-
-# Code Examples
-
-### Hello World Program
+## Code Examples
 
 ```java
 public class HelloWorld {
     public static void main(String[] args) {
         System.out.println("Hello, World!");
+        
+        // Variables
+        int number = 42;
+        String message = "The answer is: " + number;
+        
+        // Control structure
+        if (number > 40) {
+            System.out.println(message);
+        }
     }
 }
 ```
 
-### Simple Calculator
+## References
 
-```java
-public class Calculator {
-    public static void main(String[] args) {
-        int a = 10;
-        int b = 5;
-        System.out.println("Addition: " + (a + b));
-        System.out.println("Subtraction: " + (a - b));
-    }
-}
-```
+- [Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/)
+- [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se17/html/index.html)
 
-# References
+## Github-README Links & Related Topics
 
-- [Oracle Java Tutorials - Language Basics](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html)
-- [GeeksforGeeks - Java Fundamentals](https://www.geeksforgeeks.org/java/)
-
-# Github-README Links & Related Topics
-
-- [oop-principles-in-java](../oop-principles-in-java/README.md)
-- [java-stream-api-and-functional-programming](../java-stream-api-and-functional-programming/README.md)
-- [collections-and-data-structures](../collections-and-data-structures/README.md)
+- [Java OOP Principles](oop-principles-in-java)
+- [JVM Internals](jvm-internals-class-loading)
+- [Multithreading in Java](multithreading-concurrency-in-java)
