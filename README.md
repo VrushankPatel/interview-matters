@@ -257,18 +257,22 @@ This repository contains a comprehensive collection of topics related to softwar
 - [Zoom Video Conferencing](system-design/zoom-video-conferencing)
 
 ### Trading
-- [Compliance](trading/compliance)
-- [Exchange Behavior](trading/exchange-behavior)
-- [Fix Protocol](trading/fix-protocol)
-- [Itch Protocol](trading/itch-protocol)
-- [Lifecycle](trading/lifecycle)
-- [Market Data Overview And Dissemination](trading/market-data-overview-and-dissemination)
-- [Market Data](trading/market-data)
-- [Order Entry Protocols](trading/order-entry-protocols)
-- [Order Types](trading/order-types)
-- [Ouch Protocol](trading/ouch-protocol)
-- [Protocols](trading/protocols)
-- [Time In Force Variations](trading/time-in-force-variations)
+#### Protocols
+- [FIX Protocol](trading/protocols/fix-protocol/README.md)
+- [ITCH Protocol](trading/protocols/itch-protocol/README.md)
+- [OUCH Protocol](trading/protocols/ouch-protocol/README.md)
+- [Order Entry Protocols](trading/protocols/order-entry-protocols/README.md)
+#### Market Data
+- [Market Data (overview & dissemination)](trading/market-data/market-data-overview-and-dissemination/README.md)
+#### Order Types
+- [Order Types](trading/order-types/order-types/README.md)
+#### Lifecycle
+- [Journey of a Trade (end-to-end)](trading/lifecycle/journey-of-a-trade/README.md)
+#### Exchange Behavior
+- [Quotes & RFQ workflows](trading/exchange-behavior/quotes-rfq-workflows/README.md)
+#### Compliance
+- [Execution Report](trading/compliance/execution-report/README.md)
+- [Trade Capture Report](trading/compliance/trade-capture-report/README.md)
 
 ### Algorithms
 - [Algorithms And Data Structures](algorithms/algorithms-and-data-structures)

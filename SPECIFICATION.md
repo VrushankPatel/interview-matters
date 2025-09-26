@@ -5,6 +5,7 @@ Last update
 2025-09-26
 
 Summary of recent additions
+    - Processed 5 trading protocol topics (FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols) + restructured trading topics into categories (protocols, market-data, lifecycle, exchange-behavior, compliance) + updated interlinks and root index
     - Processed 5 system design topics (popular-systems-design-lld-and-hld, lld-hld-basics, replication-vs-sharding-vs-partitioning, caching, latency-and-throughput-zero-to-hero)
     - Updated existing README.md files to detailed format with STAR summaries, diagrams, and examples
     - Restructured topics into system-design category

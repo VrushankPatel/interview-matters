@@ -10,6 +10,16 @@
 - Replication vs Sharding vs Partitioning
 - Caching
 - Latency and Throughput Zero to Hero
+- Order Book modeling
+- Matching algorithm internals
+- Time-in-Force variations across exchanges
+- Market fragmentation & smart order routing
+- Latency measurement & monitoring
+- FIX Session Layer (Logon/Heartbeat/Seq numbers)
+- Market data consolidation & TOPS snapshot vs incremental
+- Latency arbitrage
+- Swap & derivatives trade lifecycle
+- Regulatory reports (e.g., MiFID/SEF)
 
 - Java Fundamentals
 - OOP Principles in Java

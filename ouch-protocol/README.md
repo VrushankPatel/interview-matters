@@ -8,7 +8,7 @@ updated: 2025-09-26
 
 # Overview
 
-OUCH is NASDAQ's binary protocol for electronic order entry, designed for high-performance submission, modification, and cancellation of orders. It provides low-latency connectivity for trading systems requiring rapid execution.
+OUCH is NASDAQ's binary protocol for electronic order entry, designed for high-performance submission, modification, and cancellation of orders. It provides low-latency connectivity for trading systems requiring rapid execution. Supported versions include OUCH 5.0, 4.2, and 4.1, with Dedicated OUCH offering enhanced features for co-located trading.
 
 # STAR Summary
 
@@ -79,6 +79,46 @@ Sample hex: 4F [14-byte token] 42 00 00 03 E8 41 41 50 4C 20 20 20 20 00 00 96 0
 | Order Token | 14 bytes | Order to cancel |
 | Quantity | 4 bytes | Quantity to cancel |
 
+Sample hex: 58 [14-byte token] 00 00 03 E8
+
+## Replace Order ('U')
+
+| Field | Size | Description |
+|-------|------|-------------|
+| Message Type | 1 byte | 'U' |
+| Existing Order Token | 14 bytes | Token of order to replace |
+| Replacement Order Token | 14 bytes | New unique order ID |
+| Quantity | 4 bytes | New quantity |
+| Price | 4 bytes | New price * 100 |
+| Time-in-Force | 1 byte | '0'=Day |
+| Display | 1 byte | 'Y' or 'N' |
+| Capacity | 1 byte | 'P'=Principal |
+| ISO | 1 byte | 'Y' or 'N' |
+| Min Qty | 4 bytes | Minimum quantity |
+
+Sample hex: 55 [14-byte existing token] [14-byte new token] 00 00 03 E8 00 00 96 00 30 59 50 4E 00 00 00 00
+
+## Order Accepted ('A')
+
+| Field | Size | Description |
+|-------|------|-------------|
+| Message Type | 1 byte | 'A' |
+| Timestamp | 6 bytes | Timestamp in nanoseconds |
+| Order Token | 14 bytes | Accepted order token |
+
+Sample hex: 41 [6-byte timestamp] [14-byte token]
+
+## Order Rejected ('J')
+
+| Field | Size | Description |
+|-------|------|-------------|
+| Message Type | 1 byte | 'J' |
+| Timestamp | 6 bytes | Timestamp in nanoseconds |
+| Order Token | 14 bytes | Rejected order token |
+| Reason | 1 byte | Rejection code |
+
+Sample hex: 4A [6-byte timestamp] [14-byte token] 01
+
 # Journey of a Trade
 
 ```mermaid
@@ -98,17 +138,20 @@ sequenceDiagram
 # Common Pitfalls & Edge Cases
 
 - **Token Management:** Ensure unique tokens; collisions cause rejections
-- **Binary Encoding:** Precise field alignment required
-- **Rate Limits:** NASDAQ enforces order frequency limits
-- **Session Recovery:** Handle reconnections without duplicate orders
-- **Order Routing:** Correct firm/routing codes for execution
-- **Time Sensitivity:** Orders must arrive within market hours
+- **Binary Encoding:** Precise field alignment required; endianness must be big-endian
+- **Rate Limits:** NASDAQ enforces order frequency limits; exceeding may lead to throttling or disconnections
+- **Session Recovery:** Handle reconnections without duplicate orders; use sequence numbers for replay
+- **Order Routing:** Correct firm/routing codes for execution; invalid codes result in rejection
+- **Time Sensitivity:** Orders must arrive within market hours; pre-open orders require specific handling
+- **Rejection Reasons:** Common codes include invalid symbol, price out of range, insufficient permissions
+- **Cross-Type Handling:** Ensure proper cross-type for intermarket sweeps or other special orders
 
 # Tools & Libraries
 
-- **OUCH SDK:** NASDAQ-provided C++ libraries
-- **Protocol Parsers:** Custom decoders for monitoring
-- **Testing Environments:** NASDAQ certification systems
+- **OUCH SDK:** NASDAQ-provided C++ libraries for message encoding/decoding
+- **Protocol Parsers:** Open-source tools like Wireshark dissectors or custom Python/Java parsers for OUCH
+- **Testing Environments:** NASDAQ certification systems and simulators for development
+- **Monitoring Tools:** Log analyzers and real-time dashboards for order flow
 
 Sample C++ code snippet:
 
