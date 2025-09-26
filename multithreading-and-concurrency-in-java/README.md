@@ -1,118 +1,126 @@
 ---
 title: Multithreading & Concurrency in Java
-aliases: [Java Multithreading, Concurrent Programming in Java]
-tags: [#java,#concurrency]
+aliases: [Java Concurrency, Threading in Java]
+tags: [#java,#concurrency,#multithreading]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Multithreading & Concurrency in Java
+# Overview
 
-## Overview
+Multithreading and concurrency in Java enable programs to perform multiple tasks simultaneously, improving performance and responsiveness. Java provides built-in support for threads, synchronization, and concurrent data structures to manage shared resources safely.
 
-Multithreading allows a program to execute multiple threads concurrently, improving performance and responsiveness. Concurrency in Java involves managing multiple threads, synchronization, and avoiding issues like race conditions and deadlocks.
+# Detailed Explanation
 
-## Detailed Explanation
+## Threads and Thread Lifecycle
 
-### Threads in Java
+A thread is a lightweight process. Thread states: NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING, TERMINATED.
 
-- **Creating Threads**: Using Thread class or Runnable interface.
-- **Thread Lifecycle**: Threads transition through various states during execution.
+## Creating Threads
 
-| State | Description | Transitions |
-|-------|-------------|-------------|
-| NEW | Thread created but not started | start() → RUNNABLE |
-| RUNNABLE | Ready to run or running | schedule → RUNNING, yield/preempt → RUNNABLE |
-| BLOCKED | Waiting for monitor lock | acquire lock → RUNNABLE |
-| WAITING | Waiting indefinitely for another thread | notify() → RUNNABLE |
-| TIMED_WAITING | Waiting for specified time | timeout/notify() → RUNNABLE |
-| TERMINATED | Execution completed | - |
+- Extend Thread class
+- Implement Runnable interface
+- Use Executor framework (preferred)
 
-### Synchronization
+## Synchronization
 
-- **Synchronized Methods/Blocks**: Ensure atomicity.
-- **Volatile Keyword**: For visibility of changes across threads.
-- **Locks**: ReentrantLock, ReadWriteLock.
+Prevents race conditions:
 
-### Concurrency Utilities
+- **synchronized** keyword
+- Locks (ReentrantLock)
+- Atomic variables
 
-Java provides high-level concurrency utilities in java.util.concurrent package:
+## Concurrency Utilities
 
-| Utility | Description | Example Use Case |
-|---------|-------------|------------------|
-| ExecutorService | Manages thread pools | Submitting tasks for execution |
-| ConcurrentHashMap | Thread-safe hash map | Shared cache with concurrent access |
-| AtomicInteger/Long | Lock-free atomic operations | Counters in multi-threaded environments |
-| CountDownLatch | Synchronization aid | Waiting for multiple threads to complete |
-| CyclicBarrier | Synchronization aid | Coordinating multiple threads |
-| Semaphore | Controlling access to resources | Limiting concurrent access |
-| Future/CompletableFuture | Asynchronous computation | Non-blocking task execution |
+- **ExecutorService**: Manages thread pools
+- **Concurrent Collections**: Thread-safe collections
+- **Atomic Classes**: Lock-free operations
 
-### Common Issues
+```mermaid
+graph TD
+    A[Thread Creation] --> B[Extend Thread]
+    A --> C[Implement Runnable]
+    A --> D[Executor Framework]
+    E[Synchronization] --> F[synchronized]
+    E --> G[Lock Interface]
+    E --> H[Atomic Variables]
+```
 
-- **Race Conditions**: When multiple threads access shared data.
-- **Deadlocks**: Circular waiting for resources.
-- **Starvation**: A thread unable to gain access to resources.
+# Real-world Examples & Use Cases
 
-## Real-world Examples & Use Cases
+- **Web Servers**: Handling multiple HTTP requests concurrently
+- **Data Processing**: Parallel processing of large datasets
+- **GUI Applications**: Keeping UI responsive during long operations
+- **Game Development**: Managing game loops, AI, and rendering threads
 
-- **Web Servers**: Handling multiple client requests concurrently.
-- **Data Processing**: Parallel computation in big data applications.
-- **GUI Applications**: Keeping UI responsive while performing background tasks.
+# Code Examples
 
-## Code Examples
-
-### Creating a Thread
+## Creating Threads
 
 ```java
+// Extending Thread
 public class MyThread extends Thread {
+    @Override
     public void run() {
         System.out.println("Thread running");
     }
 }
 
-public class Main {
-    public static void main(String[] args) {
-        MyThread t = new MyThread();
-        t.start();
-    }
-}
-```
-
-### Using Runnable
-
-```java
+// Implementing Runnable
 public class MyRunnable implements Runnable {
+    @Override
     public void run() {
         System.out.println("Runnable running");
     }
 }
 
-public class Main {
+// Usage
+public class ThreadExample {
     public static void main(String[] args) {
-        Thread t = new Thread(new MyRunnable());
-        t.start();
+        Thread t1 = new MyThread();
+        Thread t2 = new Thread(new MyRunnable());
+        
+        t1.start();
+        t2.start();
     }
 }
 ```
 
-### Synchronization
+## Synchronization
 
 ```java
 public class Counter {
     private int count = 0;
-
+    
     public synchronized void increment() {
         count++;
     }
-
+    
     public int getCount() {
         return count;
     }
 }
+
+// Using Lock
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class LockExample {
+    private final Lock lock = new ReentrantLock();
+    private int count = 0;
+    
+    public void increment() {
+        lock.lock();
+        try {
+            count++;
+        } finally {
+            lock.unlock();
+        }
+    }
+}
 ```
 
-### Using ExecutorService
+## Executor Framework
 
 ```java
 import java.util.concurrent.ExecutorService;
@@ -121,75 +129,26 @@ import java.util.concurrent.Executors;
 public class ExecutorExample {
     public static void main(String[] args) {
         ExecutorService executor = Executors.newFixedThreadPool(5);
-
+        
         for (int i = 0; i < 10; i++) {
-            Runnable task = () -> {
+            executor.submit(() -> {
                 System.out.println("Task executed by " + Thread.currentThread().getName());
-            };
-            executor.submit(task);
+            });
         }
-
+        
         executor.shutdown();
     }
 }
 ```
 
-### Atomic Variables
-
-```java
-import java.util.concurrent.atomic.AtomicInteger;
-
-public class AtomicExample {
-    private AtomicInteger counter = new AtomicInteger(0);
-
-    public void increment() {
-        counter.incrementAndGet();
-    }
-
-    public int getCounter() {
-        return counter.get();
-    }
-}
-```
-
-```mermaid
-stateDiagram-v2
-    [*] --> New
-    New --> Runnable : start()
-    Runnable --> Running : scheduled
-    Running --> Runnable : yield/preempted
-    Running --> Blocked : wait/sleep
-    Blocked --> Runnable : notify/timeout
-    Running --> Waiting : wait()
-    Waiting --> Runnable : notify()
-    Running --> TimedWaiting : sleep/wait(timeout)
-    TimedWaiting --> Runnable : timeout
-    Running --> Terminated : run() completes
-    Terminated --> [*]
-```
-
-## Common Pitfalls & Edge Cases
-
-- **Race Conditions**: Use synchronization or atomic variables.
-- **Deadlocks**: Avoid nested locks; use tryLock.
-- **Visibility Issues**: Use volatile or synchronized for shared variables.
-- **Thread Safety**: Immutable objects or proper synchronization.
-- **Performance**: Too many threads can cause overhead; use thread pools.
-
-## Tools & Libraries
-
-- **Java Concurrency Utilities**: java.util.concurrent package.
-- **Thread Dump Tools**: jstack for analyzing deadlocks.
-- **Profilers**: VisualVM, JProfiler for concurrency issues.
-- **Libraries**: Akka for actor-based concurrency.
-
-## References
+# References
 
 - [Oracle Concurrency Tutorial](https://docs.oracle.com/javase/tutorial/essential/concurrency/)
-- [Baeldung: Java Concurrency](https://www.baeldung.com/java-concurrency)
+- [Java Concurrency in Practice](https://jcip.net/)
+- [Baeldung Concurrency](https://www.baeldung.com/java-concurrency)
 
-## Github-README Links & Related Topics
+# Github-README Links & Related Topics
 
-- [JVM Internals & Class Loading](../jvm-internals-and-class-loading/README.md)
-- [Java Collections](../java-collections/README.md)
-- [Concurrent Collections](../concurrent-collections/README.md)
+- [Java Executors](../java-executorservice/)
+- [Concurrent Collections](../concurrent-collections/)
+- [Java Locks](../java-reentrantlock/)

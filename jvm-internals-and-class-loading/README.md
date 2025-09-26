@@ -1,129 +1,108 @@
 ---
 title: JVM Internals & Class Loading
-aliases: [JVM Class Loading, Java Virtual Machine Internals]
+aliases: [JVM Architecture, Java Class Loading Mechanism]
 tags: [#java,#jvm]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# JVM Internals & Class Loading
+# Overview
 
-## Overview
+The Java Virtual Machine (JVM) is the runtime environment that executes Java bytecode. JVM internals include memory management, garbage collection, and the class loading mechanism. Class loading is the process by which the JVM loads Java classes into memory at runtime, consisting of loading, linking, and initialization phases.
 
-The Java Virtual Machine (JVM) is the runtime environment that executes Java bytecode. JVM internals encompass the architecture, memory management, and execution model. Class loading is the process by which the JVM loads, links, and initializes classes at runtime, enabling dynamic loading and modularity.
+# Detailed Explanation
 
-## Detailed Explanation
-
-### JVM Architecture
+## JVM Architecture
 
 The JVM consists of several key components:
 
-- **Class Loader Subsystem**: Responsible for loading class files into memory.
-- **Runtime Data Areas**: Memory areas used during program execution.
+- **Class Loader Subsystem**: Loads class files
+- **Runtime Data Areas**: Method area, heap, stack, PC registers, native method stacks
+- **Execution Engine**: Interprets or JIT-compiles bytecode
+- **Native Interface**: Interacts with native libraries
 
-| Area | Description | Thread-shared | Stores |
-|------|-------------|---------------|--------|
-| Method Area | Stores class-level information | Yes | Class data, method info, static variables |
-| Heap | Runtime data area for objects | Yes | Objects, arrays |
-| Java Stack | Stores method calls | No | Local variables, method calls |
-| PC Register | Current instruction pointer | No | Address of executing instruction |
-| Native Method Stack | For native methods | No | Native method calls |
-- **Execution Engine**: Interprets or compiles bytecode into machine code.
-- **JNI and Native Libraries**: For interfacing with native code.
+## Class Loading Process
 
-### Class Loading Process
+Class loading occurs in three main phases:
 
-Class loading occurs in three phases:
+1. **Loading**: Finding and importing the binary data of a class
+2. **Linking**: 
+   - Verification: Ensuring bytecode is valid
+   - Preparation: Allocating memory for class variables
+   - Resolution: Replacing symbolic references with direct references
+3. **Initialization**: Executing static initializers and assigning initial values
 
-1. **Loading**: The class loader finds and loads the binary data of the class.
-2. **Linking**: Involves verification, preparation, and resolution.
-3. **Initialization**: Executes static initializers and assigns initial values.
+## Class Loader Hierarchy
+
+Java uses a hierarchical class loading model:
+
+- **Bootstrap Class Loader**: Loads core Java classes (rt.jar)
+- **Extension Class Loader**: Loads extension classes (jre/lib/ext)
+- **System/Application Class Loader**: Loads application classes
 
 ```mermaid
-flowchart TD
-    A[Class Loading Requested] --> B{Class Already Loaded?}
-    B -->|No| C[Loading Phase]
-    C --> D[Find .class file]
-    D --> E[Read binary data]
-    E --> F[Create Class object]
-    F --> G[Linking Phase]
-    G --> H[Verification]
-    H --> I[Preparation]
-    I --> J[Resolution]
-    J --> K[Initialization Phase]
-    K --> L[Execute static blocks]
-    L --> M[Class Ready for Use]
-    B -->|Yes| M
+graph TD
+    A[Bootstrap Class Loader] --> B[Extension Class Loader]
+    B --> C[System Class Loader]
+    C --> D[Custom Class Loaders]
 ```
 
-#### Types of Class Loaders
+# Real-world Examples & Use Cases
 
-| Class Loader Type | Parent | Description | Example Classes |
-|-------------------|--------|-------------|-----------------|
-| Bootstrap Class Loader | None | Loads core Java classes from rt.jar and other bootstrap classpath | java.lang.*, java.util.* |
-| Extension Class Loader | Bootstrap | Loads classes from jre/lib/ext or java.ext.dirs | Security extensions, XML parsers |
-| System/Application Class Loader | Extension | Loads classes from application classpath | User-defined classes, third-party libraries |
+- **Plugin Systems**: Custom class loaders for loading plugins dynamically
+- **Application Servers**: Isolating web applications with separate class loaders
+- **Hot Code Replacement**: Reloading classes without restarting the JVM
+- **OSGi Frameworks**: Modular class loading for bundles
 
-### Class Loading Delegation Model
+# Code Examples
 
-When loading a class, the JVM follows a delegation hierarchy: Application Class Loader → Extension Class Loader → Bootstrap Class Loader.
-
-## Real-world Examples & Use Cases
-
-- **Dynamic Plugin Systems**: Frameworks like OSGi use custom class loaders for modular applications.
-- **Hot Swapping in Development**: IDEs reload classes without restarting the JVM.
-- **Application Servers**: Load web applications in isolated class loaders for security and versioning.
-
-## Code Examples
-
-### Custom Class Loader
+## Custom Class Loader
 
 ```java
 public class CustomClassLoader extends ClassLoader {
     @Override
     public Class<?> findClass(String name) throws ClassNotFoundException {
-        // Custom loading logic
-        return super.findClass(name);
+        byte[] b = loadClassFromFile(name);
+        return defineClass(name, b, 0, b.length);
+    }
+
+    private byte[] loadClassFromFile(String fileName) {
+        // Implementation to load class bytes from file
+        // Omitted for brevity
+        return new byte[0];
     }
 }
+
+// Usage
+CustomClassLoader loader = new CustomClassLoader();
+Class<?> clazz = loader.loadClass("com.example.MyClass");
 ```
 
-### Class Loading Example
+## Class Loading Example
 
 ```java
-public class Main {
+public class ClassLoadingDemo {
     public static void main(String[] args) {
-        try {
-            Class<?> clazz = Class.forName("com.example.MyClass");
-            Object instance = clazz.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        // Bootstrap loader loads String
+        String s = "Hello";
+        
+        // Extension loader loads classes from ext
+        // System loader loads application classes
+        ClassLoadingDemo demo = new ClassLoadingDemo();
+        
+        System.out.println("Class loader: " + demo.getClass().getClassLoader());
     }
 }
 ```
 
-## Common Pitfalls & Edge Cases
+# References
 
-- **Class Loading Deadlocks**: Circular dependencies between classes can cause deadlocks during initialization.
-- **ClassNotFoundException**: Ensure classpath is correct; use try-catch for dynamic loading.
-- **Memory Leaks from Class Loaders**: Custom class loaders can hold references, preventing GC.
-- **Security Issues**: Malicious code in loaded classes; use security managers.
-- **Performance Overhead**: Excessive class loading can slow startup; use lazy loading.
+- [Oracle JVM Specification](https://docs.oracle.com/javase/specs/jvms/se17/html/)
+- [Java Class Loading](https://www.oracle.com/technetwork/java/javase/classloaders-140200.html)
+- [JVM Internals](https://www.baeldung.com/jvm-class-loading)
 
-## Tools & Libraries
+# Github-README Links & Related Topics
 
-- **JVM Tools**: jmap, jstack for monitoring class loading.
-- **IDEs**: IntelliJ IDEA with class loader visualization.
-- **Libraries**: OSGi for modular class loading.
-
-## References
-
-- [Oracle JVM Documentation](https://docs.oracle.com/javase/specs/jvms/se21/html/)
-- [Baeldung: JVM Internals](https://www.baeldung.com/jvm)
-
-## Github-README Links & Related Topics
-
-- [Garbage Collection Algorithms](../garbage-collection-algorithms/README.md)
-- [Multithreading & Concurrency in Java](../multithreading-and-concurrency-in-java/README.md)
-- [Java Fundamentals](../java-fundamentals/README.md)
+- [Garbage Collection Algorithms](../garbage-collection-algorithms/)
+- [JVM Performance Tuning](../jvm-performance-tuning/)
+- [Java Class Loaders](../java-class-loaders/)
