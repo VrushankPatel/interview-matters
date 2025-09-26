@@ -102,6 +102,18 @@ New Next Topics Candidates
    - java-testing-advanced — 'Mocks, spies, and test frameworks'
    - build-automation — 'CI/CD with Maven and Gradle'
    - profiling-tools — 'Performance analysis tools'
+
+New Next Topics Candidates (this run)
+  - Order Book modeling — 'Canonical models for in-memory book and persistence'
+  - Matching algorithm internals — 'How exchanges match buy and sell orders'
+  - Time-in-Force variations across exchanges — 'DAY, GTC, IOC behaviors by venue'
+  - Market fragmentation & smart order routing — 'Routing orders across multiple markets'
+  - Latency measurement & monitoring — 'Tools and techniques for latency analysis'
+  - FIX Session Layer (Logon/Heartbeat/Seq numbers) — 'Session management in FIX protocol'
+  - Market data consolidation & TOPS snapshot vs incremental — 'Consolidating feeds from multiple sources'
+  - Latency arbitrage — 'Exploiting latency differences for profit'
+  - Swap & derivatives trade lifecycle — 'Trading non-equity instruments'
+  - Regulatory reports (e.g., MiFID/SEF) — 'Compliance reporting requirements'
    - advanced-java-concepts — 'Generics, type erasure, and more'
  - concurrent-collections — 'Thread-safe collections in Java'
  - java-streams-advanced — 'Advanced stream operations and collectors'

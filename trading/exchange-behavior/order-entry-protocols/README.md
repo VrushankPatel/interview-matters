@@ -116,8 +116,8 @@ fix.Session.sendToTarget(order, sessionID)
 
 # Github-README Links & Related Topics
 
-- [FIX Protocol](fix-protocol/)
-- [OUCH Protocol](ouch-protocol/)
-- [Order Types](order-types/)
-- [Execution Report](execution-report/)
-- [Journey of a Trade](journey-of-a-trade/)
+- [[FIX Protocol]]
+- [[OUCH Protocol]]
+- [[Order Types]]
+- [[Execution Report]]
+- [[Journey of a Trade]]
