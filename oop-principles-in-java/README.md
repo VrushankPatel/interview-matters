@@ -1,7 +1,7 @@
 ---
 title: OOP Principles in Java
-aliases: [Object-Oriented Programming in Java]
-tags: [#java,#oop]
+aliases: [Object-Oriented Programming in Java, Java OOP]
+tags: [#java,#oop,#principles]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -216,6 +216,20 @@ public class Main {
     }
 }
 ```
+
+## Common Pitfalls & Edge Cases
+
+1. **Tight Coupling:** Overusing inheritance can lead to tight coupling between classes.
+2. **Multiple Inheritance:** Java doesn't support multiple inheritance with classes, but interfaces can be used.
+3. **Method Overriding Issues:** Forgetting to use `@Override` annotation can lead to subtle bugs.
+4. **Abstract Class vs Interface:** Choosing the wrong abstraction mechanism can complicate the design.
+5. **Composition vs Inheritance:** Sometimes composition is preferred over inheritance for better flexibility.
+
+## Tools & Libraries
+
+- **UML Tools:** For designing class diagrams and understanding relationships.
+- **IDEs:** IntelliJ IDEA or Eclipse with built-in OOP support and refactoring tools.
+- **Design Patterns Libraries:** Frameworks that implement common OOP patterns.
 
 ## References
 

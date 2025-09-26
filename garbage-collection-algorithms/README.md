@@ -1,7 +1,7 @@
 ---
 title: Garbage Collection Algorithms
 aliases: [GC Algorithms, Java Garbage Collection]
-tags: [#java,#jvm,#performance]
+tags: [#java,#jvm,#garbage-collection,#algorithms]
 created: 2025-09-26
 updated: 2025-09-26
 ---

@@ -1,7 +1,7 @@
 ---
 title: Java Fundamentals
-aliases: []
-tags: [#java]
+aliases: [Java Basics, Java Core Concepts]
+tags: [#java,#fundamentals]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -221,6 +221,21 @@ public class Person {
     }
 }
 ```
+
+## Common Pitfalls & Edge Cases
+
+1. **Integer Overflow:** Be careful with large numbers that exceed the range of `int` or `long`.
+2. **Division by Zero:** Always check for zero before division operations.
+3. **Array Index Out of Bounds:** Ensure array indices are within valid range.
+4. **String Immutability:** Remember that strings are immutable in Java.
+5. **Floating-Point Precision:** Be aware of precision issues with `float` and `double` for financial calculations.
+
+## Tools & Libraries
+
+- **JDK (Java Development Kit):** Essential for compiling and running Java programs.
+- **IDE:** Eclipse, IntelliJ IDEA, or VS Code for development.
+- **Build Tools:** Maven or Gradle for project management and dependency management.
+- **JUnit:** For unit testing Java applications.
 
 ## References
 

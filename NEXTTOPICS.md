@@ -1,10 +1,5 @@
-- Java Fundamentals
-- OOP Principles in Java
-- JVM Internals & Class Loading
-- Garbage Collection Algorithms
-- Multithreading & Concurrency in Java
-- System Design Basics
-- High Scalability Patterns
-- CAP Theorem & Distributed Systems
-- Latency and Throughput Zero to Hero
-- Monitoring and Logging
+     1| - System Design Basics
+     2| - High Scalability Patterns
+     3| - CAP Theorem & Distributed Systems
+     4| - Latency and Throughput Zero to Hero
+     5| - Monitoring and Logging
