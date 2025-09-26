@@ -199,6 +199,63 @@ public class WeakReferenceExample {
 4. **Incorrect GC Tuning**: Over-tuning can lead to worse performance.
 5. **Generational GC Issues**: Premature promotion of objects to old generation.
 
+## Data Models / Message Formats
+
+### Heap Structure Diagram
+
+```mermaid
+graph TD
+    A[Heap] --> B[Young Generation]
+    A --> C[Old Generation]
+    A --> D[Permanent Generation/Metaspace]
+    B --> E[Eden Space]
+    B --> F[Survivor Space 0]
+    B --> G[Survivor Space 1]
+    C --> H[Tenured Space]
+```
+
+### GC Algorithm Flow Diagram
+
+```mermaid
+stateDiagram-v2
+    [*] --> MinorGC
+    MinorGC --> Survived: Objects survive
+    Survived --> OldGen: Age threshold reached
+    MinorGC --> Dead: Objects die
+    Dead --> [*]
+    OldGen --> MajorGC: Old gen full
+    MajorGC --> [*]: Memory reclaimed
+```
+
+## Journey / Sequence
+
+#### Garbage Collection Cycle Sequence
+
+```mermaid
+sequenceDiagram
+    participant App
+    participant YoungGen
+    participant OldGen
+    participant GC
+    App->>YoungGen: Allocate objects
+    YoungGen->>YoungGen: Eden fills up
+    YoungGen->>GC: Trigger Minor GC
+    GC->>YoungGen: Mark live objects
+    GC->>YoungGen: Copy survivors to S0
+    GC->>OldGen: Promote aged objects
+    OldGen->>OldGen: Accumulate objects
+    OldGen->>GC: Trigger Major GC when full
+    GC->>OldGen: Mark sweep compact
+    GC->>App: Resume application
+```
+
+## STAR Summary
+
+- **Situation**: Interviewer asked about Java memory management and GC algorithms for performance optimization.
+- **Task**: Explain different GC algorithms, their trade-offs, and when to use each.
+- **Action**: Compared Serial, Parallel, CMS, G1, ZGC, and Shenandoah GCs, discussed generational hypothesis, and provided tuning recommendations.
+- **Result**: Demonstrated expertise in JVM memory management, leading to discussion of real-world performance tuning scenarios.
+
 ## Tools & Libraries
 
 - **VisualVM**: Monitor GC activity.

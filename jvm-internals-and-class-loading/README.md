@@ -139,6 +139,65 @@ public class MemoryDemo {
 - **Memory Leaks**: Improper object references in heap
 - **StackOverflowError**: Deep recursion exceeding stack size
 
+## Data Models / Message Formats
+
+### Class Loader Hierarchy Diagram
+
+```mermaid
+classDiagram
+    ClassLoader <|-- BootstrapClassLoader
+    ClassLoader <|-- ExtensionClassLoader
+    ClassLoader <|-- SystemClassLoader
+    ClassLoader <|-- CustomClassLoader
+    class ClassLoader {
+        +loadClass(String name)
+        +findClass(String name)
+        +defineClass(String name, byte[] b, int off, int len)
+    }
+    class BootstrapClassLoader {
+        +load core classes
+    }
+    class ExtensionClassLoader {
+        +load extension classes
+    }
+    class SystemClassLoader {
+        +load application classes
+    }
+    class CustomClassLoader {
+        +custom loading logic
+    }
+```
+
+## Journey / Sequence
+
+#### Class Loading Sequence
+
+```mermaid
+sequenceDiagram
+    participant App
+    participant SystemCL
+    participant ExtensionCL
+    participant BootstrapCL
+    App->>SystemCL: loadClass("com.example.MyClass")
+    SystemCL->>SystemCL: findLoadedClass()
+    SystemCL->>ExtensionCL: loadClass()
+    ExtensionCL->>ExtensionCL: findLoadedClass()
+    ExtensionCL->>BootstrapCL: loadClass()
+    BootstrapCL->>BootstrapCL: findLoadedClass()
+    BootstrapCL-->>ExtensionCL: null
+    ExtensionCL->>ExtensionCL: findClass()
+    ExtensionCL-->>SystemCL: null
+    SystemCL->>SystemCL: findClass()
+    SystemCL-->>App: Class object
+```
+
+## STAR Summary
+
+- **Situation**: Interview question about JVM internals and how classes are loaded in Java applications.
+- **Task**: Explain JVM architecture, class loading process, and different types of class loaders.
+- **Action**: Described the three phases of class loading (loading, linking, initialization), explained delegation hierarchy, and provided code examples for custom class loaders.
+- **Result**: Demonstrated deep understanding of JVM internals and class loading mechanisms, impressing the interviewer with technical depth.
+
 ## Tools & Libraries
 
 - **VisualVM**: For monitoring JVM memory and performance

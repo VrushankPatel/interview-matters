@@ -3,7 +3,7 @@ title: Multithreading & Concurrency in Java
 aliases: [Java Concurrency, Threading in Java]
 tags: [#java,#concurrency]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Multithreading & Concurrency in Java
@@ -252,6 +252,77 @@ public class ProducerConsumer {
 - **Memory Visibility**: Changes not visible across threads without proper synchronization.
 - **Thread Leaks**: Threads not properly terminated, consuming resources.
 - **Over-synchronization**: Excessive locking reducing performance.
+
+## Data Models / Message Formats
+
+### Thread Model Diagram
+
+```mermaid
+classDiagram
+    class Thread {
+        -String name
+        -int priority
+        -boolean daemon
+        +start()
+        +run()
+        +join()
+        +sleep(long millis)
+        +interrupt()
+    }
+    class Runnable {
+        +run()
+    }
+    class ExecutorService {
+        +submit(Runnable task)
+        +shutdown()
+    }
+    class ThreadPoolExecutor {
+        +execute(Runnable command)
+    }
+    Thread --> Runnable
+    ExecutorService --> ThreadPoolExecutor
+```
+
+### Concurrency Pattern Diagram
+
+```mermaid
+graph TD
+    A[Shared Resource] --> B[Mutex/Lock]
+    B --> C[Thread 1]
+    B --> D[Thread 2]
+    B --> E[Thread N]
+    C --> F[Critical Section]
+    D --> F
+    E --> F
+```
+
+## Journey / Sequence
+
+#### Thread Synchronization Sequence
+
+```mermaid
+sequenceDiagram
+    participant T1
+    participant Lock
+    participant SharedResource
+    participant T2
+    T1->>Lock: acquire()
+    Lock-->>T1: lock granted
+    T1->>SharedResource: access/modify
+    SharedResource-->>T1: operation complete
+    T1->>Lock: release()
+    Lock-->>T2: notify waiting threads
+    T2->>Lock: acquire()
+    Lock-->>T2: lock granted
+    T2->>SharedResource: access/modify
+```
+
+## STAR Summary
+
+- **Situation**: Interview question about handling concurrent access in a multi-threaded Java application.
+- **Task**: Explain thread safety, synchronization mechanisms, and demonstrate proper concurrent programming techniques.
+- **Action**: Discussed synchronized blocks, volatile variables, atomic classes, and Executor framework; provided code examples for producer-consumer pattern and thread-safe counters.
+- **Result**: Showed strong understanding of Java concurrency, leading to advanced questions about lock-free algorithms and performance optimization.
 
 ## Tools & Libraries
 

@@ -244,6 +244,78 @@ public class Bike extends Vehicle {
 4. **Multiple Inheritance Problem**: Java doesn't support multiple inheritance with classes; use interfaces instead.
 5. **Abstract Class vs Interface**: Choosing wrong abstraction mechanism can limit flexibility.
 
+## Data Models / Message Formats
+
+### Inheritance Hierarchy Diagram
+
+```mermaid
+classDiagram
+    Animal <|-- Dog
+    Animal <|-- Cat
+    class Animal {
+        +String name
+        +eat()
+        +sleep()
+    }
+    class Dog {
+        +bark()
+    }
+    class Cat {
+        +meow()
+    }
+```
+
+### Polymorphism Interface Diagram
+
+```mermaid
+classDiagram
+    Shape <|-- Circle
+    Shape <|-- Rectangle
+    class Shape {
+        +draw()
+    }
+    class Circle {
+        +draw()
+    }
+    class Rectangle {
+        +draw()
+    }
+```
+
+## Journey / Sequence
+
+#### Polymorphic Method Call Sequence
+
+```mermaid
+sequenceDiagram
+    participant Main
+    participant Shape
+    participant Circle
+    participant Rectangle
+    Main->>Shape: draw() on Circle
+    Shape->>Circle: draw()
+    Circle-->>Shape: "Drawing a circle"
+    Shape-->>Main: result
+    Main->>Shape: draw() on Rectangle
+    Shape->>Rectangle: draw()
+    Rectangle-->>Shape: "Drawing a rectangle"
+    Shape-->>Main: result
+```
+
+## STAR Summary
+
+- **Situation**: Interviewer asked to explain OOP principles and demonstrate their usage in Java.
+- **Task**: Illustrate encapsulation, inheritance, polymorphism, and abstraction with code examples.
+- **Action**: Created BankAccount class for encapsulation, Animal-Dog-Cat hierarchy for inheritance, Shape classes for polymorphism, and Vehicle abstract class for abstraction.
+- **Result**: Provided clear explanations and working code that showcased all four OOP principles effectively.
+
+## Tools & Libraries
+
+- **JDK**: For compiling and running Java OOP code.
+- **IDE**: IntelliJ IDEA or Eclipse for OOP development with refactoring support.
+- **Testing Frameworks**: JUnit for unit testing OOP classes and inheritance hierarchies.
+- **Build Tools**: Maven or Gradle for managing dependencies in OOP projects.
+
 ## References
 
 - [Oracle Java OOP Tutorial](https://docs.oracle.com/javase/tutorial/java/concepts/)

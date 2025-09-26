@@ -269,6 +269,43 @@ public class ArrayExample {
 
 5. **Case Sensitivity**: Java is case-sensitive, so `myVariable` and `myvariable` are different.
 
+## Data Models / Message Formats
+
+### Class Diagram
+
+```mermaid
+classDiagram
+    class Person {
+        -String name
+        -int age
+        +Person(String name, int age)
+        +String getName()
+        +int getAge()
+        +void setAge(int age)
+    }
+```
+
+## Journey / Sequence
+
+#### Object Creation Sequence
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Person
+    Client->>Person: new Person("Alice", 30)
+    Person-->>Client: Person object
+    Client->>Person: getName()
+    Person-->>Client: "Alice"
+```
+
+## STAR Summary
+
+- **Situation**: Preparing for a Java developer interview requiring knowledge of language fundamentals.
+- **Task**: Demonstrate understanding of Java basics including data types, control structures, and OOP concepts.
+- **Action**: Studied primitive and reference types, implemented classes with encapsulation, practiced control flow with loops and conditionals.
+- **Result**: Confidently explained Java fundamentals and provided working code examples during the interview.
+
 ## Tools & Libraries
 
 - **JDK (Java Development Kit)**: Essential for compiling and running Java programs.
