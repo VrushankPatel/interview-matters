@@ -1,6 +1,6 @@
 ---
 title: Popular System Designs (LLD and HLD)
-aliases: [system design examples, LLD HLD examples]
+aliases: ["system design examples", "LLD HLD examples"]
 tags: [#system-design,#lld,#hld]
 created: 2025-09-25
 updated: 2025-09-26
@@ -92,6 +92,54 @@ public class UrlShortener {
 User -> API Gateway -> Shortener Service -> Database
                       -> Redirect Service
 ```
+
+## Journey / Sequence
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant API Gateway
+    participant Service
+    participant Database
+
+    User->>API Gateway: Request
+    API Gateway->>Service: Route
+    Service->>Database: Query
+    Database-->>Service: Data
+    Service-->>API Gateway: Response
+    API Gateway-->>User: Result
+```
+
+## Data Models / Message Formats
+
+(The table in Detailed Explanation serves as data models for various systems.)
+
+## Common Pitfalls & Edge Cases
+
+- **Over-engineering:** Designing complex systems for simple problems.
+- **Ignoring Scalability:** Not planning for growth from day one.
+- **Security Oversights:** Failing to incorporate authentication and encryption.
+- **Data Consistency Issues:** Not handling distributed data properly.
+- **Edge Cases:** Network partitions, high concurrency, data migration.
+
+## Tools & Libraries
+
+- **Frameworks:** Spring Boot (Java), Django (Python), Express.js (Node.js)
+- **Databases:** PostgreSQL, MongoDB, Cassandra
+- **Caching:** Redis, Memcached
+- **Message Queues:** Apache Kafka, RabbitMQ
+- **Cloud Platforms:** AWS, Google Cloud, Azure
+- **Monitoring:** Prometheus, Grafana
+
+## STAR Summary
+
+**Situation:** In technical interviews, candidates frequently propose inadequate architectures for popular systems.
+
+**Task:** As a senior engineer, I needed to guide candidates through proper HLD and LLD for systems like URL shorteners.
+
+**Action:** I emphasized key components, scalability patterns, and trade-offs, using diagrams and code examples to illustrate points.
+
+**Result:** Candidates improved their design skills, and the team hired engineers capable of building robust, scalable systems.
 
 ## References
 
