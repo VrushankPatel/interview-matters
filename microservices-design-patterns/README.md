@@ -1,9 +1,9 @@
 ---
 title: Microservices Design Patterns
-aliases: [Microservices Patterns]
-tags: [#system-design]
+aliases: [Microservices Patterns, Distributed System Patterns]
+tags: [#system-design, #microservices]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Microservices Design Patterns
@@ -41,6 +41,30 @@ Microservices design patterns provide architectural solutions for building scala
 
 - **External Configuration**: Centralized config management.
 - **Service Discovery**: Automatic registration and discovery of services.
+
+| Category                  | Patterns                                                                 |
+|---------------------------|--------------------------------------------------------------------------|
+| Decomposition             | Decompose by Business Capability, Decompose by Subdomain                 |
+| Communication             | API Gateway, Service Mesh, Event-Driven Communication                    |
+| Data Management           | Database per Service, Saga, CQRS                                        |
+| Observability & Resilience| Circuit Breaker, Bulkhead, Health Check                                  |
+| Cross-Cutting             | External Configuration, Service Discovery                                |
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant OrderService
+    participant InventoryService
+    participant PaymentService
+
+    Client->>OrderService: Create Order
+    OrderService->>InventoryService: Reserve Items
+    InventoryService-->>OrderService: Reserved
+    OrderService->>PaymentService: Charge Payment
+    PaymentService-->>OrderService: Charged
+    OrderService->>OrderService: Save Order
+    OrderService-->>Client: Order Created
+```
 
 ## Real-world Examples & Use Cases
 

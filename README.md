@@ -63,8 +63,10 @@ This repository contains comprehensive documentation on various topics for inter
 - [Microservices Architecture](./microservices-architecture/README.md)
 - [Microservices Communication Patterns](./microservices-communication-patterns/README.md)
 - [Microservices Decomposition](./microservices-decomposition/README.md)
+- [Microservices Design Patterns](./microservices-design-patterns/README.md)
 - [Microservices Security](./microservices-security/README.md)
 - [Security Best Practices in Microservices](./security-best-practices-in-microservices/README.md)
+- [Security in System Design](./security-in-system-design/README.md)
 - [Monitoring and Logging](./monitoring-and-logging/README.md)
 - [Netflix System Design](./netflix-system-design/README.md)
 - [Netflix Video Streaming Architecture](./netflix-video-streaming-architecture/README.md)
@@ -105,6 +107,7 @@ This repository contains comprehensive documentation on various topics for inter
 - [Java CountdownLatch](./java-countdownlatch/README.md)
 - [Java CyclicBarrier](./java-cyclicbarrier/README.md)
 - [Java Date Time API](./java-date-time-api/README.md)
+- [Design Patterns in Java](./design-patterns-in-java/README.md)
 - [Java Design Patterns](./java-design-patterns/README.md)
 - [Java Testing Frameworks](./java-testing-frameworks/README.md)
 - [Java Testing Frameworks (JUnit, Mockito)](./java-testing-frameworks-junit-mockito/README.md)
@@ -218,6 +221,7 @@ This repository contains comprehensive documentation on various topics for inter
 
 ### Networking
 - [API Authentication Methods](./api-authentication-methods/README.md)
+- [API Design Best Practices](./api-design-best-practices/README.md)
 - [API Design Principles](./api-design-principles/README.md)
 - [API Rate Limiting](./system-design/rate-limiting/api-rate-limiting/README.md)
 - [API Security Best Practices](./api-security-best-practices/README.md)
@@ -233,6 +237,7 @@ This repository contains comprehensive documentation on various topics for inter
 ### Databases
 - [Database ACID Properties](./database-acid-properties/README.md)
 - [Database Connection Pooling](./database-connection-pooling/README.md)
+- [Database Design Patterns](./database-design-patterns/README.md)
 - [Database Design Principles](./database-design-principles/README.md)
 - [Database Indexing Best Practices](./database-indexing-best-practices/README.md)
 - [Database Indexing Strategies](./database-indexing-strategies/README.md)

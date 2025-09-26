@@ -1,9 +1,4 @@
 # NEXT TOPICS
-- Design Patterns in Java
-- Microservices Design Patterns
-- API Design Best Practices
-- Database Design Patterns
-- Security in System Design
 - Scalability Patterns
 - Performance Optimization Techniques
 - Cloud Architecture Patterns

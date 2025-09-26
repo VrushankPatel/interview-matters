@@ -1,9 +1,9 @@
 ---
 title: Design Patterns in Java
-aliases: [Design Patterns, Java Design Patterns]
+aliases: [Design Patterns, Java Design Patterns, Gang of Four Patterns]
 tags: [#java,#design-patterns]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Design Patterns in Java
@@ -48,6 +48,22 @@ These patterns are concerned with algorithms and the assignment of responsibilit
 - **Strategy**: Defines a family of algorithms and makes them interchangeable.
 - **Template Method**: Defines the skeleton of an algorithm in a method.
 - **Visitor**: Separates algorithm from the object structure on which it operates.
+
+| Category       | Patterns                                                                 |
+|----------------|--------------------------------------------------------------------------|
+| Creational     | Singleton, Factory Method, Abstract Factory, Builder, Prototype         |
+| Structural     | Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy         |
+| Behavioral     | Chain of Responsibility, Command, Interpreter, Iterator, Mediator, Memento, Observer, State, Strategy, Template Method, Visitor |
+
+```mermaid
+classDiagram
+    class Singleton {
+        -Singleton instance
+        -Singleton()
+        +getInstance() Singleton
+    }
+    Singleton --> Singleton : instance
+```
 
 ## Real-world Examples & Use Cases
 
