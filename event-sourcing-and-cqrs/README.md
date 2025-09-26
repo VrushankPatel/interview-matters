@@ -6,8 +6,6 @@ created: 2025-09-25
 updated: 2025-09-26
 ---
 
-# Event Sourcing and CQRS
-
 ## Overview
 
 Event Sourcing is an architectural pattern that stores the state of an application as a sequence of immutable events. Instead of updating the current state directly, changes are captured as events that can be replayed to reconstruct the state at any point in time. CQRS (Command Query Responsibility Segregation) is a complementary pattern that separates the responsibilities of handling commands (write operations) from queries (read operations), often used together with Event Sourcing for better scalability and performance.

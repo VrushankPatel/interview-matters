@@ -6,8 +6,6 @@ created: 2025-09-25
 updated: 2025-09-26
 ---
 
-# Kubernetes Operators
-
 ## Overview
 
 Kubernetes Operators are software extensions that automate the management of complex applications on Kubernetes. They extend the Kubernetes API to provide custom resources and controllers that manage application lifecycle, configuration, and operational tasks.

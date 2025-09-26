@@ -6,8 +6,6 @@ created: 2025-09-25
 updated: 2025-09-26
 ---
 
-# GraphQL API Design
-
 ## Overview
 
 GraphQL is a query language and runtime for APIs that allows clients to request exactly the data they need, making APIs more efficient and flexible compared to REST. It provides a single endpoint for data fetching and manipulation, with a strongly typed schema.

@@ -3,10 +3,10 @@ title: Service Mesh with Istio
 aliases: [istio service mesh]
 tags: [#istio,#service-mesh,#kubernetes,#microservices]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
-# Overview
+## Overview
 
 Istio is an open-source service mesh that provides a uniform way to connect, secure, and observe microservices. It manages traffic, enforces policies, and collects telemetry without code changes.
 
@@ -18,7 +18,7 @@ graph TD
     B --> E[Metrics, Logs, Traces]
 ```
 
-# Detailed Explanation
+## Detailed Explanation
 
 A service mesh like Istio uses sidecar proxies (Envoy) to handle inter-service communication. It offers features like load balancing, circuit breaking, mTLS, and observability through metrics and tracing.
 
@@ -27,14 +27,14 @@ A service mesh like Istio uses sidecar proxies (Envoy) to handle inter-service c
 - **Control Plane**: Istiod managing configuration.
 - **Gateways**: Ingress/egress traffic control.
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 - **E-commerce Platforms**: Manage traffic spikes and secure payments.
 - **Financial Services**: Enforce compliance with mTLS.
 - **Cloud-Native Apps**: Kubernetes deployments for observability.
 - **Multi-Cloud**: Consistent policies across providers.
 
-# Code Examples
+## Code Examples
 
 ## Istio YAML for Traffic Routing
 ```yaml
@@ -67,21 +67,21 @@ public class ServiceController {
 }
 ```
 
-# References
+## References
 
 - [What is Istio?](https://istio.io/latest/docs/concepts/what-is-istio/)
 - [Istio Documentation](https://istio.io/latest/docs/)
 - [Service Mesh Patterns](https://www.oreilly.com/library/view/service-mesh-patterns/9781492086440/)
 - [CNCF Istio Project](https://www.cncf.io/projects/istio/)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 - [Microservices Architecture](../microservices-architecture/README.md)
 - [Kubernetes Basics](../kubernetes-basics/README.md)
 - [API Gateway Design](../api-gateway-design/README.md)
 - [Kubernetes Networking](../kubernetes-networking/README.md)
 
-# STAR Summary
+## STAR Summary
 
 - **Situation**: Complex microservices communication.
 - **Task**: Simplify traffic management and security.
@@ -105,7 +105,7 @@ sequenceDiagram
     Istio->>Services: Enforce traffic rules
 ```
 
-# Data Models / Message Formats
+## Data Models / Message Formats
 
 - **Telemetry Data**: {service, latency, error_rate}
 
