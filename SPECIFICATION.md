@@ -5,9 +5,8 @@ Last update
 2025-09-26
 
 Summary of recent additions
-      - Processed 5 topics: FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols
-      - Restructured repository: merged duplicate directories (e.g., moved root-level trading topics to subcategories like protocols/, market-data/); fixed all README.md files to use proper markdown links instead of obsidian-style [[ ]] wikilinks for better Github-README compatibility.
-      - Processed 5 topics: Journey of a Trade (end-to-end), Order Types (DAY, GTC, FOK, IOC), Quotes & RFQ workflows, Execution Report, Trade Capture Report
+- Processed 5 topics: FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols
+- Restructured trading topics by moving root-level directories to trading/ subdir and updated links in trading/README.md
 
 Conventions
  - Dir naming: kebab-case.
@@ -172,25 +171,15 @@ New Next Topics Candidates
 
 TODO
    - High-level open design decisions and split criteria for oversized topics.
--e 
+
 New Next Topics Candidates (this run)
-     - Order Book modeling — 'Canonical models for in-memory book and persistence'
-     - Matching algorithm internals — 'How exchanges match buy and sell orders'
-     - Time-in-Force variations across exchanges — 'DAY, GTC, IOC behaviors by venue'
-     - Market fragmentation & smart order routing — 'Routing orders across multiple markets'
-     - Latency measurement & monitoring — 'Tools and techniques for latency analysis'
-     - FIX Session Layer (Logon/Heartbeat/Seq numbers) — 'Session management in FIX protocol'
-     - Market data consolidation & TOPS snapshot vs incremental — 'Consolidating feeds from multiple sources'
-     - Latency arbitrage — 'Exploiting latency differences for profit'
-     - Swap & derivatives trade lifecycle — 'Trading non-equity instruments'
-     - Regulatory reports (e.g., MiFID/SEF) — 'Compliance reporting requirements'
-     - Order Book modeling — 'Canonical models for in-memory book and persistence'
-     - Matching algorithm internals — 'How exchanges match buy and sell orders'
-     - Time-in-Force variations across exchanges — 'DAY, GTC, IOC behaviors by venue'
-     - Market fragmentation & smart order routing — 'Routing orders across multiple markets'
-     - Latency measurement & monitoring — 'Tools and techniques for latency analysis'
-     - FIX Session Layer (Logon/Heartbeat/Seq numbers) — 'Session management in FIX protocol'
-     - Market data consolidation & TOPS snapshot vs incremental — 'Consolidating feeds from multiple sources'
-     - Latency arbitrage — 'Exploiting latency differences for profit'
-     - Swap & derivatives trade lifecycle — 'Trading non-equity instruments'
-     - Regulatory reports (e.g., MiFID/SEF) — 'Compliance reporting requirements'
+- Order Book modeling — 'Canonical models for in-memory book and persistence'
+- Matching algorithm internals — 'How exchanges match buy and sell orders'
+- Time-in-Force variations across exchanges — 'DAY, GTC, IOC behaviors by venue'
+- Market fragmentation & smart order routing — 'Routing orders across multiple markets'
+- Latency measurement & monitoring — 'Tools and techniques for latency analysis'
+- FIX Session Layer (Logon/Heartbeat/Seq numbers) — 'Session management in FIX protocol'
+- Market data consolidation & TOPS snapshot vs incremental — 'Consolidating feeds from multiple sources'
+- Latency arbitrage — 'Exploiting latency differences for profit'
+- Swap & derivatives trade lifecycle — 'Trading non-equity instruments'
+- Regulatory reports (e.g., MiFID/SEF) — 'Compliance reporting requirements'
