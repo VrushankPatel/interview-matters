@@ -121,11 +121,11 @@ strings.forEach(System.out::println);
 
 ## Github-README Links & Related Topics
 
-- [Java Fundamentals](../java-fundamentals/)
-- [Collections and Data Structures](../collections-and-data-structures/)
-- [Concurrency and Parallelism](../concurrency-and-parallelism/)
-- [Design Patterns](../design-patterns/)
-- [API Design Principles](../api-design-principles/)
+- [Java Fundamentals](../java-fundamentals/README.md)
+- [Collections and Data Structures](../collections-and-data-structures/README.md)
+- [Concurrency and Parallelism](../concurrency-and-parallelism/README.md)
+- [Design Patterns](../design-patterns/README.md)
+- [API Design Principles](../api-design-principles/README.md)
 
 ## STAR Summary
 

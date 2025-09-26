@@ -1,6 +1,6 @@
 ---
 title: Java Fundamentals
-aliases: []
+aliases: [Java Basics, Java Core Concepts]
 tags: [#java]
 created: 2025-09-26
 updated: 2025-09-26

@@ -150,10 +150,10 @@ Here, reads may return stale data to maintain availability.
 
 ## Github-README Links & Related Topics
 
-- [Distributed Consensus](../distributed-consensus/)
-- [Database ACID Properties](../database-acid-properties/)
-- [Eventual Consistency](../eventual-consistency/)
-- [Fault Tolerance in Distributed Systems](../fault-tolerance-in-distributed-systems/)
-- [Consensus Algorithms Overview](../consensus-algorithms-overview/)
-- [Paxos Algorithm](../paxos-algorithm/)
-- [Two-Phase Commit](../two-phase-commit/)
+- [Distributed Consensus](../distributed-consensus/README.md)
+- [Database ACID Properties](../database-acid-properties/README.md)
+- [Eventual Consistency](../eventual-consistency/README.md)
+- [Fault Tolerance in Distributed Systems](../fault-tolerance-in-distributed-systems/README.md)
+- [Consensus Algorithms Overview](../consensus-algorithms-overview/README.md)
+- [Paxos Algorithm](../paxos-algorithm/README.md)
+- [Two-Phase Commit](../two-phase-commit/README.md)

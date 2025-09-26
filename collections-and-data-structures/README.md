@@ -168,8 +168,8 @@ sequenceDiagram
 
 ## Github-README Links & Related Topics
 
-- [Java Fundamentals](../java-fundamentals/)
-- [Multithreading & Concurrency in Java](../java-multithreading-and-concurrency/)
-- [Java Stream API & Functional Programming](../java-stream-api-and-functional-programming/)
-- [Algorithms](../algorithms/)
-- [Design Patterns in Java](../design-patterns-in-java/)
+- [Java Fundamentals](../java-fundamentals/README.md)
+- [Multithreading & Concurrency in Java](../java-multithreading-and-concurrency/README.md)
+- [Java Stream API & Functional Programming](../java-stream-api-and-functional-programming/README.md)
+- [Algorithms](../algorithms/README.md)
+- [Design Patterns in Java](../design-patterns-in-java/README.md)
