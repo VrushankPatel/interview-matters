@@ -1,7 +1,7 @@
 ---
 title: OOP Principles in Java
-aliases: [Object-Oriented Programming in Java, Java OOP Concepts]
-tags: [#java,#oop]
+aliases: [OOP Principles in Java, Object-Oriented Programming in Java]
+tags: [#java]
 created: 2025-09-26
 updated: 2025-09-26
 ---

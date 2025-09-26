@@ -1,7 +1,7 @@
 ---
 title: Java Annotations
-aliases: [Java Annotations Deep Dive]
-tags: [#java, #advanced-java]
+aliases: [Java Annotations, Annotations in Java]
+tags: [#java]
 created: 2025-09-25
 updated: 2025-09-26
 ---
