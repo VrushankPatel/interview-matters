@@ -1,10 +1,12 @@
-- Java Fundamentals
-- OOP Principles in Java
-- JVM Internals & Class Loading
-- Garbage Collection Algorithms
-- Multithreading & Concurrency in Java
 - System Design Basics
 - High Scalability Patterns
 - CAP Theorem & Distributed Systems
 - Replication vs Sharding vs Partitioning
 - Caching
+- LLD HLD Basics
+- Latency and Throughput Zero to Hero
+- Monitoring and Logging
+- DevOps & Infrastructure as Code
+- Proxy Forward and Reverse
+- Load Balancing and Strategies
+- Rate Limiting
