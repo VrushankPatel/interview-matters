@@ -1,5 +1,5 @@
-Collections & Data Structures
-Java Stream API & Functional Programming
-System Design Basics
-High Scalability Patterns
-CAP Theorem & Distributed Systems
+CI/CD Best Practices
+Security in Distributed Systems
+Graph Algorithms
+Dynamic Programming
+Behavioral Interview Preparation

@@ -8,8 +8,6 @@ updated: 2025-09-26
 
 # Overview
 
-## Overview
-
 Container orchestration automates the deployment, scaling, and management of containerized applications. Kubernetes (K8s) is the leading platform for this, providing features like service discovery, load balancing, and self-healing.
 
 ## Detailed Explanation
@@ -89,6 +87,14 @@ spec:
       targetPort: 8080
   type: LoadBalancer
 ```
+
+## Common Pitfalls & Edge Cases
+
+- Resource limits not set, leading to resource contention.
+- Improper service discovery configuration.
+- Ignoring cluster capacity for scaling.
+- Not handling pod failures gracefully.
+- Security misconfigurations in RBAC.
 
 ## References
 
