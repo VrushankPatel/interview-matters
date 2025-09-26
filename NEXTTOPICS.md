@@ -1,7 +1,7 @@
-Monitoring and Logging
-Async logging
-DevOps & Infrastructure as Code
-Proxy forward and reverse
-Load balancing and strategies
-Rate limiting
-Concurrency & Parallelism
+API Gateway Patterns
+Database Indexing Strategies
+GraphQL vs REST
+Event Streaming with Apache Kafka
+OAuth and JWT
+Chaos Engineering
+Infrastructure as Code with Terraform
