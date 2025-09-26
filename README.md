@@ -71,7 +71,7 @@ This repository contains comprehensive documentation on various topics for inter
 - [Popular System Designs LLD and HLD](./popular-system-designs-lld-and-hld/README.md)
 - [Proxy Forward and Reverse](./proxy-forward-and-reverse/README.md)
 - [Raft and Leader Election](./raft-and-leader-election/README.md)
-- [Rate Limiting](./system-design/rate-limiting/README.md)
+- [Rate Limiting](./rate-limiting/README.md)
 - [Replication vs Sharding vs Partitioning](./replication-vs-sharding-vs-partitioning/README.md)
 - [Popular System Designs](./popular-system-designs/README.md)
 - [Service Mesh Architecture](./service-mesh-architecture/README.md)
