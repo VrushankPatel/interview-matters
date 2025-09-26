@@ -70,7 +70,7 @@ This repository contains comprehensive documentation on various topics for inter
 - [Popular System Designs LLD and HLD](./popular-system-designs-lld-and-hld/README.md)
 - [Proxy Forward and Reverse](./proxy-forward-and-reverse/README.md)
 - [Raft and Leader Election](./raft-and-leader-election/README.md)
-- [Rate Limiting](./rate-limiting/README.md)
+- [Rate Limiting](./system-design/rate-limiting/README.md)
 - [Replication vs Sharding vs Partitioning](./replication-vs-sharding-vs-partitioning/README.md)
 - [Popular System Designs](./popular-system-designs/README.md)
 - [Service Mesh Architecture](./service-mesh-architecture/README.md)
@@ -217,7 +217,7 @@ This repository contains comprehensive documentation on various topics for inter
 ### Networking
 - [API Authentication Methods](./api-authentication-methods/README.md)
 - [API Design Principles](./api-design-principles/README.md)
-- [API Rate Limiting](./api-rate-limiting/README.md)
+- [API Rate Limiting](./system-design/rate-limiting/api-rate-limiting/README.md)
 - [API Security Best Practices](./api-security-best-practices/README.md)
 - [API Versioning Strategies](./api-versioning-strategies/README.md)
 - [File IO NIO](./file-io-nio/README.md)
