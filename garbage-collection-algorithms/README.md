@@ -53,5 +53,5 @@ Use JVM flags like -XX:+PrintGCDetails
 
 ## Github-README Links & Related Topics
 
-- [JVM Internals & Class Loading](../jvm-internals-class-loading/)
+- [JVM Internals & Class Loading](../jvm-internals-and-class-loading/)
 - [Java Memory Management](../java-memory-management/)

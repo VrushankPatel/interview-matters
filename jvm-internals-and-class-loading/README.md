@@ -1,7 +1,7 @@
 ---
 title: JVM Internals & Class Loading
-aliases: [JVM Internals & Class Loading, Java Virtual Machine]
-tags: [#java]
+aliases: [JVM Architecture, Java Class Loading Mechanism]
+tags: [#java,#jvm]
 created: 2025-09-26
 updated: 2025-09-26
 ---
