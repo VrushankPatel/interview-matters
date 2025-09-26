@@ -1,8 +1,3 @@
-Java I/O and NIO
-Java Networking
-Java Security Basics
-Java Annotations and Reflection
-Java Generics
 Java Lambda Expressions
 Java Modules
 YouTube System Design
