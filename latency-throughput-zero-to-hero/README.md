@@ -1,5 +1,5 @@
 ---
-title: Latency Throughput Zero to Hero
+title: Latency and Throughput Zero to Hero
 aliases: [latency vs throughput, performance metrics]
 tags: [#system-design,#performance,#scalability]
 created: 2025-09-26
