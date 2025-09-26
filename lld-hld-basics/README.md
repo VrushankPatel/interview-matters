@@ -1,7 +1,7 @@
 ---
 title: LLD HLD Basics
-aliases: [Low Level Design, High Level Design]
-tags: [#system-design,#lld,#hld]
+aliases: [Low Level Design, High Level Design, System Design Fundamentals]
+tags: [#system-design,#lld,#hld,#design]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -10,141 +10,142 @@ updated: 2025-09-26
 
 ## Overview
 
-Low Level Design (LLD) and High Level Design (HLD) are critical phases in software system design, bridging requirements and implementation. HLD provides a bird's-eye view of the system architecture, focusing on components, data flow, and technology choices. LLD delves into detailed specifications, including class diagrams, database schemas, and algorithms. Together, they ensure scalable, maintainable solutions. HLD is typically created first, followed by LLD for each component.
-
-Key differences:
-- **HLD**: Macro-level, non-technical stakeholders, focuses on "what" and "why".
-- **LLD**: Micro-level, developers, focuses on "how".
-
-These designs are essential for interviews, where candidates demonstrate problem-solving from architecture to code.
+Low Level Design (LLD) and High Level Design (HLD) are fundamental concepts in software engineering and system design, particularly in interviews and architecture discussions. HLD provides a bird's-eye view of the system, focusing on overall architecture, while LLD delves into the detailed implementation, including data structures, algorithms, and component interactions. Together, they bridge the gap between requirements and code.
 
 ## Detailed Explanation
 
 ### High Level Design (HLD)
 
-HLD outlines the system's overall structure without implementation details. It includes:
-- **System Architecture**: Components like web servers, databases, load balancers.
-- **Data Flow**: How data moves between components (e.g., via APIs, queues).
-- **Technology Stack**: Choices like cloud providers, databases (SQL/NoSQL).
-- **Scalability & Security**: High-level strategies for handling load and threats.
-- **Interfaces**: External integrations (e.g., payment gateways).
+HLD outlines the system's architecture at a high level, identifying major components, their interactions, and technologies. It answers "what" the system does and "how" at a macro level.
 
-HLD uses diagrams like system architecture diagrams to communicate with non-technical teams.
+- **Components**: System boundaries, modules, databases, APIs.
+- **Diagrams**: Architecture diagrams, data flow diagrams.
+- **Focus**: Scalability, reliability, technology stack.
 
 ### Low Level Design (LLD)
 
-LLD provides implementation blueprints for HLD components. It includes:
-- **Class Diagrams**: Relationships, attributes, methods using UML.
-- **Database Schemas**: Tables, relationships, indexes.
-- **API Specifications**: Endpoints, request/response formats.
-- **Algorithms & Data Structures**: For performance-critical parts.
-- **Error Handling & Edge Cases**: Detailed exception flows.
+LLD specifies the internal workings of each component from HLD, including classes, interfaces, data models, and algorithms. It answers "how" at a micro level.
 
-LLD ensures code is modular, testable, and adheres to design patterns.
+- **Components**: Class diagrams, sequence diagrams, database schemas.
+- **Focus**: Code structure, error handling, performance optimizations.
 
-### Process Flow
+### Key Differences
 
-```mermaid
-flowchart TD
-    A[Requirements Gathering] --> B[HLD Creation]
-    B --> C[Component Identification]
-    C --> D[Technology Selection]
-    D --> E[LLD for Each Component]
-    E --> F[Class Design]
-    F --> G[Database Design]
-    G --> H[API Design]
-    H --> I[Review & Iteration]
-    I --> J[Implementation]
-```
+| Aspect | HLD | LLD |
+|--------|-----|-----|
+| Scope | System-wide | Component-specific |
+| Detail Level | High-level | Detailed |
+| Audience | Architects, stakeholders | Developers |
+| Output | Diagrams, tech choices | Code blueprints |
+| Example | Microservices architecture | REST API endpoints |
 
-This sequence ensures designs evolve from abstract to concrete.
+### When to Use
+
+- **HLD**: Early design phase, requirement analysis.
+- **LLD**: After HLD, before coding.
 
 ## Real-world Examples & Use Cases
 
-- **E-commerce Platform**: HLD defines microservices (user, product, order); LLD specifies REST APIs, database tables for orders.
-- **Social Media App**: HLD outlines feed generation, user auth; LLD details caching strategies, notification algorithms.
-- **Banking System**: HLD covers security layers, compliance; LLD includes encryption methods, transaction flows.
-- **IoT Dashboard**: HLD defines data ingestion pipelines; LLD specifies sensor data schemas, real-time processing logic.
+### URL Shortener System
 
-In interviews, candidates design URL shorteners (HLD: DB, API; LLD: hash functions, redirects) or chat apps.
+#### HLD Example
+
+```mermaid
+graph TD
+    A[User] --> B[API Gateway]
+    B --> C[Shorten Service]
+    B --> D[Redirect Service]
+    C --> E[Database]
+    D --> E
+```
+
+- Components: API Gateway, Shorten/Redirect services, Database.
+
+#### LLD Example
+
+For Shorten Service:
+
+```mermaid
+classDiagram
+    class UrlShortener {
+        +shortenUrl(longUrl: String): String
+        +getOriginalUrl(shortUrl: String): String
+    }
+    class Database {
+        +save(mapping: UrlMapping)
+        +find(shortUrl: String): UrlMapping
+    }
+    UrlShortener --> Database
+```
+
+- Classes: UrlShortener, Database interface.
+
+### E-commerce Platform
+
+- **HLD**: User auth, product catalog, order processing, payment gateway.
+- **LLD**: Detailed user session management, product search algorithms.
 
 ## Code Examples
 
-### HLD Example: System Architecture Diagram (Mermaid)
-```mermaid
-graph TD
-    A[Client] --> B[Load Balancer]
-    B --> C[Web Server]
-    C --> D[Application Server]
-    D --> E[Database]
-    D --> F[Cache]
-```
+### Java LLD Example: URL Shortener Class
 
-### LLD Example: Class Diagram for User Management (PlantUML)
-```plantuml
-@startuml
-class User {
-    - id: int
-    - name: String
-    - email: String
-    + login(): boolean
-    + updateProfile(): void
+```java
+public class UrlShortener {
+    private Map<String, String> urlMap = new HashMap<>();
+    private Map<String, String> reverseMap = new HashMap<>();
+    private static final String BASE_URL = "http://short.ly/";
+
+    public String shortenUrl(String longUrl) {
+        if (reverseMap.containsKey(longUrl)) {
+            return BASE_URL + reverseMap.get(longUrl);
+        }
+        String shortCode = generateShortCode();
+        urlMap.put(shortCode, longUrl);
+        reverseMap.put(longUrl, shortCode);
+        return BASE_URL + shortCode;
+    }
+
+    public String getOriginalUrl(String shortCode) {
+        return urlMap.get(shortCode);
+    }
+
+    private String generateShortCode() {
+        // Simple random generation
+        return UUID.randomUUID().toString().substring(0, 8);
+    }
 }
-
-class UserService {
-    + createUser(user: User): User
-    + getUser(id: int): User
-}
-
-UserService --> User : manages
-@enduml
 ```
 
-### Database Schema (SQL)
-```sql
-CREATE TABLE users (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+This is a basic LLD implementation; in production, use databases and hash functions.
 
-CREATE TABLE orders (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id INT,
-    amount DECIMAL(10,2),
-    FOREIGN KEY (user_id) REFERENCES users(id)
-);
-```
+## Journey / Sequence
 
-### API Specification (OpenAPI Snippet)
-```yaml
-paths:
-  /users:
-    post:
-      summary: Create a new user
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name: { type: string }
-                email: { type: string }
-```
+1. **Requirements Gathering**: Understand functional/non-functional requirements.
+2. **HLD Creation**: Design high-level architecture.
+3. **LLD Creation**: Detail each component.
+4. **Implementation**: Code based on LLD.
+5. **Testing & Iteration**: Validate and refine.
+
+## Common Pitfalls & Edge Cases
+
+- **Over-designing HLD**: Too many components complicate LLD.
+- **Ignoring Scalability in HLD**: Leads to LLD rework.
+- **LLD without HLD**: Misses big picture.
+- **Edge Case**: Handling collisions in URL shortener.
+
+## Tools & Libraries
+
+- **Diagramming**: Draw.io, Lucidchart for HLD diagrams.
+- **Modeling**: UML tools like PlantUML for LLD.
+- **Frameworks**: Spring Boot for Java LLD.
 
 ## References
 
-- [GeeksforGeeks: HLD vs LLD](https://www.geeksforgeeks.org/difference-between-high-level-design-and-low-level-design/)
-- [InterviewBit: System Design Basics](https://www.interviewbit.com/blog/system-design-basics/)
-- [Medium: HLD and LLD Explained](https://medium.com/@saurav.aggarwal/high-level-design-vs-low-level-design-4b3b5b3b3b3b)
+- [System Design Interview Guide](https://github.com/donnemartin/system-design-primer)
+- [Low Level Design vs High Level Design](https://www.geeksforgeeks.org/difference-between-high-level-design-and-low-level-design/)
 
 ## Github-README Links & Related Topics
 
-- [System Design Primer](https://github.com/donnemartin/system-design-primer)
-- [Awesome System Design](https://github.com/madd86/awesome-system-design)
-
-Related Topics:
-- [System Design Basics](system-design-basics/)
-- [Design Patterns](design-patterns/)
-- [Database Design](database-design-principles/)
+- [System Design Basics](../system-design-basics/)
+- [Popular Systems Design LLD HLD](../popular-systems-design-lld-hld/)
+- [Design Patterns](../design-patterns/)
