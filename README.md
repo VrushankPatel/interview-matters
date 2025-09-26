@@ -235,6 +235,8 @@ This repository contains comprehensive documentation on various topics for inter
 - [Monitoring Dashboards](./monitoring-dashboards/README.md)
 - [Serverless Function Patterns](./serverless-function-patterns/README.md)
 - [DevOps & Infrastructure as Code](./devops-and-infrastructure-as-code/README.md)
+- [Docker Kubernetes Integration](./docker-kubernetes-integration/README.md)
+- [AWS Architecture Patterns](./aws-architecture-patterns/README.md)
 
 ### Networking
 - [API Authentication Methods](./api-authentication-methods/README.md)

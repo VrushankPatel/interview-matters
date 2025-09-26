@@ -1,2 +1,10 @@
-Multithreading & Concurrency in Java
-Collections & Data Structures
+java-21-features
+kotlin-for-java-developers
+spring-boot-microservices
+docker-kubernetes-integration
+aws-architecture-patterns
+machine-learning-system-design
+blockchain-system-design
+iot-architecture
+real-time-systems
+security-in-system-design
