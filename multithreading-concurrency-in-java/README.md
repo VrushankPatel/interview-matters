@@ -6,11 +6,13 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+# Multithreading & Concurrency in Java
+
+## Overview
 
 Multithreading allows concurrent execution of code, improving performance and responsiveness. Concurrency utilities in Java provide tools for safe multithreaded programming.
 
-# Detailed Explanation
+## Detailed Explanation
 
 ## Threads
 
@@ -24,12 +26,12 @@ Using synchronized blocks, locks, and atomic variables.
 
 Executors, Futures, and concurrent collections.
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 - Web servers handling multiple client requests simultaneously.
 - GUI applications remaining responsive during long operations.
 
-# Code Examples
+## Code Examples
 
 ```java
 public class ThreadExample {
@@ -40,11 +42,11 @@ public class ThreadExample {
 }
 ```
 
-# References
+## References
 
 - [Java Concurrency Tutorial](https://docs.oracle.com/javase/tutorial/essential/concurrency/)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 - [Java Fundamentals](../java-fundamentals/README.md)
 - [Concurrent Collections](../concurrent-collections/README.md)

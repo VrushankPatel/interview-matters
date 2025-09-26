@@ -6,11 +6,13 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+# Garbage Collection Algorithms
+
+## Overview
 
 Garbage Collection (GC) in Java automatically manages memory by reclaiming unused objects, preventing memory leaks and improving application stability.
 
-# Detailed Explanation
+## Detailed Explanation
 
 ## Common Algorithms
 
@@ -29,12 +31,12 @@ graph TD
     G --> A
 ```
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 - Long-running server applications where manual memory management is error-prone.
 - Real-time systems requiring predictable pause times.
 
-# Code Examples
+## Code Examples
 
 ```java
 public class GCExample {
@@ -47,11 +49,11 @@ public class GCExample {
 }
 ```
 
-# References
+## References
 
 - [Oracle GC Tuning](https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 - [JVM Internals & Class Loading](../jvm-internals-class-loading/README.md)
 - [Java Memory Management](../java-memory-management/README.md)
