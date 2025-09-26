@@ -1,8 +1,3 @@
-Java Fundamentals
-OOP Principles in Java
-JVM Internals & Class Loading
-Garbage Collection Algorithms
-Multithreading & Concurrency in Java
 A separate folder for popular systems design, LLD and HLDs both like url shortner, netflix and identify more yourself
 LLD HLD basics
 Replication vs Sharding vs Partitioning
