@@ -25,3 +25,7 @@ Java Annotations and Reflection
 Java Generics
 Java Lambda Expressions
 Java Modules
+YouTube System Design
+WhatsApp System Design
+TikTok System Design
+Spotify System Design
