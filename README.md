@@ -295,6 +295,7 @@
 - [popular systems design](popular-systems-design/README.md)
 - [popular systems design lld and hld](popular-systems-design-lld-and-hld/README.md)
 - [popular systems design lld hld](popular-systems-design-lld-hld/README.md)
+- [popular systems design examples](popular-systems-design-examples/README.md)
 - [post interview follow up](post-interview-follow-up/README.md)
 - [probabilistic algorithms](probabilistic-algorithms/README.md)
 - [probabilistic data structures](probabilistic-data structures/README.md)
