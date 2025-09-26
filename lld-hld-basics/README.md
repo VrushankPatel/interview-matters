@@ -1,65 +1,91 @@
 ---
-title: 'LLD HLD Basics'
-aliases: ['Low Level Design Basics', 'High Level Design Basics']
-tags: ['#system-design', '#lld', '#hld', '#design-principles']
-created: '2025-09-26'
-updated: '2025-09-26'
+title: LLD HLD Basics
+aliases: [Low Level Design Basics, High Level Design Basics]
+tags: [#system-design,#lld,#hld,#design-principles]
+created: 2025-09-26
+updated: 2025-09-26
 ---
 
 # LLD HLD Basics
 
 ## Overview
 
-Low Level Design (LLD) and High Level Design (HLD) are fundamental phases in software system design. HLD provides a high-level view of the system architecture, while LLD delves into detailed component specifications. Together, they ensure a structured approach to building scalable, maintainable software systems.
+Low-Level Design (LLD) and High-Level Design (HLD) are essential phases in software engineering for translating requirements into implementable solutions. HLD focuses on the system's overall architecture, while LLD delves into detailed implementation, such as class diagrams, APIs, and database schemas. Understanding these concepts is crucial for system design interviews, ensuring scalable, maintainable, and efficient systems.
 
 ## Detailed Explanation
 
-### High Level Design (HLD)
+### High-Level Design (HLD)
 
-HLD, also known as macro-level design, outlines the overall system architecture. It includes:
+HLD provides a bird's-eye view of the system, outlining how components interact without diving into code specifics. It addresses scalability, security, and performance at a macro level.
 
-- System architecture diagrams
-- Database design
-- Descriptions of systems, services, platforms, and module relationships
-- Hardware and software interfaces
-- User interfaces
-- Performance specifications
+**Key Elements:**
+- **Architecture Diagram:** Visual representation of components (e.g., microservices, databases).
+- **Technology Stack:** Choices like cloud providers, databases, and frameworks.
+- **Data Flow:** How data moves between components.
+- **Scalability Considerations:** Load balancing, sharding, and redundancy.
 
-HLD is typically created by solution architects and serves as a blueprint for the entire system.
-
-### Low Level Design (LLD)
-
-LLD, or micro-level design, provides detailed specifications for each module. It encompasses:
-
-- Detailed logic for system components
-- Algorithms and data structures
-- Interface definitions
-- Unit test plans
-- Program specifications
-
-LLD is developed by designers and developers to guide implementation.
-
-### Key Differences
-
-| Aspect | High Level Design (HLD) | Low Level Design (LLD) |
-|--------|-------------------------|-------------------------|
-| Scope | Overall system design | Component-level details |
-| Also Known As | Macro level/system design | Micro level/detailed design |
-| Description | Brief architecture and functionality | Detailed logic and specifications |
-| Created By | Solution architect | Designers and developers |
-| Input | Software Requirement Specification (SRS) | Reviewed HLD |
-| Output | Database design, functional design | Program specs, unit test plans |
-| Participants | Design team, review team, client | Design team, operations, implementers |
-
-### Process Flow
+**Example HLD for a Chat Application:**
+- Components: Client, API Gateway, Chat Service, Database, Notification Service.
+- Data Flow: Messages routed via WebSocket through the gateway to the service, stored in DB, and pushed to recipients.
 
 ```mermaid
 graph TD
-    A[Requirements Gathering] --> B[High Level Design]
-    B --> C[Low Level Design]
-    C --> D[Implementation]
-    D --> E[Testing]
+    A[Client] --> B[API Gateway]
+    B --> C[Chat Service]
+    C --> D[Database]
+    C --> E[Notification Service]
+    E --> A
 ```
+
+### Low-Level Design (LLD)
+
+LLD translates HLD into actionable details, focusing on implementation. It includes class structures, algorithms, and interfaces, ensuring the design is feasible and optimized.
+
+**Key Elements:**
+- **Class Diagrams:** Relationships between classes (e.g., inheritance, composition).
+- **API Specifications:** Endpoints, request/response formats.
+- **Database Schemas:** Tables, relationships, indexes.
+- **Algorithms and Data Structures:** Efficient solutions for operations.
+
+**Example LLD for Chat Application:**
+- Classes: User, Message, ChatRoom with methods like sendMessage().
+- API: POST /messages with JSON payload.
+- Schema: users(id, name), messages(id, sender_id, content, timestamp).
+
+```mermaid
+classDiagram
+    class User {
+        +int id
+        +String name
+        +sendMessage(Message)
+    }
+    class Message {
+        +int id
+        +int senderId
+        +String content
+        +Date timestamp
+    }
+    class ChatRoom {
+        +List<User> users
+        +List<Message> messages
+        +addUser(User)
+        +broadcast(Message)
+    }
+    User ||--o ChatRoom : participates
+    Message ||--o ChatRoom : belongs
+```
+
+### Differences and When to Use
+
+| Aspect | HLD | LLD |
+|--------|-----|-----|
+| Scope | System-wide | Component-specific |
+| Detail Level | High-level | Detailed |
+| Output | Diagrams, tech stack | Code structures, schemas |
+| Stakeholders | Architects, PMs | Developers, Testers |
+| Time | Early design phase | Implementation phase |
+
+HLD is used for feasibility and planning, while LLD for coding and testing.
 
 ## Real-world Examples & Use Cases
 
@@ -80,6 +106,8 @@ graph TD
 **HLD Use Case:** Defines secure architecture with firewalls, encryption layers, and compliance modules.
 
 **LLD Use Case:** Details transaction processing logic, including concurrency controls and audit trails.
+
+In interviews, HLD assesses architectural thinking, LLD evaluates coding skills.
 
 ## Code Examples
 
@@ -174,8 +202,8 @@ CREATE TABLE sessions (
 
 - [Difference between High Level Design(HLD) and Low Level Design(LLD) - GeeksforGeeks](https://www.geeksforgeeks.org/difference-between-high-level-design-and-low-level-design/)
 - [Software Design - Tutorialspoint](https://www.tutorialspoint.com/software_engineering/software_design.htm)
-- [What is High Level Design? - GeeksforGeeks](https://www.geeksforgeeks.org/system-design/what-is-high-level-design-learn-system-design/)
-- [What is Low Level Design or LLD? - GeeksforGeeks](https://www.geeksforgeeks.org/system-design/what-is-low-level-design-or-lld-learn-system-design/)
+- [What is High Level Design? - GeeksforGeeks](https://www.geeksforgeeks.org/what-is-high-level-design-learn-system-design/)
+- [What is Low Level Design or LLD? - GeeksforGeeks](https://www.geeksforgeeks.org/what-is-low-level-design-or-lld-learn-system-design/)
 
 ## Github-README Links & Related Topics
 

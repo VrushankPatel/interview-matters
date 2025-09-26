@@ -1,7 +1,7 @@
 ---
 title: Replication vs Sharding vs Partitioning
-aliases: [data distribution strategies]
-tags: [#database,#scalability,#system-design]
+aliases: [Database Scaling Strategies, Data Distribution Techniques]
+tags: [#system-design,#databases,#scalability]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -10,13 +10,7 @@ updated: 2025-09-26
 
 ## Overview
 
-Data distribution strategies are essential for scaling databases to handle large volumes of data and high traffic. This document compares three key strategies: **Replication**, **Sharding**, and **Partitioning**. Each serves different purposes in achieving scalability, availability, and performance.
-
-- **Replication**: Involves creating and maintaining multiple copies of data across nodes to ensure redundancy, fault tolerance, and improved read performance.
-- **Sharding**: Distributes data horizontally across multiple servers (shards) based on a shard key, allowing for parallel processing and storage scalability.
-- **Partitioning**: Divides a logical database or table into smaller, independent parts, often within a single server, to improve manageability and performance.
-
-These strategies can be used individually or in combination, depending on the system's requirements.
+Replication, sharding, and partitioning are core strategies for scaling databases and managing large datasets in distributed systems. Replication creates redundant copies for availability and read performance, sharding distributes data across nodes for horizontal scaling, and partitioning organizes data into segments for efficiency. This guide compares these techniques, their implementations, trade-offs, and real-world applications, providing a foundation for system design decisions.
 
 ## Detailed Explanation
 
@@ -43,7 +37,7 @@ graph TD
 
 ### Sharding
 
-Sharding partitions data across multiple independent databases or servers (shards), each holding a subset of the data. It enables horizontal scaling by distributing load and storage.
+Sharding (horizontal partitioning) splits data by a shard key across nodes, enabling horizontal scaling. Each shard is independent, often with replication for durability.
 
 #### Key Concepts
 - **Shard Key**: A field or set of fields used to determine data distribution (e.g., user ID, timestamp).
@@ -66,7 +60,7 @@ graph TD
 
 ### Partitioning
 
-Partitioning splits a logical database into smaller physical pieces for better performance and management. Unlike sharding, partitions are typically on the same server.
+Partitioning divides a logical database into smaller physical pieces for better performance and management. Unlike sharding, partitions are typically on the same server.
 
 #### Types of Partitioning
 - **Horizontal Partitioning**: Divides rows into separate tables (e.g., by date ranges).
@@ -181,12 +175,13 @@ INSERT INTO sales (sale_date, amount) VALUES ('2024-06-01', 200.00);
 - [Partition (database) - Wikipedia](https://en.wikipedia.org/wiki/Partition_(database))
 - [PostgreSQL: Table Partitioning](https://www.postgresql.org/docs/current/ddl-partitioning.html)
 - [MongoDB Sharding](https://docs.mongodb.com/manual/sharding/)
+- [MongoDB Replication](https://docs.mongodb.com/manual/replication/)
 
 ## Github-README Links & Related Topics
 
-- [Database Sharding Strategies](./database-sharding-strategies/)
-- [Database Replication Strategies](./database-replication-strategies/)
-- [Database Normalization](./database-normalization/)
-- [CAP Theorem and Distributed Systems](./cap-theorem-and-distributed-systems/)
-- [Horizontal Scaling](./horizontal-scaling/)
-- [Vertical Scaling](./vertical-scaling/)
+- [Database Sharding Strategies](../database-sharding-strategies/)
+- [Database Replication Strategies](../database-replication-strategies/)
+- [Database Normalization](../database-normalization/)
+- [CAP Theorem and Distributed Systems](../cap-theorem-and-distributed-systems/)
+- [Horizontal Scaling](../horizontal-scaling/)
+- [Vertical Scaling](../vertical-scaling/)

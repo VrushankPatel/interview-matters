@@ -1,169 +1,235 @@
 ---
-title: Popular System Designs (LLD and HLD)
-aliases: ["system design examples", "LLD HLD examples"]
-tags: [#system-design,#lld,#hld]
-created: 2025-09-25
+title: Popular System Designs LLD and HLD
+aliases: [System Design Examples, LLD HLD Case Studies]
+tags: [#system-design,#lld,#hld,#interview-prep]
+created: 2025-09-26
 updated: 2025-09-26
 ---
 
+# Popular System Designs LLD and HLD
+
 ## Overview
 
-Popular system designs encompass real-world architectures for large-scale applications, often discussed in technical interviews. This topic explores both High Level Design (HLD) for overall architecture and Low Level Design (LLD) for component details, using examples from major platforms like URL shorteners, video streaming, and social networks.
+System design involves creating High-Level Design (HLD) and Low-Level Design (LLD) for scalable, reliable software systems. HLD provides the overall architecture, including components, data flow, and technology stack, while LLD details implementation specifics like classes, APIs, and databases. This guide covers popular system designs, explaining LLD and HLD with examples, diagrams, and code snippets for interview preparation.
 
 ## Detailed Explanation
 
-System designs are categorized into HLD, which outlines the system's structure, components, and interactions at a high level, and LLD, which delves into the implementation details of individual components, including classes, algorithms, and data flows.
+### HLD vs. LLD
 
-Popular designs typically address scalability, reliability, and performance challenges. Below is a curated list of frequently encountered system designs, with brief HLD overviews and links to detailed READMEs.
+| Aspect | HLD | LLD |
+|--------|-----|-----|
+| Focus | System architecture, components, interactions | Detailed implementation, classes, algorithms |
+| Created by | Solution architects | Designers and developers |
+| Output | Diagrams, tech stack, data flow | Pseudocode, schemas, APIs |
+| Example | Microservices layout for a chat app | User class with methods for messaging |
+
+HLD starts with requirements, outlining scalability and trade-offs. LLD refines this into executable designs.
 
 ### Popular System Designs
 
-| System | HLD Overview | Key Challenges |
-|--------|--------------|----------------|
-| URL Shortener | API Gateway -> Service -> Database; handles encoding, redirection, analytics. | Collision avoidance, high availability. |
-| Netflix Video Streaming | CDN -> API -> Microservices -> Storage; adaptive bitrate, recommendations. | Global distribution, low latency. |
-| Twitter | Load Balancer -> API -> Timeline Service -> Database; fan-out on write. | High write throughput, real-time feeds. |
-| Instagram | CDN -> API -> Feed Service -> Sharded DB; image processing pipeline. | Media storage, user engagement. |
-| Facebook News Feed | Edge Servers -> Graph API -> Feed Ranking -> Cache/DB. | Personalized ranking, massive scale. |
-| WhatsApp | Gateway -> Message Service -> Sharded DB; end-to-end encryption. | Real-time messaging, privacy. |
-| YouTube | CDN -> API -> Video Processing -> Distributed Storage. | Video transcoding, global reach. |
-| TikTok | Recommendation Engine -> API -> Video Service -> Cache. | Viral content discovery. |
-| Discord | WebSocket Gateway -> API -> Sharded Services; voice/video routing. | Real-time communication. |
-| Slack | API -> Message Bus -> Channels -> DB; integrations. | Team collaboration, integrations. |
-| Zoom | Media Servers -> API -> Signaling; peer-to-peer/WebRTC. | Video conferencing, scalability. |
-| Google Maps | Geospatial DB -> API -> Routing Service; real-time updates. | Location accuracy, traffic data. |
-| Amazon E-commerce | Load Balancer -> Microservices -> Inventory/DB; recommendations. | Transaction volume, personalization. |
-| LinkedIn | Graph DB -> API -> Network Service; job matching. | Professional networking. |
-| Dropbox | Sync Service -> API -> Distributed FS; deduplication. | File storage, synchronization. |
-| Spotify | CDN -> API -> Recommendation Engine -> Distributed Storage. | Music streaming, personalization. |
-| Payment Systems | API Gateway -> Payment Processor -> Secure DB; PCI compliance. | Security, transactions. |
-| IoT System Design | Edge Gateways -> API -> Analytics Service -> Time-series DB. | Sensor data, real-time processing. |
-| Real-time Analytics | Stream Processor -> API -> Dashboard; event-driven. | Data pipelines, insights. |
+#### 1. URL Shortening Service (e.g., TinyURL)
+
+**HLD:** Load balancer routes requests to application servers. Encoder generates short URLs, stored in DB with cache for fast retrieval.
 
 ```mermaid
 graph TD
-    A[Popular Systems] --> B[HLD: Architecture Overview]
-    A --> C[LLD: Component Details]
-    B --> D[Scalability Patterns]
-    C --> E[Data Structures & Algorithms]
+    A[Client] --> B[Load Balancer]
+    B --> C[Application Server]
+    C --> D[Encoder]
+    D --> E[Database]
+    C --> F[Cache]
+    F --> E
 ```
 
-## Real-world Examples & Use Cases
-
-- **URL Shortener**: Used by bit.ly; HLD focuses on hash functions for shortening, LLD on collision resolution.
-- **Video Streaming**: Netflix serves billions of hours; HLD includes CDNs for delivery, LLD on buffering algorithms.
-- **Social Networks**: Twitter handles 500M tweets/day; HLD for timeline generation, LLD for ranking feeds.
-- **Messaging Apps**: WhatsApp with 2B users; HLD for message routing, LLD for encryption protocols.
-- **E-commerce**: Amazon processes millions of orders; HLD for inventory management, LLD for recommendation engines.
-
-## Code Examples
-
-### Simple URL Shortener (LLD Example)
+**LLD:** Classes include UrlShortener with encode/decode methods. DB schema: `urls(id, original_url, short_code, created_at)`.
 
 ```java
-public class UrlShortener {
+class UrlShortener {
     private Map<String, String> urlMap = new HashMap<>();
-    private Map<String, String> shortMap = new HashMap<>();
-    private static final String BASE = "http://short.ly/";
-
+    
     public String shorten(String longUrl) {
-        if (shortMap.containsKey(longUrl)) {
-            return shortMap.get(longUrl);
-        }
-        String shortUrl = BASE + generateHash(longUrl);
-        urlMap.put(shortUrl, longUrl);
-        shortMap.put(longUrl, shortUrl);
-        return shortUrl;
+        String shortCode = generateCode();
+        urlMap.put(shortCode, longUrl);
+        return shortCode;
     }
-
-    public String expand(String shortUrl) {
-        return urlMap.get(shortUrl);
+    
+    public String expand(String shortCode) {
+        return urlMap.get(shortCode);
     }
-
-    private String generateHash(String url) {
-        return Integer.toHexString(url.hashCode());
+    
+    private String generateCode() {
+        // Base62 encoding logic
+        return "abc123"; // Simplified
     }
 }
 ```
 
-### High-Level HLD Diagram (Conceptual)
+#### 2. Distributed Cache (e.g., Redis-like)
 
-```
-User -> API Gateway -> Shortener Service -> Database
-                      -> Redirect Service
-```
-
-## Journey / Sequence
+**HLD:** Clients query cache nodes via consistent hashing. Misses fetch from DB, with replication for availability.
 
 ```mermaid
-sequenceDiagram
-    participant User
-    participant API Gateway
-    participant Service
-    participant Database
-
-    User->>API Gateway: Request
-    API Gateway->>Service: Route
-    Service->>Database: Query
-    Database-->>Service: Data
-    Service-->>API Gateway: Response
-    API Gateway-->>User: Result
+graph TD
+    A[Client] --> B[Cache Node]
+    B --> C[Database]
+    B --> D[Replication]
 ```
 
-## Data Models / Message Formats
+**LLD:** Cache interface with get/put. Eviction policy like LRU.
 
-(The table in Detailed Explanation serves as data models for various systems.)
+```java
+interface Cache {
+    String get(String key);
+    void put(String key, String value);
+}
 
-## Common Pitfalls & Edge Cases
+class LRUCache implements Cache {
+    private LinkedHashMap<String, String> map;
+    
+    public LRUCache(int capacity) {
+        map = new LinkedHashMap<>(capacity, 0.75f, true);
+    }
+    
+    public String get(String key) {
+        return map.get(key);
+    }
+    
+    public void put(String key, String value) {
+        map.put(key, value);
+    }
+}
+```
 
-- **Over-engineering:** Designing complex systems for simple problems.
-- **Ignoring Scalability:** Not planning for growth from day one.
-- **Security Oversights:** Failing to incorporate authentication and encryption.
-- **Data Consistency Issues:** Not handling distributed data properly.
-- **Edge Cases:** Network partitions, high concurrency, data migration.
+#### 3. Ride Sharing Service (e.g., Uber)
 
-## Tools & Libraries
+**HLD:** API gateway handles requests. Matching service pairs riders/drivers. Location service tracks GPS.
 
-- **Frameworks:** Spring Boot (Java), Django (Python), Express.js (Node.js)
-- **Databases:** PostgreSQL, MongoDB, Cassandra
-- **Caching:** Redis, Memcached
-- **Message Queues:** Apache Kafka, RabbitMQ
-- **Cloud Platforms:** AWS, Google Cloud, Azure
-- **Monitoring:** Prometheus, Grafana
+```mermaid
+graph TD
+    A[Rider] --> B[API Gateway]
+    B --> C[Matching Service]
+    C --> D[Driver]
+    B --> E[Location Service]
+```
 
-## STAR Summary
+**LLD:** Rider/Driver classes. Matching algorithm uses geohashing.
 
-**Situation:** In technical interviews, candidates frequently propose inadequate architectures for popular systems.
+```java
+class Rider {
+    String id;
+    Location location;
+    
+    void requestRide() {
+        // Notify matching service
+    }
+}
 
-**Task:** As a senior engineer, I needed to guide candidates through proper HLD and LLD for systems like URL shorteners.
+class Driver {
+    String id;
+    Location location;
+    
+    void acceptRide(Ride ride) {
+        // Update status
+    }
+}
+```
 
-**Action:** I emphasized key components, scalability patterns, and trade-offs, using diagrams and code examples to illustrate points.
+#### 4. Video Streaming Service (e.g., YouTube)
 
-**Result:** Candidates improved their design skills, and the team hired engineers capable of building robust, scalable systems.
+**HLD:** Upload to transcoders, store in blob storage, serve via CDN.
+
+```mermaid
+graph TD
+    A[User] --> B[CDN]
+    B --> C[Blob Storage]
+    D[Uploader] --> E[Transcoder]
+    E --> C
+```
+
+**LLD:** VideoProcessor class for encoding. DB for metadata.
+
+```java
+class VideoProcessor {
+    void process(Video video) {
+        // Transcode to multiple formats
+        video.setFormats(List.of("1080p", "720p"));
+    }
+}
+```
+
+## Real-world Examples & Use Cases
+
+- **URL Shortener:** Used by Twitter for links; handles billions of requests daily.
+- **Cache:** Redis in Instagram for feed data; reduces DB load by 80%.
+- **Ride Sharing:** Uber matches 100M+ rides/month; uses real-time location for ETA.
+- **Streaming:** Netflix streams to 200M users; CDN ensures <1s latency.
+
+## Code Examples
+
+See LLD sections above for Java snippets. For Python:
+
+```python
+class UrlShortener:
+    def __init__(self):
+        self.url_map = {}
+    
+    def shorten(self, long_url):
+        short_code = self._generate_code()
+        self.url_map[short_code] = long_url
+        return short_code
+    
+    def _generate_code(self):
+        import random
+        return ''.join(random.choices('abcdefghijklmnopqrstuvwxyz0123456789', k=6))
+```
 
 ## References
 
-- [System Design Primer](https://github.com/donnemartin/system-design-primer)
-- [Grokking the System Design Interview](https://www.educative.io/courses/grokking-the-system-design-interview)
-- [AWS Architecture Center](https://aws.amazon.com/architecture/)
-- [Martin Kleppmann: Designing Data-Intensive Applications](https://dataintensive.net/)
+- [Difference between HLD and LLD](https://www.geeksforgeeks.org/difference-between-high-level-design-and-low-level-design/)
+- [Top 30 System Design Interview Questions](https://www.educative.io/blog/top-10-system-design-interview-questions)
+- [What is System Design](https://www.geeksforgeeks.org/what-is-system-design-learn-system-design/)
 
 ## Github-README Links & Related Topics
 
-- [URL Shortener System Design](url-shortener-system-design/)
-- [Netflix Video Streaming Architecture](netflix-video-streaming-architecture/)
-- [Twitter System Design](twitter-system-design/)
-- [Instagram System Design](instagram-system-design/)
-- [Facebook News Feed](facebook-news-feed/)
-- [WhatsApp Messaging System](whatsapp-messaging-system/)
-- [YouTube System Design](youtube-system-design/)
-- [TikTok System Design](tiktok-system-design/)
-- [Discord System Design](discord-system-design/)
-- [Slack Messaging System](slack-messaging-system/)
-- [Zoom Video Conferencing](zoom-video-conferencing/)
-- [Google Maps System Design](google-maps-system-design/)
-- [Amazon E-commerce Platform](amazon-e-commerce-platform/)
-- [LinkedIn Social Network](linkedin-social-network/)
-- [Dropbox File Storage](dropbox-file-storage/)
-- [LLD HLD Basics](lld-hld-basics/)
-- [System Design Basics](system-design-basics/)
+- [Airbnb System Design](./airbnb-system-design/)
+- [Amazon E-Commerce Platform](./amazon-e-commerce-platform/)
+- [Facebook News Feed](./facebook-news-feed/)
+- [Google Maps System Design](./google-maps-system-design/)
+- [Instagram System Design](./instagram-system-design/)
+- [Netflix System Design](./netflix-system-design/)
+- [Uber System Design](./uber-system-design/)
+
+## STAR Summary
+
+**Situation:** Interviewee asked to design a scalable chat service.  
+**Task:** Outline HLD and LLD for real-time messaging.  
+**Action:** Drew architecture diagram, defined classes, discussed trade-offs.  
+**Result:** Demonstrated deep understanding, leading to offer.
+
+## Journey / Sequence
+
+1. Gather requirements (functional/non-functional).
+2. Sketch HLD (components, flow).
+3. Refine LLD (classes, APIs).
+4. Validate with tests and scalability checks.
+
+## Data Models / Message Formats
+
+**URL Shortener DB Schema:**
+```json
+{
+  "id": "int",
+  "original_url": "string",
+  "short_code": "string",
+  "created_at": "timestamp"
+}
+```
+
+**Ride Request Message:**
+```json
+{
+  "rider_id": "string",
+  "pickup": {"lat": 37.7749, "lng": -122.4194},
+  "destination": {"lat": 37.7849, "lng": -122.4094}
+}
+```
