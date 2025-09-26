@@ -1,8 +1,3 @@
-Multithreading & Concurrency in Java
-Async logging
-URL Shortener System Design
-Netflix System Design
-Instagram System Design
 Twitter System Design
 YouTube System Design
 Facebook System Design
