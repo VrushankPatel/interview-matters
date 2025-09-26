@@ -1,5 +1,10 @@
-Java 22 Features
-Java 23 Features
-Java 24 Features
-Java 25 Features
-Java 26 Features
+Java 27 Features
+Java 28 Features
+Advanced Java Generics
+Java Reflection Deep Dive
+Java Annotations Advanced
+System Design for E-commerce
+Microservices Patterns
+Kubernetes Advanced
+Docker Advanced
+CI/CD Advanced
