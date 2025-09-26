@@ -1,7 +1,7 @@
 ---
 title: System Design Basics
 aliases: [System Design Fundamentals, Basic System Design]
-tags: [system-design, scalability, reliability, availability]
+tags: [#system-design]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -198,12 +198,12 @@ Run with `python app.py` and test with `curl http://localhost:5000/api/users/1`.
 
 ## Github-README Links & Related Topics
 
-- [CAP Theorem and Distributed Systems](cap-theorem-and-distributed-systems/README.md)
-- [Database Design Principles](database-design-principles/README.md)
-- [Caching](caching/README.md)
-- [Load Balancing](load-balancing/README.md)
-- [Microservices](microservices/README.md)
-- [API Design Best Practices](api-design-best-practices/README.md)
+- [CAP Theorem and Distributed Systems](../cap-theorem-and-distributed-systems/)
+- [Database Design Principles](../database-design-principles/)
+- [Caching](../caching/)
+- [Load Balancing](../load-balancing/)
+- [Microservices](../microservices/)
+- [API Design Best Practices](../api-design-best-practices/)
 
 ### Related Topics
 

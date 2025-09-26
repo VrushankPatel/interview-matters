@@ -1,7 +1,7 @@
 ---
 title: 'High Scalability Patterns'
 aliases: ['Scalability Patterns', 'High-Performance Patterns']
-tags: ['system-design', 'scalability', 'distributed-systems']
+tags: [#system-design]
 created: '2025-09-26'
 updated: '2025-09-26'
 ---

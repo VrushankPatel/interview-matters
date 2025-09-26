@@ -1,7 +1,7 @@
 ---
 title: 'CAP Theorem & Distributed Systems'
 aliases: ['CAP Theorem', 'Brewer’s Conjecture']
-tags: ['distributed-systems', 'consistency', 'availability', 'partition-tolerance']
+tags: [#system-design]
 created: '2025-09-26'
 updated: '2025-09-26'
 ---
