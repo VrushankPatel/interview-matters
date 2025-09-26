@@ -19,6 +19,7 @@
 - [aws architecture patterns](aws-architecture-patterns/README.md)
 - [aws lambda and serverless computing](aws-lambda-and-serverless-computing/README.md)
 - [backtracking](backtracking/README.md)
+- [behavioral interview preparation](behavioral-interview-preparation/README.md)
 - [behavioral interview questions](behavioral-interview-questions/README.md)
 - [blockchain basics](blockchain-basics/README.md)
 - [blockchain consensus](blockchain-consensus/README.md)
