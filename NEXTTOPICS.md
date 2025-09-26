@@ -3,3 +3,15 @@
 - JVM Internals & Class Loading
 - Garbage Collection Algorithms
 - Multithreading & Concurrency in Java
+- High Scalability Patterns
+- CAP Theorem & Distributed Systems
+- Replication vs Sharding vs Partitioning
+- Latency and Throughput zero to hero
+- Monitoring and Logging
+- Async logging
+- DevOps & Infrastructure as Code
+- Proxy forward and reverse
+- Load balancing and strategies
+- Rate limiting
+- Concurrency & Parallelism
+- Popular System Designs (LLD and HLD): URL Shortener, Netflix, etc.
