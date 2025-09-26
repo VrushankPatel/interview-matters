@@ -134,7 +134,7 @@ public class MethodsExample {
 
 ## Github-README Links & Related Topics
 
-- [OOP Principles in Java](oop-principles-in-java/)
-- [JVM Internals & Class Loading](jvm-internals-class-loading/)
-- [Java Data Types](java-data-types/)
-- [Java Operators](java-operators/)
+- [OOP Principles in Java](../oop-principles-in-java/README.md)
+- [JVM Internals & Class Loading](../jvm-internals-and-class-loading/README.md)
+- [Java Data Types](../java-data-types/README.md)
+- [Java Operators](../java-operators/README.md)
