@@ -5,7 +5,7 @@ Last update
 2025-09-26
 
 Summary of recent additions
-      - Added comprehensive README.md for FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols with detailed explanations, STAR summaries, diagrams, examples, and references. Restructured trading topics into trading/ category and moved numerous directories into appropriate categories (system-design, java, algorithms, devops, cloud, networking, security, os, ml, design-patterns, behavioral, interview) for better organization.
+      - Restructured repository: moved system design topics into subcategories (concepts, lld, hld, real-world-designs); removed duplicate directories in trading/; fixed all README.md files to use proper markdown links instead of obsidian-style [[ ]] wikilinks for better Github-README compatibility.
 
 Conventions
  - Dir naming: kebab-case.
@@ -111,16 +111,26 @@ New Next Topics Candidates (this run)
   - Latency arbitrage — 'Exploiting latency differences for profit'
   - Swap & derivatives trade lifecycle — 'Trading non-equity instruments'
   - Regulatory reports (e.g., MiFID/SEF) — 'Compliance reporting requirements'
-   - advanced-java-concepts — 'Generics, type erasure, and more'
- - concurrent-collections — 'Thread-safe collections in Java'
- - java-streams-advanced — 'Advanced stream operations and collectors'
- - reflection-and-annotations — 'Runtime inspection and custom annotations'
- - java-security-basics — 'Secure coding and cryptography'
- - networking-sockets — 'Low-level network programming'
- - file-io-nio — 'Efficient file and channel operations'
- - java-testing-advanced — 'Mocks, spies, and test frameworks'
- - build-automation — 'CI/CD with Maven and Gradle'
- - profiling-tools — 'Performance analysis tools'
+    - advanced-java-concepts — 'Generics, type erasure, and more'
+  - concurrent-collections — 'Thread-safe collections in Java'
+  - java-streams-advanced — 'Advanced stream operations and collectors'
+  - reflection-and-annotations — 'Runtime inspection and custom annotations'
+  - java-security-basics — 'Secure coding and cryptography'
+  - networking-sockets — 'Low-level network programming'
+  - file-io-nio — 'Efficient file and channel operations'
+  - java-testing-advanced — 'Mocks, spies, and test frameworks'
+  - build-automation — 'CI/CD with Maven and Gradle'
+  - profiling-tools — 'Performance analysis tools'
+  - High-Frequency Trading strategies — 'HFT algorithms and infrastructure'
+  - Order Book depth and liquidity — 'Measuring and managing order book liquidity'
+  - FIX message sequencing and recovery — 'Handling message gaps and resends'
+  - Market maker algorithms — 'Providing liquidity in markets'
+  - Cross-venue execution — 'Executing orders across multiple exchanges'
+  - Algorithmic trading frameworks — 'Building automated trading systems'
+  - Risk management in trading systems — 'Position limits and exposure control'
+  - Compliance monitoring for trades — 'Real-time regulatory checks'
+  - Blockchain in trading — 'Distributed ledger for trade settlement'
+  - AI in market prediction — 'Machine learning for price forecasting'
 
 New Next Topics Candidates
         - Order Book modeling — 'Canonical models for in-memory book and persistence'

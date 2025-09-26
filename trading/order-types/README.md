@@ -122,10 +122,10 @@ public enum TimeInForce {
 
 ## Github-README Links & Related Topics
 
-- [Journey of a Trade](/journey-of-a-trade)
-- [FIX Protocol](/fix-protocol)
-- [Order Entry Protocols](/order-entry-protocols)
-- [Execution Report](/execution-report)
+- [Journey of a Trade](../journey-of-a-trade/README.md)
+- [FIX Protocol](../fix-protocol/README.md)
+- [Order Entry Protocols](../order-entry-protocols/README.md)
+- [Execution Report](../execution-report/README.md)
 
 ## References
 
