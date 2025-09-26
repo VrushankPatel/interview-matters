@@ -52,3 +52,8 @@ created_dirs: []
 updated_files: ["README.md", "SPECIFICATION.md", "PENDING_TOPICS.md", "NEXTTOPICS.md", "trading/protocols/fix-protocol/README.md", "trading/protocols/itch-protocol/README.md", "trading/protocols/ouch-protocol/README.md", "trading/market-data/market-data/README.md", "trading/protocols/order-entry-protocols/README.md"]
 commit_made: true
 commit_message: "kb: processed 5 trading topics + updated interlinks to proper markdown links + restructured root README links"
+topics_processed: []
+created_dirs: [java, system-design, trading]
+updated_files: [README.md, java/README.md, system-design/README.md, trading/README.md, SPECIFICATION.md, PENDING_TOPICS.md, NEXTTOPICS.md]
+commit_made: true
+commit_message: "kb: restructured repository into category-based README.md files + updated root index to link to category overviews + ensured interlinking with markdown links"

@@ -5,7 +5,7 @@ Last update
 2025-09-26
 
 Summary of recent additions
-    - Processed 5 trading protocol topics (FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data, Order Entry Protocols) + updated interlinks to proper markdown links + restructured root README links for nested dirs
+     - Restructured repository into category-based README.md files for better organization; updated root index to link to category overviews; ensured all topic README.md use proper markdown links for interlinking
 
 Conventions
  - Dir naming: kebab-case.
@@ -189,6 +189,16 @@ TODO
    - High-level open design decisions and split criteria for oversized topics.
 -e 
 New Next Topics Candidates (this run)
+     - Order Book modeling — 'Canonical models for in-memory book and persistence'
+     - Matching algorithm internals — 'How exchanges match buy and sell orders'
+     - Time-in-Force variations across exchanges — 'DAY, GTC, IOC behaviors by venue'
+     - Market fragmentation & smart order routing — 'Routing orders across multiple markets'
+     - Latency measurement & monitoring — 'Tools and techniques for latency analysis'
+     - FIX Session Layer (Logon/Heartbeat/Seq numbers) — 'Session management in FIX protocol'
+     - Market data consolidation & TOPS snapshot vs incremental — 'Consolidating feeds from multiple sources'
+     - Latency arbitrage — 'Exploiting latency differences for profit'
+     - Swap & derivatives trade lifecycle — 'Trading non-equity instruments'
+     - Regulatory reports (e.g., MiFID/SEF) — 'Compliance reporting requirements'
      - Order Book modeling — 'Canonical models for in-memory book and persistence'
      - Matching algorithm internals — 'How exchanges match buy and sell orders'
      - Time-in-Force variations across exchanges — 'DAY, GTC, IOC behaviors by venue'
