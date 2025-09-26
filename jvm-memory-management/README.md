@@ -1,7 +1,7 @@
 ---
 title: JVM Memory Management
-aliases: [JVM Memory, Java Memory Model]
-tags: [#java,#jvm,#memory-management]
+aliases: [JVM Memory, Java Memory Management]
+tags: [#java,#jvm]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -10,85 +10,107 @@ updated: 2025-09-26
 
 ## Overview
 
-JVM Memory Management involves the allocation, usage, and reclamation of memory in the Java Virtual Machine. It includes heap and stack management, garbage collection, and memory tuning for optimal performance.
+JVM Memory Management involves the allocation, usage, and reclamation of memory in the Java Virtual Machine. It includes memory areas like Heap, Stack, and Metaspace, and mechanisms like Garbage Collection to ensure efficient memory usage and prevent leaks.
 
 ## Detailed Explanation
 
-The JVM divides memory into several areas: Heap, Stack, Method Area, and others. Memory management ensures efficient allocation and prevents memory leaks.
-
 ### Memory Areas
 
-- **Heap**: Stores objects and arrays, divided into Young and Old generations.
-- **Stack**: Stores method calls and local variables.
-- **Method Area**: Stores class metadata, constants, and static variables.
-- **Program Counter**: Tracks current instruction execution.
+- **Heap**: Stores objects and arrays. Divided into Young Generation (Eden, Survivor spaces) and Old Generation.
+- **Stack**: Stores method calls, local variables, and partial results. Each thread has its own stack.
+- **Metaspace**: Replaces PermGen in Java 8+, stores class metadata, constants, and method bytecode.
+- **Program Counter (PC) Register**: Holds the address of the current JVM instruction.
+- **Native Method Stack**: For native methods.
 
 ### Garbage Collection
 
-GC automatically reclaims memory from unreachable objects. Common algorithms include Serial, Parallel, CMS, G1, and ZGC.
+GC automatically reclaims memory occupied by unreachable objects.
 
-```mermaid
-graph TD
-    A[Object Created] --> B[Allocated in Eden]
-    B --> C[Survives Minor GC]
-    C --> D[Promoted to Survivor]
-    D --> E[Promoted to Old Gen]
-    E --> F[Major GC if needed]
-```
+- **Generational GC**: Young GC (minor), Old GC (major/full).
+- **GC Algorithms**: Serial, Parallel, CMS, G1, ZGC, Shenandoah.
+- **Tuning**: JVM flags like `-Xmx`, `-Xms`, `-XX:+UseG1GC`.
+
+### Memory Allocation
+
+- Objects allocated in Eden space.
+- Survived objects move to Survivor, then Old Gen.
+- Large objects may go directly to Old Gen.
+
+### Memory Leaks
+
+Caused by strong references preventing GC. Use tools like VisualVM or MAT for analysis.
 
 ## Real-world Examples & Use Cases
 
-1. **Application Tuning**: Adjusting heap sizes for web servers.
-2. **Memory Leak Detection**: Using tools like VisualVM to identify leaks.
-3. **Microservices**: Optimizing memory for containerized applications.
+- **Web Applications**: Tuning heap size for high-traffic sites.
+- **Batch Processing**: Adjusting GC for long-running jobs.
+- **Microservices**: Memory limits in containers.
+- **Performance Monitoring**: Using JMX to monitor memory usage.
 
 ## Code Examples
 
-### Memory Monitoring
+### JVM Memory Options
+
+```bash
+java -Xmx2g -Xms1g -XX:+UseG1GC MyApp
+```
+
+### Monitoring Memory Usage
 
 ```java
 Runtime runtime = Runtime.getRuntime();
 long totalMemory = runtime.totalMemory();
 long freeMemory = runtime.freeMemory();
 long usedMemory = totalMemory - freeMemory;
-System.out.println("Used Memory: " + usedMemory / 1024 / 1024 + " MB");
+System.out.println("Used Memory: " + usedMemory / (1024 * 1024) + " MB");
+```
+
+### Custom Object Allocation
+
+```java
+public class MemoryExample {
+    public static void main(String[] args) {
+        List<byte[]> list = new ArrayList<>();
+        for (int i = 0; i < 1000; i++) {
+            list.add(new byte[1024 * 1024]); // 1MB each
+        }
+        // Force GC
+        System.gc();
+    }
+}
 ```
 
 ### Weak References
 
 ```java
-import java.lang.ref.WeakReference;
-
-public class WeakRefExample {
-    public static void main(String[] args) {
-        Object obj = new Object();
-        WeakReference<Object> weakRef = new WeakReference<>(obj);
-        obj = null; // Now only weak reference exists
-        System.gc(); // Suggest GC
-        System.out.println("Object still alive: " + (weakRef.get() != null));
-    }
-}
+WeakReference<String> weakRef = new WeakReference<>(new String("Hello"));
+System.out.println(weakRef.get()); // Hello
+System.gc();
+System.out.println(weakRef.get()); // null
 ```
 
 ## Common Pitfalls & Edge Cases
 
-- **OutOfMemoryError**: Heap exhaustion or metaspace issues.
-- **Memory Leaks**: Holding references unnecessarily.
-- **GC Pauses**: Long pauses in high-throughput applications.
+- **OutOfMemoryError**: Heap space, PermGen/Metaspace.
+- **StackOverflowError**: Deep recursion.
+- **Memory Fragmentation**: In Old Gen.
+- **GC Pauses**: Long pauses in high-throughput apps.
 
 ## Tools & Libraries
 
-- **VisualVM**: For memory profiling.
-- **JConsole**: Built-in JVM monitoring.
-- **Eclipse Memory Analyzer**: For heap dump analysis.
+- **VisualVM**: GUI for monitoring JVM.
+- **JConsole**: JMX-based monitoring.
+- **MAT (Memory Analyzer Tool)**: Heap dump analysis.
+- **GC Logs**: `-Xlog:gc*` for logging.
 
 ## References
 
 - [Oracle JVM Memory Management](https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/)
-- [Java Memory Model Specification](https://docs.oracle.com/javase/specs/jls/se8/html/jls-17.html)
+- [Java Memory Model](https://docs.oracle.com/javase/specs/jls/se17/html/jls-17.html)
+- [Baeldung: JVM Memory](https://www.baeldung.com/jvm-memory)
 
 ## Github-README Links & Related Topics
 
-- [jvm-memory](https://github.com/topics/jvm-memory)
-- Related: [Garbage Collection Algorithms](../garbage-collection-algorithms/README.md)
-- Related: [JVM Performance Tuning](../jvm-performance-tuning/README.md)
+- [Garbage Collection Algorithms](../garbage-collection-algorithms/README.md)
+- [JVM Internals](../java-virtual-machine-jvm-architecture/README.md)
+- [Java Memory Model](../java-memory-model-and-concurrency/README.md)

@@ -1,5 +1,5 @@
-Collections & Data Structures
-Java Stream API & Functional Programming
-System Design Basics
-High Scalability Patterns
-CAP Theorem & Distributed Systems
+API Gateway Patterns
+Event-Driven Architecture
+Container Orchestration with Kubernetes
+CI/CD Best Practices
+Distributed Tracing

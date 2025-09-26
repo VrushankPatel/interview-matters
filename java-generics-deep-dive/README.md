@@ -1,7 +1,7 @@
 ---
 title: Java Generics Deep Dive
-aliases: [Java Generics, Generics in Java]
-tags: [#java,#generics]
+aliases: [Java Generics]
+tags: [#java]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -10,102 +10,130 @@ updated: 2025-09-26
 
 ## Overview
 
-Java Generics provide a way to create classes, interfaces, and methods that operate on types specified by the user at compile time. They enable type safety, eliminate the need for explicit casting, and allow for reusable code without compromising type checking.
+Java Generics provide a way to create classes, interfaces, and methods that operate on types specified by the user at compile time. Introduced in Java 5, generics enable type safety, eliminate the need for explicit casting, and allow for reusable code without compromising type checking.
 
 ## Detailed Explanation
 
-Generics were introduced in Java 5 to address the limitations of raw types and casting. The core concept is parameterization of types, allowing collections and other data structures to be type-safe.
+### Type Parameters
 
-### Key Concepts
+Generics use type parameters, denoted by angle brackets `<T>`, where `T` is a placeholder for the actual type.
 
-- **Type Parameters**: Represented by `<T>`, where T is a placeholder for a type.
-- **Type Erasure**: At runtime, generic types are erased to their raw types to maintain backward compatibility.
-- **Bounded Types**: `<T extends Number>` restricts T to subclasses of Number.
-- **Wildcards**: `?` for unknown types, `? extends T` for upper bounds, `? super T` for lower bounds.
+- **Unbounded Type Parameters**: `<T>` can be any reference type.
+- **Bounded Type Parameters**: `<T extends Number>` restricts `T` to subclasses of `Number`.
+- **Multiple Bounds**: `<T extends Comparable & Serializable>` combines interfaces.
 
-### Type Erasure Process
+### Wildcards
 
-```mermaid
-graph TD
-    A[Generic Code] --> B[Compiler Checks Types]
-    B --> C[Erases Generic Types]
-    C --> D[Inserts Casts if Needed]
-    D --> E[Bytecode with Raw Types]
+Wildcards (`?`) represent unknown types:
+
+- **Unbounded Wildcard**: `List<?>` - any type.
+- **Upper Bounded Wildcard**: `List<? extends Number>` - any subtype of `Number`.
+- **Lower Bounded Wildcard**: `List<? super Integer>` - any supertype of `Integer`.
+
+### Type Erasure
+
+At runtime, generics are erased to their raw types. This is done for backward compatibility. For example, `List<String>` becomes `List` at runtime.
+
+### Raw Types
+
+Using generics without type parameters, e.g., `List`, is allowed but not recommended as it bypasses type safety.
+
+### Generic Methods
+
+Methods can be generic independently of the class:
+
+```java
+public static <T> void printArray(T[] array) {
+    for (T element : array) {
+        System.out.println(element);
+    }
+}
+```
+
+### Generic Classes and Interfaces
+
+```java
+public class Box<T> {
+    private T value;
+
+    public void set(T value) { this.value = value; }
+    public T get() { return value; }
+}
 ```
 
 ## Real-world Examples & Use Cases
 
-1. **Collections Framework**: `List<String>` ensures only strings are added.
-2. **API Design**: Generic methods in utility classes like `Collections.sort()`.
-3. **Custom Data Structures**: Implementing generic stacks, queues, or trees.
+- **Collections Framework**: `ArrayList<String>`, `HashMap<K, V>` ensure type safety.
+- **Custom Data Structures**: Generic stacks, queues for any type.
+- **API Design**: Libraries like Apache Commons use generics for flexible APIs.
+- **Type-Safe Builders**: Builder patterns with generics for fluent interfaces.
 
 ## Code Examples
 
 ### Basic Generic Class
 
 ```java
-public class Box<T> {
-    private T value;
+public class Pair<K, V> {
+    private K key;
+    private V value;
 
-    public void set(T value) {
+    public Pair(K key, V value) {
+        this.key = key;
         this.value = value;
     }
 
-    public T get() {
-        return value;
-    }
+    public K getKey() { return key; }
+    public V getValue() { return value; }
 }
 
-// Usage
-Box<String> stringBox = new Box<>();
-stringBox.set("Hello Generics");
-String value = stringBox.get();
+Pair<String, Integer> pair = new Pair<>("Age", 30);
 ```
 
 ### Bounded Type Parameters
 
 ```java
-public class NumberBox<T extends Number> {
-    private T number;
-
-    public void set(T number) {
-        this.number = number;
-    }
-
-    public double getDoubleValue() {
-        return number.doubleValue();
+public class Calculator<T extends Number> {
+    public double add(T a, T b) {
+        return a.doubleValue() + b.doubleValue();
     }
 }
+
+Calculator<Integer> calc = new Calculator<>();
+System.out.println(calc.add(5, 10)); // 15.0
 ```
 
-### Wildcards
+### Wildcards in Methods
 
 ```java
-public void printList(List<?> list) {
+public static void printList(List<?> list) {
     for (Object elem : list) {
-        System.out.println(elem);
+        System.out.print(elem + " ");
     }
+    System.out.println();
 }
 
-public void addNumbers(List<? super Integer> list) {
-    list.add(1);
-    list.add(2);
-}
+List<String> strings = Arrays.asList("a", "b", "c");
+printList(strings);
 ```
 
-## Common Pitfalls & Edge Cases
+### Generic Method with Wildcards
 
-- **Type Erasure Issues**: Cannot use `instanceof` with generics directly.
-- **Heap Pollution**: Mixing raw and generic types can lead to `ClassCastException`.
-- **Overloading**: Generic methods cannot be overloaded by type parameters alone.
+```java
+public static <T> void copy(List<? super T> dest, List<? extends T> src) {
+    for (int i = 0; i < src.size(); i++) {
+        dest.set(i, src.get(i));
+    }
+}
+```
 
 ## References
 
 - [Oracle Java Tutorials: Generics](https://docs.oracle.com/javase/tutorial/java/generics/)
 - [Effective Java by Joshua Bloch: Chapter on Generics](https://www.amazon.com/Effective-Java-Joshua-Bloch/dp/0134685997)
+- [Java Language Specification: Generics](https://docs.oracle.com/javase/specs/jls/se17/html/jls-8.html)
 
 ## Github-README Links & Related Topics
 
-- [java-generics](https://github.com/topics/java-generics)
-- Related: [Java Collections Deep Dive](../java-collections-deep-dive/README.md)
-- Related: [Java OOP Principles](../java-oop-principles/README.md)
+- [Java Collections Framework](../java-collections/README.md)
+- [Java OOP Principles](../oop-principles-in-java/README.md)
+- [Java Design Patterns](../java-design-patterns/README.md)

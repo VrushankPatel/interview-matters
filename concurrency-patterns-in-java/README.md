@@ -1,7 +1,7 @@
 ---
 title: Concurrency Patterns in Java
-aliases: [Java Concurrency Patterns, Concurrent Programming Patterns]
-tags: [#java,#concurrency,#patterns]
+aliases: [Java Concurrency Patterns]
+tags: [#java,#concurrency]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -10,40 +10,55 @@ updated: 2025-09-26
 
 ## Overview
 
-Concurrency patterns in Java provide reusable solutions for common problems in multithreaded programming, such as synchronization, communication, and resource sharing between threads.
+Concurrency Patterns in Java provide reusable solutions for common problems in multithreaded programming, such as synchronization, communication, and resource sharing. They leverage Java's concurrency utilities like locks, semaphores, and executors.
 
 ## Detailed Explanation
 
-These patterns help manage shared state, avoid race conditions, and improve performance in concurrent applications.
+### Producer-Consumer Pattern
 
-### Common Patterns
+Producers add items to a buffer, consumers remove them. Uses `BlockingQueue` for thread-safe operations.
 
-- **Producer-Consumer**: Decouples producers and consumers using a shared buffer.
-- **Reader-Writer**: Allows multiple readers or single writer access to shared resources.
-- **Thread Pool**: Reuses threads to execute tasks efficiently.
-- **Barrier**: Synchronizes multiple threads to reach a common point.
+### Reader-Writer Pattern
+
+Allows multiple readers or one writer. Uses `ReadWriteLock` to optimize for read-heavy scenarios.
+
+### Thread Pool Pattern
+
+Manages a pool of worker threads. Uses `ExecutorService` to limit thread creation and improve performance.
+
+### Future and Callable Pattern
+
+Asynchronous computation with `Future` and `Callable`. Allows non-blocking operations.
+
+### Atomic Operations
+
+Using `AtomicInteger`, `AtomicReference` for lock-free updates.
+
+### Immutability Pattern
+
+Immutable objects are thread-safe by design.
 
 ## Real-world Examples & Use Cases
 
-1. **Web Servers**: Handling multiple client requests concurrently.
-2. **Data Processing**: Parallel processing of large datasets.
-3. **GUI Applications**: Updating UI without blocking the main thread.
+- **Web Servers**: Thread pools for handling HTTP requests.
+- **Database Connections**: Connection pooling with semaphores.
+- **Event Processing**: Producer-consumer for log processing.
+- **Caching**: Read-write locks for cache updates.
 
 ## Code Examples
 
 ### Producer-Consumer with BlockingQueue
 
 ```java
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.*;
 
 public class ProducerConsumer {
-    private static final BlockingQueue<Integer> queue = new LinkedBlockingQueue<>(10);
+    private static final BlockingQueue<Integer> queue = new ArrayBlockingQueue<>(10);
 
     static class Producer implements Runnable {
         public void run() {
             try {
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < 100; i++) {
                     queue.put(i);
                     System.out.println("Produced: " + i);
                 }
@@ -65,14 +80,20 @@ public class ProducerConsumer {
             }
         }
     }
+
+    public static void main(String[] args) {
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+        executor.submit(new Producer());
+        executor.submit(new Consumer());
+        executor.shutdown();
+    }
 }
 ```
 
-### ReadWriteLock Example
+### Read-Write Lock
 
 ```java
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.concurrent.locks.*;
 
 public class ReadWriteExample {
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
@@ -98,19 +119,46 @@ public class ReadWriteExample {
 }
 ```
 
+### Thread Pool
+
+```java
+ExecutorService executor = Executors.newFixedThreadPool(5);
+for (int i = 0; i < 10; i++) {
+    executor.submit(() -> {
+        System.out.println("Task executed by " + Thread.currentThread().getName());
+    });
+}
+executor.shutdown();
+```
+
+### Atomic Operations
+
+```java
+AtomicInteger counter = new AtomicInteger(0);
+int newValue = counter.incrementAndGet();
+```
+
 ## Common Pitfalls & Edge Cases
 
-- **Deadlocks**: Circular waiting for resources.
-- **Race Conditions**: Unpredictable results from concurrent access.
-- **Starvation**: Threads unable to proceed due to resource contention.
+- **Deadlocks**: Circular wait for locks.
+- **Race Conditions**: Unprotected shared state.
+- **Starvation**: Threads waiting indefinitely.
+- **Context Switching Overhead**: Too many threads.
+
+## Tools & Libraries
+
+- **java.util.concurrent**: Core concurrency utilities.
+- **Guava**: Additional concurrency tools.
+- **JMH**: Benchmarking concurrent code.
 
 ## References
 
-- [Java Concurrency in Practice by Brian Goetz](https://www.amazon.com/Java-Concurrency-Practice-Brian-Goetz/dp/0321349601)
 - [Oracle Concurrency Tutorial](https://docs.oracle.com/javase/tutorial/essential/concurrency/)
+- [Java Concurrency in Practice](https://www.amazon.com/Java-Concurrency-Practice-Brian-Goetz/dp/0321349601)
+- [Baeldung: Concurrency Patterns](https://www.baeldung.com/java-concurrency-patterns)
 
 ## Github-README Links & Related Topics
 
-- [java-concurrency](https://github.com/topics/java-concurrency)
-- Related: [Java Multithreading and Concurrency](../java-multithreading-and-concurrency/README.md)
-- Related: [Concurrent Collections](../concurrent-collections/README.md)
+- [Java Multithreading](../java-multithreading-and-concurrency/README.md)
+- [Concurrent Collections](../concurrent-collections/README.md)
+- [Java Executors](../java-executorservice/README.md)
