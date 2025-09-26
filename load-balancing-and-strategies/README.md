@@ -150,7 +150,7 @@ func main() {
 
 ## Github-README Links & Related Topics
 
-- [proxy-forward-and-reverse](proxy-forward-and-reverse/)
-- [high-scalability-patterns](high-scalability-patterns/)
-- [fault-tolerance-patterns](fault-tolerance-patterns/)
-- [container-orchestration](container-orchestration/)
+- [Proxy Forward and Reverse](./proxy-forward-and-reverse/README.md)
+- [High Scalability Patterns](./high-scalability-patterns/README.md)
+- [Fault Tolerance Patterns](./fault-tolerance-patterns/README.md)
+- [Container Orchestration](./container-orchestration/README.md)

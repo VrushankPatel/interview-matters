@@ -1,7 +1,2 @@
-Monitoring and Logging
-Async logging
-DevOps & Infrastructure as Code
-Proxy forward and reverse
-Load balancing and strategies
-Rate limiting
-Concurrency & Parallelism
+00006| Rate limiting
+00007| Concurrency & Parallelism

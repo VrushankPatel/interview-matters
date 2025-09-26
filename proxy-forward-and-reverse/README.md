@@ -141,7 +141,7 @@ backend http_back
 
 ## Github-README Links & Related Topics
 
-- [api-gateway-design](api-gateway-design/)
-- [load-balancing-and-strategies](load-balancing-and-strategies/)
-- [cdn-architecture](cdn-architecture/)
-- [networking](networking/)
+- [API Gateway Design](./api-gateway-design/README.md)
+- [Load Balancing and Strategies](./load-balancing-and-strategies/README.md)
+- [CDN Architecture](./cdn-architecture/README.md)
+- [Networking](./networking/README.md)

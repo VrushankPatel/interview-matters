@@ -239,7 +239,7 @@ pipeline {
 
 ## Github-README Links & Related Topics
 
-- [ci-cd-pipelines](ci-cd-pipelines/)
-- [monitoring-and-logging](monitoring-and-logging/)
-- [docker-containerization](docker-containerization/)
-- [kubernetes-fundamentals](kubernetes-fundamentals/)
+- [CI/CD Pipelines](./ci-cd-pipelines/README.md)
+- [Monitoring and Logging](./monitoring-and-logging/README.md)
+- [Docker Containerization](./docker-containerization/README.md)
+- [Kubernetes Fundamentals](./kubernetes-fundamentals/README.md)

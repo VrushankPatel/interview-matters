@@ -157,6 +157,5 @@ public class HighThroughputService {
 
 ## Github-README Links & Related Topics
 
-- [monitoring-and-logging](monitoring-and-logging/)
-- [logging-frameworks](logging-frameworks/)
-- [async-logging](async-logging/)
+- [Monitoring and Logging](./monitoring-and-logging/README.md)
+- [Logging Frameworks](./logging-frameworks/README.md)
