@@ -1,7 +1,7 @@
 ---
 title: Java Stream API & Functional Programming
 aliases: [Java Streams, Functional Programming in Java]
-tags: [#java, #functional]
+tags: [#java,#functional]
 created: 2023-10-01
 updated: 2025-09-26
 ---
