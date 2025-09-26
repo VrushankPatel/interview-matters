@@ -1,204 +1,127 @@
+# System Design Basics
+
 ---
 title: System Design Basics
-aliases: [system-design-fundamentals, system-design-intro]
-tags: [#system-design,#scalability,#reliability,#architecture]
+aliases: [System Design Fundamentals, Basic System Design]
+tags: [#system-design, #basics]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# System Design Basics
+# Overview
 
-## Overview
+System design basics encompass the fundamental principles and concepts required to architect scalable, reliable, and efficient software systems. At its core, system design involves understanding trade-offs between performance, scalability, availability, and consistency. Key elements include evaluating system requirements, identifying bottlenecks, and applying patterns like load balancing, caching, and database sharding. This foundation prepares engineers to design systems that handle growth from thousands to millions of users, ensuring reliability under varying loads and failure scenarios.
 
-System design is the process of planning, structuring, and defining the architecture of a software system. It involves translating user requirements into a detailed blueprint that guides the implementation phase. The goal is to create a well-organized and efficient structure that meets the intended purpose while considering factors like scalability, maintainability, and performance. System design is a critical phase in the Software Development Life Cycle (SDLC), providing the backbone to handle exceptional scenarios by representing the business logic of the software.
+# Detailed Explanation
 
-Key aspects include:
-- **Scalability**: Ability to handle increased loads.
-- **Reliability**: Ensuring system availability and fault tolerance.
-- **Performance**: Minimizing latency and optimizing response times.
-- **Security**: Protecting against unauthorized access and data breaches.
-- **Maintainability**: Ease of updates and modifications.
+System design basics build on core computer science principles, focusing on distributed systems. Here's a breakdown of essential concepts:
 
-## Detailed Explanation
+## Performance vs Scalability
+- **Performance**: Measures how fast a system responds to a single user or request. A performance issue means the system is slow for individual operations.
+- **Scalability**: Refers to the system's ability to handle increased load by adding resources proportionally. Vertical scaling (adding more power to a single machine) is limited, while horizontal scaling (adding more machines) is preferred for large systems.
 
-System design encompasses both High-Level Design (HLD) and Low-Level Design (LLD), each serving distinct purposes in the development process.
+## Latency vs Throughput
+- **Latency**: The time to complete a single operation (e.g., response time for a web request).
+- **Throughput**: The number of operations completed per unit time (e.g., requests per second).
+- Aim for maximal throughput with acceptable latency, as they often trade off.
 
-### High-Level Design (HLD)
-HLD provides an overview of the system's architecture, focusing on major components, their interactions, and data flow. It is typically created by architects and stakeholders to outline the big picture, including technology stack, infrastructure, and high-level decisions on scalability and security.
+## Availability vs Consistency (CAP Theorem)
+The CAP theorem states that in a distributed system, you can only guarantee two of the following three properties:
+- **Consistency**: Every read receives the most recent write or an error.
+- **Availability**: Every request receives a response, without guarantee of the latest data.
+- **Partition Tolerance**: The system continues operating despite network failures.
+- Most systems prioritize availability and partition tolerance (AP), accepting eventual consistency.
 
-Key elements:
-- System architecture overview
-- Data flow and component interactions
-- Technology stack and infrastructure choices
-- Module responsibilities and performance trade-offs
+## Consistency Patterns
+- **Weak Consistency**: Reads may not see the latest writes; suitable for real-time apps like VoIP.
+- **Eventual Consistency**: Reads will eventually reflect writes; common in DNS and email systems.
+- **Strong Consistency**: Reads always see the latest writes; used in RDBMS for transactions.
 
-Prerequisites for HLD include knowledge of databases, caching, APIs, networking, and tools like message queues.
+## Availability Patterns
+- **Fail-over**: Active-passive (standby takes over) or active-active (both handle traffic).
+- **Replication**: Master-slave or master-master to ensure data redundancy.
 
-### Low-Level Design (LLD)
-LLD delves into the internal implementation of each component, providing detailed blueprints for developers. It includes class designs, database schemas, API definitions, and error handling logic.
+## Core Components
+- **Load Balancers**: Distribute traffic across servers (e.g., Layer 4 for TCP/UDP, Layer 7 for HTTP).
+- **Caching**: Store frequently accessed data in memory (e.g., Redis, Memcached) to reduce database load.
+- **Databases**: Choose SQL for structured data/transactions or NoSQL for flexibility/scalability.
+- **CDNs**: Serve static content from geographically distributed servers to reduce latency.
+- **Message Queues**: Enable asynchronous processing (e.g., RabbitMQ for decoupling services).
 
-Key elements:
-- Component/module breakdown with internal logic
-- Database schema and structures
-- API and interface definitions
-- Error handling, validation, and design patterns (e.g., SOLID principles)
+## Design Process
+1. **Requirements Gathering**: Define use cases, constraints, and assumptions (e.g., users, requests/second, data volume).
+2. **High-Level Design**: Sketch components and connections.
+3. **Component Deep Dive**: Detail core elements like APIs, databases, and scaling strategies.
+4. **Scaling and Optimization**: Address bottlenecks with caching, sharding, etc.
+5. **Back-of-the-Envelope Calculations**: Estimate capacity using latency numbers (e.g., memory reference: 100ns, disk seek: 10ms).
 
-Prerequisites for LLD include strong Object-Oriented Programming (OOP) skills and familiarity with design patterns.
+# Real-world Examples & Use Cases
 
-| Aspect | High-Level Design (HLD) | Low-Level Design (LLD) |
-|--------|-------------------------|-------------------------|
-| Focus | Overall architecture and interactions | Internal implementation details |
-| Audience | Architects, stakeholders | Developers |
-| Artifacts | Architecture diagrams, data flow diagrams | Class diagrams, sequence diagrams, pseudocode |
-| Scope | Big picture, scalability decisions | Code-level logic, methods, attributes |
+- **Web Search Engine (e.g., Google)**: Uses distributed indexing, caching, and load balancing to handle billions of queries daily. Sharding data across servers ensures scalability, while eventual consistency allows for fast responses.
+- **Social Media Feed (e.g., Facebook/Twitter)**: Employs caching for timelines, replication for availability, and message queues for notifications. Trade-offs prioritize availability over strict consistency to support real-time updates.
+- **E-commerce Platform (e.g., Amazon)**: Leverages CDNs for product images, load balancers for traffic distribution, and database sharding for user data. High availability ensures uptime during peak shopping seasons.
+- **Video Streaming (e.g., Netflix)**: Uses CDNs to deliver content globally, caching for popular videos, and microservices for recommendation engines. Partition tolerance handles regional outages.
 
-### Key Concepts in System Design
-- **Scalability**: Horizontal (adding more servers) vs. Vertical (upgrading existing servers) scaling.
-- **Availability**: Ensuring the system is operational, often measured by uptime percentages.
-- **Consistency**: Maintaining data integrity across distributed systems.
-- **Reliability**: Fault tolerance and recovery mechanisms.
-- **CAP Theorem**: In distributed systems, you can achieve at most two of Consistency, Availability, and Partition Tolerance.
-- **Load Balancing**: Distributing traffic across servers to prevent overload.
-- **Caching**: Storing frequently accessed data to reduce latency.
-- **Databases**: Choosing between SQL (relational) and NoSQL (non-relational) based on needs.
+# Code Examples
 
-```mermaid
-graph TD
-    A[User Request] --> B[Load Balancer]
-    B --> C[Web Server 1]
-    B --> D[Web Server 2]
-    C --> E[Application Server]
-    D --> E
-    E --> F[Database]
-    E --> G[Cache]
-    G --> F
+Here are simple pseudocode examples illustrating basic system design concepts:
+
+### Load Balancing (Round Robin)
 ```
-
-This diagram illustrates a basic system architecture with load balancing, caching, and database interaction.
-
-## Real-world Examples & Use Cases
-
-System design principles are applied in various large-scale applications:
-
-- **Netflix**: Transitioned from a monolithic architecture to microservices for scalability. Uses event-driven systems for real-time recommendations and handles millions of concurrent users during peak times like holiday seasons.
-- **Uber**: Employs an event-driven architecture for ride requests, location updates, and dynamic pricing. Ensures low-latency matching between riders and drivers through distributed systems.
-- **Twitter**: Implements load balancing and caching for trending topics and tweets. Manages real-time data flows and high user concurrency with fault-tolerant designs.
-
-Use cases include:
-- E-commerce platforms requiring high availability during sales events.
-- Social media apps needing to scale with user growth and handle real-time interactions.
-- Streaming services managing video delivery with minimal latency.
-
-## Code Examples
-
-Here are simple code snippets demonstrating basic system design concepts.
-
-### Example 1: Basic Load Balancer Simulation in Python
-```python
-import random
-
-class LoadBalancer:
-    def __init__(self, servers):
-        self.servers = servers
-
-    def get_server(self):
-        return random.choice(self.servers)
-
-# Usage
 servers = ["server1", "server2", "server3"]
-lb = LoadBalancer(servers)
-print(lb.get_server())  # Randomly selects a server
-```
+index = 0
 
-### Example 2: Simple Caching Mechanism in Java
-```java
-import java.util.HashMap;
-import java.util.Map;
-
-class Cache {
-    private Map<String, String> cache = new HashMap<>();
-
-    public String get(String key) {
-        return cache.get(key);
-    }
-
-    public void put(String key, String value) {
-        cache.put(key, value);
-    }
-}
-
-// Usage
-Cache cache = new Cache();
-cache.put("user:123", "John Doe");
-System.out.println(cache.get("user:123"));  // Outputs: John Doe
-```
-
-These examples illustrate fundamental patterns; in real systems, consider thread safety and persistence.
-
-## STAR Summary
-**Situation:** A startup needed to design a scalable e-commerce platform from scratch with no prior architecture.
-
-**Task:** As the lead architect, I was responsible for creating both HLD and LLD to support 1M users initially, with plans for 10x growth.
-
-**Action:** I conducted stakeholder interviews, analyzed requirements, created HLD with microservices architecture, load balancing, and caching. Then developed LLD with detailed API specs, database schemas, and error handling. Implemented monitoring and logging from day one.
-
-**Result:** The platform launched successfully, handling peak loads of 500K concurrent users, with 99.9% uptime and sub-500ms response times, enabling the company to scale to 5M users within a year.
-
-## Journey / Sequence
-```mermaid
-sequenceDiagram
-    participant Stakeholder
-    participant Architect
-    participant Developer
-    participant Tester
-
-    Stakeholder->>Architect: Requirements Gathering
-    Architect->>Architect: HLD Creation
-    Architect->>Developer: LLD Handover
-    Developer->>Developer: Implementation
-    Developer->>Tester: Code Review
-    Tester->>Architect: Feedback
-    Architect->>Stakeholder: Validation
-```
-
-## Data Models / Message Formats
-### System Design Flow JSON
-```json
-{
-  "systemDesignProcess": {
-    "phase1": "Requirements Analysis",
-    "phase2": "High-Level Design (HLD)",
-    "phase3": "Low-Level Design (LLD)",
-    "phase4": "Implementation",
-    "phase5": "Testing & Deployment",
-    "artifacts": ["Architecture Diagrams", "API Specs", "Database Schemas", "Test Plans"]
-  }
+function getServer() {
+    server = servers[index]
+    index = (index + 1) % servers.length
+    return server
 }
 ```
 
-## Common Pitfalls & Edge Cases
-- **Over-engineering:** Start with simple monolith, evolve to microservices as needed.
-- **Ignoring Non-functional Requirements:** Always consider scalability, security, and performance early.
-- **Poor Communication:** Ensure HLD and LLD are well-documented and understood by all teams.
-- **Edge Cases:** Handling sudden traffic spikes, data migration during scaling, backward compatibility.
+### Cache-aside Pattern
+```
+cache = {}  // In-memory cache
 
-## Tools & Libraries
-- **Diagramming:** Lucidchart, Draw.io, Mermaid for diagrams.
-- **Documentation:** Confluence, Notion for collaborative docs.
-- **Modeling:** UML tools like Enterprise Architect.
-- **Prototyping:** Figma for UI/UX, Postman for API design.
+function getUser(userId) {
+    if (cache[userId]) {
+        return cache[userId]
+    }
+    user = db.query("SELECT * FROM users WHERE id = ?", userId)
+    if (user) {
+        cache[userId] = user  // Cache for future requests
+    }
+    return user
+}
+```
 
-## References
+### Simple Message Queue
+```
+queue = []
 
-- [What is System Design - Learn System Design](https://www.geeksforgeeks.org/what-is-system-design-learn-system-design/) - Comprehensive guide on system design fundamentals, HLD, LLD, and key concepts.
-- [System Design Tutorial](https://www.geeksforgeeks.org/system-design/system-design-tutorial/) - Overview of system design topics and interview preparation.
-- [CAP Theorem in System Design](https://www.geeksforgeeks.org/system-design/cap-theorem-in-system-design/) - Explanation of the CAP theorem and its implications.
+function enqueue(message) {
+    queue.push(message)
+}
 
-## Github-README Links & Related Topics
+function dequeue() {
+    if (queue.length > 0) {
+        return queue.shift()
+    }
+    return null
+}
+```
 
-- [Scalability Patterns](../scalability-patterns/README.md) - Detailed patterns for scaling systems.
-- [Load Balancing and Strategies](../load-balancing-and-strategies/README.md) - Techniques for distributing load.
-- [Caching](../caching/README.md) - In-depth on caching strategies.
-- [Database Design Principles](../database-design-principles/README.md) - Best practices for database architecture.
-- [Microservices Architecture](../microservices-architecture/README.md) - Design principles for microservices.
-- [Fault Tolerance in Distributed Systems](../fault-tolerance-in-distributed-systems/README.md) - Ensuring system reliability.
+# References
+
+- [System Design Primer on GitHub](https://github.com/donnemartin/system-design-primer) - Comprehensive guide with diagrams and examples.
+- [CAP Theorem Revisited](http://robertgreiner.com/2014/08/cap-theorem-revisited/) - In-depth explanation of CAP theorem.
+- [Scalability for Dummies](https://web.archive.org/web/20220530193911/https://www.lecloud.net/post/7295452622/scalability-for-dummies-part-1-clones) - Series on scaling principles.
+- [Latency Numbers Every Programmer Should Know](https://gist.github.com/jboner/2841832) - Key performance benchmarks.
+- [System Design Interview Prep](https://www.educative.io/courses/grokking-the-system-design-interview) - Interactive course on basics.
+
+# Github-README Links & Related Topics
+
+- [Scalability Patterns](./scalability-patterns/) - Advanced scaling techniques.
+- [Database Design Principles](./database-design-principles/) - In-depth database choices and trade-offs.
+- [Caching Strategies](./caching/) - Detailed caching mechanisms.
+- [Load Balancing](./load-balancer/) - Types and implementations.
+- [Microservices Architecture](./microservices/) - Breaking down monolithic systems.

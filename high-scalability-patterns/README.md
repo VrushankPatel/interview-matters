@@ -1,283 +1,142 @@
 ---
 title: High Scalability Patterns
-aliases: [high-scalability-patterns, scalability-patterns]
-tags: [#system-design,#scalability]
-created: 2025-09-25
+aliases: [Scalability Patterns, High Availability Patterns]
+tags: [#system-design,#scalability,#patterns]
+created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# High Scalability Patterns
+# Overview
 
-## Overview
+High scalability patterns are architectural strategies designed to handle increased load, user growth, and data volume in software systems. These patterns ensure systems remain performant, reliable, and cost-effective as they scale from small applications to enterprise-level platforms. Key patterns include load balancing, caching, database sharding, and microservices, each addressing specific scalability challenges like bottlenecks in processing, storage, or network traffic.
 
-High Scalability Patterns cover techniques and architectural approaches to build systems that can handle increased load, traffic, and data volume. These patterns help maintain performance, reliability, and cost-effectiveness as systems grow.
+# Detailed Explanation
 
-## Detailed Explanation
+Scalability patterns focus on distributing workload, optimizing resources, and minimizing single points of failure. They are categorized into horizontal (adding more nodes) and vertical (enhancing existing nodes) scaling.
 
-Scalability refers to a system's ability to handle growing amounts of work or its potential to accommodate growth. There are two main types of scalability:
+## Load Balancing
+Distributes incoming traffic across multiple servers to prevent overload.
+- **Types**: Round-robin, least connections, IP hash.
+- **Benefits**: Improves availability and fault tolerance.
 
-- **Vertical Scaling (Scale Up)**: Adding more power to existing servers (CPU, RAM, storage).
-- **Horizontal Scaling (Scale Out)**: Adding more servers to distribute the load.
+## Caching
+Stores frequently accessed data in fast-access storage to reduce database load.
+- **Strategies**: Cache-aside, write-through, write-behind.
+- **Tools**: Redis, Memcached.
 
-## Key Scalability Patterns
+## Database Sharding
+Splits large databases into smaller, manageable pieces (shards) distributed across servers.
+- **Types**: Horizontal (rows), vertical (columns).
+- **Challenges**: Cross-shard queries, rebalancing.
 
-### Load Balancing
-Distributes incoming traffic across multiple servers to prevent any single server from becoming a bottleneck.
+## Replication
+Creates copies of data across multiple nodes for redundancy and read scalability.
+- **Types**: Master-slave, master-master.
+- **Benefits**: High availability, load distribution.
 
-**Types:**
-- Round Robin
-- Least Connections
-- IP Hash
-- Weighted Round Robin
+## Microservices
+Breaks monolithic applications into small, independent services.
+- **Benefits**: Easier scaling, technology diversity, fault isolation.
+- **Challenges**: Inter-service communication, data consistency.
 
-### Caching
-Stores frequently accessed data in memory for faster retrieval, reducing database load.
+## CDN (Content Delivery Network)
+Distributes static content globally to reduce latency.
+- **Use Cases**: Images, videos, static files.
 
-**Types:**
-- In-memory caching (Redis, Memcached)
-- CDN caching
-- Database query caching
-- Application-level caching
+## Message Queues
+Decouples services for asynchronous processing.
+- **Tools**: Kafka, RabbitMQ.
+- **Benefits**: Handles spikes, improves reliability.
 
-### Database Sharding
-Splits large databases into smaller, more manageable pieces called shards.
+## Auto-scaling
+Dynamically adjusts resources based on demand.
+- **Cloud Tools**: AWS Auto Scaling, Kubernetes HPA.
 
-**Strategies:**
-- Horizontal sharding
-- Vertical sharding
-- Directory-based sharding
+# Real-world Examples & Use Cases
 
-### Replication
-Creates copies of data across multiple servers for redundancy and improved read performance.
+- **Netflix**: Uses microservices, CDNs, and caching for global video streaming, handling millions of concurrent users.
+- **Amazon**: Employs sharding, replication, and load balancing for e-commerce, ensuring fast checkout during peak times.
+- **Facebook**: Leverages caching, sharding, and message queues for real-time feeds and notifications.
+- **Google**: Uses load balancing and replication for search engines, distributing queries across data centers.
+- **Uber**: Applies microservices and auto-scaling for ride-sharing, managing variable demand.
 
-**Types:**
-- Master-Slave replication
-- Master-Master replication
-- Multi-Master replication
+# Code Examples
 
-### Partitioning
-Divides data or workload across multiple servers or databases.
-
-**Types:**
-- Range partitioning
-- Hash partitioning
-- List partitioning
-
-### Asynchronous Processing
-Decouples components using message queues to handle tasks asynchronously.
-
-**Benefits:**
-- Improved responsiveness
-- Better fault tolerance
-- Load leveling
-
-### Microservices Architecture
-Breaks down monolithic applications into smaller, independent services.
-
-**Advantages:**
-- Independent scaling
-- Technology diversity
-- Easier maintenance
-
-### Content Delivery Networks (CDNs)
-Distributes content geographically closer to users, reducing latency.
-
-### Auto-scaling
-Automatically adjusts resources based on demand.
-
-**Types:**
-- Horizontal auto-scaling
-- Vertical auto-scaling
-
-## Real-world Examples & Use Cases
-
-- **Social Media Platforms**: Handle millions of users posting and viewing content simultaneously.
-- **E-commerce Sites**: Manage high traffic during sales events like Black Friday.
-- **Streaming Services**: Deliver video content to millions of concurrent users.
-- **IoT Systems**: Handle data from thousands of devices in real-time.
-
-## Code Examples
-
-## Simple Load Balancer Implementation
-
+### Simple Load Balancer (Pseudocode)
 ```python
-import random
-
 class LoadBalancer:
     def __init__(self, servers):
         self.servers = servers
-    
-    def get_server_round_robin(self):
-        if not hasattr(self, 'current'):
-            self.current = 0
-        server = self.servers[self.current]
-        self.current = (self.current + 1) % len(self.servers)
-        return server
-    
-    def get_server_random(self):
-        return random.choice(self.servers)
-    
-    def get_server_least_connections(self):
-        # Simplified: assume connection counts
-        return min(self.servers, key=lambda s: s.get('connections', 0))
+        self.index = 0
 
-# Usage
-servers = [{'host': 'server1', 'connections': 5}, {'host': 'server2', 'connections': 3}]
-lb = LoadBalancer(servers)
-print(lb.get_server_round_robin())
+    def get_server(self):
+        server = self.servers[self.index]
+        self.index = (self.index + 1) % len(self.servers)
+        return server
 ```
 
-## Basic Caching with TTL
-
+### Cache Implementation (Java)
 ```java
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.HashMap;
 import java.util.Map;
 
-public class SimpleCache<K, V> {
-    private Map<K, CacheEntry<V>> cache = new ConcurrentHashMap<>();
-    
-    public V get(K key) {
-        CacheEntry<V> entry = cache.get(key);
-        if (entry != null && !entry.isExpired()) {
-            return entry.getValue();
-        } else {
-            cache.remove(key);
-            return null;
-        }
+class SimpleCache {
+    private Map<String, String> cache = new HashMap<>();
+
+    public String get(String key) {
+        return cache.get(key);
     }
-    
-    public void put(K key, V value, long ttlMillis) {
-        cache.put(key, new CacheEntry<>(value, ttlMillis));
-    }
-    
-    private static class CacheEntry<V> {
-        private V value;
-        private long expiryTime;
-        
-        public CacheEntry(V value, long ttlMillis) {
-            this.value = value;
-            this.expiryTime = System.currentTimeMillis() + ttlMillis;
-        }
-        
-        public V getValue() {
-            return value;
-        }
-        
-        public boolean isExpired() {
-            return System.currentTimeMillis() > expiryTime;
-        }
+
+    public void put(String key, String value) {
+        cache.put(key, value);
     }
 }
 ```
 
-## Database Sharding Example (Conceptual)
+### Database Sharding (SQL Example)
+```sql
+-- Shard 1: Users with ID 1-1000
+CREATE TABLE users_shard1 (
+    id INT PRIMARY KEY,
+    name VARCHAR(50)
+);
 
-```python
-class ShardingManager:
-    def __init__(self, num_shards):
-        self.num_shards = num_shards
-        self.shards = [{} for _ in range(num_shards)]  # Simplified as dicts
-    
-    def get_shard(self, key):
-        # Simple hash-based sharding
-        return hash(key) % self.num_shards
-    
-    def put(self, key, value):
-        shard_index = self.get_shard(key)
-        self.shards[shard_index][key] = value
-    
-    def get(self, key):
-        shard_index = self.get_shard(key)
-        return self.shards[shard_index].get(key)
-
-# Usage
-shard_manager = ShardingManager(4)
-shard_manager.put('user1', {'name': 'Alice'})
-shard_manager.put('user2', {'name': 'Bob'})
-print(shard_manager.get('user1'))
+-- Shard 2: Users with ID 1001-2000
+CREATE TABLE users_shard2 (
+    id INT PRIMARY KEY,
+    name VARCHAR(50)
+);
 ```
 
-## Journey / Sequence
-```mermaid
-sequenceDiagram
-    participant User
-    participant LoadBalancer
-    participant Cache
-    participant DB
+# STAR Summary
 
-    User->>LoadBalancer: Request
-    LoadBalancer->>Cache: Check cache
-    Cache-->>LoadBalancer: Cache miss
-    LoadBalancer->>DB: Query
-    DB-->>LoadBalancer: Data
-    LoadBalancer->>Cache: Store in cache
-    Cache-->>User: Response
-```
+- **Situation**: A monolithic e-commerce site experiences slowdowns during sales.
+- **Task**: Implement scalability patterns to handle 10x traffic increase.
+- **Action**: Introduced load balancing, caching, and database sharding.
+- **Result**: Reduced response time by 50%, improved uptime to 99.9%.
 
-## Data Models / Message Formats
-### Scalability Patterns Table
-| Pattern | Description | Benefits | Drawbacks |
-|---------|-------------|----------|-----------|
-| Load Balancing | Distribute traffic | Improved performance, fault tolerance | Complexity, single point of failure |
-| Caching | Store frequent data | Reduced latency, lower load | Cache invalidation, memory usage |
-| Sharding | Split data across nodes | Horizontal scaling, performance | Complexity, rebalancing |
-| Replication | Copy data across nodes | Read scalability, fault tolerance | Write overhead, consistency issues |
-| Asynchronous Processing | Decouple with queues | Responsiveness, load leveling | Ordering issues, monitoring |
+# Journey / Sequence
 
-### System Architecture Diagram
 ```mermaid
 graph TD
-    A[Client] --> B[Load Balancer]
-    B --> C[Web Server 1]
-    B --> D[Web Server 2]
-    C --> E[Cache]
-    D --> E
-    E --> F[Database Shard 1]
-    E --> G[Database Shard 2]
-    H[Message Queue] --> I[Worker 1]
-    H --> J[Worker 2]
+    A[Assess Current Load] --> B[Identify Bottlenecks]
+    B --> C[Choose Patterns: Load Balancing, Caching]
+    C --> D[Implement and Test]
+    D --> E[Monitor and Scale]
+    E --> F[Optimize Iteratively]
 ```
 
-## STAR Summary
+# References
 
-**Situation:** A growing e-commerce platform experienced slow response times during peak hours, with user requests taking over 5 seconds to load product pages.
+- [Scalability Patterns](https://microservices.io/patterns/scalability/)
+- [Database Sharding](https://www.mongodb.com/features/database-sharding)
+- [Microservices Patterns](https://microservices.io/patterns/)
+- [AWS Scalability Best Practices](https://aws.amazon.com/architecture/well-architected/)
+- [Google SRE Book](https://sre.google/sre-book/scalability/)
 
-**Task:** As the lead engineer, I was tasked with improving system performance to handle 10x traffic growth while maintaining sub-1-second response times.
+# Github-README Links & Related Topics
 
-**Action:** Implemented a multi-layered scalability approach: added load balancers for traffic distribution, introduced Redis caching for product data, sharded the user database across multiple nodes, and deployed asynchronous processing for order fulfillment using message queues.
-
-**Result:** System throughput increased by 300%, average response time dropped to 200ms, and the platform successfully handled Black Friday traffic without downtime, resulting in 25% higher conversion rates.
-
-## Common Pitfalls & Edge Cases
-- **Over-engineering:** Start simple, scale when needed.
-- **Ignoring Costs:** Scaling increases infrastructure costs.
-- **Cache Thrashing:** Frequent invalidation reduces benefits.
-- **Shard Imbalance:** Uneven data distribution causes hotspots.
-- **Edge Cases:** Sudden traffic spikes, network partitions, data skew.
-
-## Tools & Libraries
-- **Load Balancing:** NGINX, HAProxy, AWS ELB
-- **Caching:** Redis, Memcached, Caffeine
-- **Databases:** Cassandra (sharding), PostgreSQL (replication)
-- **Message Queues:** RabbitMQ, Apache Kafka
-- **Orchestration:** Kubernetes, Docker Swarm
-- **Auto-scaling:** AWS Auto Scaling, Kubernetes HPA
-
-## References
-
-- [Scalability Rules by Martin L. Abbott and Michael T. Fisher](https://www.amazon.com/Scalability-Rules-50-Principles-Sustainable/dp/0321753887)
-- [The Art of Scalability by Martin L. Abbott and Michael T. Fisher](https://www.amazon.com/Art-Scalability-Architecture-Organizations-Enterprise/dp/0137030426)
-- [Designing Data-Intensive Applications by Martin Kleppmann](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321)
-- [High Scalability Blog](http://highscalability.com/)
-- [Scalability - Wikipedia](https://en.wikipedia.org/wiki/Scalability)
-- [AWS Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/)
-- [Cloud Design Patterns - Azure](https://docs.microsoft.com/en-us/azure/architecture/patterns/)
-
-## Github-README Links & Related Topics
-
-- [Load Balancing and Strategies](../load-balancing-and-strategies/)
+- [Load Balancing Strategies](../load-balancing-strategies/)
 - [Caching](../caching/)
 - [Database Sharding Strategies](../database-sharding-strategies/)
-- [Database Replication Strategies](../database-replication-strategies/)
-- [Microservices Architecture](../microservices/)
-- [CAP Theorem & Distributed Systems](../cap-theorem-and-distributed-systems/)
+- [Microservices Architecture](../microservices-architecture/)

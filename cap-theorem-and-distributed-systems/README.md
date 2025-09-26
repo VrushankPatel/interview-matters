@@ -1,156 +1,99 @@
 ---
 title: CAP Theorem & Distributed Systems
-aliases: [cap theorem, distributed systems, consistency availability partition]
-tags: [#system-design,#distributed-systems]
-created: 2025-09-25
+aliases: [CAP Theorem, Distributed Systems Basics]
+tags: [#distributed-systems,#cap-theorem,#system-design]
+created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# CAP Theorem & Distributed Systems
+# Overview
 
-## Overview
-The CAP theorem, formulated by Eric Brewer, asserts that in a distributed data store, it's impossible to simultaneously provide more than two out of three guarantees: Consistency (C), Availability (A), and Partition Tolerance (P). This theorem is crucial for understanding trade-offs in distributed systems design.
+The CAP Theorem, formulated by Eric Brewer in 2000, states that in a distributed system, it is impossible to simultaneously guarantee Consistency, Availability, and Partition Tolerance. Distributed systems are networks of independent computers that appear as a single coherent system to users. Understanding CAP helps architects make informed trade-offs when designing systems that must handle network failures, high loads, and data replication across multiple nodes.
 
-## Detailed Explanation
-Distributed systems consist of multiple nodes communicating over a network, making them susceptible to partitions. The CAP theorem highlights the inherent trade-offs.
+# Detailed Explanation
 
-### Definitions
-- **Consistency (C):** Every read receives the most recent write or an error. All nodes see the same data at the same time.
-- **Availability (A):** Every request receives a (non-error) response, without guarantee that it contains the most recent write.
-- **Partition Tolerance (P):** The system continues to operate despite arbitrary message loss or failure of part of the system.
+Distributed systems consist of multiple interconnected nodes that communicate over a network. They face challenges like latency, bandwidth limitations, and partial failures.
 
-### Trade-offs
-- **CA (Consistency + Availability):** Possible only in systems without partitions (e.g., single-node databases).
-- **CP (Consistency + Partition Tolerance):** Sacrifices availability during partitions (e.g., blocking writes).
-- **AP (Availability + Partition Tolerance):** Sacrifices consistency (e.g., eventual consistency).
+## CAP Theorem Components
+- **Consistency**: Every read receives the most recent write or an error. All nodes see the same data simultaneously.
+- **Availability**: Every request receives a response, without guaranteeing it contains the most recent data.
+- **Partition Tolerance**: The system continues to operate despite network partitions (communication breakdowns between nodes).
 
-In practice, most systems choose AP or CP, as partitions are unavoidable in distributed environments.
+According to CAP, you can achieve at most two of these three properties in the presence of network partitions.
 
-### PACELC Theorem Extension
-An extension stating that in the absence of partitions (P), there's a trade-off between latency (L) and consistency (C): PC/EC (low latency with eventual consistency) or PC/EL (low latency with strong consistency).
+## Trade-offs
+- **CP (Consistency + Partition Tolerance)**: Sacrifices availability; e.g., systems wait for consistency during partitions (e.g., HBase, MongoDB with strict consistency).
+- **AP (Availability + Partition Tolerance)**: Sacrifices consistency; accepts eventual consistency (e.g., Cassandra, DynamoDB).
+- **CA (Consistency + Availability)**: Assumes no partitions; rare in real-world distributed systems (e.g., single-node databases).
 
-## Real-world Examples & Use Cases
-- **Banking Systems (CP):** Require strong consistency for transactions; may sacrifice availability during failures.
-- **Social Media Platforms (AP):** Prioritize availability and low latency; use eventual consistency for timelines.
-- **E-commerce Inventory (CP):** Ensure consistent stock levels across nodes.
-- **DNS Systems (AP):** Highly available, with eventual propagation of updates.
-- **File Storage like Dropbox (AP):** Files sync eventually across devices.
+## Related Concepts
+- **Eventual Consistency**: Data becomes consistent over time, not immediately.
+- **ACID vs BASE**: ACID (Atomicity, Consistency, Isolation, Durability) for strong consistency; BASE (Basically Available, Soft state, Eventually consistent) for high availability.
+- **Consensus Algorithms**: Paxos, Raft for achieving consistency in distributed systems.
 
-## Code Examples
-### Eventual Consistency in a Distributed Key-Value Store (AP System)
+## Distributed System Patterns
+- **Replication**: Copying data across nodes for redundancy.
+- **Sharding**: Splitting data across nodes.
+- **Load Balancing**: Distributing requests.
+- **Fault Tolerance**: Handling node failures.
+
+# Real-world Examples & Use Cases
+
+- **Banking Systems**: Prioritize consistency (CP) to ensure accurate transaction records, accepting temporary unavailability during network issues.
+- **Social Media (e.g., Twitter)**: Favor availability (AP) for posting tweets, allowing eventual consistency for timelines.
+- **E-commerce (e.g., Amazon)**: Use AP for product availability, with eventual consistency for inventory updates.
+- **DNS Systems**: Employ eventual consistency for global name resolution.
+- **File Storage (e.g., Dropbox)**: Balance CP for file integrity with replication for availability.
+
+# Code Examples
+
+### Simple Distributed Counter (Pseudocode for AP System)
 ```python
-import time
+class DistributedCounter:
+    def __init__(self, nodes):
+        self.nodes = nodes  # List of node values
 
-class EventualConsistencyKV:
-    def __init__(self):
-        self.data = {}  # Local data
-        self.version = {}  # Version vectors
-        self.peers = []  # Other nodes
+    def increment(self):
+        for node in self.nodes:
+            node.value += 1  # Eventual consistency
 
-    def put(self, key, value):
-        self.data[key] = value
-        self.version[key] = time.time()  # Simple timestamp
-        # Asynchronously propagate to peers
-        for peer in self.peers:
-            peer.receive_update(key, value, self.version[key])
-
-    def get(self, key):
-        return self.data.get(key, None)  # May be stale
-
-    def receive_update(self, key, value, version):
-        if version > self.version.get(key, 0):
-            self.data[key] = value
-            self.version[key] = version
+    def get_value(self):
+        return sum(node.value for node in self.nodes)  # Approximate value
 ```
 
-### Strong Consistency with Quorum (CP System)
+### Consensus with Raft (Simplified)
 ```java
-// Simplified quorum-based write/read
-class QuorumSystem {
-    private List<Node> nodes;
-    private int writeQuorum = nodes.size() / 2 + 1;
+// Simplified Raft leader election
+class RaftNode {
+    int term = 0;
+    boolean isLeader = false;
 
-    void write(String key, String value) {
-        int successCount = 0;
-        for (Node node : nodes) {
-            if (node.write(key, value)) successCount++;
-            if (successCount >= writeQuorum) break;
-        }
-        if (successCount < writeQuorum) throw new Exception("Write failed");
-    }
-
-    String read(String key) {
-        // Similar quorum read logic
-        return null; // Implement
+    void requestVote() {
+        // Send vote requests to peers
+        // If majority votes, become leader
     }
 }
 ```
 
-## Journey / Sequence
-```mermaid
-sequenceDiagram
-    participant Client
-    participant Node1
-    participant Node2
-    participant Node3
+# Common Pitfalls & Edge Cases
 
-    Client->>Node1: Write Request
-    Node1->>Node2: Propagate Write
-    Node1->>Node3: Propagate Write
-    Note over Node1,Node3: Partition occurs
-    Node2-->>Node1: Ack (but Node3 unreachable)
-    Node1-->>Client: Success (AP: available but inconsistent)
-```
+- **Network Partitions**: Test systems under partition scenarios; many fail unexpectedly.
+- **Clock Skew**: Distributed systems rely on synchronized clocks; use NTP or logical clocks.
+- **Split Brain**: Multiple leaders emerge; implement quorum-based decisions.
+- **Data Conflicts**: Resolve with last-write-wins or conflict-free replicated data types (CRDTs).
+- **Scalability Limits**: Over-replication increases latency; balance with sharding.
 
-## Data Models / Message Formats
-### CAP Trade-off Table
-| System Type | Examples | Strengths | Weaknesses |
-|-------------|----------|-----------|------------|
-| CA | Single-node RDBMS | Strong consistency, high availability | No partition tolerance |
-| CP | HBase, ZooKeeper | Strong consistency | May block during partitions |
-| AP | Cassandra, DynamoDB | High availability | Eventual consistency |
+# References
 
-### CAP Theorem Diagram
-```mermaid
-graph TD
-    A[CAP Theorem]
-    A --> B[Consistency]
-    A --> C[Availability]
-    A --> D[Partition Tolerance]
-    B --> E[CP Systems<br/>e.g., MongoDB, PostgreSQL]
-    C --> F[AP Systems<br/>e.g., Cassandra, Riak]
-    D --> G[CA Systems<br/>e.g., Single-node DB]
-```
+- [Brewer's CAP Theorem](https://www.infoq.com/articles/cap-twelve-years-later-how-the-rules-have-changed/)
+- [CAP Theorem Explained](https://en.wikipedia.org/wiki/CAP_theorem)
+- [Distributed Systems for Fun and Profit](http://book.mixu.net/distsys/)
+- [Martin Kleppmann's DDIA](https://dataintensive.net/)
+- [Paxos Made Simple](https://lamport.azurewebsites.net/pubs/paxos-simple.pdf)
 
-## Common Pitfalls & Edge Cases
-- **Misinterpreting CAP:** Thinking you can achieve all three; focus on trade-offs.
-- **Ignoring Network Partitions:** Assuming perfect networks; design for failures.
-- **Over-emphasizing Consistency:** For non-critical data, eventual consistency suffices.
-- **Edge Case:** Network heals after partition; reconciling divergent data.
+# Github-README Links & Related Topics
 
-## STAR Summary
-**Situation:** A financial services company faced data inconsistencies across global data centers during network outages.
-
-**Task:** As the distributed systems engineer, I needed to redesign the architecture to maintain consistency during partitions while ensuring high availability.
-
-**Action:** Applied CAP theorem analysis, chose CP approach for critical financial data using quorum-based consensus, implemented eventual consistency for non-critical features, and added circuit breakers for fault tolerance.
-
-**Result:** System maintained 99.99% consistency for transactions during partitions, reduced data conflicts by 80%, and improved overall availability to 99.95%.
-
-## Tools & Libraries
-- **AP Systems:** Apache Cassandra, Amazon DynamoDB, Riak
-- **CP Systems:** MongoDB (configurable), HBase, ZooKeeper
-- **CA Systems:** Traditional RDBMS like MySQL (single instance)
-- **Frameworks:** Akka for distributed actors, Consul for service discovery
-
-## Github-README Links & Related Topics
-- [data-consistency-models](../data-consistency-models/)
-- [fault-tolerance-in-distributed-systems](../fault-tolerance-in-distributed-systems/)
-- [raft-and-leader-election](../raft-and-leader-election/)
-
-## References
-- Brewer's CAP Theorem: https://www.infoq.com/articles/cap-twelve-years-later-how-the-rules-have-changed/
-- PACELC Theorem: https://en.wikipedia.org/wiki/PACELC_theorem
-- https://github.com/donnemartin/system-design-primer#cap-theorem
-- "Designing Data-Intensive Applications" by Martin Kleppmann
-- https://www.cs.berkeley.edu/~brewer/cs262b-2004/PODC-keynote.pdf (Original CAP Theorem Keynote)
+- [Consensus Algorithms](../consensus-algorithms/)
+- [Distributed Caching with Redis](../distributed-caching-with-redis/)
+- [Fault Tolerance in Distributed Systems](../fault-tolerance-in-distributed-systems/)
+- [Replication vs Sharding vs Partitioning](../replication-vs-sharding-vs-partitioning/)
