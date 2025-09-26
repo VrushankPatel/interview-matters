@@ -1,6 +1,6 @@
 ---
 title: Popular System Designs
-aliases: [system design examples]
+aliases: ["System Design Examples", "LLD HLD Examples"]
 tags: [#system-design,#lld,#hld]
 created: 2025-09-26
 updated: 2025-09-26

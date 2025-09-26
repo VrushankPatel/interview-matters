@@ -1,6 +1,6 @@
 ---
 title: LLD HLD Basics
-aliases: []
+aliases: ["Low-Level Design Basics", "High-Level Design Basics"]
 tags: [#system-design,#lld,#hld]
 created: 2025-09-26
 updated: 2025-09-26

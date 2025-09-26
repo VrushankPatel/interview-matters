@@ -1,7 +1,7 @@
 ---
 title: Replication vs Sharding vs Partitioning
 aliases: ["Database Scaling Strategies", "Data Distribution Techniques"]
-tags: ["#system-design", "#databases", "#scalability"]
+tags: [#system-design,#databases,#scalability]
 created: 2025-09-26
 updated: 2025-09-26
 ---
