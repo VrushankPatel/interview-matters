@@ -1,5 +1,5 @@
-Concurrency & Parallelism
-Latency and Throughput Zero to Hero
-Monitoring and Logging
-Async Logging
-Proxy Forward and Reverse
+Facebook News Feed
+Google Maps System Design
+Airbnb System Design
+Amazon E-commerce Platform
+LinkedIn Social Network
