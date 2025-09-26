@@ -9,4 +9,5 @@
 - [event-sourcing-and-cqrs](event-sourcing-and-cqrs/README.md)
 - [fault-tolerance-in-distributed-systems](fault-tolerance-in-distributed-systems/README.md)
 - [fault-tolerance-patterns](fault-tolerance-patterns/README.md)
+- [Design Patterns In Java](design-patterns-in-java/README.md)
 - [README.md](README.md/README.md)

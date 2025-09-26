@@ -18,4 +18,7 @@
 - [oauth-and-jwt](oauth-and-jwt/README.md)
 - [oauth-and-jwt-authentication](oauth-and-jwt-authentication/README.md)
 - [proxy-forward-and-reverse](proxy-forward-and-reverse/README.md)
+- [Graphql Subscriptions](graphql-subscriptions/README.md)
+- [Restful Apis](restful-apis/README.md)
+- [Protocols](protocols/README.md)
 - [README.md](README.md/README.md)

@@ -9,5 +9,6 @@
 - [latency-throughput-zero-to-hero](latency-throughput-zero-to-hero/README.md)
 - [paxos-algorithm](paxos-algorithm/README.md)
 - [README.md](README.md/README.md)
+- [Os](os/README.md)
 - [spring-boot-microservices](spring-boot-microservices/README.md)
 - [zookeeper-for-coordination](zookeeper-for-coordination/README.md)

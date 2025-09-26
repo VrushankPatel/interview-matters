@@ -5,5 +5,6 @@
 - [lifecycle](lifecycle/README.md)
 - [market-data](market-data/README.md)
 - [order-types](order-types/README.md)
+- [Journey Of A Trade](journey-of-a-trade/README.md)
 - [README.md](README.md/README.md)
 - [trading](trading/README.md)
