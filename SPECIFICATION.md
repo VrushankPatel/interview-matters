@@ -5,10 +5,10 @@ Last update
 2025-09-26
 
 Summary of recent additions
-   - Processed 5 trading topics (Journey of a Trade, Order Types, Quotes & RFQ Workflows, Execution Report, Trade Capture Report)
-   - Restructured trading topics into categories (protocols, order-types, lifecycle, market-data, exchange-behavior, compliance)
-   - Updated all links to proper markdown format instead of Obsidian wikilinks
-   - Added 10 new candidate topics to NEXTTOPICS.md with rationales in SPECIFICATION.md
+    - Processed 5 system design topics (popular-systems-design-lld-and-hld, lld-hld-basics, replication-vs-sharding-vs-partitioning, caching, latency-and-throughput-zero-to-hero)
+    - Updated existing README.md files to detailed format with STAR summaries, diagrams, and examples
+    - Restructured topics into system-design category
+    - Updated links and interlinks
 
 Conventions
  - Dir naming: kebab-case.

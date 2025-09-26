@@ -3,3 +3,8 @@ created_dirs: [protocols, order-types, lifecycle, market-data, exchange-behavior
 updated_files: [README.md, protocols/fix-protocol/README.md, protocols/itch-protocol/README.md, protocols/ouch-protocol/README.md, market-data/market-data-overview-dissemination/README.md, exchange-behavior/order-entry-protocols/README.md, lifecycle/journey-of-a-trade/README.md, order-types/order-types/README.md, exchange-behavior/quotes-rfq-workflows/README.md, compliance/execution-report/README.md, compliance/trade-capture-report/README.md, SPECIFICATION.md, PENDING_TOPICS.md, NEXTTOPICS.md]
 commit_made: true
 commit_message: "kb: add 5 topics (journey-of-a-trade, order-types, quotes-rfq-workflows, execution-report, trade-capture-report) + restructure trading topics into categories + update links"
+topics_processed: ["FIX Protocol", "ITCH Protocol", "OUCH Protocol", "Market Data (overview & dissemination)", "Order Entry Protocols"]
+created_dirs: []
+updated_files: ["README.md", "SPECIFICATION.md", "PENDING_TOPICS.md", "NEXTTOPICS.md"]
+commit_made: true
+commit_message: "kb: restructured into categories + updated root index and interlinks"
