@@ -1,8 +1,3 @@
-Collections & Data Structures
-Java Stream API & Functional Programming
-System Design Basics
-High Scalability Patterns
-CAP Theorem & Distributed Systems
 A separate folder for popular systems design, LLD and HLDs both like url shortner, netflix and identify more yourself
 LLD HLD basics
 Replication vs Sharding vs Partitioning
@@ -28,4 +23,8 @@ Java Modules
 YouTube System Design
 WhatsApp System Design
 TikTok System Design
-Spotify System Design
+Spotify System Design-e 00032| Java Fundamentals
+00033| OOP Principles in Java
+00034| JVM Internals & Class Loading
+00035| Garbage Collection Algorithms
+00036| Multithreading & Concurrency in Java
