@@ -6,8 +6,6 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# System Design Basics
-
 # Overview
 
 System design basics encompass the fundamental principles and concepts required to architect scalable, reliable, and efficient software systems. At its core, system design involves understanding trade-offs between performance, scalability, availability, and consistency. Key elements include evaluating system requirements, identifying bottlenecks, and applying patterns like load balancing, caching, and database sharding. This foundation prepares engineers to design systems that handle growth from thousands to millions of users, ensuring reliability under varying loads and failure scenarios.
