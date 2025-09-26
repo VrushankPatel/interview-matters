@@ -1,7 +1,7 @@
 ---
 title: Java Fundamentals
 aliases: [Java Basics, Core Java]
-tags: [#java]
+tags: [#java,#fundamentals]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -283,7 +283,34 @@ public class ArrayOperations {
 
 ## Github-README Links & Related Topics
 
-- [OOP Principles in Java](./oop-principles-in-java/)
-- [JVM Internals & Class Loading](./jvm-internals-and-class-loading/)
-- [Collections & Data Structures](./collections-and-data-structures/)
-- [Java Stream API & Functional Programming](./java-stream-api-and-functional-programming/)
+- [oop-principles-in-java/](oop-principles-in-java/)
+- [jvm-internals-and-class-loading/](jvm-internals-and-class-loading/)
+- [collections-and-data-structures/](collections-and-data-structures/)
+- [java-stream-api-and-functional-programming/](java-stream-api-and-functional-programming/)
+
+# STAR Summary
+
+- **Situation**: Need to learn Java for software development.
+- **Task**: Master fundamental concepts.
+- **Action**: Study syntax, OOP, and practice coding.
+- **Result**: Ability to build basic Java applications.
+
+# Journey / Sequence
+
+1. Install JDK and IDE (e.g., IntelliJ).
+2. Learn syntax: variables, loops, methods.
+3. Understand OOP: classes, inheritance, polymorphism.
+4. Practice with small projects.
+5. Explore advanced topics like generics.
+
+# Common Pitfalls & Edge Cases
+
+- **Null Pointer Exceptions**: Always check for null.
+- **Type Casting**: Avoid ClassCastException.
+- **Memory Leaks**: Improper object references.
+
+# Tools & Libraries
+
+- **JDK**: Java Development Kit.
+- **Maven/Gradle**: Build tools.
+- **JUnit**: For unit testing.

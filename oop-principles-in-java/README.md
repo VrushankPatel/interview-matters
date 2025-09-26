@@ -240,8 +240,28 @@ public class Main {
 
 ## Github-README Links & Related Topics
 
-- [Java Fundamentals](../java-fundamentals/README.md)
-- [Inheritance in Java](../inheritance-in-java/README.md)
-- [Polymorphism in Java](../polymorphism-in-java/README.md)
-- [Encapsulation in Java](../encapsulation-in-java/README.md)
-- [Abstraction in Java](../abstraction-in-java/README.md)
+- [java-fundamentals/](java-fundamentals/)
+- [inheritance-in-java/](inheritance-in-java/)
+- [polymorphism-in-java/](polymorphism-in-java/)
+- [encapsulation-in-java/](encapsulation-in-java/)
+- [abstraction-in-java/](abstraction-in-java/)
+
+# STAR Summary
+
+- **Situation**: Need to build modular, maintainable software.
+- **Task**: Apply OOP principles.
+- **Action**: Use encapsulation, inheritance, polymorphism, abstraction.
+- **Result**: Cleaner, reusable code.
+
+# Journey / Sequence
+
+1. Learn encapsulation: private fields, getters/setters.
+2. Study inheritance: extends, super.
+3. Practice polymorphism: overloading, overriding.
+4. Implement abstraction: abstract classes, interfaces.
+5. Apply in real projects.
+
+# Data Models / Message Formats
+
+- **Class Diagram**: {class_name, attributes, methods, relationships}
+- **Object Interaction**: Method calls between objects.

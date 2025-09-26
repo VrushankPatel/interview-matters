@@ -1,9 +1,9 @@
 ---
 title: Infrastructure as Code with Terraform
-aliases: []
-tags: [#terraform,#iac]
+aliases: [IaC with Terraform, Terraform IaC]
+tags: [#devops,#infrastructure-as-code,#terraform]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Overview
@@ -60,6 +60,34 @@ terraform apply
 
 # Github-README Links & Related Topics
 
-- [DevOps Infrastructure as Code](./devops-infrastructure-as-code/README.md)
-- [Cloud Deployment Strategies](./cloud-deployment-strategies/README.md)
-- [Kubernetes Orchestration](./kubernetes-orchestration/README.md)
+- [devops-and-infrastructure-as-code/](devops-and-infrastructure-as-code/)
+- [ci-cd-pipelines/](ci-cd-pipelines/)
+- [cloud-deployment-strategies/](cloud-deployment-strategies/)
+
+# STAR Summary
+
+- **Situation**: Manual infrastructure setup leading to inconsistencies.
+- **Task**: Automate and version infrastructure.
+- **Action**: Adopt Terraform for declarative IaC.
+- **Result**: Faster, reliable deployments with version control.
+
+# Journey / Sequence
+
+1. Install Terraform CLI.
+2. Write HCL configurations.
+3. Initialize with `terraform init`.
+4. Plan changes with `terraform plan`.
+5. Apply with `terraform apply`.
+6. Manage state and collaborate.
+
+# Common Pitfalls & Edge Cases
+
+- **State File Management**: Avoid manual edits; use remote state.
+- **Provider Version Conflicts**: Pin versions to prevent breaking changes.
+- **Large State Files**: Use workspaces or modules for isolation.
+
+# Tools & Libraries
+
+- **Terraform CLI**: Core tool for execution.
+- **Terragrunt**: Wrapper for DRY configurations.
+- **Terraform Cloud**: Remote execution and collaboration.

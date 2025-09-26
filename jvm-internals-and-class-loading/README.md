@@ -208,7 +208,27 @@ public class StaticInitializationExample {
 
 ## Github-README Links & Related Topics
 
-- [Java Fundamentals](./java-fundamentals/)
-- [Garbage Collection Algorithms](./garbage-collection-algorithms/)
-- [JVM Memory Model](./jvm-memory-model/)
-- [Java Security Basics](./java-security-basics/)
+- [java-fundamentals/](java-fundamentals/)
+- [garbage-collection-algorithms/](garbage-collection-algorithms/)
+- [jvm-memory-model/](jvm-memory-model/)
+- [java-security-basics/](java-security-basics/)
+
+# STAR Summary
+
+- **Situation**: Need to optimize Java application performance and security.
+- **Task**: Understand JVM internals.
+- **Action**: Study class loading, memory management.
+- **Result**: Better debugging and optimization.
+
+# Journey / Sequence
+
+1. Learn JVM architecture: class loaders, runtime areas.
+2. Understand class loading phases: loading, linking, initialization.
+3. Explore different class loader types.
+4. Practice with custom class loaders.
+5. Monitor and tune JVM in production.
+
+# Data Models / Message Formats
+
+- **Class File Format**: {magic, version, constant_pool, methods, fields}
+- **Runtime Stack Frame**: {local_variables, operand_stack, frame_data}
