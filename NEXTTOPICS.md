@@ -1,8 +1,15 @@
-00006| Rate limiting
-00007| Concurrency & Parallelism
-00008| 
-00009| Java Fundamentals
-00010| OOP Principles in Java
+
 00011| JVM Internals & Class Loading
 00012| Garbage Collection Algorithms
 00013| Multithreading & Concurrency in Java
+LLD HLD basics
+Replication vs Sharding vs Partitioning
+Caching
+Latency and Throughput zero to hero
+Monitoring and Logging
+Async logging
+DevOps & Infrastructure as Code
+Proxy forward and reverse
+Load balancing and strategies
+URL Shortener System Design
+Netflix System Design
