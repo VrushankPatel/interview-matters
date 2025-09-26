@@ -6,11 +6,11 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-## Overview
+# Overview
 
 Caching is a fundamental technique in system design that stores frequently accessed data in a high-speed storage layer to reduce latency, improve performance, and alleviate load on primary data sources. By maintaining a temporary copy of data closer to the consumer, caching minimizes expensive operations like database queries or API calls, enabling faster response times and better scalability.
 
-## Detailed Explanation
+# Detailed Explanation
 
 ### Types of Caches
 
@@ -51,7 +51,7 @@ Eviction policies determine which data to remove when cache is full:
 | TTL | Time To Live | Automatic expiration | May evict still-useful data |
 | Size-Based | FIFO or random | Simple implementation | No intelligence in eviction |
 
-## Real-world Examples & Use Cases
+# Real-world Examples & Use Cases
 
 ### Web Applications
 - **User Sessions**: Store session data in Redis to avoid repeated authentication checks
@@ -77,7 +77,7 @@ Eviction policies determine which data to remove when cache is full:
 - **Sensor Data**: Cache recent readings for local processing
 - **Device Configurations**: Store settings with version control
 
-## Code Examples
+# Code Examples
 
 ### Redis In-Memory Caching (Java)
 
@@ -252,7 +252,7 @@ class CacheService {
 module.exports = CacheService;
 ```
 
-## References
+# References
 
 - [Redis Caching Best Practices](https://redis.io/topics/lru-cache)
 - [Martin Fowler - Caching](https://martinfowler.com/bliki/Caching.html)
@@ -261,7 +261,7 @@ module.exports = CacheService;
 - [MDN Web Docs - HTTP Caching](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching)
 - [Cache Eviction Policies Explained](https://en.wikipedia.org/wiki/Cache_replacement_policies)
 
-## Github-README Links & Related Topics
+# Github-README Links & Related Topics
 
 - [Distributed Caching with Redis](../distributed-caching-with-redis/README.md)
 - [CDN Architecture](../cdn-architecture/README.md)

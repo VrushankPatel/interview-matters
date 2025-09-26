@@ -102,6 +102,8 @@ This repository contains comprehensive documentation on various topics for inter
 
 ### Java
 - [Java Fundamentals](./java-fundamentals/README.md)
+- [Collections & Data Structures](./collections-data-structures/README.md)
+- [Java Stream API & Functional Programming](./java-stream-api-functional-programming/README.md)
 - [OOP Principles in Java](./oop-principles-in-java/README.md)
 - [JVM Internals & Class Loading](./jvm-internals-and-class-loading/README.md)
 - [Garbage Collection Algorithms](./garbage-collection-algorithms/README.md)
