@@ -35,6 +35,15 @@ graph TD
 
 Modern JVMs like G1, ZGC, and Shenandoah use concurrent and parallel techniques for low-pause GC.
 
+# Journey / Sequence
+
+## Generational GC Cycle
+
+1. **Allocation**: New objects created in Eden space.
+2. **Minor GC**: When Eden fills, live objects copied to Survivor space; dead objects discarded.
+3. **Aging**: Objects surviving multiple Minor GCs are aged and may be promoted to Old Generation.
+4. **Major GC**: When Old Generation fills, full collection using Mark-Sweep-Compact; may include Full GC.
+
 # Real-world Examples & Use Cases
 
 - **E-commerce Platforms**: Use G1 GC for balanced throughput and latency during peak sales.

@@ -19,7 +19,25 @@ OOP is a programming paradigm that uses objects and classes to structure softwar
 - **Polymorphism**: Ability of objects to take multiple forms, achieved through method overriding and overloading.
 - **Abstraction**: Hiding complex implementation details, focusing on essential features.
 
+### Access Modifiers
+
+| Modifier | Class | Package | Subclass | World |
+|----------|-------|---------|----------|-------|
+| public | Y | Y | Y | Y |
+| protected | Y | Y | Y | N |
+| default | Y | Y | N | N |
+| private | Y | N | N | N |
+
 Java supports these through classes, interfaces, and abstract classes.
+
+```mermaid
+classDiagram
+    Animal <|-- Dog
+    Animal <|-- Cat
+    Animal : +eat()
+    Dog : +bark()
+    Cat : +meow()
+```
 
 # Real-world Examples & Use Cases
 
@@ -86,10 +104,45 @@ public class Circle extends Shape {
 }
 ```
 
+Abstraction example:
+
+```java
+interface Vehicle {
+    void start();
+}
+
+public class Car implements Vehicle {
+    @Override
+    public void start() {
+        System.out.println("Car starts");
+    }
+}
+
+public class Bike implements Vehicle {
+    @Override
+    public void start() {
+        System.out.println("Bike starts");
+    }
+}
+```
+
 # References
 
 - [Oracle OOP Concepts](https://docs.oracle.com/javase/tutorial/java/concepts/)
 - [GeeksforGeeks OOP in Java](https://www.geeksforgeeks.org/object-oriented-programming-oops-concept-in-java/)
+- [Design Patterns: Elements of Reusable Object-Oriented Software](https://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612)
+
+# Common Pitfalls & Edge Cases
+
+- **Deep Inheritance Hierarchies**: Can lead to tight coupling and maintenance issues.
+- **Breaking Encapsulation**: Exposing internal state through public getters/setters without validation.
+- **Improper Polymorphism**: Forgetting @Override annotation or not handling method signatures correctly.
+- **Abstract Classes vs Interfaces**: Choosing wrong abstraction mechanism for the use case.
+
+# Tools & Libraries
+
+- **UML Tools**: PlantUML, StarUML for visualizing class hierarchies and relationships.
+- **IDEs**: IntelliJ IDEA, Eclipse with built-in refactoring tools for OOP code.
 
 # Github-README Links & Related Topics
 
