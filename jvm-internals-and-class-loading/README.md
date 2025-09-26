@@ -1,6 +1,6 @@
 ---
 title: JVM Internals & Class Loading
-aliases: [Java Virtual Machine, JVM Architecture, Class Loaders]
+aliases: [Java Virtual Machine, JVM Architecture, Class Loading Mechanism]
 tags: [#java,#jvm]
 created: 2025-09-26
 updated: 2025-09-26
@@ -16,86 +16,55 @@ The Java Virtual Machine (JVM) is the runtime environment that executes Java byt
 
 ### JVM Architecture
 
-The JVM consists of several key components that work together to execute Java programs:
+The JVM consists of several key components:
+
+- **Class Loader Subsystem**: Loads class files into memory
+- **Runtime Data Areas**: Method area, heap, stack, PC registers, native method stacks
+- **Execution Engine**: Interprets or JIT-compiles bytecode
+- **Native Interface**: Interacts with native libraries
 
 ```mermaid
 graph TD
-    A[Class Loader Subsystem] --> B[Runtime Data Areas]
-    B --> C[Execution Engine]
-    C --> D[Java Native Interface]
-    D --> E[Java Native Libraries]
-    
-    B --> F[Method Area]
-    B --> G[Heap]
-    B --> H[Java Stack]
-    B --> I[Program Counter Register]
-    B --> J[Native Method Stack]
+    A[Java Source Code] --> B[Java Compiler]
+    B --> C[Bytecode .class files]
+    C --> D[Class Loader]
+    D --> E[Runtime Data Areas]
+    E --> F[Execution Engine]
+    F --> G[Operating System]
 ```
-
-#### Class Loader Subsystem
-
-Responsible for loading, linking, and initializing classes.
-
-#### Runtime Data Areas
-
-- **Method Area**: Stores class-level information, constants, static variables.
-- **Heap**: Stores objects and instance variables.
-- **Java Stack**: Stores method calls, local variables, and partial results.
-- **Program Counter Register**: Contains address of currently executing JVM instruction.
-- **Native Method Stack**: Supports native methods written in languages other than Java.
-
-#### Execution Engine
-
-Interprets or compiles bytecode into machine code.
-
-#### Java Native Interface (JNI)
-
-Allows Java code to call native methods and vice versa.
 
 ### Class Loading Process
 
-Class loading is the process of finding and loading class files into the JVM. It involves three main steps:
+Class loading is performed by the Class Loader Subsystem in three phases:
 
-1. **Loading**: Finding and importing the binary data of a class.
+1. **Loading**: Finding and importing the binary data of a class
 2. **Linking**: 
-   - Verification: Ensuring the correctness of the loaded class.
-   - Preparation: Allocating memory for class variables and initializing them to default values.
-   - Resolution: Converting symbolic references to direct references.
-3. **Initialization**: Executing static initializers and assigning initial values to static variables.
+   - Verification: Ensuring the bytecode is valid
+   - Preparation: Allocating memory for class variables
+   - Resolution: Converting symbolic references to direct references
+3. **Initialization**: Executing static initializers and assigning initial values
 
-### Class Loaders
+### Types of Class Loaders
 
-Java uses a hierarchical class loading mechanism:
+- **Bootstrap Class Loader**: Loads core Java classes (rt.jar)
+- **Extension Class Loader**: Loads extension classes (jre/lib/ext)
+- **System/Application Class Loader**: Loads application classes
+- **Custom Class Loaders**: User-defined for specific needs
 
-1. **Bootstrap Class Loader**: Loads core Java classes (rt.jar, etc.).
-2. **Extension Class Loader**: Loads classes from extension directories.
-3. **System/Application Class Loader**: Loads classes from the application classpath.
+### Memory Areas
 
-#### Class Loader Delegation Model
-
-When a class loader is asked to load a class, it delegates the request to its parent class loader first. Only if the parent cannot load the class does the child attempt to load it.
-
-### Memory Management
-
-#### Heap Memory
-
-- **Young Generation**: Where new objects are allocated.
-  - Eden Space
-  - Survivor Spaces (S0, S1)
-- **Old Generation**: Long-lived objects.
-- **Permanent Generation/Metaspace**: Class metadata (Java 8+).
-
-#### Garbage Collection
-
-Automatic memory management that reclaims heap space occupied by objects that are no longer in use.
+- **Method Area**: Stores class-level information, constants, static variables
+- **Heap**: Runtime data area for objects and arrays
+- **Stack**: Stores method calls, local variables, partial results
+- **PC Registers**: Holds address of current executing instruction
+- **Native Method Stacks**: For native method calls
 
 ## Real-world Examples & Use Cases
 
-1. **Application Startup Optimization**: Understanding class loading to reduce startup time.
-2. **Memory Leak Diagnosis**: Analyzing heap dumps to identify memory issues.
-3. **Performance Tuning**: Configuring JVM parameters for optimal performance.
-4. **Custom Class Loaders**: Implementing dynamic plugin systems.
-5. **Security**: Understanding class loading for sandboxing applications.
+- **Application Servers**: Understanding class loading for deploying multiple applications
+- **Plugin Systems**: Custom class loaders for dynamic plugin loading
+- **Hot Deployment**: Reloading classes without restarting the application
+- **Security**: Isolating classes from different sources using custom loaders
 
 ## Code Examples
 
@@ -105,98 +74,72 @@ Automatic memory management that reclaims heap space occupied by objects that ar
 public class CustomClassLoader extends ClassLoader {
     @Override
     public Class<?> findClass(String name) throws ClassNotFoundException {
-        byte[] classData = loadClassData(name);
-        if (classData == null) {
-            throw new ClassNotFoundException();
-        }
-        return defineClass(name, classData, 0, classData.length);
+        byte[] b = loadClassFromFile(name);
+        return defineClass(name, b, 0, b.length);
     }
     
-    private byte[] loadClassData(String name) {
-        // Implementation to load class data from custom source
-        // For example, from a database or network
-        return null;
+    private byte[] loadClassFromFile(String fileName) {
+        // Implementation to load bytecode from file
+        return new byte[0]; // Placeholder
     }
 }
 ```
 
-### JVM Memory Monitoring
+### Demonstrating Class Loading
 
 ```java
-public class MemoryMonitor {
-    public static void main(String[] args) {
-        Runtime runtime = Runtime.getRuntime();
-        
-        long totalMemory = runtime.totalMemory();
-        long freeMemory = runtime.freeMemory();
-        long usedMemory = totalMemory - freeMemory;
-        
-        System.out.println("Total Memory: " + totalMemory / (1024 * 1024) + " MB");
-        System.out.println("Free Memory: " + freeMemory / (1024 * 1024) + " MB");
-        System.out.println("Used Memory: " + usedMemory / (1024 * 1024) + " MB");
-        
-        // Force garbage collection
-        runtime.gc();
-        
-        freeMemory = runtime.freeMemory();
-        usedMemory = totalMemory - freeMemory;
-        
-        System.out.println("After GC - Free Memory: " + freeMemory / (1024 * 1024) + " MB");
-        System.out.println("After GC - Used Memory: " + usedMemory / (1024 * 1024) + " MB");
-    }
-}
-```
-
-### Class Loading Example
-
-```java
-public class ClassLoadingExample {
+public class ClassLoadingDemo {
     public static void main(String[] args) {
         try {
-            // Load class dynamically
-            Class<?> clazz = Class.forName("java.util.ArrayList");
+            Class<?> clazz = Class.forName("java.lang.String");
             System.out.println("Class loaded: " + clazz.getName());
-            
-            // Get class loader
-            ClassLoader classLoader = clazz.getClassLoader();
-            System.out.println("Class Loader: " + classLoader);
-            
-            // Create instance
-            Object instance = clazz.newInstance();
-            System.out.println("Instance created: " + instance.getClass().getName());
-            
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            System.out.println("Class loader: " + clazz.getClassLoader());
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 }
 ```
 
+### Memory Management Example
+
+```java
+public class MemoryDemo {
+    public static void main(String[] args) {
+        // Stack allocation
+        int x = 10;
+        
+        // Heap allocation
+        String str = new String("Hello");
+        
+        // Method area (static)
+        System.out.println(MemoryDemo.class.getName());
+    }
+}
+```
+
 ## Common Pitfalls & Edge Cases
 
-1. **ClassNotFoundException**: Class not found in classpath.
-2. **NoClassDefFoundError**: Class was available at compile time but not at runtime.
-3. **OutOfMemoryError**: Insufficient heap or metaspace memory.
-4. **Class loading deadlocks**: Circular dependencies between classes.
-5. **PermGen/Metaspace exhaustion**: Too many classes loaded, especially in application servers.
+- **ClassNotFoundException**: When class loader cannot find the class
+- **NoClassDefFoundError**: When class was available at compile time but not at runtime
+- **ClassCastException**: Due to multiple class loaders loading the same class
+- **Memory Leaks**: Improper object references in heap
+- **StackOverflowError**: Deep recursion exceeding stack size
 
 ## Tools & Libraries
 
-- **VisualVM**: GUI tool for monitoring JVM.
-- **JConsole**: JMX-based monitoring tool.
-- **jmap**: Memory map tool.
-- **jstack**: Stack trace tool.
-- **MAT (Memory Analyzer Tool)**: For heap dump analysis.
+- **VisualVM**: For monitoring JVM memory and performance
+- **JConsole**: Built-in JVM monitoring tool
+- **JVM Tools**: jps, jstat, jmap, jstack for diagnostics
 
 ## References
 
 - [JVM Specification](https://docs.oracle.com/javase/specs/jvms/se17/html/)
-- [Oracle JVM Documentation](https://docs.oracle.com/en/java/javase/17/vm/)
-- [Java Performance: The Definitive Guide by Scott Oaks](https://www.amazon.com/Java-Performance-Definitive-Guide-Getting/dp/1449358454)
+- [Oracle JVM Internals](https://docs.oracle.com/javase/8/docs/technotes/guides/vm/)
+- [Java Class Loading](https://www.oracle.com/technetwork/java/javase/classloaders-140200.html)
 
 ## Github-README Links & Related Topics
 
-- [Java Fundamentals](../java-fundamentals/README.md)
-- [Garbage Collection Algorithms](../garbage-collection-algorithms/README.md)
-- [Java Memory Management](../java-memory-management/README.md)
-- [JVM Internals Class Loading](../jvm-internals-class-loading/README.md)
+- [Java Fundamentals](../java-fundamentals)
+- [Garbage Collection Algorithms](../garbage-collection-algorithms)
+- [JVM Performance Tuning](../java/jvm-performance-tuning)

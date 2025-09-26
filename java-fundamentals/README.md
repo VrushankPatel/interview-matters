@@ -10,130 +10,95 @@ updated: 2025-09-26
 
 ## Overview
 
-Java Fundamentals cover the core concepts and building blocks of the Java programming language, including syntax, data types, control structures, and basic object-oriented principles. These form the foundation for writing Java applications and are essential for understanding more advanced topics.
+Java Fundamentals encompass the core concepts and syntax of the Java programming language, providing the foundation for building robust applications. This includes data types, variables, operators, control structures, methods, and basic object-oriented programming principles.
 
 ## Detailed Explanation
 
-### Variables and Data Types
+### Data Types
 
-Java is a statically-typed language, requiring explicit declaration of variable types. Variables store data values and can be primitive or reference types.
+Java supports two categories of data types:
 
-#### Primitive Data Types
+- **Primitive Types**: int, long, float, double, char, boolean, byte, short.
+- **Reference Types**: Classes, interfaces, arrays, and strings.
 
-| Type | Size | Range | Default Value |
-|------|------|-------|---------------|
-| byte | 1 byte | -128 to 127 | 0 |
-| short | 2 bytes | -32,768 to 32,767 | 0 |
-| int | 4 bytes | -2^31 to 2^31-1 | 0 |
-| long | 8 bytes | -2^63 to 2^63-1 | 0L |
-| float | 4 bytes | ~3.4e-038 to 3.4e+038 | 0.0f |
-| double | 8 bytes | ~1.7e-308 to 1.7e+308 | 0.0d |
-| char | 2 bytes | 0 to 65,535 | '\u0000' |
-| boolean | 1 bit | true or false | false |
+Primitive types are stored directly in memory, while reference types store references to objects.
 
-#### Reference Types
+### Variables and Constants
 
-Reference types include classes, interfaces, arrays, and enums. They store references to objects in memory.
+Variables are declared with a type and can be reassigned:
+
+```java
+int age = 25;
+age = 26;
+```
+
+Constants are declared with `final` and cannot be changed:
+
+```java
+final int MAX_USERS = 100;
+```
 
 ### Operators
 
-Java supports various operators:
-
-- Arithmetic: +, -, *, /, %
-- Relational: ==, !=, >, <, >=, <=
-- Logical: &&, ||, !
-- Assignment: =, +=, -=, etc.
-- Bitwise: &, |, ^, ~, <<, >>
+- **Arithmetic**: +, -, *, /, %
+- **Relational**: ==, !=, <, >, <=, >=
+- **Logical**: &&, ||, !
+- **Bitwise**: &, |, ^, ~, <<, >>
+- **Assignment**: =, +=, -=, etc.
 
 ### Control Structures
 
-#### Conditional Statements
+- **Conditional**: if-else, switch
+- **Loops**: for, while, do-while
+
+Example:
 
 ```java
-if (condition) {
-    // code
-} else if (anotherCondition) {
-    // code
+if (age > 18) {
+    System.out.println("Adult");
 } else {
-    // code
+    System.out.println("Minor");
 }
-
-switch (expression) {
-    case value1:
-        // code
-        break;
-    case value2:
-        // code
-        break;
-    default:
-        // code
-}
-```
-
-#### Loops
-
-```java
-// For loop
-for (int i = 0; i < 10; i++) {
-    System.out.println(i);
-}
-
-// While loop
-int i = 0;
-while (i < 10) {
-    System.out.println(i);
-    i++;
-}
-
-// Do-while loop
-int i = 0;
-do {
-    System.out.println(i);
-    i++;
-} while (i < 10);
 ```
 
 ### Methods
 
-Methods define reusable blocks of code.
+Methods are functions defined in classes:
 
 ```java
-public static int add(int a, int b) {
+public int add(int a, int b) {
     return a + b;
 }
 ```
 
 ### Classes and Objects
 
-Basic OOP concepts:
+A class is a blueprint for objects:
 
 ```java
 public class Person {
-    private String name;
-    private int age;
+    String name;
+    int age;
     
-    public Person(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-    
-    public String getName() {
-        return name;
-    }
-    
-    public void setName(String name) {
-        this.name = name;
+    public void greet() {
+        System.out.println("Hello, " + name);
     }
 }
 ```
 
+Objects are instances:
+
+```java
+Person p = new Person();
+p.name = "John";
+p.greet();
+```
+
 ## Real-world Examples & Use Cases
 
-1. **Simple Calculator**: Implementing basic arithmetic operations.
-2. **Student Grade Calculator**: Calculating averages and grades.
-3. **Bank Account Management**: Basic deposit and withdrawal operations.
-4. **Temperature Converter**: Converting between Celsius, Fahrenheit, and Kelvin.
-5. **Number Guessing Game**: Interactive game using loops and conditionals.
+- **Simple Applications**: Building console-based calculators or text processors.
+- **Data Processing**: Handling user input and basic computations in web forms.
+- **Educational Software**: Teaching programming concepts through interactive examples.
 
 ## Code Examples
 
@@ -150,79 +115,27 @@ public class HelloWorld {
 ### Basic Calculator
 
 ```java
-import java.util.Scanner;
-
 public class Calculator {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        
-        System.out.print("Enter first number: ");
-        double num1 = scanner.nextDouble();
-        
-        System.out.print("Enter operator (+, -, *, /): ");
-        char operator = scanner.next().charAt(0);
-        
-        System.out.print("Enter second number: ");
-        double num2 = scanner.nextDouble();
-        
-        double result;
-        
-        switch (operator) {
-            case '+':
-                result = num1 + num2;
-                break;
-            case '-':
-                result = num1 - num2;
-                break;
-            case '*':
-                result = num1 * num2;
-                break;
-            case '/':
-                if (num2 != 0) {
-                    result = num1 / num2;
-                } else {
-                    System.out.println("Error: Division by zero");
-                    return;
-                }
-                break;
-            default:
-                System.out.println("Error: Invalid operator");
-                return;
-        }
-        
-        System.out.println("Result: " + result);
+        int a = 10;
+        int b = 5;
+        System.out.println("Sum: " + (a + b));
+        System.out.println("Difference: " + (a - b));
     }
 }
 ```
 
-### Array Operations
+### Class with Methods
 
 ```java
-public class ArrayExample {
+public class MathUtils {
+    public static int factorial(int n) {
+        if (n == 0) return 1;
+        return n * factorial(n - 1);
+    }
+    
     public static void main(String[] args) {
-        int[] numbers = {1, 2, 3, 4, 5};
-        
-        // Print array elements
-        for (int num : numbers) {
-            System.out.print(num + " ");
-        }
-        System.out.println();
-        
-        // Calculate sum
-        int sum = 0;
-        for (int num : numbers) {
-            sum += num;
-        }
-        System.out.println("Sum: " + sum);
-        
-        // Find maximum
-        int max = numbers[0];
-        for (int i = 1; i < numbers.length; i++) {
-            if (numbers[i] > max) {
-                max = numbers[i];
-            }
-        }
-        System.out.println("Maximum: " + max);
+        System.out.println("Factorial of 5: " + factorial(5));
     }
 }
 ```
@@ -231,11 +144,9 @@ public class ArrayExample {
 
 - [Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/)
 - [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se17/html/index.html)
-- [Effective Java by Joshua Bloch](https://www.amazon.com/Effective-Java-Joshua-Bloch/dp/0134685997)
 
 ## Github-README Links & Related Topics
 
-- [OOP Principles in Java](../oop-principles-in-java/README.md)
-- [JVM Internals & Class Loading](../jvm-internals-and-class-loading/README.md)
-- [Collections & Data Structures](../collections-and-data-structures/README.md)
-- [Java Stream API & Functional Programming](../java-stream-api-and-functional-programming/README.md)
+- [OOP Principles in Java](../oop-principles-in-java)
+- [JVM Internals & Class Loading](../jvm-internals-and-class-loading)
+- [Collections & Data Structures](../collections-and-data-structures)
