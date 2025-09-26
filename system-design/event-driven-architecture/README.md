@@ -3,7 +3,7 @@ title: Event-Driven Architecture
 aliases: [eda, pub-sub-architecture]
 tags: [#system-design, #distributed-systems, #interviews]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Overview

@@ -3,7 +3,7 @@ title: Java Stream API & Functional Programming
 aliases: [Java Streams, Functional Programming in Java]
 tags: [#java, #functional-programming]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Java Stream API & Functional Programming
