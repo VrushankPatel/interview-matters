@@ -1,5 +1,5 @@
-Java Fundamentals
-OOP Principles in Java
-JVM Internals & Class Loading
-Garbage Collection Algorithms
-Multithreading & Concurrency in Java
+URL Shortener System Design
+Netflix Video Streaming Architecture
+Facebook News Feed
+Google Search Engine
+WhatsApp Messaging System

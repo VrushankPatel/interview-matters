@@ -1,7 +1,7 @@
 ---
 title: Java Fundamentals
-aliases: ["Java Basics", "Java Language Basics"]
-tags: ["#java"]
+aliases: [Java Basics, Core Java]
+tags: [#java]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -10,84 +10,44 @@ updated: 2025-09-26
 
 ## Overview
 
-Java Fundamentals cover the core building blocks of the Java programming language, including variables, data types, operators, and control flow statements. These concepts form the foundation for writing Java programs and are essential for understanding more advanced topics.
+Java is a high-level, object-oriented programming language that enables developers to write code that runs on any platform with a Java Virtual Machine (JVM). It's designed for portability, security, and robustness, making it ideal for enterprise applications, web development, and mobile apps.
 
 ## Detailed Explanation
 
-### Variables
+Java fundamentals include basic syntax, data types, operators, control structures, and object-oriented concepts.
 
-Variables are containers for storing data values. In Java, you must declare a variable before using it, specifying its type and name.
+### Data Types
 
-- **Declaration**: `int age;`
-- **Initialization**: `age = 25;` or `int age = 25;`
-- **Naming Rules**: Start with letter, $, or _; case-sensitive; no keywords.
+- **Primitive Types**: int, long, float, double, boolean, char, byte, short
+- **Reference Types**: Objects, arrays, strings
 
-### Primitive Data Types
+### Variables and Operators
 
-Java has 8 primitive data types:
+Variables store data, and operators perform operations on them.
 
-| Type | Size | Range | Example |
-|------|------|-------|---------|
-| byte | 1 byte | -128 to 127 | `byte b = 100;` |
-| short | 2 bytes | -32,768 to 32,767 | `short s = 1000;` |
-| int | 4 bytes | -2^31 to 2^31-1 | `int i = 100000;` |
-| long | 8 bytes | -2^63 to 2^63-1 | `long l = 100000L;` |
-| float | 4 bytes | ~6-7 decimal digits | `float f = 3.14f;` |
-| double | 8 bytes | ~15 decimal digits | `double d = 3.14159;` |
-| char | 2 bytes | 0 to 65,535 | `char c = 'A';` |
-| boolean | 1 byte | true/false | `boolean flag = true;` |
+### Control Structures
 
-### Operators
+- Conditional: if-else, switch
+- Loops: for, while, do-while
 
-Operators perform operations on variables and values.
+### Methods and Classes
 
-- **Arithmetic**: +, -, *, /, %
-- **Relational**: ==, !=, >, <, >=, <=
-- **Logical**: &&, ||, !
-- **Assignment**: =, +=, -=, etc.
+Methods are functions in classes, and classes are blueprints for objects.
 
-### Control Flow Statements
-
-Control the execution flow of the program.
-
-- **if-else**:
-
-```java
-if (condition) {
-    // code
-} else {
-    // code
-}
-```
-
-- **switch**:
-
-```java
-switch (expression) {
-    case value1:
-        // code
-        break;
-    case value2:
-        // code
-        break;
-    default:
-        // code
-}
-```
-
-- **Loops**: for, while, do-while
-
-```java
-for (int i = 0; i < 10; i++) {
-    System.out.println(i);
-}
+```mermaid
+graph TD
+A[Java Source Code] --> B[Javac Compiler]
+B --> C[Bytecode .class]
+C --> D[JVM]
+D --> E[Operating System]
 ```
 
 ## Real-world Examples & Use Cases
 
-- **User Input Validation**: Use if-else to check user age.
-- **Data Processing**: Loops to iterate over arrays.
-- **Calculations**: Operators for mathematical computations in financial apps.
+- Developing Android applications
+- Building web servers with Spring Framework
+- Creating desktop applications with JavaFX
+- Enterprise software for banking and finance
 
 ## Code Examples
 
@@ -101,28 +61,34 @@ public class HelloWorld {
 }
 ```
 
-### Variable Usage
+### Variables and Data Types
 
 ```java
-public class VariablesExample {
+public class DataTypesExample {
     public static void main(String[] args) {
         int age = 25;
-        double salary = 50000.0;
+        double salary = 50000.50;
         boolean isEmployed = true;
-        
-        if (isEmployed && age > 21) {
-            System.out.println("Eligible for loan");
-        }
+        String name = "John Doe";
+        System.out.println("Name: " + name + ", Age: " + age + ", Salary: " + salary + ", Employed: " + isEmployed);
     }
 }
 ```
 
-### Loop Example
+### Control Structures
 
 ```java
-public class LoopExample {
+public class ControlStructures {
     public static void main(String[] args) {
-        for (int i = 1; i <= 5; i++) {
+        int number = 10;
+        if (number > 0) {
+            System.out.println("Positive number");
+        } else if (number < 0) {
+            System.out.println("Negative number");
+        } else {
+            System.out.println("Zero");
+        }
+        for (int i = 0; i < 5; i++) {
             System.out.println("Count: " + i);
         }
     }
@@ -131,11 +97,11 @@ public class LoopExample {
 
 ## References
 
-- [Oracle Java Tutorials: Language Basics](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html)
-- [Java Primitive Data Types](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html)
+- [Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/)
+- [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se21/html/index.html)
 
 ## Github-README Links & Related Topics
 
 - [OOP Principles in Java](../oop-principles-in-java/)
-- [Collections & Data Structures](../collections-data-structures/)
-- [Java Stream API & Functional Programming](../java-stream-api-functional-programming/)
+- [JVM Internals & Class Loading](../jvm-internals-class-loading/)
+- [Multithreading & Concurrency in Java](../multithreading-concurrency-in-java/)
