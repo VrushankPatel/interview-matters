@@ -206,7 +206,7 @@ This repository contains comprehensive documentation on various topics for inter
 - [Configuration Management](./configuration-management/README.md)
 - [Container Orchestration Patterns](./container-orchestration-patterns/README.md)
 - [Container Security](./container-security/README.md)
-- [DevOps & Infrastructure as Code](./devops-infrastructure-as-code/README.md)
+- [DevOps & Infrastructure as Code](./devops-and-infrastructure-as-code/README.md)
 - [Docker Best Practices](./docker-best-practices/README.md)
 - [Docker Compose Best Practices](./docker-compose-best-practices/README.md)
 - [Docker Containerization](./docker-containerization/README.md)
@@ -230,7 +230,7 @@ This repository contains comprehensive documentation on various topics for inter
 - [Kubernetes Security](./kubernetes-security/README.md)
 - [Monitoring Dashboards](./monitoring-dashboards/README.md)
 - [Serverless Function Patterns](./serverless-function-patterns/README.md)
-- [DevOps & Infrastructure as Code](./devops-infrastructure-as-code/README.md)
+- [DevOps & Infrastructure as Code](./devops-and-infrastructure-as-code/README.md)
 
 ### Networking
 - [API Authentication Methods](./api-authentication-methods/README.md)
