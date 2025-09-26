@@ -140,6 +140,10 @@ This repository contains comprehensive documentation on various topics for inter
 - [Java Virtual Threads](./java-virtual-threads/README.md)
 - [Java Volatile Keyword](./java-volatile-keyword/README.md)
 - [Java Wait Notify](./java-wait-notify/README.md)
+
+- [JVM Internals & Class Loading](./jvm-internals-and-class-loading/README.md)
+
+- [Multithreading & Concurrency in Java](./multithreading-and-concurrency-in-java/README.md)
 - [Performance Tuning in Java Applications](./performance-tuning-in-java-applications/README.md)
 - [Java Fundamentals](./java-fundamentals/README.md)
 - [OOP Principles in Java](./oop-principles-in-java/README.md)

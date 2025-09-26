@@ -22,6 +22,16 @@ GC identifies and removes objects that are no longer reachable from the root set
 2. **Sweeping**: Removing dead objects and reclaiming memory.
 3. **Compacting**: Moving live objects to create contiguous free space (optional).
 
+```mermaid
+graph TD
+    A[Start GC] --> B[Mark Live Objects]
+    B --> C[Sweep Dead Objects]
+    C --> D{Compacting Needed?}
+    D -->|Yes| E[Compact Heap]
+    D -->|No| F[End GC]
+    E --> F
+```
+
 ### Common GC Algorithms
 
 #### Serial GC
