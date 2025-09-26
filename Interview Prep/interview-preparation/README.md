@@ -1,0 +1,12 @@
+# Interview Preparation
+- [Behavioral Star Prep](behavioral-star-prep/README.md)
+- [Coding Interview Strategies](coding-interview-strategies/README.md)
+- [Common Interview Mistakes](common-interview-mistakes/README.md)
+- [Interview Matters](interview-matters/README.md)
+- [Resume Optimization For Tech Jobs](resume-optimization-for-tech-jobs/README.md)
+- [Post Interview Follow Up](post-interview-follow-up/README.md)
+- [Star Method For Interviews](star-method-for-interviews/README.md)
+- [Negotiation Strategies For Offers](negotiation-strategies-for-offers/README.md)
+- [Technical Interview Formats](technical-interview-formats/README.md)
+- [Java Stream Api And Functional Programming](java-stream-api-and-functional-programming/README.md)
+- [Popular System Designs](popular-system-designs/README.md)
