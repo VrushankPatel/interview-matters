@@ -23,3 +23,8 @@
 - [Load Balancing and Strategies](system-design/load-balancing-and-strategies/README.md)
 - [Popular System Designs LLD HLD](popular-systems-design-lld-hld/README.md)
 - [Proxy Forward and Reverse](proxy-forward-and-reverse/README.md)
+- [Async Logging](async-logging/README.md)
+- [DevOps & Infrastructure as Code](devops-infrastructure-as-code/README.md)
+- [Load Balancing and Strategies](system-design/load-balancing-and-strategies/README.md)
+- [Popular System Designs LLD HLD](popular-systems-design-lld-hld/README.md)
+- [Proxy Forward and Reverse](proxy-forward-and-reverse/README.md)
