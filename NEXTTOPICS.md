@@ -1,5 +1,10 @@
-java-fundamentals
-oop-principles-in-java
-jvm-internals-class-loading
-garbage-collection-algorithms
-multithreading-concurrency-in-java
+00006| collections-data-structures
+00007| java-stream-api-functional-programming
+00008| system-design-basics
+00009| high-scalability-patterns
+00010| cap-theorem-distributed-systems
+00011| replication-vs-sharding-vs-partitioning
+00012| caching
+00013| latency-throughput-zero-to-hero
+00014| monitoring-logging
+00015| devops-infrastructure-as-code
