@@ -6,8 +6,6 @@ created: 2025-09-25
 updated: 2025-09-26
 ---
 
-# Java Fundamentals
-
 ## Overview
 
 Java Fundamentals cover the basic building blocks of the Java programming language, including data types, variables, operators, control structures, and basic syntax. These concepts form the foundation for writing Java programs.
