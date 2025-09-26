@@ -3,7 +3,7 @@ title: Docker Best Practices
 aliases: []
 tags: [#docker,#devops]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Docker Best Practices

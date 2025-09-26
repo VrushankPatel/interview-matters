@@ -3,7 +3,7 @@ title: RESTful API Design
 aliases: []
 tags: [#api, #system-design]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # RESTful API Design

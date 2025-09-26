@@ -3,7 +3,7 @@ title: Event Sourcing and CQRS
 aliases: [Event Sourcing, CQRS]
 tags: [#system-design, #architecture-patterns, #data-management]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Event Sourcing and CQRS
