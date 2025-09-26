@@ -1,12 +1,10 @@
 ---
-title: Java Collections
-aliases: [Java Collections Framework, Collections in Java]
+title: Java Collections Framework
+aliases: [Java Collections, Collections in Java]
 tags: [#java,#collections]
 created: 2025-09-26
 updated: 2025-09-26
 ---
-
-# Java Collections
 
 ## Overview
 

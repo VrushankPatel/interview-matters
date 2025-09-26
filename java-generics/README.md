@@ -1,12 +1,10 @@
 ---
 title: Java Generics
 aliases: []
-tags: ["#java"]
+tags: [#java]
 created: 2025-09-26
 updated: 2025-09-26
 ---
-
-# Java Generics
 
 ## Overview
 
@@ -155,6 +153,22 @@ public class WildcardExample {
     }
 }
 ```
+
+## Common Pitfalls & Edge Cases
+
+- **Raw Types**: Using collections without generics (e.g., `List` instead of `List<String>`) leads to compiler warnings and potential ClassCastException at runtime.
+- **Type Erasure Limitations**: Cannot perform instanceof checks or create arrays of generic types due to type erasure.
+- **Wildcard Misuse**: Incorrect use of bounded wildcards can lead to compilation errors or unexpected behavior.
+- **Heap Pollution**: Mixing raw types with generics can cause heap pollution, leading to ClassCastException.
+- **Edge Case**: Generic methods with varargs can cause heap pollution if not handled carefully.
+
+## Tools & Libraries
+
+- **Java Standard Library**: Extensive use of generics in Collections Framework (List, Map, Set, etc.).
+- **IDEs**: IntelliJ IDEA, Eclipse provide excellent generics support with auto-completion and error highlighting.
+- **Build Tools**: Maven and Gradle support generics in Java projects.
+- **Frameworks**: Spring Framework uses generics extensively in its core APIs.
+- **Testing**: JUnit and TestNG support generic test classes and methods.
 
 ## References
 
