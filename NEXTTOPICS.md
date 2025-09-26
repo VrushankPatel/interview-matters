@@ -1,12 +1,10 @@
-Rate limiting
-Concurrency & Parallelism
-Java Fundamentals
-OOP Principles in Java
-JVM Internals & Class Loading
-Garbage Collection Algorithms
-Multithreading & Concurrency in Java
-Collections & Data Structures
-Java Stream API & Functional Programming
-System Design Basics
-High Scalability Patterns
-CAP Theorem & Distributed Systems
+Java Generics Deep Dive
+Java Annotations and Reflection
+Database Normalization Techniques
+Event-Driven Architecture Patterns
+Kubernetes Networking and Services
+Docker Container Orchestration
+API Gateway Implementation
+Circuit Breaker Pattern in Microservices
+Distributed Tracing with OpenTelemetry
+Machine Learning in System Design

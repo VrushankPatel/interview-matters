@@ -146,6 +146,8 @@ This repository contains comprehensive documentation on various topics for inter
 - [Java Virtual Threads](./java-virtual-threads/README.md)
 - [Java Volatile Keyword](./java-volatile-keyword/README.md)
 - [Java Wait Notify](./java-wait-notify/README.md)
+- [Java Generics Deep Dive](./java-generics-deep-dive/README.md)
+- [Java Annotations and Reflection](./java-annotations-and-reflection/README.md)
 
 - [JVM Internals & Class Loading](./jvm-internals-and-class-loading/README.md)
 
@@ -196,6 +198,7 @@ This repository contains comprehensive documentation on various topics for inter
 - [Kubernetes Basics](./kubernetes-basics/README.md)
 - [Kubernetes Ingress and Load Balancing](./kubernetes-ingress-and-load-balancing/README.md)
 - [Kubernetes Networking](./kubernetes-networking/README.md)
+- [Kubernetes Networking and Services](./kubernetes-networking-and-services/README.md)
 - [Kubernetes Operators](./kubernetes-operators/README.md)
 - [Kubernetes Orchestration](./kubernetes-orchestration/README.md)
 - [Kubernetes Security](./kubernetes-security/README.md)
@@ -225,6 +228,7 @@ This repository contains comprehensive documentation on various topics for inter
 - [Database Migration Strategies](./database-migration-strategies/README.md)
 - [Database Migration Tools](./database-migration-tools/README.md)
 - [Database Normalization](./database-normalization/README.md)
+- [Database Normalization Techniques](./database-normalization-techniques/README.md)
 - [Database Performance Tuning](./database-performance-tuning/README.md)
 - [Database Replication Strategies](./database-replication-strategies/README.md)
 - [Database Sharding Strategies](./database-sharding-strategies/README.md)
@@ -240,6 +244,7 @@ This repository contains comprehensive documentation on various topics for inter
 - [Consensus Algorithms Overview](./consensus-algorithms-overview/README.md)
 - [Edge Computing](./edge-computing/README.md)
 - [Event Driven Systems](./event-driven-systems/README.md)
+- [Event-Driven Architecture Patterns](./event-driven-architecture-patterns/README.md)
 - [Event Streaming with Apache Kafka](./event-streaming-with-apache-kafka/README.md)
 - [Garbage Collection Algorithms](./garbage-collection-algorithms/README.md)
 - [GC Tuning](./gc-tuning/README.md)
