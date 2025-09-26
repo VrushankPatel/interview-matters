@@ -1,9 +1,9 @@
 ---
-title: High Scalability Patterns
-aliases: [Scalability Patterns, High Performance Patterns]
-tags: [scalability, architecture, patterns, distributed-systems]
-created: 2025-09-26
-updated: 2025-09-26
+title: "High Scalability Patterns"
+aliases: ["Scalability Patterns", "High Performance Patterns"]
+tags: ["#scalability","#architecture","#patterns","#distributed-systems"]
+created: "2025-09-26"
+updated: "2025-09-26"
 ---
 
 ## Overview
