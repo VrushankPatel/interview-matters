@@ -3,7 +3,7 @@ title: GraphQL vs REST
 aliases: [GraphQL REST Comparison]
 tags: [#graphql,#rest,#api-design]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # GraphQL vs REST
@@ -208,8 +208,8 @@ const fetchBookWithAuthor = async (bookId) => {
 
 ## Github-README Links & Related Topics
 
-- [API Design Principles](api-design-principles/)
-- [GraphQL API Design](graphql-api-design/)
-- [RESTful APIs](restful-apis/)
-- [API Authentication Methods](api-authentication-methods/)
-- [Microservices Communication Patterns](microservices-communication-patterns/)
+- [API Design Principles](../api-design-principles/README.md)
+- [GraphQL API Design](../graphql-api-design/README.md)
+- [API Design Best Practices](../api-design-best-practices/README.md)
+- [API Authentication Methods](../api-authentication-methods/README.md)
+- [Microservices Architecture](../microservices-architecture/README.md)

@@ -1,16 +1,16 @@
 ---
 title: OAuth and JWT
-aliases: ["OAuth 2.0", "JWT Authentication"]
-tags: ["#security", "#authentication", "#api"]
+aliases: [OAuth 2.0, JWT Authentication]
+tags: [#security,#authentication,#api]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
-# Overview
+## Overview
 
 OAuth (Open Authorization) is a protocol for secure delegated access, allowing third-party applications to access resources without sharing credentials. JWT (JSON Web Tokens) is a compact, URL-safe token format for securely transmitting information as JSON objects, commonly used for authentication and authorization.
 
-# Detailed Explanation
+## Detailed Explanation
 
 ## OAuth 2.0
 
@@ -49,14 +49,14 @@ sequenceDiagram
     RS->>C: Protected resource
 ```
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 - **Social Login**: "Login with Google/Facebook" using OAuth.
 - **API Authentication**: Microservices using JWT for stateless auth.
 - **Single Sign-On (SSO)**: Enterprise applications.
 - **Mobile Apps**: Secure API access without storing credentials.
 
-# Code Examples
+## Code Examples
 
 ## JWT Generation (Node.js)
 
@@ -95,7 +95,7 @@ authorization_url, state = oauth.authorization_url(authorization_base_url)
 token = oauth.fetch_token(token_url, client_secret=client_secret, authorization_response=request.url)
 ```
 
-# Journey / Sequence
+## Journey / Sequence
 
 ### OAuth Flow
 1. Client initiates authorization request.
@@ -130,9 +130,8 @@ token = oauth.fetch_token(token_url, client_secret=client_secret, authorization_
 - [JWT RFC 7519](https://tools.ietf.org/html/rfc7519)
 - [OAuth Security Best Practices](https://tools.ietf.org/html/rfc6819)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
-- [API Security Best Practices](api-security-best-practices/README.md)
-- [User Authentication](user-authentication/README.md)
-- [OAuth 2.0 Implementation](oauth-2-0-implementation/README.md)
-- [Microservices Security](microservices-security/README.md)
+- [API Security Best Practices](../api-security-best-practices/README.md)
+- [API Authentication Methods](../api-authentication-methods/README.md)
+- [Microservices Architecture](../microservices-architecture/README.md)
