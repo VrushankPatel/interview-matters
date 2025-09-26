@@ -229,6 +229,7 @@
 - [java-vector-api](./java-vector-api/)
 - [java-virtual-threads](./java-virtual-threads/)
 - [java-volatile-keyword](./java-volatile-keyword/)
+- [java-virtual-machine-jvm-architecture](./java-virtual-machine-jvm-architecture/)
 - [java-wait-notify](./java-wait-notify/)
 - [java](./java/)
 - [jpa-and-hibernate](./jpa-and-hibernate/)
