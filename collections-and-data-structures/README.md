@@ -14,23 +14,52 @@ Collections in Java are frameworks that provide architectures for storing and ma
 
 ## Detailed Explanation
 
-The Java Collections Framework consists of interfaces, implementations, and algorithms. Key interfaces include List, Set, Queue, and Map. Implementations like ArrayList, LinkedList, HashSet, HashMap provide different performance characteristics.
+The Java Collections Framework (JCF) is a unified architecture for representing and manipulating collections. It consists of interfaces, implementations, and algorithms that provide reusable data structures.
 
 ### Key Components
 
-- **Interfaces**: Define contracts for collections.
-- **Implementations**: Concrete classes like ArrayList, HashMap.
-- **Algorithms**: Static methods in Collections class for sorting, searching.
+- **Interfaces**: Define the abstract data types (e.g., List, Set, Queue, Map).
+- **Implementations**: Concrete classes that implement the interfaces (e.g., ArrayList, HashSet).
+- **Algorithms**: Utility methods in the Collections class for operations like sorting, searching, and shuffling.
+
+### Collection Hierarchy
+
+```mermaid
+graph TD
+    A[Collection] --> B[List]
+    A --> C[Set]
+    A --> D[Queue]
+    B --> E[ArrayList]
+    B --> F[LinkedList]
+    C --> G[HashSet]
+    C --> H[TreeSet]
+    D --> I[PriorityQueue]
+    D --> J[LinkedList]
+    K[Map] --> L[HashMap]
+    K --> M[TreeMap]
+    K --> N[LinkedHashMap]
+```
+
+### Data Structures and Their Implementations
+
+| Data Structure | Interface | Implementations | Time Complexity (Average) |
+|----------------|-----------|-----------------|---------------------------|
+| Array | List | ArrayList | O(1) access, O(n) insert/delete |
+| Linked List | List/Deque | LinkedList | O(n) access, O(1) insert/delete at ends |
+| Hash Table | Set/Map | HashSet/HashMap | O(1) operations |
+| Tree | Set/Map | TreeSet/TreeMap | O(log n) operations |
+| Stack | Deque | ArrayDeque | O(1) push/pop |
+| Queue | Queue/Deque | LinkedList/ArrayDeque | O(1) enqueue/dequeue |
 
 ### Data Structures Covered
 
-- Arrays
-- Linked Lists
-- Stacks
-- Queues
-- Trees
-- Graphs
-- Hash Tables
+- **Arrays**: Fixed-size, contiguous memory.
+- **Linked Lists**: Dynamic, node-based.
+- **Stacks**: LIFO structure.
+- **Queues**: FIFO structure.
+- **Trees**: Hierarchical, balanced for efficiency.
+- **Graphs**: Complex relationships (not directly in JCF, but can be implemented).
+- **Hash Tables**: Key-value pairs with fast lookup.
 
 ## Real-world Examples & Use Cases
 
@@ -87,6 +116,50 @@ public class StackExample {
     }
 }
 ```
+
+### TreeMap Example
+
+```java
+import java.util.TreeMap;
+import java.util.Map;
+
+public class TreeMapExample {
+    public static void main(String[] args) {
+        Map<String, Integer> map = new TreeMap<>();
+        map.put("Banana", 2);
+        map.put("Apple", 1);
+        map.put("Cherry", 3);
+        // Prints in sorted order: Apple=1, Banana=2, Cherry=3
+        map.forEach((k, v) -> System.out.println(k + "=" + v));
+    }
+}
+```
+
+### PriorityQueue Example
+
+```java
+import java.util.PriorityQueue;
+import java.util.Queue;
+
+public class PriorityQueueExample {
+    public static void main(String[] args) {
+        Queue<Integer> pq = new PriorityQueue<>();
+        pq.add(3);
+        pq.add(1);
+        pq.add(2);
+        System.out.println(pq.poll()); // 1 (smallest)
+        System.out.println(pq.poll()); // 2
+    }
+}
+```
+
+## Common Pitfalls & Edge Cases
+
+- **Concurrent Modification Exception**: Modifying a collection while iterating over it without an Iterator.
+- **Null Keys/Values**: HashMap allows null keys/values, but TreeMap does not allow null keys.
+- **Performance Issues**: Choosing wrong implementation (e.g., ArrayList for frequent insertions/deletions).
+- **Memory Leaks**: Not clearing references in collections like HashMap.
+- **Thread Safety**: Using non-thread-safe collections in multi-threaded environments without synchronization.
 
 ## References
 
