@@ -1,58 +1,136 @@
 ---
 title: Java Fundamentals
-aliases: [Java Basics, Core Java]
+aliases: []
 tags: [#java]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+# Java Fundamentals
 
-Java Fundamentals encompass the core concepts and syntax of the Java programming language. This includes basic syntax, data types, operators, control structures, and the foundation of object-oriented programming. Understanding these fundamentals is essential for building robust Java applications.
+## Overview
+Java is a high-level, object-oriented programming language designed for portability and robustness. It follows the "write once, run anywhere" principle through the Java Virtual Machine (JVM). Key features include automatic memory management, strong typing, and extensive standard libraries.
 
-# Detailed Explanation
+## Detailed Explanation
+Java fundamentals encompass the core concepts and syntax that form the building blocks of Java programming. This includes data types, variables, operators, control structures, and basic object-oriented principles.
 
-Java is a statically-typed, object-oriented programming language that emphasizes portability, security, and performance. Key components include:
+### Data Types
+Java has two categories of data types: primitive and reference.
 
-## Variables and Data Types
+**Primitive Types:**
+- `byte`: 8-bit signed integer (-128 to 127)
+- `short`: 16-bit signed integer (-32,768 to 32,767)
+- `int`: 32-bit signed integer (-2^31 to 2^31-1)
+- `long`: 64-bit signed integer (-2^63 to 2^63-1)
+- `float`: 32-bit IEEE 754 floating-point
+- `double`: 64-bit IEEE 754 floating-point
+- `char`: 16-bit Unicode character
+- `boolean`: true or false
 
-Java supports primitive data types and reference types.
+**Reference Types:**
+- Classes, interfaces, arrays, and enums
 
-| Data Type | Size | Range |
-|-----------|------|-------|
-| byte | 1 byte | -128 to 127 |
-| short | 2 bytes | -32,768 to 32,767 |
-| int | 4 bytes | -2^31 to 2^31-1 |
-| long | 8 bytes | -2^63 to 2^63-1 |
-| float | 4 bytes | ~6-7 decimal digits |
-| double | 8 bytes | ~15 decimal digits |
-| char | 2 bytes | 0 to 65,535 |
-| boolean | 1 byte | true/false |
+### Variables
+Variables are containers for storing data values. They must be declared with a data type.
 
-## Operators
+```java
+int age = 25;
+String name = "John Doe";
+double salary = 50000.0;
+```
 
-Java provides arithmetic, relational, logical, and assignment operators.
+### Operators
+Java supports various operators for arithmetic, comparison, logical, and assignment operations.
 
-## Control Structures
+**Arithmetic Operators:**
+```java
+int a = 10, b = 5;
+int sum = a + b;        // 15
+int difference = a - b; // 5
+int product = a * b;    // 50
+int quotient = a / b;   // 2
+int remainder = a % b;  // 0
+```
 
-- Conditional: if-else, switch
-- Loops: for, while, do-while
+**Comparison Operators:**
+```java
+boolean isEqual = (a == b);     // false
+boolean isGreater = (a > b);    // true
+boolean isLessOrEqual = (a <= b); // false
+```
 
-## Methods
+**Logical Operators:**
+```java
+boolean condition1 = true, condition2 = false;
+boolean andResult = condition1 && condition2; // false
+boolean orResult = condition1 || condition2;  // true
+boolean notResult = !condition1;              // false
+```
 
-Functions defined within classes that perform operations.
+### Control Structures
+Control structures direct the flow of program execution.
 
-# Real-world Examples & Use Cases
+**If-Else Statement:**
+```java
+int score = 85;
+if (score >= 90) {
+    System.out.println("Grade: A");
+} else if (score >= 80) {
+    System.out.println("Grade: B");
+} else {
+    System.out.println("Grade: C");
+}
+```
 
-- Developing command-line tools
-- Creating backend APIs
-- Building desktop applications with Swing
-- Android mobile app development
+**Switch Statement:**
+```java
+int day = 3;
+switch (day) {
+    case 1:
+        System.out.println("Monday");
+        break;
+    case 2:
+        System.out.println("Tuesday");
+        break;
+    case 3:
+        System.out.println("Wednesday");
+        break;
+    default:
+        System.out.println("Other day");
+}
+```
 
-# Code Examples
+**Loops:**
+```java
+// For loop
+for (int i = 0; i < 5; i++) {
+    System.out.println("Iteration: " + i);
+}
 
-## Basic Hello World
+// While loop
+int count = 0;
+while (count < 3) {
+    System.out.println("Count: " + count);
+    count++;
+}
 
+// Do-while loop
+int num = 1;
+do {
+    System.out.println("Number: " + num);
+    num++;
+} while (num <= 3);
+```
+
+## Real-world Examples & Use Cases
+1. **Simple Calculator Application:** Implementing basic arithmetic operations using variables, operators, and control structures.
+2. **Student Grade Management System:** Using arrays and loops to store and process student grades.
+3. **Bank Account Simulator:** Demonstrating object creation and method calls for basic banking operations.
+4. **Temperature Converter:** Converting between Celsius, Fahrenheit, and Kelvin using mathematical formulas.
+5. **Number Guessing Game:** Implementing game logic with random number generation and user input validation.
+
+## Code Examples
+### Hello World Program
 ```java
 public class HelloWorld {
     public static void main(String[] args) {
@@ -61,50 +139,91 @@ public class HelloWorld {
 }
 ```
 
-## Variables and Data Types
-
+### Basic Calculator
 ```java
-public class DataTypesExample {
+import java.util.Scanner;
+
+public class Calculator {
     public static void main(String[] args) {
-        int age = 25;
-        double salary = 50000.50;
-        String name = "John Doe";
-        boolean isEmployed = true;
+        Scanner scanner = new Scanner(System.in);
         
-        System.out.println("Name: " + name + ", Age: " + age + ", Salary: " + salary + ", Employed: " + isEmployed);
+        System.out.print("Enter first number: ");
+        double num1 = scanner.nextDouble();
+        
+        System.out.print("Enter operator (+, -, *, /): ");
+        char operator = scanner.next().charAt(0);
+        
+        System.out.print("Enter second number: ");
+        double num2 = scanner.nextDouble();
+        
+        double result;
+        switch (operator) {
+            case '+':
+                result = num1 + num2;
+                break;
+            case '-':
+                result = num1 - num2;
+                break;
+            case '*':
+                result = num1 * num2;
+                break;
+            case '/':
+                if (num2 != 0) {
+                    result = num1 / num2;
+                } else {
+                    System.out.println("Error: Division by zero");
+                    return;
+                }
+                break;
+            default:
+                System.out.println("Error: Invalid operator");
+                return;
+        }
+        
+        System.out.println("Result: " + result);
+        scanner.close();
     }
 }
 ```
 
-## Control Structures
-
+### Array Operations
 ```java
-public class ControlStructures {
+public class ArrayExample {
     public static void main(String[] args) {
-        int number = 10;
+        // Declare and initialize an array
+        int[] numbers = {10, 20, 30, 40, 50};
         
-        if (number > 0) {
-            System.out.println("Positive number");
-        } else if (number < 0) {
-            System.out.println("Negative number");
-        } else {
-            System.out.println("Zero");
+        // Print array elements
+        System.out.println("Array elements:");
+        for (int i = 0; i < numbers.length; i++) {
+            System.out.println("Index " + i + ": " + numbers[i]);
         }
         
-        for (int i = 1; i <= 5; i++) {
-            System.out.println("Count: " + i);
+        // Calculate sum
+        int sum = 0;
+        for (int num : numbers) {
+            sum += num;
         }
+        System.out.println("Sum of array elements: " + sum);
+        
+        // Find maximum
+        int max = numbers[0];
+        for (int num : numbers) {
+            if (num > max) {
+                max = num;
+            }
+        }
+        System.out.println("Maximum value: " + max);
     }
 }
 ```
 
-# References
-
+## References
 - [Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/)
 - [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se17/html/index.html)
+- [Baeldung Java Guides](https://www.baeldung.com/java)
 
-# Github-README Links & Related Topics
-
+## Github-README Links & Related Topics
 - [OOP Principles in Java](../oop-principles-in-java/)
-- [Java Data Types](../java-data-types/)
-- [Java Operators](../java-operators/)
+- [Collections & Data Structures](../collections-and-data-structures/)
+- [Java Stream API & Functional Programming](../java-stream-api-functional-programming/)
