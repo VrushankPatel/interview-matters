@@ -27,6 +27,16 @@ Modern GC uses generational hypothesis:
 - **Old Generation**: Long-lived objects
 - **Permanent Generation/Metaspace**: Class metadata (Java 8+)
 
+```mermaid
+graph TD
+    A[Heap] --> B[Young Generation]
+    A --> C[Old Generation]
+    A --> D[Metaspace]
+    B --> E[Eden Space]
+    B --> F[Survivor Space 0]
+    B --> G[Survivor Space 1]
+```
+
 ### Common GC Algorithms
 
 #### 1. Mark-Sweep

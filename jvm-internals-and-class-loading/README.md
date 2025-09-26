@@ -34,11 +34,29 @@ The JVM consists of several key components:
 Class loading occurs in three main phases:
 
 1. **Loading**: Finding and importing the binary data of a class
-2. **Linking**: 
+2. **Linking**:
    - Verification: Ensuring the correctness of the loaded class
    - Preparation: Allocating memory for class variables and initializing them to default values
    - Resolution: Replacing symbolic references with direct references
 3. **Initialization**: Executing static initializers and assigning initial values to static variables
+
+```mermaid
+graph TD
+    A[Class Loading Requested] --> B{Class Already Loaded?}
+    B -->|Yes| C[Return Class]
+    B -->|No| D[Loading Phase]
+    D --> E[Find .class file]
+    E --> F[Read binary data]
+    F --> G[Create Class object]
+    G --> H[Linking Phase]
+    H --> I[Verification]
+    I --> J[Preparation]
+    J --> K[Resolution]
+    K --> L[Initialization Phase]
+    L --> M[Execute static blocks]
+    M --> N[Initialize static variables]
+    N --> C
+```
 
 ### Types of Class Loaders
 Java uses a hierarchical class loading mechanism:

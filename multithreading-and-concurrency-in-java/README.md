@@ -29,6 +29,18 @@ Multithreading and concurrency are fundamental concepts in Java for building res
 4. **Blocked**: Waiting for a resource (I/O, lock)
 5. **Terminated**: Execution completed
 
+```mermaid
+stateDiagram-v2
+    [*] --> New
+    New --> Runnable: start()
+    Runnable --> Running: scheduled
+    Running --> Runnable: time slice expires
+    Running --> Blocked: wait/sleep/I/O
+    Blocked --> Runnable: resource available
+    Running --> Terminated: run() completes
+    Terminated --> [*]
+```
+
 ### Synchronization
 Synchronization ensures thread-safe access to shared resources.
 
