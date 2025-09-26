@@ -240,6 +240,7 @@ This repository contains comprehensive documentation on various topics for inter
 - [Helm for Kubernetes](./helm-for-kubernetes/README.md)
 - [Infrastructure as Code with Terraform](./infrastructure-as-code-with-terraform/README.md)
 - [Infrastructure Monitoring](./infrastructure-monitoring/README.md)
+- [Monitoring and Logging](./monitoring-and-logging/README.md)
 - [Kubernetes Advanced Concepts](./kubernetes-advanced-concepts/README.md)
 - [Kubernetes Basics](./kubernetes-basics/README.md)
 - [Kubernetes Ingress and Load Balancing](./kubernetes-ingress-and-load-balancing/README.md)
