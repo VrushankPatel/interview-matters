@@ -1,119 +1,177 @@
 ---
 title: Monitoring and Logging
 aliases: [observability, system monitoring]
-tags: [#devops,#system-design]
+tags: [#devops, #system-design, #reliability]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+## Overview
 
-Monitoring and logging are essential practices for maintaining the health, performance, and reliability of software systems. Monitoring involves collecting and analyzing metrics, logs, and traces in real-time to detect issues and ensure optimal operation. Logging captures detailed records of events, errors, and activities for debugging, auditing, and compliance. Together, they form the foundation of observability, enabling proactive issue resolution and informed decision-making.
+Monitoring and logging are essential practices for maintaining system health, diagnosing issues, and ensuring reliability. Monitoring provides real-time insights into system performance, while logging captures historical data for analysis and debugging.
 
-# Detailed Explanation
+## Detailed Explanation
 
-## Monitoring
+### Monitoring
+Monitoring involves collecting, analyzing, and alerting on system metrics and health indicators.
 
-Monitoring tracks system behavior through key metrics:
-- **Infrastructure Metrics**: CPU, memory, disk, network usage.
-- **Application Metrics**: Response times, error rates, throughput.
-- **Business Metrics**: User activity, revenue indicators.
+#### Key Metrics
+- **System Metrics**: CPU, memory, disk, network usage
+- **Application Metrics**: Response times, error rates, throughput
+- **Business Metrics**: User engagement, conversion rates
+- **Infrastructure Metrics**: Server health, container status
 
-Tools: Prometheus, Grafana, Nagios, DataDog.
+#### Monitoring Types
+- **Infrastructure Monitoring**: Hardware and OS level metrics
+- **Application Monitoring**: Code-level performance and errors
+- **Business Monitoring**: User-facing functionality and KPIs
+- **Synthetic Monitoring**: Simulated user interactions
 
-Approaches:
-- **White-box Monitoring**: Insights from inside the system (e.g., application logs).
-- **Black-box Monitoring**: External checks (e.g., synthetic transactions).
-- **Alerting**: Threshold-based notifications for anomalies.
+### Logging
+Logging involves recording events, errors, and state changes for later analysis.
 
-## Logging
+#### Log Levels
+- **DEBUG**: Detailed information for debugging
+- **INFO**: General information about application operation
+- **WARN**: Potentially harmful situations
+- **ERROR**: Error conditions that don't stop execution
+- **FATAL**: Severe errors that cause program abortion
 
-Logging records events with structured data:
-- **Levels**: DEBUG, INFO, WARN, ERROR, FATAL.
-- **Structured Logging**: JSON format for easy parsing.
-- **Centralized Logging**: Aggregates logs from distributed systems.
+#### Structured Logging
+Using consistent formats (JSON) for logs to enable better querying and analysis.
 
-Tools: ELK Stack (Elasticsearch, Logstash, Kibana), Splunk, Fluentd.
+## Real-world Examples & Use Cases
 
-Best Practices:
-- Log rotation to prevent disk fill.
-- Sensitive data masking.
-- Correlation IDs for tracing requests.
+### E-commerce Platform
+- Monitor checkout flow conversion rates
+- Log payment transaction details for audit trails
+- Alert on high error rates during peak traffic
 
-## Integration
+### Microservices Architecture
+- Distributed tracing for request flows across services
+- Centralized logging for correlating events
+- Health checks for service discovery
 
-Monitoring and logging complement each other:
-- Logs provide context for metrics anomalies.
-- Metrics guide log analysis.
+### Cloud Infrastructure
+- Auto-scaling based on CPU utilization metrics
+- Log aggregation from multiple instances
+- Anomaly detection for security threats
 
-```mermaid
-graph TD
-    A[Application] --> B[Generate Logs]
-    A --> C[Expose Metrics]
-    B --> D[Log Aggregator]
-    C --> E[Metrics Collector]
-    D --> F[Search & Analyze]
-    E --> G[Visualize & Alert]
-    F --> H[Debug Issues]
-    G --> H
-```
+### IoT Systems
+- Monitor device connectivity and data ingestion rates
+- Log sensor readings for historical analysis
+- Alert on device failures or unusual patterns
 
-# Real-world Examples & Use Cases
+## Code Examples
 
-- **E-commerce**: Monitor cart abandonment rates; log user sessions for fraud detection.
-- **Microservices**: Distributed tracing with tools like Jaeger; alert on service failures.
-- **Cloud Services**: AWS CloudWatch monitors EC2 instances; logs API calls for security audits.
-- **DevOps Pipelines**: CI/CD monitoring for build failures; logs for deployment issues.
-
-# Code Examples
-
-## Prometheus Metrics in Python (Flask App)
-
-```python
-from flask import Flask
-from prometheus_client import Counter, Histogram, generate_latest
-
-app = Flask(__name__)
-
-REQUEST_COUNT = Counter('http_requests_total', 'Total HTTP requests', ['method', 'endpoint'])
-REQUEST_LATENCY = Histogram('http_request_duration_seconds', 'Request latency', ['method', 'endpoint'])
-
-@app.route('/api/data')
-def get_data():
-    REQUEST_COUNT.labels(method='GET', endpoint='/api/data').inc()
-    with REQUEST_LATENCY.labels(method='GET', endpoint='/api/data').time():
-        # Simulate work
-        return {'data': 'example'}
-
-@app.route('/metrics')
-def metrics():
-    return generate_latest()
-```
-
-## Structured Logging in Java (Logback)
+### Java Logging with SLF4J
 
 ```java
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ExampleService {
-    private static final Logger logger = LoggerFactory.getLogger(ExampleService.class);
+public class UserService {
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
-    public void processRequest(String userId) {
-        logger.info("Processing request for user {}", userId);
+    public User getUser(Long id) {
+        logger.debug("Fetching user with id: {}", id);
         try {
-            // Business logic
-            logger.debug("Request details: {}", getDetails());
+            User user = userRepository.findById(id);
+            logger.info("Successfully retrieved user: {}", user.getName());
+            return user;
         } catch (Exception e) {
-            logger.error("Error processing request for user {}: {}", userId, e.getMessage(), e);
+            logger.error("Failed to retrieve user with id: {}", id, e);
+            throw e;
         }
     }
 }
 ```
 
-# References
+### Structured Logging with JSON
 
-- [Monitoring - Wikipedia](https://en.wikipedia.org/wiki/Monitoring_(computing))
-- [Logging - Wikipedia](https://en.wikipedia.org/wiki/Computer_logging)
-- [Prometheus Documentation](https://prometheus.io/docs/)
-- [ELK Stack](https://www.elastic.co/what-is/elk-stack)
+```java
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class StructuredLogger {
+    private static final Logger logger = LoggerFactory.getLogger(StructuredLogger.class);
+    private static final ObjectMapper mapper = new ObjectMapper();
+
+    public void logUserAction(String action, String userId, Map<String, Object> details) {
+        Map<String, Object> logEntry = new HashMap<>();
+        logEntry.put("timestamp", Instant.now());
+        logEntry.put("action", action);
+        logEntry.put("userId", userId);
+        logEntry.put("details", details);
+
+        try {
+            String jsonLog = mapper.writeValueAsString(logEntry);
+            logger.info("User action: {}", jsonLog);
+        } catch (Exception e) {
+            logger.error("Failed to serialize log entry", e);
+        }
+    }
+}
+```
+
+### Metrics Collection with Micrometer
+
+```java
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
+import org.springframework.stereotype.Service;
+
+@Service
+public class MetricsService {
+    private final Counter requestCounter;
+    private final Timer requestTimer;
+
+    public MetricsService(MeterRegistry registry) {
+        this.requestCounter = Counter.builder("http_requests_total")
+                .description("Total HTTP requests")
+                .register(registry);
+        this.requestTimer = Timer.builder("http_request_duration")
+                .description("HTTP request duration")
+                .register(registry);
+    }
+
+    public void recordRequest() {
+        requestCounter.increment();
+    }
+
+    public void recordRequestDuration(Runnable operation) {
+        requestTimer.record(operation);
+    }
+}
+```
+
+## Common Pitfalls & Edge Cases
+
+- **Log Noise**: Excessive logging impacting performance
+- **Missing Context**: Logs without sufficient information for debugging
+- **Security Concerns**: Sensitive data in logs
+- **Distributed Tracing Complexity**: Correlating logs across services
+- **Alert Fatigue**: Too many alerts leading to ignored warnings
+
+## Tools & Libraries
+
+- **ELK Stack**: Elasticsearch, Logstash, Kibana for log aggregation and visualization
+- **Prometheus**: Monitoring and alerting toolkit
+- **Grafana**: Analytics and monitoring dashboards
+- **Splunk**: Enterprise logging and monitoring platform
+- **Datadog**: Cloud monitoring and analytics
+
+## References
+
+- [Monitoring Best Practices](https://landing.google.com/sre/sre-book/chapters/monitoring-distributed-systems/)
+- [Logging Best Practices](https://12factor.net/logs)
+- [Observability](https://opentelemetry.io/docs/concepts/observability-principles/)
+- [SLF4J Documentation](https://www.slf4j.org/)
+
+## Github-README Links & Related Topics
+
+- [Distributed Tracing](../distributed-tracing/README.md)
+- [Async Logging](../async-logging/README.md)
+- [Infrastructure Monitoring](../infrastructure-monitoring/README.md)
+- [DevOps & Infrastructure as Code](../devops-and-infrastructure-as-code/README.md)

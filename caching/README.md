@@ -1,117 +1,147 @@
 ---
 title: Caching
 aliases: [cache, caching strategies]
-tags: [#system-design,#performance]
+tags: [#system-design, #performance, #scalability]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+## Overview
 
-Caching is a technique used to store frequently accessed data in a fast-access storage layer to improve performance and reduce latency. It acts as a temporary data store that sits between the application and the primary data source, such as a database or API. By serving data from cache instead of recomputing or refetching it, systems can achieve significant speedups and handle higher loads.
+Caching is a technique to store frequently accessed data in a fast-access storage layer to reduce latency, improve performance, and decrease load on backend systems. It acts as a temporary data store that sits between the application and the primary data source.
 
-# Detailed Explanation
+## Detailed Explanation
 
-## Cache Types
+### Types of Caches
+- **In-Memory Cache**: Stores data in RAM for fastest access (e.g., Redis, Memcached)
+- **Database Cache**: Query result caching at the database level
+- **CDN Cache**: Content delivery network caching for static assets
+- **Browser Cache**: Client-side caching in web browsers
+- **Application Cache**: Caching within the application layer
 
-- **In-Memory Cache**: Stores data in RAM for ultra-fast access (e.g., Redis, Memcached).
-- **Disk Cache**: Uses local or network storage for larger datasets (e.g., browser cache, CDN).
-- **Distributed Cache**: Shared across multiple servers for scalability (e.g., Redis Cluster).
-- **CPU Cache**: Hardware-level caching in processors (L1, L2, L3).
+### Cache Strategies
+- **Cache-Aside (Lazy Loading)**: Application checks cache first; if miss, fetches from source and populates cache
+- **Write-Through**: Data written to cache and source simultaneously
+- **Write-Behind (Write-Back)**: Data written to cache first, then asynchronously to source
+- **Read-Through**: Cache sits between application and data source, handles all reads
 
-## Cache Policies
+### Cache Eviction Policies
+- **LRU (Least Recently Used)**: Evicts least recently accessed items
+- **LFU (Least Frequently Used)**: Evicts least frequently accessed items
+- **TTL (Time To Live)**: Items expire after a set time
+- **Size-Based**: Evicts when cache reaches maximum size
 
-- **Eviction Policies**: Determine what to remove when cache is full.
-  - LRU (Least Recently Used): Removes oldest accessed items.
-  - LFU (Least Frequently Used): Removes least accessed items.
-  - FIFO (First In, First Out): Removes oldest items.
-  - Random: Evicts randomly.
+## Real-world Examples & Use Cases
 
-- **Write Policies**:
-  - Write-Through: Writes to cache and primary storage simultaneously.
-  - Write-Back: Writes to cache first, then asynchronously to storage.
-  - Write-Around: Bypasses cache for writes, only reads are cached.
+### Web Applications
+- User session data caching to avoid repeated database queries
+- API response caching for public data that doesn't change often
 
-## Cache Invalidation
+### E-commerce Platforms
+- Product catalog caching to handle high traffic during sales
+- Shopping cart data caching for personalized experiences
 
-- **Time-Based**: Expire after a set time (TTL - Time To Live).
-- **Event-Based**: Invalidate on data changes (e.g., via pub/sub).
-- **Manual**: Explicitly remove entries.
+### Social Media
+- Timeline feed caching to reduce computation for personalized feeds
+- User profile data caching for quick access
 
-Challenges: Cache coherence, stale data, cache misses.
+### Gaming
+- Game state caching for real-time multiplayer games
+- Leaderboard caching for competitive features
 
-```mermaid
-graph TD
-    A[Client Request] --> B{Cache Hit?}
-    B -->|Yes| C[Return Cached Data]
-    B -->|No| D[Fetch from Source]
-    D --> E[Store in Cache]
-    E --> C
-```
+## Code Examples
 
-# Real-world Examples & Use Cases
-
-- **Web Applications**: Browser caches static assets; CDNs cache content globally.
-- **Databases**: Query result caching in ORM layers (e.g., Hibernate second-level cache).
-- **APIs**: Rate limiting with cached responses; API gateways cache frequent requests.
-- **Microservices**: Shared cache for session data or computed results.
-- **Gaming**: Preload assets; cache user profiles.
-
-# Code Examples
-
-## Redis In-Memory Cache (Python)
-
-```python
-import redis
-
-# Connect to Redis
-r = redis.Redis(host='localhost', port=6379, db=0)
-
-# Set a key with TTL
-r.set('key', 'value', ex=3600)  # Expires in 1 hour
-
-# Get value
-value = r.get('key')
-print(value)  # b'value'
-
-# Cache miss example
-if not r.exists('missing_key'):
-    # Fetch from DB
-    data = fetch_from_database()
-    r.set('missing_key', data, ex=300)
-```
-
-## Simple In-Memory Cache (Java)
+### Redis In-Memory Caching (Java)
 
 ```java
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.Map;
+import redis.clients.jedis.Jedis;
 
-public class SimpleCache<K, V> {
-    private final Map<K, V> cache = new ConcurrentHashMap<>();
+public class CacheExample {
+    private Jedis jedis = new Jedis("localhost");
 
-    public V get(K key) {
-        return cache.get(key);
+    public String getData(String key) {
+        String cached = jedis.get(key);
+        if (cached != null) {
+            return cached;
+        }
+        // Fetch from database
+        String data = fetchFromDatabase(key);
+        jedis.setex(key, 3600, data); // Cache for 1 hour
+        return data;
     }
 
-    public void put(K key, V value) {
-        cache.put(key, value);
-    }
-
-    public void invalidate(K key) {
-        cache.remove(key);
+    private String fetchFromDatabase(String key) {
+        // Database logic here
+        return "data";
     }
 }
-
-// Usage
-SimpleCache<String, String> cache = new SimpleCache<>();
-cache.put("user:123", "John Doe");
-String name = cache.get("user:123");
 ```
 
-# References
+### Spring Boot Cache Annotation
 
-- [Caching - Wikipedia](https://en.wikipedia.org/wiki/Cache_(computing))
+```java
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserService {
+
+    @Cacheable(value = "users", key = "#id")
+    public User getUserById(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+}
+```
+
+### Cache-Aside Pattern Implementation
+
+```java
+public class CacheAsideService {
+    private Cache cache;
+    private DataSource dataSource;
+
+    public Data getData(String key) {
+        Data data = cache.get(key);
+        if (data == null) {
+            data = dataSource.get(key);
+            cache.put(key, data);
+        }
+        return data;
+    }
+
+    public void updateData(String key, Data data) {
+        dataSource.update(key, data);
+        cache.put(key, data);
+    }
+}
+```
+
+## Common Pitfalls & Edge Cases
+
+- **Cache Invalidation**: Ensuring stale data is removed when source data changes
+- **Cache Penetration**: Handling requests for non-existent data that bypass cache
+- **Cache Avalanche**: Mass cache expiration causing sudden load spikes
+- **Hot Key Problem**: Single popular key causing cache server overload
+- **Data Consistency**: Balancing between cache and source data freshness
+
+## Tools & Libraries
+
+- **Redis**: High-performance in-memory data structure store
+- **Memcached**: Distributed memory object caching system
+- **Ehcache**: Java-based cache library
+- **Caffeine**: High-performance Java caching library
+- **Varnish**: HTTP accelerator designed for content-heavy dynamic web sites
+
+## References
+
 - [Redis Documentation](https://redis.io/documentation)
-- [Memcached](https://memcached.org/)
-- [AWS Caching Best Practices](https://aws.amazon.com/caching/best-practices/)
+- [Memcached Wiki](https://memcached.org/)
+- [Cache Strategies](https://martinfowler.com/bliki/Caching.html)
+- [CAP Theorem and Caching](https://en.wikipedia.org/wiki/CAP_theorem)
+
+## Github-README Links & Related Topics
+
+- [Distributed Caching with Redis](../distributed-caching-with-redis/README.md)
+- [CDN Architecture](../cdn-architecture/README.md)
+- [Database Performance Tuning](../database-performance-tuning/README.md)
+- [High Scalability Patterns](../high-scalability-patterns/README.md)

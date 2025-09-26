@@ -1,140 +1,165 @@
 ---
 title: Latency and Throughput Zero to Hero
-aliases: ["Performance Metrics Guide", "Latency Throughput Tutorial"]
-tags: [performance, latency, throughput, systems, networking, optimization]
+aliases: [latency throughput, performance metrics]
+tags: [#system-design, #performance, #scalability]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+## Overview
 
-Latency and throughput are fundamental performance metrics in computing systems, representing the speed and capacity of operations. Latency measures the time delay between initiating an action and its completion, while throughput quantifies the rate of successful operations over time. This guide progresses from basic concepts to advanced optimization techniques, emphasizing their trade-offs and practical applications in engineering.
+Latency and throughput are fundamental performance metrics in system design. Latency measures the time delay for a single operation, while throughput measures the rate of successful operations. Understanding and optimizing these metrics is crucial for building high-performance systems.
 
-# Detailed Explanation
+## Detailed Explanation
 
-## Definitions and Basics
+### Latency
+Latency is the time taken for a request to travel from source to destination and back. It includes:
+- **Network Latency**: Time for data to travel across networks
+- **Disk Latency**: Time to read/write from storage
+- **Processing Latency**: Time for CPU to process requests
+- **Queue Latency**: Time spent waiting in queues
 
-- **Latency**: The time interval between a stimulus and response. In systems, it's the delay for a single operation (e.g., request-response round-trip). Measured in units like milliseconds (ms), microseconds (μs), or nanoseconds (ns).
-- **Throughput**: The rate of processing or data transfer, often in operations per second (ops/s), bits per second (bps), or transactions per second (tps). It reflects system capacity under load.
+### Throughput
+Throughput is the rate at which a system processes requests, typically measured in requests per second (RPS) or transactions per second (TPS).
 
-Key relationship: Latency and throughput often trade off. Optimizing for low latency may reduce throughput (e.g., small batches), while high throughput might increase latency (e.g., batching operations).
+### Relationship Between Latency and Throughput
+- **Little's Law**: Throughput = Concurrency / Latency
+- Increasing concurrency can improve throughput but may increase latency due to contention
+- Optimizing for low latency often requires trade-offs with throughput
 
-## Measurement Techniques
+### Measuring Latency
+- **Percentiles**: P50, P95, P99 latencies provide distribution insights
+- **Average vs. Tail Latencies**: Average may hide performance issues for edge cases
 
-### Latency Measurement
-- **One-way Latency**: Time from send to receive.
-- **Round-trip Latency**: Includes return path, common in networks (e.g., ping).
-- Tools: `ping` for networks, `time` command for processes, profilers for code.
+## Real-world Examples & Use Cases
 
-### Throughput Measurement
-- **Maximum Theoretical Throughput**: Based on channel capacity (e.g., Shannon-Hartley theorem for analog channels).
-- **Sustained Throughput**: Average over time, accounting for overhead.
-- Tools: `iperf` for networks, `ab` (Apache Bench) for web servers, custom benchmarks.
+### Web Services
+- API response times: Target <100ms for good UX
+- Database queries: Optimize slow queries affecting overall latency
 
-Factors affecting metrics:
-- **Network**: Propagation delay, queuing, packet loss.
-- **Hardware**: CPU cycles, memory access, I/O bottlenecks.
-- **Software**: Algorithm efficiency, concurrency, contention.
+### Streaming Services
+- Video buffering: Low latency critical for real-time streaming
+- Data pipelines: High throughput for processing large datasets
 
-## Trade-offs and Optimization
+### Financial Systems
+- High-frequency trading: Microsecond latency requirements
+- Payment processing: Balancing throughput with fraud detection latency
 
-Use the USE Method (Utilization, Saturation, Errors) for resource analysis:
-- Check each resource (CPU, memory, disk, network) for high utilization, saturation, or errors.
+### IoT Systems
+- Sensor data collection: High throughput with acceptable latency
+- Real-time analytics: Low latency for immediate insights
 
-Optimization strategies:
-- **Reduce Latency**: Caching, precomputation, parallelization.
-- **Increase Throughput**: Batching, pipelining, load balancing.
-- **Balancing**: Tune based on workload (e.g., real-time vs. batch processing).
+## Code Examples
 
-| Scenario | Latency Focus | Throughput Focus | Trade-off Example |
-|----------|---------------|------------------|-------------------|
-| Real-time chat | Low (<100ms) | Moderate | Buffering increases latency for higher throughput |
-| Video streaming | Moderate | High (Mbps) | Buffering reduces latency jitter but adds delay |
-| Database queries | Low | High (qps) | Indexing speeds queries (lower latency) but adds write overhead |
+### Measuring Latency in Java
 
-```mermaid
-graph TD
-    A[High Latency, Low Throughput] --> B[Optimize for Latency]
-    A --> C[Optimize for Throughput]
-    B --> D[Low Latency, Moderate Throughput]
-    C --> E[Moderate Latency, High Throughput]
-    D --> F[Balanced System]
-    E --> F
+```java
+import java.time.Duration;
+import java.time.Instant;
+
+public class LatencyMeasurement {
+    public static void measureLatency(Runnable operation) {
+        Instant start = Instant.now();
+        operation.run();
+        Instant end = Instant.now();
+        Duration latency = Duration.between(start, end);
+        System.out.println("Latency: " + latency.toMillis() + " ms");
+    }
+
+    public static void main(String[] args) {
+        measureLatency(() -> {
+            // Simulate operation
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        });
+    }
+}
 ```
 
-## Advanced Concepts
+### Throughput Calculation
 
-- **Bandwidth-Delay Product**: Throughput limit = bandwidth × round-trip latency. Affects TCP window sizing.
-- **Little's Law**: In queuing systems, average queue length = arrival rate × average wait time.
-- **Amdahl's Law**: Speedup from parallelization limited by serial portions.
-- **99th Percentile Latency**: Focus on tail latencies for user experience, not averages.
+```java
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
-# Real-world Examples & Use Cases
+public class ThroughputCalculator {
+    private AtomicLong requestCount = new AtomicLong(0);
+    private ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
-- **Web Services**: API gateways prioritize low latency for user-facing endpoints, high throughput for backend processing. Example: Netflix optimizes for <1s latency with global CDN.
-- **Databases**: OLTP systems (e.g., PostgreSQL) minimize query latency; OLAP (e.g., Redshift) maximizes data throughput.
-- **Networking**: Fiber optics: ~5μs/km latency; Satellite: ~250ms one-way. High-frequency trading demands sub-ms latency.
-- **Distributed Systems**: Consensus algorithms (e.g., Paxos) balance latency (round-trips) and throughput (operations/sec).
-- **IoT**: Sensors send data with low throughput but strict latency bounds for real-time alerts.
+    public void startMonitoring() {
+        scheduler.scheduleAtFixedRate(() -> {
+            long count = requestCount.getAndSet(0);
+            System.out.println("Throughput: " + count + " requests/second");
+        }, 1, 1, TimeUnit.SECONDS);
+    }
 
-# Code Examples
-
-## Measuring Latency in Python
-
-```python
-import time
-
-def measure_latency(func, *args, **kwargs):
-    start = time.time()
-    result = func(*args, **kwargs)
-    end = time.time()
-    latency = (end - start) * 1000  # ms
-    print(f"Latency: {latency:.2f} ms")
-    return result
-
-# Example usage
-def dummy_operation():
-    time.sleep(0.01)  # Simulate 10ms operation
-    return "done"
-
-measure_latency(dummy_operation)
+    public void recordRequest() {
+        requestCount.incrementAndGet();
+    }
+}
 ```
 
-## Measuring Throughput in Python
+### Optimizing Latency with Async Processing
 
-```python
-import time
-import threading
+```java
+import java.util.concurrent.CompletableFuture;
 
-def throughput_test(operations, duration=1):
-    count = 0
-    start = time.time()
-    while time.time() - start < duration:
-        operations()
-        count += 1
-    throughput = count / duration
-    print(f"Throughput: {throughput:.2f} ops/s")
-    return throughput
+public class AsyncLatencyOptimization {
+    public CompletableFuture<String> processAsync(String input) {
+        return CompletableFuture.supplyAsync(() -> {
+            // Simulate processing
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            return "Processed: " + input;
+        });
+    }
 
-# Example: Simulate operations
-def dummy_op():
-    pass  # No-op for simplicity
-
-throughput_test(dummy_op, duration=1)
+    public static void main(String[] args) {
+        AsyncLatencyOptimization optimizer = new AsyncLatencyOptimization();
+        Instant start = Instant.now();
+        CompletableFuture<String> future = optimizer.processAsync("data");
+        future.thenAccept(result -> {
+            Instant end = Instant.now();
+            System.out.println("Async Latency: " + Duration.between(start, end).toMillis() + " ms");
+        });
+    }
+}
 ```
 
-## Network Throughput with iperf (Bash)
+## Common Pitfalls & Edge Cases
 
-```bash
-# Install iperf if needed
-# Server: iperf -s
-# Client: iperf -c <server_ip> -t 10
-# Output: bandwidth in Mbits/sec
-```
+- **Latency Spikes**: Sudden increases due to garbage collection or network issues
+- **Throughput Limits**: System saturation leading to performance degradation
+- **Measurement Bias**: Not accounting for cold starts or cache misses
+- **Network Variability**: Latency fluctuations in distributed systems
+- **Resource Contention**: CPU, memory, or I/O bottlenecks affecting both metrics
 
-# References
+## Tools & Libraries
 
-- [Latency (engineering) - Wikipedia](https://en.wikipedia.org/wiki/Latency_(engineering))
-- [Network Throughput - Wikipedia](https://en.wikipedia.org/wiki/Network_throughput)
-- [Understanding Latency vs Throughput - NGINX](https://www.nginx.com/blog/understanding-latency-vs-throughput/)
-- [Performance Analysis Methodology - Brendan Gregg](https://brendangregg.com/methodology.html)
+- **Apache JMeter**: Load testing and performance measurement
+- **Grafana**: Visualization of latency and throughput metrics
+- **Prometheus**: Monitoring and alerting for performance metrics
+- **New Relic**: Application performance monitoring
+- **Micrometer**: Metrics collection for Java applications
+
+## References
+
+- [Latency vs Throughput](https://en.wikipedia.org/wiki/Latency_(engineering))
+- [Little's Law](https://en.wikipedia.org/wiki/Little%27s_law)
+- [Performance Best Practices](https://developers.google.com/web/fundamentals/performance/)
+- [System Performance Tuning](https://www.brendangregg.com/linuxperf.html)
+
+## Github-README Links & Related Topics
+
+- [High Scalability Patterns](../high-scalability-patterns/README.md)
+- [Distributed Tracing](../distributed-tracing/README.md)
+- [Load Balancing and Strategies](../load-balancing-and-strategies/README.md)
+- [Monitoring and Logging](../monitoring-and-logging/README.md)
