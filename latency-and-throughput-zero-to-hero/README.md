@@ -6,11 +6,11 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-## Overview
+# Overview
 
 Latency and throughput are fundamental metrics in system design and performance engineering. Latency measures the time delay for a system to respond to a request, while throughput quantifies the rate at which a system processes requests. Understanding their interplay is crucial for optimizing applications, from web services to distributed systems. This guide progresses from basic definitions to advanced concepts, tradeoffs, and practical implementations.
 
-## Detailed Explanation
+# Detailed Explanation
 
 ### Definitions
 
@@ -75,7 +75,7 @@ sequenceDiagram
     Note over Client,Server: Throughput: Requests per second
 ```
 
-## Real-world Examples & Use Cases
+# Real-world Examples & Use Cases
 
 ### Web Servers
 
@@ -93,7 +93,7 @@ Real-time video streaming requires <50ms latency for smooth playback. Online gam
 
 Sensor networks need high throughput for data ingestion but low latency for real-time alerts, often using edge processing to balance both.
 
-## Common Pitfalls & Edge Cases
+# Common Pitfalls & Edge Cases
 
 - **Misinterpreting Metrics**: Average latency hides outliers; always check percentiles (e.g., P99 latency).
 - **Over-optimization**: Reducing latency at the cost of throughput can lead to bottlenecks under load.
@@ -110,7 +110,7 @@ Sensor networks need high throughput for data ingestion but low latency for real
 | No load testing | Unpredictable performance | Simulate real traffic |
 | Synchronous processing | Low throughput | Implement async patterns |
 
-## Code Examples
+# Code Examples
 
 ### Measuring Latency in Python
 
@@ -241,7 +241,7 @@ public class ThroughputMeasurer {
 }
 ```
 
-## Tools & Libraries
+# Tools & Libraries
 
 - **Load Testing**: JMeter, Gatling, Locust for simulating high throughput and measuring latency.
 - **Monitoring**: Prometheus with Grafana for real-time metrics visualization.
@@ -251,7 +251,7 @@ public class ThroughputMeasurer {
   - Go: fasthttp for low-latency HTTP handling.
 - **Profiling**: perf, Valgrind for system-level latency analysis.
 
-## References
+# References
 
 - [Latency (engineering) - Wikipedia](https://en.wikipedia.org/wiki/Latency_(engineering))
 - [Network throughput - Wikipedia](https://en.wikipedia.org/wiki/Network_throughput)
@@ -262,14 +262,14 @@ public class ThroughputMeasurer {
 - [Performance Testing Tools - Guru99](https://www.guru99.com/performance-testing.html)
 - [Understanding Latency and Throughput - ACM Queue](https://queue.acm.org/detail.cfm?id=3028685)
 
-## STAR Summary
+# STAR Summary
 
 - **Situation**: Applications must deliver fast responses and handle high loads.
 - **Task**: Optimize for both low latency and high throughput.
 - **Action**: Measure metrics, identify bottlenecks, apply caching, parallelism, and load balancing.
 - **Result**: Enhanced user experience, scalable systems, and efficient resource use.
 
-## Github-README Links & Related Topics
+# Github-README Links & Related Topics
 
 - [Caching](../caching/README.md)
 - [CAP Theorem & Distributed Systems](../cap-theorem-and-distributed-systems/README.md)

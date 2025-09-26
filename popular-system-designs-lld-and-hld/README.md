@@ -6,13 +6,11 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Popular System Designs LLD and HLD
-
-## Overview
+# Overview
 
 System design involves creating High-Level Design (HLD) and Low-Level Design (LLD) for scalable, reliable software systems. HLD provides the overall architecture, including components, data flow, and technology stack, while LLD details implementation specifics like classes, APIs, and databases. This guide covers popular system designs, explaining LLD and HLD with examples, diagrams, and code snippets for interview preparation.
 
-## Detailed Explanation
+# Detailed Explanation
 
 ### HLD vs. LLD
 
@@ -157,14 +155,14 @@ class VideoProcessor {
 }
 ```
 
-## Real-world Examples & Use Cases
+# Real-world Examples & Use Cases
 
 - **URL Shortener:** Used by Twitter for links; handles billions of requests daily.
 - **Cache:** Redis in Instagram for feed data; reduces DB load by 80%.
 - **Ride Sharing:** Uber matches 100M+ rides/month; uses real-time location for ETA.
 - **Streaming:** Netflix streams to 200M users; CDN ensures <1s latency.
 
-## Code Examples
+# Code Examples
 
 See LLD sections above for Java snippets. For Python:
 
@@ -183,13 +181,13 @@ class UrlShortener:
         return ''.join(random.choices('abcdefghijklmnopqrstuvwxyz0123456789', k=6))
 ```
 
-## References
+# References
 
 - [Difference between HLD and LLD](https://www.geeksforgeeks.org/difference-between-high-level-design-and-low-level-design/)
 - [Top 30 System Design Interview Questions](https://www.educative.io/blog/top-10-system-design-interview-questions)
 - [What is System Design](https://www.geeksforgeeks.org/what-is-system-design-learn-system-design/)
 
-## Github-README Links & Related Topics
+# Github-README Links & Related Topics
 
 - [Airbnb System Design](./airbnb-system-design/)
 - [Amazon E-Commerce Platform](./amazon-e-commerce-platform/)
@@ -199,21 +197,21 @@ class UrlShortener:
 - [Netflix System Design](./netflix-system-design/)
 - [Uber System Design](./uber-system-design/)
 
-## STAR Summary
+# STAR Summary
 
 **Situation:** Interviewee asked to design a scalable chat service.  
 **Task:** Outline HLD and LLD for real-time messaging.  
 **Action:** Drew architecture diagram, defined classes, discussed trade-offs.  
 **Result:** Demonstrated deep understanding, leading to offer.
 
-## Journey / Sequence
+# Journey / Sequence
 
 1. Gather requirements (functional/non-functional).
 2. Sketch HLD (components, flow).
 3. Refine LLD (classes, APIs).
 4. Validate with tests and scalability checks.
 
-## Data Models / Message Formats
+# Data Models / Message Formats
 
 **URL Shortener DB Schema:**
 ```json

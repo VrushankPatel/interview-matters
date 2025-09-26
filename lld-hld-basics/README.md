@@ -6,13 +6,11 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# LLD HLD Basics
-
-## Overview
+# Overview
 
 Low Level Design (LLD) and High Level Design (HLD) are fundamental concepts in software engineering and system design, particularly in interviews and architecture discussions. HLD provides a bird's-eye view of the system, focusing on overall architecture, while LLD delves into the detailed implementation, including data structures, algorithms, and component interactions. Together, they bridge the gap between requirements and code.
 
-## Detailed Explanation
+# Detailed Explanation
 
 ### High Level Design (HLD)
 
@@ -44,7 +42,7 @@ LLD specifies the internal workings of each component from HLD, including classe
 - **HLD**: Early design phase, requirement analysis.
 - **LLD**: After HLD, before coding.
 
-## Real-world Examples & Use Cases
+# Real-world Examples & Use Cases
 
 ### URL Shortener System
 
@@ -85,7 +83,7 @@ classDiagram
 - **HLD**: User auth, product catalog, order processing, payment gateway.
 - **LLD**: Detailed user session management, product search algorithms.
 
-## Code Examples
+# Code Examples
 
 ### Java LLD Example: URL Shortener Class
 
@@ -118,7 +116,7 @@ public class UrlShortener {
 
 This is a basic LLD implementation; in production, use databases and hash functions.
 
-## Journey / Sequence
+# Journey / Sequence
 
 1. **Requirements Gathering**: Understand functional/non-functional requirements.
 2. **HLD Creation**: Design high-level architecture.
@@ -126,25 +124,25 @@ This is a basic LLD implementation; in production, use databases and hash functi
 4. **Implementation**: Code based on LLD.
 5. **Testing & Iteration**: Validate and refine.
 
-## Common Pitfalls & Edge Cases
+# Common Pitfalls & Edge Cases
 
 - **Over-designing HLD**: Too many components complicate LLD.
 - **Ignoring Scalability in HLD**: Leads to LLD rework.
 - **LLD without HLD**: Misses big picture.
 - **Edge Case**: Handling collisions in URL shortener.
 
-## Tools & Libraries
+# Tools & Libraries
 
 - **Diagramming**: Draw.io, Lucidchart for HLD diagrams.
 - **Modeling**: UML tools like PlantUML for LLD.
 - **Frameworks**: Spring Boot for Java LLD.
 
-## References
+# References
 
 - [System Design Interview Guide](https://github.com/donnemartin/system-design-primer)
 - [Low Level Design vs High Level Design](https://www.geeksforgeeks.org/difference-between-high-level-design-and-low-level-design/)
 
-## Github-README Links & Related Topics
+# Github-README Links & Related Topics
 
 - [System Design Basics](../system-design-basics/)
 - [Popular Systems Design LLD HLD](../popular-systems-design-lld-hld/)
