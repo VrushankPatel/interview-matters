@@ -1,5 +1,10 @@
-- OOP Principles in Java
-- JVM Internals & Class Loading
-- System Design Basics
-- High Scalability Patterns
-- Replication vs Sharding vs Partitioning
+- Java Fundamentals
+- Multithreading & Concurrency in Java
+- Collections & Data Structures
+- Java Stream API & Functional Programming
+- CAP Theorem & Distributed Systems
+- Latency and Throughput zero to hero
+- Monitoring and Logging
+- Async logging
+- DevOps & Infrastructure as Code
+- Proxy forward and reverse
