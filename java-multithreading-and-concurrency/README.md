@@ -1,8 +1,8 @@
 ---
 title: Multithreading & Concurrency in Java
 aliases: [Java Multithreading, Concurrent Programming in Java]
-tags: [#java,#multithreading,#concurrency]
-created: 2025-09-26
+tags: [#java, #concurrency]
+created: 2023-10-01
 updated: 2025-09-26
 ---
 
