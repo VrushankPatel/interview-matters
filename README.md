@@ -46,6 +46,7 @@
 - [Cloud Deployment Strategies](cloud-deployment-strategies/)
 - [Coding Interview Strategies](coding-interview-strategies/)
 - [Collections And Data Structures](collections-and-data-structures/)
+- [Container Orchestration with Kubernetes](container-orchestration-with-kubernetes/)
 - [Collections Data Structures](collections-data-structures/)
 - [Common Interview Mistakes](common-interview-mistakes/)
 - [Computational Geometry](computational-geometry/)

@@ -1,7 +1,7 @@
 ---
 title: API Gateway Implementation
 aliases: []
-tags: [#api,#microservices,#system-design]
+tags: [#api, #microservices, #system-design]
 created: 2025-09-25
 updated: 2025-09-26
 ---

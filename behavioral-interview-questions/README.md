@@ -1,7 +1,7 @@
 ---
 title: Behavioral Interview Questions
 aliases: []
-tags: [#interview-preparation,#behavioral-interviews]
+tags: [#interview-preparation, #behavioral-interviews]
 created: 2025-09-26
 updated: 2025-09-26
 ---
