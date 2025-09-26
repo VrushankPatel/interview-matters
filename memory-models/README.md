@@ -3,7 +3,7 @@ title: Memory Models
 aliases: [JMM, Java memory model, happens-before]
 tags: [#java,#concurrency,#interviews,#jvm]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 ## Overview

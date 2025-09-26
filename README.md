@@ -11,6 +11,7 @@ This repository contains comprehensive documentation on various topics for inter
 - [Divide and Conquer](./divide-and-conquer/README.md)
 - [Dynamic Programming](./dynamic-programming/README.md)
 - [Graph Algorithms](./graph-algorithms/README.md)
+- [Matching Algorithms](./matching-algorithms/README.md)
 - [Probabilistic Algorithms](./probabilistic-algorithms/README.md)
 
 ### System Design
@@ -68,6 +69,7 @@ This repository contains comprehensive documentation on various topics for inter
 - [Netflix Video Streaming Architecture](./netflix-video-streaming-architecture/README.md)
 - [Popular System Designs LLD and HLD](./popular-system-designs-lld-and-hld/README.md)
 - [Proxy Forward and Reverse](./proxy-forward-and-reverse/README.md)
+- [Raft and Leader Election](./raft-and-leader-election/README.md)
 - [Rate Limiting](./rate-limiting/README.md)
 - [Replication vs Sharding vs Partitioning](./replication-vs-sharding-vs-partitioning/README.md)
 - [Popular System Designs](./popular-system-designs/README.md)
@@ -278,4 +280,5 @@ This repository contains comprehensive documentation on various topics for inter
 - [OAuth 2.0 Implementation](./oauth-2-0-implementation/README.md)
 - [Paxos Algorithm](./paxos-algorithm/README.md)
 - [Three Phase Commit](./three-phase-commit/README.md)
+- [Time in Force Variations](./time-in-force-variations/README.md)
 - [Zookeeper for Coordination](./zookeeper-for-coordination/README.md)

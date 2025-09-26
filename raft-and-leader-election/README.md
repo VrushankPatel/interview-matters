@@ -3,7 +3,7 @@ title: Raft and Leader Election
 aliases: [raft consensus, leader election algorithm]
 tags: [#system-design, #distributed-systems, #interviews, #algorithms]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 ## Overview

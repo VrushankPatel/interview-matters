@@ -3,7 +3,7 @@ title: Latency Measurement
 aliases: [latency, performance measurement, instrumentation]
 tags: [#system-design, #low-latency, #interviews, #observability]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 ## Overview
