@@ -316,6 +316,7 @@
 - [proxy-forward-and-reverse](./proxy-forward-and-reverse/)
 - [proxy-forward-reverse](./proxy-forward-reverse/)
 - [rabbitmq-message-queue](./rabbitmq-message-queue/)
+- [raft-consensus](./raft-consensus/)
 - [raft-and-leader-election](./raft-and-leader-election/)
 - [rate-limiting](./rate-limiting/)
 - [reactive-programming-with-rxjava](./reactive-programming-with-rxjava/)

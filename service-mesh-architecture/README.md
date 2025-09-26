@@ -3,7 +3,7 @@ title: Service Mesh Architecture
 aliases: [Service Mesh, Istio, Linkerd]
 tags: [#microservices,#system-design,#kubernetes]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Service Mesh Architecture
