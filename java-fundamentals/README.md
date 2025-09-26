@@ -1,6 +1,6 @@
 ---
 title: Java Fundamentals
-aliases: [Java Basics, Core Java]
+aliases: ["Java Basics", "Core Java"]
 tags: [#java]
 created: 2025-09-26
 updated: 2025-09-26
@@ -125,6 +125,6 @@ public class HelloWorld {
 
 ## Github-README Links & Related Topics
 
-- [Java OOP Principles](oop-principles-in-java)
-- [JVM Internals](jvm-internals-class-loading)
-- [Multithreading in Java](multithreading-concurrency-in-java)
+- [Java OOP Principles](../oop-principles-in-java/)
+- [JVM Internals](../jvm-internals-class-loading/)
+- [Multithreading in Java](../multithreading-concurrency-in-java/)

@@ -1,7 +1,7 @@
 ---
 title: LLD HLD Basics
-aliases: [Low Level Design High Level Design Basics]
-tags: [system-design, software-engineering, interview-preparation]
+aliases: ["Low Level Design", "High Level Design"]
+tags: [#system-design,#software-engineering,#interview-preparation]
 created: 2025-09-26
 updated: 2025-09-26
 ---

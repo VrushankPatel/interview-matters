@@ -1,6 +1,6 @@
 ---
 title: Garbage Collection Algorithms
-aliases: [GC Algorithms, Memory Management]
+aliases: ["GC Algorithms", "Memory Management"]
 tags: [#java, #jvm, #gc]
 created: 2025-09-26
 updated: 2025-09-26
@@ -97,5 +97,5 @@ public class GCTuningExample {
 
 ## Github-README Links & Related Topics
 
-- [JVM Internals](jvm-internals-class-loading)
-- [JVM Performance Tuning](jvm-performance-tuning)
+- [JVM Internals](../jvm-internals-class-loading/)
+- [JVM Performance Tuning](../jvm-performance-tuning/)
