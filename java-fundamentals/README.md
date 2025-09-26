@@ -10,54 +10,138 @@ updated: 2025-09-26
 
 ## Overview
 
-Java Fundamentals cover the core concepts and building blocks of the Java programming language. This includes basic syntax, data types, control structures, and object-oriented programming principles that form the foundation for developing Java applications.
+Java Fundamentals cover the basic building blocks of the Java programming language, including syntax, data types, control structures, and object-oriented concepts. This topic is essential for understanding how to write, compile, and run Java programs.
 
 ## Detailed Explanation
 
-### Basic Syntax and Structure
-
-Java programs are organized into classes and methods. Every Java application must have a `main` method as the entry point.
-
 ### Data Types
 
-Java has two categories of data types:
+Java has two categories of data types: primitive and reference.
 
-| Category | Types | Description |
-|----------|-------|-------------|
-| Primitive | byte, short, int, long, float, double, char, boolean | Basic data types stored directly in memory |
-| Reference | String, Arrays, Objects | Reference to objects stored in heap memory |
+**Primitive Data Types:**
+
+- byte: 8-bit signed integer (-128 to 127)
+- short: 16-bit signed integer (-32,768 to 32,767)
+- int: 32-bit signed integer (-2^31 to 2^31-1)
+- long: 64-bit signed integer (-2^63 to 2^63-1)
+- float: 32-bit IEEE 754 floating-point
+- double: 64-bit IEEE 754 floating-point
+- char: 16-bit Unicode character
+- boolean: true or false
+
+**Reference Data Types:**
+
+- Classes
+- Interfaces
+- Arrays
 
 ### Variables and Constants
 
-Variables store data values, while constants are immutable values declared with `final`.
+Variables are declared with a type and name:
+
+```java
+int age = 25;
+String name = "John";
+```
+
+Constants use the `final` keyword:
+
+```java
+final double PI = 3.14159;
+```
+
+### Operators
+
+- Arithmetic: +, -, *, /, %
+- Relational: ==, !=, >, <, >=, <=
+- Logical: &&, ||, !
+- Assignment: =, +=, -=, etc.
 
 ### Control Structures
 
-Java provides standard control structures:
-- Conditional statements: `if-else`, `switch`
-- Loops: `for`, `while`, `do-while`
-- Branching: `break`, `continue`, `return`
+**If-else:**
 
-### Object-Oriented Concepts
+```java
+if (condition) {
+    // code
+} else {
+    // code
+}
+```
 
-Java is fundamentally object-oriented with concepts like:
-- Classes and Objects
-- Inheritance
-- Polymorphism
-- Encapsulation
-- Abstraction
+**Switch:**
+
+```java
+switch (variable) {
+    case value1:
+        // code
+        break;
+    case value2:
+        // code
+        break;
+    default:
+        // code
+}
+```
+
+**Loops:**
+
+```java
+for (int i = 0; i < 10; i++) {
+    // code
+}
+
+while (condition) {
+    // code
+}
+
+do {
+    // code
+} while (condition);
+```
+
+### Methods
+
+Methods are defined with return type, name, parameters:
+
+```java
+public static int add(int a, int b) {
+    return a + b;
+}
+```
+
+### Classes and Objects
+
+```java
+public class Person {
+    private String name;
+    private int age;
+    
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+```
 
 ## Real-world Examples & Use Cases
 
-- **Web Applications**: Building server-side logic with Spring Framework
-- **Mobile Apps**: Android development using Java APIs
-- **Enterprise Software**: Large-scale business applications
-- **Embedded Systems**: IoT devices and hardware control
-- **Big Data Processing**: Hadoop and Spark frameworks
+- Building console applications for data processing
+- Creating utility classes for common operations
+- Implementing basic algorithms like sorting and searching
+- Developing simple calculators or converters
 
 ## Code Examples
 
-### Basic Hello World Program
+### Hello World Program
 
 ```java
 public class HelloWorld {
@@ -67,117 +151,51 @@ public class HelloWorld {
 }
 ```
 
-### Data Types and Variables
+### Simple Calculator
 
 ```java
-public class DataTypesExample {
-    public static void main(String[] args) {
-        // Primitive data types
-        int age = 25;
-        double salary = 50000.50;
-        char grade = 'A';
-        boolean isEmployed = true;
-        
-        // Reference data type
-        String name = "John Doe";
-        
-        // Constants
-        final double PI = 3.14159;
-        
-        System.out.println("Name: " + name);
-        System.out.println("Age: " + age);
-        System.out.println("Salary: " + salary);
-    }
-}
-```
+import java.util.Scanner;
 
-### Control Structures
-
-```java
-public class ControlStructuresExample {
+public class Calculator {
     public static void main(String[] args) {
-        int number = 10;
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter first number: ");
+        double num1 = scanner.nextDouble();
+        System.out.print("Enter operator (+, -, *, /): ");
+        char operator = scanner.next().charAt(0);
+        System.out.print("Enter second number: ");
+        double num2 = scanner.nextDouble();
         
-        // If-else statement
-        if (number > 0) {
-            System.out.println("Positive number");
-        } else if (number < 0) {
-            System.out.println("Negative number");
-        } else {
-            System.out.println("Zero");
-        }
-        
-        // For loop
-        for (int i = 1; i <= 5; i++) {
-            System.out.println("Count: " + i);
-        }
-        
-        // Switch statement
-        switch (number) {
-            case 1:
-                System.out.println("One");
+        double result;
+        switch (operator) {
+            case '+':
+                result = num1 + num2;
                 break;
-            case 10:
-                System.out.println("Ten");
+            case '-':
+                result = num1 - num2;
+                break;
+            case '*':
+                result = num1 * num2;
+                break;
+            case '/':
+                result = num1 / num2;
                 break;
             default:
-                System.out.println("Other number");
+                System.out.println("Invalid operator");
+                return;
         }
+        System.out.println("Result: " + result);
     }
 }
 ```
-
-### Simple Class Example
-
-```java
-public class Person {
-    // Instance variables
-    private String name;
-    private int age;
-    
-    // Constructor
-    public Person(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-    
-    // Method
-    public void introduce() {
-        System.out.println("Hi, I'm " + name + " and I'm " + age + " years old.");
-    }
-    
-    // Main method
-    public static void main(String[] args) {
-        Person person = new Person("Alice", 30);
-        person.introduce();
-    }
-}
-```
-
-## Common Pitfalls & Edge Cases
-
-- **Null Pointer Exceptions**: Always check for null before using reference variables
-- **Integer Overflow**: Be aware of maximum values for primitive types
-- **String Immutability**: Remember that Strings cannot be modified after creation
-- **Array Bounds**: Accessing array elements outside bounds throws exceptions
-- **Type Casting**: Improper casting can lead to ClassCastException
-
-## Tools & Libraries
-
-- **JDK (Java Development Kit)**: Essential for compiling and running Java programs
-- **IDE Options**: Eclipse, IntelliJ IDEA, NetBeans
-- **Build Tools**: Maven, Gradle
-- **Testing Frameworks**: JUnit, TestNG
 
 ## References
 
 - [Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/)
 - [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se17/html/index.html)
-- [Effective Java by Joshua Bloch](https://www.amazon.com/Effective-Java-Joshua-Bloch/dp/0134685997)
 
 ## Github-README Links & Related Topics
 
-- [OOP Principles in Java](./oop-principles-in-java/README.md)
-- [JVM Internals & Class Loading](./jvm-internals-and-class-loading/README.md)
-- [Java Collections Deep Dive](../java-collections-deep-dive/README.md)
-- [Java Exception Handling](../java-exception-handling/README.md)
+- [OOP Principles in Java](../oop-principles-in-java/README.md)
+- [JVM Internals & Class Loading](../jvm-internals-and-class-loading/README.md)
+- [Collections & Data Structures](../collections-and-data-structures/README.md)
