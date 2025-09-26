@@ -1,11 +1,11 @@
-rate-limiting
-java-fundamentals
-oop-principles-in-java
-jvm-internals-class-loading
-garbage-collection-algorithms
 multithreading-concurrency-in-java
 concurrency-parallelism
 caching
 cap-theorem-and-distributed-systems
 database-acid-properties
 event-driven-architecture
+java-stream-api-functional-programming
+collections-data-structures
+system-design-basics
+high-scalability-patterns
+replication-vs-sharding-vs-partitioning

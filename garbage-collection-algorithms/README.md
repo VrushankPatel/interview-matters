@@ -6,7 +6,9 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+# Garbage Collection Algorithms
+
+## Overview
 
 Garbage Collection (GC) is an automatic memory management feature in Java that reclaims memory occupied by objects that are no longer in use. Understanding GC algorithms is essential for optimizing Java application performance, reducing pause times, and preventing memory leaks. This topic covers various GC algorithms, their mechanisms, and best practices.
 

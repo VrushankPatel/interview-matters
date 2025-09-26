@@ -6,7 +6,9 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+# JVM Internals & Class Loading
+
+## Overview
 
 The Java Virtual Machine (JVM) is the runtime environment that executes Java bytecode. Understanding JVM internals and the class loading mechanism is crucial for Java developers to optimize performance, troubleshoot issues, and write efficient code. This topic covers the JVM architecture, memory management, and the class loading process.
 

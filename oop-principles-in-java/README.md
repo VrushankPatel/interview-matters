@@ -6,6 +6,8 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
+# OOP Principles in Java
+
 ## Overview
 
 Object-Oriented Programming (OOP) principles in Java form the foundation of designing and implementing robust, maintainable, and scalable software. The four main principles are Encapsulation, Inheritance, Polymorphism, and Abstraction. These principles help in organizing code, promoting reusability, and managing complexity.
