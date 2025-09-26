@@ -1,8 +1,3 @@
-collections-and-data-structures
-java-stream-api-and-functional-programming
-system-design-basics
-high-scalability-patterns
-latency-and-throughput-zero-to-hero
 url-shortener-system-design
 netflix-system-design
 cap-theorem-and-distributed-systems
