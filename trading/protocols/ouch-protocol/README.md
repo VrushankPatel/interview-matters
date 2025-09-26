@@ -8,186 +8,97 @@ updated: 2025-09-26
 
 # Overview
 
-OUCH is NASDAQ's binary protocol for electronic order entry, designed for high-performance submission, modification, and cancellation of orders. It provides low-latency connectivity for trading systems requiring rapid execution. Supported versions include OUCH 5.0, 4.2, and 4.1, with Dedicated OUCH offering enhanced features for co-located trading.
+NASDAQ OUCH is a binary protocol for order entry, allowing market participants to submit, modify, and cancel orders directly to NASDAQ's matching engine. It emphasizes low latency and high throughput, making it suitable for high-frequency trading environments.
 
 # STAR Summary
 
-**SITUATION:** Traditional text-based protocols introduced latency in high-frequency trading environments.
+**SITUATION**: Traditional text-based order entry protocols were slow and bandwidth-intensive for high-volume trading.
 
-**TASK:** Develop a binary protocol optimized for speed and efficiency in order entry.
+**TASK**: Design a protocol for efficient order submission to support rapid electronic trading.
 
-**ACTION:** Created OUCH with compact binary messages and fixed field layouts for minimal parsing overhead.
+**ACTION**: NASDAQ developed OUCH with binary encoding and TCP connections for reliable, sequenced order flow.
 
-**RESULT:** OUCH enables sub-millisecond order processing, supporting NASDAQ's high-volume electronic trading.
+**RESULT**: OUCH handles millions of orders daily with sub-millisecond processing, integral to NASDAQ's order routing.
 
 # Detailed Explanation
 
-OUCH supports:
-- **Order Entry:** Submit new orders with full parameters
-- **Order Modification:** Change price, quantity, or attributes
-- **Order Cancellation:** Remove pending orders
-- **Order Status:** Receive confirmations and rejections
+OUCH uses binary messages over TCP for guaranteed delivery. Messages are compact, with fixed formats for speed.
 
-Key features:
-- **Binary Format:** Fixed-size fields for fast parsing
-- **Session Management:** Connection-oriented with sequence numbers
-- **Order Tokens:** Unique identifiers for order tracking
-- **Routing:** Support for different order types and destinations
+Key message types:
+- Enter Order (O): Submit new order.
+- Replace Order (U): Modify existing order.
+- Cancel Order (X): Cancel order.
 
-Message types include Enter Order ('O'), Replace Order ('U'), Cancel Order ('X').
+Fields: Token (order ID), Side, Qty, Price, etc.
+
+Session: Persistent TCP connection with logon.
+
+Unlike FIX, OUCH is NASDAQ-specific and optimized for their engine.
 
 # Real-world Examples & Use Cases
 
-OUCH is used by:
-- **HFT Firms:** Co-located systems for minimal latency
-- **Market Makers:** Rapid order management for liquidity
-- **Algorithmic Traders:** Automated order entry strategies
-- **Broker Systems:** Client order routing
+Used by brokers and HFT for direct market access.
 
-Example: An HFT algorithm uses OUCH to enter orders within 10 microseconds of signal detection.
+Sample Enter Order (hex):
+```
+4F 00 00 00 01 41 41 50 4C 01 00 00 00 64 00 00 00 00 00 00 00 96
+```
+(Buy 100 AAPL at $150).
 
 # Message Formats / Data Models
 
-OUCH messages are binary with big-endian byte order.
+| Message Type | Length | Fields |
+|--------------|--------|--------|
+| O (Enter) | 48 bytes | Token, Side, Qty, Price, etc. |
+| U (Replace) | 32 bytes | Token, New Qty/Price |
+| X (Cancel) | 16 bytes | Token |
 
-## Enter Order ('O')
-
-| Field | Size | Description |
-|-------|------|-------------|
-| Message Type | 1 byte | 'O' |
-| Order Token | 14 bytes | Unique order ID |
-| Side | 1 byte | 'B' or 'S' |
-| Quantity | 4 bytes | Order quantity |
-| Symbol | 8 bytes | Stock symbol |
-| Price | 4 bytes | Price * 100 |
-| Time-in-Force | 1 byte | '0'=Day |
-| Firm | 4 bytes | Firm ID |
-| Display | 1 byte | 'Y' or 'N' |
-| Capacity | 1 byte | 'P'=Principal |
-| ISO | 1 byte | 'Y' or 'N' |
-| Min Qty | 4 bytes | Minimum quantity |
-| Cross Type | 1 byte | Cross type |
-| Customer Type | 1 byte | Customer type |
-
-Sample hex: 4F [14-byte token] 42 00 00 03 E8 41 41 50 4C 20 20 20 20 00 00 96 00 30 [firm] 59 50 4E 00 00 00 00 00 00
-
-## Cancel Order ('X')
-
-| Field | Size | Description |
-|-------|------|-------------|
-| Message Type | 1 byte | 'X' |
-| Order Token | 14 bytes | Order to cancel |
-| Quantity | 4 bytes | Quantity to cancel |
-
-Sample hex: 58 [14-byte token] 00 00 03 E8
-
-## Replace Order ('U')
-
-| Field | Size | Description |
-|-------|------|-------------|
-| Message Type | 1 byte | 'U' |
-| Existing Order Token | 14 bytes | Token of order to replace |
-| Replacement Order Token | 14 bytes | New unique order ID |
-| Quantity | 4 bytes | New quantity |
-| Price | 4 bytes | New price * 100 |
-| Time-in-Force | 1 byte | '0'=Day |
-| Display | 1 byte | 'Y' or 'N' |
-| Capacity | 1 byte | 'P'=Principal |
-| ISO | 1 byte | 'Y' or 'N' |
-| Min Qty | 4 bytes | Minimum quantity |
-
-Sample hex: 55 [14-byte existing token] [14-byte new token] 00 00 03 E8 00 00 96 00 30 59 50 4E 00 00 00 00
-
-## Order Accepted ('A')
-
-| Field | Size | Description |
-|-------|------|-------------|
-| Message Type | 1 byte | 'A' |
-| Timestamp | 6 bytes | Timestamp in nanoseconds |
-| Order Token | 14 bytes | Accepted order token |
-
-Sample hex: 41 [6-byte timestamp] [14-byte token]
-
-## Order Rejected ('J')
-
-| Field | Size | Description |
-|-------|------|-------------|
-| Message Type | 1 byte | 'J' |
-| Timestamp | 6 bytes | Timestamp in nanoseconds |
-| Order Token | 14 bytes | Rejected order token |
-| Reason | 1 byte | Rejection code |
-
-Sample hex: 4A [6-byte timestamp] [14-byte token] 01
+Data models: Orders with states managed by NASDAQ.
 
 # Journey of a Trade
 
 ```mermaid
 sequenceDiagram
     participant Trader
-    participant OUCH Gateway
-    participant NASDAQ Matching Engine
+    participant NASDAQ
 
-    Trader->>OUCH Gateway: Enter Order
-    OUCH Gateway->>NASDAQ Matching Engine: Order Message
-    NASDAQ Matching Engine->>OUCH Gateway: Acknowledgment
-    NASDAQ Matching Engine->>NASDAQ Matching Engine: Match Order
-    NASDAQ Matching Engine->>OUCH Gateway: Execution Report
-    OUCH Gateway->>Trader: Confirmation
+    Trader->>NASDAQ: Enter Order (O)
+    NASDAQ->>Trader: Accepted (A)
+    Trader->>NASDAQ: Replace Order (U)
+    NASDAQ->>Trader: Replaced (U)
+    NASDAQ->>Trader: Executed (E)
+    Trader->>NASDAQ: Cancel Order (X)
+    NASDAQ->>Trader: Canceled (C)
 ```
+
+Flow from submission to execution.
 
 # Common Pitfalls & Edge Cases
 
-- **Token Management:** Ensure unique tokens; collisions cause rejections
-- **Binary Encoding:** Precise field alignment required; endianness must be big-endian
-- **Rate Limits:** NASDAQ enforces order frequency limits; exceeding may lead to throttling or disconnections
-- **Session Recovery:** Handle reconnections without duplicate orders; use sequence numbers for replay
-- **Order Routing:** Correct firm/routing codes for execution; invalid codes result in rejection
-- **Time Sensitivity:** Orders must arrive within market hours; pre-open orders require specific handling
-- **Rejection Reasons:** Common codes include invalid symbol, price out of range, insufficient permissions
-- **Cross-Type Handling:** Ensure proper cross-type for intermarket sweeps or other special orders
+- **Connection Drops**: TCP ensures delivery, but reconnections require resubmission.
+- **Rate Limits**: NASDAQ enforces throttling; monitor for rejects.
+- **Invalid Orders**: Price/quantity checks; handle rejects promptly.
 
 # Tools & Libraries
 
-- **OUCH SDK:** NASDAQ-provided C++ libraries for message encoding/decoding
-- **Protocol Parsers:** Open-source tools like Wireshark dissectors or custom Python/Java parsers for OUCH
-- **Testing Environments:** NASDAQ certification systems and simulators for development
-- **Monitoring Tools:** Log analyzers and real-time dashboards for order flow
-
-Sample C++ code snippet:
-
-```cpp
-#include <ouch_messages.h>
-
-// Create Enter Order message
-EnterOrderMessage msg;
-msg.type = 'O';
-memcpy(msg.orderToken, "TOKEN12345678", 14);
-msg.side = 'B';
-msg.quantity = htonl(1000);
-memcpy(msg.symbol, "AAPL    ", 8);
-msg.price = htonl(15025);  // 150.25 * 100
-msg.timeInForce = '0';
-msg.display = 'N';
-// Send via TCP socket
-send(sock, &msg, sizeof(msg), 0);
-```
+- **OUCH Libraries**: Proprietary or open-source parsers.
+- Sample (C++):
+  ```cpp
+  struct EnterOrder {
+      char type = 'O';
+      uint32_t token;
+      char side;
+      uint32_t qty;
+      uint32_t price;
+  };
+  ```
 
 # Github-README Links & Related Topics
 
-[FIX Protocol](../fix-protocol/)
+- [[FIX Protocol]]
+- [[Order Entry Protocols]]
+- [[Execution Report]]
 
-[ITCH Protocol](../itch-protocol/)
+## References
 
-[Market Data (overview & dissemination)](../market-data/market-data-overview-dissemination/)
-
-[Order Entry Protocols](../order-entry-protocols/)
-
-[Execution Report](../compliance/execution-report/)
-
-[Journey of a Trade](../lifecycle/journey-of-a-trade/)
-
-# References
-
-- [NASDAQ OUCH Specification](https://www.nasdaqtrader.com/content/technicalsupport/specifications/TradingProducts/OUCH4.2.pdf)
-- [OUCH Protocol Overview](https://www.nasdaq.com/solutions/technology-innovation/trading-protocols)
-- [Order Entry Best Practices](https://www.fixtrading.org/resources/recommended-practices/)
+- [NASDAQ OUCH Overview](https://www.nasdaq.com/solutions/nasdaq-ouch)
