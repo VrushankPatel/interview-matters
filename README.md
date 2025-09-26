@@ -353,3 +353,8 @@
 - [youtube system design](youtube-system-design/README.md)
 - [zookeeper for coordination](zookeeper-for-coordination/README.md)
 - [zoom video conferencing](zoom-video-conferencing/README.md)
+- [reactive programming with rxjava](reactive-programming-with-rxjava/README.md)
+- [spring boot actuator](spring-boot-actuator/README.md)
+- [jpa and hibernate](jpa-and-hibernate/README.md)
+- [istio service mesh](istio-service-mesh/README.md)
+- [prometheus monitoring](prometheus-monitoring/README.md)
