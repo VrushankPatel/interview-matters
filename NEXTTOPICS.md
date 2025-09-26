@@ -1,20 +1,24 @@
-kafka-internals
-caching-patterns
-consistency-models
-concurrent-collections
+# NEXT TOPICS
 
- System Design Basics
-High Scalability Patterns
-CAP Theorem & Distributed Systems
-Latency and Throughput zero to hero
-Monitoring and Logging
-java-fundamentals
-oop-principles-in-java
-jvm-internals-class-loading
-garbage-collection-algorithms
-multithreading-concurrency-in-java
-replication-vs-sharding-vs-partitioning
-lld-hld-basics
-proxy-forward-and-reverse
-load-balancing-and-strategies
-rate-limiting
+- Collections & Data Structures
+- Java Stream API & Functional Programming
+- System Design Basics
+- High Scalability Patterns
+- CAP Theorem & Distributed Systems
+- A separate folder for popular systems design, LLD and HLDs both like url shortner, netflix and identify more yourself
+- LLD HLD basics
+- Replication vs Sharding vs Partitioning
+- Caching
+- Latency and Throughput zero to hero
+- Monitoring and Logging
+- Async logging
+- DevOps & Infrastructure as Code
+- Proxy forward and reverse
+- Load balancing and strategies
+- Rate limiting
+- Concurrency & Parallelism
+- Java Generics
+- Java Exception Handling
+- Java Collections
+- Java Annotations
+- Java Reflection
