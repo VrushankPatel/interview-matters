@@ -6,11 +6,11 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+## Overview
 
 Multithreading and concurrency in Java enable programs to perform multiple tasks simultaneously, improving performance and responsiveness. Java provides built-in support for threads, synchronization, and concurrent data structures to manage shared resources safely.
 
-# Detailed Explanation
+## Detailed Explanation
 
 ## Threads and Thread Lifecycle
 
@@ -46,14 +46,14 @@ graph TD
     E --> H[Atomic Variables]
 ```
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 - **Web Servers**: Handling multiple HTTP requests concurrently
 - **Data Processing**: Parallel processing of large datasets
 - **GUI Applications**: Keeping UI responsive during long operations
 - **Game Development**: Managing game loops, AI, and rendering threads
 
-# Code Examples
+## Code Examples
 
 ## Creating Threads
 
@@ -141,13 +141,13 @@ public class ExecutorExample {
 }
 ```
 
-# References
+## References
 
 - [Oracle Concurrency Tutorial](https://docs.oracle.com/javase/tutorial/essential/concurrency/)
 - [Java Concurrency in Practice](https://jcip.net/)
 - [Baeldung Concurrency](https://www.baeldung.com/java-concurrency)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 - [Java Executors](../java-executorservice/)
 - [Concurrent Collections](../concurrent-collections/)
