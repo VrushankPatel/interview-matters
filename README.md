@@ -333,6 +333,7 @@
 - [scalability-patterns](./scalability-patterns/)
 - [security-best-practices-in-java](./security-best-practices-in-java/)
 - [security-best-practices-in-microservices](./security-best-practices-in-microservices/)
+- [security-in-distributed-systems](./security-in-distributed-systems/)
 - [security-in-system-design](./security-in-system-design/)
 - [serverless-architecture-patterns](./serverless-architecture-patterns/)
 - [serverless-architecture](./serverless-architecture/)

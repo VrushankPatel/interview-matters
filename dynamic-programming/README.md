@@ -6,11 +6,11 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+## Overview
 
 Dynamic programming is both a mathematical optimization method and a computer programming method. The method was developed by Richard Bellman in the 1950s and has found applications in numerous fields, from aerospace engineering to economics. It refers to simplifying a complicated problem by breaking it down into simpler sub-problems in a recursive manner, with optimal substructure and overlapping subproblems.
 
-# Detailed Explanation
+## Detailed Explanation
 
 Dynamic programming is applicable when the problem has overlapping subproblems and optimal substructure.
 
@@ -37,7 +37,7 @@ graph TD
 | String | LCS | O(mn) |
 | Path | Grid Paths | O(mn) |
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 - **Bioinformatics**: Sequence alignment (LCS, edit distance).
 - **Operations Research**: Resource allocation (Knapsack).
@@ -45,7 +45,7 @@ graph TD
 - **Economics**: Optimal control, Ramsey's saving problem.
 - **AI**: Reinforcement learning value functions.
 
-# Code Examples
+## Code Examples
 
 ## Fibonacci (Memoization - Python)
 ```python
@@ -89,13 +89,13 @@ def lcs(X, Y):
     return dp[m][n]
 ```
 
-# References
+## References
 
 - [Wikipedia: Dynamic Programming](https://en.wikipedia.org/wiki/Dynamic_programming)
 - [GeeksforGeeks: Dynamic Programming](https://www.geeksforgeeks.org/dynamic-programming/)
 - Bellman, R. (1957). Dynamic Programming. Princeton University Press.
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 - [Algorithms](../algorithms/)
 - [Divide and Conquer](../divide-and-conquer/)

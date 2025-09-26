@@ -6,7 +6,7 @@ created: 2025-09-25
 updated: 2025-09-26
 ---
 
-# Overview
+## Overview
 
 CI/CD (Continuous Integration/Continuous Deployment) best practices ensure fast, reliable, and secure software delivery. They involve automating build, test, and deployment processes to reduce errors and improve collaboration.
 

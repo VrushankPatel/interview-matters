@@ -6,7 +6,7 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-## Overview
+### Overview
 
 Behavioral interview preparation involves anticipating common questions, practicing responses using structured frameworks, and reflecting on past experiences to demonstrate key competencies. Effective preparation builds confidence and ensures you can articulate your skills and experiences clearly.
 

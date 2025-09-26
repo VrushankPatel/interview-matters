@@ -6,11 +6,11 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+## Overview
 
 Graph algorithms are essential computational techniques for analyzing and solving problems on graph structures, consisting of vertices (nodes) and edges. They enable efficient traversal, pathfinding, connectivity analysis, and optimization in networks. Widely used in computer science for applications like routing, social network analysis, and dependency resolution.
 
-# Detailed Explanation
+## Detailed Explanation
 
 Graphs model relationships between entities, with vertices representing objects and edges denoting connections. Algorithms operate on various graph types: directed/undirected, weighted/unweighted, and cyclic/acyclic.
 
@@ -55,7 +55,7 @@ This undirected weighted graph can be used to demonstrate shortest path algorith
 - **Supply Chain**: Optimizing logistics with minimum spanning trees for cost-effective connections.
 - **Biology**: Protein interaction networks analyzed with graph traversal for drug discovery.
 
-# Code Examples
+## Code Examples
 
 ## BFS in Java
 
@@ -237,7 +237,7 @@ graph = [
 print(dijkstra(graph, 0))
 ```
 
-# References
+## References
 
 - [Graph Algorithms - Wikipedia](https://en.wikipedia.org/wiki/Graph_algorithm)
 - [Graph Data Structure and Algorithms - GeeksforGeeks](https://www.geeksforgeeks.org/graph-data-structure-and-algorithms/)
@@ -245,7 +245,7 @@ print(dijkstra(graph, 0))
 - [Algorithms on Graphs - Stanford CS161](https://cs161.stanford.edu/)
 - [Graph Theory - Khan Academy](https://www.khanacademy.org/computing/computer-science/algorithms/graph-representation/a/representing-graphs)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 - [Algorithms](../algorithms/)
 - [Data Structures](../collections-and-data-structures/)
