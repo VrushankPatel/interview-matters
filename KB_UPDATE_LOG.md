@@ -13,5 +13,5 @@ commit_message: "kb: add 5 trading topics (fix-protocol, itch-protocol, ouch-pro
 topics_processed: ["FIX Protocol", "ITCH Protocol", "OUCH Protocol", "Market Data (overview & dissemination)", "Order Entry Protocols"]
 created_dirs: []
 updated_files: ["PENDING_TOPICS.md", "SPECIFICATION.md"]
-commit_made: false
-commit_message: null
+commit_made: true
+commit_message: "kb: process 5 trading topics (fix-protocol, itch-protocol, ouch-protocol, market-data-overview-dissemination, order-entry-protocols) + restructure system-design into concepts/lld/hld/real-world-designs subdirs"

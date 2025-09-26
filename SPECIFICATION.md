@@ -5,17 +5,10 @@ Last update
 2025-09-26
 
 Summary of recent additions
-   - Processed 5 trading topics (FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data overview & dissemination, Order Entry Protocols)
-   - Restructured system-design directory into concepts, lld, hld, real-world-designs subdirectories
-   - Added Journey of a Trade (end-to-end) topic
-   - Added Order Types (DAY, GTC, FOK, IOC) topic
-   - Added Quotes & RFQ Workflows topic
-   - Added Execution Report topic
-   - Added Trade Capture Report topicAdded FIX Protocol topic
-   - Added ITCH Protocol topic
-   - Added OUCH Protocol topic
-   - Added Market Data (overview & dissemination) topic
-   - Added Order Entry Protocols topic
+   - Processed 5 trading topics (Journey of a Trade, Order Types, Quotes & RFQ Workflows, Execution Report, Trade Capture Report)
+   - Restructured trading topics into categories (protocols, order-types, lifecycle, market-data, exchange-behavior, compliance)
+   - Updated all links to proper markdown format instead of Obsidian wikilinks
+   - Added 10 new candidate topics to NEXTTOPICS.md with rationales in SPECIFICATION.md
 
 Conventions
  - Dir naming: kebab-case.
@@ -149,14 +142,17 @@ New Next Topics Candidates
    - java-reflection — 'Runtime inspection and dynamic code'
    - java-annotations — 'Custom annotations and metadata'
 
+New Next Topics Candidates
+- Order Book modeling — 'Canonical models for in-memory book and persistence'
+- Matching algorithm internals — 'How exchanges match buy and sell orders'
+- Time-in-Force variations across exchanges — 'DAY, GTC, IOC behaviors by venue'
+- Market fragmentation & smart order routing — 'Routing orders across multiple markets'
+- Latency measurement & monitoring — 'Tools and techniques for latency analysis'
+- FIX Session Layer (Logon/Heartbeat/Seq numbers) — 'Session management in FIX protocol'
+- Market data consolidation & TOPS snapshot vs incremental — 'Consolidating feeds from multiple sources'
+- Latency arbitrage — 'Exploiting latency differences for profit'
+- Swap & derivatives trade lifecycle — 'Trading non-equity instruments'
+- Regulatory reports (e.g., MiFID/SEF) — 'Compliance reporting requirements'
+
 TODO
- - High-level open design decisions and split criteria for oversized topics.   - backtracking — 'N-Queens, Sudoku, combinatorial problem solving'
-   - divide-and-conquer — 'Merge sort, quicksort, closest pair algorithms'
-   - probabilistic-algorithms — 'Bloom filters, skip lists for space efficiency'
-   - computational-geometry — 'Convex hull, line intersection, geometric algorithms'
-   - jvm-performance-tuning — 'Heap sizing, GC tuning for low latency'
-   - concurrent-collections — 'Thread-safe collections in Java'
-   - java-streams-advanced — 'Advanced stream operations and collectors'
-   - reflection-and-annotations — 'Runtime inspection and custom annotations'
-   - java-security-basics — 'Secure coding and cryptography'
-   - networking-sockets — 'Low-level network programming'
+   - High-level open design decisions and split criteria for oversized topics.
