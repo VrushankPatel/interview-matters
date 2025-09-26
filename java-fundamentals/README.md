@@ -1,7 +1,7 @@
 ---
 title: Java Fundamentals
-aliases: [Java Basics, Core Java]
-tags: [#java,#fundamentals]
+aliases: [Java Basics, Java Core Concepts]
+tags: [#java]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -10,113 +10,121 @@ updated: 2025-09-26
 
 ## Overview
 
-Java Fundamentals form the bedrock of Java programming, covering essential concepts like variables, data types, operators, control flow statements, and basic object-oriented programming (OOP) principles. These elements enable developers to write simple yet effective Java programs, from command-line tools to foundational components of larger applications. Understanding Java Fundamentals is essential for anyone starting with Java, as they provide the syntax and logic building blocks for more advanced topics.
+Java Fundamentals cover the core concepts and building blocks of the Java programming language. This includes data types, variables, operators, control structures, and basic object-oriented programming principles. Understanding these fundamentals is essential for writing efficient and maintainable Java code.
 
 ## Detailed Explanation
 
+### Data Types
+
+Java has two categories of data types: primitive and reference.
+
+**Primitive Types:**
+- `byte`: 8-bit signed integer (-128 to 127)
+- `short`: 16-bit signed integer (-32,768 to 32,767)
+- `int`: 32-bit signed integer (-2^31 to 2^31-1)
+- `long`: 64-bit signed integer (-2^63 to 2^63-1)
+- `float`: 32-bit floating-point
+- `double`: 64-bit floating-point
+- `char`: 16-bit Unicode character
+- `boolean`: true or false
+
+**Reference Types:** Classes, interfaces, arrays, and strings.
+
 ### Variables
 
-Variables store data values that can change during program execution. In Java, variables must be declared with a data type before use. Naming conventions include starting with a letter, underscore, or dollar sign, and being case-sensitive.
+Variables are containers for storing data values. They must be declared with a data type and can be initialized at declaration.
 
-### Primitive Data Types
-
-Java has eight primitive data types:
-
-| Data Type | Size | Range | Default Value | Example |
-|-----------|------|-------|---------------|---------|
-| `byte` | 8 bits | -128 to 127 | 0 | `byte b = 100;` |
-| `short` | 16 bits | -32,768 to 32,767 | 0 | `short s = 1000;` |
-| `int` | 32 bits | -2^31 to 2^31-1 | 0 | `int i = 100000;` |
-| `long` | 64 bits | -2^63 to 2^63-1 | 0L | `long l = 100000L;` |
-| `float` | 32 bits | ~1.4e-45 to 3.4e38 | 0.0f | `float f = 3.14f;` |
-| `double` | 64 bits | ~4.9e-324 to 1.8e308 | 0.0d | `double d = 3.14159;` |
-| `char` | 16 bits | 0 to 65,535 (Unicode) | '\u0000' | `char c = 'A';` |
-| `boolean` | 1 bit | true or false | false | `boolean flag = true;` |
-
-Reference types include classes, interfaces, arrays, and enums, which store references to objects.
-
-### Arrays
-
-Arrays are fixed-size containers for storing multiple values of the same type. Declaration: `int[] arr = new int[5];` or `int[] arr = {1, 2, 3, 4, 5};`.
+```java
+int age = 25;
+String name = "John Doe";
+boolean isStudent = true;
+```
 
 ### Operators
 
-Operators perform operations on variables and values. Categories include:
+Java supports various operators:
+- **Arithmetic:** +, -, *, /, %
+- **Relational:** ==, !=, >, <, >=, <=
+- **Logical:** &&, ||, !
+- **Assignment:** =, +=, -=, etc.
+- **Unary:** ++, --, +, -
 
-- **Arithmetic**: `+`, `-`, `*`, `/`, `%`
-- **Unary**: `+`, `-`, `++`, `--`, `!`
-- **Assignment**: `=`, `+=`, `-=`, etc.
-- **Relational**: `==`, `!=`, `<`, `<=`, `>`, `>=`
-- **Logical**: `&&`, `||`, `!`
-- **Bitwise**: `&`, `|`, `^`, `~`, `<<`, `>>`, `>>>`
+### Control Structures
 
-### Expressions, Statements, and Blocks
+**Conditional Statements:**
+```java
+if (condition) {
+    // code
+} else if (anotherCondition) {
+    // code
+} else {
+    // code
+}
+```
 
-Expressions compute values (e.g., `a + b`). Statements perform actions (e.g., assignment, method calls). Blocks group statements with `{}`.
+**Loops:**
+- For loop: `for (int i = 0; i < 10; i++) { // code }`
+- While loop: `while (condition) { // code }`
+- Do-while loop: `do { // code } while (condition);`
 
-### Control Flow Statements
+**Switch Statement:**
+```java
+switch (variable) {
+    case value1:
+        // code
+        break;
+    case value2:
+        // code
+        break;
+    default:
+        // code
+}
+```
 
-Control flow determines the order of execution.
+### Methods
 
-#### Conditional Statements
+Methods are blocks of code that perform specific tasks. They are defined within classes.
 
-- `if-else`: Executes code based on condition.
-- `switch`: Selects among multiple options.
-
-#### Loops
-
-- `for`: Repeats for a known number of iterations.
-- `while`: Repeats while condition is true.
-- `do-while`: Executes at least once, then checks condition.
-
-#### Branching
-
-- `break`: Exits loop or switch.
-- `continue`: Skips to next iteration.
-- `return`: Exits method.
-
-```mermaid
-flowchart TD
-    A[Start] --> B{Condition?}
-    B -->|True| C[Execute Block]
-    B -->|False| D[Skip Block]
-    C --> E[End]
-    D --> E
+```java
+public int add(int a, int b) {
+    return a + b;
+}
 ```
 
 ### Classes and Objects
 
-Classes are blueprints for objects. Basic class structure:
+A class is a blueprint for objects. An object is an instance of a class.
 
 ```java
-public class MyClass {
-    // Fields
-    private int field;
+public class Person {
+    String name;
+    int age;
 
-    // Constructor
-    public MyClass(int value) {
-        this.field = value;
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
     }
 
-    // Method
     public void display() {
-        System.out.println("Value: " + field);
+        System.out.println("Name: " + name + ", Age: " + age);
     }
 }
-```
 
-Objects are instances created with `new MyClass(10);`.
+// Usage
+Person p = new Person("Alice", 30);
+p.display();
+```
 
 ## Real-world Examples & Use Cases
 
-- **Console Applications**: Building command-line tools for data processing, like a simple file reader or calculator.
-- **Utility Classes**: Creating helper classes for string manipulation, date formatting, or basic computations in larger systems.
-- **Prototyping**: Quickly sketching out logic for algorithms before integrating into web or mobile apps.
-- **Educational Software**: Developing programs to teach programming concepts, such as sorting algorithms or basic simulations.
+- **Simple Calculator:** Implementing basic arithmetic operations using variables and operators.
+- **User Registration System:** Storing user data using classes and objects.
+- **Inventory Management:** Using control structures to manage stock levels and generate reports.
+- **Banking Application:** Handling transactions with methods and data validation.
 
 ## Code Examples
 
-### Hello World
+### Hello World Program
 
 ```java
 public class HelloWorld {
@@ -126,146 +134,94 @@ public class HelloWorld {
 }
 ```
 
-### Variables and Data Types
+### Variables and Operators Example
 
 ```java
-public class DataTypesExample {
+public class VariablesExample {
     public static void main(String[] args) {
-        // Primitive types
-        int age = 25;
-        double salary = 50000.50;
-        char grade = 'A';
-        boolean isEmployed = true;
+        int a = 10;
+        int b = 20;
+        int sum = a + b;
+        int product = a * b;
+        boolean isEqual = (a == b);
 
-        // Reference type
-        String name = "John Doe";
-
-        // Array
-        int[] numbers = {1, 2, 3, 4, 5};
-
-        System.out.println("Name: " + name + ", Age: " + age + ", Salary: " + salary);
+        System.out.println("Sum: " + sum);
+        System.out.println("Product: " + product);
+        System.out.println("Are equal: " + isEqual);
     }
 }
 ```
 
-### Operators
+### Control Structures Example
 
 ```java
-public class OperatorsExample {
-    public static void main(String[] args) {
-        int a = 10, b = 5;
-
-        // Arithmetic
-        System.out.println("Addition: " + (a + b));
-        System.out.println("Modulus: " + (a % b));
-
-        // Relational
-        System.out.println("a > b: " + (a > b));
-
-        // Logical
-        boolean x = true, y = false;
-        System.out.println("x && y: " + (x && y));
-    }
-}
-```
-
-### Control Structures
-
-```java
-public class ControlFlowExample {
+public class ControlExample {
     public static void main(String[] args) {
         int number = 10;
 
-        // if-else
+        // If-else
         if (number > 0) {
-            System.out.println("Positive");
+            System.out.println("Positive number");
+        } else if (number < 0) {
+            System.out.println("Negative number");
         } else {
-            System.out.println("Non-positive");
+            System.out.println("Zero");
         }
 
-        // for loop
+        // For loop
+        System.out.println("Counting to 5:");
         for (int i = 1; i <= 5; i++) {
-            System.out.println("Count: " + i);
+            System.out.println(i);
         }
 
-        // switch
-        switch (number % 2) {
-            case 0:
-                System.out.println("Even");
-                break;
+        // Switch
+        int day = 3;
+        switch (day) {
             case 1:
-                System.out.println("Odd");
+                System.out.println("Monday");
                 break;
+            case 2:
+                System.out.println("Tuesday");
+                break;
+            case 3:
+                System.out.println("Wednesday");
+                break;
+            default:
+                System.out.println("Other day");
         }
     }
 }
 ```
 
-### Classes and Objects
+### Class and Method Example
 
 ```java
-public class Person {
-    private String name;
-    private int age;
-
-    public Person(String name, int age) {
-        this.name = name;
-        this.age = age;
+public class Calculator {
+    public int add(int a, int b) {
+        return a + b;
     }
 
-    public void introduce() {
-        System.out.println("Hi, I'm " + name + " and I'm " + age + " years old.");
+    public int subtract(int a, int b) {
+        return a - b;
     }
 
     public static void main(String[] args) {
-        Person person = new Person("Alice", 30);
-        person.introduce();
+        Calculator calc = new Calculator();
+        System.out.println("5 + 3 = " + calc.add(5, 3));
+        System.out.println("5 - 3 = " + calc.subtract(5, 3));
     }
 }
 ```
 
-## Journey / Sequence
-
-A typical learning path for Java Fundamentals:
-
-1. **Install JDK and IDE**: Set up Java Development Kit and an IDE like IntelliJ IDEA or Eclipse.
-2. **Learn Syntax**: Start with variables, data types, and basic I/O.
-3. **Master Operators and Expressions**: Understand how to manipulate data.
-4. **Control Flow**: Practice conditional statements and loops.
-5. **OOP Basics**: Define classes, create objects, and use methods.
-6. **Practice with Examples**: Build small programs to reinforce concepts.
-7. **Debug and Test**: Learn to identify and fix common errors.
-
-## Common Pitfalls & Edge Cases
-
-- **Integer Overflow**: Using `int` for large numbers; use `long` or `BigInteger`.
-- **Floating-Point Precision**: `double` may not be exact for decimals; consider `BigDecimal` for financial calculations.
-- **Null Pointer Exceptions**: Always check for null before accessing object methods.
-- **Array Index Out of Bounds**: Ensure indices are within array length.
-- **Case Sensitivity**: Variable names like `age` and `Age` are different.
-- **Implicit Casting**: Narrowing conversions (e.g., `double` to `int`) require explicit casting.
-
-## Tools & Libraries
-
-- **JDK (Java Development Kit)**: Essential for compiling and running Java code. Download from [Oracle](https://www.oracle.com/java/technologies/javase-downloads.html).
-- **IDEs**: IntelliJ IDEA, Eclipse, VS Code with Java extensions for coding assistance.
-- **Build Tools**: Maven or Gradle for project management and dependencies.
-- **Libraries**: Standard Java libraries; for fundamentals, focus on `java.lang`, `java.util`.
-
 ## References
 
-- [Oracle Java Tutorials - Language Basics](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html)
-- [Primitive Data Types](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html)
-- [Operators](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/operators.html)
-- [Control Flow Statements](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/flow.html)
-- [Classes and Objects](https://docs.oracle.com/javase/tutorial/java/javaOO/index.html)
+- [Oracle Java Tutorials - Getting Started](https://docs.oracle.com/javase/tutorial/getStarted/index.html)
 - [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se21/html/index.html)
+- [GeeksforGeeks - Java Fundamentals](https://www.geeksforgeeks.org/java/)
 
 ## Github-README Links & Related Topics
 
-- [Java Data Types](../java-data-types/)
-- [Java Operators](../java-operators/)
-- [Java OOP Principles](../java-oop-principles/)
-- [Java Collections](../java-collections/)
-- [Java Exception Handling](../java-exception-handling/)
-- [JVM Internals](../java-class-loaders/)
+- [OOP Principles in Java](./oop-principles-in-java/)
+- [JVM Internals & Class Loading](./jvm-internals-class-loading/)
+- [Collections & Data Structures](./collections-data-structures/)
+- [Java Stream API & Functional Programming](./java-stream-api-functional-programming/)
