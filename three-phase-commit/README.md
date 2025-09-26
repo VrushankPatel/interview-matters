@@ -3,7 +3,7 @@ title: Three-Phase Commit
 aliases: [3PC, Three Phase Commit Protocol]
 tags: [#distributed-systems, #system-design, #transactions]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Three-Phase Commit

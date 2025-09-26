@@ -1,10 +1,12 @@
 ---
 title: Netflix Video Streaming Architecture
-aliases: [Netflix Tech Stack, Streaming at Scale]
-tags: [#system-design,#microservices,#scalability]
+aliases: ["Netflix Tech Stack", "Streaming at Scale"]
+tags: ["#system-design", "#microservices", "#scalability"]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
+
+# Netflix Video Streaming Architecture
 
 ## Overview
 
