@@ -1,8 +1,3 @@
-Collections & Data Structures
-Java Stream API & Functional Programming
-System Design Basics
-High Scalability Patterns
-CAP Theorem & Distributed Systems
 url-shortener-system-design
 netflix-system-design
 lld-hld-basics
@@ -14,3 +9,8 @@ devops-infrastructure-as-code
 proxy-forward-reverse
 load-balancing-strategies
 rate-limiting
+java-fundamentals
+oop-principles-in-java
+jvm-internals-class-loading
+garbage-collection-algorithms
+multithreading-concurrency-in-java

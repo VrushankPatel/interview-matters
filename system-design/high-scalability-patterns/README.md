@@ -179,6 +179,55 @@ if __name__ == '__main__':
 - Auto-scaling policies that react too slowly to traffic spikes
 - Over-provisioning resources leading to high costs
 
+## STAR Summary
+**Situation:** An e-commerce platform experienced performance degradation during peak shopping seasons, with response times exceeding 10 seconds.
+
+**Task:** As the scalability engineer, I was tasked with redesigning the architecture to handle 10x traffic growth.
+
+**Action:** Implemented horizontal scaling with load balancers, introduced caching layers, and adopted microservices for independent scaling. Added auto-scaling policies and monitored with Prometheus.
+
+**Result:** System handled 5x peak load with sub-2 second response times, reduced infrastructure costs by 30%, and achieved 99.9% uptime.
+
+## Journey / Sequence
+```mermaid
+sequenceDiagram
+    participant User
+    participant LoadBalancer
+    participant AppServer
+    participant Cache
+    participant Database
+
+    User->>LoadBalancer: Request
+    LoadBalancer->>AppServer: Route
+    AppServer->>Cache: Check Cache
+    Cache-->>AppServer: Cache Hit/Miss
+    AppServer->>Database: Query if Miss
+    Database-->>AppServer: Data
+    AppServer-->>User: Response
+```
+
+## Data Models / Message Formats
+### Scalability Metrics JSON
+```json
+{
+  "scalabilityMetrics": {
+    "horizontalScaling": {
+      "servers": 10,
+      "loadBalancer": "nginx",
+      "autoScaling": true
+    },
+    "caching": {
+      "type": "redis",
+      "hitRate": 0.85
+    },
+    "microservices": {
+      "services": ["auth", "catalog", "checkout"],
+      "communication": "REST/gRPC"
+    }
+  }
+}
+```
+
 # Tools & Libraries
 
 - **Horizontal Scaling:** Kubernetes, Docker Swarm, AWS ECS
