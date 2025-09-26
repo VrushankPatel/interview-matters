@@ -227,6 +227,7 @@
 - [java-try-with-resources](./java-try-with-resources/)
 - [java-var-keyword](./java-var-keyword/)
 - [java-vector-api](./java-vector-api/)
+- [jvm-internals-class-loading](./jvm-internals-class-loading/)
 - [java-virtual-threads](./java-virtual-threads/)
 - [java-volatile-keyword](./java-volatile-keyword/)
 - [java-virtual-machine-jvm-architecture](./java-virtual-machine-jvm-architecture/)
