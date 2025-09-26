@@ -1,8 +1,3 @@
-matching-algorithms
-time-in-force-variations
-latency-measurement
-raft-and-leader-election
-memory-models
 kafka-internals
 caching-patterns
 consistency-models
@@ -18,3 +13,8 @@ oop-principles-in-java
 jvm-internals-class-loading
 garbage-collection-algorithms
 multithreading-concurrency-in-java
+replication-vs-sharding-vs-partitioning
+lld-hld-basics
+proxy-forward-and-reverse
+load-balancing-and-strategies
+rate-limiting

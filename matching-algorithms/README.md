@@ -67,6 +67,33 @@ Uses bad character and good suffix heuristics for faster skipping.
 
 ### Graph Matching Algorithms
 
+Graph matching finds correspondences between graphs or subgraphs.
+
+#### Maximum Bipartite Matching
+Finds the largest set of edges without shared vertices in a bipartite graph.
+
+```mermaid
+graph TD
+    A1[A1] --> B1[B1]
+    A1 --> B2[B2]
+    A2[A2] --> B2
+    A2 --> B3[B3]
+    A3[A3] --> B3
+    A3 --> B4[B4]
+    style A1 fill:#f9f
+    style B1 fill:#9f9
+```
+
+#### Stable Matching
+Gale-Shapley algorithm ensures no blocking pairs.
+
+```java
+// Gale-Shapley implementation
+public class StableMatching {
+    // Similar to previous code
+}
+```
+
 Graph matching finds subgraphs or mappings between graphs.
 
 #### Maximum Matching in Bipartite Graphs
