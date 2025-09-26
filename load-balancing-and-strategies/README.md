@@ -1,8 +1,8 @@
 ---
 title: Load Balancing and Strategies
-aliases: [Load Balancer Strategies]
-tags: [#system-design,#scalability,#networking]
-created: 2025-09-25
+aliases: [Load Balancing]
+tags: [#system-design,#scalability]
+created: 2025-09-26
 updated: 2025-09-26
 ---
 
@@ -201,3 +201,105 @@ resource "aws_lb_listener" "app_listener" {
 - [API Gateway vs Load Balancer](../api-gateway-vs-load-balancer/)
 - [High Scalability Patterns](../high-scalability-patterns/)
 - [Fault Tolerance in Distributed Systems](../fault-tolerance-in-distributed-systems/)
+
+# Data Models / Message Formats
+
+## Load Balancer Configuration Formats
+
+### Nginx Upstream Block
+
+```nginx
+upstream backend {
+    # Algorithm: round_robin (default), least_conn, ip_hash, etc.
+    least_conn;
+    
+    # Server definitions
+    server backend1.example.com:8080 weight=3 max_fails=3 fail_timeout=30s;
+    server backend2.example.com:8080 weight=2 backup;
+    server backend3.example.com:8080 down;
+}
+```
+
+### HAProxy Backend Configuration
+
+```haproxy
+backend web_servers
+    # Load balancing algorithm
+    balance roundrobin
+    
+    # Health check options
+    option httpchk GET /health HTTP/1.1\r\nHost:\ www.example.com
+    http-check expect status 200
+    
+    # Server definitions
+    server web1 192.168.1.10:80 check weight 3
+    server web2 192.168.1.11:80 check weight 2
+    server web3 192.168.1.12:80 check backup
+```
+
+## Health Check Protocols
+
+### HTTP Health Check Request
+
+```
+GET /health HTTP/1.1
+Host: backend.example.com
+User-Agent: LoadBalancer/1.0
+Connection: close
+```
+
+### TCP Health Check
+
+Simple TCP connection attempt to server port, with optional send/expect strings.
+
+## Session Persistence Mechanisms
+
+### Cookie-Based Sticky Sessions
+
+Load balancer sets a cookie with server identifier:
+
+```
+Set-Cookie: SERVERID=server1; Path=/; HttpOnly
+```
+
+Subsequent requests include this cookie to route to the same server.
+
+### IP Hash Persistence
+
+Client IP address hashed to determine server:
+
+```python
+server_index = hash(client_ip) % num_servers
+```
+
+## Metrics and Monitoring Data
+
+Load balancer exposes metrics in formats like:
+
+### Prometheus Exposition Format
+
+```
+# HELP haproxy_backend_current_sessions Current sessions on backend
+# TYPE haproxy_backend_current_sessions gauge
+haproxy_backend_current_sessions{backend="web_servers"} 42
+```
+
+### Stats Endpoint JSON
+
+```json
+{
+  "backends": [
+    {
+      "name": "web_servers",
+      "servers": [
+        {
+          "name": "web1",
+          "status": "UP",
+          "current_sessions": 15,
+          "max_sessions": 100
+        }
+      ]
+    }
+  ]
+}
+```
