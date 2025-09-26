@@ -108,5 +108,5 @@ public class Main {
 
 ## Github-README Links & Related Topics
 
-- [Java Fundamentals](../java-fundamentals/)
-- [Design Patterns in Java](../java-design-patterns/)
+- [Java Fundamentals](../java-fundamentals/README.md)
+- [Design Patterns in Java](../design-patterns-in-java/README.md)
