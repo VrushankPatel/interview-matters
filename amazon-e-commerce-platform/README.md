@@ -3,7 +3,7 @@ title: Amazon E-commerce Platform System Design
 aliases: [E-commerce System, Online Retail Platform]
 tags: [#system-design, #e-commerce, #microservices, #scalability]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Amazon E-commerce Platform System Design

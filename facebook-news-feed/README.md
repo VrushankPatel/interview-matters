@@ -3,7 +3,7 @@ title: 'Facebook News Feed'
 aliases: ['Social Media Feed Design']
 tags: [#system-design,#distributed-systems,#personalization]
 created: '2025-09-25'
-updated: '2025-09-25'
+updated: '2025-09-26'
 ---
 
 ## Overview

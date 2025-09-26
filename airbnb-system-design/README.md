@@ -3,7 +3,7 @@ title: Airbnb System Design
 aliases: [Vacation Rental Platform, Airbnb Architecture]
 tags: [#system-design,#marketplace,#booking-system]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Airbnb System Design

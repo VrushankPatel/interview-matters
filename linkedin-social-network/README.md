@@ -3,7 +3,7 @@ title: LinkedIn Social Network
 aliases: [LinkedIn, Social Network Design]
 tags: [#system-design, #social-network, #distributed-systems]
 created: 2023-01-01
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 ## Overview
