@@ -6,9 +6,7 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# LLD HLD Basics
-
-## Overview
+# Overview
 
 Low-Level Design (LLD) and High-Level Design (HLD) are essential phases in software engineering for translating requirements into implementable solutions. HLD focuses on the system's overall architecture, while LLD delves into detailed implementation, such as class diagrams, APIs, and database schemas. Understanding these concepts is crucial for system design interviews, ensuring scalable, maintainable, and efficient systems.
 

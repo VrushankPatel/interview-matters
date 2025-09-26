@@ -6,9 +6,7 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Replication vs Sharding vs Partitioning
-
-## Overview
+# Overview
 
 Replication, sharding, and partitioning are core strategies for scaling databases and managing large datasets in distributed systems. Replication creates redundant copies for availability and read performance, sharding distributes data across nodes for horizontal scaling, and partitioning organizes data into segments for efficiency. This guide compares these techniques, their implementations, trade-offs, and real-world applications, providing a foundation for system design decisions.
 

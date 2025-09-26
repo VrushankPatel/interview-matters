@@ -1,8 +1,3 @@
-url-shortener-system-design
-netflix-system-design
-lld-hld-basics
-replication-vs-sharding-vs-partitioning
-latency-throughput-zero-to-hero
 monitoring-logging
 async-logging
 devops-infrastructure-as-code
@@ -14,3 +9,8 @@ oop-principles-in-java
 jvm-internals-class-loading
 garbage-collection-algorithms
 multithreading-concurrency-in-java
+concurrency-parallelism
+caching
+cap-theorem-and-distributed-systems
+database-acid-properties
+event-driven-architecture
