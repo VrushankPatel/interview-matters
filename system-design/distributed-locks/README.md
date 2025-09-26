@@ -94,7 +94,7 @@ sequenceDiagram
 - **etcd:** Client libraries
 
 ## Github-README Links & Related Topics
-Related: [[raft-and-leader-election]], [[consistency-models]], [[partitioning-and-sharding]], [[microservices-architecture]]
+Related: [raft-and-leader-election](../raft-and-leader-election/), [consistency-models](../concepts/consistency-models/), [partitioning-and-sharding](../partitioning-and-sharding/), [microservices-architecture](../microservices-architecture/)
 
 ## References
 - https://redis.io/topics/distlock

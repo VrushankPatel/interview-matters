@@ -133,9 +133,9 @@ flowchart TD
 - **Advanced:** Ukkonen's algorithm for suffix trees.
 
 ## Github-README Links & Related Topics
-- [[algorithms-and-data-structures]]
-- [[dynamic-programming-and-greedy]]
-- [[graphs-trees-heaps-and-tries]]
+- [algorithms-and-data-structures](../algorithms-and-data-structures/)
+- [dynamic-programming-and-greedy](../dynamic-programming-and-greedy/)
+- [graphs-trees-heaps-and-tries](../graphs-trees-heaps-and-tries/)
 
 ## References
 - CLRS "Introduction to Algorithms" Chapter 32

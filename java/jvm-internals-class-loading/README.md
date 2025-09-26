@@ -122,7 +122,7 @@ N/A.
 
 # Github-README Links & Related Topics
 
-[[Garbage Collection Algorithms]]
-[[JVM Performance Tuning]]
-[[Java Class Loaders]]
-[[JVM Memory Management]]
+[Garbage Collection Algorithms](../jvm/garbage-collection-algorithms/)
+[JVM Performance Tuning](../jvm/jvm-performance-tuning/)
+[Java Class Loaders](../jvm/java-class-loaders/)
+[JVM Memory Management](../jvm-memory-management/)

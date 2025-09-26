@@ -187,7 +187,7 @@ sequenceDiagram
 
 # Github-README Links & Related Topics
 
-Related: [[low-latency-systems]], [[distributed-tracing-and-observability]], [[observability-logs-metrics-traces]], [[performance-tuning-and-profiling]], [[system-design-basics]]
+Related: [low-latency-systems](../low-latency-systems/), [distributed-tracing-and-observability](../distributed-tracing-and-observability/), [observability-logs-metrics-traces](../observability-logs-metrics-traces/), [performance-tuning-and-profiling](../../java/profiling/performance-tuning-and-profiling/), [system-design-basics](../system-design-basics/)
 
 # References
 

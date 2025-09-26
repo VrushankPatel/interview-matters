@@ -114,7 +114,7 @@ sequenceDiagram
 
 # Github-README Links & Related Topics
 
-Related: [[microservices-architecture]], [[security-authz-authn-tokens]], [[rate-limiting-algorithms]]
+Related: [microservices-architecture](../microservices-architecture/), [security-authz-authn-tokens](../security-authz-authn-tokens/), [rate-limiting-algorithms](../rate-limiting-algorithms/)
 
 # References
 

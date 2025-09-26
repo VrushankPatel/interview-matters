@@ -114,9 +114,9 @@ public class Order {
 
 # Github-README Links & Related Topics
 
-[[Popular Systems Design LLD and HLD]]
-[[Microservices Architecture]]
-[[Database Design Principles]]
+[Popular Systems Design LLD and HLD](../popular-systems-design-lld-and-hld/)
+[Microservices Architecture](../microservices-architecture/)
+[Database Design Principles](../../databases/database-design-principles/)
 
 # References
 

@@ -101,7 +101,7 @@ sequenceDiagram
 - gRPC for high-performance sync.
 
 ## Github-README Links & Related Topics
-Related: [[api-design-rest-grpc-openapi]], [[message-queues-and-kafka]], [[event-driven-architecture]]
+Related: [api-design-rest-grpc-openapi](../concepts/api-design-rest-grpc-openapi/), [message-queues-and-kafka](../message-queues-and-kafka/), [event-driven-architecture](../event-driven-architecture/)
 
 ## References
 - https://microservices.io/patterns/communication-style/

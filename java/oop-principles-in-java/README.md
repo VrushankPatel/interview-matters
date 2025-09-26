@@ -226,8 +226,8 @@ This diagram illustrates inheritance and polymorphism with a simple animal hiera
 
 # Github-README Links & Related Topics
 
-[[Java Fundamentals]]
-[[Inheritance In Java]]
-[[Polymorphism In Java]]
-[[Abstraction In Java]]
-[[Encapsulation In Java]]
+[Java Fundamentals](../java-fundamentals/)
+[Inheritance In Java](../oop/inheritance-in-java/)
+[Polymorphism In Java](../polymorphism-in-java/)
+[Abstraction In Java](../oop/abstraction-in-java/)
+[Encapsulation In Java](../oop/encapsulation-in-java/)

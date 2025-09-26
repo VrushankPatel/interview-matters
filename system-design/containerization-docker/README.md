@@ -84,7 +84,7 @@ sequenceDiagram
 - **Podman:** Alternative runtime.
 
 ## Github-README Links & Related Topics
-Related: [[container-orchestration-k8s]], [[microservices-architecture]], [[cloud-native-architectures]]
+Related: [container-orchestration-k8s](../container-orchestration-k8s/), [microservices-architecture](../microservices-architecture/), [cloud-native-architectures](../cloud-native-architectures/)
 
 ## References
 - https://docs.docker.com/

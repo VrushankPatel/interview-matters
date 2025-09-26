@@ -145,11 +145,11 @@ public class UrlShortenerService {
 
 # Github-README Links & Related Topics
 
-[[LLD HLD Basics]]
-[[Microservices Architecture]]
-[[Caching]]
-[[Load Balancing and Strategies]]
-[[Database Sharding Strategies]]
+[LLD HLD Basics](../lld/lld-hld-basics/)
+[Microservices Architecture](../microservices-architecture/)
+[Caching](../caching/)
+[Load Balancing and Strategies](../load-balancing-and-strategies/)
+[Database Sharding Strategies](../database-sharding-strategies/)
 
 # References
 

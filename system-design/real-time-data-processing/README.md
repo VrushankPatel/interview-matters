@@ -65,7 +65,7 @@ sequenceDiagram
 - Kafka, Apache Flink, Kinesis.
 
 ## Github-README Links & Related Topics
-Related: [[message-queues-and-kafka]], [[event-sourcing-and-cqrs]]
+Related: [message-queues-and-kafka](../message-queues-and-kafka/), [event-sourcing-and-cqrs](../event-sourcing-and-cqrs/)
 
 ## References
 - https://kafka.apache.org/

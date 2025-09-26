@@ -73,8 +73,8 @@ long latency = System.nanoTime() - start;
 
 # Github-README Links & Related Topics
 
-[[Performance Optimization Techniques]]
-[[Latency Measurement]]
+[Performance Optimization Techniques](../performance-optimization-techniques/)
+[Latency Measurement](../latency-measurement/)
 
 # References
 

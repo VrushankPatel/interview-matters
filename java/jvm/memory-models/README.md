@@ -72,7 +72,7 @@ graph TD
 
 # Github-README Links & Related Topics
 
-Related: [[java-memory-model-and-concurrency]], [[threads-executors-futures]], [[concurrent-data-structures]]
+Related: [java-memory-model-and-concurrency](../java-memory-model-and-concurrency/), [threads-executors-futures](../../concurrency/threads-executors-futures/), [concurrent-data-structures](../../concurrent-data-structures/)
 
 # References
 

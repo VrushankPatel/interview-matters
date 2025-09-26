@@ -109,7 +109,7 @@ sequenceDiagram
 - **Vault:** For secret management.
 
 ## Github-README Links & Related Topics
-Related: [[service-discovery]], [[microservices-architecture]], [[security-in-distributed-systems]]
+Related: [service-discovery](../service-discovery/), [microservices-architecture](../microservices-architecture/), [security-in-distributed-systems](../security-in-distributed-systems/)
 
 ## References
 - https://spring.io/projects/spring-cloud-config

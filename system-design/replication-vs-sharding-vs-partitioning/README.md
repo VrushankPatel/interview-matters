@@ -105,7 +105,7 @@ public class ShardRouter {
 
 # Github-README Links & Related Topics
 
-[[Database Sharding Strategies]]
+[Database Sharding Strategies](../database-sharding-strategies/)
 [[Replication Strategies]]
 [[Distributed Databases]]
 

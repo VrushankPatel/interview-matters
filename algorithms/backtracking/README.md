@@ -162,7 +162,7 @@ sequenceDiagram
 - Testing: JUnit for correctness.
 
 ## Github-README Links & Related Topics
-Related: [[divide-and-conquer]], [[dynamic-programming-and-greedy]], [[graphs-trees-heaps-and-tries]]
+Related: [divide-and-conquer](../../divide-and-conquer/), [dynamic-programming-and-greedy](../dynamic-programming-and-greedy/), [graphs-trees-heaps-and-tries](../graphs-trees-heaps-and-tries/)
 
 ## References
 - https://en.wikipedia.org/wiki/Backtracking

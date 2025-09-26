@@ -113,7 +113,7 @@ sequenceDiagram
 - **Proxies:** Vitess, ProxySQL for routing.
 
 ## Github-README Links & Related Topics
-Related: [[partitioning-and-sharding]], [[database-design-and-indexing]], [[consistency-and-availability]]
+Related: [partitioning-and-sharding](../../partitioning-and-sharding/), [database-design-and-indexing](../../database-design-and-indexing/), [consistency-and-availability](../../consistency-and-availability/)
 
 ## References
 - https://www.geeksforgeeks.org/database-sharding-a-system-design-concept/

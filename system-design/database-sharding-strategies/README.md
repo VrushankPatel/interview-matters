@@ -92,7 +92,7 @@ flowchart TD
 - Redis Cluster for consistent hashing.
 
 ## Github-README Links & Related Topics
-Related: [[partitioning-and-sharding]], [[database-design-and-indexing]], [[nosql-vs-sql-tradeoffs]]
+Related: [partitioning-and-sharding](../partitioning-and-sharding/), [database-design-and-indexing](../database-design-and-indexing/), [nosql-vs-sql-tradeoffs](../nosql-vs-sql-tradeoffs/)
 
 ## References
 - https://en.wikipedia.org/wiki/Shard_(database_architecture)

@@ -87,7 +87,7 @@ flowchart TD
 - **Java:** JDBC, MongoDB Driver, Hibernate
 
 ## Github-README Links & Related Topics
-Related: [[database-design-and-indexing]], [[consistency-models]], [[partitioning-and-sharding]], [[caching-strategies]]
+Related: [database-design-and-indexing](../database-design-and-indexing/), [consistency-models](../concepts/consistency-models/), [partitioning-and-sharding](../partitioning-and-sharding/), [caching-strategies](../caching-strategies/)
 
 ## References
 - https://en.wikipedia.org/wiki/NoSQL

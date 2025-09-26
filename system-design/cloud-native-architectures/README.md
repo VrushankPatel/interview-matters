@@ -63,7 +63,7 @@ graph TD
 - Kubernetes, Docker, AWS Lambda.
 
 ## Github-README Links & Related Topics
-Related: [[microservices-architecture]], [[container-orchestration-k8s]], [[serverless]]
+Related: [microservices-architecture](../microservices-architecture/), [container-orchestration-k8s](../container-orchestration-k8s/), [serverless](../../cloud/serverless/)
 
 ## References
 - https://aws.amazon.com/what-is/cloud-native/

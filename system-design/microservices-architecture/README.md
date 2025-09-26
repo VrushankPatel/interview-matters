@@ -129,7 +129,7 @@ Common Interview Questions:
 - Istio: Service mesh.
 
 ## Github-README Links & Related Topics
-Related: [[api-design-rest-grpc-openapi]], [[event-sourcing-and-cqrs]], [[service-mesh-istio]]
+Related: [api-design-rest-grpc-openapi](../concepts/api-design-rest-grpc-openapi/), [event-sourcing-and-cqrs](../event-sourcing-and-cqrs/), [service-mesh-istio](../service-mesh-istio/)
 
 ## References
 - https://microservices.io/

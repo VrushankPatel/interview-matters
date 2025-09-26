@@ -90,7 +90,7 @@ sequenceDiagram
 - **Custom implementations:** For interviews.
 
 ## Github-README Links & Related Topics
-Related: [[algorithms-and-data-structures]], [[graphs-trees-heaps-and-tries]], [[dynamic-programming-and-greedy]]
+Related: [algorithms-and-data-structures](../algorithms-and-data-structures/), [graphs-trees-heaps-and-tries](../graphs-trees-heaps-and-tries/), [dynamic-programming-and-greedy](../dynamic-programming-and-greedy/)
 
 ## References
 - https://en.wikipedia.org/wiki/Fenwick_tree

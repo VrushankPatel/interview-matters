@@ -5,7 +5,8 @@ Last update
 2025-09-26
 
 Summary of recent additions
-      - Restructured repository: moved system design topics into subcategories (concepts, lld, hld, real-world-designs); reorganized trading/ into subcategories (protocols, order-types, lifecycle, market-data, exchange-behavior, compliance); fixed all README.md files to use proper markdown links instead of obsidian-style [[ ]] wikilinks for better Github-README compatibility.
+      - Processed 5 topics: FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols
+      - Restructured repository: merged duplicate directories (e.g., moved root-level trading topics to subcategories like protocols/, market-data/); fixed all README.md files to use proper markdown links instead of obsidian-style [[ ]] wikilinks for better Github-README compatibility.
       - Processed 5 topics: Journey of a Trade (end-to-end), Order Types (DAY, GTC, FOK, IOC), Quotes & RFQ workflows, Execution Report, Trade Capture Report
 
 Conventions
@@ -134,53 +135,16 @@ New Next Topics Candidates (this run)
   - AI in market prediction — 'Machine learning for price forecasting'
 
 New Next Topics Candidates
-         - Order Book modeling — 'Canonical models for in-memory book and persistence'
-         - Matching algorithm internals — 'How exchanges match buy and sell orders'
-         - Time-in-Force variations across exchanges — 'DAY, GTC, IOC behaviors by venue'
-         - Market fragmentation & smart order routing — 'Routing orders across multiple markets'
-         - Latency measurement & monitoring — 'Tools and techniques for latency analysis'
-         - FIX Session Layer (Logon/Heartbeat/Seq numbers) — 'Session management in FIX protocol'
-         - Market data consolidation & TOPS snapshot vs incremental — 'Consolidating feeds from multiple sources'
-         - Latency arbitrage — 'Exploiting latency differences for profit'
-         - Swap & derivatives trade lifecycle — 'Trading non-equity instruments'
-         - Regulatory reports (e.g., MiFID/SEF) — 'Compliance reporting requirements'
-     - Order Book modeling — 'Canonical models for in-memory book and persistence'
-     - Matching algorithm internals — 'How exchanges match buy and sell orders'
-     - Time-in-Force variations across exchanges — 'DAY, GTC, IOC behaviors by venue'
-     - Market fragmentation & smart order routing — 'Routing orders across multiple markets'
-     - Latency measurement & monitoring — 'Tools and techniques for latency analysis'
-     - FIX Session Layer (Logon/Heartbeat/Seq numbers) — 'Session management in FIX protocol'
-     - Market data consolidation & TOPS snapshot vs incremental — 'Consolidating feeds from multiple sources'
-     - Latency arbitrage — 'Exploiting latency differences for profit'
-     - Swap & derivatives trade lifecycle — 'Trading non-equity instruments'
-     - Regulatory reports (e.g., MiFID/SEF) — 'Compliance reporting requirements'
-    - Order Book modeling — 'Canonical models for in-memory book and persistence'
-    - Matching algorithm internals — 'How exchanges match buy and sell orders'
-    - Time-in-Force variations across exchanges — 'DAY, GTC, IOC behaviors by venue'
-    - Market fragmentation & smart order routing — 'Routing orders across multiple markets'
-    - Latency measurement & monitoring — 'Tools and techniques for latency analysis'
-    - FIX Session Layer (Logon/Heartbeat/Seq numbers) — 'Session management in FIX protocol'
-    - Market data consolidation & TOPS snapshot vs incremental — 'Consolidating feeds from multiple sources'
-    - Latency arbitrage — 'Exploiting latency differences for profit'
-    - Swap & derivatives trade lifecycle — 'Trading non-equity instruments'
-    - Regulatory reports (e.g., MiFID/SEF) — 'Compliance reporting requirements'
-    - java-generics — 'Type safety and erasure in Java'
-    - java-lambda-expressions — 'Functional programming with lambdas'
-    - java-modules — 'Modular system with JPMS'
-    - java-records — 'Immutable data classes'
-    - java-sealed-classes — 'Restricted class hierarchies'
-    - java-text-blocks — 'Multi-line string literals'
-    - java-switch-expressions — 'Enhanced switch statements'
-    - java-generics — 'Type safety and erasure in Java'
-    - java-lambda-expressions — 'Functional programming with lambdas'
-    - java-modules — 'Modular system with JPMS'
-    - java-records — 'Immutable data classes'
-    - java-sealed-classes — 'Restricted class hierarchies'
-    - java-text-blocks — 'Multi-line string literals'
-    - java-switch-expressions — 'Enhanced switch statements'
-    - concurrent-programming-patterns — 'Common patterns for concurrent programming'
-    - java-reflection — 'Runtime inspection and dynamic code'
-    - java-annotations — 'Custom annotations and metadata'
+          - Order Book modeling — 'Canonical models for in-memory book and persistence'
+          - Matching algorithm internals — 'How exchanges match buy and sell orders'
+          - Time-in-Force variations across exchanges — 'DAY, GTC, IOC behaviors by venue'
+          - Market fragmentation & smart order routing — 'Routing orders across multiple markets'
+          - Latency measurement & monitoring — 'Tools and techniques for latency analysis'
+          - FIX Session Layer (Logon/Heartbeat/Seq numbers) — 'Session management in FIX protocol'
+          - Market data consolidation & TOPS snapshot vs incremental — 'Consolidating feeds from multiple sources'
+          - Latency arbitrage — 'Exploiting latency differences for profit'
+          - Swap & derivatives trade lifecycle — 'Trading non-equity instruments'
+          - Regulatory reports (e.g., MiFID/SEF) — 'Compliance reporting requirements'
 
 New Next Topics Candidates (this run)
     - Order Book modeling — 'Canonical models for in-memory book and persistence'

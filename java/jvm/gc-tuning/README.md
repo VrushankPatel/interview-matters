@@ -64,7 +64,7 @@ graph TD
 
 # Github-README Links & Related Topics
 
-Related: [[garbage-collection-algorithms]], [[performance-tuning-and-profiling]], [[jvm-internals-and-classloading]]
+Related: [garbage-collection-algorithms](../garbage-collection-algorithms/), [performance-tuning-and-profiling](../../profiling/performance-tuning-and-profiling/), [[jvm-internals-and-classloading]]
 
 # References
 

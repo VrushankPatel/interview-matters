@@ -79,7 +79,7 @@ sequenceDiagram
 - Resilience4j, Hystrix, Polly.
 
 ## Github-README Links & Related Topics
-Related: [[circuit-breaker-pattern]], [[microservices-architecture]], [[distributed-tracing-and-observability]]
+Related: [circuit-breaker-pattern](../circuit-breaker-pattern/), [microservices-architecture](../microservices-architecture/), [distributed-tracing-and-observability](../distributed-tracing-and-observability/)
 
 ## References
 - https://microservices.io/patterns/reliability/

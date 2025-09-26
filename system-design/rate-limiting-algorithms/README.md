@@ -109,7 +109,7 @@ sequenceDiagram
 - **Frameworks:** Spring Cloud Gateway, Nginx
 
 ## Github-README Links & Related Topics
-Related: [[caching-strategies]], [[load-balancing-and-routing]], [[circuit-breaker-pattern]], [[microservices-architecture]]
+Related: [caching-strategies](../caching-strategies/), [load-balancing-and-routing](../load-balancing-and-routing/), [circuit-breaker-pattern](../circuit-breaker-pattern/), [microservices-architecture](../microservices-architecture/)
 
 ## References
 - https://en.wikipedia.org/wiki/Rate_limiting

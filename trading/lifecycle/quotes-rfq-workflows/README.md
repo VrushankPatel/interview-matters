@@ -54,9 +54,9 @@ FIX for messaging.
 
 # Github-README Links & Related Topics
 
-[[fix-protocol]]
+[fix-protocol](../../protocols/fix-protocol/)
 
-[[market-data]]
+[market-data](../../market-data/)
 
 # References
 

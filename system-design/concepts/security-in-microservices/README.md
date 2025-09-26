@@ -102,7 +102,7 @@ sequenceDiagram
 - **Istio:** Service mesh security.
 
 ## Github-README Links & Related Topics
-Related: [[api-gateway-patterns]], [[security-authz-authn-tokens]], [[service-mesh-istio]]
+Related: [api-gateway-patterns](../../api-gateway-patterns/), [security-authz-authn-tokens](../../security-authz-authn-tokens/), [service-mesh-istio](../../service-mesh-istio/)
 
 ## References
 - https://oauth.net/2/

@@ -103,7 +103,7 @@ sequenceDiagram
 - **Jaeger:** Distributed tracing.
 
 ## Github-README Links & Related Topics
-Related: [[distributed-tracing-and-observability]], [[observability-logs-metrics-traces]], [[fault-tolerance-patterns]]
+Related: [distributed-tracing-and-observability](../distributed-tracing-and-observability/), [observability-logs-metrics-traces](../observability-logs-metrics-traces/), [fault-tolerance-patterns](../fault-tolerance-patterns/)
 
 ## References
 - https://www.elastic.co/elk-stack

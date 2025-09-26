@@ -117,9 +117,9 @@ flowchart TD
 - **Debugging:** Binary representation with Integer.toBinaryString().
 
 ## Github-README Links & Related Topics
-- [[algorithms-and-data-structures]]
-- [[number-theory]]
-- [[dynamic-programming-and-greedy]]
+- [algorithms-and-data-structures](../algorithms-and-data-structures/)
+- [number-theory](../number-theory/)
+- [dynamic-programming-and-greedy](../dynamic-programming-and-greedy/)
 
 ## References
 - "Hacker's Delight" by Henry S. Warren

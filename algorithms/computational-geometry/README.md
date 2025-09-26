@@ -115,7 +115,7 @@ sequenceDiagram
 - AWT for basics.
 
 ## Github-README Links & Related Topics
-Related: [[divide-and-conquer]], [[graphs-trees-heaps-and-tries]], [[dynamic-programming-and-greedy]]
+Related: [divide-and-conquer](../../divide-and-conquer/), [graphs-trees-heaps-and-tries](../graphs-trees-heaps-and-tries/), [dynamic-programming-and-greedy](../dynamic-programming-and-greedy/)
 
 ## References
 - https://en.wikipedia.org/wiki/Computational_geometry

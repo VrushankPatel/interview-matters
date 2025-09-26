@@ -108,7 +108,7 @@ Common Interview Questions:
 - Spring: Idempotency support.
 
 ## Github-README Links & Related Topics
-Related: [[api-design-rest-grpc-openapi]], [[consistency-models]], [[circuit-breaker-pattern]]
+Related: [api-design-rest-grpc-openapi](../concepts/api-design-rest-grpc-openapi/), [consistency-models](../concepts/consistency-models/), [circuit-breaker-pattern](../circuit-breaker-pattern/)
 
 ## References
 - https://stripe.com/docs/api/idempotent_requests

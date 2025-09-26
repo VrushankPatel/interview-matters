@@ -115,7 +115,7 @@ Common Interview Questions:
 - Istio: Envoy-based breakers.
 
 ## Github-README Links & Related Topics
-Related: [[microservices-architecture]], [[load-balancing-and-routing]], [[fault-tolerance-patterns]]
+Related: [microservices-architecture](../microservices-architecture/), [load-balancing-and-routing](../load-balancing-and-routing/), [fault-tolerance-patterns](../fault-tolerance-patterns/)
 
 ## References
 - https://martinfowler.com/bliki/CircuitBreaker.html

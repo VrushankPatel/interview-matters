@@ -103,7 +103,7 @@ sequenceDiagram
 
 # Github-README Links & Related Topics
 
-Related: [[distributed-tracing-and-observability]], [[observability-logs-metrics-traces]], [[low-latency-systems]]
+Related: [distributed-tracing-and-observability](../distributed-tracing-and-observability/), [observability-logs-metrics-traces](../observability-logs-metrics-traces/), [low-latency-systems](../low-latency-systems/)
 
 # References
 

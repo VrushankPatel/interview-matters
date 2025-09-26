@@ -120,11 +120,11 @@ This example demonstrates variables, conditionals, and loops.
 
 # Github-README Links & Related Topics
 
-[[OOP Principles in Java]]
-[[JVM Internals & Class Loading]]
-[[Garbage Collection Algorithms]]
-[[Multithreading & Concurrency in Java]]
-[[Java Data Types]]
+[OOP Principles in Java](../oop-principles-in-java/)
+[JVM Internals & Class Loading](../jvm-internals-class-loading/)
+[Garbage Collection Algorithms](../jvm/garbage-collection-algorithms/)
+[Multithreading & Concurrency in Java](../multithreading-concurrency-in-java/)
+[Java Data Types](../fundamentals/java-data-types/)
 
 # References
 

@@ -69,7 +69,7 @@ graph TD
 
 # Github-README Links & Related Topics
 
-Related: [[message-queues-and-kafka]], [[event-sourcing-and-cqrs]], [[partitioning-and-sharding]]
+Related: [message-queues-and-kafka](../message-queues-and-kafka/), [event-sourcing-and-cqrs](../event-sourcing-and-cqrs/), [partitioning-and-sharding](../partitioning-and-sharding/)
 
 # References
 

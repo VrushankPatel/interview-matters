@@ -85,7 +85,7 @@ sequenceDiagram
 - Kubernetes service discovery.
 
 ## Github-README Links & Related Topics
-Related: [[microservices-architecture]], [[load-balancing-and-routing]], [[container-orchestration-k8s]]
+Related: [microservices-architecture](../microservices-architecture/), [load-balancing-and-routing](../load-balancing-and-routing/), [container-orchestration-k8s](../container-orchestration-k8s/)
 
 ## References
 - https://microservices.io/patterns/service-discovery.html

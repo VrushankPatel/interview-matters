@@ -101,7 +101,7 @@ sequenceDiagram
 - **Integration:** Kubernetes, Helm
 
 ## Github-README Links & Related Topics
-Related: [[microservices-architecture]], [[observability-logs-metrics-traces]], [[load-balancing-and-routing]], [[circuit-breaker-pattern]]
+Related: [microservices-architecture](../microservices-architecture/), [observability-logs-metrics-traces](../observability-logs-metrics-traces/), [load-balancing-and-routing](../load-balancing-and-routing/), [circuit-breaker-pattern](../circuit-breaker-pattern/)
 
 ## References
 - https://istio.io/

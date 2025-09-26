@@ -56,7 +56,7 @@ graph TD
 - TensorFlow, Kubernetes, SageMaker.
 
 ## Github-README Links & Related Topics
-Related: [[low-latency-systems]], [[distributed-tracing-and-observability]]
+Related: [low-latency-systems](../low-latency-systems/), [distributed-tracing-and-observability](../distributed-tracing-and-observability/)
 
 ## References
 - https://aws.amazon.com/machine-learning/infrastructure/

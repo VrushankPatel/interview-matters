@@ -122,7 +122,7 @@ sequenceDiagram
 
 # Github-README Links & Related Topics
 
-Related: [[microservices-architecture]], [[load-balancing-and-routing]], [[service-mesh-istio]]
+Related: [microservices-architecture](../microservices-architecture/), [load-balancing-and-routing](../load-balancing-and-routing/), [service-mesh-istio](../service-mesh-istio/)
 
 # References
 

@@ -109,7 +109,7 @@ sequenceDiagram
 - **Distributed:** XA transactions for multi-resource
 
 ## Github-README Links & Related Topics
-Related: [[database-design-and-indexing]], [[consistency-models]], [[partitioning-and-sharding]], [[event-sourcing-and-cqrs]]
+Related: [database-design-and-indexing](../database-design-and-indexing/), [consistency-models](../concepts/consistency-models/), [partitioning-and-sharding](../partitioning-and-sharding/), [event-sourcing-and-cqrs](../event-sourcing-and-cqrs/)
 
 ## References
 - https://en.wikipedia.org/wiki/ACID

@@ -81,7 +81,7 @@ sequenceDiagram
 - Kafka for event-driven Sagas.
 
 ## Github-README Links & Related Topics
-Related: [[database-acid-properties]], [[event-sourcing-and-cqrs]], [[consistency-and-availability]]
+Related: [database-acid-properties](../database-acid-properties/), [event-sourcing-and-cqrs](../event-sourcing-and-cqrs/), [consistency-and-availability](../consistency-and-availability/)
 
 ## References
 - https://microservices.io/patterns/data/saga.html

@@ -117,9 +117,9 @@ flowchart TD
 - **Crypto:** Bouncy Castle for advanced primality.
 
 ## Github-README Links & Related Topics
-- [[algorithms-and-data-structures]]
-- [[bit-manipulation]]
-- [[dynamic-programming-and-greedy]]
+- [algorithms-and-data-structures](../algorithms-and-data-structures/)
+- [bit-manipulation](../bit-manipulation/)
+- [dynamic-programming-and-greedy](../dynamic-programming-and-greedy/)
 
 ## References
 - "Number Theory" by George Andrews

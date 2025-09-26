@@ -123,7 +123,7 @@ sequenceDiagram
 
 # Github-README Links & Related Topics
 
-Related: [[message-queues-and-kafka]], [[event-sourcing-and-cqrs]], [[microservices-architecture]]
+Related: [message-queues-and-kafka](../message-queues-and-kafka/), [event-sourcing-and-cqrs](../event-sourcing-and-cqrs/), [microservices-architecture](../microservices-architecture/)
 
 # References
 

@@ -124,9 +124,9 @@ flowchart TD
 - **Profiling:** JMH for benchmarking sort performance.
 
 ## Github-README Links & Related Topics
-- [[algorithms-and-data-structures]]
-- [[graphs-trees-heaps-and-tries]]
-- [[dynamic-programming-and-greedy]]
+- [algorithms-and-data-structures](../algorithms-and-data-structures/)
+- [graphs-trees-heaps-and-tries](../graphs-trees-heaps-and-tries/)
+- [dynamic-programming-and-greedy](../dynamic-programming-and-greedy/)
 
 ## References
 - CLRS "Introduction to Algorithms" Chapter 7

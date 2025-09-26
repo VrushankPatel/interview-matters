@@ -106,7 +106,7 @@ sequenceDiagram
 
 # Github-README Links & Related Topics
 
-Related: [[security-authz-authn-tokens]], [[api-gateway-patterns]], [[microservices-architecture]]
+Related: [security-authz-authn-tokens](../security-authz-authn-tokens/), [api-gateway-patterns](../api-gateway-patterns/), [microservices-architecture](../microservices-architecture/)
 
 # References
 
