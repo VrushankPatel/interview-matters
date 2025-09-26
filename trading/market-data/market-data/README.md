@@ -89,9 +89,9 @@ Data flow from exchange to trader.
 
 # Github-README Links & Related Topics
 
-- [[ITCH Protocol]]
-- [[FIX Protocol]]
-- [[Latency Measurement]]
+- [ITCH Protocol](../../protocols/itch-protocol/README.md)
+- [FIX Protocol](../../protocols/fix-protocol/README.md)
+- [Latency Measurement](../../../system-design/latency-measurement/README.md)
 
 ## References
 

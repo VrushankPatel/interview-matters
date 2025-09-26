@@ -114,10 +114,10 @@ This diagram shows the end-to-end flow from order submission to execution or can
 # Github-README Links & Related Topics
 
 - [[ITCH Protocol]]
-- [[OUCH Protocol]]
-- [[Order Types]]
+- [OUCH Protocol](../ouch-protocol/README.md)
+- [Order Types](../../order-types/order-types/README.md)
 - [[Market Data]]
-- [[Execution Report]]
+- [Execution Report](../../compliance/execution-report/README.md)
 
 ## References
 

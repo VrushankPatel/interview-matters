@@ -35,3 +35,20 @@ created_dirs: ["monitoring-and-logging", "async-logging", "devops-infrastructure
 updated_files: ["monitoring-and-logging/README.md", "async-logging/README.md", "devops-infrastructure-as-code/README.md", "proxy-forward-and-reverse/README.md", "system-design/load-balancing-and-strategies/README.md", "README.md", "SPECIFICATION.md", "PENDING_TOPICS.md", "NEXTTOPICS.md"]
 commit_made: true
 commit_message: "kb: add 5 topics (monitoring-and-logging, async-logging, devops-infrastructure-as-code, proxy-forward-and-reverse, load-balancing-and-strategies) + update root index + fix interlinks"
+topics_processed: ["FIX Protocol", "ITCH Protocol", "OUCH Protocol", "Market Data (overview & dissemination)", "Order Entry Protocols"]
+created_dirs: ["trading/protocols/fix-protocol", "trading/protocols/itch-protocol", "trading/protocols/ouch-protocol", "trading/market-data", "trading/protocols/order-entry-protocols"]
+updated_files: ["README.md", "SPECIFICATION.md", "PENDING_TOPICS.md", "NEXTTOPICS.md"]
+commit_made: true
+commit_message: "kb: add 5 trading topics (fix-protocol, itch-protocol, ouch-protocol, market-data, order-entry-protocols) + update index and spec"
+
+topics_processed: ["restructure"]
+created_dirs: []
+updated_files: ["README.md"]
+commit_made: true
+commit_message: "kb: restructure into categories (java, system-design, trading, devops, algorithms) + update index links + add READMEs for trading topics"
+
+topics_processed: ["FIX Protocol", "ITCH Protocol", "OUCH Protocol", "Market Data (overview & dissemination)", "Order Entry Protocols"]
+created_dirs: []
+updated_files: ["README.md", "SPECIFICATION.md", "PENDING_TOPICS.md", "NEXTTOPICS.md", "trading/protocols/fix-protocol/README.md", "trading/protocols/itch-protocol/README.md", "trading/protocols/ouch-protocol/README.md", "trading/market-data/market-data/README.md", "trading/protocols/order-entry-protocols/README.md"]
+commit_made: true
+commit_message: "kb: processed 5 trading topics + updated interlinks to proper markdown links + restructured root README links"

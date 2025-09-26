@@ -95,9 +95,9 @@ This shows incremental updates building the order book and reporting executions.
 
 # Github-README Links & Related Topics
 
-- [[FIX Protocol]]
+- [FIX Protocol](../fix-protocol/README.md)
 - [[Market Data]]
-- [[Order Book Modeling]]
+- [Order Book Modeling](../../../algorithms/order-book-modeling/README.md)
 
 ## References
 

@@ -54,9 +54,9 @@ As above.
 
 # Github-README Links & Related Topics
 
-- [[FIX Protocol]]
-- [[OUCH Protocol]]
-- [[Order Types]]
+- [FIX Protocol](../fix-protocol/README.md)
+- [OUCH Protocol](../ouch-protocol/README.md)
+- [Order Types](../../order-types/order-types/README.md)
 
 ## References
 

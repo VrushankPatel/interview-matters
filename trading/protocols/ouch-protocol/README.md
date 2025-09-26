@@ -95,9 +95,9 @@ Flow from submission to execution.
 
 # Github-README Links & Related Topics
 
-- [[FIX Protocol]]
-- [[Order Entry Protocols]]
-- [[Execution Report]]
+- [FIX Protocol](../fix-protocol/README.md)
+- [Order Entry Protocols](../order-entry-protocols/README.md)
+- [Execution Report](../../compliance/execution-report/README.md)
 
 ## References
 
