@@ -1,7 +1,7 @@
 ---
 title: Java Fundamentals
-aliases: [Java Basics, Core Java]
-tags: [#java]
+aliases: [java basics, java syntax]
+tags: [#java, #fundamentals]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -9,31 +9,28 @@ updated: 2025-09-26
 # Java Fundamentals
 
 ## Overview
-Java Fundamentals cover the core concepts and building blocks of the Java programming language, including syntax, data types, control structures, and basic object-oriented principles. These form the foundation for more advanced Java topics and are essential for any Java developer.
+
+Java fundamentals cover the core building blocks of the Java programming language, including basic syntax, data types, control structures, and introductory object-oriented programming concepts. These form the foundation for writing, compiling, and running Java applications.
 
 ## Detailed Explanation
-Java is a high-level, object-oriented programming language developed by Sun Microsystems (now Oracle). It follows the "Write Once, Run Anywhere" (WORA) principle through the Java Virtual Machine (JVM).
 
-### Key Concepts
-- **Data Types**: Primitive types (int, double, boolean, char) and reference types (objects, arrays)
-- **Variables**: Declaration, initialization, and scope
-- **Operators**: Arithmetic, relational, logical, assignment, and bitwise operators
-- **Control Structures**: if-else, switch, loops (for, while, do-while)
-- **Methods**: Declaration, parameters, return types, and method overloading
-- **Classes and Objects**: Basic OOP concepts like encapsulation, inheritance, and polymorphism
+Java is a statically-typed, object-oriented language that compiles to bytecode for the Java Virtual Machine (JVM). Key fundamentals include:
 
-### JVM Architecture Basics
-Java code is compiled to bytecode, which runs on the JVM. The JVM provides platform independence and memory management through garbage collection.
+- **Basic Syntax**: Java programs start with `public class ClassName { public static void main(String[] args) { ... } }`. Statements end with semicolons, blocks use curly braces.
+- **Data Types**: Primitive types (int, double, boolean, char) and reference types (objects, arrays, strings).
+- **Control Structures**: if-else, loops (for, while, do-while), switch statements for decision-making and iteration.
+- **OOP Basics**: Classes, objects, methods, constructors as the basis for encapsulation and modularity.
 
 ## Real-world Examples & Use Cases
-- **Web Applications**: Building servlets and JSPs for dynamic web content
-- **Mobile Apps**: Android development using Java (though Kotlin is gaining popularity)
-- **Enterprise Software**: Large-scale applications using frameworks like Spring
-- **Embedded Systems**: Java ME for resource-constrained devices
+
+- **Console Applications**: Simple calculators or text processors.
+- **Data Processing**: Reading files, parsing data, basic computations.
+- **Educational Tools**: Teaching programming concepts through small programs.
 
 ## Code Examples
 
-### Basic Hello World
+### Hello World
+
 ```java
 public class HelloWorld {
     public static void main(String[] args) {
@@ -42,25 +39,23 @@ public class HelloWorld {
 }
 ```
 
-### Data Types and Variables
+### Variables and Data Types
+
 ```java
-public class DataTypesExample {
+public class Variables {
     public static void main(String[] args) {
-        // Primitive types
-        int age = 25;
-        double salary = 50000.50;
+        int age = 25; // Primitive
+        String name = "John"; // Reference
+        double salary = 50000.0;
         boolean isEmployed = true;
-        char grade = 'A';
         
-        // Reference type
-        String name = "John Doe";
-        
-        System.out.println("Name: " + name + ", Age: " + age);
+        System.out.println(name + " is " + age + " years old.");
     }
 }
 ```
 
 ### Control Structures
+
 ```java
 public class ControlStructures {
     public static void main(String[] args) {
@@ -68,23 +63,18 @@ public class ControlStructures {
         
         // If-else
         if (number > 0) {
-            System.out.println("Positive number");
-        } else if (number < 0) {
-            System.out.println("Negative number");
+            System.out.println("Positive");
         } else {
-            System.out.println("Zero");
+            System.out.println("Non-positive");
         }
         
         // For loop
-        for (int i = 1; i <= 5; i++) {
+        for (int i = 0; i < 5; i++) {
             System.out.println("Count: " + i);
         }
         
         // Switch
         switch (number) {
-            case 1:
-                System.out.println("One");
-                break;
             case 10:
                 System.out.println("Ten");
                 break;
@@ -95,41 +85,13 @@ public class ControlStructures {
 }
 ```
 
-### Simple Class and Object
-```java
-public class Person {
-    private String name;
-    private int age;
-    
-    public Person(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-    
-    public void displayInfo() {
-        System.out.println("Name: " + name + ", Age: " + age);
-    }
-    
-    public static void main(String[] args) {
-        Person person = new Person("Alice", 30);
-        person.displayInfo();
-    }
-}
-```
-
-## Common Pitfalls & Edge Cases
-- Forgetting to initialize variables before use
-- Using == for string comparison instead of .equals()
-- Not handling null pointer exceptions
-- Misunderstanding integer overflow
-- Confusing pass-by-value for objects (references are passed by value)
-
 ## References
+
 - [Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/)
-- [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se17/html/index.html)
-- "Java: A Beginner's Guide" by Herbert Schildt
+- [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se21/html/index.html)
 
 ## Github-README Links & Related Topics
-- [java-language-basics](../java/java-language-basics/)
-- [oop-principles-in-java](../oop-principles-in-java/)
-- [java-data-types](../java-data-types/)
+
+- [OOP Principles in Java](oop-principles-in-java/)
+- [JVM Internals & Class Loading](jvm-internals-class-loading/)
+- [Java Data Types](java-data-types/)

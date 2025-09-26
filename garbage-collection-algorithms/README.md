@@ -1,6 +1,6 @@
 ---
 title: Garbage Collection Algorithms
-aliases: [GC Algorithms, Java Garbage Collection]
+aliases: [gc, garbage collection]
 tags: [#java, #gc]
 created: 2025-09-26
 updated: 2025-09-26
@@ -21,36 +21,24 @@ Garbage Collection (GC) is the process of automatically reclaiming memory occupi
 ### Common GC Algorithms
 
 #### Mark-Sweep
-1. **Mark Phase**: Traverse all reachable objects and mark them
-2. **Sweep Phase**: Reclaim memory from unmarked objects
-
-```mermaid
-graph TD
-    A[Mark Phase] --> B[Traverse reachable objects]
-    B --> C[Mark objects]
-    C --> D[Sweep Phase]
-    D --> E[Reclaim unmarked memory]
-```
-
-#### Mark-Compact
-Similar to Mark-Sweep but adds a compaction phase to reduce fragmentation.
+Basic tracing GC algorithm: marks reachable objects, sweeps unreclaimed memory.  
+Pros: Simple implementation, low memory overhead.  
+Cons: Causes heap fragmentation, long pause times during sweeps, inefficient for large heaps.
 
 #### Generational GC
-Divides heap into generations based on object age. Most objects die young.
+Divides heap into young (Eden/Survivor) and old generations; most objects die young. Uses mark-sweep in young gen, mark-compact in old.  
+Pros: Exploits weak generational hypothesis for efficiency, reduces full heap scans.  
+Cons: More complex, still has pause times, potential for old gen bloat.
 
-#### G1 Garbage Collector
-- Divides heap into regions
-- Concurrent marking
-- Evacuation pauses
+#### G1 (Garbage-First) GC
+Partitions heap into regions, prioritizes garbage-rich regions for collection; concurrent marking and evacuation.  
+Pros: Predictable low pause times, handles large heaps well, reduces fragmentation.  
+Cons: Higher CPU overhead, more tuning required, not ideal for small heaps.
 
-#### Z Garbage Collector
-- Low latency
-- Handles large heaps
-- Concurrent
-
-#### Shenandoah
-- Concurrent evacuation
-- Low pause times
+#### ZGC (Z Garbage Collector)
+Concurrent GC using colored pointers and load barriers; pauses <10ms, supports 8MB-16TB heaps.  
+Pros: Ultra-low latency, scalable, no pause scaling with heap size.  
+Cons: Higher memory usage, increased CPU overhead, not default (enable with -XX:+UseZGC).
 
 ## Real-world Examples & Use Cases
 - **Web Applications**: Choosing GC based on latency requirements

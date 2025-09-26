@@ -1,7 +1,7 @@
 ---
 title: Slack System Design
-aliases: [Slack Architecture, Slack Collaboration]
-tags: [#system-design,#collaboration,#real-time]
+aliases: [slack, system design, real-time messaging]
+tags: [#system-design, #messaging, #real-time, #microservices]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -10,30 +10,19 @@ updated: 2025-09-26
 
 ## Overview
 
-Slack is a cloud-based team collaboration platform that provides real-time messaging, file sharing, and integrations for modern workplaces. Launched in 2013, it serves millions of users across organizations, enabling seamless communication through channels, direct messages, threads, and bots. The system design emphasizes scalability, real-time performance, and extensibility, handling billions of messages daily while maintaining low latency and high availability.
-
-Key architectural principles include microservices architecture, event-driven messaging, and multi-tenant isolation to support diverse use cases from small teams to enterprise-scale deployments.
+Slack is a cloud-based team collaboration platform launched in 2013, serving millions of users with real-time messaging, file sharing, and integrations. Its architecture emphasizes scalability, low-latency real-time performance, and extensibility, processing billions of messages daily while maintaining high availability. Key principles include microservices, event-driven messaging, and multi-tenant isolation for small teams to enterprise-scale deployments.
 
 ## Detailed Explanation
 
-Slack's architecture is built on a distributed, event-driven system that separates concerns into specialized services. The core components handle real-time communication, data persistence, search, and integrations.
+Slack's system is distributed and event-driven, separating concerns into specialized services:
 
-### Core Components
-
-1. **Real-Time Messaging Gateway**: Manages WebSocket connections for instant message delivery using Elixir for high concurrency.
-2. **API Layer**: REST and GraphQL APIs for client interactions, built with Ruby on Rails and Node.js.
-3. **Message Storage**: PostgreSQL for metadata and Elasticsearch for full-text search.
-4. **File and Media Services**: AWS S3 for storage with CDN distribution.
-5. **Integration Platform**: Event-driven system supporting webhooks and third-party apps.
-
-### Scalability Strategies
-
-| Strategy | Implementation | Benefit |
-|----------|----------------|---------|
-| Horizontal Scaling | Auto-scaling services on AWS | Handles traffic spikes |
-| Sharding | Workspace-based data partitioning | Isolates large organizations |
-| Caching | Redis for session and message caching | Reduces database load |
-| Load Balancing | Global distribution with CloudFront | Low-latency worldwide access |
+- **Real-Time Messaging Gateway**: Manages WebSocket connections for instant delivery using Elixir for high concurrency.
+- **API Layer**: REST and GraphQL APIs for client interactions, built with Ruby on Rails and Node.js.
+- **Message Storage**: PostgreSQL for metadata and Elasticsearch for full-text search and indexing.
+- **File and Media Services**: AWS S3 for storage with CDN (CloudFront) for global distribution.
+- **Integration Platform**: Event-driven system supporting webhooks, bots, and third-party apps via Kafka for streaming.
+- **Job Queue System**: Uses Kafka and Redis for asynchronous processing of tasks like notifications and URL unfurls, handling 1.4 billion jobs daily at 33,000/sec peak.
+- **Presence and User Management**: Tracks online status and user data with Redis caching.
 
 ### Architecture Diagram
 
@@ -48,209 +37,142 @@ graph TD
     Workers --> Integrations[Third-party Integrations]
     API --> S3[(S3 Storage)]
     S3 --> CDN[CDN]
+    API --> Queue[Kafka Job Queue]
+    Queue --> Redis[(Redis Workers)]
 ```
 
-## STAR Summary
+## Scalability Strategies
 
-**Situation**: In 2014, Slack faced rapid user growth, needing to scale from thousands to millions of users while maintaining real-time performance.
+Slack handles massive scale through:
 
-**Task**: Design a system to handle 1 billion+ messages per month with sub-second delivery and reliable search.
+- **Horizontal Scaling**: Auto-scaling on AWS EC2 for traffic spikes.
+- **Sharding**: Workspace-based data partitioning to isolate large organizations (e.g., 100,000+ users).
+- **Caching**: Redis for sessions, messages, and presence to reduce DB load.
+- **Load Balancing**: Global CDN and load balancers for low-latency access worldwide.
+- **Durable Queues**: Kafka buffers jobs to prevent memory exhaustion in Redis, with rate limiting and failover.
+- **Multi-Region Deployment**: Services across AWS availability zones for fault tolerance.
 
-**Action**: Implemented microservices with Elixir for RTM, PostgreSQL sharding, and Elasticsearch indexing; used Redis for pub/sub messaging.
+Achieves 99.99% uptime, supporting 12 million daily active users with <100ms message latency.
 
-**Result**: Achieved 99.99% uptime, supporting 12 million daily active users with average message latency under 100ms.
+## Real-world Examples & Use Cases
 
-## Journey / Sequence
+- **Team Collaboration**: Real-time messaging for remote teams, with channels, threads, and file sharing.
+- **Enterprise Integration**: Custom bots and workflows for HR, sales, and IT departments.
+- **Event Notifications**: Automated alerts from monitoring tools or CI/CD pipelines.
+- **Customer Support**: Internal channels for support teams to coordinate on tickets.
 
-### Message Delivery Sequence
+## Code Examples
 
-```mermaid
-sequenceDiagram
-    participant User
-    participant Client
-    participant Gateway
-    participant Redis
-    participant API
-    participant DB
-    participant Search
+### Sending a Message via Slack API
 
-    User->>Client: Types message
-    Client->>Gateway: Send via WebSocket
-    Gateway->>Redis: Publish to channel
-    Redis->>Gateway: Broadcast to subscribers
-    Gateway->>Client: Deliver message
-    Gateway->>API: Persist async
-    API->>DB: Store metadata
-    API->>Search: Index content
+```python
+import requests
+
+# Slack API token
+token = 'xoxb-your-token'
+
+# Message payload
+payload = {
+    'channel': '#general',
+    'text': 'Hello, world!',
+    'as_user': True
+}
+
+# Post message
+response = requests.post('https://slack.com/api/chat.postMessage', 
+                         headers={'Authorization': f'Bearer {token}'}, 
+                         json=payload)
+
+print(response.json())
+```
+
+### WebSocket Connection for Real-Time Events
+
+```javascript
+const WebSocket = require('ws');
+
+const ws = new WebSocket('wss://slack.com/websocket/rtm?token=xoxb-your-token');
+
+ws.on('open', function open() {
+  console.log('Connected to Slack RTM');
+});
+
+ws.on('message', function incoming(data) {
+  const event = JSON.parse(data);
+  if (event.type === 'message') {
+    console.log('New message:', event.text);
+  }
+});
+```
+
+### Kafka Producer for Event Streaming
+
+```java
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerRecord;
+
+Properties props = new Properties();
+props.put("bootstrap.servers", "localhost:9092");
+props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+
+KafkaProducer<String, String> producer = new KafkaProducer<>(props);
+
+ProducerRecord<String, String> record = new ProducerRecord<>("slack-events", "user123", "Message sent");
+producer.send(record);
+producer.close();
 ```
 
 ## Data Models / Message Formats
 
-### Message JSON Format
-
-```json
-{
-  "type": "message",
-  "channel": "C1234567890",
-  "user": "U1234567890",
-  "text": "Hello, world!",
-  "ts": "1609459200.000100",
-  "thread_ts": "1609459200.000100",
-  "attachments": [
-    {
-      "fallback": "File attached",
-      "id": 1,
-      "filename": "example.pdf"
-    }
-  ]
-}
-```
-
-### User Presence Format
-
-```json
-{
-  "type": "presence_change",
-  "user": "U1234567890",
-  "presence": "active"
-}
-```
-
-## Real-world Examples & Use Cases
-
-### Enterprise Communication
-- **Example**: Fortune 500 companies use Slack for internal collaboration, integrating with tools like Salesforce and Jira.
-- **Scale**: Handles workspaces with 100,000+ users and millions of messages.
-
-### Remote Team Coordination
-- **Example**: Tech startups use channels for project discussions and threads for code reviews.
-- **Features**: File sharing, voice calls, and screen sharing integrated seamlessly.
-
-### Customer Support Hubs
-- **Example**: Companies like Zapier use shared channels for customer interactions with automated bots.
-- **Benefits**: Centralized ticketing and real-time responses.
-
-### Developer Communities
-- **Example**: Open-source projects on GitHub integrate Slack for notifications and discussions.
-- **Integration**: Webhooks for CI/CD pipelines and automated deployments.
-
-## Code Examples
-
-### WebSocket Client Connection (JavaScript)
-
-```javascript
-const ws = new WebSocket('wss://slack.com/rtm');
-
-ws.onopen = () => {
-  ws.send(JSON.stringify({
-    type: 'hello',
-    token: 'xoxb-your-bot-token'
-  }));
-};
-
-ws.onmessage = (event) => {
-  const data = JSON.parse(event.data);
-  if (data.type === 'message') {
-    console.log(`Message: ${data.text}`);
+- **Message JSON**:
+  ```json
+  {
+    "type": "message",
+    "channel": "C1234567890",
+    "user": "U1234567890",
+    "text": "Hello, world!",
+    "ts": "1609459200.000100",
+    "thread_ts": "1609459200.000100",
+    "attachments": [...]
   }
-};
-```
+  ```
 
-### Publishing Messages with Redis (Node.js)
-
-```javascript
-const redis = require('redis');
-const publisher = redis.createClient();
-
-function sendMessage(channelId, message) {
-  const payload = {
-    type: 'message',
-    channel: channelId,
-    text: message,
-    ts: Date.now() / 1000
-  };
-  publisher.publish(`channel:${channelId}`, JSON.stringify(payload));
-}
-```
-
-### Elasticsearch Search Query (Python)
-
-```python
-from elasticsearch import Elasticsearch
-
-es = Elasticsearch(['localhost:9200'])
-
-def search_messages(workspace_id, query):
-    response = es.search(
-        index=f'slack-{workspace_id}',
-        body={
-            'query': {
-                'multi_match': {
-                    'query': query,
-                    'fields': ['text', 'user']
-                }
-            }
-        }
-    )
-    return [hit['_source'] for hit in response['hits']['hits']]
-```
-
-### API Integration Webhook (Go)
-
-```go
-package main
-
-import (
-    "encoding/json"
-    "net/http"
-)
-
-type SlackEvent struct {
-    Type string `json:"type"`
-    Text string `json:"text"`
-}
-
-func handleWebhook(w http.ResponseWriter, r *http.Request) {
-    var event SlackEvent
-    json.NewDecoder(r.Body).Decode(&event)
-    if event.Type == "message" {
-        // Process message
-        processMessage(event.Text)
-    }
-    w.WriteHeader(http.StatusOK)
-}
-```
+- **Presence**:
+  ```json
+  {
+    "type": "presence_change",
+    "user": "U1234567890",
+    "presence": "active"
+  }
+  ```
 
 ## Common Pitfalls & Edge Cases
 
-- **Message Ordering**: Use timestamps and sequence IDs to maintain order in high-concurrency scenarios.
-- **Rate Limiting Abuse**: Implement per-user limits to prevent spam and ensure fair usage.
-- **Data Privacy**: Handle GDPR compliance with configurable retention and deletion policies.
-- **Integration Failures**: Use circuit breakers and retries for third-party service dependencies.
-- **Large Workspaces**: Monitor shard performance and implement horizontal scaling for user growth.
-- **Offline Synchronization**: Cache messages locally and sync on reconnection to handle network issues.
+- **Message Ordering**: Timestamps and sequence IDs ensure order in threads.
+- **Rate Limiting**: Per-user limits prevent abuse; handle throttling gracefully.
+- **Large Workspaces**: Monitor shard performance; implement pagination for message history.
+- **Integration Failures**: Use circuit breakers for third-party APIs to avoid cascading failures.
+- **Offline Sync**: Cache messages locally and sync on reconnection to handle network issues.
 
 ## Tools & Libraries
 
-- **Backend Services**: Elixir/Phoenix for real-time, Ruby on Rails for APIs, Go for high-performance services.
-- **Messaging**: Redis for pub/sub, Kafka for event streaming.
-- **Databases**: PostgreSQL for relational data, Elasticsearch for search.
-- **Storage**: AWS S3 for files, CloudFront for CDN.
-- **Monitoring**: Datadog for observability, Sentry for error tracking.
-- **Client Development**: React for web, Electron for desktop apps.
+- **Languages**: Elixir (RTM), Ruby/Rails (APIs), Go (services), Node.js (clients).
+- **Infrastructure**: AWS (EC2, S3, CloudFront), Redis, Kafka, PostgreSQL, Elasticsearch.
+- **Client**: React (web), Electron (desktop), native mobile.
+- **Monitoring**: Datadog, Sentry for observability.
 
 ## References
 
-- [Slack Engineering Blog](https://slack.engineering/)
-- [How Slack Built Their Real-Time Messaging Architecture](https://slack.engineering/how-slack-built-their-real-time-messaging-architecture/)
-- [Scaling Slack's Real-Time Messaging](https://slack.engineering/scaling-slacks-real-time-messaging/)
-- [Slack API Documentation](https://api.slack.com/)
-- [Building Resilient Systems at Slack](https://slack.engineering/building-resilient-systems/)
+- Slack Engineering Blog: https://slack.engineering/
+- Scaling Job Queue: https://slack.engineering/scaling-slacks-job-queue/
+- API Docs: https://api.slack.com/
 
 ## Github-README Links & Related Topics
 
-- [Real-time Systems](../real-time-systems/README.md)
-- [Event-Driven Architecture](../event-driven-architecture/README.md)
-- [API Design Principles](../api-design-principles/README.md)
-- [Microservices Architecture](../microservices-architecture/README.md)
-- [Distributed Caching](../distributed-caching-with-redis/README.md)
+- [Real-Time Systems](real-time-systems/)
+- [Event-Driven Architecture](event-driven-architecture/)
+- [Distributed Caching with Redis](distributed-caching-with-redis/)
+- [Event Streaming with Apache Kafka](event-streaming-with-apache-kafka/)
+- [Microservices Architecture](microservices-architecture/)
+- [WebSockets for Real Time Apps](websockets-for-real-time-apps/)

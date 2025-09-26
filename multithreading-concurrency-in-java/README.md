@@ -1,6 +1,6 @@
 ---
 title: Multithreading & Concurrency in Java
-aliases: [Java Multithreading, Concurrent Programming in Java]
+aliases: [multithreading, concurrency]
 tags: [#java, #concurrency]
 created: 2025-09-26
 updated: 2025-09-26
@@ -20,13 +20,58 @@ Multithreading and concurrency in Java allow programs to perform multiple tasks 
 4. **Blocked/Waiting**: Thread waiting for resources or I/O
 5. **Terminated**: Thread completed execution
 
-### Key Concepts
-- **Thread**: Lightweight process
-- **Runnable**: Interface for thread execution
-- **Synchronization**: Controlling access to shared resources
-- **Locks**: More flexible synchronization than synchronized
-- **Executors**: Managing thread pools
-- **Concurrent Collections**: Thread-safe collections
+### Threads
+Threads are the basic units of execution in Java, allowing concurrent tasks. Each thread has its own call stack but shares memory with other threads in the same process.
+
+- **Creating Threads**: Use the `Thread` class or implement `Runnable`. Threads can be started with `start()`, which calls `run()` asynchronously.
+- **Thread States**: New, Runnable, Blocked, Waiting, Timed Waiting, Terminated.
+- **Key Methods**:
+  - `start()`: Begins execution.
+  - `join()`: Waits for thread completion.
+  - `sleep(long millis)`: Pauses execution.
+  - `interrupt()`: Signals interruption.
+- **Example**:
+  ```java
+  Thread thread = new Thread(() -> {
+      System.out.println("Running in thread: " + Thread.currentThread().getName());
+  });
+  thread.start();
+  ```
+
+### Synchronization
+Synchronization prevents thread interference and memory consistency errors by controlling access to shared resources.
+
+- **Thread Interference**: Occurs when threads access shared data simultaneously, leading to unpredictable results.
+- **Memory Consistency Errors**: Threads may see stale values due to caching; synchronization establishes happens-before relationships.
+- **Synchronized Methods/Blocks**: Use `synchronized` keyword on methods or blocks. It uses intrinsic locks (monitor locks).
+  - Example: `public synchronized void method() { ... }`
+- **Atomic Access**: Operations like reading/writing primitives (except `long`/`double`) are atomic, but compound actions need synchronization.
+- **Guarded Blocks**: Use `wait()`/`notify()` for condition-based synchronization.
+- **Immutable Objects**: Thread-safe by design; avoid shared mutable state.
+
+### Locks
+Locks provide more flexible synchronization than intrinsic locks, via `java.util.concurrent.locks`.
+
+- **ReentrantLock**: Basic lock; supports `lock()`, `unlock()`, `tryLock()`, `lockInterruptibly()`.
+- **ReadWriteLock**: Allows multiple readers or one writer; implemented by `ReentrantReadWriteLock`.
+- **Advantages over Synchronized**: Try-lock with timeout, interruptible locking, fairness policies.
+- **Example (Read-Write Lock)**:
+  ```java
+  ReadWriteLock lock = new ReentrantReadWriteLock();
+  lock.readLock().lock();
+  try { /* read */ } finally { lock.readLock().unlock(); }
+  ```
+- **Deadlock Prevention**: Use `tryLock()` to avoid circular waits.
+
+### Concurrent Collections
+Thread-safe collections in `java.util.concurrent` avoid synchronization overhead.
+
+- **ConcurrentHashMap**: High-concurrency hash map; retrievals don't block, updates are fine-grained. Supports bulk ops like `forEach`, `search`, `reduce`. No null keys/values.
+  - Example: `ConcurrentHashMap<String, Integer> map = new ConcurrentHashMap<>(); map.putIfAbsent(key, value);`
+- **BlockingQueue**: FIFO queue that blocks on full/empty. Implementations: `ArrayBlockingQueue` (bounded), `LinkedBlockingQueue` (optionally bounded), `PriorityBlockingQueue`.
+  - Example: `BlockingQueue<String> queue = new ArrayBlockingQueue<>(10); queue.put("item"); String item = queue.take();`
+- **ConcurrentLinkedQueue**: Non-blocking, unbounded queue using CAS; suitable for high-concurrency producer-consumer.
+- **Other**: `ConcurrentSkipListMap` (navigable map), atomic variables like `AtomicInteger` for lock-free updates.
 
 ## Real-world Examples & Use Cases
 - **Web Servers**: Handling multiple client requests
