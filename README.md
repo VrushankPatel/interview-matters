@@ -66,6 +66,7 @@ This repository contains comprehensive documentation on various topics for inter
 - [Proxy Forward and Reverse](./proxy-forward-and-reverse/README.md)
 - [Rate Limiting](./rate-limiting/README.md)
 - [Replication vs Sharding vs Partitioning](./replication-vs-sharding-vs-partitioning/README.md)
+- [Popular System Designs](./popular-system-designs/README.md)
 - [Service Mesh Architecture](./service-mesh-architecture/README.md)
 - [System Design Basics](./system-design-basics/README.md)
 - [Three Phase Commit](./three-phase-commit/README.md)
