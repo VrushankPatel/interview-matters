@@ -341,3 +341,4 @@ This repository contains comprehensive documentation on various topics for inter
 - [Technical Interview Formats](./technical-interview-formats/README.md)
 - [Negotiation Strategies for Offers](./negotiation-strategies-for-offers/README.md)
 
+- [JVM Internals & Class Loading](./jvm-internals-class-loading/README.md)
