@@ -215,7 +215,7 @@
 - [Java Volatile Keyword](java-volatile-keyword/)
 - [Java Wait Notify](java-wait-notify/)
 - [Java](java/)
-- [Jvm Internals And Class Loading](jvm-internals-and-class-loading/)
+- [JVM Internals & Class Loading](jvm-internals-class-loading/)
 - [Jvm Internals Class Loading](jvm-internals-class-loading/)
 - [Jvm Memory Model](jvm-memory-model/)
 - [Jvm Performance Tuning](jvm-performance-tuning/)
