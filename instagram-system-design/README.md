@@ -1,7 +1,7 @@
 ---
 title: Instagram System Design
-aliases: [Instagram Architecture, Instagram Scalability, Instagram Photo Sharing]
-tags: [system-design, social-media, scalability, microservices, aws]
+aliases: [Instagram Architecture, Instagram Photo Sharing Design]
+tags: [#system-design, #social-media, #image-processing]
 created: 2025-09-26
 updated: 2025-09-26
 ---

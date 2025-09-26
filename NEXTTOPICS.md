@@ -1,5 +1,0 @@
-- WhatsApp Messaging System Design
-- YouTube System Design
-- Google Search Engine System Design
-- Instagram System Design
-- Slack Messaging System Design
