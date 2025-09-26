@@ -1,8 +1,3 @@
-- Popular System Designs LLD and HLD
-- Java Fundamentals
-- OOP Principles in Java
-- JVM Internals & Class Loading
-- System Design Basics
 - Replication vs Sharding vs Partitioning
 - Caching
 - Concurrency & Parallelism
@@ -15,3 +10,7 @@
 - Load Balancing and Strategies
 - Rate Limiting
 - Async Logging
+- DevOps & Infrastructure as Code
+- Proxy Forward and Reverse
+- Latency and Throughput Zero to Hero
+- Monitoring and Logging
