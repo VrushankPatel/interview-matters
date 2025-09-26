@@ -3,7 +3,7 @@ title: CI/CD with GitHub Actions
 aliases: []
 tags: [#devops,#ci-cd]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # CI/CD with GitHub Actions
@@ -107,6 +107,26 @@ jobs:
           # Deployment commands here
           echo "Deploying to production..."
 ```
+
+## Common Pitfalls & Edge Cases
+
+- **Action Version Pinning**: Use specific versions (e.g., `actions/checkout@v4`) to avoid breaking changes from updates.
+- **Secret Management**: Never log secrets; use encrypted secrets and environment variables.
+- **Job Dependencies**: Ensure proper `needs` configuration to avoid race conditions in parallel jobs.
+- **Resource Limits**: Free tier has limits; monitor usage to avoid throttling.
+- **Self-Hosted Runners**: Secure them properly; they can access internal resources.
+- **Large Repos**: Use shallow clones or caching to speed up checkouts.
+
+## Tools & Libraries
+
+| Category | Tool/Action | Description |
+|----------|-------------|-------------|
+| Checkout | `actions/checkout` | Clone repository with options for depth, submodules |
+| Setup | `actions/setup-node`, `actions/setup-java` | Configure runtime environments |
+| Build | `docker/build-push-action` | Build and push Docker images |
+| Deploy | `aws-actions/configure-aws-credentials` | Authenticate with AWS for deployments |
+| Test | `codecov/codecov-action` | Upload coverage reports |
+| Security | `github/codeql-action` | Run CodeQL security scans |
 
 ## References
 

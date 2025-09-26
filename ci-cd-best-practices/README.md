@@ -3,7 +3,7 @@ title: CI/CD Best Practices
 aliases: [Continuous Integration Best Practices, Continuous Deployment]
 tags: [#devops,#ci-cd,#automation]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 ## Overview
@@ -84,13 +84,22 @@ pipeline {
 
 ## Common Pitfalls & Edge Cases
 
-- **Flaky Tests**: Ensure tests are reliable.
-- **Security**: Scan for vulnerabilities in dependencies.
-- **Environment Differences**: Use consistent environments.
+- **Flaky Tests**: Tests that pass/fail intermittently; use retries, isolate dependencies, and monitor failure patterns.
+- **Security Vulnerabilities**: Regularly scan dependencies with tools like Snyk or OWASP Dependency-Check; automate security gates.
+- **Environment Differences**: Staging vs. production discrepancies; use Docker for consistent environments and infrastructure as code.
+- **Long Build Times**: Optimize by caching dependencies, parallelizing jobs, and using faster runners.
+- **Manual Approvals Bottlenecks**: Balance automation with necessary human oversight; use automated canary deployments.
+- **Rollback Failures**: Test rollback procedures; ensure immutable deployments with versioning.
 
 ## Tools & Libraries
 
-- Jenkins, GitHub Actions, GitLab CI, CircleCI, Travis CI.
+| Tool | Description | Key Features |
+|------|-------------|--------------|
+| Jenkins | Open-source automation server | Extensible plugins, pipeline as code, on-prem hosting |
+| GitHub Actions | CI/CD integrated with GitHub | Free for public repos, marketplace of actions, YAML workflows |
+| GitLab CI/CD | Built-in CI/CD for GitLab | Auto DevOps, Kubernetes integration, comprehensive security scanning |
+| CircleCI | Cloud-native CI/CD | Fast builds, orbs for reusable configs, Docker support |
+| Travis CI | Hosted CI service | Simple setup, matrix builds, integration with GitHub |
 
 ## References
 

@@ -3,7 +3,7 @@ title: CI/CD Pipelines
 aliases: [Continuous Integration Continuous Deployment]
 tags: [#devops]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # CI/CD Pipelines
@@ -114,6 +114,24 @@ pipeline {
     }
 }
 ```
+
+## Common Pitfalls & Edge Cases
+
+- **Pipeline Failures Due to Environment**: Ensure consistent environments across stages; use containers or VMs.
+- **Security in Pipelines**: Protect secrets; use encrypted variables and least-privilege access.
+- **Scalability Issues**: For large projects, optimize parallel jobs and caching to reduce build times.
+- **Integration with Legacy Systems**: Plan for gradual adoption; use feature flags for phased rollouts.
+- **Monitoring Pipeline Health**: Track metrics like build success rates, deployment frequencies, and mean time to recovery.
+
+## Tools & Libraries
+
+| Tool | Language/Framework | Description |
+|------|-------------------|-------------|
+| Jenkins | General | Declarative pipelines, extensive plugin ecosystem |
+| GitHub Actions | GitHub-integrated | YAML-based workflows, free tiers available |
+| GitLab CI | GitLab-integrated | Auto-scaling runners, integrated security scans |
+| CircleCI | General | Performance-optimized, supports monorepos |
+| Azure DevOps | Microsoft ecosystem | Integrated with Azure services, YAML pipelines |
 
 ## References
 
