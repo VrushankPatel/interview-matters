@@ -132,6 +132,56 @@ graph TD
 | Instagram | Photo/video sharing, stories, reels | Media storage, real-time feeds | PostgreSQL, Cassandra |
 | YouTube | Video upload/streaming, recommendations | Video transcoding, global CDN | Bigtable, MySQL |
 | WhatsApp | Messaging, calls, groups | End-to-end encryption, high concurrency | Erlang-based custom DB |
+| Facebook | News feed, social graph, ads | Real-time updates, massive scale | MySQL, Cassandra, HBase |
+| Google Maps | Navigation, traffic, places | Geospatial data, real-time updates | Bigtable, Spanner |
+| Slack | Team messaging, channels | Real-time collaboration, integrations | PostgreSQL, Redis |
+
+### 6. Facebook News Feed
+
+A social media platform's core feature for displaying personalized content from friends and pages.
+
+**HLD Diagram:**
+
+```mermaid
+graph TD
+    A[User] --> B[Load Balancer]
+    B --> C[Web/App Servers]
+    C --> D[News Feed Service]
+    D --> E[Graph Database (TAO)]
+    D --> F[Caching (Memcached)]
+    D --> G[Message Queue (Scribe)]
+    G --> H[Analytics]
+```
+
+**Key Components:**
+- **News Feed Service:** Generates feeds using edge-rank algorithm.
+- **Graph Database:** Stores social connections.
+- **Caching:** Speeds up feed generation.
+- **Analytics:** Tracks engagement.
+
+### 7. Google Maps
+
+A mapping service providing directions, real-time traffic, and location-based services.
+
+**HLD Diagram:**
+
+```mermaid
+graph TD
+    A[User] --> B[CDN]
+    B --> C[API Gateway]
+    C --> D[Routing Service]
+    C --> E[Places Service]
+    C --> F[Traffic Service]
+    D --> G[Database (Bigtable)]
+    E --> H[Geospatial Index]
+    F --> I[Real-time Data Pipeline]
+```
+
+**Key Components:**
+- **Routing Service:** Calculates optimal paths.
+- **Places Service:** Search and details for locations.
+- **Traffic Service:** Real-time congestion data.
+- **Databases:** Bigtable for scalability.
 
 ## Code Examples
 
