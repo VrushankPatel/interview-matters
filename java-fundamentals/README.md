@@ -189,6 +189,23 @@ public class Calculator {
 }
 ```
 
+## Common Pitfalls & Edge Cases
+
+- NullPointerException when accessing methods on null references
+- Integer overflow with large numbers (use long for big values)
+- Floating-point precision issues (use BigDecimal for financial calculations)
+- String comparison with == instead of .equals()
+- Forgetting to handle exceptions properly
+- Mutable objects in collections causing unexpected behavior
+
+## Tools & Libraries
+
+- **JDK (Java Development Kit)**: Core Java platform
+- **IntelliJ IDEA**: Popular IDE for Java development
+- **Eclipse**: Open-source IDE
+- **Maven/Gradle**: Build automation tools
+- **JUnit**: Unit testing framework
+
 ## References
 
 - [Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/)
