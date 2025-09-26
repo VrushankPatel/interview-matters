@@ -8,125 +8,128 @@ updated: 2025-09-26
 
 # Overview
 
-Order Entry Protocols are standardized electronic communications protocols used for submitting, modifying, and canceling orders in financial markets. The primary protocol is the Financial Information eXchange (FIX) protocol, developed by the FIX Trading Community. FIX enables real-time exchange of securities transaction information between buy-side institutions, sell-side brokers, and exchanges. It has evolved from a simple equity trading protocol to support multi-asset classes including equities, fixed income, derivatives, and foreign exchange. FIX reduces manual errors, lowers latency, and facilitates straight-through processing (STP) by automating trade communications.
+Order entry protocols enable the submission, modification, and cancellation of orders to electronic exchanges. Key protocols include FIX (Financial Information eXchange) for versatile messaging and OUCH for high-performance binary order entry. These protocols handle message types like New Order, Amend, and Cancel, with fields such as symbol, side, type, quantity, and price. Session management ensures reliable connections through logons, heartbeats, and sequence numbers.
 
 # STAR Summary
 
-**SITUATION**: In high-frequency trading environments, manual order entry via phone calls leads to errors, delays, and inefficiencies.
+**SITUATION:** Early electronic trading relied on proprietary systems, causing interoperability issues and high latency in order entry.
 
-**TASK**: Implement a reliable, low-latency protocol for electronic order submission and management.
+**TASK:** Standardize protocols for efficient, low-latency order submission across exchanges and brokers.
 
-**ACTION**: Adopted FIX protocol with tag-value encoding over TCP, utilizing messages like NewOrderSingle (D) for submissions and ExecutionReport (8) for confirmations.
+**ACTION:** Developed FIX as a text-based, extensible protocol and OUCH as a binary protocol optimized for speed, both supporting core order operations and session handling.
 
-**RESULT**: Achieved sub-millisecond order processing, reduced trade errors by 90%, and enabled seamless integration with global exchanges.
+**RESULT:** Enabled global electronic trading with reduced costs, improved speed, and standardized communication, supporting trillions in daily trade volume.
 
 # Detailed Explanation
 
-FIX is a session-layer protocol that defines message formats for pre-trade, trade, and post-trade communications. It uses a tag-value pair encoding where each field is identified by a numeric tag (e.g., 35 for MsgType, 11 for ClOrdID). Messages are self-describing and include a header, body, and trailer with checksum for integrity.
+Order entry protocols facilitate real-time communication between traders, brokers, and exchanges. FIX, a tag-value pair format, is widely used for equities, derivatives, and FX. OUCH, NASDAQ's binary protocol, minimizes parsing overhead for high-frequency trading.
 
-Key components:
-- **Session Layer (FIXT):** Manages connection establishment, message sequencing, and recovery. Supports point-to-point communication with guaranteed delivery.
-- **Application Layer:** Defines business semantics for order handling, including single orders, mass orders, cross orders, and multileg orders.
-- **Encodings:** Classic tagvalue (ASCII-based), FIXML (XML), and Simple Binary Encoding (SBE) for high-performance scenarios.
+**Message Types:**
+- **New Order:** Submits a new trade order (e.g., FIX NewOrderSingle, OUCH Enter Order).
+- **Amend:** Modifies an existing order (e.g., FIX OrderCancelReplaceRequest, OUCH Replace Order).
+- **Cancel:** Removes a pending order (e.g., FIX OrderCancelRequest, OUCH Cancel Order).
 
-For order entry, the Trade business area includes categories like Single/General Order Handling, with messages such as:
-- NewOrderSingle (35=D): Submits a new order.
-- OrderCancelReplaceRequest (35=G): Modifies an existing order.
-- OrderCancelRequest (35=F): Cancels an order.
-- ExecutionReport (35=8): Confirms order status and executions.
+**Key Fields:**
+- Symbol: Instrument identifier (e.g., AAPL).
+- Side: Buy (1) or Sell (2) in FIX; B or S in OUCH.
+- Type: Order type (e.g., Market, Limit).
+- Quantity: Number of shares or contracts.
+- Price: Limit price for limit orders.
 
-Fields include ClOrdID (11) for client order identification, Symbol (55) for security, Side (54) for buy/sell, OrderQty (38), Price (44), and OrdType (40) for order type (e.g., market, limit).
+**Session Management:** Protocols maintain persistent TCP connections with logon messages, heartbeats for keep-alive, and sequence numbers to detect gaps or duplicates. FIX uses session layers for reliability; OUCH relies on connection-oriented design with acknowledgments.
 
 # Real-world Examples & Use Cases
 
-**Equity Trading:** A hedge fund submits a limit buy order for 1000 shares of AAPL at $150 via NewOrderSingle. The broker responds with ExecutionReport confirming receipt, then partial fills as executions occur.
+- **HFT Firms:** Use OUCH for co-located order entry to minimize latency in NASDAQ trading.
+- **Retail Brokers:** Employ FIX to route client orders to multiple exchanges.
+- **Algorithmic Traders:** Submit and amend orders via FIX in automated strategies for equities or futures.
 
-**High-Frequency Trading (HFT):** Algorithms use FIX over low-latency connections to enter and cancel orders in microseconds, leveraging SBE for minimal encoding overhead.
-
-**Cross Orders:** For block trades, NewOrderCross (35=s) submits matched buy/sell sides simultaneously to minimize market impact.
-
-**Sample FIX Message (NewOrderSingle):**
-```
-8=FIX.4.4|9=122|35=D|49=BUYSIDE|56=SELLSIDE|34=1|52=20230926-12:00:00|11=12345|55=AAPL|54=1|38=1000|40=2|44=150|10=123|
-```
-This represents a buy order for 1000 AAPL at $150 limit.
+Example: A trader submits a limit buy order for 1000 AAPL shares at $150 via FIX to their broker, who forwards it to NYSE.
 
 # Message Formats / Data Models
 
-### NewOrderSingle Fields Table
+## FIX NewOrderSingle
 
-| Tag | Name          | Req'd | Description |
-|-----|---------------|-------|-------------|
-| 11  | ClOrdID       | Y     | Unique client order ID |
-| 55  | Symbol        | Y     | Security identifier |
-| 54  | Side          | Y     | 1=Buy, 2=Sell |
-| 38  | OrderQty      | Y     | Quantity |
-| 40  | OrdType       | Y     | 1=Market, 2=Limit, etc. |
-| 44  | Price         | C     | Required for limit orders |
-| 59  | TimeInForce   | N     | 0=Day, 1=GTC, etc. |
-| 60  | TransactTime  | Y     | Order initiation time |
+FIX messages use tag=value pairs delimited by SOH (ASCII 1).
 
-Messages are parsed by splitting on SOH (0x01), validating checksum (tag 10), and processing fields based on MsgType (tag 35).
+| Tag | Field Name    | Type   | Required | Description                          |
+|-----|---------------|--------|----------|--------------------------------------|
+| 35  | MsgType       | String | Y        | D for NewOrderSingle                 |
+| 11  | ClOrdID       | String | Y        | Unique client order ID               |
+| 55  | Symbol        | String | Y        | Instrument symbol                    |
+| 54  | Side          | Char   | Y        | 1=Buy, 2=Sell                       |
+| 38  | OrderQty      | Qty    | Y        | Quantity to trade                    |
+| 40  | OrdType       | Char   | Y        | 1=Market, 2=Limit                   |
+| 44  | Price         | Price  | C        | Limit price (if OrdType=2)           |
+
+Sample: 8=FIX.4.2|9=123|35=D|49=BUYER|56=EXCHANGE|34=1|52=20230926-12:00:00.000|11=ORD123|55=AAPL|54=1|38=100|40=2|44=150.00|10=123|
+
+## OUCH Enter Order
+
+OUCH uses fixed binary fields.
+
+| Field          | Size | Description                  |
+|----------------|------|------------------------------|
+| Message Type   | 1    | 'O'                          |
+| Order Token    | 14   | Unique order ID              |
+| Side           | 1    | 'B' or 'S'                   |
+| Quantity       | 4    | Order quantity               |
+| Symbol         | 8    | Stock symbol                 |
+| Price          | 4    | Price * 100                  |
+| Time-in-Force  | 1    | '0'=Day                      |
+
+Sample hex: 4F [14-byte token] 42 00 00 03 E8 41 41 50 4C 20 20 20 20 00 00 96 00 30 [firm] 59 50 4E 00 00 00 00 00 00
 
 # Journey of a Trade
 
 ```mermaid
 sequenceDiagram
-    participant Client
-    participant Broker
+    participant Trader
+    participant Broker/Gateway
     participant Exchange
 
-    Client->>Broker: NewOrderSingle (35=D)
-    Broker->>Client: ExecutionReport (35=8, ExecType=0 New)
-    Broker->>Exchange: Internal routing
-    Exchange->>Broker: Execution confirmation
-    Broker->>Client: ExecutionReport (35=8, ExecType=F Trade)
-    Client->>Broker: OrderCancelRequest (35=F) if needed
-    Broker->>Client: ExecutionReport (35=8, ExecType=4 Canceled)
+    Trader->>Broker/Gateway: Submit New Order (NewOrderSingle/Enter Order)
+    Broker/Gateway->>Exchange: Forward Order
+    Exchange->>Broker/Gateway: Acknowledge/ExecutionReport
+    Broker/Gateway->>Trader: Confirm Receipt/Execution
+    Note over Trader,Exchange: Amendments and cancellations follow similar flow
 ```
-
-This diagram illustrates the lifecycle: order submission, acknowledgment, execution, and potential cancellation.
 
 # Common Pitfalls & Edge Cases
 
-- **Message Sequencing:** Out-of-order messages can cause rejections; use MsgSeqNum (34) for recovery.
-- **Latency Issues:** Character-based encoding adds overhead; use SBE for HFT.
-- **Session Management:** Disconnections require logon/logout; implement heartbeat (35=0) monitoring.
-- **Validation Errors:** Invalid fields (e.g., unknown Symbol) trigger rejects; always validate before sending.
-- **Race Conditions:** Concurrent modifications; use OrigClOrdID (41) for chaining.
-- **Regulatory Compliance:** Ensure messages comply with MiFID II; use extensions for reporting.
+- **Validation Failures:** Invalid symbol, price outside tick size, or insufficient quantity lead to rejections; always validate inputs.
+- **Session Disconnects:** Network issues cause gaps in sequence numbers; implement reconnection logic.
+- **Rate Limiting:** Exchanges enforce order frequency limits; monitor and throttle submissions.
+- **Order Routing Errors:** Incorrect firm IDs or destinations result in failed executions.
+- **Concurrency Issues:** Simultaneous amends/cancels can cause race conditions; use order tokens for tracking.
 
 # Tools & Libraries
 
-- **QuickFIX:** Open-source FIX engine in C++, Java, Python. Example Python snippet:
-  ```python
-  import quickfix as fix
-
-  class Application(fix.Application):
-      def onMessage(self, message, sessionID):
-          msgType = fix.MsgType()
-          message.getHeader().getField(msgType)
-          if msgType.getValue() == fix.MsgType_NewOrderSingle:
-              # Process order
-              pass
-
-  # Initialize and run
+- **QuickFIX (C++, Java, Python):** Open-source for FIX message handling.
+  ```java
+  import quickfix.*;
+  Message msg = new Message();
+  msg.getHeader().setField(new MsgType("D"));
+  msg.setField(new ClOrdID("123"));
+  msg.setField(new Symbol("AAPL"));
+  msg.setField(new Side(Side.BUY));
+  msg.setField(new OrderQty(100));
+  msg.setField(new OrdType(OrdType.LIMIT));
+  msg.setField(new Price(150.0));
   ```
-- **FIX Antenna:** Commercial library for high-performance FIX parsing.
-- **FIXimate:** Online dictionary for message validation.
-- **Esprow FIX Tools:** Browser-based parser for testing.
+- **OUCH SDK:** NASDAQ-provided libraries for binary message encoding/decoding.
+- **FIXimulator:** Testing tool for FIX sessions.
 
 # Github-README Links & Related Topics
 
-- [FIX Protocol](../fix-protocol/)
-- [ITCH Protocol](../itch-protocol/)
-- [OUCH Protocol](../ouch-protocol/)
-- [Market Data (overview & dissemination)](../../market-data/market-data-overview-dissemination/)
-- [Execution Report](../../compliance/execution-report/)
-- [Trade Capture Report](../../compliance/trade-capture-report/)
+[[OUCH Protocol]]
+
+[[FIX Protocol]]
+
+[[Order Types]]
 
 # References
 
-- [FIX Trading Community](https://www.fixtrading.org/)
-- [FIX Protocol Specification](https://www.fixtrading.org/online-specification/)
-- [Wikipedia: Financial Information eXchange](https://en.wikipedia.org/wiki/Financial_Information_eXchange)
+- [FIX Protocol Standards](https://www.fixtrading.org/standards/)
+- [NASDAQ OUCH Specification](https://www.nasdaqtrader.com/content/technicalsupport/specifications/TradingProducts/OUCH4.2.pdf)
+- [Order Routing Protocols Blog](https://www.tradingtechnologies.com/blog/order-routing-protocols/)

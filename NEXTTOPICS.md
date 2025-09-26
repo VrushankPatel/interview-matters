@@ -72,3 +72,14 @@
 - Latency arbitrage
 - Swap & derivatives trade lifecycle
 - Regulatory reports (e.g., MiFID/SEF)
+-e 
+- Concurrent Collections
+- Java Streams Advanced
+- Reflection and Annotations
+- Java Security Basics
+- Networking Sockets
+- File IO NIO
+- Java Testing Advanced
+- Build Automation
+- Profiling Tools
+- Advanced Java Concepts

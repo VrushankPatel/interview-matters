@@ -1,16 +1,36 @@
 ---
 title: OOP Principles in Java
 aliases: [Object-Oriented Programming in Java]
-tags: [#java, #oop]
+tags: [java,oop]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# OOP Principles in Java
+# Overview
 
-## Overview
+Object-Oriented Programming (OOP) in Java revolves around four core principles: Encapsulation, Inheritance, Polymorphism, and Abstraction. These principles enable modular, reusable, and maintainable code by modeling real-world entities as objects with properties (fields) and behaviors (methods). Java is inherently object-oriented, requiring all code to be within classes, with everything treated as objects except primitives.
 
-Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects", which can contain data and code. Java implements OOP through four main principles: Encapsulation, Inheritance, Polymorphism, and Abstraction.
+# STAR Summary
+
+**SITUATION:** Procedural programming leads to code that is hard to maintain and scale, with data and logic scattered across functions.
+
+**TASK:** Implement OOP principles to organize code into cohesive units that mirror real-world concepts.
+
+**ACTION:** Apply encapsulation to hide data, inheritance for code reuse, polymorphism for flexibility, and abstraction for simplification.
+
+**RESULT:** Cleaner, more extensible codebases that are easier to debug, test, and extend, as seen in large Java applications like enterprise systems.
+
+# Detailed Explanation
+
+- **Encapsulation:** Bundling data and methods into classes, with access modifiers (`private`, `protected`, `public`) to control visibility. Getters/setters provide controlled access.
+
+- **Inheritance:** Creating new classes (subclasses) from existing ones (superclasses) to inherit properties and methods. Uses `extends` keyword. Supports method overriding.
+
+- **Polymorphism:** Ability of objects to take many forms. Achieved through method overriding (runtime) and overloading (compile-time). Enables dynamic method dispatch.
+
+- **Abstraction:** Hiding complex implementation details, showing only essential features. Implemented via abstract classes and interfaces. Interfaces define contracts without implementation.
+
+Java supports single inheritance for classes but multiple inheritance via interfaces. The `Object` class is the root of all classes, providing methods like `toString()`, `equals()`, `hashCode()`.
 
 ## Detailed Explanation
 
@@ -155,12 +175,59 @@ public class SavingsAccount extends BankAccount {
 }
 ```
 
+# Message Formats / Data Models
+
+N/A.
+
+# Journey of a Trade
+
+N/A.
+
+```mermaid
+classDiagram
+    Animal <|-- Dog
+    Animal <|-- Cat
+    Animal : +String name
+    Animal : +makeSound()
+    class Dog {
+        +makeSound() "Woof"
+    }
+    class Cat {
+        +makeSound() "Meow"
+    }
+```
+
+This diagram illustrates inheritance and polymorphism with a simple animal hierarchy.
+
+# Common Pitfalls & Edge Cases
+
+- **Tight Coupling:** Overusing inheritance creates rigid hierarchies; prefer composition.
+
+- **Method Overriding Issues:** Forgetting `@Override` or mismatching signatures.
+
+- **Abstract Class vs Interface:** Use interfaces for multiple inheritance; abstract classes for shared state.
+
+- **Encapsulation Violations:** Exposing fields directly; use accessors.
+
+- **Diamond Problem:** Avoided in Java by single class inheritance, but interfaces can have default methods.
+
+- **Null Checks:** Polymorphic calls on null objects throw exceptions.
+
+# Tools & Libraries
+
+- **IDEs:** IntelliJ IDEA for refactoring and code generation.
+
+- **Libraries:** Lombok for reducing boilerplate with annotations for getters/setters.
+
 ## References
 
 - [Oracle OOP Concepts](https://docs.oracle.com/javase/tutorial/java/concepts/)
 - "Design Patterns: Elements of Reusable Object-Oriented Software" by Gang of Four
 
-## Github-README Links & Related Topics
+# Github-README Links & Related Topics
 
-- [Java Fundamentals](java-fundamentals)
-- [Design Patterns in Java](design-patterns-in-java)
+[[Java Fundamentals]]
+[[Inheritance In Java]]
+[[Polymorphism In Java]]
+[[Abstraction In Java]]
+[[Encapsulation In Java]]
