@@ -1,95 +1,105 @@
 ---
 title: OOP Principles in Java
-aliases: [Object-Oriented Programming in Java, Java OOP]
+aliases: [Object-Oriented Programming, Java OOP]
 tags: [#java,#oop]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
+# OOP Principles in Java
+
 ## Overview
 
-Object-Oriented Programming (OOP) in Java is built around four fundamental principles: Encapsulation, Inheritance, Polymorphism, and Abstraction. These principles guide the design of classes and objects, enabling developers to create robust, modular, and maintainable software systems.
-
-```mermaid
-graph TD
-    A[OOP Principles in Java] --> B[Encapsulation]
-    A --> C[Inheritance]
-    A --> D[Polymorphism]
-    A --> E[Abstraction]
-```
+Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects", which can contain data and code. Java is fundamentally an object-oriented language that implements OOP principles to promote code reusability, modularity, and maintainability. The four main OOP principles are Encapsulation, Inheritance, Polymorphism, and Abstraction.
 
 ## Detailed Explanation
 
-| Principle | Description | Key Benefit |
-|-----------|-------------|-------------|
-| Encapsulation | Bundling data and methods within a class, restricting access to internal state | Data protection and reduced coupling |
-| Inheritance | Allowing classes to inherit properties and behaviors from parent classes | Code reusability and hierarchical relationships |
-| Polymorphism | Enabling objects to take multiple forms through method overriding and overloading | Flexibility and extensibility |
-| Abstraction | Hiding complex implementation details while exposing essential features | Simplified interfaces and reduced complexity |
-
 ### Encapsulation
 
-Encapsulation combines data (fields) and the methods that manipulate that data into a single unit (class). Access to the data is controlled through public methods, preventing unauthorized modifications.
+Encapsulation is the bundling of data and methods that operate on that data within a single unit (class). It restricts direct access to some of an object's components, which is a means of preventing accidental interference and misuse of the data.
+
+**Key Concepts:**
+- Private fields
+- Public getter/setter methods
+- Data hiding
 
 ### Inheritance
 
-Inheritance establishes an "is-a" relationship between classes, where a subclass inherits attributes and methods from a superclass. This promotes code reuse but should be used judiciously to avoid tight coupling.
+Inheritance is a mechanism where one class acquires the properties and behaviors of another class. It promotes code reusability and establishes a relationship between classes.
+
+**Types of Inheritance in Java:**
+- Single inheritance
+- Multilevel inheritance
+- Hierarchical inheritance
+- Multiple inheritance (through interfaces)
 
 ### Polymorphism
 
-Polymorphism allows methods to behave differently based on the object calling them. In Java, this is achieved through method overriding (runtime) and method overloading (compile-time), enabling dynamic behavior.
+Polymorphism allows objects of different classes to be treated as objects of a common superclass. It enables a single interface to represent different underlying forms (data types).
+
+**Types:**
+- Compile-time polymorphism (Method Overloading)
+- Runtime polymorphism (Method Overriding)
 
 ### Abstraction
 
-Abstraction focuses on what an object does rather than how it does it. Abstract classes and interfaces define contracts that concrete classes must fulfill, separating interface from implementation.
+Abstraction is the process of hiding implementation details and showing only the functionality to the user. It focuses on what an object does rather than how it does it.
+
+**Achieved through:**
+- Abstract classes
+- Interfaces
 
 ## Real-world Examples & Use Cases
 
-### Encapsulation
-- **Banking System**: Account balances are encapsulated within the `Account` class, accessible only through deposit and withdrawal methods to ensure data integrity.
-- **Car Dashboard**: Internal engine parameters are hidden; users interact via public controls like accelerate and brake.
+1. **Banking System**: Account classes with encapsulation for balance, inheritance for different account types (Savings, Checking), polymorphism for interest calculation.
 
-### Inheritance
-- **Employee Management**: A `Manager` class inherits from `Employee`, gaining base attributes like salary while adding management-specific features.
-- **GUI Components**: `Button` extends `Component`, inheriting positioning and rendering logic.
+2. **Vehicle Management**: Base Vehicle class with inheritance for Car, Bike, Truck; abstraction for engine types.
 
-### Polymorphism
-- **Payment Gateway**: Different payment types (CreditCard, PayPal) implement the same `processPayment()` method with varying logic.
-- **Media Players**: `play()` method works for Audio, Video, and Streaming objects with different implementations.
+3. **Employee Management**: Employee hierarchy with different roles, using inheritance and polymorphism for salary calculations.
 
-### Abstraction
-- **Database Layer**: An abstract `DatabaseConnection` class defines `connect()` and `query()`, with concrete implementations for MySQL, PostgreSQL, etc.
-- **Notification Service**: Abstract `Notifier` interface with `send()` method, implemented by EmailNotifier, SMSNotifier, etc.
+4. **GUI Components**: Abstract Component class with concrete implementations like Button, TextField using polymorphism.
 
 ## Code Examples
 
 ### Encapsulation Example
 
 ```java
-public class BankAccount {
-    private double balance;
-
-    public BankAccount(double initialBalance) {
-        this.balance = initialBalance;
+public class Person {
+    private String name;
+    private int age;
+    
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
     }
-
-    public void deposit(double amount) {
-        if (amount > 0) {
-            balance += amount;
+    
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public int getAge() {
+        return age;
+    }
+    
+    public void setAge(int age) {
+        if (age > 0) {
+            this.age = age;
         }
     }
+}
 
-    public double getBalance() {
-        return balance;
-    }
-
-    // Withdraw method with validation
-    public boolean withdraw(double amount) {
-        if (amount > 0 && amount <= balance) {
-            balance -= amount;
-            return true;
-        }
-        return false;
+public class EncapsulationExample {
+    public static void main(String[] args) {
+        Person person = new Person("John", 25);
+        System.out.println("Name: " + person.getName());
+        System.out.println("Age: " + person.getAge());
+        
+        person.setAge(30);
+        System.out.println("Updated Age: " + person.getAge());
     }
 }
 ```
@@ -97,36 +107,45 @@ public class BankAccount {
 ### Inheritance Example
 
 ```java
-public class Vehicle {
-    protected String brand;
-    protected int speed;
-
-    public Vehicle(String brand) {
-        this.brand = brand;
-        this.speed = 0;
+// Base class
+public class Animal {
+    protected String name;
+    
+    public Animal(String name) {
+        this.name = name;
     }
-
-    public void accelerate(int increment) {
-        speed += increment;
+    
+    public void eat() {
+        System.out.println(name + " is eating");
     }
-
-    public void displayInfo() {
-        System.out.println("Brand: " + brand + ", Speed: " + speed);
+    
+    public void sleep() {
+        System.out.println(name + " is sleeping");
     }
 }
 
-public class Car extends Vehicle {
-    private int doors;
-
-    public Car(String brand, int doors) {
-        super(brand);
-        this.doors = doors;
+// Derived class
+public class Dog extends Animal {
+    public Dog(String name) {
+        super(name);
     }
-
+    
+    public void bark() {
+        System.out.println(name + " is barking");
+    }
+    
     @Override
-    public void displayInfo() {
-        super.displayInfo();
-        System.out.println("Doors: " + doors);
+    public void eat() {
+        System.out.println(name + " is eating dog food");
+    }
+}
+
+public class InheritanceExample {
+    public static void main(String[] args) {
+        Dog dog = new Dog("Buddy");
+        dog.eat();    // Overridden method
+        dog.sleep();  // Inherited method
+        dog.bark();   // Dog-specific method
     }
 }
 ```
@@ -134,31 +153,62 @@ public class Car extends Vehicle {
 ### Polymorphism Example
 
 ```java
-public abstract class Animal {
-    public abstract void makeSound();
+// Interface
+interface Shape {
+    double area();
+    double perimeter();
 }
 
-public class Dog extends Animal {
+// Circle class
+class Circle implements Shape {
+    private double radius;
+    
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+    
     @Override
-    public void makeSound() {
-        System.out.println("Woof!");
+    public double area() {
+        return Math.PI * radius * radius;
+    }
+    
+    @Override
+    public double perimeter() {
+        return 2 * Math.PI * radius;
     }
 }
 
-public class Cat extends Animal {
+// Rectangle class
+class Rectangle implements Shape {
+    private double length;
+    private double width;
+    
+    public Rectangle(double length, double width) {
+        this.length = length;
+        this.width = width;
+    }
+    
     @Override
-    public void makeSound() {
-        System.out.println("Meow!");
+    public double area() {
+        return length * width;
+    }
+    
+    @Override
+    public double perimeter() {
+        return 2 * (length + width);
     }
 }
 
-// Usage
-public class AnimalDemo {
+public class PolymorphismExample {
     public static void main(String[] args) {
-        Animal[] animals = {new Dog(), new Cat()};
-        for (Animal animal : animals) {
-            animal.makeSound(); // Polymorphic call
-        }
+        Shape circle = new Circle(5);
+        Shape rectangle = new Rectangle(4, 6);
+        
+        System.out.println("Circle Area: " + circle.area());
+        System.out.println("Circle Perimeter: " + circle.perimeter());
+        
+        System.out.println("Rectangle Area: " + rectangle.area());
+        System.out.println("Rectangle Perimeter: " + rectangle.perimeter());
     }
 }
 ```
@@ -166,69 +216,59 @@ public class AnimalDemo {
 ### Abstraction Example
 
 ```java
-public interface Shape {
-    double calculateArea();
-    double calculatePerimeter();
-}
-
-public class Circle implements Shape {
-    private double radius;
-
-    public Circle(double radius) {
-        this.radius = radius;
+// Abstract class
+abstract class Vehicle {
+    protected String brand;
+    
+    public Vehicle(String brand) {
+        this.brand = brand;
     }
-
-    @Override
-    public double calculateArea() {
-        return Math.PI * radius * radius;
-    }
-
-    @Override
-    public double calculatePerimeter() {
-        return 2 * Math.PI * radius;
+    
+    abstract void start();
+    abstract void stop();
+    
+    public void honk() {
+        System.out.println("Honk! Honk!");
     }
 }
 
-public class Rectangle implements Shape {
-    private double width, height;
-
-    public Rectangle(double width, double height) {
-        this.width = width;
-        this.height = height;
+// Concrete class
+class Car extends Vehicle {
+    public Car(String brand) {
+        super(brand);
     }
-
+    
     @Override
-    public double calculateArea() {
-        return width * height;
+    void start() {
+        System.out.println(brand + " car is starting");
     }
-
+    
     @Override
-    public double calculatePerimeter() {
-        return 2 * (width + height);
+    void stop() {
+        System.out.println(brand + " car is stopping");
+    }
+}
+
+public class AbstractionExample {
+    public static void main(String[] args) {
+        Vehicle car = new Car("Toyota");
+        car.start();
+        car.honk();
+        car.stop();
     }
 }
 ```
 
-## Common Pitfalls & Edge Cases
-
-- **Inheritance Overuse**: Deep inheritance chains can lead to the "fragile base class" problem. Consider composition as an alternative.
-- **Polymorphism Confusion**: Method overloading vs. overriding can cause unexpected behavior if not carefully managed.
-- **Abstraction Leaks**: Exposing implementation details through public methods breaks abstraction.
-- **Encapsulation Violations**: Using reflection to access private fields bypasses encapsulation safeguards.
-- **Multiple Inheritance Limitation**: Java doesn't support multiple inheritance for classes, leading to complex interface hierarchies.
-
 ## References
 
-- [Oracle Java Tutorials: Object-Oriented Programming Concepts](https://docs.oracle.com/javase/tutorial/java/concepts/)
-- [GeeksforGeeks: OOPs Concepts in Java](https://www.geeksforgeeks.org/object-oriented-programming-oops-concept-in-java/)
-- [Baeldung: Object-Oriented Programming in Java](https://www.baeldung.com/java-oop)
-- [JavaPoint: OOPs Concepts](https://www.javatpoint.com/java-oops-concepts)
+- [Oracle OOP Concepts](https://docs.oracle.com/javase/tutorial/java/concepts/)
+- [GeeksforGeeks OOP in Java](https://www.geeksforgeeks.org/object-oriented-programming-oops-concept-in-java/)
+- [Baeldung OOP Principles](https://www.baeldung.com/java-oop)
 
 ## Github-README Links & Related Topics
 
-- [Encapsulation in Java](./encapsulation-in-java/README.md)
-- [Inheritance in Java](./inheritance-in-java/README.md)
-- [Polymorphism in Java](./polymorphism-in-java/README.md)
-- [Abstraction in Java](./abstraction-in-java/README.md)
-- [Design Patterns in Java](./java-design-patterns/README.md)
-- [Java OOP Design and Principles](./java/oop-design-and-principles/README.md)
+- [Java Fundamentals](../java-fundamentals/README.md)
+- [Inheritance in Java](../inheritance-in-java/README.md)
+- [Polymorphism in Java](../polymorphism-in-java/README.md)
+- [Encapsulation in Java](../encapsulation-in-java/README.md)
+- [Abstraction in Java](../abstraction-in-java/README.md)
