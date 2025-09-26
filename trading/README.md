@@ -4,10 +4,10 @@ This section covers trading systems, protocols, market data, order management, a
 
 ## Protocols
 
-- [FIX Protocol](fix-protocol/README.md)
-- [ITCH Protocol](itch-protocol/README.md)
-- [OUCH Protocol](ouch-protocol/README.md)
-- [Order Entry Protocols](order-entry-protocols/README.md)
+- [FIX Protocol](protocols/fix-protocol/README.md)
+- [ITCH Protocol](protocols/itch-protocol/README.md)
+- [OUCH Protocol](protocols/ouch-protocol/README.md)
+- [Order Entry Protocols](protocols/order-entry-protocols/README.md)
 
 ## Market Data
 
@@ -19,13 +19,13 @@ This section covers trading systems, protocols, market data, order management, a
 
 ## Lifecycle
 
-- [Journey of a Trade (end-to-end)](journey-of-a-trade/README.md)
+- [Journey of a Trade (end-to-end)](lifecycle/journey-of-a-trade/README.md)
 
 ## Exchange Behavior
 
-- [Quotes & RFQ workflows](quotes-and-rfq-workflows/README.md)
+- [Quotes & RFQ workflows](exchange-behavior/quotes-rfq-workflows/README.md)
 
 ## Compliance
 
-- [Execution Report](execution-report/README.md)
-- [Trade Capture Report](trade-capture-report/README.md)
+- [Execution Report](lifecycle/execution-report/README.md)
+- [Trade Capture Report](lifecycle/trade-capture-report/README.md)

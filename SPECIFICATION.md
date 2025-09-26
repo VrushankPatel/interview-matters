@@ -6,7 +6,7 @@ Last update
 
 Summary of recent additions
    - Processed 5 topics: FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols
-   - Updated interlinks to use wikilinks in existing trading READMEs
+   - Restructured repository: moved trading protocols to protocols/ subdir, system-design real-world topics to real-world-designs/ subdir, created subdirs for better organization
 
 Conventions
  - Dir naming: kebab-case.
@@ -134,16 +134,36 @@ New Next Topics Candidates (this run)
   - AI in market prediction — 'Machine learning for price forecasting'
 
 New Next Topics Candidates
-            - Order Book modeling — 'Canonical models for in-memory book and persistence'
-            - Matching algorithm internals — 'How exchanges match buy and sell orders'
-            - Time-in-Force variations across exchanges — 'DAY, GTC, IOC behaviors by venue'
-            - Market fragmentation & smart order routing — 'Routing orders across multiple markets'
-            - Latency measurement & monitoring — 'Tools and techniques for latency analysis'
-            - FIX Session Layer (Logon/Heartbeat/Seq numbers) — 'Session management in FIX protocol'
-            - Market data consolidation & TOPS snapshot vs incremental — 'Consolidating feeds from multiple sources'
-            - Latency arbitrage — 'Exploiting latency differences for profit'
-            - Swap & derivatives trade lifecycle — 'Trading non-equity instruments'
-            - Regulatory reports (e.g., MiFID/SEF) — 'Compliance reporting requirements'
+              - Order Book modeling — 'Canonical models for in-memory book and persistence'
+              - Matching algorithm internals — 'How exchanges match buy and sell orders'
+              - Time-in-Force variations across exchanges — 'DAY, GTC, IOC behaviors by venue'
+              - Market fragmentation & smart order routing — 'Routing orders across multiple markets'
+              - Latency measurement & monitoring — 'Tools and techniques for latency analysis'
+              - FIX Session Layer (Logon/Heartbeat/Seq numbers) — 'Session management in FIX protocol'
+              - Market data consolidation & TOPS snapshot vs incremental — 'Consolidating feeds from multiple sources'
+              - Latency arbitrage — 'Exploiting latency differences for profit'
+              - Swap & derivatives trade lifecycle — 'Trading non-equity instruments'
+              - Regulatory reports (e.g., MiFID/SEF) — 'Compliance reporting requirements'
+              - High-Frequency Trading strategies — 'HFT algorithms and infrastructure'
+              - Order Book depth and liquidity — 'Measuring and managing order book liquidity'
+              - FIX message sequencing and recovery — 'Handling message gaps and resends'
+              - Market maker algorithms — 'Providing liquidity in markets'
+              - Cross-venue execution — 'Executing orders across multiple exchanges'
+              - Algorithmic trading frameworks — 'Building automated trading systems'
+              - Risk management in trading systems — 'Position limits and exposure control'
+              - Compliance monitoring for trades — 'Real-time regulatory checks'
+              - Blockchain in trading — 'Distributed ledger for trade settlement'
+              - AI in market prediction — 'Machine learning for price forecasting'
+             - High-Frequency Trading strategies — 'HFT algorithms and infrastructure'
+             - Order Book depth and liquidity — 'Measuring and managing order book liquidity'
+             - FIX message sequencing and recovery — 'Handling message gaps and resends'
+             - Market maker algorithms — 'Providing liquidity in markets'
+             - Cross-venue execution — 'Executing orders across multiple exchanges'
+             - Algorithmic trading frameworks — 'Building automated trading systems'
+             - Risk management in trading systems — 'Position limits and exposure control'
+             - Compliance monitoring for trades — 'Real-time regulatory checks'
+             - Blockchain in trading — 'Distributed ledger for trade settlement'
+             - AI in market prediction — 'Machine learning for price forecasting'
 
 New Candidate Topics Rationales
 - Order Book modeling: Essential for understanding HFT and matching engines

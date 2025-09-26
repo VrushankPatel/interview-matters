@@ -20,3 +20,9 @@ created_dirs: ["trading/journey-of-a-trade", "trading/order-types", "trading/quo
 updated_files: ["trading/README.md", "SPECIFICATION.md", "PENDING_TOPICS.md", "NEXTTOPICS.md", "trading/journey-of-a-trade/README.md", "trading/order-types/README.md", "trading/quotes-and-rfq-workflows/README.md", "trading/execution-report/README.md", "trading/trade-capture-report/README.md"]
 commit_made: true
 commit_message: "kb: add 5 topics (journey-of-a-trade, order-types, quotes-and-rfq-workflows, execution-report, trade-capture-report) + update indexes and specs"
+-e 
+topics_processed: ["FIX Protocol", "ITCH Protocol", "OUCH Protocol", "Market Data (overview & dissemination)", "Order Entry Protocols"]
+created_dirs: ["trading/market-data-overview-and-dissemination"]
+updated_files: ["SPECIFICATION.md", "PENDING_TOPICS.md", "NEXTTOPICS.md", "trading/fix-protocol/README.md", "trading/itch-protocol/README.md", "trading/ouch-protocol/README.md", "trading/order-entry-protocols/README.md"]
+commit_made: true
+commit_message: "kb: add 5 topics (fix-protocol, itch-protocol, ouch-protocol, market-data-overview-and-dissemination, order-entry-protocols) + update interlinks to wikilinks"

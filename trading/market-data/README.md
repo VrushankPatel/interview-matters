@@ -108,11 +108,11 @@ This diagram illustrates the lifecycle: from order submission to dissemination, 
 
 ## Github-README Links & Related Topics
 
-- [FIX Protocol](fix-protocol/README.md)
-- [API Rate Limiting](api-rate-limiting/README.md)
-- [Event-Driven Architecture](event-driven-architecture/README.md)
-- [Distributed Tracing](distributed-tracing/README.md)
-- [Database Indexing Strategies](database-indexing-strategies/README.md)
+- [FIX Protocol](../protocols/fix-protocol/README.md)
+- [API Rate Limiting](../../system-design/concepts/api-rate-limiting/README.md)
+- [Event-Driven Architecture](../../system-design/concepts/event-driven-architecture/README.md)
+- [Distributed Tracing](../../system-design/concepts/distributed-tracing/README.md)
+- [Database Indexing Strategies](../../databases/database-indexing-strategies/README.md)
 
 ## References
 
