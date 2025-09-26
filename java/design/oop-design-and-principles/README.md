@@ -205,7 +205,7 @@ classDiagram
 
 ## Github-README Links & Related Topics
 
-Related: [design-patterns](../design-patterns/), [java-language-basics](../../fundamentals/java-language-basics/), [[jvm-internals-and-classloading]]
+Related: [design-patterns](../design-patterns/), [java-language-basics](../../fundamentals/java-language-basics/), [JVM Internals and Class Loading](../../jvm-internals-and-class-loading/README.md)
 
 ## References
 

@@ -191,3 +191,14 @@
 - Latency arbitrage
 - Swap & derivatives trade lifecycle
 - Regulatory reports (e.g., MiFID/SEF)
+-e 
+- Blockchain Consensus Mechanisms
+- API Rate Limiting Strategies
+- Event Sourcing Patterns
+- Microservices Communication Patterns
+- Graph Database Query Optimization
+- Container Orchestration with Kubernetes
+- Serverless Function Cold Starts
+- Database Indexing for High Throughput
+- Message Queue Reliability Patterns
+- Fault Tolerance in Distributed Systems

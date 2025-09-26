@@ -140,7 +140,7 @@ flowchart TD
 
 ## Github-README Links & Related Topics
 
-Related: [oop-design-and-principles](../../design/oop-design-and-principles/), [[jvm-internals-and-classloading]], [collections-framework](../../collections-framework/), [exception-handling-and-errors](../../exceptions/exception-handling-and-errors/)
+Related: [oop-design-and-principles](../../design/oop-design-and-principles/), [JVM Internals and Class Loading](../../jvm-internals-and-class-loading/README.md), [collections-framework](../../collections-framework/), [exception-handling-and-errors](../../exceptions/exception-handling-and-errors/)
 
 ## References
 

@@ -5,7 +5,10 @@ Last update
 2025-09-26
 
 Summary of recent additions
-   - Updated 5 topics (FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols) with enhanced content, proper markdown links, and interlinking
+   - Processed 5 topics: Journey of a Trade (end-to-end), Order Types (DAY, GTC, FOK, IOC), Quotes & RFQ workflows, Execution Report, Trade Capture Report with comprehensive READMEs following strict format, including STAR summaries, detailed explanations, real-world examples, message formats, mermaid diagrams, common pitfalls, tools/libraries, and proper interlinking
+   - Performed repository restructuring: removed duplicate directories, organized trading topics under appropriate subcategories (protocols/, market-data/, lifecycle/, exchange-behavior/)
+   - Fixed all [[ ]] wikilinks to proper markdown links across README files
+   - Updated root and category README indexes to reflect new structure
 
 Conventions
  - Dir naming: kebab-case.
@@ -221,6 +224,18 @@ New Topic Candidates Rationales
 - Latency arbitrage: Advanced trading strategy
 - Swap & derivatives trade lifecycle: Expands beyond equities
 - Regulatory reports: Compliance knowledge for interviews
+
+New Candidate Topics Rationales (this run)
+- Blockchain Consensus Mechanisms: Essential for understanding decentralized systems and crypto trading
+- API Rate Limiting Strategies: Critical for protecting services and managing traffic in distributed systems
+- Event Sourcing Patterns: Important for audit trails and rebuilding state in financial systems
+- Microservices Communication Patterns: Key for designing scalable service architectures
+- Graph Database Query Optimization: Relevant for complex relationship queries in social/trading networks
+- Container Orchestration with Kubernetes: Fundamental for deploying and managing containerized applications
+- Serverless Function Cold Starts: Performance consideration for latency-sensitive applications
+- Database Indexing for High Throughput: Optimization technique for read-heavy workloads
+- Message Queue Reliability Patterns: Ensuring message delivery in event-driven systems
+- Fault Tolerance in Distributed Systems: Building resilient architectures for high availability
 
 TODO
    - High-level open design decisions and split criteria for oversized topics.

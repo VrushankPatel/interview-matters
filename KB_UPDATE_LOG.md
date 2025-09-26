@@ -26,3 +26,10 @@ created_dirs: ["trading/market-data-overview-and-dissemination"]
 updated_files: ["SPECIFICATION.md", "PENDING_TOPICS.md", "NEXTTOPICS.md", "trading/fix-protocol/README.md", "trading/itch-protocol/README.md", "trading/ouch-protocol/README.md", "trading/order-entry-protocols/README.md"]
 commit_made: true
 commit_message: "kb: add 5 topics (fix-protocol, itch-protocol, ouch-protocol, market-data-overview-and-dissemination, order-entry-protocols) + update interlinks to wikilinks"
+-e 
+---
+topics_processed: ['FIX Protocol', 'ITCH Protocol', 'OUCH Protocol', 'Market Data (overview & dissemination)', 'Order Entry Protocols']
+created_dirs: []
+updated_files: ['trading/fix-protocol/README.md', 'trading/itch-protocol/README.md', 'trading/ouch-protocol/README.md', 'trading/market-data-overview-and-dissemination/README.md', 'trading/order-entry-protocols/README.md', 'trading/lifecycle/execution-report/README.md', 'trading/lifecycle/trade-capture-report/README.md', 'PENDING_TOPICS.md', 'NEXTTOPICS.md', 'SPECIFICATION.md']
+commit_made: true
+commit_message: kb: updated 5 trading topics (FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data, Order Entry Protocols) with enhanced content and proper markdown links + merged compliance/ into lifecycle/ for better organization

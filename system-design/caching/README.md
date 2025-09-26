@@ -80,7 +80,7 @@ Cache<String, String> cache = Caffeine.newBuilder()
 # Github-README Links & Related Topics
 
 [Database Performance Tuning](../../databases/database-performance-tuning/)
-[[Distributed Caching]]
+[Distributed Caching](../../distributed-systems/distributed-caching-with-redis/README.md)
 
 # References
 
