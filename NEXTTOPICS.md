@@ -1,11 +1,13 @@
-- Garbage Collection Algorithms
-- Multithreading & Concurrency in Java
-- Collections & Data Structures
-- High Scalability Patterns
-- CAP Theorem & Distributed Systems
 - Latency and Throughput Zero to Hero
 - Monitoring and Logging
 - DevOps & Infrastructure as Code
 - Proxy Forward and Reverse
 - LLD HLD Basics
 - Popular System Designs LLD and HLD
+- Java Fundamentals
+- OOP Principles in Java
+- JVM Internals & Class Loading
+- System Design Basics
+- Replication vs Sharding vs Partitioning
+- Caching
+- Concurrency & Parallelism
