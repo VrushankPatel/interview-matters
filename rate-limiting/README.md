@@ -6,6 +6,8 @@ created: '2025-09-26'
 updated: '2025-09-26'
 ---
 
+# Rate Limiting
+
 ## Overview
 
 Rate limiting controls the rate of requests to prevent abuse, ensure fair usage, and protect resources. It limits the number of requests a client can make in a given time period, commonly used in APIs, web servers, and network devices to mitigate DoS attacks, brute-force attempts, and resource exhaustion.

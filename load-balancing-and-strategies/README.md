@@ -6,6 +6,8 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
+# Load Balancing and Strategies
+
 ## Overview
 
 Load balancing distributes network traffic across multiple servers to optimize resource use, maximize throughput, minimize response time, and prevent overload. It ensures high availability, scalability, and fault tolerance by routing requests to healthy backends using algorithms and health checks.

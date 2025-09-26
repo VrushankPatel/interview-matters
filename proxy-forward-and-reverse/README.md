@@ -6,6 +6,8 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
+# Proxy Forward and Reverse
+
 ## Overview
 
 Proxies act as intermediaries between clients and servers, facilitating request routing, security, and performance optimization. A **forward proxy** sits between clients and the internet, handling outbound requests on behalf of clients. A **reverse proxy** sits between the internet and servers, managing inbound requests to protect and balance backend services.
