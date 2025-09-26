@@ -158,8 +158,8 @@ public class EventService {
 
 ## Github-README Links & Related Topics
 
-- [Microservices Architecture](microservices-architecture/)
-- [CDN Architecture](cdn-architecture/)
-- [Event Streaming with Apache Kafka](event-streaming-with-apache-kafka/)
-- [Distributed Caching with Redis](distributed-caching-with-redis/)
-- [Machine Learning in System Design](machine-learning-in-system-design/)
+- [Microservices Architecture](../microservices-design-patterns/README.md)
+- [CDN Architecture](../cdn-architecture/README.md)
+- [Event Streaming with Apache Kafka](../event-streaming-with-apache-kafka/README.md)
+- [Distributed Caching with Redis](../distributed-caching-with-redis/README.md)
+- [Machine Learning Model Serving](../machine-learning-model-serving/README.md)

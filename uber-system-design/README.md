@@ -1,7 +1,7 @@
 ---
 title: Uber System Design
 aliases: ["Ride-Sharing Platform Design", "Uber Backend Architecture"]
-tags: [system-design, ride-sharing, scalability, microservices, distributed-systems, real-time]
+tags: [#system-design, #ride-sharing, #scalability, #microservices, #distributed-systems, #real-time]
 created: 2025-09-26
 updated: 2025-09-26
 ---

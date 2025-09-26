@@ -161,8 +161,8 @@ CREATE TABLE clicks (
 
 ## Github-README Links & Related Topics
 
-- [Caching](caching/)
-- [Database Sharding Strategies](database-sharding-strategies/)
-- [API Rate Limiting](api-rate-limiting/)
-- [CDN Architecture](cdn-architecture/)
-- [Load Balancing Strategies](load-balancing-strategies/)
+- [Caching](../caching/README.md)
+- [Database Sharding Strategies](../database-sharding-strategies/README.md)
+- [API Rate Limiting](../api-rate-limiting/README.md)
+- [CDN Architecture](../cdn-architecture/README.md)
+- [Load Balancing Strategies](../load-balancing-and-strategies/README.md)

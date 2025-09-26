@@ -1,7 +1,7 @@
 ---
 title: Twitter System Design
 aliases: ["X System Design"]
-tags: [#system-design,#scalability,#real-time]
+tags: [#system-design, #scalability, #real-time]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -153,8 +153,8 @@ def get_timeline(user_id):
 - Educative: "Twitter System Design" (educative.io)
 
 ## Github-README Links & Related Topics
-- [YouTube System Design](./youtube-system-design/README.md)
-- [Facebook System Design](./facebook-system-design/README.md)
-- [Uber System Design](./uber-system-design/README.md)
-- [Airbnb System Design](./airbnb-system-design/README.md)
-- [Popular System Designs LLD and HLD](./popular-system-designs-lld-and-hld/README.md)
+- [YouTube System Design](../youtube-system-design/README.md)
+- [Facebook System Design](../facebook-system-design/README.md)
+- [Uber System Design](../uber-system-design/README.md)
+- [Airbnb System Design](../airbnb-system-design/README.md)
+- [Popular Systems Design LLD and HLD](../popular-systems-design-lld-and-hld/README.md)
