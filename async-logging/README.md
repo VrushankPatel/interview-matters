@@ -1,7 +1,7 @@
 ---
 title: Async Logging
-aliases: [asynchronous logging, log buffering]
-tags: [#java, #system-design]
+aliases: [asynchronous logging, non-blocking logging]
+tags: [#java,#performance]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -9,13 +9,6 @@ updated: 2025-09-26
 ## Overview
 
 Async logging is a technique that decouples log message generation from log message writing, allowing application threads to continue processing without waiting for I/O operations to complete. This improves performance and responsiveness, especially in high-throughput systems.
-
-## STAR Summary
-
-- **Situation**: In high-throughput applications, synchronous logging can cause significant latency and performance degradation due to I/O blocking.
-- **Task**: Implement asynchronous logging to decouple log generation from log writing.
-- **Action**: Configure an async logging framework with a queue and background thread to handle log events.
-- **Result**: Improved application performance, reduced response times, and better scalability without losing critical log data.
 
 ## Detailed Explanation
 
@@ -59,44 +52,13 @@ sequenceDiagram
     BackgroundThread->>LogDestination: Write Log
 ```
 
-## Journey / Sequence
-
-1. **Identify Logging Needs**: Determine the volume of logs and performance requirements.
-2. **Choose Framework**: Select an async logging library (e.g., Logback AsyncAppender, Log4j2 Async Appender).
-3. **Configure Queue**: Set queue size, discarding threshold, and other parameters.
-4. **Attach Appenders**: Wrap synchronous appenders with async wrapper.
-5. **Test and Monitor**: Verify performance gains and monitor for data loss or queue overflows.
-6. **Tune Parameters**: Adjust based on load, e.g., increase queue size for high throughput.
-
 ## Real-world Examples & Use Cases
 
 - **High-Traffic Web Services**: E-commerce platforms logging thousands of requests per second without impacting response times.
 - **Real-Time Data Processing**: Streaming applications where logging delays could affect data flow.
 - **Microservices**: Centralized logging in distributed systems where synchronous writes could cascade failures.
-
-## Data Models / Message Formats
-
-Async logging typically uses structured log events. A common format includes:
-
-- **Timestamp**: When the event occurred.
-- **Level**: Severity (DEBUG, INFO, WARN, ERROR).
-- **Logger Name**: Source of the log.
-- **Message**: The log text.
-- **Thread**: Which thread generated it.
-- **MDC/Context**: Additional key-value pairs.
-
-Example in JSON:
-
-```json
-{
-  "timestamp": "2023-09-26T10:00:00Z",
-  "level": "INFO",
-  "logger": "com.example.Service",
-  "message": "User logged in",
-  "thread": "main",
-  "mdc": {"userId": "123"}
-}
-```
+- **Financial Systems**: Trading platforms requiring low-latency operations with extensive audit logging.
+- **IoT Applications**: Devices generating logs at high frequency without blocking sensor data processing.
 
 ## Code Examples
 
@@ -177,7 +139,7 @@ public class HighThroughputService {
             <AppenderRef ref="AsyncFile"/>
         </Root>
     </Loggers>
-  </Configuration>
+</Configuration>
 ```
 
 ### Python with QueueHandler
@@ -211,15 +173,37 @@ logger.error('An error occurred')
 listener.stop()
 ```
 
-## Common Pitfalls & Edge Cases
+### Node.js with Winston Async Transport
 
-| Pitfall | Description | Mitigation |
-|---------|-------------|------------|
-| Queue Overflow | Logs discarded when queue is full | Monitor queue size; increase capacity or reduce logging |
-| Thread Starvation | Background thread can't keep up | Tune queue size and thread priority |
-| Memory Leaks | Unbounded queues consume all heap | Set maximum queue size |
-| Log Loss on Crash | Queued logs not written if JVM exits abruptly | Use synchronous logging for critical errors |
-| Performance Monitoring | Hard to debug async logging issues | Add metrics for queue depth and drop rates |
+```javascript
+const winston = require('winston');
+
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.json(),
+  defaultMeta: { service: 'user-service' },
+  transports: [
+    new winston.transports.File({ filename: 'error.log', level: 'error' }),
+    new winston.transports.File({ filename: 'combined.log' }),
+  ],
+});
+
+// Async logging with custom transport
+class AsyncFileTransport extends winston.Transport {
+  constructor(opts) {
+    super(opts);
+  }
+
+  log(info, callback) {
+    setImmediate(() => {
+      this.emit('logged', info);
+    });
+    callback();
+  }
+}
+
+logger.add(new AsyncFileTransport());
+```
 
 ## Tools & Libraries
 
@@ -231,6 +215,20 @@ listener.stop()
 | Serilog Async Sink | .NET | Async sink for Serilog |
 | Winston with async transports | Node.js | Async logging in Node.js |
 | Python logging.handlers.QueueHandler and QueueListener | Python | Asynchronous logging with queues |
+| Bunyan with streams | Node.js | Structured logging with async streams |
+| Logrus with hooks | Go | Async logging in Go applications |
+
+## Common Pitfalls & Edge Cases
+
+| Pitfall | Description | Mitigation |
+|---------|-------------|------------|
+| Queue Overflow | Logs discarded when queue is full | Monitor queue size; increase capacity or reduce logging |
+| Thread Starvation | Background thread can't keep up | Tune queue size and thread priority |
+| Memory Leaks | Unbounded queues consume all heap | Set maximum queue size |
+| Log Loss on Crash | Queued logs not written if JVM exits abruptly | Use synchronous logging for critical errors |
+| Performance Monitoring | Hard to debug async logging issues | Add metrics for queue depth and drop rates |
+| Ordering Issues | Logs may not be written in order due to async nature | Use sequence numbers if order is critical |
+| Blocking on Full Queue | If queue is full and blocking is enabled, threads may wait | Configure overflow policy to discard or use bounded queues |
 
 ## References
 
@@ -239,6 +237,9 @@ listener.stop()
 - [SLF4J Overview](https://www.slf4j.org/)
 - [Async Logging Best Practices](https://www.baeldung.com/java-asynchronous-logging)
 - [Python Logging QueueHandler](https://docs.python.org/3/library/logging.handlers.html#queuehandler)
+- [Winston Async Logging](https://github.com/winstonjs/winston)
+- [NLog Async Logging](https://nlog-project.org/)
+- [Serilog Async Sink](https://github.com/serilog/serilog-sinks-async)
 
 ## Github-README Links & Related Topics
 
@@ -246,3 +247,5 @@ listener.stop()
 - [Logging Frameworks](./logging-frameworks/README.md)
 - [Concurrency and Parallelism](./concurrency-and-parallelism/README.md)
 - [Event Driven Architecture](./event-driven-architecture/README.md)
+- [High Scalability Patterns](./high-scalability-patterns/README.md)
+- [Java Multithreading and Concurrency](./java-multithreading-and-concurrency/README.md)

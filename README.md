@@ -353,3 +353,8 @@
 - [lld hld basics](lld-hld-basics/README.md)
 - [popular system designs](popular-system-designs/README.md)
 - [replication vs sharding vs partitioning](replication-vs-sharding-vs-partitioning/README.md)
+- [async logging](async-logging/README.md)
+- [devops infrastructure as code](devops-infrastructure-as-code/README.md)
+- [load balancing and strategies](load-balancing-and-strategies/README.md)
+- [monitoring and logging](monitoring-and-logging/README.md)
+- [proxy forward and reverse](proxy-forward-and-reverse/README.md)

@@ -1,7 +1,7 @@
 ---
 title: Proxy Forward and Reverse
-aliases: [Forward Proxy, Reverse Proxy, Proxy Servers]
-tags: [#networking,#proxies,#web,#security]
+aliases: [forward proxy, reverse proxy]
+tags: [#networking,#system-design]
 created: 2025-09-26
 updated: 2025-09-26
 ---

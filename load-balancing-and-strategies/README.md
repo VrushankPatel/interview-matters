@@ -1,7 +1,7 @@
 ---
 title: Load Balancing and Strategies
-aliases: [Load Balancer Strategies, Load Distribution Techniques]
-tags: [#system-design,#load-balancing,#scalability,#networking]
+aliases: [load balancer, distribution strategies]
+tags: [#system-design,#scalability]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -116,31 +116,12 @@ aws elb create-load-balancer --load-balancer-name my-load-balancer \
 - [Scalability Patterns](../high-scalability-patterns/README.md)
 - [Fault Tolerance Patterns](../fault-tolerance-patterns/README.md)
 
-## STAR Summary
+## Tools & Libraries
 
-- **Situation**: High-traffic applications risk server overload.
-- **Task**: Implement load balancing to distribute traffic.
-- **Action**: Choose algorithm (e.g., least connections), configure balancer (e.g., NGINX).
-- **Result**: Improved uptime, reduced latency, better user experience.
-
-## Journey / Sequence
-
-1. Identify bottlenecks in single-server setups.
-2. Select load balancer type (hardware/software).
-3. Configure upstream servers and algorithm.
-4. Implement health checks and monitoring.
-5. Test failover and scale horizontally.
-
-## Data Models / Message Formats
-
-Load balancers handle HTTP requests/responses. For session persistence, use cookies or headers.
-
-Example HTTP Request:
-```
-GET /api/data HTTP/1.1
-Host: example.com
-X-Session-ID: abc123
-```
+- **NGINX**: Open-source load balancer.
+- **HAProxy**: High-performance proxy.
+- **AWS ELB/ALB**: Managed cloud load balancing.
+- **Traefik**: Modern reverse proxy for containers.
 
 ## Common Pitfalls & Edge Cases
 
@@ -148,10 +129,3 @@ X-Session-ID: abc123
 - **Health Check Delays**: Slow detection of failed servers.
 - **Thundering Herd**: Sudden traffic spikes after recovery.
 - **SSL Termination**: Offloading can introduce latency.
-
-## Tools & Libraries
-
-- **NGINX**: Open-source load balancer.
-- **HAProxy**: High-performance proxy.
-- **AWS ELB/ALB**: Managed cloud load balancing.
-- **Traefik**: Modern reverse proxy for containers.
