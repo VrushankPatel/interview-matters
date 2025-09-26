@@ -2,8 +2,8 @@
 title: Multithreading & Concurrency in Java
 aliases: [Java Concurrency, Threading in Java]
 tags: [#java,#concurrency,#multithreading]
-created: '2025-09-26'
-updated: '2025-09-26'
+created: 2025-09-26
+updated: 2025-09-26
 ---
 
 # Multithreading & Concurrency in Java
@@ -222,9 +222,9 @@ public class ExecutorExample {
 
 ## Github-README Links & Related Topics
 
-- [Java Fundamentals](../java-fundamentals/)
-- [Java Atomic Variables](../java-atomic-variables/)
-- [Java ConcurrentHashMap](../java-concurrenthashmap/)
-- [Java ExecutorService](../java-executorservice/)
-- [Java Synchronized Blocks](../java-synchronized-blocks/)
-- [Java Volatile Keyword](../java-volatile-keyword/)
+- [Java Fundamentals](./java-fundamentals/)
+- [Java Atomic Variables](./java-atomic-variables/)
+- [Java ConcurrentHashMap](./java-concurrenthashmap/)
+- [Java ExecutorService](./java-executorservice/)
+- [Java Synchronized Blocks](./java-synchronized-blocks/)
+- [Java Volatile Keyword](./java-volatile-keyword/)

@@ -1,9 +1,9 @@
 ---
-title: 'Garbage Collection Algorithms'
-aliases: ['GC Algorithms']
-tags: ['#java', '#gc']
-created: '2025-09-26'
-updated: '2025-09-26'
+title: Garbage Collection Algorithms
+aliases: [GC Algorithms]
+tags: [#java,#gc]
+created: 2025-09-26
+updated: 2025-09-26
 ---
 
 # Garbage Collection Algorithms
@@ -155,7 +155,7 @@ public class GCMonitor {
 
 ## Github-README Links & Related Topics
 
-- [java-memory-management](../java-memory-management/README.md)
-- [gc-tuning](../gc-tuning/README.md)
-- [jvm-internals-and-class-loading](../jvm-internals-and-class-loading/README.md)
-- [java](../java/README.md)
+- [Java Memory Management](./java-memory-management/)
+- [GC Tuning](./gc-tuning/)
+- [JVM Internals & Class Loading](./jvm-internals-and-class-loading/)
+- [Java](./java/)

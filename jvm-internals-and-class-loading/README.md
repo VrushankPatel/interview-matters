@@ -172,8 +172,8 @@ public class StaticInitExample {
 
 ## Github-README Links & Related Topics
 
-- [Java Fundamentals](../java-fundamentals/)
-- [Garbage Collection Algorithms](../garbage-collection-algorithms/)
-- [Java Memory Management](../java-memory-management/)
-- [JVM Performance Tuning](../jvm-performance-tuning/)
-- [Class Loading Mechanism](../class-loading-mechanism/)
+- [Java Fundamentals](./java-fundamentals/)
+- [Garbage Collection Algorithms](./garbage-collection-algorithms/)
+- [Java Memory Management](./java-memory-management/)
+- [JVM Performance Tuning](./jvm-performance-tuning/)
+- [Class Loading Mechanism](./class-loading-mechanism/)
