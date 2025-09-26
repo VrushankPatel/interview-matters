@@ -6,8 +6,6 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Latency and Throughput Zero to Hero
-
 ## Overview
 
 Latency and throughput are fundamental metrics in system design and performance engineering. Latency measures the time delay for a system to respond to a request, while throughput quantifies the rate at which a system processes requests. Understanding their interplay is crucial for optimizing applications, from web services to distributed systems. This guide progresses from basic definitions to advanced concepts, tradeoffs, and practical implementations.
@@ -139,8 +137,10 @@ These snippets use `requests` for HTTP calls; install via `pip install requests`
 
 ## Github-README Links & Related Topics
 
-- [Caching](caching/)
-- [Distributed Systems](distributed-systems/)
-- [API Design](api-design-principles/)
-- [Database Performance Tuning](database-performance-tuning/)
-- [CDN Architecture](cdn-architecture/)
+- [Caching](../caching/README.md)
+- [CAP Theorem & Distributed Systems](../cap-theorem-and-distributed-systems/README.md)
+- [API Design Principles](../api-design-principles/README.md)
+- [Database Performance Tuning](../database-performance-tuning/README.md)
+- [CDN Architecture](../cdn-architecture/README.md)
+- [Load Balancing and Strategies](../load-balancing-and-strategies/README.md)
+- [Monitoring and Logging](../monitoring-and-logging/README.md)

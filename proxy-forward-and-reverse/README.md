@@ -6,8 +6,6 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Proxy Forward and Reverse
-
 ## Overview
 
 Proxies act as intermediaries between clients and servers, facilitating request routing, security, and performance optimization. A **forward proxy** sits between clients and the internet, handling outbound requests on behalf of clients. A **reverse proxy** sits between the internet and servers, managing inbound requests to protect and balance backend services.
@@ -115,7 +113,7 @@ server {
 }
 ```
 
-# STAR Summary
+## STAR Summary
 
 **Situation**: Modern web architectures require efficient traffic management and security.
 
@@ -125,7 +123,7 @@ server {
 
 **Result**: Improved performance, security, and scalability in network communications.
 
-# Journey / Sequence
+## Journey / Sequence
 
 1. Client initiates request
 2. Proxy intercepts and processes request
@@ -134,7 +132,7 @@ server {
 5. Proxy applies transformations (caching, headers)
 6. Final response delivered to client
 
-# Data Models / Message Formats
+## Data Models / Message Formats
 
 ## HTTP Headers
 
@@ -157,7 +155,7 @@ server {
 }
 ```
 
-# Common Pitfalls & Edge Cases
+## Common Pitfalls & Edge Cases
 
 - **Header Spoofing**: Malicious clients can forge X-Forwarded-For headers
 - **Infinite Loops**: Misconfigured proxies routing to themselves
@@ -165,7 +163,7 @@ server {
 - **Session Persistence**: Ensuring sticky sessions in load-balanced environments
 - **Caching Conflicts**: Stale content from aggressive caching policies
 
-# Tools & Libraries
+## Tools & Libraries
 
 - **NGINX**: High-performance reverse proxy and load balancer
 - **HAProxy**: TCP/HTTP load balancer with proxy capabilities
@@ -173,17 +171,17 @@ server {
 - **Traefik**: Modern reverse proxy with automatic configuration
 - **http-proxy (Node.js)**: Library for creating proxies in JavaScript
 
-# References
+## References
 
 - [Wikipedia: Proxy server](https://en.wikipedia.org/wiki/Proxy_server)
 - [MDN: Proxy servers and tunneling](https://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling)
 - [NGINX Reverse Proxy](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/)
 - [RFC 7230: HTTP/1.1 Message Syntax and Routing](https://datatracker.ietf.org/doc/html/rfc7230)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
-- [API Gateway](../api-gateway/)
-- [Load Balancing](../load-balancing/)
-- [Caching](../caching/)
-- [SSL Termination](../ssl-termination/)
-- [Microservices Architecture](../microservices/)
+- [API Gateway Design](../api-gateway-design/README.md)
+- [Load Balancing and Strategies](../load-balancing-and-strategies/README.md)
+- [Caching](../caching/README.md)
+- [API Security Best Practices](../api-security-best-practices/README.md)
+- [Event-Driven Microservices](../event-driven-microservices/README.md)
