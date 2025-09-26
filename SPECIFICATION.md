@@ -5,7 +5,13 @@ Last update
 2025-09-26
 
 Summary of recent additions
-   - Added FIX Protocol topic
+   - Processed 5 trading topics (FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data overview & dissemination, Order Entry Protocols)
+   - Restructured system-design directory into concepts, lld, hld, real-world-designs subdirectories
+   - Added Journey of a Trade (end-to-end) topic
+   - Added Order Types (DAY, GTC, FOK, IOC) topic
+   - Added Quotes & RFQ Workflows topic
+   - Added Execution Report topic
+   - Added Trade Capture Report topicAdded FIX Protocol topic
    - Added ITCH Protocol topic
    - Added OUCH Protocol topic
    - Added Market Data (overview & dissemination) topic
