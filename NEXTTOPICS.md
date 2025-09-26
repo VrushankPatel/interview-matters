@@ -1,8 +1,3 @@
-Latency and Throughput Zero to Hero
-Monitoring and Logging
-Async Logging
-DevOps & Infrastructure as Code
-Proxy Forward and Reverse
 Java Fundamentals
 OOP Principles in Java
 JVM Internals & Class Loading
@@ -16,3 +11,13 @@ Netflix System Design
 Load Balancing and Strategies
 Rate Limiting
 Concurrency & Parallelism
+Caching Strategies
+Database Replication
+Event Sourcing
+CQRS Pattern
+API Rate Limiting
+Fault Tolerance Patterns
+Distributed Caching
+Message Queues
+Service Mesh Architecture
+Container Orchestration
