@@ -1,8 +1,3 @@
-event-driven-architecture
-java-stream-api-functional-programming
-collections-data-structures
-system-design-basics
-high-scalability-patterns
 replication-vs-sharding-vs-partitioning
 java-fundamentals
 oop-principles-in-java
@@ -13,3 +8,8 @@ java-stream-api-and-functional-programming
 system-design-basics
 high-scalability-patterns
 latency-and-throughput-zero-to-hero
+url-shortener-system-design
+netflix-system-design
+cap-theorem-and-distributed-systems
+caching
+lld-hld-basics
