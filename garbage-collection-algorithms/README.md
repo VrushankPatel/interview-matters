@@ -1,7 +1,7 @@
 ---
 title: Garbage Collection Algorithms
-aliases: [GC Algorithms, JVM Garbage Collection]
-tags: [#java,#jvm,#performance]
+aliases: []
+tags: [#java,#jvm,#gc]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -16,8 +16,8 @@ Garbage Collection (GC) is the process of automatically reclaiming memory occupi
 
 ### Generational Hypothesis
 
-Most objects die young (generational hypothesis). This leads to generational GC:
-- **Young Generation:** Where new objects are allocated
+The weak generational hypothesis states that most objects survive for only a short period of time. This is based on empirical observations that a majority of objects die young, allowing efficient garbage collection by focusing on short-lived objects. This leads to generational GC:
+- **Young Generation:** Where new objects are allocated (eden + survivor spaces)
 - **Old Generation:** Long-lived objects
 - **Permanent Generation/Metaspace:** Class metadata (Java 8+)
 
@@ -55,6 +55,17 @@ Most objects die young (generational hypothesis). This leads to generational GC:
 - Concurrent evacuation
 - Low pause times
 
+### Comparison of GC Algorithms
+
+| Garbage Collector | Threads | Generational | Compaction | Pause Time | Throughput | Use Case |
+|-------------------|---------|--------------|------------|------------|------------|----------|
+| Serial | Single | Yes | Yes | High | Low | Small applications, single-threaded environments |
+| Parallel | Multi | Yes | Yes | Medium | High | Batch processing, high-throughput applications |
+| CMS | Multi (concurrent) | Yes | No | Low | Medium | Web servers, low-latency requirements (deprecated) |
+| G1 | Multi | Yes (regions) | Yes | Low (predictable) | Medium-High | General-purpose, large heaps |
+| ZGC | Multi (concurrent) | No | Yes | Very Low | High | Ultra-low latency, heaps up to 16TB |
+| Shenandoah | Multi (concurrent) | Yes | Yes | Very Low | High | Low-pause, concurrent compaction |
+
 ### GC Phases
 
 1. **Mark:** Identify live objects
@@ -68,6 +79,15 @@ graph TD
     C --> D[Compact Phase]
     D --> E[GC Complete]
 ```
+
+### Performance Metrics
+
+- **Throughput:** Percentage of total time not spent in garbage collection over long periods.
+- **Latency:** Responsiveness of the application; garbage collection pauses affect latency.
+- **Footprint:** Working set of the process, measured in pages and cache lines.
+- **Promptness:** Time between when an object becomes dead and when its memory becomes available.
+
+Selecting a GC algorithm involves trade-offs between these metrics. For example, maximizing throughput may increase pause times, while minimizing latency may reduce overall throughput.
 
 ## Real-world Examples & Use Cases
 
@@ -139,6 +159,21 @@ public class WeakReferenceExample {
 }
 ```
 
+### GC Logging
+Run the JVM with `-verbose:gc` or `-Xlog:gc*` to monitor garbage collection activity.
+
+Example command:
+```bash
+java -Xlog:gc* -jar your-app.jar
+```
+
+Example output:
+```
+[15,651s][info ][gc] GC(36) Pause Young (G1 Evacuation Pause) 239M->57M(307M) (15,646s, 15,651s) 5,048ms
+```
+
+This shows the GC event type, heap usage before/after (239M->57M), heap size (307M), timestamps, and duration (5,048ms).
+
 ## Common Pitfalls & Edge Cases
 
 - **GC thrashing:** Too frequent GC due to small heap
@@ -154,7 +189,8 @@ public class WeakReferenceExample {
 
 ## References
 
-- [Oracle GC Tuning Guide](https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/)
+- [Oracle GC Tuning Guide (Java 21)](https://docs.oracle.com/en/java/javase/21/gctuning/)
+- [Garbage Collector Implementation](https://docs.oracle.com/en/java/javase/21/gctuning/garbage-collector-implementation.html)
 - [G1 GC](https://www.oracle.com/technetwork/tutorials/tutorials-1876574.html)
 - [ZGC](https://wiki.openjdk.java.net/display/zgc/Main)
 - [JVM GC Algorithms](https://www.baeldung.com/jvm-garbage-collectors)
