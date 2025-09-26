@@ -1,9 +1,9 @@
 ---
-title: 'Garbage Collection Algorithms'
-aliases: ['GC Algorithms', 'Java Garbage Collection']
-tags: ['#java', '#gc']
-created: '2025-09-26'
-updated: '2025-09-26'
+title: Garbage Collection Algorithms
+aliases: [GC Algorithms, Java Garbage Collection]
+tags: [#java,#gc]
+created: 2025-09-26
+updated: 2025-09-26
 ---
 
 # Garbage Collection Algorithms
