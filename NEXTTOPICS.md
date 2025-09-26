@@ -1,5 +1,10 @@
--e 00001| Database Design Principles
-00002| API Design Best Practices
-00003| Microservices Architecture
-00004| Event-Driven Systems
-00005| Cloud Computing Fundamentals
+- Kubernetes Basics
+- Docker Containerization
+- RESTful API Design
+- GraphQL APIs
+- OAuth 2.0 Implementation
+- JWT Authentication
+- Message Queues and Brokers
+- Load Balancing Strategies
+- API Rate Limiting
+- Fault Tolerance Patterns

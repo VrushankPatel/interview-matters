@@ -1,105 +1,146 @@
 ---
 title: Database Design Principles
 aliases: [Database Design, DB Design Principles]
-tags: [#database,#design,#principles]
+tags: [#database,#system-design]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Database Design Principles
+# Overview
 
-## Overview
+Database design principles encompass the fundamental guidelines and best practices for structuring relational databases to ensure efficiency, integrity, and scalability. These principles guide the creation of schemas that minimize redundancy, enforce data integrity, and optimize query performance.
 
-Database design principles guide the creation of efficient, scalable, and maintainable database schemas. They cover normalization, indexing, relationships, and performance optimization.
+# Detailed Explanation
 
-## Detailed Explanation
+## Key Principles
 
-Good database design ensures data integrity, reduces redundancy, and supports efficient queries. Key principles include normalization, proper indexing, and choosing appropriate data types.
+### 1. Normalization
+Normalization is the process of organizing data to reduce redundancy and improve data integrity. It involves dividing large tables into smaller, related tables.
 
-### Normalization Forms
+| Normal Form | Description | Example |
+|-------------|-------------|---------|
+| 1NF | Eliminate repeating groups | Ensure atomic values |
+| 2NF | Remove partial dependencies | Non-key attributes depend on full key |
+| 3NF | Remove transitive dependencies | Non-key attributes depend only on key |
+| BCNF | Boyce-Codd Normal Form | Every determinant is a candidate key |
 
-- **1NF**: Eliminate repeating groups.
-- **2NF**: Remove partial dependencies.
-- **3NF**: Remove transitive dependencies.
-- **BCNF**: Boyce-Codd Normal Form for complex dependencies.
+### 2. Entity-Relationship Modeling
+ER diagrams represent entities, attributes, and relationships.
 
-### Relationships
+```mermaid
+erDiagram
+    CUSTOMER ||--o{ ORDER : places
+    ORDER ||--|{ LINE-ITEM : contains
+    CUSTOMER {
+        string name
+        string custNumber
+        string sector
+    }
+    ORDER {
+        int orderNumber
+        string deliveryAddress
+    }
+    LINE-ITEM {
+        string productCode
+        int quantity
+        float pricePerUnit
+    }
+```
 
-- **One-to-One**: Unique relationship between tables.
-- **One-to-Many**: Foreign key relationships.
-- **Many-to-Many**: Junction tables to resolve.
+### 3. Constraints
+- Primary Keys: Unique identifiers
+- Foreign Keys: Maintain referential integrity
+- Check Constraints: Validate data values
+- Unique Constraints: Ensure uniqueness
 
-## Real-world Examples & Use Cases
+### 4. Indexing Strategies
+Indexes improve query performance but add overhead for writes.
 
-1. **E-commerce**: Product catalogs with categories and orders.
-2. **Social Networks**: User profiles, friendships, and posts.
-3. **Banking Systems**: Accounts, transactions, and customer data.
+### 5. Denormalization
+Sometimes applied for read-heavy systems to improve performance at the cost of redundancy.
 
-## Code Examples
+## Design Process
+1. Requirements Analysis
+2. Conceptual Design (ER Model)
+3. Logical Design (Relational Schema)
+4. Physical Design (Implementation)
 
-### Normalized Schema (SQL)
+# Real-world Examples & Use Cases
+
+## E-commerce Platform
+- **Entities**: Users, Products, Orders, Payments
+- **Relationships**: One-to-many (User-Orders), Many-to-many (Products-Orders via OrderItems)
+- **Use Case**: Ensuring inventory accuracy and order history integrity
+
+## Social Media Application
+- **Entities**: Users, Posts, Comments, Likes
+- **Relationships**: Self-referencing (User follows User), Polymorphic (Likes on Posts/Comments)
+- **Use Case**: Handling large-scale data with efficient querying for feeds
+
+## Banking System
+- **Entities**: Accounts, Transactions, Customers
+- **Constraints**: Strict referential integrity for financial data
+- **Use Case**: ACID compliance and audit trails
+
+# Code Examples
+
+## Creating Normalized Tables (SQL)
 
 ```sql
--- Users table
-CREATE TABLE users (
-    user_id INT PRIMARY KEY,
-    username VARCHAR(50) UNIQUE,
+-- 1NF: Atomic values
+CREATE TABLE Customer (
+    customer_id INT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
     email VARCHAR(100)
 );
 
--- Orders table
-CREATE TABLE orders (
+-- 2NF: Remove partial dependencies
+CREATE TABLE Order (
     order_id INT PRIMARY KEY,
-    user_id INT,
+    customer_id INT,
     order_date DATE,
-    total DECIMAL(10,2),
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
 );
 
--- Order Items table
-CREATE TABLE order_items (
-    order_item_id INT PRIMARY KEY,
-    order_id INT,
-    product_id INT,
-    quantity INT,
-    price DECIMAL(10,2),
-    FOREIGN KEY (order_id) REFERENCES orders(order_id)
+-- 3NF: Remove transitive dependencies
+CREATE TABLE Product (
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(100),
+    category_id INT,
+    category_name VARCHAR(50),  -- This would be moved to separate table in 3NF
+    price DECIMAL(10,2)
 );
+
+-- Proper 3NF
+CREATE TABLE Category (
+    category_id INT PRIMARY KEY,
+    category_name VARCHAR(50)
+);
+
+ALTER TABLE Product ADD FOREIGN KEY (category_id) REFERENCES Category(category_id);
 ```
 
-### Indexing Example
+## Query Optimization with Indexes
 
 ```sql
--- Add index for faster queries
-CREATE INDEX idx_orders_user_date ON orders(user_id, order_date);
+-- Create index for faster lookups
+CREATE INDEX idx_customer_email ON Customer(email);
 
 -- Query benefiting from index
-SELECT * FROM orders WHERE user_id = 123 AND order_date > '2023-01-01';
+SELECT * FROM Customer WHERE email = 'user@example.com';
 ```
 
-## Data Models / Message Formats
+# References
 
-| Principle | Description | Example |
-|-----------|-------------|---------|
-| Normalization | Reduce redundancy | Separate tables for users and orders |
-| Denormalization | Improve read performance | Duplicate data in reports |
-| Indexing | Speed up queries | B-tree indexes on frequently queried columns |
-| Partitioning | Distribute data | Range partitioning by date |
+- [Database Design Principles - Oracle Documentation](https://docs.oracle.com/en/database/)
+- [Normalization in DBMS - GeeksforGeeks](https://www.geeksforgeeks.org/normalization-in-dbms/)
+- [Entity-Relationship Model - Wikipedia](https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model)
+- "Database System Concepts" by Silberschatz, Korth, Sudarshan
 
-## Common Pitfalls & Edge Cases
+# Github-README Links & Related Topics
 
-- **Over-normalization**: Can lead to complex joins and slow queries.
-- **Under-normalization**: Data redundancy and update anomalies.
-- **Poor Indexing**: Slow queries on large datasets.
-- **Ignoring Constraints**: Data integrity issues.
-
-## References
-
-- [Database Design for Mere Mortals by Michael Hernandez](https://www.amazon.com/Database-Design-Mere-Mortals-Hands/dp/0321884493)
-- [SQL Antipatterns by Bill Karwin](https://www.amazon.com/SQL-Antipatterns-Programming-Pragmatic-Programmers/dp/1934356557)
-
-## Github-README Links & Related Topics
-
-- [database-design](https://github.com/topics/database-design)
-- Related: [Database Normalization](../database-normalization/README.md)
-- Related: [Database Indexing Strategies](../database-indexing-strategies/README.md)
+- [Database Normalization Techniques](./database-normalization-techniques/)
+- [Database Indexing Strategies](./database-indexing-strategies/)
+- [Database Design Patterns](./database-design-patterns/)
+- [CAP Theorem & Distributed Systems](./cap-theorem-and-distributed-systems/)

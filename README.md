@@ -54,6 +54,7 @@ This repository contains a comprehensive collection of topics related to softwar
 - [****](/)class-loading-mechanism
 - [****](/)cloud-architecture-patterns
 - [****](/)cloud-computing-basics
+- [****](/)cloud-computing-fundamentals
 - [****](/)cloud-deployment-strategies
 - [****](/)coding-interview-strategies
 - [****](/)collections-and-data-structures
