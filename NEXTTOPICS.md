@@ -1,5 +1,10 @@
--e Collections & Data Structures
-Java Stream API & Functional Programming
-System Design Basics
-High Scalability Patterns
-CAP Theorem & Distributed Systems
+- LLD HLD basics
+- Replication vs Sharding vs Partitioning
+- Latency and Throughput zero to hero
+- Monitoring and Logging
+- Async logging
+- System Design Basics
+- High Scalability Patterns
+- CAP Theorem & Distributed Systems
+- DevOps & Infrastructure as Code
+- Concurrency & Parallelism
