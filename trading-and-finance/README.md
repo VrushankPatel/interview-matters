@@ -6,5 +6,7 @@
 - [market-data](market-data/README.md)
 - [order-types](order-types/README.md)
 - [Journey Of A Trade](journey-of-a-trade/README.md)
+- [Quotes And Rfq Workflows](quotes-and-rfq-workflows/README.md)
+- [Time In Force Variations](time-in-force-variations/README.md)
 - [README.md](README.md/README.md)
 - [trading](trading/README.md)

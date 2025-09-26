@@ -45,6 +45,8 @@
 - [monitoring-with-prometheus-and-grafana](monitoring-with-prometheus-and-grafana/README.md)
 - [post-interview-follow-up](post-interview-follow-up/README.md)
 - [prometheus-monitoring](prometheus-monitoring/README.md)
+- [Logging With Elk Stack](logging-with-elk-stack/README.md)
+- [Profiling Tools](profiling-tools/README.md)
 - [README.md](README.md/README.md)
 - [resume-optimization-for-tech-jobs](resume-optimization-for-tech-jobs/README.md)
 - [technical-interview-formats](technical-interview-formats/README.md)
