@@ -1,8 +1,3 @@
-00017| LLD HLD Basics
-00018| Replication vs Sharding vs Partitioning
-00019| Latency and Throughput Zero to Hero
-00020| Monitoring and Logging
-00017| LLD HLD Basics
 00018| Replication vs Sharding vs Partitioning
 00019| Latency and Throughput Zero to Hero
 00020| Monitoring and Logging
