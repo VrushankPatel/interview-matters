@@ -103,5 +103,5 @@ public class ControlStructures {
 ## Github-README Links & Related Topics
 
 - [OOP Principles in Java](../oop-principles-in-java/)
-- [JVM Internals & Class Loading](../jvm-internals-class-loading/)
+- [JVM Internals & Class Loading](../jvm-internals-and-class-loading/)
 - [Multithreading & Concurrency in Java](../multithreading-concurrency-in-java/)
