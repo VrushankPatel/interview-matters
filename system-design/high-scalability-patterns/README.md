@@ -6,7 +6,7 @@ created: 2025-09-25
 updated: 2025-09-26
 ---
 
-# Overview
+## Overview
 
 High scalability patterns are architectural and design strategies that enable systems to handle growing amounts of work efficiently. Scalability, as defined by Wikipedia, is the property of a system to handle a growing amount of work by adding resources. These patterns address challenges in performance, reliability, and cost as systems grow. Key patterns include horizontal and vertical scaling, load balancing, caching, database sharding, and microservices. They draw from principles in distributed systems, as outlined in the AWS Well-Architected Framework, emphasizing trade-offs between consistency, availability, and partition tolerance (CAP theorem).
 
