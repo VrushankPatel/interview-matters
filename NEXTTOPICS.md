@@ -1,12 +1,5 @@
-- High Scalability Patterns
-- CAP Theorem & Distributed Systems
-- Replication vs Sharding vs Partitioning
-- Latency and Throughput zero to hero
-- Monitoring and Logging
-- Async logging
-- DevOps & Infrastructure as Code
-- Proxy forward and reverse
-- Load balancing and strategies
-- Rate limiting
-- Concurrency & Parallelism
-- Popular System Designs (LLD and HLD): URL Shortener, Netflix, etc.
+-e Collections & Data Structures
+Java Stream API & Functional Programming
+System Design Basics
+High Scalability Patterns
+CAP Theorem & Distributed Systems

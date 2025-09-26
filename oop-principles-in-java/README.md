@@ -1,61 +1,69 @@
 ---
 title: OOP Principles in Java
 aliases: [Object-Oriented Programming in Java]
-tags: [#java, #oop]
+tags: [#java,#oop]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+# OOP Principles in Java
 
-Object-Oriented Programming (OOP) principles in Java revolve around four core concepts: Encapsulation, Inheritance, Polymorphism, and Abstraction. These principles enable modular, reusable, and maintainable code.
+## Overview
 
-# Detailed Explanation
+Object-Oriented Programming (OOP) is a programming paradigm that organizes software design around data, or objects, rather than functions and logic. Java is fundamentally an object-oriented language, implementing OOP concepts through classes and objects. The four main principles of OOP are Encapsulation, Inheritance, Polymorphism, and Abstraction. These principles help in creating modular, reusable, and maintainable code.
 
-OOP is a programming paradigm that uses objects and classes to structure software. In Java:
+## Detailed Explanation
 
-- **Encapsulation**: Bundling data and methods into classes, controlling access via modifiers (private, public).
-- **Inheritance**: Creating new classes from existing ones, promoting code reuse.
-- **Polymorphism**: Ability of objects to take multiple forms, achieved through method overriding and overloading.
-- **Abstraction**: Hiding complex implementation details, focusing on essential features.
+### Encapsulation
+Encapsulation is the bundling of data (attributes) and methods (behaviors) that operate on the data into a single unit called a class. It restricts direct access to some of an object's components, which is achieved using access modifiers like private, protected, and public.
 
-### Access Modifiers
+**Benefits:**
+- Data hiding and protection
+- Increased security
+- Easier maintenance
 
-| Modifier | Class | Package | Subclass | World |
-|----------|-------|---------|----------|-------|
-| public | Y | Y | Y | Y |
-| protected | Y | Y | Y | N |
-| default | Y | Y | N | N |
-| private | Y | N | N | N |
+### Inheritance
+Inheritance allows a class (subclass) to inherit properties and methods from another class (superclass). It promotes code reusability and establishes a relationship between classes.
 
-Java supports these through classes, interfaces, and abstract classes.
+**Types of Inheritance in Java:**
+- Single inheritance
+- Multilevel inheritance
+- Hierarchical inheritance
+- Multiple inheritance (through interfaces)
 
-```mermaid
-classDiagram
-    Animal <|-- Dog
-    Animal <|-- Cat
-    Animal : +eat()
-    Dog : +bark()
-    Cat : +meow()
-```
+### Polymorphism
+Polymorphism means "many forms" and allows objects to be treated as instances of their parent class. It enables a single interface to represent different underlying forms (data types).
 
-# Real-world Examples & Use Cases
+**Types:**
+- Compile-time polymorphism (method overloading)
+- Runtime polymorphism (method overriding)
 
-- **Banking System**: Account classes with encapsulated balance and transaction methods.
-- **Game Development**: Character classes inheriting from base entities with polymorphic behaviors.
-- **E-commerce**: Product hierarchies using inheritance and abstraction for different item types.
+### Abstraction
+Abstraction is the process of hiding complex implementation details and showing only the essential features of an object. In Java, abstraction is achieved through abstract classes and interfaces.
 
-Example: A vehicle rental system with base Vehicle class and derived Car and Bike classes.
+**Key Points:**
+- Abstract classes can have abstract and concrete methods
+- Interfaces define contracts that implementing classes must follow
+- Helps in reducing complexity and increasing efficiency
 
-# Code Examples
+## Real-world Examples & Use Cases
 
-Encapsulation example:
+1. **Banking System**: Using encapsulation to protect account balances, inheritance for different account types (savings, checking), polymorphism for interest calculation methods.
+2. **Vehicle Management System**: Abstraction for a generic Vehicle class, inheritance for Car, Truck, Motorcycle subclasses.
+3. **Employee Management**: Polymorphism for calculating salaries for different employee types (full-time, part-time, contractor).
+4. **Shape Drawing Application**: Abstraction for Shape interface, concrete implementations for Circle, Rectangle, Triangle with polymorphic draw() methods.
+5. **E-commerce Platform**: Encapsulation for Product classes, inheritance for different product categories.
 
+## Code Examples
+
+### Encapsulation Example
 ```java
 public class BankAccount {
+    private String accountNumber;
     private double balance;
     
-    public BankAccount(double initialBalance) {
+    public BankAccount(String accountNumber, double initialBalance) {
+        this.accountNumber = accountNumber;
         this.balance = initialBalance;
     }
     
@@ -65,86 +73,161 @@ public class BankAccount {
         }
     }
     
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+        }
+    }
+    
     public double getBalance() {
         return balance;
+    }
+    
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        BankAccount account = new BankAccount("123456789", 1000.0);
+        account.deposit(500.0);
+        account.withdraw(200.0);
+        System.out.println("Balance: " + account.getBalance());
     }
 }
 ```
 
-Inheritance example:
-
+### Inheritance Example
 ```java
 public class Animal {
+    protected String name;
+    
+    public Animal(String name) {
+        this.name = name;
+    }
+    
     public void eat() {
-        System.out.println("Animal eats");
+        System.out.println(name + " is eating.");
+    }
+    
+    public void sleep() {
+        System.out.println(name + " is sleeping.");
     }
 }
 
 public class Dog extends Animal {
+    public Dog(String name) {
+        super(name);
+    }
+    
     public void bark() {
-        System.out.println("Dog barks");
+        System.out.println(name + " is barking.");
+    }
+    
+    @Override
+    public void eat() {
+        System.out.println(name + " is eating dog food.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Dog dog = new Dog("Buddy");
+        dog.eat();    // Overridden method
+        dog.sleep();  // Inherited method
+        dog.bark();   // Dog-specific method
     }
 }
 ```
 
-Polymorphism example:
-
+### Polymorphism Example
 ```java
 public class Shape {
     public void draw() {
-        System.out.println("Drawing shape");
+        System.out.println("Drawing a shape.");
     }
 }
 
 public class Circle extends Shape {
     @Override
     public void draw() {
-        System.out.println("Drawing circle");
+        System.out.println("Drawing a circle.");
+    }
+}
+
+public class Rectangle extends Shape {
+    @Override
+    public void draw() {
+        System.out.println("Drawing a rectangle.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Shape shape1 = new Circle();
+        Shape shape2 = new Rectangle();
+        
+        shape1.draw();  // Calls Circle's draw method
+        shape2.draw();  // Calls Rectangle's draw method
     }
 }
 ```
 
-Abstraction example:
-
+### Abstraction Example
 ```java
-interface Vehicle {
-    void start();
-}
-
-public class Car implements Vehicle {
-    @Override
-    public void start() {
-        System.out.println("Car starts");
+public abstract class Vehicle {
+    protected String brand;
+    
+    public Vehicle(String brand) {
+        this.brand = brand;
+    }
+    
+    public abstract void start();
+    public abstract void stop();
+    
+    public void honk() {
+        System.out.println("Honking the horn!");
     }
 }
 
-public class Bike implements Vehicle {
+public class Car extends Vehicle {
+    public Car(String brand) {
+        super(brand);
+    }
+    
     @Override
     public void start() {
-        System.out.println("Bike starts");
+        System.out.println("Starting the " + brand + " car.");
+    }
+    
+    @Override
+    public void stop() {
+        System.out.println("Stopping the " + brand + " car.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Vehicle car = new Car("Toyota");
+        car.start();
+        car.honk();
+        car.stop();
     }
 }
 ```
 
-# References
+## References
 
-- [Oracle OOP Concepts](https://docs.oracle.com/javase/tutorial/java/concepts/)
+- [Oracle Java OOP Concepts](https://docs.oracle.com/javase/tutorial/java/concepts/)
 - [GeeksforGeeks OOP in Java](https://www.geeksforgeeks.org/object-oriented-programming-oops-concept-in-java/)
-- [Design Patterns: Elements of Reusable Object-Oriented Software](https://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612)
+- [Baeldung OOP Principles](https://www.baeldung.com/java-oop)
+- [Java OOP Tutorial](https://www.javatpoint.com/java-oops-concepts)
 
-# Common Pitfalls & Edge Cases
+## Github-README Links & Related Topics
 
-- **Deep Inheritance Hierarchies**: Can lead to tight coupling and maintenance issues.
-- **Breaking Encapsulation**: Exposing internal state through public getters/setters without validation.
-- **Improper Polymorphism**: Forgetting @Override annotation or not handling method signatures correctly.
-- **Abstract Classes vs Interfaces**: Choosing wrong abstraction mechanism for the use case.
-
-# Tools & Libraries
-
-- **UML Tools**: PlantUML, StarUML for visualizing class hierarchies and relationships.
-- **IDEs**: IntelliJ IDEA, Eclipse with built-in refactoring tools for OOP code.
-
-# Github-README Links & Related Topics
-
-- [Java Fundamentals](../java-fundamentals/)
-- [Design Patterns in Java](../design-patterns-in-java/)
+- [Java Fundamentals](../java-fundamentals/README.md)
+- [Inheritance in Java](../inheritance-in-java/README.md)
+- [Polymorphism in Java](../polymorphism-in-java/README.md)
+- [Encapsulation in Java](../encapsulation-in-java/README.md)
+- [Abstraction in Java](../abstraction-in-java/README.md)
