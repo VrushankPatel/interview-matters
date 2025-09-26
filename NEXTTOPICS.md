@@ -1,10 +1,5 @@
-Java Memory Management
-Java Annotations and Reflection
-Design Patterns in Java
-Exception Handling in Java
-Java Networking and Sockets
-Database Design Principles
-API Design Best Practices
-Microservices Architecture
-Event-Driven Systems
-Cloud Computing Fundamentals
+-e 00001| Database Design Principles
+00002| API Design Best Practices
+00003| Microservices Architecture
+00004| Event-Driven Systems
+00005| Cloud Computing Fundamentals
