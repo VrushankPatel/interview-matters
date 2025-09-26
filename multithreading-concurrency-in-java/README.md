@@ -1,6 +1,6 @@
 ---
 title: Multithreading & Concurrency in Java
-aliases: [Java Threads, Concurrent Programming]
+aliases: [Java Concurrency, Threading in Java]
 tags: [#java, #concurrency]
 created: 2025-09-26
 updated: 2025-09-26
@@ -10,48 +10,32 @@ updated: 2025-09-26
 
 ## Overview
 
-Multithreading allows a program to perform multiple tasks simultaneously. Java provides built-in support for threads, synchronization, and concurrent utilities to manage shared resources safely.
+Multithreading in Java enables concurrent execution of code, improving performance and responsiveness. Concurrency utilities like locks and executors manage thread safety and coordination.
 
 ## Detailed Explanation
 
-### Threads
+### Threads and Runnable
 
-- Creating threads with Thread class or Runnable
-- Thread lifecycle: New, Runnable, Blocked, Waiting, Timed Waiting, Terminated
+Create threads using `Thread` class or `Runnable` interface.
 
 ### Synchronization
 
-- Synchronized blocks and methods
-- Locks, semaphores, barriers
+Use `synchronized` keyword or `Lock` interfaces for thread safety.
 
-### Concurrent Collections
+### Concurrency Utilities
 
-- ConcurrentHashMap, CopyOnWriteArrayList
-
-```mermaid
-stateDiagram-v2
-[*] --> New
-New --> Runnable : start()
-Runnable --> Running : schedule
-Running --> Blocked : wait/sleep
-Blocked --> Runnable : notify
-Running --> Waiting : join
-Waiting --> Runnable : joined
-Running --> Terminated : run complete
-Terminated --> [*]
-```
+- `ExecutorService` for thread pools.
+- `ConcurrentHashMap` for thread-safe collections.
 
 ## Real-world Examples & Use Cases
 
-- Web servers handling multiple requests
-- GUI applications with responsive interfaces
-- Data processing pipelines
+- Web servers handling multiple requests.
+- Data processing pipelines with parallel tasks.
 
 ## Code Examples
 
-### Creating a Thread
-
 ```java
+// Thread creation
 public class MyThread extends Thread {
     public void run() {
         System.out.println("Thread running");
@@ -65,25 +49,44 @@ public class Main {
 }
 ```
 
-### Synchronization
-
 ```java
+// Synchronization
 public class Counter {
     private int count = 0;
     public synchronized void increment() {
         count++;
     }
-    public int getCount() {
-        return count;
-    }
 }
 ```
 
+## Journey / Sequence
+
+```mermaid
+stateDiagram-v2
+    [*] --> New
+    New --> Runnable
+    Runnable --> Running
+    Running --> Blocked
+    Blocked --> Runnable
+    Running --> Terminated
+    Terminated --> [*]
+```
+
+## Common Pitfalls & Edge Cases
+
+- Race conditions without synchronization.
+- Deadlocks with improper lock ordering.
+
+## Tools & Libraries
+
+- `java.util.concurrent` package.
+
 ## References
 
-- [Oracle Concurrency](https://docs.oracle.com/javase/tutorial/essential/concurrency/)
+- [Oracle Concurrency Tutorial](https://docs.oracle.com/javase/tutorial/essential/concurrency/)
+- [Baeldung Java Concurrency](https://www.baeldung.com/java-concurrency)
 
 ## Github-README Links & Related Topics
 
-- [Java Fundamentals](../java-fundamentals/)
-- [Concurrent Collections](../concurrent-collections/)
+- [Java Fundamentals](../java-fundamentals)
+- [Concurrency & Parallelism](../concurrency-parallelism)

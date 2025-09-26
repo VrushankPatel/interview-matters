@@ -1,10 +1,17 @@
-00036| Collections & Data Structures
-00037| Java Stream API & Functional Programming
-00038| System Design Basics
-00039| High Scalability Patterns
-00040| CAP Theorem & Distributed Systems
-00041| LLD HLD Basics
-00042| Replication vs Sharding vs Partitioning
-00043| Caching
-00044| Latency and Throughput Zero to Hero
-00045| Monitoring and Logging
+Collections & Data Structures
+Java Stream API & Functional Programming
+System Design Basics
+High Scalability Patterns
+CAP Theorem & Distributed Systems
+A separate folder for popular systems design, LLD and HLDs both like url shortner, netflix and identify more yourself
+LLD HLD basics
+Replication vs Sharding vs Partitioning
+Caching
+Latency and Throughput zero to hero
+Monitoring and Logging
+Async logging
+DevOps & Infrastructure as Code
+Proxy forward and reverse
+Load balancing and strategies
+Rate limiting
+Concurrency & Parallelism

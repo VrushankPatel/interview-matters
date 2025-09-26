@@ -1,7 +1,7 @@
 ---
 title: OOP Principles in Java
 aliases: [Object-Oriented Programming in Java]
-tags: [#java,#oop]
+tags: [#java, #oop]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -10,165 +10,76 @@ updated: 2025-09-26
 
 ## Overview
 
-Object-Oriented Programming (OOP) is a paradigm that organizes code around objects, which are instances of classes. Java is fundamentally object-oriented, supporting four main principles: Encapsulation, Inheritance, Polymorphism, and Abstraction. These principles promote code reusability, modularity, and maintainability.
+Object-Oriented Programming (OOP) in Java revolves around four main principles: Encapsulation, Inheritance, Polymorphism, and Abstraction. These principles help in creating modular, reusable, and maintainable code.
 
 ## Detailed Explanation
 
 ### Encapsulation
 
-- Bundles data and methods into a single unit (class).
-- Uses access modifiers (private, protected, public) to control access.
-- Provides getters/setters for controlled access.
+Encapsulation involves bundling data and methods that operate on that data within a single unit (class). Access is controlled via access modifiers like `private`, `public`.
 
 ### Inheritance
 
-- Allows a class to inherit properties and methods from another class.
-- Promotes code reuse and hierarchical relationships.
-- Uses 'extends' keyword.
+Inheritance allows a class to inherit properties and methods from another class using `extends`. It promotes code reuse.
 
 ### Polymorphism
 
-- Ability of objects to take many forms.
-- Method overloading (same name, different parameters) and overriding (subclass redefines superclass method).
-- Runtime polymorphism via dynamic method dispatch.
+Polymorphism means "many forms." It allows methods to behave differently based on the object. Achieved via method overriding and overloading.
 
 ### Abstraction
 
-- Hides implementation details, showing only essential features.
-- Achieved through abstract classes and interfaces.
-- Interfaces define contracts; abstract classes provide partial implementation.
-
-```mermaid
-classDiagram
-    class Animal {
-        +makeSound()
-    }
-    class Dog {
-        +makeSound()
-    }
-    class Cat {
-        +makeSound()
-    }
-    Animal <|-- Dog
-    Animal <|-- Cat
-```
+Abstraction hides complex implementation details and shows only essential features. Implemented using abstract classes and interfaces.
 
 ## Real-world Examples & Use Cases
 
-- **Banking System**: Account classes with inheritance for different account types.
-- **Game Development**: Characters with polymorphism for different behaviors.
-- **E-commerce**: Product catalog with abstraction for various product types.
-- **GUI Frameworks**: Components inheriting from base classes.
+- Modeling real-world entities like employees in a payroll system.
+- Designing game characters with shared behaviors.
 
 ## Code Examples
 
-### Encapsulation
-
 ```java
+// Encapsulation
 public class Person {
     private String name;
-    private int age;
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public int getAge() {
-        return age;
-    }
-    public void setAge(int age) {
-        this.age = age;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 }
 ```
 
-### Inheritance
-
 ```java
-public class Animal {
-    public void eat() {
-        System.out.println("Eating");
-    }
+// Inheritance and Polymorphism
+class Animal {
+    void sound() { System.out.println("Animal sound"); }
 }
-public class Dog extends Animal {
-    public void bark() {
-        System.out.println("Barking");
-    }
+class Dog extends Animal {
+    void sound() { System.out.println("Bark"); }
 }
 public class Main {
     public static void main(String[] args) {
-        Dog dog = new Dog();
-        dog.eat();
-        dog.bark();
+        Animal a = new Dog();
+        a.sound(); // Outputs: Bark
     }
 }
 ```
 
-### Polymorphism
-
 ```java
-public class Animal {
-    public void makeSound() {
-        System.out.println("Some sound");
-    }
-}
-public class Dog extends Animal {
-    @Override
-    public void makeSound() {
-        System.out.println("Woof");
-    }
-}
-public class Cat extends Animal {
-    @Override
-    public void makeSound() {
-        System.out.println("Meow");
-    }
-}
-public class Main {
-    public static void main(String[] args) {
-        Animal animal1 = new Dog();
-        Animal animal2 = new Cat();
-        animal1.makeSound(); // Woof
-        animal2.makeSound(); // Meow
-    }
-}
-```
-
-### Abstraction
-
-```java
+// Abstraction
 abstract class Shape {
     abstract double area();
 }
 class Circle extends Shape {
-    private double radius;
-    public Circle(double radius) {
-        this.radius = radius;
-    }
-    @Override
-    double area() {
-        return Math.PI * radius * radius;
-    }
-}
-public class Main {
-    public static void main(String[] args) {
-        Shape shape = new Circle(5);
-        System.out.println("Area: " + shape.area());
-    }
+    double radius;
+    Circle(double r) { radius = r; }
+    double area() { return Math.PI * radius * radius; }
 }
 ```
 
 ## References
 
-- [Oracle OOP in Java](https://docs.oracle.com/javase/tutorial/java/concepts/)
-- [GeeksforGeeks OOP](https://www.geeksforgeeks.org/object-oriented-programming-oops-concept-in-java/)
-- [Tutorialspoint OOP](https://www.tutorialspoint.com/java/java_object_oriented.htm)
+- [Oracle OOP Concepts](https://docs.oracle.com/javase/tutorial/java/concepts/index.html)
+- [GeeksforGeeks OOP in Java](https://www.geeksforgeeks.org/object-oriented-programming-oops-concept-in-java/)
 
 ## Github-README Links & Related Topics
 
-- [Java Fundamentals](../java-fundamentals/README.md)
-- [Inheritance in Java](../inheritance-in-java/README.md)
-- [Polymorphism in Java](../polymorphism-in-java/README.md)
-- [Encapsulation in Java](../encapsulation-in-java/README.md)
-- [Abstraction in Java](../abstraction-in-java/README.md)
+- [Java Fundamentals](../java-fundamentals)
+- [Design Patterns in Java](../design-patterns-in-java)
