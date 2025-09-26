@@ -1,9 +1,9 @@
 ---
 title: API Gateway vs Service Mesh
-aliases: []
+aliases: ["API Gateway vs Service Mesh Comparison"]
 tags: [#system-design, #microservices]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # API Gateway vs Service Mesh

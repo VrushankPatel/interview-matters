@@ -1,9 +1,9 @@
 ---
 title: Dropbox File Storage
-aliases: [Dropbox, File Storage System]
+aliases: ["Dropbox", "File Storage System"]
 tags: [#system-design, #storage, #distributed-systems]
 created: 2023-01-01
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 ## Overview

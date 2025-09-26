@@ -1,9 +1,9 @@
 ---
 title: Google Maps System Design
-aliases: [Mapping System, Location Services]
+aliases: ["Mapping System", "Location Services"]
 tags: [#system-design, #geospatial, #location-based-services, #routing]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Google Maps System Design

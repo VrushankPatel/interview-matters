@@ -1,9 +1,9 @@
 ---
 title: Discord System Design
-aliases: [Discord Chat Platform, Discord Architecture]
+aliases: ["Discord Chat Platform", "Discord Architecture"]
 tags: [#system-design, #real-time, #messaging, #scalability, #websocket, #elasticsearch]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Discord System Design Architecture

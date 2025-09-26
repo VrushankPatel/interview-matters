@@ -1,9 +1,9 @@
 ---
 title: API Gateway vs Load Balancer
-aliases: [API Gateway Comparison, Load Balancer Differences]
+aliases: ["API Gateway Comparison", "Load Balancer Differences"]
 tags: [#system-design,#api,#networking]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 ## Overview
