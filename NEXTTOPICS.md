@@ -1,5 +1,5 @@
-- JWT Authentication
-- Message Queues and Brokers
-- Load Balancing Strategies
-- API Rate Limiting
-- Fault Tolerance Patterns
+- Java Fundamentals
+- OOP Principles in Java
+- JVM Internals & Class Loading
+- Garbage Collection Algorithms
+- Multithreading & Concurrency in Java

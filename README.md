@@ -253,6 +253,7 @@ This repository contains a comprehensive collection of topics related to softwar
 - [****](/)java-virtual-threads
 - [****](/)java-volatile-keyword
 - [****](/)java-wait-notify
+- [****](/)jwt-authentication
 - [****](/)java
 - [****](/)jpa-and-hibernate
 - [****](/)jvm-internals-and-class-loading

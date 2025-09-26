@@ -1,9 +1,9 @@
 ---
 title: Message Queues and Brokers
-aliases: ["MQ", "Message Brokers"]
-tags: ["#system-design","#distributed-systems"]
+aliases: [MQ, Message Brokers]
+tags: [#system-design,#distributed-systems]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 ## Overview
