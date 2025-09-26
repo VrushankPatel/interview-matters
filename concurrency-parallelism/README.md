@@ -6,8 +6,6 @@ created: 2025-09-25
 updated: 2025-09-26
 ---
 
-# Concurrency & Parallelism
-
 ## Overview
 
 Concurrency and parallelism are fundamental concepts in computer science for executing multiple tasks efficiently. Concurrency refers to the ability to handle multiple tasks that may overlap in time, often through interleaving, while parallelism involves executing multiple tasks simultaneously, typically leveraging multiple processors or cores. These concepts are crucial for building responsive, high-performance systems, especially in multi-threaded and distributed environments.

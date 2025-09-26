@@ -6,11 +6,11 @@ created: 2025-09-25
 updated: 2025-09-26
 ---
 
-# Overview
+## Overview
 
 A URL shortener service, like bit.ly or TinyURL, converts long URLs into short, shareable links. It involves generating unique short codes, storing URL mappings, and handling redirections at scale.
 
-# Detailed Explanation
+## Detailed Explanation
 
 ## Requirements
 
@@ -42,7 +42,7 @@ graph TD
 - Database schema: table with short_code, long_url, created_at, expires_at
 - Caching: Redis for hot URLs
 
-# Journey / Sequence
+## Journey / Sequence
 
 ```mermaid
 sequenceDiagram
@@ -58,13 +58,13 @@ sequenceDiagram
     API->>User: Redirect (301) to original
 ```
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 - Social media sharing
 - Marketing campaigns
 - Analytics tracking
 
-# Code Examples
+## Code Examples
 
 ## Java Implementation (Simple)
 
@@ -115,7 +115,7 @@ def redirect(short_code):
     return "Not found", 404
 ```
 
-# Data Models / Message Formats
+## Data Models / Message Formats
 
 ```json
 {
@@ -126,26 +126,26 @@ def redirect(short_code):
 }
 ```
 
-# Common Pitfalls & Edge Cases
+## Common Pitfalls & Edge Cases
 
 - Collisions: Handle hash collisions.
 - Expiration: Implement TTL for URLs.
 - Analytics: Track clicks without slowing redirects.
 
-# Tools & Libraries
+## Tools & Libraries
 
 - Databases: PostgreSQL, Cassandra.
 - Caching: Redis.
 - Frameworks: Spring Boot for API.
 
-# References
+## References
 
 - [System Design: URL Shortening Service](https://www.geeksforgeeks.org/system-design-url-shortening-service/)
 - [Designing a URL Shortening service like TinyURL](https://medium.com/@sandeep4.verma/designing-a-url-shortening-service-like-tinyurl-73a04d986e8f)
 - [System Design Primer: URL Shortener](https://github.com/donnemartin/system-design-primer#url-shortener)
 - [Bitly Architecture](https://bitly.com/blog/)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 - [Caching](../caching/README.md)
 - [Database Sharding Strategies](../database-sharding-strategies/README.md)
