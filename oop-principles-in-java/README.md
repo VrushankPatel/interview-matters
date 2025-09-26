@@ -1,6 +1,6 @@
 ---
 title: OOP Principles in Java
-aliases: [Object-Oriented Programming in Java, Java OOP]
+aliases: [Object-Oriented Programming in Java]
 tags: [#java,#oop]
 created: 2025-09-26
 updated: 2025-09-26
@@ -10,118 +10,121 @@ updated: 2025-09-26
 
 ## Overview
 
-Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects", which can contain data and code. Java implements OOP through four main principles: Encapsulation, Inheritance, Polymorphism, and Abstraction. These principles help in creating modular, reusable, and maintainable code.
+Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects", which can contain data and code. Java is an OOP language that supports four main principles: Encapsulation, Inheritance, Polymorphism, and Abstraction.
 
 ## Detailed Explanation
 
 ### Encapsulation
 
-Encapsulation is the bundling of data and methods that operate on that data within a single unit (class). It restricts direct access to some of an object's components.
+Encapsulation is the mechanism of wrapping the data (variables) and code acting on the data (methods) together as a single unit.
 
 ```java
-public class BankAccount {
-    private double balance;
-    
-    public void deposit(double amount) {
-        if (amount > 0) {
-            balance += amount;
-        }
+public class Student {
+    private String name;
+    private int age;
+
+    public String getName() {
+        return name;
     }
-    
-    public double getBalance() {
-        return balance;
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
 ```
 
 ### Inheritance
 
-Inheritance allows a class to inherit properties and methods from another class. The child class can override or extend the functionality of the parent class.
+Inheritance is a mechanism where one class acquires the property of another class.
 
 ```java
 public class Animal {
     public void eat() {
-        System.out.println("Eating...");
+        System.out.println("Eating");
     }
 }
 
 public class Dog extends Animal {
     public void bark() {
-        System.out.println("Woof!");
+        System.out.println("Barking");
     }
 }
 ```
 
 ### Polymorphism
 
-Polymorphism allows objects of different classes to be treated as objects of a common superclass. It can be achieved through method overriding and method overloading.
+Polymorphism allows one interface to be used for a general class of actions.
 
-**Method Overriding:**
-
-```java
-public class Shape {
-    public double area() {
-        return 0;
-    }
-}
-
-public class Circle extends Shape {
-    private double radius;
-    
-    public Circle(double radius) {
-        this.radius = radius;
-    }
-    
-    @Override
-    public double area() {
-        return Math.PI * radius * radius;
-    }
-}
-```
-
-**Method Overloading:**
+Method Overloading:
 
 ```java
 public class Calculator {
     public int add(int a, int b) {
         return a + b;
     }
-    
+
     public double add(double a, double b) {
         return a + b;
     }
 }
 ```
 
-### Abstraction
-
-Abstraction is the process of hiding complex implementation details and showing only the necessary features of an object.
+Method Overriding:
 
 ```java
-public abstract class Vehicle {
-    public abstract void start();
-    public abstract void stop();
+public class Animal {
+    public void sound() {
+        System.out.println("Animal sound");
+    }
 }
 
-public class Car extends Vehicle {
+public class Dog extends Animal {
     @Override
-    public void start() {
-        System.out.println("Car started");
+    public void sound() {
+        System.out.println("Bark");
     }
-    
-    @Override
-    public void stop() {
-        System.out.println("Car stopped");
+}
+```
+
+### Abstraction
+
+Abstraction is a process of hiding the implementation details and showing only functionality to the user.
+
+Using abstract classes:
+
+```java
+public abstract class Shape {
+    abstract void draw();
+}
+
+public class Circle extends Shape {
+    void draw() {
+        System.out.println("Drawing Circle");
+    }
+}
+```
+
+Using interfaces:
+
+```java
+public interface Drawable {
+    void draw();
+}
+
+public class Rectangle implements Drawable {
+    public void draw() {
+        System.out.println("Drawing Rectangle");
     }
 }
 ```
 
 ## Real-world Examples & Use Cases
 
-- Banking systems: Account classes with encapsulation for security
-- Game development: Inheritance hierarchies for different character types
-- GUI frameworks: Polymorphism for handling different UI components
-- Database connections: Abstraction for different database implementations
+- Banking system: Account classes with inheritance for different account types.
+
+- Game development: Character classes with polymorphism for different behaviors.
+
+- GUI frameworks: Abstract components with concrete implementations.
 
 ## Code Examples
 
@@ -129,85 +132,75 @@ public class Car extends Vehicle {
 
 ```java
 // Abstraction
-abstract class Employee {
-    protected String name;
-    protected double salary;
-    
-    public Employee(String name, double salary) {
-        this.name = name;
-        this.salary = salary;
-    }
-    
-    public abstract double calculateBonus();
-    
-    public void displayInfo() {
-        System.out.println("Name: " + name + ", Salary: " + salary);
-    }
+abstract class Vehicle {
+    abstract void start();
+    abstract void stop();
 }
 
 // Inheritance and Polymorphism
-class Manager extends Employee {
-    private double bonusPercentage;
-    
-    public Manager(String name, double salary, double bonusPercentage) {
-        super(name, salary);
-        this.bonusPercentage = bonusPercentage;
-    }
-    
+class Car extends Vehicle {
     @Override
-    public double calculateBonus() {
-        return salary * bonusPercentage / 100;
+    void start() {
+        System.out.println("Car started");
+    }
+
+    @Override
+    void stop() {
+        System.out.println("Car stopped");
     }
 }
 
-class Developer extends Employee {
-    private int projectsCompleted;
-    
-    public Developer(String name, double salary, int projectsCompleted) {
-        super(name, salary);
-        this.projectsCompleted = projectsCompleted;
-    }
-    
+class Bike extends Vehicle {
     @Override
-    public double calculateBonus() {
-        return projectsCompleted * 1000;
+    void start() {
+        System.out.println("Bike started");
+    }
+
+    @Override
+    void stop() {
+        System.out.println("Bike stopped");
     }
 }
 
-public class Company {
+// Encapsulation
+class Person {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+}
+
+public class Main {
     public static void main(String[] args) {
-        Employee manager = new Manager("John Doe", 80000, 10);
-        Employee developer = new Developer("Jane Smith", 60000, 5);
-        
-        manager.displayInfo();
-        System.out.println("Bonus: " + manager.calculateBonus());
-        
-        developer.displayInfo();
-        System.out.println("Bonus: " + developer.calculateBonus());
+        Vehicle car = new Car();
+        car.start();
+        car.stop();
+
+        Person p = new Person("John", 25);
+        System.out.println(p.getName() + " is " + p.getAge() + " years old");
     }
 }
 ```
 
-## Common Pitfalls & Edge Cases
-
-- Overusing inheritance can lead to tight coupling
-- Forgetting to call super() in constructors of subclasses
-- Method overriding without proper access modifiers
-- Abstract classes vs interfaces confusion
-
-## Tools & Libraries
-
-- IDEs like IntelliJ IDEA or Eclipse for OOP design
-- UML tools for class diagram visualization
-- JUnit for testing OOP implementations
-
 ## References
 
 - [Oracle OOP Concepts](https://docs.oracle.com/javase/tutorial/java/concepts/)
-- [Effective Java by Joshua Bloch](https://www.amazon.com/Effective-Java-Joshua-Bloch/dp/0134685997)
+
+- [GeeksforGeeks OOP](https://www.geeksforgeeks.org/object-oriented-programming-oops-concept-in-java/)
 
 ## Github-README Links & Related Topics
 
 - [Java Fundamentals](../java-fundamentals/README.md)
-- [Design Patterns in Java](../java-design-patterns/README.md)
-- [Java Generics](../java-generics/README.md)
+
+- [Design Patterns in Java](../design-patterns-in-java/README.md)

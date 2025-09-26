@@ -1,7 +1,7 @@
 ---
 title: JVM Internals & Class Loading
-aliases: [Java Virtual Machine, JVM Architecture, Class Loading Mechanism]
-tags: [#java,#jvm]
+aliases: [Java Virtual Machine, Class Loading Mechanism]
+tags: [#java,#jvm,#internals]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -10,72 +10,57 @@ updated: 2025-09-26
 
 ## Overview
 
-The Java Virtual Machine (JVM) is the runtime environment that executes Java bytecode. Understanding JVM internals and the class loading mechanism is crucial for Java developers to optimize performance, troubleshoot issues, and write efficient code. This topic covers the JVM architecture, memory management, and how classes are loaded and linked.
+The Java Virtual Machine (JVM) is the runtime environment for Java applications. Class loading is the process by which the JVM loads class files into memory. Understanding JVM internals and class loading is crucial for performance tuning and debugging.
 
 ## Detailed Explanation
 
 ### JVM Architecture
 
-The JVM consists of several key components:
+The JVM consists of:
 
-1. **Class Loader Subsystem**: Loads class files into memory
-2. **Runtime Data Areas**: Memory areas used during program execution
-3. **Execution Engine**: Executes the bytecode
-4. **Native Method Interface**: Interface with native libraries
-5. **Native Method Libraries**: Platform-specific libraries
+- Class Loader Subsystem
 
-```mermaid
-graph TD
-    A[Java Source Code] --> B[Java Compiler]
-    B --> C[Bytecode]
-    C --> D[Class Loader]
-    D --> E[Runtime Data Areas]
-    E --> F[Execution Engine]
-    F --> G[Operating System]
-```
+- Runtime Data Areas
+
+- Execution Engine
+
+- Native Method Interface
 
 ### Class Loading Process
 
-Class loading involves three main steps:
+1. Loading: Finding and importing the binary data for a type.
 
-1. **Loading**: Finding and importing the binary data for a class
-2. **Linking**: Performing verification, preparation, and resolution
-3. **Initialization**: Executing static initializers and assigning initial values
+2. Linking: Performing verification, preparation, and resolution.
 
-**Class Loaders Hierarchy:**
+3. Initialization: Executing static initializers and initializing static fields.
 
-- **Bootstrap Class Loader**: Loads core Java classes (rt.jar)
-- **Extension Class Loader**: Loads extension classes
-- **System/Application Class Loader**: Loads application classes
+### Class Loaders
 
-```java
-public class ClassLoaderExample {
-    public static void main(String[] args) {
-        ClassLoader classLoader = ClassLoaderExample.class.getClassLoader();
-        System.out.println("Class Loader: " + classLoader);
-        System.out.println("Parent: " + classLoader.getParent());
-    }
-}
-```
+- Bootstrap Class Loader: Loads core Java classes.
+
+- Extension Class Loader: Loads classes from extension directories.
+
+- System/Application Class Loader: Loads classes from the application classpath.
 
 ### Runtime Data Areas
 
-1. **Method Area**: Stores class-level data (class name, methods, field info)
-2. **Heap**: Stores objects and instance variables
-3. **Stack**: Stores method calls and local variables
-4. **PC Registers**: Stores current instruction address
-5. **Native Method Stack**: Stores native method calls
+- Method Area: Stores class-level data.
 
-### Just-In-Time (JIT) Compilation
+- Heap: Stores objects.
 
-The JVM uses JIT compilation to improve performance by compiling bytecode to native machine code at runtime.
+- Stack: Stores method calls and local variables.
+
+- PC Register: Holds the address of the current instruction.
+
+- Native Method Stack: For native methods.
 
 ## Real-world Examples & Use Cases
 
-- **Performance Tuning**: Understanding memory areas helps in optimizing heap size
-- **Troubleshooting**: Analyzing stack traces and memory dumps
-- **Custom Class Loaders**: Implementing plugin systems or hot-swapping
-- **Security**: Understanding class loading for sandboxing applications
+- Custom class loaders for dynamic loading of plugins.
+
+- Understanding OutOfMemoryError in heap or permgen.
+
+- Performance tuning by monitoring JVM memory usage.
 
 ## Code Examples
 
@@ -85,60 +70,42 @@ The JVM uses JIT compilation to improve performance by compiling bytecode to nat
 public class CustomClassLoader extends ClassLoader {
     @Override
     public Class<?> findClass(String name) throws ClassNotFoundException {
-        byte[] classData = loadClassData(name);
-        if (classData == null) {
-            throw new ClassNotFoundException();
-        }
-        return defineClass(name, classData, 0, classData.length);
+        byte[] b = loadClassFromFile(name);
+        return defineClass(name, b, 0, b.length);
     }
-    
-    private byte[] loadClassData(String name) {
-        // Implementation to load class data from custom source
-        // For example, from a database or encrypted file
-        return null;
+
+    private byte[] loadClassFromFile(String fileName) {
+        // Implementation to load class bytes from file
+        return new byte[0];
     }
 }
 ```
 
-### Memory Management Example
+### Monitoring JVM
 
 ```java
-public class MemoryExample {
+public class JVMMemoryMonitor {
     public static void main(String[] args) {
-        // Stack allocation
-        int localVar = 10;
-        
-        // Heap allocation
-        String heapString = new String("Hello World");
-        
-        // Method area (static)
-        System.out.println(MemoryExample.class.getName());
+        Runtime runtime = Runtime.getRuntime();
+        long totalMemory = runtime.totalMemory();
+        long freeMemory = runtime.freeMemory();
+        long usedMemory = totalMemory - freeMemory;
+
+        System.out.println("Total Memory: " + totalMemory / 1024 / 1024 + " MB");
+        System.out.println("Free Memory: " + freeMemory / 1024 / 1024 + " MB");
+        System.out.println("Used Memory: " + usedMemory / 1024 / 1024 + " MB");
     }
 }
 ```
-
-## Common Pitfalls & Edge Cases
-
-- **ClassNotFoundException**: When class loader cannot find the class
-- **NoClassDefFoundError**: When class was available at compile time but not at runtime
-- **OutOfMemoryError**: Heap or PermGen/Metaspace exhaustion
-- **StackOverflowError**: Excessive recursion or deep call stacks
-
-## Tools & Libraries
-
-- **VisualVM**: For JVM monitoring and profiling
-- **JConsole**: Built-in JVM monitoring tool
-- **MAT (Memory Analyzer Tool)**: For heap dump analysis
-- **jmap and jstack**: Command-line tools for memory and thread analysis
 
 ## References
 
-- [JVM Specification](https://docs.oracle.com/javase/specs/jvms/se17/html/)
+- [JVM Specification](https://docs.oracle.com/javase/specs/jvms/se8/html/)
+
 - [Oracle JVM Internals](https://docs.oracle.com/javase/8/docs/technotes/guides/vm/)
-- [Understanding the JVM Internals](https://www.oracle.com/technetwork/java/javase/tech/index-jsp-140228.html)
 
 ## Github-README Links & Related Topics
 
 - [Garbage Collection Algorithms](../garbage-collection-algorithms/README.md)
+
 - [JVM Performance Tuning](../jvm-performance-tuning/README.md)
-- [Java Memory Management](../java-memory-management/README.md)
