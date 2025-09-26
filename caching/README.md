@@ -3,7 +3,7 @@ title: Caching
 aliases: [cache, caching strategies]
 tags: [#system-design,#performance]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 ## Overview
