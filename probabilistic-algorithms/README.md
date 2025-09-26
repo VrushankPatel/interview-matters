@@ -6,9 +6,7 @@ created: 2025-09-25
 updated: 2025-09-25
 ---
 
-# Probabilistic Algorithms
-
-## Overview
+# Overview
 
 Probabilistic algorithms leverage randomness to achieve efficient solutions, often trading exactness for space and time efficiency. This topic focuses on Bloom filters and skip lists, two key probabilistic data structures designed for space efficiency. Bloom filters provide fast, space-efficient set membership testing with a small probability of false positives, while skip lists offer logarithmic-time operations for ordered data with reduced space overhead compared to balanced trees.
 
@@ -208,7 +206,7 @@ print(sl.search(5))  # False
 - Wikipedia: Bloom filter. [https://en.wikipedia.org/wiki/Bloom_filter](https://en.wikipedia.org/wiki/Bloom_filter)
 - Wikipedia: Skip list. [https://en.wikipedia.org/wiki/Skip_list](https://en.wikipedia.org/wiki/Skip_list)
 
-## Github-README Links & Related Topics
+# Github-README Links & Related Topics
 
 - [Hash Tables](../hash-tables/README.md)
 - [Trees](../graphs-trees-heaps-and-tries/README.md)

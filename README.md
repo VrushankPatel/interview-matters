@@ -7,9 +7,11 @@ This repository contains comprehensive documentation on various topics for inter
 ### Algorithms
 - [Algorithms](./algorithms/README.md)
 - [Backtracking](./backtracking/README.md)
+- [Computational Geometry](./computational-geometry/README.md)
 - [Divide and Conquer](./divide-and-conquer/README.md)
 - [Dynamic Programming](./dynamic-programming/README.md)
 - [Graph Algorithms](./graph-algorithms/README.md)
+- [Probabilistic Algorithms](./probabilistic-algorithms/README.md)
 
 ### System Design
 - [Acid vs Base Tradeoffs](./acid-vs-base-tradeoffs/README.md)
@@ -152,6 +154,7 @@ This repository contains comprehensive documentation on various topics for inter
 - [Java Annotations and Reflection](./java-annotations-and-reflection/README.md)
 
 - [JVM Internals & Class Loading](./jvm-internals-and-class-loading/README.md)
+- [JVM Performance Tuning](./jvm-performance-tuning/README.md)
 
 - [Multithreading & Concurrency in Java](./multithreading-and-concurrency-in-java/README.md)
 - [Performance Tuning in Java Applications](./performance-tuning-in-java-applications/README.md)
