@@ -42,7 +42,28 @@ graph TD
 
 ## Detailed Explanation
 
-### Core Components
+### Sequence Diagram for Booking Flow
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant AG as API Gateway
+    participant BS as Booking Service
+    participant LS as Listing Service
+    participant PS as Payment Service
+    participant MS as Messaging Service
+
+    U->>AG: Request booking
+    AG->>BS: Create booking
+    BS->>LS: Check availability
+    LS-->>BS: Availability confirmed
+    BS->>PS: Process payment
+    PS-->>BS: Payment successful
+    BS->>MS: Send confirmation
+    MS-->>U: Notification sent
+    BS-->>U: Booking confirmed
+```
+
+### Key Components
 
 1. **User Service**: Manages user profiles, authentication (OAuth, JWT), and roles (host/guest). Uses relational DB like PostgreSQL for ACID transactions.
 
@@ -58,45 +79,24 @@ graph TD
 
 7. **Review Service**: Collects and displays ratings/reviews, with moderation for spam.
 
-### Scalability Strategies
-- **Sharding**: Shard databases by region or user ID.
-- **Caching**: Redis for session data, listings cache.
-- **Load Balancing**: Nginx or AWS ELB for traffic distribution.
-- **CDN**: Cloudflare for static content delivery.
-- **Microservices**: Independent deployment, API versioning.
+### Scalability Considerations
+- **Sharding**: Shard databases by region or user ID to distribute load.
+- **Caching**: Redis for session data, listings cache to reduce DB hits.
+- **Load Balancing**: Nginx or AWS ELB for traffic distribution and fault tolerance.
+- **CDN**: Cloudflare for static content delivery to edge locations.
+- **Microservices**: Independent deployment, API versioning for rolling updates.
+- **Auto-scaling**: Horizontal scaling based on traffic metrics.
+- **Database Optimization**: Read replicas, indexing for queries.
 
-### Data Flow
-1. User searches for listings.
-2. Search Service queries Elasticsearch and filters results.
-3. User selects listing, checks availability via Booking Service.
-4. Booking initiated, payment processed.
-5. Confirmation sent via email/messaging.
-
-## STAR Summary
-
-- **Situation**: Design a marketplace for vacation rentals with millions of users.
-- **Task**: Build scalable system handling listings, bookings, payments.
-- **Action**: Implement microservices, distributed DBs, caching, load balancing.
-- **Result**: Achieves high availability, low latency, secure transactions.
-
-## Journey / Sequence
-
-1. **Requirements Gathering**: Define use cases, constraints (e.g., GDPR compliance).
-2. **High-Level Design**: Sketch components, data flow.
-3. **Detailed Design**: API specs, DB schemas, algorithms.
-4. **Implementation**: Code services, integrate third-party APIs.
-5. **Testing**: Load testing, security audits.
-6. **Deployment**: CI/CD with Kubernetes, monitoring.
-
-## Data Models / Message Formats
-
-### Key Entities
+### Data Models
 | Entity | Fields | Storage |
 |--------|--------|---------|
-| User | id, name, email, role | PostgreSQL |
-| Listing | id, host_id, title, location, price, availability | Cassandra |
-| Booking | id, user_id, listing_id, dates, status | PostgreSQL |
-| Payment | id, booking_id, amount, method | Encrypted DB |
+| User | id, name, email, role, profile_pic | PostgreSQL |
+| Listing | id, host_id, title, location, price, availability, photos | Cassandra |
+| Booking | id, user_id, listing_id, dates, status, total_price | PostgreSQL |
+| Payment | id, booking_id, amount, method, status | Encrypted DB |
+| Message | id, sender_id, receiver_id, content, timestamp | MongoDB |
+| Review | id, booking_id, rating, comment, moderated | PostgreSQL |
 
 ### Message Formats (JSON)
 ```json
@@ -111,12 +111,25 @@ graph TD
 }
 ```
 
+### Data Flow
+1. User searches for listings via Search Service querying Elasticsearch.
+2. Filters applied (price, location, amenities).
+3. User selects listing, Booking Service checks availability.
+4. If available, payment initiated through Payment Service.
+5. Booking confirmed, notifications sent via Messaging Service.
+
 ## Real-world Examples & Use Cases
 
-- **Peak Traffic Handling**: During holidays, system scales to 10x normal load using auto-scaling groups.
-- **Fraud Detection**: Machine learning models flag suspicious bookings (e.g., bulk reservations).
-- **Personalization**: Recommendations based on user history, similar to Netflix.
-- **Global Expansion**: Localized search, multi-currency support.
+- **Peak Traffic Handling**: During events like New Year's Eve, the system handles 10x normal load through auto-scaling groups in AWS, ensuring <200ms response times.
+- **Fraud Detection**: ML models analyze booking patterns to detect fraud, such as bulk reservations from bots, reducing chargebacks by 30%.
+- **Personalization**: Collaborative filtering recommends listings based on past bookings and user preferences, increasing conversion rates.
+- **Global Expansion**: Supports 62 countries with localized search (e.g., geolocation), multi-currency payments, and language translations.
+- **Dynamic Pricing**: Hosts set flexible pricing; system adjusts based on demand using algorithms similar to airline yield management.
+- **Instant Bookings**: For verified hosts, bookings are confirmed immediately, improving user experience and reducing no-shows.
+- **Experiences Platform**: Extends beyond stays to offer tours, classes, and activities, using similar search and booking flows.
+- **Mobile Optimization**: App supports offline browsing, push notifications for booking updates, and camera integration for listing photos.
+- **Host Onboarding**: Automated verification of properties via AI image recognition and background checks.
+- **Dispute Resolution**: Escrow system holds funds until check-out; mediation service handles cancellations or damages.
 
 ## Code Examples
 
@@ -157,23 +170,6 @@ def search_listings(query, filters):
     return elasticsearch.search(index="listings", body=es_query)
 ```
 
-## Common Pitfalls & Edge Cases
-
-- **Double Booking**: Use optimistic locking or distributed locks.
-- **Currency Fluctuations**: Store prices in base currency, convert at runtime.
-- **Host/Guest Disputes**: Mediation system with escrow holds.
-- **Data Privacy**: Encrypt PII, comply with regulations.
-- **Scalability Bottlenecks**: Monitor DB queries, optimize with indexes.
-
-## Tools & Libraries
-
-- **Frameworks**: Spring Boot (Java), Flask (Python).
-- **Databases**: PostgreSQL, Cassandra, Elasticsearch.
-- **Caching**: Redis.
-- **Messaging**: Kafka for events.
-- **Orchestration**: Kubernetes.
-- **Monitoring**: Prometheus, Grafana.
-
 ## References
 
 - [Alex Xu Blog: Airbnb System Design](https://www.alexxu.com/blog/airbnb-system-design/)
@@ -182,11 +178,9 @@ def search_listings(query, filters):
 - [InterviewBit: Airbnb System Design](https://www.interviewbit.com/blog/airbnb-system-design/)
 
 ## Github-README Links & Related Topics
+- [Twitter System Design](./twitter-system-design/README.md)
+- [YouTube System Design](./youtube-system-design/README.md)
+- [Facebook System Design](./facebook-system-design/README.md)
+- [Uber System Design](./uber-system-design/README.md)
+- [Popular System Designs LLD and HLD](./popular-system-designs-lld-and-hld/README.md)
 
-- [Microservices Architecture](../microservices-architecture/README.md)
-- [API Design Principles](../api-design-principles/README.md)
-- [Database Sharding Strategies](../database-sharding-strategies/README.md)
-- [Load Balancing and Strategies](../load-balancing-and-strategies/README.md)
-- [Distributed Caching](../caching/README.md)
-- [Event-Driven Systems](../event-driven-systems/README.md)
-- [Payment Systems](../payment-systems/README.md)

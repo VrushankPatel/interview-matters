@@ -1,13 +1,3 @@
-Twitter System Design
-YouTube System Design
-Facebook System Design
-Uber System Design
-Airbnb System Design
-Dropbox System Design
-Google Search System Design
-A separate folder for popular systems design, LLD and HLDs both like url shortner, netflix and identify more yourself
-LLD HLD basics
-Replication vs Sharding vs Partitioning
 Caching
 Latency and Throughput zero to hero
 Monitoring and Logging
@@ -20,3 +10,8 @@ Java Exception Handling
 Java Generics
 Java Annotations
 Java Reflection
+Java Fundamentals
+OOP Principles in Java
+JVM Internals & Class Loading
+Garbage Collection Algorithms
+Multithreading & Concurrency in Java

@@ -1,169 +1,160 @@
 ---
-title: 'Twitter System Design'
-aliases: ['Twitter SD', 'Twitter Architecture']
-tags: ['#system-design', '#social-media']
-created: '2025-09-25'
-updated: '2025-09-26'
+title: Twitter System Design
+aliases: ["X System Design"]
+tags: [#system-design,#scalability,#real-time]
+created: 2025-09-26
+updated: 2025-09-26
 ---
-
-# Twitter System Design
 
 ## Overview
 
-Twitter (now X) is a social media platform that allows users to post short messages called tweets, follow other users, and view a personalized newsfeed. Designing Twitter involves handling massive scale, real-time updates, and complex features like timelines, search, and notifications. Key challenges include high availability, low latency, scalability, and managing billions of tweets daily.
+Twitter (now X) is a real-time social media platform handling billions of tweets daily, with over 500 million users. The system supports posting tweets, following users, viewing timelines, searching, and real-time notifications. Key challenges include high write throughput (up to 15,000 tweets/second), low-latency reads, and massive scale.
 
-This document outlines the system design for Twitter, covering functional and non-functional requirements, capacity estimation, architecture, data models, and more.
+### Key Requirements
+- **Functional**: Tweet posting, user following, timeline generation, search, notifications.
+- **Non-Functional**: High availability (99.9% uptime), low latency (<200ms for timelines), scalability to billions of users, data consistency for timelines.
+- **Constraints**: Real-time updates, global distribution, compliance with regulations.
+
+### High-Level Architecture
+The architecture uses microservices, event-driven design, and distributed storage. Components include:
+- **Client Layer**: Web/mobile apps.
+- **API Gateway**: Load balancing, authentication.
+- **Services**: Tweet Service, User Service, Timeline Service, Search Service, Notification Service.
+- **Storage**: Cassandra for tweets, Redis for caching timelines, MySQL for user data.
+- **Infrastructure**: Kubernetes for orchestration, CDN for static assets, Kafka for event streaming.
 
 ## Detailed Explanation
 
-### Requirements
-
-#### Functional Requirements
-- Post tweets (text, images, videos).
-- Follow/unfollow users.
-- View personalized newsfeed (tweets from followed users).
-- Search tweets by keywords or hashtags.
-- Extended: Retweets, favorites, notifications, analytics.
-
-#### Non-Functional Requirements
-- High availability and minimal latency.
-- Scalability to handle billions of users and tweets.
-- Fault tolerance and consistency.
-
-### Capacity Estimation
-
-Assuming 1 billion total users, 200 million daily active users (DAU), each tweeting 5 times/day:
-- **Tweets/day**: 1 billion.
-- **Media/day**: 100 million (10% of tweets).
-- **RPS**: ~12,000 requests/second.
-- **Storage/day**: 100 GB for tweets + 5 TB for media.
-- **Bandwidth**: ~60 MB/second.
-
-### Architecture
-
-Twitter uses a microservices architecture for scalability. High-level components:
-
+### Architecture Diagram
 ```mermaid
 graph TD
-    A[Client] --> B[Load Balancer]
-    B --> C[Web Servers]
-    C --> D[Application Servers]
-    D --> E[User Service]
-    D --> F[Newsfeed Service]
-    D --> G[Tweet Service]
-    D --> H[Search Service]
-    D --> I[Media Service]
-    D --> J[Analytics Service]
-    D --> K[Notifications Service]
-    E --> L[(Databases: MySQL/Cassandra)]
-    F --> M[(Cache: Redis)]
-    G --> L
-    H --> N[(Search Index: Elasticsearch)]
-    I --> O[(Object Storage: S3)]
-    J --> P[(Message Queue: Kafka)]
-    K --> P
+    A[Client Apps] --> B[API Gateway]
+    B --> C[Tweet Service]
+    B --> D[User Service]
+    B --> E[Timeline Service]
+    B --> F[Search Service]
+    B --> G[Notification Service]
+    C --> H[Cassandra DB]
+    D --> I[MySQL DB]
+    E --> J[Redis Cache]
+    F --> K[Elasticsearch]
+    G --> L[Kafka]
+    H --> M[Replication/Sharding]
+    I --> M
+    J --> M
+    K --> M
+    L --> N[Event Processing]
+    N --> O[Analytics Service]
 ```
 
-#### Key Services
-- **User Service**: Handles authentication, profiles.
-- **Newsfeed Service**: Generates timelines using pull/push/hybrid models.
-  - Pull: Fetch on load (saves writes, increases reads).
-  - Push: Fan-out on write (real-time, increases writes).
-  - Hybrid: Push for small followers, pull for large.
-- **Tweet Service**: Manages posting, retweets, favorites.
-- **Search Service**: Uses Elasticsearch for indexing and querying.
-- **Media Service**: Handles uploads to S3/CDN.
-- **Notifications Service**: Sends push notifications via Kafka and FCM/APNS.
-- **Analytics Service**: Processes metrics with Spark.
+### Key Components
+- **API Gateway**: Handles routing, rate limiting, authentication using OAuth. Uses NGINX or similar for load balancing.
+- **Tweet Service**: Manages tweet creation, validation, and storage. Uses Cassandra for high-write scalability.
+- **User Service**: Handles user profiles, follows/unfollows. Stored in MySQL with sharding.
+- **Timeline Service**: Generates personalized timelines using fan-out-on-write (for high-follower users) and fan-out-on-read (for low-follower users). Cached in Redis.
+- **Search Service**: Powered by Elasticsearch for real-time indexing and querying.
+- **Notification Service**: Uses Kafka for event-driven notifications (e.g., new followers, likes).
+- **Storage Layer**:
+  - **Cassandra**: NoSQL for tweets; handles high writes via partitioning.
+  - **Redis**: In-memory cache for timelines; supports sorted sets for ordering.
+  - **MySQL**: Relational for user data; sharded by user ID.
+  - **Kafka**: Message queue for decoupling services and real-time processing.
 
-#### Data Partitioning and Sharding
-- Use consistent hashing for sharding databases.
-- Replicate data for fault tolerance.
+### Scalability Considerations
+- **Horizontal Scaling**: Services run on Kubernetes pods, auto-scaled based on CPU/memory.
+- **Data Partitioning**: Cassandra shards by tweet ID; Redis clusters for cache distribution.
+- **Caching**: Multi-layer caching (CDN for images, Redis for timelines) reduces DB load.
+- **Event Streaming**: Kafka enables asynchronous processing, handling spikes in traffic.
+- **Global Distribution**: Data centers worldwide with geo-replication; users routed to nearest DC.
+- **Rate Limiting**: Prevents abuse; implemented at API Gateway using token buckets.
+- **Fault Tolerance**: Circuit breakers, retries, and failover to secondary regions.
 
-#### Caching and CDN
-- Cache timelines in Redis.
-- Serve media via CDN (CloudFront).
-
-### Data Model
-
-| Table      | Fields                          |
-|------------|---------------------------------|
-| Users     | ID, Name, Email, DOB, CreatedAt |
-| Tweets    | ID, UserID, Type, Content, CreatedAt |
-| Followers | ID, FollowerID, FolloweeID      |
-| Favorites | ID, UserID, TweetID, CreatedAt  |
-| Feeds     | ID, UserID, UpdatedAt           |
-| Feeds_Tweets | ID, FeedID, TweetID             |
-
-- Databases: Relational (PostgreSQL) for users/tweets, NoSQL (Cassandra) for scalability.
-
-### API Design
-
-- **POST /tweet**: `{userID, content, mediaURL?}` → Boolean
-- **POST /follow**: `{followerID, followeeID}` → Boolean
-- **GET /newsfeed**: `{userID}` → Tweet[]
+### Data Models
+- **Tweet**:
+  ```json
+  {
+    "tweet_id": "string (UUID)",
+    "user_id": "string",
+    "text": "string (max 280 chars)",
+    "timestamp": "datetime",
+    "media_urls": ["string"],
+    "hashtags": ["string"],
+    "likes_count": "int",
+    "retweets_count": "int"
+  }
+  ```
+- **User**:
+  ```json
+  {
+    "user_id": "string",
+    "username": "string",
+    "display_name": "string",
+    "bio": "string",
+    "followers": ["user_id"],
+    "following": ["user_id"],
+    "profile_pic_url": "string"
+  }
+  ```
+- **Timeline** (Cached in Redis):
+  - Sorted set: key = "timeline:{user_id}", members = tweet_ids, scores = timestamps.
 
 ## Real-world Examples & Use Cases
-
-- **Newsfeed Generation**: For a user with 1,000 followers, hybrid model ensures real-time updates without overwhelming the system.
-- **Search**: Query "#AI" returns ranked tweets using Elasticsearch.
-- **Scalability**: During events like elections, push model handles spikes.
-- **Notifications**: Retweet triggers push to followers via Kafka.
+- **High-Traffic Events**: During events like Super Bowl, Twitter handles 10x normal load via auto-scaling and caching.
+- **Timeline Generation**: For a user with 1M followers (e.g., Elon Musk), fan-out-on-write pushes tweets to follower timelines asynchronously.
+- **Search**: Querying "#COVID19" returns indexed tweets in <100ms using Elasticsearch.
+- **Notifications**: Liking a tweet triggers a Kafka event, processed by Notification Service to send push notifications.
+- **Global Scale**: Tweets from US users are replicated to EU DCs for low-latency access.
 
 ## Code Examples
+### Tweet Posting (Simplified Java with Spring Boot)
+```java
+@RestController
+public class TweetController {
+    @Autowired
+    private TweetService tweetService;
 
-### Simple Tweet Posting (Python with Flask)
-
-```python
-from flask import Flask, request, jsonify
-import uuid
-
-app = Flask(__name__)
-
-# Mock database
-tweets = []
-
-@app.route('/tweet', methods=['POST'])
-def post_tweet():
-    data = request.json
-    user_id = data['userID']
-    content = data['content']
-    tweet_id = str(uuid.uuid4())
-    tweet = {
-        'id': tweet_id,
-        'userID': user_id,
-        'content': content,
-        'createdAt': '2025-09-25T00:00:00Z'
+    @PostMapping("/tweet")
+    public ResponseEntity<Tweet> postTweet(@RequestBody TweetRequest request) {
+        Tweet tweet = tweetService.createTweet(request.getUserId(), request.getText());
+        return ResponseEntity.ok(tweet);
     }
-    tweets.append(tweet)
-    return jsonify({'success': True, 'tweetID': tweet_id})
+}
 
-if __name__ == '__main__':
-    app.run()
+@Service
+public class TweetService {
+    @Autowired
+    private CassandraTemplate cassandraTemplate;
+
+    public Tweet createTweet(String userId, String text) {
+        Tweet tweet = new Tweet(UUID.randomUUID().toString(), userId, text, Instant.now());
+        cassandraTemplate.insert(tweet);
+        // Publish to Kafka for timeline updates
+        kafkaTemplate.send("tweet-events", tweet);
+        return tweet;
+    }
+}
 ```
 
-### Newsfeed Fetch (Simplified)
-
+### Timeline Fetch (Redis Example)
 ```python
-def get_newsfeed(user_id):
-    # Mock: Get followed users
-    followed = ['user1', 'user2']
-    feed = []
-    for tweet in tweets:
-        if tweet['userID'] in followed:
-            feed.append(tweet)
-    return sorted(feed, key=lambda x: x['createdAt'], reverse=True)
+import redis
+
+r = redis.Redis(host='localhost', port=6379, db=0)
+
+def get_timeline(user_id):
+    tweet_ids = r.zrevrange(f"timeline:{user_id}", 0, 19)  # Top 20 tweets
+    return [fetch_tweet(tweet_id) for tweet_id in tweet_ids]
 ```
 
 ## References
-
-- [Designing Twitter - GeeksforGeeks](https://www.geeksforgeeks.org/design-twitter-a-system-design-interview-question/)
-- [Twitter System Design - Educative](https://www.educative.io/blog/twitter-system-design) (Note: Link may be outdated)
-- [Life of a Tweet - High Scalability](https://highscalability.com/blog/2016/7/25/life-of-a-tweet-how-twitter-scales.html)
+- High Scalability Blog: "The Architecture Twitter Uses to Deal with 15,000 Writes Per Second" (highscalability.com)
+- Twitter Engineering Blog: "Twitter Timeline Service" (blog.twitter.com)
+- InfoQ: "Twitter's Architecture" (infoq.com)
+- Educative: "Twitter System Design" (educative.io)
 
 ## Github-README Links & Related Topics
-
-- [Facebook News Feed](../system-design/facebook-news-feed/README.md)
-- [WhatsApp Messaging System](../system-design/whatsapp-messaging-system/README.md)
-- [Instagram System Design](../instagram-system-design/README.md)
-- [Microservices Architecture](../system-design/microservices-architecture/README.md)
+- [YouTube System Design](./youtube-system-design/README.md)
+- [Facebook System Design](./facebook-system-design/README.md)
+- [Uber System Design](./uber-system-design/README.md)
+- [Airbnb System Design](./airbnb-system-design/README.md)
+- [Popular System Designs LLD and HLD](./popular-system-designs-lld-and-hld/README.md)
