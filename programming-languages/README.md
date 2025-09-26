@@ -92,4 +92,6 @@
 - [java-wait-notify](java-wait-notify/README.md)
 - [kotlin-for-java-developers](kotlin-for-java-developers/README.md)
 - [polymorphism-in-java](polymorphism-in-java/README.md)
+- [Class Loading Mechanism](class-loading-mechanism/README.md)
+- [Java](java/README.md)
 - [README.md](README.md/README.md)
