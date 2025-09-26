@@ -1,8 +1,3 @@
-- Kubernetes Basics
-- Docker Containerization
-- RESTful API Design
-- GraphQL APIs
-- OAuth 2.0 Implementation
 - JWT Authentication
 - Message Queues and Brokers
 - Load Balancing Strategies
