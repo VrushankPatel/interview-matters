@@ -1,8 +1,3 @@
-- Collections & Data Structures
-- Java Stream API & Functional Programming
-- System Design Basics
-- LLD HLD basics
-- Caching
 - Java Fundamentals
 - OOP Principles in Java
 - JVM Internals & Class Loading
