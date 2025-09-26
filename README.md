@@ -195,6 +195,12 @@ This repository contains comprehensive documentation on various topics for inter
 - [Java 21 Features](./java-21-features/README.md)
 - [Kotlin for Java Developers](./kotlin-for-java-developers/README.md)
 
+- [Java Fundamentals](./java-fundamentals/README.md)
+- [OOP Principles in Java](./oop-principles-in-java/README.md)
+- [JVM Internals & Class Loading](./jvm-internals-class-loading/README.md)
+- [Garbage Collection Algorithms](./garbage-collection-algorithms/README.md)
+- [Multithreading & Concurrency in Java](./multithreading-concurrency-in-java/README.md)
+
 - [JVM Internals & Class Loading](./jvm-internals-and-class-loading/README.md)
 - [JVM Performance Tuning](./jvm-performance-tuning/README.md)
 

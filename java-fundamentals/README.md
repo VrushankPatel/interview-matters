@@ -1,166 +1,66 @@
 ---
-title: 'Java Fundamentals'
-aliases: ['Java Basics', 'Core Java']
-tags: ['#java', '#fundamentals']
-created: '2025-09-26'
-updated: '2025-09-26'
+title: Java Fundamentals
+aliases: ["Java Basics", "Java Language Basics"]
+tags: ["#java"]
+created: 2025-09-26
+updated: 2025-09-26
 ---
+
+# Java Fundamentals
 
 ## Overview
 
-Java Fundamentals cover the core building blocks of the Java programming language, including variables, data types, operators, expressions, statements, and control flow structures. These elements form the foundation for writing any Java program, enabling developers to store data, perform computations, and control program execution flow.
+Java Fundamentals cover the core building blocks of the Java programming language, including variables, data types, operators, and control flow statements. These concepts form the foundation for writing Java programs and are essential for understanding more advanced topics.
 
 ## Detailed Explanation
 
-## Variables
+### Variables
 
-Variables in Java are containers for storing data values. Java is a statically-typed language, meaning you must declare the type of a variable before using it.
+Variables are containers for storing data values. In Java, you must declare a variable before using it, specifying its type and name.
 
-### Variable Declaration and Initialization
+- **Declaration**: `int age;`
+- **Initialization**: `age = 25;` or `int age = 25;`
+- **Naming Rules**: Start with letter, $, or _; case-sensitive; no keywords.
 
-```java
-int age;        // Declaration
-age = 25;       // Initialization
-int height = 180; // Declaration and initialization
-```
+### Primitive Data Types
 
-### Naming Rules and Conventions
+Java has 8 primitive data types:
 
-- Must start with a letter, underscore (_), or dollar sign ($)
-- Can contain letters, digits, underscores, and dollar signs
-- Case-sensitive
-- Cannot be Java keywords
-- Convention: camelCase for variables (e.g., `myVariable`)
+| Type | Size | Range | Example |
+|------|------|-------|---------|
+| byte | 1 byte | -128 to 127 | `byte b = 100;` |
+| short | 2 bytes | -32,768 to 32,767 | `short s = 1000;` |
+| int | 4 bytes | -2^31 to 2^31-1 | `int i = 100000;` |
+| long | 8 bytes | -2^63 to 2^63-1 | `long l = 100000L;` |
+| float | 4 bytes | ~6-7 decimal digits | `float f = 3.14f;` |
+| double | 8 bytes | ~15 decimal digits | `double d = 3.14159;` |
+| char | 2 bytes | 0 to 65,535 | `char c = 'A';` |
+| boolean | 1 byte | true/false | `boolean flag = true;` |
 
-## Primitive Data Types
+### Operators
 
-Java provides eight primitive data types:
+Operators perform operations on variables and values.
 
-| Type | Size | Range | Default Value |
-|------|------|-------|---------------|
-| byte | 8 bits | -128 to 127 | 0 |
-| short | 16 bits | -32,768 to 32,767 | 0 |
-| int | 32 bits | -2^31 to 2^31-1 | 0 |
-| long | 64 bits | -2^63 to 2^63-1 | 0L |
-| float | 32 bits | ~1.4e-45 to ~3.4e38 | 0.0f |
-| double | 64 bits | ~4.9e-324 to ~1.8e308 | 0.0d |
-| char | 16 bits | '\u0000' to '\uffff' | '\u0000' |
-| boolean | 1 bit | true or false | false |
+- **Arithmetic**: +, -, *, /, %
+- **Relational**: ==, !=, >, <, >=, <=
+- **Logical**: &&, ||, !
+- **Assignment**: =, +=, -=, etc.
 
-## Arrays
+### Control Flow Statements
 
-Arrays are used to store multiple values of the same type in a single variable.
+Control the execution flow of the program.
 
-```java
-// Declaration and initialization
-int[] numbers = new int[5];
-int[] primes = {2, 3, 5, 7, 11};
-
-// Accessing elements
-numbers[0] = 10;
-int firstPrime = primes[0];
-```
-
-## Operators
-
-Java provides various operators for performing operations on variables and values.
-
-### Assignment Operators
-
-```java
-int x = 10;
-x += 5;  // x = x + 5
-x *= 2;  // x = x * 2
-```
-
-### Arithmetic Operators
-
-```java
-int a = 10, b = 3;
-int sum = a + b;      // 13
-int difference = a - b; // 7
-int product = a * b;  // 30
-int quotient = a / b; // 3
-int remainder = a % b; // 1
-```
-
-### Comparison Operators
-
-```java
-boolean result1 = (a == b);  // false
-boolean result2 = (a != b);  // true
-boolean result3 = (a > b);   // true
-boolean result4 = (a < b);   // false
-boolean result5 = (a >= b);  // true
-boolean result6 = (a <= b);  // false
-```
-
-### Logical Operators
-
-```java
-boolean x = true, y = false;
-boolean andResult = x && y;  // false
-boolean orResult = x || y;   // true
-boolean notResult = !x;      // false
-```
-
-## Expressions, Statements, and Blocks
-
-### Expressions
-
-Expressions are constructs that evaluate to a single value.
-
-```java
-int result = 5 + 3 * 2;  // Arithmetic expression
-boolean isAdult = age >= 18;  // Boolean expression
-```
-
-### Statements
-
-Statements are complete units of execution.
-
-```java
-int x = 5;              // Declaration statement
-x = x + 1;              // Assignment statement
-System.out.println(x);  // Method call statement
-```
-
-### Blocks
-
-Blocks are groups of statements enclosed in curly braces.
-
-```java
-{
-    int localVar = 10;
-    System.out.println(localVar);
-} // localVar is not accessible outside this block
-```
-
-## Control Flow Statements
-
-Control flow statements allow you to control the order of execution in your program.
-
-### Decision-Making Statements
-
-#### if-then Statement
+- **if-else**:
 
 ```java
 if (condition) {
-    // code to execute if condition is true
-}
-```
-
-#### if-then-else Statement
-
-```java
-if (condition) {
-    // code if true
+    // code
 } else {
-    // code if false
+    // code
 }
 ```
 
-#### switch Statement
+- **switch**:
 
 ```java
 switch (expression) {
@@ -175,237 +75,56 @@ switch (expression) {
 }
 ```
 
-### Looping Statements
-
-#### while Loop
-
-```java
-while (condition) {
-    // code to repeat
-}
-```
-
-#### do-while Loop
-
-```java
-do {
-    // code to repeat
-} while (condition);
-```
-
-#### for Loop
-
-```java
-for (initialization; condition; update) {
-    // code to repeat
-}
-```
-
-#### Enhanced for Loop (for-each)
-
-```java
-for (Type element : collection) {
-    // code using element
-}
-```
-
-### Branching Statements
-
-#### break Statement
+- **Loops**: for, while, do-while
 
 ```java
 for (int i = 0; i < 10; i++) {
-    if (i == 5) {
-        break;  // Exit the loop
-    }
     System.out.println(i);
-}
-```
-
-#### continue Statement
-
-```java
-for (int i = 0; i < 10; i++) {
-    if (i % 2 == 0) {
-        continue;  // Skip even numbers
-    }
-    System.out.println(i);
-}
-```
-
-#### return Statement
-
-```java
-public int add(int a, int b) {
-    return a + b;  // Return the sum
 }
 ```
 
 ## Real-world Examples & Use Cases
 
-## Temperature Converter
-
-```java
-public class TemperatureConverter {
-    public static void main(String[] args) {
-        double celsius = 25.0;
-        double fahrenheit = (celsius * 9/5) + 32;
-        
-        System.out.println(celsius + "°C is " + fahrenheit + "°F");
-        
-        // Decision making
-        if (fahrenheit > 80) {
-            System.out.println("It's hot!");
-        } else if (fahrenheit < 60) {
-            System.out.println("It's cold!");
-        } else {
-            System.out.println("It's comfortable.");
-        }
-    }
-}
-```
-
-## Simple Calculator
-
-```java
-import java.util.Scanner;
-
-public class Calculator {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        
-        System.out.print("Enter first number: ");
-        double num1 = scanner.nextDouble();
-        
-        System.out.print("Enter operator (+, -, *, /): ");
-        char operator = scanner.next().charAt(0);
-        
-        System.out.print("Enter second number: ");
-        double num2 = scanner.nextDouble();
-        
-        double result;
-        
-        // Switch statement for operation selection
-        switch (operator) {
-            case '+':
-                result = num1 + num2;
-                break;
-            case '-':
-                result = num1 - num2;
-                break;
-            case '*':
-                result = num1 * num2;
-                break;
-            case '/':
-                if (num2 != 0) {
-                    result = num1 / num2;
-                } else {
-                    System.out.println("Error: Division by zero!");
-                    return;
-                }
-                break;
-            default:
-                System.out.println("Error: Invalid operator!");
-                return;
-        }
-        
-        System.out.println("Result: " + result);
-    }
-}
-```
-
-## Array Processing Example
-
-```java
-public class ArrayProcessor {
-    public static void main(String[] args) {
-        int[] numbers = {12, 45, 23, 67, 89, 34, 56, 78, 90, 11};
-        
-        // Find maximum value
-        int max = numbers[0];
-        for (int i = 1; i < numbers.length; i++) {
-            if (numbers[i] > max) {
-                max = numbers[i];
-            }
-        }
-        System.out.println("Maximum value: " + max);
-        
-        // Calculate average
-        double sum = 0;
-        for (int number : numbers) {
-            sum += number;
-        }
-        double average = sum / numbers.length;
-        System.out.println("Average: " + average);
-        
-        // Count even numbers
-        int evenCount = 0;
-        for (int number : numbers) {
-            if (number % 2 == 0) {
-                evenCount++;
-            }
-        }
-        System.out.println("Number of even values: " + evenCount);
-    }
-}
-```
+- **User Input Validation**: Use if-else to check user age.
+- **Data Processing**: Loops to iterate over arrays.
+- **Calculations**: Operators for mathematical computations in financial apps.
 
 ## Code Examples
 
-## Variable Scope Example
+### Hello World
 
 ```java
-public class VariableScope {
-    static int classVariable = 10;  // Class variable
-    
+public class HelloWorld {
     public static void main(String[] args) {
-        int methodVariable = 20;  // Method variable
-        
-        if (true) {
-            int blockVariable = 30;  // Block variable
-            System.out.println("Block variable: " + blockVariable);
-        }
-        
-        // System.out.println(blockVariable);  // Error: blockVariable not accessible
-        
-        System.out.println("Class variable: " + classVariable);
-        System.out.println("Method variable: " + methodVariable);
+        System.out.println("Hello, World!");
     }
 }
 ```
 
-## Control Flow Diagram
-
-```mermaid
-graph TD
-    A[Start] --> B{Condition}
-    B -->|True| C[Execute if block]
-    B -->|False| D[Execute else block]
-    C --> E[Continue]
-    D --> E
-    E[End]
-```
-
-## Operator Precedence Example
+### Variable Usage
 
 ```java
-public class OperatorPrecedence {
+public class VariablesExample {
     public static void main(String[] args) {
-        int a = 5, b = 10, c = 15;
+        int age = 25;
+        double salary = 50000.0;
+        boolean isEmployed = true;
         
-        // Multiplication has higher precedence than addition
-        int result1 = a + b * c;  // 5 + (10 * 15) = 155
-        System.out.println("a + b * c = " + result1);
-        
-        // Parentheses can change precedence
-        int result2 = (a + b) * c;  // (5 + 10) * 15 = 225
-        System.out.println("(a + b) * c = " + result2);
-        
-        // Logical operators
-        boolean result3 = a < b && b < c;  // true && true = true
-        boolean result4 = a > b || b < c;  // false || true = true
-        System.out.println("a < b && b < c = " + result3);
-        System.out.println("a > b || b < c = " + result4);
+        if (isEmployed && age > 21) {
+            System.out.println("Eligible for loan");
+        }
+    }
+}
+```
+
+### Loop Example
+
+```java
+public class LoopExample {
+    public static void main(String[] args) {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Count: " + i);
+        }
     }
 }
 ```
@@ -413,14 +132,10 @@ public class OperatorPrecedence {
 ## References
 
 - [Oracle Java Tutorials: Language Basics](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html)
-- [Oracle Java Tutorials: Variables](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/variables.html)
-- [Oracle Java Tutorials: Operators](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/operators.html)
-- [Oracle Java Tutorials: Control Flow Statements](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/flow.html)
+- [Java Primitive Data Types](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html)
 
 ## Github-README Links & Related Topics
 
-- [Java Data Types](../java-data-types/)
-- [Java Operators](../java-operators/)
-- [Java Control Flow](../java-control-flow/)
-- [Java Arrays](../java-arrays/)
 - [OOP Principles in Java](../oop-principles-in-java/)
+- [Collections & Data Structures](../collections-data-structures/)
+- [Java Stream API & Functional Programming](../java-stream-api-functional-programming/)
