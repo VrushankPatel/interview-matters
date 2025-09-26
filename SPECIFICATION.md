@@ -8,7 +8,8 @@ Summary of recent additions
     - Processed 5 topics: FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols with comprehensive READMEs following strict format, including STAR summaries, detailed explanations, real-world examples, message formats, mermaid diagrams, common pitfalls, tools/libraries, and proper interlinking
     - Updated trading/protocols/ and trading/market-data/ indexes
     - Added authoritative references from FIX Trading Community and NASDAQ docs
-    - Processed 5 topics: FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols with updated interlinks using [[ ]] format. Restructured system-design/ with subdirs LLD, HLD, concepts, real-world-designs. Moved facebook-news-feed, instagram-system-design, netflix-video-streaming-architecture to real-world-designs/. Created algorithms/README.md.
+     - Processed 5 topics: FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols with updated interlinks using [[ ]] format. Restructured system-design/ with subdirs LLD, HLD, concepts, real-world-designs. Moved facebook-news-feed, instagram-system-design, netflix-video-streaming-architecture to real-world-designs/. Created algorithms/README.md.
+     - Processed 5 topics: Order Types (DAY, GTC, FOK, IOC), Quotes & RFQ workflows, Execution Report, Trade Capture Report, Rate Limiting with comprehensive READMEs following strict format, including STAR summaries, detailed explanations, real-world examples, message formats, mermaid diagrams, common pitfalls, tools/libraries, and proper interlinking. Restructured by moving container-security to security/, graph-databases to databases/, http-caching-headers to networking/.
 
 Conventions
  - Dir naming: kebab-case.
@@ -238,8 +239,20 @@ New Candidate Topics Rationales (this run)
 - Fault Tolerance in Distributed Systems: Building resilient architectures for high availability
 
 TODO
-   - High-level open design decisions and split criteria for oversized topics.
-   - Restructure Plan: Move individual topic directories under appropriate category directories (e.g., backtracking/ under algorithms/). Create subdirs under system-design/ for LLD, HLD. This requires git mv operations.
+    - High-level open design decisions and split criteria for oversized topics.
+    - Restructure Plan: Move individual topic directories under appropriate category directories (e.g., backtracking/ under algorithms/). Create subdirs under system-design/ for LLD, HLD. This requires git mv operations.
+
+New Next Topics Candidates Rationales (this run)
+- Blockchain Consensus Mechanisms: Essential for understanding decentralized systems and crypto trading
+- API Rate Limiting Strategies: Critical for protecting services and managing traffic in distributed systems
+- Event Sourcing Patterns: Important for audit trails and rebuilding state in financial systems
+- Microservices Communication Patterns: Key for designing scalable service architectures
+- Graph Database Query Optimization: Relevant for complex relationship queries in social/trading networks
+- Container Orchestration with Kubernetes: Fundamental for deploying and managing containerized applications
+- Serverless Function Cold Starts: Performance consideration for latency-sensitive applications
+- Database Indexing for High Throughput: Optimization technique for read-heavy workloads
+- Message Queue Reliability Patterns: Ensuring message delivery in event-driven systems
+- Fault Tolerance in Distributed Systems: Building resilient architectures for high availability
 
 New Next Topics Candidates (this run)
 - Order Book modeling — 'Canonical models for in-memory book and persistence'
