@@ -3,7 +3,7 @@ title: Java Lambda Expressions
 aliases: [Functional Programming in Java, Lambda Syntax]
 tags: [#java]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 ## Overview

@@ -3,7 +3,7 @@ title: WhatsApp System Design
 aliases: ["Messaging App Architecture", "Real-time Chat System"]
 tags: [#system-design, #messaging, #real-time]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # WhatsApp System Design
@@ -12,7 +12,7 @@ updated: 2025-09-25
 
 WhatsApp System Design focuses on building a scalable, real-time messaging platform capable of handling billions of users worldwide. Key features include end-to-end encryption, instant message delivery, media sharing, group chats, voice/video calls, and status updates. The architecture emphasizes low latency, high availability, and efficient resource usage, drawing from client-server models with proprietary protocols for secure communication. Challenges involve managing massive scale, ensuring message reliability, and maintaining privacy through encryption.
 
-# Detailed Explanation
+## Detailed Explanation
 
 WhatsApp's system is designed for real-time communication with a focus on simplicity and security. It uses a centralized server architecture with distributed components for scaling.
 
@@ -46,7 +46,7 @@ graph TD
     I --> C
 ```
 
-# STAR Summary
+## STAR Summary
 
 **Situation**: Designing a messaging app for global scale with real-time features.
 
@@ -56,7 +56,7 @@ graph TD
 
 **Result**: Achieved <1s latency for messages, 99.9% uptime, and secure communication for billions of users.
 
-# Journey / Sequence
+## Journey / Sequence
 
 A message flow from sender to receiver:
 
