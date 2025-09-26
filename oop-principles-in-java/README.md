@@ -1,7 +1,7 @@
 ---
 title: OOP Principles in Java
-aliases: [Object-Oriented Programming in Java, Java OOP]
-tags: [#java,#oop]
+aliases: [Object-Oriented Programming in Java]
+tags: [#java, #oop]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -10,65 +10,32 @@ updated: 2025-09-26
 
 ## Overview
 
-Object-Oriented Programming (OOP) principles in Java provide a structured approach to software development by organizing code around objects that represent real-world entities. The four main principles are Encapsulation, Inheritance, Polymorphism, and Abstraction, which help create maintainable, reusable, and scalable code.
+Object-Oriented Programming (OOP) principles in Java provide a structured approach to software development. The four main principles are Encapsulation, Inheritance, Polymorphism, and Abstraction, which help create modular, reusable, and maintainable code.
 
 ## Detailed Explanation
 
 ### Encapsulation
 
-Encapsulation is the bundling of data and methods that operate on that data within a single unit (class). It restricts direct access to some of an object's components, which is a means of preventing accidental interference and misuse of the data.
-
-Key concepts:
-- Private fields
-- Public getter/setter methods
-- Data hiding
+Encapsulation is the bundling of data and methods that operate on that data within a single unit (class). It restricts direct access to some of an object's components.
 
 ### Inheritance
 
-Inheritance allows a class (subclass) to inherit properties and behaviors from another class (superclass). It promotes code reusability and establishes a relationship between classes.
-
-Types of inheritance in Java:
-- Single inheritance
-- Multilevel inheritance
-- Hierarchical inheritance
-- Multiple inheritance (through interfaces)
+Inheritance allows a class to inherit properties and methods from another class. The inheriting class is called the subclass, and the class being inherited from is the superclass.
 
 ### Polymorphism
 
-Polymorphism allows objects of different classes to be treated as objects of a common superclass. It enables one interface to be used for a general class of actions.
-
-Types:
-- Compile-time polymorphism (method overloading)
-- Runtime polymorphism (method overriding)
+Polorphism allows objects of different classes to be treated as objects of a common superclass. It enables methods to behave differently based on the object that invokes them.
 
 ### Abstraction
 
-Abstraction is the process of hiding implementation details and showing only the essential features of an object. It helps in reducing complexity and allows focusing on what an object does rather than how it does it.
-
-Achieved through:
-- Abstract classes
-- Interfaces
-
-#### OOP Principles Relationship Diagram
-
-```mermaid
-graph TD
-    A[OOP Principles] --> B[Encapsulation]
-    A --> C[Inheritance]
-    A --> D[Polymorphism]
-    A --> E[Abstraction]
-    C --> F[Code Reusability]
-    D --> G[Flexibility]
-    E --> H[Simplification]
-```
+Abstraction focuses on showing only essential features while hiding implementation details. It helps manage complexity by providing a simplified view of complex systems.
 
 ## Real-world Examples & Use Cases
 
-1. **Banking System**: Account classes with encapsulation for balance, inheritance for different account types (Savings, Checking), polymorphism for interest calculation.
-2. **Vehicle Management**: Base Vehicle class with inheritance for Car, Bike, Truck; abstraction for engine types.
-3. **Employee Management**: Employee hierarchy with different roles, using inheritance and polymorphism for salary calculations.
-4. **Shape Drawing Application**: Shape interface with concrete implementations for Circle, Rectangle, Triangle using polymorphism.
-5. **E-commerce Platform**: Product catalog with inheritance for different product types, encapsulation for pricing logic.
+- **Banking System**: Account classes with encapsulation for security
+- **Vehicle Rental System**: Inheritance hierarchy for different vehicle types
+- **Payment Processing**: Polymorphic payment methods (credit card, PayPal, etc.)
+- **GUI Frameworks**: Abstract components with concrete implementations
 
 ## Code Examples
 
@@ -76,8 +43,8 @@ graph TD
 
 ```java
 public class BankAccount {
-    private String accountNumber;
     private double balance;
+    private String accountNumber;
     
     public BankAccount(String accountNumber, double initialBalance) {
         this.accountNumber = accountNumber;
@@ -100,8 +67,9 @@ public class BankAccount {
         return balance;
     }
     
-    public String getAccountNumber() {
-        return accountNumber;
+    // Private method - encapsulated
+    private void logTransaction(String type, double amount) {
+        System.out.println("Transaction: " + type + " $" + amount);
     }
 }
 ```
@@ -109,6 +77,7 @@ public class BankAccount {
 ### Inheritance Example
 
 ```java
+// Superclass
 public class Animal {
     protected String name;
     
@@ -125,6 +94,7 @@ public class Animal {
     }
 }
 
+// Subclass
 public class Dog extends Animal {
     public Dog(String name) {
         super(name);
@@ -140,6 +110,7 @@ public class Dog extends Animal {
     }
 }
 
+// Subclass
 public class Cat extends Animal {
     public Cat(String name) {
         super(name);
@@ -154,33 +125,34 @@ public class Cat extends Animal {
 ### Polymorphism Example
 
 ```java
-public class Shape {
-    public void draw() {
-        System.out.println("Drawing a shape");
+public class PaymentProcessor {
+    public void processPayment(PaymentMethod method, double amount) {
+        method.pay(amount);
     }
 }
 
-public class Circle extends Shape {
+interface PaymentMethod {
+    void pay(double amount);
+}
+
+class CreditCard implements PaymentMethod {
     @Override
-    public void draw() {
-        System.out.println("Drawing a circle");
+    public void pay(double amount) {
+        System.out.println("Processing credit card payment of $" + amount);
     }
 }
 
-public class Rectangle extends Shape {
+class PayPal implements PaymentMethod {
     @Override
-    public void draw() {
-        System.out.println("Drawing a rectangle");
+    public void pay(double amount) {
+        System.out.println("Processing PayPal payment of $" + amount);
     }
 }
 
-public class Main {
-    public static void main(String[] args) {
-        Shape[] shapes = {new Circle(), new Rectangle(), new Shape()};
-        
-        for (Shape shape : shapes) {
-            shape.draw();  // Polymorphic behavior
-        }
+class BankTransfer implements PaymentMethod {
+    @Override
+    public void pay(double amount) {
+        System.out.println("Processing bank transfer of $" + amount);
     }
 }
 ```
@@ -188,143 +160,79 @@ public class Main {
 ### Abstraction Example
 
 ```java
-public abstract class Vehicle {
-    protected String brand;
+// Abstract class
+public abstract class Shape {
+    protected String color;
     
-    public Vehicle(String brand) {
-        this.brand = brand;
+    public Shape(String color) {
+        this.color = color;
     }
     
-    public abstract void start();
-    public abstract void stop();
+    // Abstract method
+    public abstract double calculateArea();
     
-    public void honk() {
-        System.out.println("Honk! Honk!");
-    }
-}
-
-public class Car extends Vehicle {
-    public Car(String brand) {
-        super(brand);
-    }
-    
-    @Override
-    public void start() {
-        System.out.println(brand + " car is starting");
-    }
-    
-    @Override
-    public void stop() {
-        System.out.println(brand + " car is stopping");
+    // Concrete method
+    public void displayColor() {
+        System.out.println("Color: " + color);
     }
 }
 
-public class Bike extends Vehicle {
-    public Bike(String brand) {
-        super(brand);
+// Concrete implementation
+public class Circle extends Shape {
+    private double radius;
+    
+    public Circle(String color, double radius) {
+        super(color);
+        this.radius = radius;
     }
     
     @Override
-    public void start() {
-        System.out.println(brand + " bike is starting");
+    public double calculateArea() {
+        return Math.PI * radius * radius;
+    }
+}
+
+// Concrete implementation
+public class Rectangle extends Shape {
+    private double width;
+    private double height;
+    
+    public Rectangle(String color, double width, double height) {
+        super(color);
+        this.width = width;
+        this.height = height;
     }
     
     @Override
-    public void stop() {
-        System.out.println(brand + " bike is stopping");
+    public double calculateArea() {
+        return width * height;
     }
 }
 ```
 
 ## Common Pitfalls & Edge Cases
 
-1. **Tight Coupling**: Overusing inheritance can lead to tight coupling; prefer composition over inheritance.
-2. **Method Overriding Issues**: Forgetting to use @Override annotation or not calling super() when needed.
-3. **Access Modifier Confusion**: Misusing public, private, protected can break encapsulation.
-4. **Multiple Inheritance Problem**: Java doesn't support multiple inheritance with classes; use interfaces instead.
-5. **Abstract Class vs Interface**: Choosing wrong abstraction mechanism can limit flexibility.
-
-## Data Models / Message Formats
-
-### Inheritance Hierarchy Diagram
-
-```mermaid
-classDiagram
-    Animal <|-- Dog
-    Animal <|-- Cat
-    class Animal {
-        +String name
-        +eat()
-        +sleep()
-    }
-    class Dog {
-        +bark()
-    }
-    class Cat {
-        +meow()
-    }
-```
-
-### Polymorphism Interface Diagram
-
-```mermaid
-classDiagram
-    Shape <|-- Circle
-    Shape <|-- Rectangle
-    class Shape {
-        +draw()
-    }
-    class Circle {
-        +draw()
-    }
-    class Rectangle {
-        +draw()
-    }
-```
-
-## Journey / Sequence
-
-#### Polymorphic Method Call Sequence
-
-```mermaid
-sequenceDiagram
-    participant Main
-    participant Shape
-    participant Circle
-    participant Rectangle
-    Main->>Shape: draw() on Circle
-    Shape->>Circle: draw()
-    Circle-->>Shape: "Drawing a circle"
-    Shape-->>Main: result
-    Main->>Shape: draw() on Rectangle
-    Shape->>Rectangle: draw()
-    Rectangle-->>Shape: "Drawing a rectangle"
-    Shape-->>Main: result
-```
-
-## STAR Summary
-
-- **Situation**: Interviewer asked to explain OOP principles and demonstrate their usage in Java.
-- **Task**: Illustrate encapsulation, inheritance, polymorphism, and abstraction with code examples.
-- **Action**: Created BankAccount class for encapsulation, Animal-Dog-Cat hierarchy for inheritance, Shape classes for polymorphism, and Vehicle abstract class for abstraction.
-- **Result**: Provided clear explanations and working code that showcased all four OOP principles effectively.
+- **Tight Coupling**: Overuse of inheritance can lead to tightly coupled classes
+- **Multiple Inheritance**: Java doesn't support multiple inheritance to avoid diamond problem
+- **Method Overriding**: Ensure proper use of @Override annotation
+- **Abstract Classes vs Interfaces**: Choose based on whether you need default implementations
+- **Composition over Inheritance**: Prefer composition for flexibility
 
 ## Tools & Libraries
 
-- **JDK**: For compiling and running Java OOP code.
-- **IDE**: IntelliJ IDEA or Eclipse for OOP development with refactoring support.
-- **Testing Frameworks**: JUnit for unit testing OOP classes and inheritance hierarchies.
-- **Build Tools**: Maven or Gradle for managing dependencies in OOP projects.
+- **Design Patterns Libraries**: Frameworks implementing common OOP patterns
+- **UML Tools**: For visualizing class hierarchies and relationships
+- **Refactoring Tools**: IDE features for improving OOP design
 
 ## References
 
-- [Oracle Java OOP Tutorial](https://docs.oracle.com/javase/tutorial/java/concepts/)
-- [Head First Java by Kathy Sierra and Bert Bates](https://www.amazon.com/Head-First-Java-Kathy-Sierra/dp/0596009208)
+- [Oracle OOP Concepts](https://docs.oracle.com/javase/tutorial/java/concepts/)
+- [Head First Java](https://www.amazon.com/Head-First-Java-Kathy-Sierra/dp/0596009208)
 - [Design Patterns: Elements of Reusable Object-Oriented Software](https://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612)
 
 ## Github-README Links & Related Topics
 
 - [Java Fundamentals](../java-fundamentals/README.md)
-- [Design Patterns](../design-patterns/README.md)
-- [Java Annotations](../java-annotations/README.md)
-- [JVM Internals & Class Loading](../jvm-internals-and-class-loading/README.md)
+- [Design Patterns in Java](../java-design-patterns/README.md)
+- [Java Collections Deep Dive](../java-collections-deep-dive/README.md)
+- [Java Exception Handling](../java-exception-handling/README.md)

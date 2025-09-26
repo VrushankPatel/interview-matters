@@ -77,6 +77,11 @@ This repository contains comprehensive documentation on various topics for inter
 - [Zoom Video Conferencing](./zoom-video-conferencing/README.md)
 
 ### Java
+- [Java Fundamentals](./java-fundamentals/README.md)
+- [OOP Principles in Java](./oop-principles-in-java/README.md)
+- [JVM Internals & Class Loading](./jvm-internals-and-class-loading/README.md)
+- [Garbage Collection Algorithms](./garbage-collection-algorithms/README.md)
+- [Multithreading & Concurrency in Java](./multithreading-and-concurrency-in-java/README.md)
 - [Java](./java/README.md)
 - [Java Annotations](./java-annotations/README.md)
 - [Java Annotations Deep Dive](./java-annotations-deep-dive/README.md)
