@@ -1,7 +1,7 @@
 ---
 title: Monitoring and Logging
 aliases: [monitoring, logging, observability]
-tags: [system-design, devops, monitoring, logging]
+tags: [#system-design,#devops,#monitoring,#logging]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -199,9 +199,9 @@ sequenceDiagram
 
 ## Github-README Links & Related Topics
 
-- [Async Logging](async-logging/)
-- [Logging with ELK Stack](logging-with-elk-stack/)
-- [Distributed Tracing](distributed-tracing/)
-- [Infrastructure Monitoring](infrastructure-monitoring/)
-- [CI/CD Pipelines](ci-cd-pipelines/)
-- [Chaos Engineering](chaos-engineering/)
+- [Async Logging](async-logging/README.md)
+- [Logging with ELK Stack](logging-with-elk-stack/README.md)
+- [Distributed Tracing](distributed-tracing/README.md)
+- [Infrastructure Monitoring](infrastructure-monitoring/README.md)
+- [CI/CD Pipelines](ci-cd-pipelines/README.md)
+- [Chaos Engineering](chaos-engineering/README.md)

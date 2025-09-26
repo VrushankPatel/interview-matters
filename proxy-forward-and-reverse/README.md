@@ -1,7 +1,7 @@
 ---
 title: Proxy Forward and Reverse
 aliases: [Forward Proxy, Reverse Proxy, Proxy Servers]
-tags: [networking, proxies, web, security]
+tags: [#networking,#proxies,#web,#security]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -181,12 +181,12 @@ if __name__ == '__main__':
 
 # Github-README Links & Related Topics
 
-- [api-gateway-design](../api-gateway-design/)
-- [api-gateway-vs-load-balancer](../api-gateway-vs-load-balancer/)
-- [load-balancing](../load-balancing/)
-- [cdn-architecture](../cdn-architecture/)
-- [distributed-caching-with-redis](../distributed-caching-with-redis/)
-- [circuit-breaker-pattern](../circuit-breaker-pattern/)
+- [api-gateway-design](../api-gateway-design/README.md)
+- [api-gateway-vs-load-balancer](../api-gateway-vs-load-balancer/README.md)
+- [load-balancing](../load-balancing/README.md)
+- [cdn-architecture](../cdn-architecture/README.md)
+- [distributed-caching-with-redis](../distributed-caching-with-redis/README.md)
+- [circuit-breaker-pattern](../circuit-breaker-pattern/README.md)
 
 # STAR Summary
 
