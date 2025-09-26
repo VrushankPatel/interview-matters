@@ -6,73 +6,86 @@ created: 2023-10-01
 updated: 2025-09-26
 ---
 
-# Overview
+# Java Fundamentals
 
-Java is a high-level, object-oriented programming language developed by Sun Microsystems (now Oracle). It's designed to be platform-independent, secure, and robust. Key fundamentals include data types, variables, operators, control structures, and basic syntax.
+## Overview
 
-# Detailed Explanation
+Java Fundamentals cover the core building blocks of the Java programming language, including data types, variables, operators, control structures, and basic syntax. These concepts form the foundation for writing Java programs and are essential for understanding more advanced topics.
 
-## Data Types
+## Detailed Explanation
 
+### Data Types
 Java has two categories of data types: primitive and reference.
 
-Primitive types: byte, short, int, long, float, double, char, boolean.
+**Primitive Types:**
+- `byte`: 8-bit signed integer (-128 to 127)
+- `short`: 16-bit signed integer (-32,768 to 32,767)
+- `int`: 32-bit signed integer (-2^31 to 2^31-1)
+- `long`: 64-bit signed integer (-2^63 to 2^63-1)
+- `float`: 32-bit floating-point
+- `double`: 64-bit floating-point
+- `char`: 16-bit Unicode character
+- `boolean`: true or false
 
-Reference types: classes, interfaces, arrays.
+**Reference Types:** Objects, arrays, and strings.
 
-## Variables
+### Variables
+Variables store data values. Declaration: `type variableName = value;`
 
-Variables are containers for storing data values. They must be declared with a data type.
+### Operators
+- Arithmetic: +, -, *, /, %
+- Relational: ==, !=, >, <, >=, <=
+- Logical: &&, ||, !
+- Assignment: =, +=, -=, etc.
 
-Example:
+### Control Structures
+- If-else statements
+- Switch statements
+- Loops: for, while, do-while
 
-int age = 25;
+## Real-world Examples & Use Cases
 
-String name = "John";
+- Building a simple calculator application
+- Processing user input in a console application
+- Validating data in forms
 
-## Operators
-
-Arithmetic: +, -, *, /, %
-
-Relational: ==, !=, >, <, >=, <=
-
-Logical: &&, ||, !
-
-## Control Structures
-
-If-else, switch, loops (for, while, do-while).
-
-# Real-world Examples & Use Cases
-
-- Building web applications with Spring Framework.
-- Android app development.
-- Enterprise software with Java EE.
-
-# Code Examples
+## Code Examples
 
 ```java
 public class HelloWorld {
     public static void main(String[] args) {
-        System.out.println("Hello, World!");
+        // Primitive data types
+        int age = 25;
+        double salary = 50000.50;
+        boolean isEmployed = true;
+        char grade = 'A';
+
+        // Operators
+        int sum = 10 + 20;
+        boolean isAdult = age >= 18;
+
+        // Control structure
+        if (isAdult) {
+            System.out.println("Adult");
+        } else {
+            System.out.println("Minor");
+        }
+
+        // Loop
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Count: " + i);
+        }
     }
 }
 ```
 
-```java
-// Variables and operators
-int a = 10;
-int b = 20;
-int sum = a + b;
-System.out.println("Sum: " + sum);
-```
-
-# References
+## References
 
 - [Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/)
-- [Wikipedia - Java](https://en.wikipedia.org/wiki/Java_(programming_language))
+- [Java Language Specification](https://docs.oracle.com/javase/specs/jls/se21/html/index.html)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
-- [java-oop-principles](../java-oop-principles/)
-- [java-data-types](../java-data-types/)
-- [java-operators](../java-operators/)
+- [OOP Principles in Java](../oop-principles-in-java/README.md)
+- [Java Data Types](../java-data-types/README.md)
+- [Java Operators](../java-operators/README.md)

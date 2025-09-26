@@ -6,51 +6,99 @@ created: 2023-10-01
 updated: 2025-09-26
 ---
 
-# Overview
+# JVM Internals & Class Loading
 
-The Java Virtual Machine (JVM) is the runtime environment for Java applications. It handles memory management, bytecode execution, and class loading. Class loading is the process of loading class files into memory.
+## Overview
 
-# Detailed Explanation
+The Java Virtual Machine (JVM) is the runtime environment for Java applications. It handles memory management, bytecode execution, and class loading. Class loading is the process of loading class files into memory, verifying them, and preparing them for execution.
 
-## JVM Architecture
+## Detailed Explanation
 
-- Class Loader Subsystem
-- Runtime Data Areas (Heap, Stack, Method Area, etc.)
-- Execution Engine (Interpreter, JIT Compiler)
-- JNI and Native Method Libraries
+### JVM Architecture
 
-## Class Loading Process
+The JVM consists of several key components:
 
-1. Loading: Finding and loading the class file.
-2. Linking: Verification, Preparation, Resolution.
-3. Initialization: Executing static initializers.
+- **Class Loader Subsystem**: Loads class files into memory.
+- **Runtime Data Areas**: Includes Heap, Stack, Method Area, Program Counter, and Native Method Stack.
+- **Execution Engine**: Interprets or compiles bytecode. Includes Interpreter and JIT Compiler.
+- **JNI (Java Native Interface)**: Allows interaction with native libraries.
 
-Class Loaders: Bootstrap, Extension, System/Application.
+### Class Loading Process
 
-# Real-world Examples & Use Cases
+Class loading occurs in three phases:
 
-- Understanding memory leaks and performance tuning.
-- Custom class loaders for dynamic loading.
+1. **Loading**: The class loader finds the class file and loads it into memory.
+2. **Linking**: 
+   - Verification: Ensures the bytecode is valid.
+   - Preparation: Allocates memory for static variables.
+   - Resolution: Resolves symbolic references.
+3. **Initialization**: Executes static initializers and assigns initial values.
 
-# Code Examples
+**Types of Class Loaders:**
+- Bootstrap Class Loader: Loads core Java classes.
+- Extension Class Loader: Loads extension classes.
+- System/Application Class Loader: Loads application classes.
+
+```mermaid
+graph TD
+    A[Loading] --> B[Linking]
+    B --> C[Verification]
+    B --> D[Preparation]
+    B --> E[Resolution]
+    C --> F[Initialization]
+    D --> F
+    E --> F
+```
+
+## Real-world Examples & Use Cases
+
+- **Performance Tuning**: Understanding JVM internals helps optimize memory usage and garbage collection.
+- **Custom Class Loaders**: Used in application servers for hot deployment or plugin systems.
+- **Security**: Class loading verification prevents malicious code execution.
+
+## Code Examples
+
+### Custom Class Loader
 
 ```java
-// Custom Class Loader
 public class CustomClassLoader extends ClassLoader {
     @Override
-    public Class<?> findClass(String name) throws ClassNotFoundException {
-        // Load class from custom source
-        return super.findClass(name);
+    protected Class<?> findClass(String name) throws ClassNotFoundException {
+        // Implement custom loading logic
+        byte[] classData = loadClassData(name);
+        if (classData == null) {
+            throw new ClassNotFoundException();
+        }
+        return defineClass(name, classData, 0, classData.length);
+    }
+
+    private byte[] loadClassData(String name) {
+        // Load class data from file, network, etc.
+        return new byte[0]; // Placeholder
     }
 }
 ```
 
-# References
+### Using Class Loader
+
+```java
+public class Main {
+    public static void main(String[] args) throws Exception {
+        CustomClassLoader loader = new CustomClassLoader();
+        Class<?> clazz = loader.loadClass("com.example.MyClass");
+        Object instance = clazz.newInstance();
+    }
+}
+```
+
+## References
 
 - [JVM Specification](https://docs.oracle.com/javase/specs/jvms/se21/html/index.html)
-- [Oracle Class Loading](https://docs.oracle.com/javase/tutorial/ext/basics/load.html)
+- [Oracle Class Loading Tutorial](https://docs.oracle.com/javase/tutorial/ext/basics/load.html)
+- [Baeldung - JVM Internals](https://www.baeldung.com/jvm)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
-- [java-class-loaders](../java-class-loaders/)
-- [garbage-collection-algorithms](../garbage-collection-algorithms/)
+- [Java Class Loaders](../java-class-loaders/README.md)
+- [Garbage Collection Algorithms](../garbage-collection-algorithms/README.md)
+- [JVM Memory Model](../jvm-memory-model/README.md)
