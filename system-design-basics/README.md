@@ -1,5 +1,3 @@
-# System Design Basics
-
 ---
 title: System Design Basics
 aliases: [System Design Fundamentals, Basic System Design]
@@ -7,6 +5,8 @@ tags: [#system-design, #basics]
 created: 2025-09-26
 updated: 2025-09-26
 ---
+
+# System Design Basics
 
 # Overview
 
