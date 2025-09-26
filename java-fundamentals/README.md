@@ -6,11 +6,11 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+## Overview
 
 Java Fundamentals encompass the core concepts and syntax of the Java programming language. This includes data types, variables, operators, control structures, methods, and basic object-oriented principles. Understanding these fundamentals is essential for building robust Java applications.
 
-# Detailed Explanation
+## Detailed Explanation
 
 ## Data Types
 
@@ -127,14 +127,14 @@ public int add(int a, int b) {
 }
 ```
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 1. **Simple Calculator**: Using arithmetic operators and methods to perform calculations.
 2. **Student Grade Calculator**: Using conditional statements to determine grades based on scores.
 3. **Number Guessing Game**: Using loops and random number generation for interactive gameplay.
 4. **Temperature Converter**: Converting between Celsius and Fahrenheit using formulas and user input.
 
-# Code Examples
+## Code Examples
 
 ### Hello World Program
 ```java
@@ -211,14 +211,14 @@ public class GradeCalculator {
 }
 ```
 
-# References
+## References
 
 - [Oracle Java Tutorials: Language Basics](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html)
 - [Java Data Types](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html)
 - [Java Operators](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/operators.html)
 - [Java Control Structures](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/flow.html)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 - [OOP Principles in Java](./oop-principles-in-java/README.md)
 - [JVM Internals & Class Loading](./jvm-internals-class-loading/README.md)

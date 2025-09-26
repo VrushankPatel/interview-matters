@@ -6,11 +6,11 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+## Overview
 
 Object-Oriented Programming (OOP) principles in Java form the foundation of designing and implementing robust, maintainable, and scalable software. The four main principles are Encapsulation, Inheritance, Polymorphism, and Abstraction. These principles help in organizing code, promoting reusability, and managing complexity.
 
-# Detailed Explanation
+## Detailed Explanation
 
 ## Encapsulation
 
@@ -47,13 +47,30 @@ Achieved through:
 - Abstract classes
 - Interfaces
 
-# Real-world Examples & Use Cases
+### OOP Principles Diagram
+
+```mermaid
+classDiagram
+    class Animal {
+        +eat()
+    }
+    class Dog {
+        +bark()
+    }
+    class Cat {
+        +meow()
+    }
+    Animal <|-- Dog
+    Animal <|-- Cat
+```
+
+## Real-world Examples & Use Cases
 
 1. **Banking System**: Using encapsulation to protect account balances, inheritance for different account types (savings, checking), polymorphism for interest calculations.
 2. **Vehicle Management**: Abstraction for a generic Vehicle class, inheritance for Car, Truck, etc., polymorphism for fuel efficiency calculations.
 3. **Employee Management System**: Encapsulation for employee data, inheritance for different employee types (manager, developer), abstraction for common behaviors.
 
-# Code Examples
+## Code Examples
 
 ### Encapsulation Example
 ```java
@@ -171,7 +188,7 @@ public class Car extends Vehicle {
 }
 ```
 
-# References
+## References
 
 - [Oracle Java Tutorials: Object-Oriented Programming Concepts](https://docs.oracle.com/javase/tutorial/java/concepts/index.html)
 - [Encapsulation in Java](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html)
@@ -179,7 +196,7 @@ public class Car extends Vehicle {
 - [Polymorphism in Java](https://docs.oracle.com/javase/tutorial/java/IandI/polymorphism.html)
 - [Abstraction in Java](https://docs.oracle.com/javase/tutorial/java/IandI/abstract.html)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
 - [Java Fundamentals](./java-fundamentals/README.md)
 - [Java Design Patterns](./java-design-patterns/README.md)
