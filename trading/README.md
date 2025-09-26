@@ -23,7 +23,7 @@ This section covers trading systems, protocols, market data, order management, a
 
 ## Exchange Behavior
 
-- [Quotes & RFQ workflows](quotes-rfq-workflows/README.md)
+- [Quotes & RFQ workflows](quotes-and-rfq-workflows/README.md)
 
 ## Compliance
 
