@@ -202,23 +202,13 @@
 - Database Indexing for High Throughput
 - Message Queue Reliability Patterns
 - Fault Tolerance in Distributed Systems
-- Blockchain Consensus Mechanisms
-- API Rate Limiting Strategies
-- Event Sourcing Patterns
-- Microservices Communication Patterns
-- Graph Database Query Optimization
-- Container Orchestration with Kubernetes
-- Serverless Function Cold Starts
-- Database Indexing for High Throughput
-- Message Queue Reliability Patterns
-- Fault Tolerance in Distributed Systems
-- Blockchain Consensus Mechanisms
-- API Rate Limiting Strategies
-- Event Sourcing Patterns
-- Microservices Communication Patterns
-- Graph Database Query Optimization
-- Container Orchestration with Kubernetes
-- Serverless Function Cold Starts
-- Database Indexing for High Throughput
-- Message Queue Reliability Patterns
-- Fault Tolerance in Distributed Systems
+- Order Book modeling
+- Matching algorithm internals
+- Time-in-Force variations across exchanges
+- Market fragmentation & smart order routing
+- Latency measurement & monitoring
+- FIX Session Layer (Logon/Heartbeat/Seq numbers)
+- Market data consolidation & TOPS snapshot vs incremental
+- Latency arbitrage
+- Swap & derivatives trade lifecycle
+- Regulatory reports (e.g., MiFID/SEF)

@@ -39,3 +39,8 @@ created_dirs: []
 updated_files: ["SPECIFICATION.md", "PENDING_TOPICS.md", "NEXTTOPICS.md", "java/jvm/gc-tuning/README.md", "java/fundamentals/java-language-basics/README.md", "java/design/oop-design-and-principles/README.md", "system-design/caching/README.md", "system-design/replication-vs-sharding-vs-partitioning/README.md"]
 commit_made: true
 commit_message: "kb: process 5 topics (journey-of-a-trade, order-types, quotes-rfq-workflows, execution-report, trade-capture-report) + restructure trading/ subdirs + fix wikilinks to markdown links"
+topics_processed: ["Order Types (DAY, GTC, FOK, IOC)", "Quotes & RFQ workflows", "Execution Report", "Trade Capture Report", "Rate Limiting"]
+created_dirs: ["trading/quotes-and-rfq-workflows", "trading/execution-report", "trading/trade-capture-report"]
+updated_files: ["trading/order-types/README.md", "rate-limiting/README.md", "SPECIFICATION.md", "PENDING_TOPICS.md", "NEXTTOPICS.md"]
+commit_made: true
+commit_message: "kb: add 5 topics (order-types, quotes-and-rfq-workflows, execution-report, trade-capture-report, rate-limiting) + restructure security, databases, networking"

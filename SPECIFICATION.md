@@ -5,6 +5,10 @@ Last update
 2025-09-26
 
 Summary of recent additions
+   - Processed 5 topics: FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols with comprehensive READMEs following strict format, including STAR summaries, detailed explanations, real-world examples, message formats, mermaid diagrams, common pitfalls, tools/libraries, and proper interlinking
+   - Restructured repository: moved real-world designs to system-design/real-world-designs/, moved java-related dirs to java/, moved algorithms-related to algorithms/, created system-design subdirs (lld, hld, concepts)
+   - Fixed all README links from [[ ]] to proper markdown relative links
+   - Updated root README.md index to reflect new structure
     - Processed 5 topics: FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols with comprehensive READMEs following strict format, including STAR summaries, detailed explanations, real-world examples, message formats, mermaid diagrams, common pitfalls, tools/libraries, and proper interlinking
     - Updated trading/protocols/ and trading/market-data/ indexes
     - Added authoritative references from FIX Trading Community and NASDAQ docs
@@ -179,6 +183,16 @@ New Candidate Topics Rationales
 - Latency arbitrage: Advanced trading strategy
 - Swap & derivatives trade lifecycle: Expands beyond equities
 - Regulatory reports: Compliance knowledge for interviews
+- Blockchain Consensus Mechanisms: Essential for understanding decentralized systems and crypto trading
+- API Rate Limiting Strategies: Critical for protecting services and managing traffic in distributed systems
+- Event Sourcing Patterns: Important for audit trails and rebuilding state in financial systems
+- Microservices Communication Patterns: Key for designing scalable service architectures
+- Graph Database Query Optimization: Relevant for complex relationship queries in social/trading networks
+- Container Orchestration with Kubernetes: Fundamental for deploying and managing containerized applications
+- Serverless Function Cold Starts: Performance consideration for latency-sensitive applications
+- Database Indexing for High Throughput: Optimization technique for read-heavy workloads
+- Message Queue Reliability Patterns: Ensuring message delivery in event-driven systems
+- Fault Tolerance in Distributed Systems: Building resilient architectures for high availability
            - High-Frequency Trading strategies — 'HFT algorithms and infrastructure'
            - Order Book depth and liquidity — 'Measuring and managing order book liquidity'
            - FIX message sequencing and recovery — 'Handling message gaps and resends'
