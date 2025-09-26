@@ -63,6 +63,26 @@ Common system design problems include:
 - **LLD**: Product catalog, shopping cart.
 - **HLD**: Multi-region deployment, recommendation engine.
 
+### Google Search
+- **Use Case**: Index and search the web efficiently.
+- **LLD**: Page ranking algorithm (e.g., PageRank), query processing and tokenization.
+- **HLD**: Distributed web crawlers, inverted index storage, load balancing across data centers.
+
+### YouTube
+- **Use Case**: Video upload, streaming, and personalized recommendations.
+- **LLD**: Video encoding pipeline, recommendation algorithm using collaborative filtering.
+- **HLD**: Global CDN for content delivery, microservices architecture, big data for analytics and views tracking.
+
+### Slack
+- **Use Case**: Real-time messaging and team collaboration.
+- **LLD**: Message threading, user presence indicators, channel management.
+- **HLD**: WebSocket for real-time connections, message queues (e.g., Kafka), database sharding for scalability.
+
+### Instagram
+- **Use Case**: Photo/video sharing with stories and reels.
+- **LLD**: Image processing, feed ranking algorithm.
+- **HLD**: Distributed storage for media, graph database for relationships, event-driven architecture.
+
 ## Code Examples
 
 ### URL Shortener LLD (Java)
@@ -117,5 +137,11 @@ graph TD
 ## Github-README Links & Related Topics
 - [URL Shortener Design](../url-shortener-design/README.md)
 - [Netflix System Design](../netflix-system-design/README.md)
+- [Facebook News Feed](../facebook-news-feed/README.md)
+- [Uber System Design](../uber-system-design/README.md)
+- [Twitter System Design](../twitter-system-design/README.md)
+- [Instagram System Design](../instagram-system-design/README.md)
+- [Google Search Engine](../google-search-engine/README.md)
+- [Slack Messaging System](../slack-messaging-system/README.md)
 - [System Design Basics](../system-design-basics/README.md)
 - [LLD HLD Basics](../lld-hld-basics/README.md)
