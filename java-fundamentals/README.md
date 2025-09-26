@@ -6,11 +6,11 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+## Overview
 
 Java Fundamentals cover the core building blocks of the Java programming language, including variables, data types, operators, expressions, statements, and control flow structures. These elements form the foundation for writing any Java program, enabling developers to store data, perform computations, and control program execution flow.
 
-# Detailed Explanation
+## Detailed Explanation
 
 ## Variables
 
@@ -241,7 +241,7 @@ public int add(int a, int b) {
 }
 ```
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 ## Temperature Converter
 
@@ -350,7 +350,7 @@ public class ArrayProcessor {
 }
 ```
 
-# Code Examples
+## Code Examples
 
 ## Variable Scope Example
 
@@ -410,17 +410,17 @@ public class OperatorPrecedence {
 }
 ```
 
-# References
+## References
 
 - [Oracle Java Tutorials: Language Basics](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html)
 - [Oracle Java Tutorials: Variables](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/variables.html)
 - [Oracle Java Tutorials: Operators](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/operators.html)
 - [Oracle Java Tutorials: Control Flow Statements](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/flow.html)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
-- [java-data-types](java-data-types/)
-- [java-operators](java-operators/)
-- [java-control-flow](java-control-flow/)
-- [java-arrays](java-arrays/)
-- [oop-principles-in-java](oop-principles-in-java/)
+- [Java Data Types](../java-data-types/)
+- [Java Operators](../java-operators/)
+- [Java Control Flow](../java-control-flow/)
+- [Java Arrays](../java-arrays/)
+- [OOP Principles in Java](../oop-principles-in-java/)

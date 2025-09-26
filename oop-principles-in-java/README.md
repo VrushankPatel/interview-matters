@@ -6,11 +6,11 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
-# Overview
+## Overview
 
 Object-Oriented Programming (OOP) is a programming paradigm that organizes software design around data, or objects, rather than functions and logic. Java is fundamentally an object-oriented language that implements OOP principles including encapsulation, inheritance, polymorphism, and abstraction. These principles help create modular, maintainable, and reusable code.
 
-# Detailed Explanation
+## Detailed Explanation
 
 ## What Is an Object?
 
@@ -318,7 +318,7 @@ public class Circle extends Shape {
 }
 ```
 
-# Real-world Examples & Use Cases
+## Real-world Examples & Use Cases
 
 ## Banking System
 
@@ -518,7 +518,7 @@ public class Motorcycle extends AbstractVehicle {
 }
 ```
 
-# Code Examples
+## Code Examples
 
 ## Inheritance Hierarchy Diagram
 
@@ -629,7 +629,7 @@ public class MacCheckbox implements Checkbox {
 }
 ```
 
-# Common Pitfalls & Edge Cases
+## Common Pitfalls & Edge Cases
 
 ## Fragile Base Class Problem
 
@@ -722,7 +722,7 @@ public class Child extends Parent {
 }
 ```
 
-# References
+## References
 
 - [Oracle Java Tutorials: Object-Oriented Programming Concepts](https://docs.oracle.com/javase/tutorial/java/concepts/index.html)
 - [Oracle Java Tutorials: What Is an Object?](https://docs.oracle.com/javase/tutorial/java/concepts/object.html)
@@ -731,11 +731,11 @@ public class Child extends Parent {
 - [Oracle Java Tutorials: What Is an Interface?](https://docs.oracle.com/javase/tutorial/java/concepts/interface.html)
 - [Oracle Java Tutorials: What Is a Package?](https://docs.oracle.com/javase/tutorial/java/concepts/package.html)
 
-# Github-README Links & Related Topics
+## Github-README Links & Related Topics
 
-- [java-fundamentals](java-fundamentals/)
-- [java-classes-and-objects](java-classes-and-objects/)
-- [java-inheritance](java-inheritance/)
-- [java-interfaces](java-interfaces/)
-- [java-polymorphism](java-polymorphism/)
-- [design-patterns](design-patterns/)
+- [Java Fundamentals](../java-fundamentals/)
+- [Java Classes and Objects](../java-classes-and-objects/)
+- [Java Inheritance](../java-inheritance/)
+- [Java Interfaces](../java-interfaces/)
+- [Java Polymorphism](../java-polymorphism/)
+- [Design Patterns](../design-patterns/)

@@ -6,8 +6,6 @@ created: 2025-09-25
 updated: 2025-09-26
 ---
 
-# Java Exception Handling
-
 ## Overview
 
 Exception handling in Java is a mechanism to handle runtime errors, allowing programs to continue execution or fail gracefully. It uses try-catch-finally blocks and the throw keyword to manage exceptional conditions.
