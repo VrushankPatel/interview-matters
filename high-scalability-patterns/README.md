@@ -3,7 +3,7 @@ title: High Scalability Patterns
 aliases: [high-scalability-patterns, scalability-patterns]
 tags: [#system-design, #scalability]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # High Scalability Patterns
@@ -94,7 +94,6 @@ Automatically adjusts resources based on demand.
 - **Social Media Platforms**: Handle millions of users posting and viewing content simultaneously.
 - **E-commerce Sites**: Manage high traffic during sales events like Black Friday.
 - **Streaming Services**: Deliver video content to millions of concurrent users.
-- **Search Engines**: Process billions of queries daily with low latency.
 - **IoT Systems**: Handle data from thousands of devices in real-time.
 
 ## Code Examples
@@ -270,13 +269,15 @@ graph TD
 - [The Art of Scalability by Martin L. Abbott and Michael T. Fisher](https://www.amazon.com/Art-Scalability-Architecture-Organizations-Enterprise/dp/0137030426)
 - [Designing Data-Intensive Applications by Martin Kleppmann](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321)
 - [High Scalability Blog](http://highscalability.com/)
+- [Scalability - Wikipedia](https://en.wikipedia.org/wiki/Scalability)
+- [AWS Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/)
+- [Cloud Design Patterns - Azure](https://docs.microsoft.com/en-us/azure/architecture/patterns/)
 
 ## Github-README Links & Related Topics
 
 - [Load Balancing and Strategies](../load-balancing-and-strategies/)
 - [Caching](../caching/)
-- [Replication vs Sharding vs Partitioning](../replication-vs-sharding-vs-partitioning/)
-- [Microservices Architecture](../microservices-architecture/)
-- [CAP Theorem & Distributed Systems](../cap-theorem-and-distributed-systems/)</content>
-</xai:function_call ><xai:function_call name="write">
-<parameter name="filePath">cap-theorem-and-distributed-systems/README.md
+- [Database Sharding Strategies](../database-sharding-strategies/)
+- [Database Replication Strategies](../database-replication-strategies/)
+- [Microservices Architecture](../microservices/)
+- [CAP Theorem & Distributed Systems](../cap-theorem-and-distributed-systems/)

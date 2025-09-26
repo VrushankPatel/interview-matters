@@ -3,7 +3,7 @@ title: CAP Theorem & Distributed Systems
 aliases: [cap theorem, distributed systems, consistency availability partition]
 tags: [#system-design, #distributed-systems]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # CAP Theorem & Distributed Systems
@@ -144,3 +144,4 @@ graph TD
 - PACELC Theorem: https://en.wikipedia.org/wiki/PACELC_theorem
 - https://github.com/donnemartin/system-design-primer#cap-theorem
 - "Designing Data-Intensive Applications" by Martin Kleppmann
+- https://www.cs.berkeley.edu/~brewer/cs262b-2004/PODC-keynote.pdf (Original CAP Theorem Keynote)

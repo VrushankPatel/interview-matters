@@ -3,7 +3,7 @@ title: Latency and Throughput: Zero to Hero
 aliases: [Latency vs Throughput, Performance Metrics, System Performance]
 tags: [#system-design,#performance]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 ## Overview
@@ -37,6 +37,12 @@ Throughput is the rate at which a system processes requests or data over time. I
 There's often an inverse relationship between latency and throughput:
 - Optimizing for low latency may reduce throughput (e.g., small batch sizes)
 - Optimizing for high throughput may increase latency (e.g., large batch sizes)
+
+| Aspect | Low Latency Focus | High Throughput Focus |
+|--------|-------------------|-----------------------|
+| Batch Size | Small | Large |
+| Processing | Immediate | Batched |
+| Trade-off Point | Balance needed | Balance needed |
 
 ```mermaid
 graph LR
@@ -202,14 +208,6 @@ public class SimpleCache<K, V> {
         cache.clear();
     }
 }
-
-// Usage example
-SimpleCache<String, String> cache = new SimpleCache<>();
-String result = cache.get("key", k -> {
-    // Simulate expensive operation
-    try { Thread.sleep(100); } catch (Exception e) {}
-    return "computed_value";
-});
 ```
 
 ## Common Pitfalls & Edge Cases
@@ -234,11 +232,12 @@ String result = cache.get("key", k -> {
 - [Systems Performance: Enterprise and the Cloud by Brendan Gregg](https://www.amazon.com/Systems-Performance-Enterprise-Brendan-Gregg/dp/0133390098)
 - [Designing Data-Intensive Applications by Martin Kleppmann](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321)
 - [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
+- [Latency (engineering) - Wikipedia](https://en.wikipedia.org/wiki/Latency_(engineering))
+- [Network Throughput - Wikipedia](https://en.wikipedia.org/wiki/Network_throughput)
 
 ## Github-README Links & Related Topics
 
 - [Latency Measurement](latency-measurement/README.md)
-- [Performance Optimization Techniques](performance-optimization-techniques/README.md)
 - [Caching](caching/README.md)
 - [Load Balancing and Strategies](load-balancing-and-strategies/README.md)
 - [High Scalability Patterns](high-scalability-patterns/README.md)
