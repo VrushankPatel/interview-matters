@@ -1,0 +1,13 @@
+# other
+- [chaos-engineering](0/README.md)
+- [chaos-engineering-practices](0/README.md)
+- [eureka-service-discovery](0/README.md)
+- [file-io-nio](0/README.md)
+- [garbage-collection-algorithms](0/README.md)
+- [gc-tuning](0/README.md)
+- [istio-service-mesh](0/README.md)
+- [latency-throughput-zero-to-hero](0/README.md)
+- [paxos-algorithm](0/README.md)
+- [README.md](0/README.md)
+- [spring-boot-microservices](0/README.md)
+- [zookeeper-for-coordination](0/README.md)
