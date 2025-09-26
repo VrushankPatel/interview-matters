@@ -10,6 +10,16 @@
 - Latency arbitrage
 - Swap & derivatives trade lifecycle
 - Regulatory reports (e.g., MiFID/SEF)
+- High-Frequency Trading strategies
+- Order Book depth and liquidity
+- FIX message sequencing and recovery
+- Market maker algorithms
+- Cross-venue execution
+- Algorithmic trading frameworks
+- Risk management in trading systems
+- Compliance monitoring for trades
+- Blockchain in trading
+- AI in market prediction
 - Order Book modeling
 - Matching algorithm internals
 - Time-in-Force variations across exchanges

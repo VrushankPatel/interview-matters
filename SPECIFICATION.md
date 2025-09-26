@@ -5,7 +5,7 @@ Last update
 2025-09-26
 
 Summary of recent additions
-    - Processed 5 topics from PENDING_TOPICS.md (Journey of a Trade, Order Types, Quotes & RFQ workflows, Execution Report, Trade Capture Report) with content verification and interlink updates. Restructured by removing duplicate directories from root (backtracking, divide-and-conquer, facebook-news-feed, instagram-system-design, netflix-video-streaming-architecture) and consolidating under appropriate categories. Created subdirs under system-design/ (LLD, HLD, concepts, real-world-designs). Updated root README index links to point to correct paths.
+    - Processed 5 topics from PENDING_TOPICS.md (FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data, Order Entry Protocols) with comprehensive READMEs including STAR summaries, Mermaid diagrams, real-world examples, message formats, and references. Restructured by moving new topics to trading/protocols/ and trading/market-data/. Created subdirs under system-design/ (LLD, HLD, concepts, real-world-designs) and moved relevant existing topics. Updated trading/protocols/README.md and replaced [[ ]] wikilinks with proper markdown links where found.
 
 Conventions
  - Dir naming: kebab-case.

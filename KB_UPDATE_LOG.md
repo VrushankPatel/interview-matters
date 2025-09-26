@@ -74,3 +74,9 @@ updated_files: ["market-data/README.md", "PENDING_TOPICS.md", "NEXTTOPICS.md", "
 commit_made: true
 commit_message: "kb: add 5 topics (fix-protocol, itch-protocol, ouch-protocol, market-data, order-entry-protocols)"
 {"topics_processed": ["fix-protocol", "itch-protocol", "ouch-protocol", "market-data", "order-entry-protocols"], "created_dirs": [], "updated_files": ["SPECIFICATION.md", "PENDING_TOPICS.md", "NEXTTOPICS.md", "README.md"], "commit_made": true, "commit_message": "kb: add 5 topics (fix-protocol, itch-protocol, ouch-protocol, market-data, order-entry-protocols) + restructure trading category and merge duplicates + update interlinks"}
+-e 
+topics_processed: ["Journey of a Trade (end-to-end)", "Order Types (DAY, GTC, FOK, IOC)", "Quotes & RFQ workflows", "Execution Report", "Trade Capture Report"]
+created_dirs: ["journey-of-a-trade", "order-types"]
+updated_files: ["README.md", "SPECIFICATION.md", "PENDING_TOPICS.md", "NEXTTOPICS.md"]
+commit_made: true
+commit_message: "kb: process 5 topics (journey-of-a-trade, order-types, quotes-and-rfq-workflows, execution-report, trade-capture-report) + restructure duplicates and update indices"
