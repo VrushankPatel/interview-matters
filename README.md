@@ -56,6 +56,7 @@ This repository contains comprehensive documentation on various topics for inter
 - [Latency and Throughput Zero to Hero](./latency-and-throughput-zero-to-hero/README.md)
 - [LinkedIn Social Network](./linkedin-social-network/README.md)
 - [Load Balancing and Strategies](./load-balancing-and-strategies/README.md)
+- [Monitoring and Logging](./monitoring-and-logging/README.md)
 - [Machine Learning in System Design](./machine-learning-in-system-design/README.md)
 - [Message Queue Patterns](./message-queue-patterns/README.md)
 - [Message Queues and Brokers](./message-queues-and-brokers/README.md)
@@ -213,6 +214,7 @@ This repository contains comprehensive documentation on various topics for inter
 - [Kubernetes Security](./kubernetes-security/README.md)
 - [Monitoring Dashboards](./monitoring-dashboards/README.md)
 - [Serverless Function Patterns](./serverless-function-patterns/README.md)
+- [DevOps & Infrastructure as Code](./devops-infrastructure-as-code/README.md)
 
 ### Networking
 - [API Authentication Methods](./api-authentication-methods/README.md)
