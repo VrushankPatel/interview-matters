@@ -6,8 +6,6 @@ created: 2025-09-25
 updated: 2025-09-26
 ---
 
-# Load Balancing and Strategies
-
 ## Overview
 
 Load balancing distributes incoming network traffic across multiple servers to ensure no single server becomes overwhelmed, improving reliability, performance, and scalability.
