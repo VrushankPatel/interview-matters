@@ -3,7 +3,7 @@ title: Load Balancing and Strategies
 aliases: [load balancing, load balancer strategies]
 tags: [#system-design, #scalability, #networking]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Load Balancing and Strategies

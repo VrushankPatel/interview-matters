@@ -1,5 +1,5 @@
 ---
-title: Popular Systems Design LLD HLD
+title: Popular System Designs LLD HLD
 aliases: [Popular System Designs, LLD HLD Examples]
 tags: [#system-design,#lld,#hld,#interview-prep]
 created: 2025-09-26
