@@ -51,3 +51,8 @@ created_dirs: []
 updated_files: ["protocols/fix-protocol/README.md", "protocols/itch-protocol/README.md", "protocols/ouch-protocol/README.md", "market-data/market-data-overview-and-dissemination/README.md", "protocols/order-entry-protocols/README.md", "SPECIFICATION.md", "PENDING_TOPICS.md", "NEXTTOPICS.md", "README.md"]
 commit_made: true
 commit_message: "kb: processed 5 topics (FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data, Order Entry Protocols) + restructured trading categories to top-level + fixed links and updated indexes"
+topics_processed: ["Journey of a Trade (end-to-end)", "Order Types (DAY, GTC, FOK, IOC)", "Quotes & RFQ workflows", "Execution Report", "Trade Capture Report"]
+created_dirs: ["journey-of-a-trade", "order-types", "quotes-and-rfq-workflows", "lifecycle/execution-report", "lifecycle/trade-capture-report"]
+updated_files: ["lifecycle/README.md", "exchange-behavior/README.md", "PENDING_TOPICS.md", "NEXTTOPICS.md", "SPECIFICATION.md", "protocols/ouch-protocol/README.md"]
+commit_made: true
+commit_message: "kb: add 5 topics (journey-of-a-trade, order-types, quotes-and-rfq-workflows, execution-report, trade-capture-report) + restructure links and indices"

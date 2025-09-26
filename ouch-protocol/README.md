@@ -8,96 +8,97 @@ updated: 2025-09-26
 
 # Overview
 
-The OUCH protocol is a binary message protocol developed by NASDAQ for order entry, allowing market participants to submit, modify, and cancel orders electronically. It is designed for low-latency order routing, complementing ITCH for market data. OUCH supports various order types and is used in NASDAQ's matching engine for equities and options.
+OUCH (Order Handling and Execution) is a binary protocol developed by NASDAQ for order entry and execution. It allows market participants to submit, modify, and cancel orders directly to the matching engine with low latency.
 
 # STAR Summary
 
-**SITUATION:** NASDAQ required a fast, reliable protocol for order submission to handle increasing electronic trading volumes.
+**SITUATION**: Text-based protocols like FIX were too verbose for high-speed order entry.
 
-**TASK:** Develop a binary protocol for order entry that minimizes latency and supports complex order types.
+**TASK**: Develop a binary protocol for efficient order submission and management.
 
-**ACTION:** OUCH was created with fixed-length binary messages for orders, cancellations, and modifications, integrated with NASDAQ's systems.
+**ACTION**: NASDAQ created OUCH as a compact binary format for order messages.
 
-**RESULT:** OUCH enables sub-millisecond order processing, supporting HFT and institutional trading on NASDAQ.
+**RESULT**: OUCH enables sub-millisecond order processing, critical for HFT.
 
 # Detailed Explanation
 
-OUCH messages are binary, with each type having a fixed size for efficient parsing. The protocol uses big-endian encoding.
+OUCH uses a binary format with fixed-length messages. It supports order entry, cancellation, modification, and query operations. Messages are acknowledged with response messages indicating acceptance or rejection.
 
 Key message types:
-
-- Enter Order (O): Submits a new order.
-
-- Replace Order (U): Modifies an existing order.
-
-- Cancel Order (X): Cancels an order.
-
-- Modify Order (M): Changes order parameters.
-
-- System Event (S): Market status.
-
-Orders include fields like symbol, side, quantity, price, and time-in-force.
-
-OUCH integrates with ITCH for confirmations and executions.
+- 'O': Enter Order
+- 'U': Replace Order
+- 'X': Cancel Order
+- 'S': System Event
+- 'A': Accepted
+- 'J': Rejected
+- 'E': Executed
+- 'C': Canceled
+- 'B': Broken Trade
 
 # Real-world Examples & Use Cases
 
-An HFT firm sends an Enter Order message for 500 shares of GOOGL at $2800. NASDAQ acknowledges via ITCH ExecutionReport.
+- **Order Submission**: Send 'O' message to place a new order.
+- **Order Cancellation**: 'X' message to cancel by order token.
+- **Execution**: 'E' messages report fills.
 
-Use cases: Algorithmic order placement, market making, arbitrage strategies.
+Used by brokers and HFT firms for direct market access.
 
 # Message Formats / Data Models
 
-Enter Order (O) - 49 bytes.
+Example Enter Order ('O'):
 
-| Offset | Length | Field | Description |
-|--------|--------|-------|-------------|
-| 0 | 1 | Message Type | 'O' |
-| 1 | 8 | Order Token | Unique ID |
-| 9 | 14 | Buy/Sell | 'B' or 'S' |
-| 23 | 8 | Shares | Quantity |
-| 31 | 8 | Stock | Symbol |
-| 39 | 4 | Price | Price * 10000 |
-| 43 | 1 | Time-in-Force | '0'=Day |
-| 44 | 1 | Firm | Firm ID |
-| 45 | 1 | Display | 'Y' or 'N' |
-| 46 | 1 | Capacity | Trading capacity |
-| 47 | 1 | Intermarket Sweep | 'Y' or 'N' |
-| 48 | 1 | Cross Type | For crosses |
+| Field | Type | Length | Description |
+|-------|------|--------|-------------|
+| Message Type | char | 1 | 'O' |
+| Order Token | char[14] | 14 | Unique order identifier |
+| Buy/Sell Indicator | char | 1 | 'B' or 'S' |
+| Shares | uint32 | 4 | Quantity |
+| Stock | char[8] | 8 | Symbol |
+| Price | uint32 | 4 | Price (4 decimals) |
+| Time in Force | uint32 | 4 | TIF in nanoseconds |
+| Firm | char[4] | 4 | Firm ID |
+| Display | char | 1 | Display flag |
+| Capacity | char | 1 | Capacity code |
+| ISO | char | 1 | ISO flag |
+| Min Qty | uint32 | 4 | Minimum quantity |
+| Cross Type | char | 1 | Cross type |
+| Customer Type | char | 1 | Customer type |
 
 # Journey of a Trade
 
 ```mermaid
 sequenceDiagram
-    participant Trader
-    participant NASDAQ
-    Trader->>NASDAQ: Enter Order (O)
-    NASDAQ->>Trader: Accepted (via ITCH)
-    NASDAQ->>Trader: Executed (via ITCH)
+    participant Client
+    participant Gateway
+    participant Exchange
+
+    Client->>Gateway: Prepare Order
+    Gateway->>Exchange: OUCH Enter Order ('O')
+    Exchange->>Gateway: Accepted ('A')
+    Exchange->>Exchange: Match
+    Exchange->>Gateway: Executed ('E')
+    Gateway->>Client: Confirmation
 ```
 
 # Common Pitfalls & Edge Cases
 
-- Order rejections due to market halts.
-
-- Handling order modifications during execution.
-
-- Latency in binary parsing.
+- **Token Management**: Unique tokens required; collisions can cause issues.
+- **Rejection Handling**: 'J' messages must be processed to resubmit or cancel.
+- **Latency**: Binary format minimizes, but network issues can cause delays.
+- **Capacity Limits**: Exceeding order rate limits leads to throttling.
 
 # Tools & Libraries
 
-- NASDAQ OUCH SDK: Official tools.
-
-- Custom parsers in C++ for low-latency.
-
-Example code snippet (C++):
+- **NASDAQ OUCH Specs**: Official documentation.
+- **Order Management Systems**: Integrate OUCH for DMA.
+- **Sample Code**: C++ parser example:
 
 ```cpp
 struct EnterOrder {
     char type;
-    uint64_t token;
-    char side[14];
-    uint64_t shares;
+    char token[14];
+    char side;
+    uint32_t shares;
     char stock[8];
     uint32_t price;
     // etc.
@@ -109,9 +110,7 @@ struct EnterOrder {
 - [FIX Protocol](../fix-protocol/README.md)
 - [ITCH Protocol](../itch-protocol/README.md)
 - [Order Entry Protocols](../order-entry-protocols/README.md)
-- [Order Types](../order-types/README.md)
 
 # References
 
-- NASDAQ OUCH Specification: https://www.nasdaqtrader.com/content/technicalsupport/specifications/tradingproducts/ouch5.0.pdf
-- NASDAQ Trading: https://www.nasdaq.com/solutions/nasdaq-trading-platform
+- [NASDAQ OUCH Specification](https://www.nasdaqtrader.com/content/technicalsupport/specifications/dataproducts/ouch4.2.pdf)
