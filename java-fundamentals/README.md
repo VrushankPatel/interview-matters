@@ -1,9 +1,9 @@
 ---
-title: Java Fundamentals
-aliases: [Java Fundamentals, Java Basics]
-tags: [#java]
-created: 2025-09-26
-updated: 2025-09-26
+title: 'Java Fundamentals'
+aliases: ['Java Basics', 'Core Java']
+tags: ['#java', '#fundamentals']
+created: '2025-09-26'
+updated: '2025-09-26'
 ---
 
 ## Overview

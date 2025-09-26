@@ -1,16 +1,10 @@
-Monitoring and Logging
-DevOps & Infrastructure as Code
-Proxy forward and reverse
+Java Fundamentals
+OOP Principles in Java
 JVM Internals & Class Loading
+Garbage Collection Algorithms
+Multithreading & Concurrency in Java
 Collections & Data Structures
 Java Stream API & Functional Programming
-Caching
-Latency and Throughput zero to hero
-Monitoring and Logging
-DevOps & Infrastructure as Code
-Proxy forward and reverse
--e URL Shortener System Design
-Netflix System Design
-Twitter System Design
-Instagram System Design
-Facebook System Design
+System Design Basics
+High Scalability Patterns
+CAP Theorem & Distributed Systems

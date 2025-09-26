@@ -1,16 +1,16 @@
 ---
-title: Multithreading & Concurrency in Java
-aliases: []
-tags: [#java,#concurrency]
-created: 2025-09-26
-updated: 2025-09-26
+title: 'Multithreading & Concurrency in Java'
+aliases: ['Java Concurrency', 'Java Threads']
+tags: ['#java', '#concurrency']
+created: '2025-09-26'
+updated: '2025-09-26'
 ---
 
 # Overview
 
-Multithreading and concurrency in Java enable programs to perform multiple tasks simultaneously, improving performance and responsiveness. Java provides built-in support for threads, synchronization mechanisms, and high-level concurrency utilities in the `java.util.concurrent` package. Key concepts include thread creation, synchronization to avoid race conditions, and managing thread pools for efficient resource utilization.
+Multithreading and concurrency in Java enable programs to perform multiple tasks simultaneously, improving performance and responsiveness. Java provides built-in support for threads, synchronization mechanisms, and high-level concurrency utilities in the `java.util.concurrent` package. With Java 21, virtual threads (Project Loom) offer lightweight concurrency for scalable applications. Key concepts include thread creation, synchronization to avoid race conditions, memory visibility, and managing thread pools for efficient resource utilization.
 
-This topic covers the fundamentals of concurrent programming in Java, from basic thread operations to advanced patterns like producer-consumer and deadlock prevention.
+This topic covers the fundamentals of concurrent programming in Java, from basic thread operations to advanced patterns like producer-consumer, deadlock prevention, and modern features like virtual threads.
 
 # Detailed Explanation
 
@@ -73,11 +73,21 @@ The `java.util.concurrent` package provides high-level tools:
 - **Producer-Consumer**: Threads produce and consume data via shared buffers.
 - **Fork-Join**: Divide tasks into subtasks for parallel execution.
 
-## Pitfalls
+## Memory Model
 
-- **Deadlock**: Threads wait indefinitely for resources.
-- **Race Conditions**: Unpredictable results from unsynchronized access.
-- **Starvation**: A thread never gets CPU time.
+Java's memory model defines how threads interact with memory, ensuring visibility and ordering through "happens-before" relationships established by synchronization, volatile variables, and thread start/join operations.
+
+## Volatile Keyword
+
+The `volatile` keyword guarantees that changes to a variable are immediately visible to all threads. It does not provide atomicity for compound operations.
+
+## Atomic Operations
+
+Classes like `AtomicInteger` provide lock-free, thread-safe operations using compare-and-swap (CAS) instructions.
+
+## Virtual Threads (Java 21+)
+
+Virtual threads are user-mode threads managed by the JVM, enabling efficient concurrency for I/O-bound tasks without the overhead of platform threads.
 
 # Real-world Examples & Use Cases
 
@@ -86,6 +96,28 @@ The `java.util.concurrent` package provides high-level tools:
 - **Data Processing**: Parallelize computations in big data pipelines (e.g., Apache Spark).
 - **Gaming**: Simulate multiple entities or handle network I/O without blocking.
 - **Financial Systems**: Process transactions concurrently while maintaining consistency.
+
+# Common Pitfalls & Edge Cases
+
+- **Deadlock**: Threads hold resources and wait for others in a cycle, leading to indefinite blocking.
+- **Race Conditions**: Concurrent access to shared data without synchronization causes unpredictable results.
+- **Starvation**: A thread is perpetually denied resources due to scheduling policies.
+- **Livelock**: Threads change state in response to each other but make no progress.
+- **Memory Visibility Issues**: Changes by one thread are not visible to others without proper synchronization.
+- **Atomicity Violations**: Operations like `i++` are not atomic, leading to lost updates.
+
+```mermaid
+sequenceDiagram
+    participant T1 as Thread 1
+    participant T2 as Thread 2
+    participant A as Resource A
+    participant B as Resource B
+    T1->>A: lock A
+    T2->>B: lock B
+    T1->>B: try lock B (blocked)
+    T2->>A: try lock A (blocked)
+    Note over T1,T2: Deadlock: Mutual waiting
+```
 
 # Code Examples
 
@@ -227,14 +259,91 @@ public class ProducerConsumer {
         consumer.start();
     }
 }
+
 ```
 
-# References
+## Using Volatile
 
+```java
+public class VolatileExample {
+    private volatile boolean running = true;
+
+    public void stop() {
+        running = false;
+    }
+
+    public void run() {
+        while (running) {
+            // Perform work
+        }
+    }
+}
+```
+
+## Using AtomicInteger
+
+```java
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class AtomicCounter {
+    private AtomicInteger count = new AtomicInteger(0);
+
+    public void increment() {
+        count.incrementAndGet();
+    }
+
+    public int get() {
+        return count.get();
+    }
+}
+```
+
+## Virtual Threads Example
+
+```java
+import java.util.concurrent.Executors;
+
+public class VirtualThreadsDemo {
+    public static void main(String[] args) {
+        try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+            for (int i = 0; i < 100; i++) {
+                executor.submit(() -> {
+                    System.out.println("Task in virtual thread: " + Thread.currentThread().getName());
+                });
+            }
+        }
+    }
+}
+```
+
+# Tools & Libraries
+
+- **JMH (Java Microbenchmarking Harness)**: For accurate performance benchmarking of concurrent code.
+- **VisualVM**: Tool for profiling and monitoring JVM, including thread dumps and CPU usage.
+- **JConsole**: Built-in JVM monitoring tool for threads, memory, and performance.
+- **Libraries**: 
+  - **Guava**: Provides additional concurrency utilities like `ListenableFuture`.
+  - **RxJava**: For reactive programming and asynchronous streams.
+  - **Akka**: Actor-based concurrency framework for building concurrent applications.
+
+# References
 - [Oracle Java Concurrency Tutorial](https://docs.oracle.com/javase/tutorial/essential/concurrency/)
 - [Java Util Concurrent Package](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/package-summary.html)
 - [Baeldung Concurrency Guide](https://www.baeldung.com/java-concurrency)
 - [Effective Java: Concurrency Chapter](https://www.amazon.com/Effective-Java-Joshua-Bloch/dp/0134685997) (Book reference)
+- [Java Memory Model](https://docs.oracle.com/javase/specs/jls/se21/html/jls-17.html)
+- [Project Loom: Virtual Threads](https://openjdk.org/jeps/444)
+- [JMH (Java Microbenchmarking Harness)](https://openjdk.org/projects/code-tools/jmh/)
+
+# STAR Summary
+
+**Situation**: A web server handling thousands of concurrent requests experiences performance degradation and occasional crashes under high load.
+
+**Task**: Optimize the server to handle concurrency efficiently without resource exhaustion.
+
+**Action**: Implemented a thread pool using `ExecutorService`, applied synchronization for shared state, and used atomic variables for counters. Monitored with VisualVM to identify bottlenecks.
+
+**Result**: Server throughput increased by 50%, response times reduced by 30%, and eliminated crashes, ensuring reliable operation under peak loads.
 
 # Github-README Links & Related Topics
 
@@ -247,3 +356,4 @@ public class ProducerConsumer {
 - [Java Semaphore](../java-semaphore/)
 - [Java CountDownLatch](../java-countdownlatch/)
 - [Java CyclicBarrier](../java-cyclicbarrier/)
+- [Java Structured Concurrency](../java-structured-concurrency/)
