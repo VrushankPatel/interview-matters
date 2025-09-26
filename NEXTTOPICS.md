@@ -1,9 +1,4 @@
 # NEXT TOPICS
-- Latency and Throughput zero to hero
-- URL Shortener System Design
-- Netflix System Design
-- Popular System Designs LLD and HLD
-- Database Design Principles
 - Event-Driven Architecture
 - Java Fundamentals
 - OOP Principles in Java
