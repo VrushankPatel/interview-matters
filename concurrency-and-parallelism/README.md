@@ -1,7 +1,7 @@
 ---
 title: Concurrency & Parallelism
-aliases: [concurrency, parallelism, concurrent programming]
-tags: [#concurrency,#parallelism,#system-design]
+aliases: ["concurrency", "parallelism", "concurrent programming"]
+tags: ["#concurrency", "#parallelism", "#system-design"]
 created: 2025-09-26
 updated: 2025-09-26
 ---

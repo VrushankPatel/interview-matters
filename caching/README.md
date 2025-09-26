@@ -1,7 +1,7 @@
 ---
 title: Caching
-aliases: [Cache Strategies, Memory Caching]
-tags: [#system-design,#performance,#databases]
+aliases: ["Cache Strategies", "Memory Caching"]
+tags: ["#system-design", "#performance", "#databases"]
 created: 2025-09-26
 updated: 2025-09-26
 ---

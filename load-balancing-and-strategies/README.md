@@ -1,7 +1,7 @@
 ---
 title: Load Balancing and Strategies
-aliases: [Load Balancing]
-tags: [#system-design,#scalability]
+aliases: ["Load Balancing Strategies", "Load Balancer Types"]
+tags: ["#system-design", "#scalability", "#networking"]
 created: 2025-09-26
 updated: 2025-09-26
 ---

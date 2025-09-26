@@ -27,7 +27,7 @@ This repository contains comprehensive documentation on various topics for inter
 - [Circuit Breaker Pattern](./circuit-breaker-pattern/README.md)
 - [Circuit Breaker Pattern in Microservices](./circuit-breaker-pattern-in-microservices/README.md)
 - [Cloud Computing Basics](./cloud-computing-basics/README.md)
-- [Concurrency & Parallelism](./concurrency-parallelism/README.md)
+- [Concurrency & Parallelism](./concurrency-and-parallelism/README.md)
 - [Container Orchestration](./container-orchestration/README.md)
 - [CQRS Pattern](./cqrs-pattern/README.md)
 - [Data Consistency Models](./data-consistency-models/README.md)

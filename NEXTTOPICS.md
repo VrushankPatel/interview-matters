@@ -1,7 +1,16 @@
-- Load Balancing and Strategies
-- Rate Limiting
-- Replication vs Sharding vs Partitioning
-- Caching
-- Concurrency & Parallelism
 - Java Stream API & Functional Programming
 - System Design Basics
+- Java Fundamentals
+- OOP Principles in Java
+- JVM Internals & Class Loading
+- Garbage Collection Algorithms
+- Multithreading & Concurrency in Java
+- Collections & Data Structures
+- High Scalability Patterns
+- CAP Theorem & Distributed Systems
+- Latency and Throughput Zero to Hero
+- Monitoring and Logging
+- DevOps & Infrastructure as Code
+- Proxy Forward and Reverse
+- LLD HLD Basics
+- Popular System Designs LLD and HLD
