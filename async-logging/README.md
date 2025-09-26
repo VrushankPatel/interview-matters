@@ -1,9 +1,9 @@
 ---
 title: Async Logging
 aliases: [Asynchronous Logging]
-tags: [#logging, #concurrency, #performance]
+tags: [#logging,#concurrency,#performance]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 ## Overview
@@ -62,9 +62,11 @@ sequenceDiagram
 
 ## Real-world Examples & Use Cases
 
-- High-traffic web servers (e.g., Nginx with async logs).
-- Financial trading systems needing low latency.
-- Mobile apps to avoid UI freezes.
+- **High-traffic web servers**: Nginx and Apache use async logging to handle thousands of requests without blocking.
+- **Financial trading systems**: Require microsecond latency; async logging prevents I/O delays in trade execution.
+- **Mobile apps**: Prevent UI thread blocking during log writes, ensuring smooth user experience.
+- **Microservices**: In distributed systems, async logging allows services to log without waiting for network I/O to logging services like ELK stack.
+- **Data processing pipelines**: Apache Kafka producers use async logging to avoid slowing down data ingestion.
 
 ## Data Models / Message Formats
 
@@ -126,7 +128,6 @@ Example JSON log entry:
 import logging
 import logging.handlers
 import queue
-import threading
 
 # Create a queue
 log_queue = queue.Queue()
@@ -148,6 +149,30 @@ logger.info("This is an async log message")
 listener.stop()
 ```
 
+### Node.js with Winston Async Transport
+
+```javascript
+const winston = require('winston');
+
+// Async file transport
+const asyncFileTransport = new winston.transports.File({
+  filename: 'app.log',
+  handleExceptions: true,
+  maxsize: 5242880, // 5MB
+  maxFiles: 5,
+});
+
+// Use async logging
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.json(),
+  transports: [asyncFileTransport],
+});
+
+// Log asynchronously
+logger.info('User action performed', { userId: 123 });
+```
+
 ## Common Pitfalls & Edge Cases
 
 - Queue overflow leading to dropped logs.
@@ -164,12 +189,14 @@ listener.stop()
 
 ## Github-README Links & Related Topics
 
-- [monitoring-and-logging](../monitoring-and-logging/)
-- [async-logging](../system-design/async-logging/)
-- [concurrency-parallelism](../concurrency-parallelism/)
+- [Logging Frameworks](../logging-frameworks/)
+- [Monitoring and Logging](../monitoring-and-logging/)
+- [Concurrency & Parallelism](../concurrency-parallelism/)
+- [Distributed Tracing](../distributed-tracing/)
 
 ## References
 
-- Logback Async Appender: https://logback.qos.ch/manual/appenders.html#AsyncAppender
-- Python Logging Cookbook: https://docs.python.org/3/howto/logging-cookbook.html#logging-to-a-single-file-from-multiple-processes
-- Async Logging Best Practices: https://www.scalyr.com/blog/async-logging/
+- [Logback Async Appender](https://logback.qos.ch/manual/appenders.html#AsyncAppender)
+- [Python Logging Cookbook](https://docs.python.org/3/howto/logging-cookbook.html#logging-to-a-single-file-from-multiple-processes)
+- [Async Logging Best Practices](https://www.scalyr.com/blog/async-logging/)
+- [Java Logging Best Practices](https://www.oracle.com/technical-resources/articles/javase/logging.html)

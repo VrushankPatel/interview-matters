@@ -1,9 +1,9 @@
 ---
 title: Load Balancing and Strategies
-aliases: [Load Balancers, Traffic Distribution]
-tags: [#system-design,#scalability,#networking]
+aliases: [Load Balancer, Load Distribution]
+tags: [#load-balancing,#system-design,#scalability]
 created: 2025-09-25
-updated: 2025-09-25
+updated: 2025-09-26
 ---
 
 # Load Balancing and Strategies
@@ -11,6 +11,13 @@ updated: 2025-09-25
 ## Overview
 
 Load balancing distributes incoming network traffic across multiple servers to ensure no single server becomes overwhelmed, improving reliability, performance, and scalability.
+
+## STAR Summary
+
+**Situation:** E-commerce platform experiencing downtime during peak traffic due to single server overload.  
+**Task:** Implement load balancing to handle increased traffic and improve availability.  
+**Action:** Deployed HAProxy with round-robin algorithm and health checks across 3 web servers.  
+**Result:** Achieved 99.9% uptime, reduced response time by 40%, and supported 3x traffic increase.
 
 ## Detailed Explanation
 
@@ -21,10 +28,14 @@ Load balancing distributes incoming network traffic across multiple servers to e
 
 ### Load Balancing Algorithms
 
-- **Round Robin**: Cycles through servers sequentially.
-- **Least Connections**: Routes to server with fewest active connections.
-- **IP Hash**: Routes based on client IP for session persistence.
-- **Weighted**: Assigns weights to servers based on capacity.
+| Algorithm | Description | Pros | Cons | Use Case |
+|-----------|-------------|------|------|----------|
+| Round Robin | Cycles through servers sequentially | Simple, fair distribution | Ignores server load/capacity | Equal capacity servers |
+| Least Connections | Routes to server with fewest active connections | Considers current load | Requires connection tracking | Variable request times |
+| IP Hash | Routes based on client IP hash | Session persistence | Uneven distribution if IP ranges vary | Session stickiness needed |
+| Weighted Round Robin | Assigns weights to servers | Handles different capacities | Manual weight management | Mixed server capacities |
+| Least Response Time | Routes to fastest responding server | Optimizes performance | Complex to implement | Performance-critical apps |
+| Random | Random server selection | Very simple | Unpredictable distribution | Testing/development |
 
 ### Components
 
@@ -42,12 +53,67 @@ graph TD
     E --> F
 ```
 
+## Journey / Sequence
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant LB as Load Balancer
+    participant S1 as Server 1
+    participant S2 as Server 2
+
+    Client->>LB: HTTP Request
+    LB->>LB: Health Check Servers
+    LB->>S1: Route Request (Round Robin)
+    S1->>LB: Process Response
+    LB->>Client: Return Response
+
+    Client->>LB: Next Request
+    LB->>S2: Route to Server 2
+    S2->>LB: Process Response
+    LB->>Client: Return Response
+```
+
 ## Real-world Examples & Use Cases
 
-- **Web Applications**: Distribute HTTP requests across web servers.
-- **Databases**: Read replicas load balancing.
-- **Microservices**: API gateway load balancing.
-- **Global Scale**: CDN load balancing for content delivery.
+### Web Application Scaling
+```nginx
+upstream backend {
+    least_conn;
+    server backend1.example.com:8080 weight=3;
+    server backend2.example.com:8080 weight=2;
+    server backend3.example.com:8080 weight=1;
+}
+
+server {
+    listen 80;
+    location / {
+        proxy_pass http://backend;
+    }
+}
+```
+
+### Kubernetes Service Load Balancing
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  selector:
+    app: my-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
+```
+
+### Database Read Replicas
+```java
+// JDBC URL for MySQL read replicas
+String jdbcUrl = "jdbc:mysql:loadbalance://master,slave1,slave2/db?loadBalanceStrategy=random";
+```
 
 ## Code Examples
 
@@ -82,6 +148,34 @@ backend http_back
     server server2 192.168.1.2:80 check
 ```
 
+### AWS Application Load Balancer
+
+```hcl
+resource "aws_lb" "app_lb" {
+  name               = "app-lb"
+  internal           = false
+  load_balancer_type = "application"
+  subnets            = [aws_subnet.public.id]
+}
+
+resource "aws_lb_target_group" "app_tg" {
+  name     = "app-tg"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = aws_vpc.main.id
+}
+
+resource "aws_lb_listener" "app_listener" {
+  load_balancer_arn = aws_lb.app_lb.arn
+  port              = "80"
+  protocol          = "HTTP"
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.app_tg.arn
+  }
+}
+```
+
 ## Common Pitfalls & Edge Cases
 
 - **Session Stickiness**: Ensuring user sessions stay on same server.
@@ -100,9 +194,12 @@ backend http_back
 
 - [Nginx Load Balancing](https://nginx.org/en/docs/http/load_balancing.html)
 - [HAProxy Documentation](https://www.haproxy.org/)
+- [AWS Load Balancing](https://aws.amazon.com/elasticloadbalancing/)
+- [Load Balancing Algorithms](https://www.nginx.com/resources/glossary/load-balancing/)
 
 ## Github-README Links & Related Topics
 
-- [Proxy Forward and Reverse](../proxy-forward-and-reverse/README.md)
-- [High Scalability Patterns](../high-scalability-patterns/README.md)
-- [Latency and Throughput](../latency-and-throughput/README.md)
+- [Proxy Forward and Reverse](../proxy-forward-and-reverse/)
+- [API Gateway vs Load Balancer](../api-gateway-vs-load-balancer/)
+- [High Scalability Patterns](../high-scalability-patterns/)
+- [Fault Tolerance in Distributed Systems](../fault-tolerance-in-distributed-systems/)

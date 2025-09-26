@@ -1,7 +1,7 @@
 ---
 title: Collections & Data Structures
-aliases: [collections, data structures, java collections]
-tags: [#java, #data-structures]
+aliases: [Data Structures, Collections Framework]
+tags: [#java,#data-structures,#algorithms]
 created: 2025-09-25
 updated: 2025-09-26
 ---
@@ -32,6 +32,24 @@ The Collections Framework is built around interfaces (List, Set, Map, Queue) wit
   - PriorityQueue: Heap-based, priority ordering.
   - ArrayDeque: Resizable array deque.
 
+```mermaid
+graph TD
+    A[Collection] --> B[List]
+    A --> C[Set]
+    A --> D[Queue]
+    A --> E[Deque]
+    F[Map] --> G[HashMap]
+    F --> H[TreeMap]
+    F --> I[LinkedHashMap]
+    B --> J[ArrayList]
+    B --> K[LinkedList]
+    C --> L[HashSet]
+    C --> M[TreeSet]
+    C --> N[LinkedHashSet]
+    D --> O[PriorityQueue]
+    E --> P[ArrayDeque]
+```
+
 ### Time Complexities
 | Structure | Access | Insert | Delete | Search | Space |
 |-----------|--------|--------|--------|--------|-------|
@@ -48,10 +66,86 @@ The Collections Framework is built around interfaces (List, Set, Map, Queue) wit
 - Use TreeMap for sorted key iteration.
 
 ## Real-world Examples & Use Cases
-- **Caching:** HashMap for in-memory key-value stores.
-- **Unique Collections:** HashSet for deduplication in data processing.
-- **Priority Queues:** PriorityQueue for task scheduling in OS kernels.
-- **Sorted Data:** TreeSet for maintaining ordered unique elements in search algorithms.
+
+### Shopping Cart (List)
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class ShoppingCart {
+    private List<String> items = new ArrayList<>();
+
+    public void addItem(String item) {
+        items.add(item);
+    }
+
+    public void removeItem(String item) {
+        items.remove(item);
+    }
+
+    public List<String> getItems() {
+        return new ArrayList<>(items); // Defensive copy
+    }
+}
+```
+
+### User Session Cache (Map)
+```java
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Map;
+
+public class SessionManager {
+    private Map<String, UserSession> sessions = new ConcurrentHashMap<>();
+
+    public void createSession(String sessionId, UserSession session) {
+        sessions.put(sessionId, session);
+    }
+
+    public UserSession getSession(String sessionId) {
+        return sessions.get(sessionId);
+    }
+
+    public void invalidateSession(String sessionId) {
+        sessions.remove(sessionId);
+    }
+}
+```
+
+### Task Queue (Queue)
+```java
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+
+public class TaskProcessor {
+    private BlockingQueue<Task> taskQueue = new LinkedBlockingQueue<>();
+
+    public void submitTask(Task task) {
+        taskQueue.offer(task);
+    }
+
+    public Task getNextTask() throws InterruptedException {
+        return taskQueue.take();
+    }
+}
+```
+
+### Unique User IDs (Set)
+```java
+import java.util.HashSet;
+import java.util.Set;
+
+public class UserRegistry {
+    private Set<String> userIds = new HashSet<>();
+
+    public boolean registerUser(String userId) {
+        return userIds.add(userId); // Returns false if already exists
+    }
+
+    public boolean isUserRegistered(String userId) {
+        return userIds.contains(userId);
+    }
+}
+```
 
 ## Code Examples
 ### ArrayList Usage
@@ -100,6 +194,18 @@ pq.add(2);
 System.out.println(pq.poll()); // 1
 ```
 
+### LinkedList as Deque
+```java
+import java.util.LinkedList;
+import java.util.Deque;
+
+Deque<String> deque = new LinkedList<>();
+deque.addFirst("First");
+deque.addLast("Last");
+System.out.println(deque.removeFirst()); // First
+System.out.println(deque.removeLast()); // Last
+```
+
 ## Common Pitfalls & Edge Cases
 - **Concurrent Modification:** Avoid modifying collections during iteration; use iterators or concurrent collections.
 - **Null Values:** HashMap allows null keys/values, but TreeMap doesn't.
@@ -112,12 +218,18 @@ System.out.println(pq.poll()); // 1
 - Apache Commons Collections: Utilities for collections.
 
 ## References
-- Oracle Collections Tutorial: https://docs.oracle.com/javase/tutorial/collections/
-- Effective Java by Joshua Bloch: Chapter on Generics and Collections.
-- GeeksforGeeks Data Structures: https://www.geeksforgeeks.org/data-structures/
+
+- [Oracle Java Collections Tutorial](https://docs.oracle.com/javase/tutorial/collections/)
+- [GeeksforGeeks Data Structures](https://www.geeksforgeeks.org/data-structures/)
+- [Java Collections Framework Overview](https://www.javatpoint.com/collections-in-java)
+- [Effective Java: Programming Language Guide](https://www.amazon.com/Effective-Java-Joshua-Bloch/dp/0134685997)
 
 ## Github-README Links & Related Topics
-- [java-collections-deep-dive](../java-collections-deep-dive/)
-- [multithreading-and-concurrency-in-java](../multithreading-and-concurrency-in-java/)</content>
+
+- [Java Collections Framework](../java/collections-framework/)
+- [Concurrent Collections](../java/concurrent-collections/)
+- [Algorithms](../algorithms/)
+- [Design Patterns](../design-patterns/)
+- [System Design Basics](../system-design-basics/)</content>
 </xai:function_call ><xai:function_call name="write">
 <parameter name="filePath">java-stream-api-and-functional-programming/README.md
