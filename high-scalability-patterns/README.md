@@ -6,6 +6,8 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
+# High Scalability Patterns
+
 ## Overview
 
 High scalability patterns are architectural approaches to design systems that can handle increased load, data volume, and user growth without compromising performance. These patterns address challenges in distributed systems, focusing on horizontal scaling, fault tolerance, and efficient resource utilization. Common patterns include load balancing, sharding, replication, microservices, and caching strategies.

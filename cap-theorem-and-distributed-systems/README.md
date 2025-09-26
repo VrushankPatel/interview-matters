@@ -6,6 +6,8 @@ created: 2025-09-26
 updated: 2025-09-26
 ---
 
+# CAP Theorem & Distributed Systems
+
 ## Overview
 
 The CAP Theorem, formulated by Eric Brewer in 2000 and formally proven by Seth Gilbert and Nancy Lynch in 2002, states that in a distributed data store, it is impossible to simultaneously guarantee all three of the following properties: **Consistency**, **Availability**, and **Partition Tolerance**. This theorem highlights the fundamental trade-offs in designing distributed systems, where network partitions are inevitable.
