@@ -3,29 +3,15 @@ Java Stream API & Functional Programming
 System Design Basics
 High Scalability Patterns
 CAP Theorem & Distributed Systems
-A separate folder for popular systems design, LLD and HLDs both like url shortner, netflix and identify more yourself
-LLD HLD basics
+Popular Systems Design LLD and HLD
+LLD HLD Basics
 Replication vs Sharding vs Partitioning
 Caching
-Latency and Throughput zero to hero
+Latency and Throughput Zero to Hero
 Monitoring and Logging
-Async logging
+Async Logging
 DevOps & Infrastructure as Code
-Proxy forward and reverse
-Load balancing and strategies
-Rate limiting
- Concurrency & Parallelism
-Database Design Principles
-API Design Best Practices
-Microservices Architecture
-Event-Driven Architecture
-Container Orchestration with Kubernetes
-Database Indexing Strategies
-API Authentication Methods
-Microservices Communication Patterns
-Event Sourcing and CQRS
-Graph Algorithms
-Dynamic Programming
-Behavioral Interview Questions
-Coding Interview Strategies
-DevOps CI/CD Pipelines
+Proxy Forward and Reverse
+Load Balancing and Strategies
+Rate Limiting
+Concurrency & Parallelism
