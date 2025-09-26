@@ -148,6 +148,11 @@ This repository contains comprehensive documentation on various topics for inter
 - [Multithreading & Concurrency in Java](./multithreading-and-concurrency-in-java/README.md)
 - [JVM Internals & Class Loading](./jvm-internals-and-class-loading/README.md)
 - [JVM Internals Class Loading](./jvm-internals-class-loading/README.md)
+- [Java Fundamentals](./java-fundamentals/README.md)
+- [OOP Principles in Java](./oop-principles-in-java/README.md)
+- [JVM Internals & Class Loading](./jvm-internals-and-class-loading/README.md)
+- [Garbage Collection Algorithms](./garbage-collection-algorithms/README.md)
+- [Multithreading & Concurrency in Java](./multithreading-and-concurrency-in-java/README.md)
 
 ### DevOps
 - [Ansible Configuration Management](./ansible-configuration-management/README.md)
