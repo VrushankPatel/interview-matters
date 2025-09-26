@@ -5,8 +5,7 @@ Last update
 2025-09-26
 
 Summary of recent additions
-   - Processed 5 topics: FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols
-   - Restructured repository: moved trading protocols to protocols/ subdir, system-design real-world topics to real-world-designs/ subdir, created subdirs for better organization
+   - Updated 5 topics (FIX Protocol, ITCH Protocol, OUCH Protocol, Market Data (overview & dissemination), Order Entry Protocols) with enhanced content, proper markdown links, and interlinking
 
 Conventions
  - Dir naming: kebab-case.
@@ -211,9 +210,21 @@ New Next Topics Candidates
 - Swap & derivatives trade lifecycle — 'Trading non-equity instruments'
 - Regulatory reports (e.g., MiFID/SEF) — 'Compliance reporting requirements'
 
+New Topic Candidates Rationales
+- Order Book modeling: Essential for understanding HFT and matching engines
+- Matching algorithm internals: Core to exchange operations and interview questions
+- Time-in-Force variations across exchanges: Important for order lifecycle management
+- Market fragmentation & smart order routing: Key in multi-venue trading
+- Latency measurement & monitoring: Critical for performance optimization
+- FIX Session Layer: Fundamental for reliable FIX connections
+- Market data consolidation: Necessary for unified market views
+- Latency arbitrage: Advanced trading strategy
+- Swap & derivatives trade lifecycle: Expands beyond equities
+- Regulatory reports: Compliance knowledge for interviews
+
 TODO
-    - High-level open design decisions and split criteria for oversized topics.
-    - Restructure Plan: Move individual topic directories under appropriate category directories (e.g., backtracking/ under algorithms/). Create subdirs under system-design/ for LLD, HLD. This requires git mv operations.
+   - High-level open design decisions and split criteria for oversized topics.
+   - Restructure Plan: Move individual topic directories under appropriate category directories (e.g., backtracking/ under algorithms/). Create subdirs under system-design/ for LLD, HLD. This requires git mv operations.
 
 New Next Topics Candidates (this run)
 - Order Book modeling — 'Canonical models for in-memory book and persistence'

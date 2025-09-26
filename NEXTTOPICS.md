@@ -180,3 +180,14 @@
 - Latency arbitrage — 'Exploiting latency differences for profit'
 - Swap & derivatives trade lifecycle — 'Trading non-equity instruments'
 - Regulatory reports (e.g., MiFID/SEF) — 'Compliance reporting requirements'
+-e 
+- Order Book modeling
+- Matching algorithm internals
+- Time-in-Force variations across exchanges
+- Market fragmentation & smart order routing
+- Latency measurement & monitoring
+- FIX Session Layer (Logon/Heartbeat/Seq numbers)
+- Market data consolidation & TOPS snapshot vs incremental
+- Latency arbitrage
+- Swap & derivatives trade lifecycle
+- Regulatory reports (e.g., MiFID/SEF)

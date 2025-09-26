@@ -1,69 +1,127 @@
 ---
 title: Execution Report
-aliases: [Trade Confirmation, ExecReport]
-tags: [trading,protocol,reporting]
+aliases: [Trade Confirmation]
+tags: [trading, reports, fix]
 created: 2025-09-26
 updated: 2025-09-26
 ---
 
 # Overview
 
-Execution Reports (ExecReports) confirm the status and details of order executions, providing traders with real-time feedback on fills, partial fills, rejections, and cancellations. Standardized via FIX protocol, these reports ensure transparency and enable risk management across trading systems.
+The Execution Report (FIX MsgType=8) is a critical message in the FIX protocol sent by the executing party (typically a broker or exchange) to confirm the execution of an order. It provides detailed information about the trade, including executed quantity, price, timestamps, and order status. Execution Reports are sent for partial fills, full fills, cancellations, and rejections, ensuring all parties have accurate and timely trade confirmations. This message is essential for maintaining order state synchronization between trading systems.
 
 # STAR Summary
 
-**SITUATION**: Traders require immediate confirmation of order executions for position tracking and compliance.
+**S**ituation: Trading systems require immediate confirmation of order executions to update positions, risk metrics, and downstream processing.
 
-**TASK**: Implement Execution Report generation and dissemination in a trading engine.
+**T**ask: Design a standardized message format for execution confirmations that handles various execution scenarios.
 
-**ACTION**: Integrated FIX ExecutionReport messages with order lifecycle events, including fill details and status updates.
+**A**ction: Developed the FIX ExecutionReport message with comprehensive fields covering execution details, order status, and identifiers.
 
-**RESULT**: Achieved 99.9% report accuracy and sub-second delivery, enhancing trader confidence and regulatory compliance.
+**R**esult: Enabled reliable, real-time trade confirmations across global markets, reducing settlement errors and improving operational efficiency.
 
 # Detailed Explanation
 
-Execution Reports are sent for each execution event: new, fill, partial fill, cancel, reject. Key fields include ExecType, LastQty, LastPx, CumQty.
+The Execution Report is triggered whenever an order's state changes due to execution, cancellation, or rejection. Key components include:
 
-Mapping to FIX: MsgType=8 (ExecutionReport).
+- **Execution Types**: Indicate the nature of the report (e.g., New, Partial Fill, Fill, Canceled, Rejected).
+- **Order Status**: Current state of the order (e.g., New, Partially Filled, Filled, Canceled).
+- **Execution Details**: Quantity executed, price, and cumulative values.
+- **Identifiers**: Links the report to the original order and specific execution instance.
+- **Timestamps**: Precise timing for audit and sequencing.
+
+Execution Reports must be sent in sequence for each order, with unique ExecID for each report. For high-volume trading, reports are often batched or streamed to manage bandwidth.
 
 # Real-world Examples & Use Cases
 
-- **Partial Fill**: Order for 1000 shares, 500 executed at $100, report sent.
-- **Rejection**: Invalid order, ExecType=8 (Rejected).
+- **Partial Fill Confirmation**: A limit order for 1000 shares executes 500 at $50.00; an Execution Report confirms the partial fill, updating the remaining quantity.
+- **Full Execution**: An IOC order fills completely; the report marks the order as filled with final status.
+- **Order Rejection**: Invalid order parameters trigger a rejection report with reason codes.
+- **HFT Scenario**: Sub-millisecond executions generate reports that update algo strategies in real-time.
+
+Case Study: During flash crashes, timely Execution Reports help algorithms detect anomalies and halt trading.
 
 # Message Formats / Data Models
 
-| Field | Tag | Description |
-|-------|-----|-------------|
-| ExecType | 150 | Type of execution (0=New, 1=Partial, 2=Fill, 8=Rejected) |
-| LastQty | 32 | Quantity of last fill |
-| LastPx | 31 | Price of last fill |
-| CumQty | 14 | Total filled quantity |
+Key FIX fields in ExecutionReport:
 
-Example:
+| Field | Tag | Description | Example |
+|-------|-----|-------------|---------|
+| MsgType | 35 | Message type (8 for ExecutionReport) | 8 |
+| OrderID | 37 | Unique order identifier | ORD12345 |
+| ExecID | 17 | Unique execution identifier | EXEC67890 |
+| ExecType | 150 | Type of execution (0=New, 1=Partial, 2=Fill, etc.) | 2 |
+| OrdStatus | 39 | Order status (0=New, 1=Partial, 2=Filled, etc.) | 2 |
+| Symbol | 55 | Instrument | AAPL |
+| Side | 54 | Buy/Sell | 1 (Buy) |
+| LastQty | 32 | Last executed quantity | 500 |
+| LastPx | 31 | Last executed price | 150.00 |
+| CumQty | 14 | Cumulative executed quantity | 1000 |
+| AvgPx | 6 | Average price | 149.50 |
+| LeavesQty | 151 | Remaining quantity | 0 |
+
+Sample ExecutionReport message:
+
 ```
-8=FIX.4.4|...|150=1|32=500|31=100.00|14=500|...
+8=FIX.4.4|9=178|35=8|49=EXECUTOR|56=CLIENT|34=2|52=20230926-14:30:00|37=ORD123|17=EXEC456|150=2|39=2|55=AAPL|54=1|32=1000|31=150.00|14=1000|6=150.00|151=0|10=123|
 ```
 
 # Journey of a Trade
 
-Reports are sent at each step in the sequence diagram from Journey of a Trade.
+```mermaid
+sequenceDiagram
+    participant Trader
+    participant Broker
+    participant Exchange
+
+    Trader->>Broker: Submit Order (NewOrderSingle)
+    Broker->>Exchange: Route Order
+    Exchange->>Exchange: Match and Execute
+    Exchange->>Broker: Execution Report (Partial/Full)
+    Broker->>Trader: Forward Execution Report
+    Note over Trader,Broker: Repeat for multiple fills if needed
+```
 
 # Common Pitfalls & Edge Cases
 
-- **Out-of-Order Reports**: Sequence number gaps.
-- **Duplicate Reports**: Handle idempotently.
+- **Out-of-Sequence Reports**: Network issues can cause reports to arrive out of order; systems must handle resequencing.
+- **Duplicate ExecIDs**: Rare but possible; validation prevents double-processing.
+- **Stale Reports**: Delays in high-latency environments; use timestamps for freshness checks.
+- **Partial Fill Aggregation**: For large orders, multiple partial reports must be correctly aggregated.
+- **Rejection Handling**: Incorrect rejection codes can lead to order resubmission loops.
 
 # Tools & Libraries
 
-- FIX libraries for parsing/generation.
+- **QuickFIX/J**: Java library for parsing and generating Execution Reports.
+
+  ```java
+  import quickfix.Message;
+  import quickfix.field.ExecType;
+  import quickfix.field.LastQty;
+
+  // Parse ExecutionReport
+  if (message.getHeader().getString(35).equals("8")) {
+      ExecType execType = new ExecType();
+      message.getField(execType);
+      if (execType.getValue() == ExecType.FILL) {
+          LastQty qty = new LastQty();
+          message.getField(qty);
+          // Process fill
+      }
+  }
+  ```
+
+- **FIX Analyzers**: Tools like FIXLog for monitoring report flows.
+- **Testing Frameworks**: Simulate execution scenarios with FIX simulators.
 
 # Github-README Links & Related Topics
 
-- [Journey of a Trade](trading/journey-of-a-trade/README.md)
-- [Trade Capture Report](trading/trade-capture-report/README.md)
-- [FIX Protocol](trading/fix-protocol/README.md)
+- [FIX Protocol](../../fix-protocol/README.md)
+- [Order Types](../../order-types/README.md)
+- [Trade Capture Report](../trade-capture-report/README.md)
+- [Journey of a Trade](../../journey-of-a-trade/README.md)
 
 # References
 
-- FIX Spec: https://www.fixtrading.org/
+- [FIX Protocol Specification - ExecutionReport](https://www.fixtrading.org/online-specification/)
+- [Investopedia - Execution Confirmation](https://www.investopedia.com/terms/e/execution.asp)
