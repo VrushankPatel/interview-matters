@@ -1,6 +1,6 @@
 ---
 title: JVM Internals & Class Loading
-aliases: [JVM Architecture, Java Class Loading Mechanism]
+aliases: [JVM Class Loading, Java Virtual Machine Internals]
 tags: [#java,#jvm]
 created: 2025-09-26
 updated: 2025-09-26
@@ -10,7 +10,7 @@ updated: 2025-09-26
 
 ## Overview
 
-The Java Virtual Machine (JVM) is the runtime environment that executes Java bytecode. Understanding JVM internals and the class loading mechanism is crucial for Java developers to optimize performance, troubleshoot issues, and write efficient code. This topic covers JVM architecture, memory management, and the class loading process.
+The Java Virtual Machine (JVM) is the runtime environment that executes Java bytecode. JVM internals encompass the architecture, memory management, and execution model. Class loading is the process by which the JVM loads, links, and initializes classes at runtime, enabling dynamic loading and modularity.
 
 ## Detailed Explanation
 
@@ -18,162 +18,71 @@ The Java Virtual Machine (JVM) is the runtime environment that executes Java byt
 
 The JVM consists of several key components:
 
-1. **Class Loader Subsystem:** Loads class files into memory
-2. **Runtime Data Areas:** Memory areas used during program execution
-3. **Execution Engine:** Executes the bytecode
-4. **Native Method Interface:** Interface with native libraries
-5. **Native Method Libraries:** Platform-specific libraries
-
-### Runtime Data Areas
-
-- **Method Area:** Stores class-level information, constants, static variables
-- **Heap:** Stores objects and instance variables
-- **Stack:** Stores local variables and method calls (per thread)
-- **Program Counter Register:** Contains address of current instruction (per thread)
-- **Native Method Stack:** Supports native method execution (per thread)
+- **Class Loader Subsystem**: Responsible for loading class files into memory.
+- **Runtime Data Areas**: Including Method Area, Heap, Stack, PC Registers, and Native Method Stacks.
+- **Execution Engine**: Interprets or compiles bytecode into machine code.
+- **JNI and Native Libraries**: For interfacing with native code.
 
 ### Class Loading Process
 
-Class loading is performed in three main phases:
+Class loading occurs in three phases:
 
-1. **Loading:** Finding and importing the binary data of a class
-2. **Linking:** 
-   - Verification: Ensuring the correctness of the bytecode
-   - Preparation: Allocating memory for class variables and initializing to default values
-   - Resolution: Replacing symbolic references with direct references
-3. **Initialization:** Executing static initializers and assigning initial values to static variables
+1. **Loading**: The class loader finds and loads the binary data of the class.
+2. **Linking**: Involves verification, preparation, and resolution.
+3. **Initialization**: Executes static initializers and assigns initial values.
 
-### Class Loader Hierarchy
+#### Types of Class Loaders
 
-Java uses a hierarchical class loading mechanism:
-
-- **Bootstrap Class Loader:** Loads core Java classes (rt.jar)
-- **Extension Class Loader:** Loads classes from extension directories
-- **System/Application Class Loader:** Loads classes from classpath
-
-```mermaid
-graph TD
-    A[Bootstrap Class Loader] --> B[Extension Class Loader]
-    B --> C[System Class Loader]
-    C --> D[Custom Class Loaders]
-```
+- **Bootstrap Class Loader**: Loads core Java classes.
+- **Extension Class Loader**: Loads extension classes.
+- **System/Application Class Loader**: Loads application classes.
 
 ### Class Loading Delegation Model
 
-When a class is requested:
-1. The request is delegated to the parent class loader
-2. If the parent can't find the class, the child attempts to load it
-3. This continues up the hierarchy
+When loading a class, the JVM follows a delegation hierarchy: Application Class Loader → Extension Class Loader → Bootstrap Class Loader.
 
 ## Real-world Examples & Use Cases
 
-- **Plugin Systems:** Using custom class loaders to load plugins dynamically
-- **Application Servers:** Isolating web applications with separate class loaders
-- **Hot Deployment:** Reloading classes without restarting the application
-- **Security:** Sandboxing untrusted code with custom class loaders
+- **Dynamic Plugin Systems**: Frameworks like OSGi use custom class loaders for modular applications.
+- **Hot Swapping in Development**: IDEs reload classes without restarting the JVM.
+- **Application Servers**: Load web applications in isolated class loaders for security and versioning.
 
 ## Code Examples
 
-### Understanding Class Loading
-```java
-public class ClassLoadingExample {
-    public static void main(String[] args) {
-        // Get the class loader for this class
-        ClassLoader classLoader = ClassLoadingExample.class.getClassLoader();
-        System.out.println("Class Loader: " + classLoader);
-        
-        // Get the parent class loader
-        ClassLoader parent = classLoader.getParent();
-        System.out.println("Parent Class Loader: " + parent);
-        
-        // Bootstrap class loader
-        ClassLoader bootstrap = parent.getParent();
-        System.out.println("Bootstrap Class Loader: " + bootstrap); // null
-    }
-}
-```
-
 ### Custom Class Loader
-```java
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 
+```java
 public class CustomClassLoader extends ClassLoader {
-    
-    private String classPath;
-    
-    public CustomClassLoader(String classPath) {
-        this.classPath = classPath;
-    }
-    
     @Override
-    protected Class<?> findClass(String name) throws ClassNotFoundException {
-        byte[] classData = loadClassData(name);
-        if (classData == null) {
-            throw new ClassNotFoundException("Class " + name + " not found");
-        }
-        return defineClass(name, classData, 0, classData.length);
-    }
-    
-    private byte[] loadClassData(String className) {
-        String fileName = classPath + File.separator + className.replace('.', File.separatorChar) + ".class";
-        try (FileInputStream fis = new FileInputStream(fileName);
-             ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            int b;
-            while ((b = fis.read()) != -1) {
-                baos.write(b);
-            }
-            return baos.toByteArray();
-        } catch (IOException e) {
-            return null;
-        }
-    }
-}
-
-// Usage
-public class Main {
-    public static void main(String[] args) throws Exception {
-        CustomClassLoader loader = new CustomClassLoader("/path/to/classes");
-        Class<?> clazz = loader.loadClass("com.example.MyClass");
-        Object instance = clazz.newInstance();
-        // Use the instance
+    public Class<?> findClass(String name) throws ClassNotFoundException {
+        // Custom loading logic
+        return super.findClass(name);
     }
 }
 ```
 
-### Static Initialization Example
+### Class Loading Example
+
 ```java
-public class StaticInitExample {
-    static {
-        System.out.println("Static block executed");
-    }
-    
+public class Main {
     public static void main(String[] args) {
-        System.out.println("Main method executed");
+        try {
+            Class<?> clazz = Class.forName("com.example.MyClass");
+            Object instance = clazz.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 ```
-
-## Common Pitfalls & Edge Cases
-
-- **ClassNotFoundException vs NoClassDefFoundError:** Former occurs during loading, latter during linking/initialization
-- **Class loader leaks:** In application servers, can cause memory leaks
-- **Circular dependencies:** Can cause StackOverflowError during initialization
-- **Security implications:** Custom class loaders can bypass security restrictions
 
 ## References
 
-- [Oracle JVM Documentation](https://docs.oracle.com/javase/specs/jvms/se11/html/)
-- [Understanding Class Loading](https://www.baeldung.com/java-classloaders)
-- [JVM Architecture](https://www.geeksforgeeks.org/jvm-works-jvm-architecture/)
-- [Class Loading in Java](https://www.javatpoint.com/class-loading-in-java)
+- [Oracle JVM Documentation](https://docs.oracle.com/javase/specs/jvms/se21/html/)
+- [Baeldung: JVM Internals](https://www.baeldung.com/jvm)
 
 ## Github-README Links & Related Topics
 
-- [Java Fundamentals](../java-fundamentals/README.md)
 - [Garbage Collection Algorithms](../garbage-collection-algorithms/README.md)
-- [Java Memory Management](../java-memory-management/README.md)
-- [JVM Performance Tuning](../jvm-performance-tuning/README.md)
-- [Class Loading Mechanism](../class-loading-mechanism/README.md)
+- [Multithreading & Concurrency in Java](../multithreading-and-concurrency-in-java/README.md)
+- [Java Fundamentals](../java-fundamentals/README.md)
