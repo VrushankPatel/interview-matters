@@ -1,7 +1,7 @@
 ---
 title: Multithreading & Concurrency in Java
 aliases: [Java Multithreading, Concurrent Programming in Java]
-tags: [#java, #concurrency]
+tags: [#java,#concurrency]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -287,9 +287,9 @@ sequenceDiagram
 
 # Github-README Links & Related Topics
 
-- [Java Executorservice](../java-executorservice/)
-- [Java Completablefuture](../java-completablefuture/)
-- [Java Concurrenthashmap](../java-concurrenthashmap/)
+- [Java Executorservice](../java-executorservice/README.md)
+- [Java Completablefuture](../java-completablefuture/README.md)
+- [Java Concurrenthashmap](../java-concurrenthashmap/README.md)
 - [Java Atomic Variables](../java-atomic-variables/)
 - [Java Readwritelock](../java-readwritelock/)
 - [Java Semaphore](../java-semaphore/)

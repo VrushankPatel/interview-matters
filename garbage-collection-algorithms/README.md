@@ -1,7 +1,7 @@
 ---
 title: Garbage Collection Algorithms
 aliases: [GC Algorithms, Memory Management in Java]
-tags: [#java, #jvm]
+tags: [#java,#jvm]
 created: 2025-09-26
 updated: 2025-09-26
 ---
@@ -125,5 +125,5 @@ public class WeakRefExample {
 
 ## Github-README Links & Related Topics
 
-- [JVM Internals & Class Loading](../jvm-internals-class-loading/README.md)
+- [JVM Internals & Class Loading](../jvm-internals-and-class-loading/README.md)
 - [Java Memory Management](../java-memory-management/README.md)
