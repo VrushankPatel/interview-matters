@@ -63,6 +63,30 @@ flowchart TD
 - Evaluating problem-solving: Scenarios involving technical challenges or deadlines.
 - Gauging adaptability: Experiences with change or learning new technologies.
 
+## Sample Behavioral Responses
+
+### Tell me about yourself
+
+Sure, so, my name is Vrushank Patel and I'm 24 years old.
+
+I've some background in software engineering with a Information technology degree that i pursued from Apollo institute of engineering under Gujarat technological university with overall CGPA of 8.24
+
+from last more than 2 and half years i've been working at capsystematic technologies as a software developer in fintech domain, and focusing on the Financial systems messaging formats and design scalable systems for payment interfaces integrations. Currently, I'm working on a project zeus which is One core solution for all securities business lines: retail investments, premium banking, private banking, and trading/brokerage. Project is divided to multiple component projects like ZEUS Core, NXT, ThinClient and GPI.
+
+### Why should we hire you? Why do you think you're fit for this position?
+
+"Honestly, I possess all the skills and experience that you're looking for. ... It's not just my background in the past projects, but also my people skills, which will be applicable in this position. On the other hand, I am a self motivated person and I try to exceed my superior's expectations with high-quality work."
+
+### Weakness
+
+I would say my biggest mistake is the fact i find it really hard at times to let go of projects.
+
+used to work on 2 projects symentensly
+
+### Strength
+
+Enthusiasm, Quick Learning Abilities, Task prioritization, Communication Skills, Dedication.
+
 ## Code Examples
 
 N/A - Behavioral questions focus on experiences rather than coding.

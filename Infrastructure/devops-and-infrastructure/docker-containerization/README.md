@@ -119,6 +119,13 @@ docker tag my-node-app username/my-node-app:v1.0
 docker push username/my-node-app:v1.0
 ```
 
+## Docker Interview Concepts
+
+### CMD, RUN, and ENTRYPOINT
+- RUN executes command(s) in a new layer and creates a new image. E.g., it is often used for installing software packages.
+- CMD sets default command and/or parameters, which can be overwritten from command line when docker container runs.
+- ENTRYPOINT command and parameters will not be overwritten from command line. Instead, all command line arguments will be added after ENTRYPOINT parameters.
+
 ## References
 
 - [Docker Overview](https://docs.docker.com/get-started/overview/)

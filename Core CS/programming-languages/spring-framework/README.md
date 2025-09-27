@@ -65,6 +65,32 @@ public class HelloController {
 }
 ```
 
+# Spring Interview Concepts
+
+### Bean Scopes
+- Bean scope singleton vs prototype
+
+### Annotations
+- @Qualifier annotation
+- @Transactional annotation uses
+- @RestControllerAdvice and @ControllerAdvice
+- @ResponseBody and @RequestBody
+- @Component, @Service, @Controller, @Repository
+- @Lazy annotation
+- @PostConstruct and @PreDestroy
+- @Autowired vs @Inject
+
+### JPA
+- noArgsConstructor for JPA
+- CRUDRepository vs JPARepository
+
+### Spring Boot
+- Make spring boot app non web
+- Spring boot actuator
+
+### AOP
+- AOP advices: Before, After, Around, After Throwing, After Returning
+
 # References
 
 - [Spring Framework Official Site](https://spring.io/projects/spring-framework)

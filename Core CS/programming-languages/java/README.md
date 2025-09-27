@@ -124,3 +124,45 @@ This section covers Java programming language fundamentals, advanced concepts, f
 - [Streams Functional Java](streams-functional-java/README.md)
 - [Testing And Mocking Junit Mockito](testing-and-mocking-junit-mockito/README.md)
 - [Threads Executors Futures](threads-executors-futures/README.md)
+
+## Java Interview Concepts
+
+### Collections
+- hashCode and equals
+- ThreadSafe collections
+- String pool
+- Serialization
+- ConcurrentModification exception
+
+### Threading
+- Create a thread
+- Odd even thread
+- Synchronized method vs synchronized block
+- wait notify
+
+### Garbage Collection
+- Garbage collection
+
+### Java 8 Features
+- Java 8 features
+
+### OOP
+- OOP concepts
+
+### JUnit
+- How to write a test case
+- How to Mock a method
+
+### SQL
+- Joins
+- Aggregations like sum, count
+- Employee table find how many employees are there in each dept
+- Find the total salary distributed in each department
+
+### Spring
+- Bean scope singleton vs prototype
+
+### Linux Commands
+- How to list all process running in a machine
+- How to login to another system within your network
+- Copying a file

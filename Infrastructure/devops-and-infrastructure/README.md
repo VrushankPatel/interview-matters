@@ -50,3 +50,13 @@
 - [README.md](README.md/README.md)
 - [resume-optimization-for-tech-jobs](resume-optimization-for-tech-jobs/README.md)
 - [technical-interview-formats](technical-interview-formats/README.md)
+
+## Linux Commands Interview Concepts
+
+- How to list all process running in a machine
+- How to login to another system within your network
+- Copying a file
+
+## SDLC Interview Concepts
+
+- Waterfall vs Agile: Waterfall is sequential, Agile is iterative with continuous delivery.

@@ -20,3 +20,38 @@
 - [README.md](README.md/README.md)
 - [sorting-algorithms](sorting-algorithms/README.md)
 - [string-algorithms](string-algorithms/README.md)
+
+## Common Coding Interview Problems
+
+### Data Structures
+- Get first repeating integer from array
+
+### String
+- Longest Substring Without Repeating Characters
+- Smallest window in a String containing all characters of other String
+- Check whether two Strings are anagram of each other
+- Print all anagrams together
+- Check if given Parentheses expression is balanced or not
+- Longest Palindromic Substring
+
+### Linked List
+- Reverse a Linked List
+- Detect Cycle in a Linked List
+- Merge Two Sorted Lists
+- Remove Nth Node From End Of List
+- Find the middle of a given linked list
+- Delete last occurrence of an item from linked list
+
+### Array
+- Check if pair with the given Sum exists in Array
+- Find duplicates
+- Maximum Subarray
+- 3 Sum problem
+
+### Tree
+- Maximum Depth of Binary Tree
+- Check if two trees have same structure
+- Invert/Flip Binary Tree
+- Construct Binary Tree from Preorder and Inorder Traversal
+- Validate Binary Search Tree
+- Smallest Element in a BST

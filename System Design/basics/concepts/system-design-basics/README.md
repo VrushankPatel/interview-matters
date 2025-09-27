@@ -119,6 +119,57 @@ Related: [load-balancing-and-routing](../load-balancing-and-routing/), [caching-
 - Describe the difference between horizontal and vertical scaling.
 - How to handle database sharding in a distributed system?
 
+## Additional Systems Concepts
+
+### Latency and Throughput
+- Latency: Time taken for a request to be processed.
+- Throughput: Number of requests processed per unit time.
+- Improving Latency: Use caching, optimize algorithms, reduce network hops.
+- Improving Throughput: Horizontal scaling, asynchronous processing, efficient resource utilization.
+
+### Availability
+- Concept: Percentage of time a system is operational and accessible.
+- Measured as uptime (e.g., 99.9% availability means ~8.76 hours downtime/year).
+
+### Cache
+- Cache Hit: Data found in cache.
+- Cache Miss: Data not found, fetched from source.
+- Eviction Policies: LRU (Least Recently Used), LFU (Least Frequently Used), FIFO.
+
+### Proxy and Types
+- Proxy: Intermediary server between client and server.
+- Types: Forward Proxy (client-side), Reverse Proxy (server-side), Transparent Proxy.
+
+### Replication vs Sharding
+- Replication: Copying data across multiple nodes for redundancy.
+- Sharding: Splitting data across multiple databases for scalability.
+
+### Rate Limiting
+- Technique to control the rate of requests to prevent abuse or overload.
+
+### PubSub Model
+- Publish-Subscribe: Asynchronous messaging where publishers send messages to topics, subscribers receive them.
+
+### Pagination
+- Dividing large datasets into pages for efficient API responses.
+
+### Inversion of Control (IoC)
+- Design principle where control flow is inverted; dependencies are injected rather than created.
+
+### SOLID Principles
+- Single Responsibility: A class should have one reason to change.
+- Open-Closed: Open for extension, closed for modification.
+- Liskov Substitution: Subtypes should be substitutable for their base types.
+- Interface Segregation: Clients should not depend on interfaces they don't use.
+- Dependency Inversion: Depend on abstractions, not concretions.
+
+### Design Patterns
+- Decorator: Adds behavior to objects dynamically.
+- Singleton: Ensures a class has only one instance.
+- Thread-Safe Singleton: Use double-checked locking or enums in Java.
+- Factory: Creates objects without specifying exact classes.
+- MVC: Model-View-Controller for separating concerns in UI.
+
 ## References
 - "Designing Data-Intensive Applications" by Martin Kleppmann.
 - System Design Interview resources on LeetCode.

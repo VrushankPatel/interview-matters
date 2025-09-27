@@ -19,3 +19,27 @@
 - [hibernate-orm](hibernate-orm/README.md)
 - [README.md](README.md/README.md)
 - [vector-databases](vector-databases/README.md)
+
+## SQL Interview Concepts
+
+### Joins
+- Joins
+
+### Aggregations
+- Aggregations like sum, count
+
+### Queries
+- Employee table find how many employees are there in each dept
+- Find the total salary distributed in each department
+
+Employee
+ID| Name | Address | Dept Id | Salary
+
+Department
+ID | Dept name
+
+### Additional SQL Concepts
+- Difference between Having and Where: WHERE filters records before GROUP BY, HAVING after.
+- Difference between EXISTS and IN: EXISTS checks for existence, faster for large subqueries; IN compares values.
+- How to find the third largest salary: Use subqueries with MAX and WHERE salary < MAX.
+- Difference between inner and outer join: Inner join returns intersection, outer join returns union.
