@@ -1,22 +1,35 @@
-# Interview Matters Knowledge Base
+# Interview Matters
 
-This repository contains a comprehensive collection of topics related to software engineering interviews, system design, Java programming, and more.
+A clean, interview-focused knowledge base organized into a few root files only.
 
-## Categories
+## Start Here
 
-- [Programming Languages](programming-languages/README.md)
-- [Algorithms and Data Structures](algorithms-and-data-structures/README.md)
-- [System Design](system-design/README.md)
-- [Databases](databases/README.md)
-- [DevOps and Infrastructure](devops-and-infrastructure/README.md)
-- [Behavioral Interviews](behavioral-interviews/README.md)
-- [Interview Preparation](interview-preparation/README.md)
-- [Concurrency and Parallelism](concurrency-and-parallelism/README.md)
-- [Design Patterns](design-patterns/README.md)
-- [Networking](networking/README.md)
-- [Big Data and Streaming](big-data-and-streaming/README.md)
-- [Cloud Computing](cloud-computing/README.md)
-- [Security](security/README.md)
-- [Trading and Finance](trading-and-finance/README.md)
-- [Machine Learning](machine-learning/README.md)
-- [Other](other/README.md)
+- [Java Prep](./java-prep.md)
+- [Spring Boot Prep](./spring-boot-prep.md)
+- [Problem Solving Prep](./problem-solving-prep.md)
+- [System Design Concepts](./system-design-concepts.md)
+- [System Design Questions](./system-design-questions.md)
+- [CS Fundamentals](./cs-fundamentals.md)
+- [Kubernetes and Docker Prep](./kubernetes-docker-prep.md)
+- [Kafka Prep](./kafka-prep.md)
+
+## Recommended Study Order
+
+1. [CS Fundamentals](./cs-fundamentals.md)
+2. [Java Prep](./java-prep.md)
+3. [Problem Solving Prep](./problem-solving-prep.md)
+4. [Spring Boot Prep](./spring-boot-prep.md)
+5. [System Design Concepts](./system-design-concepts.md)
+6. [System Design Questions](./system-design-questions.md)
+7. [Kafka Prep](./kafka-prep.md)
+8. [Kubernetes and Docker Prep](./kubernetes-docker-prep.md)
+
+## How To Use
+
+- Use `find . -maxdepth 1 -name '*.md'` to list all prep files.
+- Use section search in your editor (`#`, `##`) for fast revision.
+- Use this flow for interview rounds:
+  - Coding round: [Problem Solving Prep](./problem-solving-prep.md)
+  - Java/Spring round: [Java Prep](./java-prep.md), [Spring Boot Prep](./spring-boot-prep.md)
+  - HLD round: [System Design Concepts](./system-design-concepts.md), [System Design Questions](./system-design-questions.md)
+  - Infra round: [Kafka Prep](./kafka-prep.md), [Kubernetes and Docker Prep](./kubernetes-docker-prep.md)
