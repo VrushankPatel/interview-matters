@@ -16,6 +16,7 @@ A practical Java interview guide focused on fundamentals, concurrency, JVM inter
 - [Performance and Profiling](#performance-and-profiling)
 - [Java Security Basics](#java-security-basics)
 - [Most Asked Java Interview Questions](#most-asked-java-interview-questions)
+- [Most Frequently Asked (Challenging) Java Questions](#most-frequently-asked-challenging-java-questions)
 - [Revision Checklist](#revision-checklist)
 
 ## Java Language Fundamentals
@@ -190,6 +191,54 @@ Use features when they improve clarity, not to look modern for its own sake.
 8. Checked vs unchecked exceptions?
 9. Java 8 stream pitfalls (stateful ops, side effects)?
 10. Virtual threads: where to use and where not?
+
+---
+
+## Most Frequently Asked (Challenging) Java Questions
+
+These are the advanced questions that repeatedly show up for experienced backend roles.
+
+### Concurrency and JMM
+
+1. Why does double-checked locking require `volatile`?
+2. Explain `happens-before` with a real bug you can get without it.
+3. `synchronized` vs `ReentrantLock`: when is `ReentrantLock` actually worth it?
+4. Why can `volatile int count++` still break under concurrency?
+5. `ConcurrentHashMap` internals and why reads are scalable.
+6. How do `CountDownLatch`, `CyclicBarrier`, and `Phaser` differ in lifecycle and use case?
+7. How do you detect and debug deadlocks in production?
+8. Work-stealing in `ForkJoinPool`: when does it help, and when does it hurt?
+9. `CompletableFuture.thenApply` vs `thenCompose` in distributed call chains.
+10. Virtual threads vs platform threads: where pinning/blocking still matters.
+
+### Collections and Core Language Internals
+
+11. `HashMap` collision handling and treeification thresholds.
+12. Why mutating a key used in `HashMap` is dangerous.
+13. `ArrayList` growth behavior and practical memory impact.
+14. `Comparable` vs `Comparator` trade-offs in domain design.
+15. Why `Optional` is discouraged in fields/entities but useful in APIs.
+16. Type erasure in generics and real limitations it creates.
+17. Covariance/contravariance with wildcards: `? extends` vs `? super`.
+18. String pool behavior and when `intern()` is a bad idea.
+
+### JVM, GC, and Performance
+
+19. How G1 works (young/mixed collections) and which metrics show GC pressure.
+20. ZGC/Shenandoah vs G1: latency and throughput trade-offs.
+21. Diagnose high CPU with low throughput in a Java service: investigation order.
+22. Explain memory leak vs high allocation rate vs retained heap growth.
+23. ClassLoader leaks in long-running servers and how to prove one.
+24. Safe microbenchmarking: why plain loop timing is misleading and when to use JMH.
+
+### Design and Code Quality
+
+25. Checked vs unchecked exceptions in service boundaries.
+26. Immutability patterns for thread-safe domain models.
+27. Designing retry-safe/idempotent Java service methods.
+28. How to structure a Java module/package layout for large codebases.
+29. Common stream API anti-patterns that hurt readability/perf.
+30. Refactoring a legacy synchronized code path without introducing races.
 
 ## Revision Checklist
 

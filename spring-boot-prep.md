@@ -16,6 +16,7 @@ A focused Spring + Spring Boot interview guide for backend and microservices rol
 - [Testing Strategy](#testing-strategy)
 - [Production Best Practices](#production-best-practices)
 - [Most Asked Spring Boot Interview Questions](#most-asked-spring-boot-interview-questions)
+- [Most Frequently Asked (Challenging) Spring Boot Questions](#most-frequently-asked-challenging-spring-boot-questions)
 
 ## Spring Core Essentials
 
@@ -115,6 +116,57 @@ A focused Spring + Spring Boot interview guide for backend and microservices rol
 8. How do you secure a stateless REST API?
 9. How would you design a Spring Boot microservice for scale?
 10. What tests run in CI for confidence?
+
+---
+
+## Most Frequently Asked (Challenging) Spring Boot Questions
+
+These are the high-frequency deep-dive questions commonly used for experienced backend candidates.
+
+### Boot Internals and Configuration
+
+1. How does Spring Boot auto-configuration actually work (`@Conditional*`, `spring.factories`/auto-configuration imports)?
+2. What is the exact startup sequence from `SpringApplication.run()` to fully initialized context?
+3. Configuration precedence: what wins between env vars, command-line args, profiles, and `application.yml`?
+4. `@ConfigurationProperties` vs `@Value`: maintainability and runtime safety trade-offs.
+5. When would you exclude an auto-configuration and why?
+6. Common causes of slow application startup and how to profile/fix them.
+
+### Dependency Injection, Proxies, and AOP
+
+7. What problems can field injection cause compared with constructor injection?
+8. JDK dynamic proxies vs CGLIB in Spring: behavior differences that matter.
+9. Why self-invocation can break `@Transactional` and other proxy-based annotations.
+10. Bean lifecycle hooks (`@PostConstruct`, `InitializingBean`, `BeanPostProcessor`) and when to use each.
+11. Circular dependencies: how Spring resolves them and when to redesign instead.
+
+### Data, JPA, and Transactions
+
+12. Solving N+1 at scale: fetch join vs entity graph vs batch size.
+13. Transaction propagation modes (`REQUIRES_NEW`, `NESTED`, etc.) with real use cases.
+14. Isolation levels and anomaly prevention in a Spring/JPA service.
+15. Why `@Transactional` on `private` methods does not work as expected.
+16. Lazy loading pitfalls in APIs and DTO mapping boundaries.
+17. Optimistic vs pessimistic locking in concurrent update flows.
+18. How to design idempotent write endpoints with transaction safety.
+
+### Web, Security, and API Design
+
+19. Building a global exception strategy with consistent error contract.
+20. Spring Security filter chain order and common JWT authentication mistakes.
+21. CSRF in stateless APIs: when to disable and when not to.
+22. Method-level security (`@PreAuthorize`) pitfalls and test strategy.
+23. API versioning approaches in Spring Boot (`URI`, header, media type) and trade-offs.
+
+### Resilience, Observability, and Production
+
+24. Timeouts, retries, and circuit breakers: where each belongs in client stack.
+25. How to expose Actuator endpoints safely in production.
+26. Readiness vs liveness probes and failure-mode-aware probe design.
+27. Detecting thread pool exhaustion and connection pool starvation in live systems.
+28. Handling graceful shutdown without dropping in-flight requests/messages.
+29. Structured logging + trace correlation design for debugging distributed calls.
+30. Backpressure strategies for burst traffic in Spring Boot services.
 
 ## Related
 
